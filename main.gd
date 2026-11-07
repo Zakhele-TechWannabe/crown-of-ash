@@ -57,6 +57,12 @@ var unit_card: PanelContainer
 var unit_lbl: Label
 var move_btn: Button
 var place_lbl: Label
+var cards_box: HBoxContainer
+var warband_btn: Button
+var order_row: HBoxContainer
+var train_row: HBoxContainer
+var order_btns := {}
+var train_btns := {}
 var minimap := Rect2()
 
 
@@ -92,6 +98,7 @@ func _ready() -> void:
 	hud.add_child(hud_draw)
 	var start := false
 	var night := false
+	var pick := -1
 	for a in OS.get_cmdline_user_args():
 		if a == "--play":
 			start = true
@@ -104,12 +111,16 @@ func _ready() -> void:
 			shot_path = a.get_slice("=", 1)
 		elif a.begins_with("--frames="):
 			shot_frames = int(a.get_slice("=", 1))
+		elif a.begins_with("--select="):
+			pick = int(a.get_slice("=", 1))
 	if not "--windowed" in OS.get_cmdline_user_args() and shot_path == "":
 		if DisplayServer.get_screen_count() > 1:
 			DisplayServer.window_set_current_screen(1)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	if start:
 		new_game()
+		if pick >= 0:
+			_select(c.people[pick], true)
 		if night:
 			c.clock = Realm.DAY_LEN - 3.0
 	else:
@@ -186,7 +197,7 @@ func show_title() -> void:
 	var go := _btn("Raise the banner")
 	go.pressed.connect(new_game)
 	v.add_child(go)
-	v.add_child(_lbl("Click a villager to set their work · click a hall to pick its village · Reclaim sends the warband\nWASD / arrows / right-drag to look around · wheel to zoom · click the map · Space pauses", 19, C_DIM))
+	v.add_child(_lbl("Click a villager to set their work · click a village to manage it or send the warband\nWASD / arrows / right-drag to look around · wheel to zoom · click the map · Space pauses", 19, C_DIM))
 	if best > 0:
 		v.add_child(_lbl("Your longest reign: %d days" % best, 24, C_GOLD))
 
@@ -370,6 +381,7 @@ func _build_ui() -> void:
 	place_lbl.offset_left = -300; place_lbl.offset_right = 300; place_lbl.offset_top = -124; place_lbl.offset_bottom = -102
 	ui.add_child(place_lbl)
 	var cards := HBoxContainer.new()
+	cards_box = cards
 	var n := Realm.UPGRADES.size()
 	var cw := 132 * n + 6 * (n - 1)
 	cards.anchor_left = 0.5; cards.anchor_right = 0.5; cards.anchor_top = 1.0; cards.anchor_bottom = 1.0
@@ -385,11 +397,16 @@ func _build_ui() -> void:
 		b.pressed.connect(_card.bind(u.id))
 		cards.add_child(b)
 		card_btns[u.id] = b
+	warband_btn = _btn("", 20)
+	warband_btn.anchor_left = 0.5; warband_btn.anchor_right = 0.5; warband_btn.anchor_top = 1.0; warband_btn.anchor_bottom = 1.0
+	warband_btn.offset_left = -330; warband_btn.offset_right = 330; warband_btn.offset_top = -94; warband_btn.offset_bottom = -20
+	warband_btn.pressed.connect(_send_warband)
+	ui.add_child(warband_btn)
 	# the villager card
 	unit_card = PanelContainer.new()
 	unit_card.add_theme_stylebox_override("panel", _box(Color(0.07, 0.06, 0.05, 0.94), Color(0.55, 0.45, 0.3, 0.8)))
 	unit_card.anchor_left = 1.0; unit_card.anchor_right = 1.0; unit_card.anchor_top = 1.0; unit_card.anchor_bottom = 1.0
-	unit_card.offset_left = -420; unit_card.offset_right = -14; unit_card.offset_top = -330; unit_card.offset_bottom = -132
+	unit_card.offset_left = -726; unit_card.offset_right = -314; unit_card.offset_top = -330; unit_card.offset_bottom = -132
 	unit_card.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	ui.add_child(unit_card)
 	var uv := VBoxContainer.new()
@@ -411,6 +428,31 @@ func _build_ui() -> void:
 		b.pressed.connect(_set_job.bind(j))
 		grid.add_child(b)
 		job_btns[j] = b
+	order_row = HBoxContainer.new()
+	order_row.add_theme_constant_override("separation", 5)
+	uv.add_child(order_row)
+	order_btns.clear()
+	for o in Realm.ORDERS:
+		var b := _btn({"escort": "Escort foragers", "fields": "Guard fields", "warband": "Warband"}[o], 14)
+		b.custom_minimum_size = Vector2(124, 32)
+		b.tooltip_text = Realm.ORDERS[o]
+		b.pressed.connect(_set_order.bind(o))
+		order_row.add_child(b)
+		order_btns[o] = b
+	train_row = HBoxContainer.new()
+	train_row.add_theme_constant_override("separation", 5)
+	uv.add_child(train_row)
+	train_btns.clear()
+	for u in Realm.UNITS:
+		if u == "militia":
+			continue
+		var ud: Dictionary = Realm.UNITS[u]
+		var b := _btn("", 13)
+		b.custom_minimum_size = Vector2(124, 44)
+		b.tooltip_text = ud.info
+		b.pressed.connect(_train.bind(u))
+		train_row.add_child(b)
+		train_btns[u] = b
 	move_btn = _btn("", 15)
 	move_btn.pressed.connect(_move_selected)
 	uv.add_child(move_btn)
@@ -428,15 +470,32 @@ func _toggle_rule(key: String) -> void:
 	_refresh_ui()
 
 
+## Clicking a village picks it: works if it's yours, the warband order if the dead hold it.
 func _holding_click(h: int) -> void:
-	if c.land.holdings[h].claimed:
-		place = h
-		cam.position = c.hall_pos(h)
-	else:
-		var r := c.send_warband(h)
-		if r != "":
-			floats.append([c.hall_pos(h), r, 1.5, C_DIM])
-		cam.position = c.hall_pos(h)
+	place = h
+	cam.position = c.hall_pos(h)
+	_refresh_ui()
+
+
+func _send_warband() -> void:
+	var r := c.send_warband(place)
+	if r != "":
+		floats.append([c.hall_pos(place), r, 2.0, C_DIM])
+	_refresh_ui()
+
+
+func _set_order(o: String) -> void:
+	if selected != null:
+		c.set_order(selected, o)
+		_refresh_ui()
+
+
+func _train(u: String) -> void:
+	if selected == null:
+		return
+	var r := c.train(selected, u)
+	if r != "":
+		floats.append([selected.p, r, 2.0, C_DIM])
 	_refresh_ui()
 
 
@@ -482,6 +541,8 @@ func _refresh_ui() -> void:
 			txt += "  — yours (%d)" % c.people.filter(func(s): return s.home == h).size()
 		elif hd.crypt:
 			txt += "  — altar %d%%" % int(100.0 * maxf(0.0, c.altar_hp) / Realm.ALTAR_HP)
+		elif c.dead_in(h) == 0:
+			txt += "  — empty, no banner"
 		else:
 			txt += "  — the dead (%d)" % c.dead_in(h)
 		if c.target == h:
@@ -490,23 +551,43 @@ func _refresh_ui() -> void:
 		b.add_theme_color_override("font_color", C_BLUE.lightened(0.3) if hd.claimed else (C_GOLD if c.target == h else C_RED.lightened(0.2)))
 		if h == place:
 			b.add_theme_color_override("font_color", Color.WHITE)
-	place_lbl.text = "WORKS OF " + c.land.holdings[place].name.to_upper()
+	var ph: Dictionary = c.land.holdings[place]
+	cards_box.visible = ph.claimed
+	warband_btn.visible = not ph.claimed
+	if ph.claimed:
+		place_lbl.text = "WORKS OF " + ph.name.to_upper()
+	else:
+		var band := c.people.filter(func(s): return s.job == "soldier" and s.order == "warband").size()
+		place_lbl.text = ph.name.to_upper() + (" — THE CRYPT" if ph.crypt else " — HELD BY THE DEAD (%d)" % c.dead_in(place))
+		if c.target == place:
+			warband_btn.text = "The warband is marching here — call it back"
+		elif band == 0:
+			warband_btn.text = "No soldier has the Warband order (pick a soldier, press Warband)"
+		else:
+			warband_btn.text = "Send the warband here (%d soldier%s)" % [band, "" if band == 1 else "s"]
 	for u in Realm.UPGRADES:
 		var b: Button = card_btns[u.id]
 		var cost := " ".join(u.cost.keys().map(func(k): return "%d %s" % [u.cost[k], k]))
 		var status := cost
+		if u.id == "palisade":
+			var st := c.stakes(place)
+			status = "%d/%d stakes" % [st.x, st.y]
+		elif u.id == "towers" and not c.has_built(place, u.id):
+			status = "%d/%d · %s" % [c.tower_count[place], Realm.TOWERS, cost]
 		if c.has_built(place, u.id):
 			status = "BUILT"
 		elif c.progress[place].has(u.id):
 			status = "building %d%%" % int(100.0 * c.progress[place][u.id] / u.work)
 		elif u.id in c.queue[place]:
-			status = "queued #%d · %s" % [c.queue[place].find(u.id) + 1, cost]
+			status = "queued #%d · %s" % [c.queue[place].find(u.id) + 1, status]
 		b.text = "%s\n%s" % [u.name, status]
 		b.add_theme_color_override("font_color", C_OK if c.has_built(place, u.id) else (C_GOLD if u.id in c.queue[place] else C_TEXT))
 	for n in people_box.get_children():
 		n.queue_free()
 	for s in c.people:
-		var b := _btn("%s · %s · %s" % [s.name, s.job, c.land.holdings[s.home].name], 14)
+		var role: String = s.job if s.job != "soldier" else Realm.UNITS[s.unit].name.to_lower() + " (" + s.order + ")"
+		var b := _btn("%s · %s · %s" % [s.name, role, c.land.holdings[s.home].name], 14)
+		b.draw.connect(_hp_strip.bind(b, s))
 		b.custom_minimum_size = Vector2(275, 28)
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.add_theme_color_override("font_color", JOB_COL[s.job] if s != selected else Color.WHITE)
@@ -514,8 +595,26 @@ func _refresh_ui() -> void:
 		people_box.add_child(b)
 	unit_card.visible = selected != null
 	if selected != null:
+		var soldier: bool = selected.job == "soldier"
+		order_row.visible = soldier
+		train_row.visible = soldier
+		for o in order_btns:
+			order_btns[o].add_theme_color_override("font_color", C_GOLD if selected.order == o else C_TEXT)
+		var barracks := c.has_built(selected.home, "barracks")
+		for u in train_btns:
+			var ud: Dictionary = Realm.UNITS[u]
+			var cost := " ".join(ud.cost.keys().map(func(k): return "%d %s" % [ud.cost[k], k]))
+			var b: Button = train_btns[u]
+			b.text = "Train %s\n%s" % [ud.name, "current" if selected.unit == u else ("training…" if selected.train == u else (cost if barracks else "needs barracks"))]
+			b.disabled = not barracks or selected.unit == u or selected.train != ""
 		move_btn.text = "Lives at %s — move" % c.land.holdings[selected.home].name if c.holdings_owned().size() > 1 else "Lives at %s" % c.land.holdings[selected.home].name
 		move_btn.disabled = c.holdings_owned().size() < 2
+
+
+## A health bar along the bottom of each name in the people list.
+func _hp_strip(b: Button, s: Dictionary) -> void:
+	var f := clampf(s.hp / 100.0, 0.0, 1.0)
+	b.draw_rect(Rect2(4, b.size.y - 5, (b.size.x - 8) * f, 3), Color(0.9, 0.25, 0.2).lerp(Color(0.45, 0.85, 0.35), f))
 
 
 func _select(s: Variant, center := false) -> void:
@@ -690,8 +789,9 @@ func _update_view(dt: float) -> void:
 	if unit_card and selected != null:
 		var s: Dictionary = selected
 		var carry := ", ".join(s.carry.keys().map(func(k): return "%d %s" % [s.carry[k], k]))
-		unit_lbl.text = "%s  (%s — %s)\n%s\nHealth %d   Food %d   Strength %d%s" % [s.name, s.trait, Realm.TRAITS[s.trait],
-			s.doing if s.doing != "" else "—", int(s.hp), int(s.hunger), int(s.energy), ("\nCarrying " + carry) if carry != "" else ""]
+		var kind := ("%s · %s\n" % [Realm.UNITS[s.unit].name, Realm.ORDERS[s.order]]) if s.job == "soldier" else ""
+		unit_lbl.text = "%s  (%s — %s)\n%s%s\nHealth %d   Food %d   Strength %d%s" % [s.name, s.trait, Realm.TRAITS[s.trait], kind,
+			{"fight": "fighting!", "flee": "running for the hall!", "": "—"}.get(s.doing, s.doing), int(s.hp), int(s.hunger), int(s.energy), ("\nCarrying " + carry) if carry != "" else ""]
 		for j in job_btns:
 			job_btns[j].add_theme_color_override("font_color", C_GOLD if s.job == j else C_TEXT)
 	world.queue_redraw()
@@ -731,6 +831,8 @@ func _draw_world() -> void:
 		for b in c.beds[h]:
 			world.draw_rect(Rect2(b - Vector2(12, 8), Vector2(24, 16)), Color(0.75, 0.65, 0.35) if c.has_built(h, "beds") else Color(0.45, 0.38, 0.28))
 		for u in Realm.UPGRADES:
+			if not u.id in Realm.HALL_WORKS:
+				continue
 			var at: Vector2 = c.slots[h][u.id]
 			if c.has_built(h, u.id):
 				_work_icon(u.id, at)
@@ -739,6 +841,7 @@ func _draw_world() -> void:
 				world.draw_rect(Rect2(at - Vector2(13, 13), Vector2(26, 26)), Color(1, 0.9, 0.6, 0.35), false, 2.0)
 				if frac > 0.0:
 					world.draw_rect(Rect2(at + Vector2(-13, 15), Vector2(26 * frac, 4)), C_GOLD)
+	_draw_walls(r)
 	# the crypt's altar
 	var ch := c.land.holdings.size() - 1
 	var ap := c.hall_pos(ch)
@@ -829,6 +932,64 @@ func _tile(cell: Vector2i) -> void:
 				world.draw_rect(Rect2(rect.position + Vector2(2, -8), Vector2((T - 4) * float(o.hp) / full, 4)), C_RED)
 
 
+## The palisade: stakes where it's raised, a faint marked line where it's planned, gates on the roads; and the
+## corner towers.
+func _draw_walls(view: Rect2i) -> void:
+	for cell in c.walls:
+		if not view.has_point(cell):
+			continue
+		var w: Dictionary = c.walls[cell]
+		var mine: bool = c.land.holdings[w.h].claimed
+		var rect := Rect2(cell.x * T, cell.y * T, T, T)
+		if not w.up:
+			if not mine:
+				continue
+			var queued: bool = "palisade" in c.queue[w.h]
+			world.draw_rect(rect.grow(-6), Color(0.9, 0.8, 0.55, 0.35 if queued else 0.16), false, 2.0)
+			if float(w.work) > 0.0:
+				world.draw_rect(Rect2(rect.position + Vector2(3, T - 7), Vector2((T - 6) * w.work / Realm.STAKE_WORK, 4)), C_GOLD)
+			continue
+		var wood := Color(0.48, 0.34, 0.2)
+		if float(w.hp) <= 0.0:
+			for k in 3:
+				world.draw_line(rect.position + Vector2(5 + k * 10, 10), rect.position + Vector2(8 + k * 9, T - 4), wood.darkened(0.4), 3.0)
+			continue
+		if w.gate:
+			world.draw_rect(rect, Color(0.3, 0.22, 0.14))
+			if w.open:
+				world.draw_rect(Rect2(rect.position, Vector2(6, T)), wood.lightened(0.1))
+			else:
+				world.draw_rect(rect.grow(-1), wood.lightened(0.15))
+				world.draw_line(rect.position + Vector2(0, T / 2), rect.position + Vector2(T, T / 2), wood.darkened(0.4), 3.0)
+		else:
+			for k in 4:
+				var x := rect.position.x + 4 + k * 8
+				world.draw_rect(Rect2(x - 3.5, rect.position.y + 2, 7, T - 4), wood.lerp(wood.lightened(0.15), _hash(cell.x * 4 + k, cell.y)))
+				world.draw_colored_polygon(PackedVector2Array([Vector2(x - 3.5, rect.position.y + 2), Vector2(x + 3.5, rect.position.y + 2), Vector2(x, rect.position.y - 3)]), wood.lightened(0.25))
+		var full: float = c.wall_max(w)
+		if float(w.hp) < full - 1.0:
+			world.draw_rect(Rect2(rect.position + Vector2(2, -7), Vector2((T - 4) * float(w.hp) / full, 4)), C_RED)
+	for h in c.towers:
+		if not c.land.holdings[h].claimed:
+			continue
+		for k in c.towers[h].size():
+			var at: Vector2 = c.towers[h][k]
+			var tr := Rect2(at - Vector2(22, 22), Vector2(44, 44))
+			if k < c.tower_count[h]:
+				world.draw_rect(tr, Color(0.55, 0.52, 0.47))
+				world.draw_rect(tr.grow(-7), Color(0.42, 0.33, 0.22))
+				for q in 4:
+					var cp: Vector2 = tr.position + Vector2(q % 2, q / 2) * 34.0
+					world.draw_rect(Rect2(cp, Vector2(10, 10)), Color(0.66, 0.63, 0.58))
+			else:
+				var queued: bool = "towers" in c.queue[h] and k == c.tower_count[h]
+				world.draw_rect(tr, Color(0.9, 0.8, 0.55, 0.4 if queued else 0.15), false, 2.0)
+				if queued:
+					var frac: float = c.progress[h].get("towers", 0.0) / 24.0
+					if frac > 0.0:
+						world.draw_rect(Rect2(tr.position + Vector2(0, 46), Vector2(44 * frac, 4)), C_GOLD)
+
+
 func _tree(cell: Vector2i) -> void:
 	var h := _hash(cell.x, cell.y)
 	var p := c.land.center(cell) + Vector2((h - 0.5) * 10, (_hash(cell.y, cell.x) - 0.5) * 10)
@@ -901,9 +1062,21 @@ func _person(s: Dictionary) -> void:
 	world.draw_rect(Rect2(-9, -11, 16, 22), col.darkened(0.25))
 	match s.job:
 		"soldier":
-			world.draw_line(Vector2(0, 6), Vector2(26, 6), Color(0.6, 0.45, 0.3), 3.0)
-			world.draw_colored_polygon(PackedVector2Array([Vector2(26, 3), Vector2(32, 6), Vector2(26, 9)]), Color(0.8, 0.8, 0.85))
-			world.draw_rect(Rect2(-2, -14, 8, 10), Color(0.7, 0.2, 0.2))
+			match s.unit:
+				"archer":
+					world.draw_arc(Vector2(10, 0), 11, -1.3, 1.3, 10, Color(0.55, 0.4, 0.22), 3.0)
+					world.draw_line(Vector2(-6, -8), Vector2(-12, 6), Color(0.85, 0.8, 0.7), 2.0)
+				"spearman":
+					world.draw_line(Vector2(-4, 6), Vector2(38, 6), Color(0.6, 0.45, 0.3), 3.0)
+					world.draw_colored_polygon(PackedVector2Array([Vector2(38, 2), Vector2(46, 6), Vector2(38, 10)]), Color(0.85, 0.85, 0.9))
+				"man_at_arms":
+					world.draw_rect(Rect2(-10, -12, 18, 24), Color(0.6, 0.62, 0.66))
+					world.draw_line(Vector2(4, 7), Vector2(24, 7), Color(0.85, 0.85, 0.9), 4.0)
+					world.draw_rect(Rect2(2, -14, 6, 12), Color(0.7, 0.2, 0.2))
+				_:
+					world.draw_line(Vector2(0, 6), Vector2(26, 6), Color(0.6, 0.45, 0.3), 3.0)
+					world.draw_colored_polygon(PackedVector2Array([Vector2(26, 3), Vector2(32, 6), Vector2(26, 9)]), Color(0.8, 0.8, 0.85))
+					world.draw_rect(Rect2(-2, -14, 8, 10), Color(0.7, 0.2, 0.2))
 		"guard":
 			world.draw_arc(Vector2(10, 0), 10, -1.2, 1.2, 10, Color(0.55, 0.4, 0.22), 2.5)
 		"chop":
@@ -913,6 +1086,8 @@ func _person(s: Dictionary) -> void:
 			world.draw_line(Vector2(4, 4), Vector2(20, 8), Color(0.6, 0.45, 0.25), 2.5)
 	world.draw_circle(Vector2.ZERO, 7.5, Color(0.86, 0.7, 0.55))
 	world.draw_arc(Vector2.ZERO, 7.5, PI * 0.5, PI * 1.5, 12, col.darkened(0.5), 4.0)
+	if s.job == "soldier" and s.unit == "man_at_arms":
+		world.draw_circle(Vector2.ZERO, 7.5, Color(0.62, 0.64, 0.68))
 	if not s.carry.is_empty():
 		world.draw_rect(Rect2(-14, -6, 7, 12), Color(0.55, 0.45, 0.3))
 	world.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
@@ -976,8 +1151,9 @@ func _draw_labels() -> void:
 		var txt: String = "zzz" if s.asleep else s.name
 		var w := font.get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x
 		labels.draw_string(font, s.p + Vector2(-w / 2, -16), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, JOB_COL[s.job])
-		if s.hp < 60.0:
-			labels.draw_rect(Rect2(s.p + Vector2(-12, 14), Vector2(24 * s.hp / 100.0, 3)), C_RED)
+		var f := clampf(s.hp / 100.0, 0.0, 1.0)
+		labels.draw_rect(Rect2(s.p + Vector2(-13, 15), Vector2(26, 4)), Color(0, 0, 0, 0.6))
+		labels.draw_rect(Rect2(s.p + Vector2(-13, 15), Vector2(26 * f, 4)), Color(0.9, 0.25, 0.2).lerp(Color(0.45, 0.85, 0.35), f))
 	# each village: a banner and its name
 	for h in c.land.holdings.size():
 		var hd: Dictionary = c.land.holdings[h]

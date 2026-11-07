@@ -43,8 +43,8 @@ func build(seed_val: int) -> void:
 		_holding(i)
 	_crypt()
 	# graveyards at the edges of the land
-	for p in [Vector2i(3, 30), Vector2i(80, 28), Vector2i(30, 2), Vector2i(56, 57)]:
-		_fill(Rect2i(p.x - 2, p.y - 2, 5, 5), GRAVE)
+	for p in [Vector2i(3, 30), Vector2i(80, 28), Vector2i(28, 8), Vector2i(56, 57)]:
+		_fill(Rect2i(p.x - 1, p.y - 1, 3, 3), GRAVE)
 		graves.append(p)
 
 
