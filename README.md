@@ -23,11 +23,16 @@ and your villagers live their lives. Retake the realm one village at a time, the
 - **Rules** (top left): hearths at night, rations, shut the gates behind you.
 - **Works** (bottom cards) are prebuilt plots you order built, per village:
   - **Palisade:** the wall ring is marked out around every village; builders raise it a stake at a time, paying
-    wood as they go. Roads through it get gates. The dead batter walls and gates; builders mend them.
+    wood as they go. There's a gate on every side. The dead batter walls and gates; builders mend them.
   - **Towers:** four corner towers, one at a time. Guards take the towers first and see and shoot much further.
   - Hall door bars, shutters, straw beds, mill, fletcher, chapel, barracks, bell.
-- **Soldiers** have standing orders: **Escort** (walk beside a forager and fight what comes for them),
-  **Guard fields** (patrol the farmers and woodcutters) or **Warband**. They only fight what threatens their people.
+- **Soldiers** have standing orders: **Escort**, **Guard fields** (patrol the farmers and woodcutters) or
+  **Warband**. They only fight what threatens their people, and fall back onto the walls when outnumbered.
+- **Escorts** walk ahead of a forager and clear the dead from where they're going. The forager holds back till
+  it's safe, skips houses with more dead than the escort can handle, and never leaves your villages without
+  an escort: if theirs falls or goes home hurt, they head back to the hall for another.
+- **Healing.** Anyone badly hurt (under half health) goes home and rests in bed till they're mended. Bed rest
+  heals far faster than standing about; herbs patch the worst wounds and the chapel doubles healing.
 - **Barracks** train soldiers who live there: spearmen (reach), archers (shoot from range, use arrows) and
   men-at-arms (heavy armour).
 - **The realm** (right): click a village to pick it. Yours shows its works; one the dead hold shows **Send the
