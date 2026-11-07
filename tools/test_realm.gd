@@ -20,10 +20,14 @@ func _init() -> void:
 		var frames := 0
 		var order := [2, 1, 3, 6, 4, 5, 7]
 		while r.phase in [Realm.DAY, Realm.NIGHT] and r.day <= days and frames < 60 * 60 * 60:
-			if r.day >= 3 and r.people.size() > 1 and not r.people.any(func(p): return p.order == "warband" and p.job == "soldier"):
-				var sol := r.people.filter(func(p): return p.job == "soldier")
-				if not sol.is_empty():
-					r.set_order(sol[-1], "warband")
+			# from day 3, newcomers (and the guard) are raised as a warband once there are enough of them
+			if r.day >= 3:
+				var band := r.people.filter(func(p): return p.order == "warband" and p.job == "soldier")
+				var spare := r.people.filter(func(p): return p.job in ["rest", "guard"])
+				if band.size() + spare.size() >= Realm.WARBAND_MIN and band.size() < Realm.WARBAND_MIN:
+					for p in spare.slice(0, Realm.WARBAND_MIN - band.size()):
+						p.job = "soldier"
+						r.set_order(p, "warband")
 			if r.target < 0 and r.day >= 3:
 				for h in order:
 					if not r.land.holdings[h].claimed:

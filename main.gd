@@ -561,8 +561,8 @@ func _refresh_ui() -> void:
 		place_lbl.text = ph.name.to_upper() + (" — THE CRYPT" if ph.crypt else " — HELD BY THE DEAD (%d)" % c.dead_in(place))
 		if c.target == place:
 			warband_btn.text = "The warband is marching here — call it back"
-		elif band == 0:
-			warband_btn.text = "No soldier has the Warband order (pick a soldier, press Warband)"
+		elif band < Realm.WARBAND_MIN:
+			warband_btn.text = "A warband needs %d soldiers — %d have the Warband order" % [Realm.WARBAND_MIN, band]
 		else:
 			warband_btn.text = "Send the warband here (%d soldier%s)" % [band, "" if band == 1 else "s"]
 	for u in Realm.UPGRADES:

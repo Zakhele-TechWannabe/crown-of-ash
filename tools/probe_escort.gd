@@ -24,6 +24,6 @@ func _init() -> void:
 	for k in keys:
 		print("%4d  %s" % [counts[k], k])
 	for line in r.log:
-		if ["escort", "safer", "Too many", "rest", "mended", "fallen"].any(func(w): return w in str(line[1])):
+		if ["escort", "turns away", "withdraw", "falls back", "fallen", "seen"].any(func(w): return w in str(line[1])):
 			print(line)
 	quit()

@@ -23,6 +23,10 @@ const STAKE_WORK := 2.5              # seconds of work per palisade cell
 const TOWERS := 4
 const WOUNDED := 50.0                # below this, people go home to rest...
 const MENDED := 90.0                 # ...and stay in bed until they're back to this
+const LEASH := 420.0                 # how far a village's dead follow anyone out of it
+const WARBAND_MIN := 3
+const PARTY := 2                     # soldiers a forager needs before leaving our villages
+const PARTY_MAX := 3
 
 enum { DAY, NIGHT, LOST, WON }
 enum { IDLE, WANDER, INVESTIGATE, CHASE }
@@ -48,13 +52,13 @@ const NAMES := ["Aldric", "Bryn", "Cedric", "Edith", "Gareth", "Hilda", "Isolde"
 
 ## What a soldier is trained as. Militia is everyone's start; the rest need a barracks where they live.
 const UNITS := {
-	"militia": {"name": "Militia", "dmg": 45.0, "armor": 1.0, "reach": 0.0, "cost": {}, "time": 0.0, "info": "Spear and buckler, no training"},
+	"militia": {"name": "Militia", "dmg": 30.0, "armor": 1.0, "reach": 0.0, "cost": {}, "time": 0.0, "info": "Spear and buckler, no training"},
 	"spearman": {"name": "Spearman", "dmg": 55.0, "armor": 0.8, "reach": 18.0, "cost": {"wood": 2}, "time": 30.0, "info": "A long spear: strikes before the dead can reach"},
 	"archer": {"name": "Archer", "dmg": 25.0, "armor": 1.0, "reach": 0.0, "cost": {"wood": 3}, "time": 30.0, "info": "Shoots from 280 paces (uses arrows); weak up close"},
 	"man_at_arms": {"name": "Man-at-arms", "dmg": 75.0, "armor": 0.45, "reach": 0.0, "cost": {"wood": 4, "food": 4}, "time": 45.0, "info": "Mail and a sword: hits hard, hard to kill"},
 }
 const ORDERS := {
-	"escort": "Walks ahead of a forager and clears the way; the forager waits till it's safe",
+	"escort": "Goes out with a forager in a quiet party of 2-3; avoids fights, only defends",
 	"fields": "Patrols the village's fields and woodcutters",
 	"warband": "Marches when you send the warband to a village",
 }
@@ -155,7 +159,7 @@ func setup(seed_val: int) -> void:
 	for k in jobs.size():
 		_add_person(0, jobs[k], traits[k])
 	people[6].order = "escort"
-	people[7].order = "fields"
+	people[7].order = "escort"
 	# the dead hold every hamlet, and the crypt
 	for h in range(1, land.holdings.size()):
 		var crypt: bool = land.holdings[h].crypt
@@ -453,8 +457,9 @@ func _dawn() -> void:
 func send_warband(h: int) -> String:
 	if land.holdings[h].claimed:
 		return "That village is already yours"
-	if target != h and not people.any(func(s): return s.job == "soldier" and s.order == "warband"):
-		return "No soldier has the warband order"
+	var band := people.filter(func(s): return s.job == "soldier" and s.order == "warband").size()
+	if target != h and band < WARBAND_MIN:
+		return "A warband needs %d soldiers (it has %d)" % [WARBAND_MIN, band]
 	target = h if target != h else -1
 	if target >= 0:
 		note("The warband is ordered to %s." % land.holdings[h].name)
@@ -513,7 +518,7 @@ func _person(s: Dictionary, dt: float) -> void:
 			s.hp = minf(100.0, s.hp + 35.0)
 		if s.hp < 100.0 and s.hunger > 30.0:
 			# rest in bed heals far faster than standing about; the chapel doubles it
-			s.hp = minf(100.0, s.hp + dt * (1.2 if s.asleep else 0.3) * (2.0 if has_built(s.home, "chapel") else 1.0))
+			s.hp = minf(100.0, s.hp + dt * (0.28 if s.asleep else 0.08) * (2.0 if has_built(s.home, "chapel") else 1.0))
 	_decide(s, dt)
 	_walk(s, dt)
 
@@ -525,7 +530,11 @@ func _decide(s: Dictionary, dt: float) -> void:
 		# fall back onto the walls and towers
 		var n := dead.filter(func(z): return z.state == CHASE and z.target == s).size()
 		var odds := 3 if s.unit == "man_at_arms" else 2
-		if (s.job == "soldier" and not s.resting and (n <= odds or at_home(s))) or (s.trait == "Strong" and n <= 2 and not s.resting) or (n == 1 and s.hp > 50.0):
+		if s.job == "soldier" and s.order == "escort" and not s.resting and not at_home(s) \
+				and s.p.distance_to(threat.p) > 50.0:
+			if s.doing == "fight":
+				s.doing = ""                               # escorts keep with the party and cover its retreat
+		elif (s.job == "soldier" and not s.resting and (n <= odds or at_home(s))) or (s.trait == "Strong" and n <= 2 and not s.resting) or (n == 1 and s.hp > 50.0):
 			s.doing = "fight"
 		else:
 			if s.doing == "fight":
@@ -548,7 +557,7 @@ func _decide(s: Dictionary, dt: float) -> void:
 			return
 	var dusk := phase == DAY and time_left() < 30.0
 	if phase == NIGHT or dusk:
-		if (s.job == "guard" or s.job == "soldier") and s.energy > 15.0 and not s.resting and _post_index(s) < tower_count[s.home]:
+		if (s.job == "guard" or (s.job == "soldier" and s.order != "escort")) and s.energy > 15.0 and not s.resting and _post_index(s) < tower_count[s.home]:
 			_deposit_if_home(s)
 			_guard(s, dt)
 			return
@@ -559,7 +568,7 @@ func _decide(s: Dictionary, dt: float) -> void:
 			if not at_home(s):
 				return
 		_deposit_if_home(s)
-		if (s.job == "guard" or s.job == "soldier") and s.energy > 15.0 and not s.resting:
+		if (s.job == "guard" or (s.job == "soldier" and s.order != "escort")) and s.energy > 15.0 and not s.resting:
 			_guard(s, dt)
 		else:
 			_sleep(s, dt)
@@ -768,8 +777,9 @@ func _melee(s: Dictionary, z: Dictionary) -> void:
 		s.goal = s.p
 		if s.cd <= 0.0:
 			s.cd = 0.7
-			_hit(z, float(u.dmg) * (1.4 if s.trait == "Strong" else 1.0), s.face * 160.0)
-			_noise(s.p, 60.0)
+			var quiet: bool = z.state != CHASE and s.doing == "quietly dispatching one"   # a blade from behind
+			_hit(z, float(u.dmg) * (1.4 if s.trait == "Strong" else 1.0) * (3.0 if quiet else 1.0), s.face * 160.0)
+			_noise(s.p, 25.0 if quiet else 60.0)
 	elif s.job == "soldier":
 		_go(s, z.p)
 
@@ -846,19 +856,20 @@ func _dead_near(at: Vector2, r: float) -> int:
 	return n
 
 
+## Escorts gather into parties: each joins the forager whose party is fullest without being full, so two
+## soldiers make one party that can go out rather than two lone guards who can't.
 func _ward(s: Dictionary) -> Variant:
-	var w: Variant = s.ward
-	if w != null and people.has(w) and w.job == "forage" and not w.resting:
-		return w
-	s.ward = null
 	var best: Variant = null
-	var bn := 99
+	var bn := -99
 	for f in people:
 		if f.job != "forage" or f.resting:
 			continue
-		var n := escorts_of(f).size() + (0 if f.home == s.home else 2)
-		if n < bn:
-			bn = n
+		var n := escorts_of(f).filter(func(o): return o != s).size()
+		if n >= PARTY_MAX:
+			continue
+		var score := n * 10 - (0 if f.home == s.home else 25) + (1 if f == s.ward else 0)
+		if score > bn:
+			bn = score
 			best = f
 	s.ward = best
 	return best
@@ -880,40 +891,7 @@ func _soldier(s: Dictionary, dt: float) -> void:
 		"escort":
 			var f: Variant = _ward(s)
 			if f != null:
-				var z: Variant = _threat(s, [f], 240.0)
-				if z != null:
-					_engage(s, z, "defending " + f.name)
-					return
-				# out in front: clear the dead from where the forager means to go
-				if f.dest != null:
-					var bd := 200.0
-					for d in dead:
-						var dd: float = d.p.distance_to(f.dest)
-						if dd < bd:
-							bd = dd
-							z = d
-					if z != null:
-						_engage(s, z, "clearing the way for " + f.name)
-						return
-				s.doing = "escorting " + f.name
-				var lead: Vector2
-				if f.dest != null:
-					lead = f.dest
-					# lead, but never so far ahead that the forager is left alone
-					if s.p.distance_to(f.p) > 110.0 and s.p.distance_to(lead) < f.p.distance_to(lead):
-						s.path = []
-						s.goal = s.p
-						s.doing = "waiting for " + f.name
-						return
-				elif at_home(f):
-					lead = f.p + Vector2(18, 0)
-				else:
-					lead = f.p + (hall_pos(f.home) - f.p).normalized() * 30.0   # walking home: still in front
-				if s.p.distance_to(lead) > 16.0:
-					_go(s, lead)
-				else:
-					s.path = []
-					s.goal = s.p
+				_escort(s, f)
 				return
 			_patrol(s, dt)
 			return
@@ -1169,15 +1147,50 @@ func move_home(s: Dictionary, h: int) -> String:
 
 # ---------------------------------------------------------------- foraging
 
+## A forager and their party, out past our own villages. They go quietly: they pick only houses with no more
+## dead nearby than the party can handle unheard, move together, and turn back rather than start a fight.
+func _escort(s: Dictionary, f: Dictionary) -> void:
+	var party := escorts_of(f)
+	var z: Variant = _threat(s, [f] + party, 220.0)
+	if z != null:
+		if z.state == CHASE:
+			# seen: cover the forager's retreat, striking only what gets close; never chase into the village
+			if f.p.distance_to(z.p) < 70.0 or s.p.distance_to(z.p) < 45.0 or at_home(f):
+				_engage(s, z, "defending " + f.name)
+				return
+		elif f.dest != null and _dead_near(z.p, 150.0) == 1 and s.p.distance_to(f.p) < 160.0:
+			s.doing = "quietly dispatching one"           # a lone one, unaware: a blade from behind, no alarm
+			s.asleep = false
+			_melee(s, z)
+			return
+	var dir := Vector2.RIGHT
+	if f.dest != null:
+		dir = (f.dest - f.p).normalized()
+	elif not at_home(f):
+		dir = (hall_pos(f.home) - f.p).normalized()
+	if dir == Vector2.ZERO:
+		dir = Vector2.RIGHT
+	var i := maxi(0, party.find(s))
+	var side := dir.orthogonal()
+	var slot: Vector2 = f.p + [dir * 38.0, dir * 6.0 + side * 26.0, dir * 6.0 - side * 26.0, -dir * 24.0][mini(i, 3)]
+	s.doing = ("scouting ahead of " if i == 0 and f.dest != null else "escorting ") + f.name
+	if s.p.distance_to(slot) > 10.0:
+		_go(s, slot)
+	else:
+		s.path = []
+		s.goal = s.p
+
+
 func _forage(s: Dictionary, dt: float) -> void:
 	var carried := 0
 	for k in s.carry:
 		carried += int(s.carry[k])
 	s.dest = null
-	var guards := escorts_of(s)
-	if guards.is_empty() and s.escort != "" and not at_home(s):
-		note("%s lost their escort and heads home for another." % s.name)
-	s.escort = guards[0].name if not guards.is_empty() else ""
+	var party := escorts_of(s)
+	if party.size() < PARTY and s.escort != "" and not at_home(s) and s.house >= 0 \
+			and not land.holdings[land.houses[s.house].holding].claimed:
+		note("%s's escort is down to %d; they turn for home." % [s.name, party.size()])
+	s.escort = ", ".join(party.map(func(o): return o.name))
 	if carried >= 6 or time_left() < 50.0:
 		s.doing = "bringing things home"
 		if at_home(s):
@@ -1188,11 +1201,19 @@ func _forage(s: Dictionary, dt: float) -> void:
 		else:
 			_go(s, hall_pos(s.home))
 		return
+	if s.house >= 0 and crates_left(s.house) > 0 and not _house_safe(s, s.house):
+		s.avoid[s.house] = true                         # the scouts saw too many: give it up, no fighting
+		note("%s's party sees too many dead at %s and turns away." % [s.name, land.holdings[land.houses[s.house].holding].name])
+		s.house = -1
 	if s.house < 0 or crates_left(s.house) == 0:
 		s.house = _pick_house(s)
 		if s.house < 0:
+			if not at_home(s):
+				s.doing = "heading home"
+				_go(s, hall_pos(s.home))
+				return
 			_idle(s)
-			s.doing = "nothing left to search" if s.avoid.is_empty() else "no house safe enough today"
+			s.doing = "no house quiet enough to search" if land.crates.any(func(c): return not c.searched) else "nothing left to search"
 			return
 	var cr: Variant = null
 	var bd := 1e9
@@ -1206,10 +1227,10 @@ func _forage(s: Dictionary, dt: float) -> void:
 		return
 	var hol: int = land.houses[s.house].holding
 	var spot := land.center(cr.cell)
-	if not land.holdings[hol].claimed and s.p.distance_to(spot) > 20.0:
-		# beyond our own villages nobody goes without a soldier in front
-		if guards.is_empty():
-			s.doing = "waiting at the hall for an escort"
+	if not land.holdings[hol].claimed:
+		# beyond our own villages nobody goes without a party
+		if party.size() < PARTY:
+			s.doing = "waiting at the hall for an escort (%d of %d)" % [party.size(), PARTY]
 			if at_home(s):
 				_deposit_if_home(s)
 				s.path = []
@@ -1217,31 +1238,30 @@ func _forage(s: Dictionary, dt: float) -> void:
 			else:
 				_go(s, hall_pos(s.home))
 			return
-		var e: Dictionary = guards[0]
 		s.dest = spot
-		if _dead_near(spot, 250.0) > guards.size() * 2 + 1:   # a pack wakes together: count all of it
-			s.avoid[s.house] = true
+		if dead.any(func(z): return z.state == CHASE and (z.target == s or party.has(z.target))):
+			s.avoid[s.house] = true                     # spotted: give the house up and slip away home
 			s.house = -1
 			s.dest = null
-			s.doing = "looking for a safer house"
+			s.doing = "withdrawing"
+			note("The dead spotted %s's party; they withdraw." % s.name)
+			_go(s, hall_pos(s.home))
 			return
 		var wait := ""
-		if _dead_near(s.p, 150.0) > 0 or _dead_near(spot, 200.0) > 0 or str(e.doing).begins_with("defending") \
-				or str(e.doing).begins_with("clearing"):
-			wait = "waiting till it's safe"
-		elif e.p.distance_to(spot) > 50.0 and e.p.distance_to(spot) > s.p.distance_to(spot) - 30.0:
-			wait = "letting %s go first" % e.name
+		if party.any(func(o): return o.doing == "quietly dispatching one"):
+			wait = "keeping low till it's quiet"
+		elif party.any(func(o): return o.p.distance_to(s.p) > 70.0):
+			wait = "waiting for the party"
 		if wait != "":
 			s.doing = wait
 			s.wait_t += dt
-			if s.wait_t > 45.0:                               # it isn't clearing: try another house
+			if s.wait_t > 40.0:                           # it isn't settling: try somewhere else
 				s.wait_t = 0.0
 				s.avoid[s.house] = true
 				s.house = -1
-				s.dest = null
 			elif _dead_near(s.p, 110.0) > 0:
-				s.doing = "falling back behind " + e.name
-				_go(s, hall_pos(s.home))
+				s.doing = "slipping back behind the party"
+				_go(s, s.p + (s.p - spot).normalized() * 40.0)
 			else:
 				s.path = []
 				s.goal = s.p
@@ -1260,18 +1280,29 @@ func _forage(s: Dictionary, dt: float) -> void:
 		_loot(s, cr)
 
 
+## Our own villages are always safe to search. Out past them, a house is only worth it if the dead nearby are
+## few enough for the party to deal with quietly: right at the door, one apiece less one to keep watch; within
+## earshot, no more than two apiece.
+func _house_safe(s: Dictionary, i: int) -> bool:
+	if land.holdings[land.houses[i].holding].claimed:
+		return true
+	var c := land.center(land.houses[i].rect.get_center())
+	var n := maxi(PARTY, escorts_of(s).size())
+	return _dead_near(c, 140.0) <= n - 1 and _dead_near(c, 260.0) <= n * 2
+
+
 func _pick_house(s: Dictionary) -> int:
 	var best := -1
 	var bd := 1e9
 	for i in land.houses.size():
 		var hol: int = land.houses[i].holding
-		if land.holdings[hol].crypt or crates_left(i) == 0 or s.avoid.has(i):
+		if land.holdings[hol].crypt or crates_left(i) == 0 or s.avoid.has(i) or not _house_safe(s, i):
 			continue
 		var d := land.center(land.houses[i].rect.get_center()).distance_to(s.p)
 		if marked.has(i):
 			d -= 20000.0
 		elif not land.holdings[hol].claimed:
-			d += 900.0 + _dead_near(land.center(land.houses[i].rect.get_center()), 250.0) * 500.0   # the quietest edge first
+			d += 900.0
 		if d < bd:
 			bd = d
 			best = i
@@ -1359,7 +1390,7 @@ func _walk(s: Dictionary, dt: float) -> void:
 		_noise(land.center(c), 110.0)
 		_ev("door", land.center(c))
 	var near := dead.any(func(z): return z.p.distance_to(s.p) < 260.0)
-	s.sneak = near and s.doing != "flee" and s.job != "soldier"
+	s.sneak = near and s.doing != "flee" and (s.job != "soldier" or s.order == "escort")
 	var speed := 230.0 if s.doing == "flee" else (70.0 if s.sneak else 125.0)
 	var d: Vector2 = tgt - s.p
 	if d.length() < 6.0:
@@ -1466,7 +1497,7 @@ func _make_dead(at: Vector2, kind: String, state: int) -> Dictionary:
 	var hpv: float = {"walker": 100.0, "runner": 70.0, "brute": 260.0}[kind]
 	var z := {"p": at, "v": Vector2.ZERO, "hp": hpv, "kind": kind, "state": state, "goal": at, "home": at,
 		"face": Vector2.RIGHT.rotated(rng.randf() * TAU), "sus": 0.0, "lost": 0.0, "look": 0.0, "attack_t": 0.0,
-		"stun": 0.0, "step": rng.randf() * 10.0, "herd": false, "target": null, "lurker": -1}
+		"stun": 0.0, "step": rng.randf() * 10.0, "herd": false, "target": null, "lurker": -1, "leash": 0.0, "max_hp": hpv}
 	dead.append(z)
 	return z
 
@@ -1603,15 +1634,24 @@ func _dead_step(dt: float) -> void:
 	for z in dead:
 		z.stun = maxf(0.0, z.stun - dt)
 		z.attack_t -= dt
+		if int(z.state) == IDLE:
+			z.hp = minf(z.max_hp, z.hp + dt * 4.0)        # left alone, the dead knit back together
 		if int(z.state) == IDLE and not people.any(func(s): return z.p.distance_squared_to(s.p) < 250000.0):
 			z.sus = maxf(0.0, z.sus - dt * 0.4)          # nobody about: they just stand and sway
 			if rng.randf() < dt * 0.3:
 				z.face = Vector2.RIGHT.rotated(rng.randf() * TAU)
 			z.v = Vector2.ZERO
 			continue
+		# the dead of a village don't follow far past it: pulled out, they lose interest and drift back home
+		z.leash = maxf(0.0, z.leash - dt)
+		if z.lurker >= 0 and int(z.state) in [CHASE, INVESTIGATE] and z.p.distance_to(z.home) > LEASH:
+			z.state = IDLE
+			z.target = null
+			z.sus = 0.0
+			z.leash = 10.0
 		var seen: Variant = null
 		for s in people:
-			if z.p.distance_squared_to(s.p) < 180000.0 and _sees(z, s):
+			if z.leash <= 0.0 and z.p.distance_squared_to(s.p) < 180000.0 and _sees(z, s):
 				seen = s
 				break
 		if seen != null:

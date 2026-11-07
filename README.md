@@ -28,15 +28,17 @@ and your villagers live their lives. Retake the realm one village at a time, the
   - Hall door bars, shutters, straw beds, mill, fletcher, chapel, barracks, bell.
 - **Soldiers** have standing orders: **Escort**, **Guard fields** (patrol the farmers and woodcutters) or
   **Warband**. They only fight what threatens their people, and fall back onto the walls when outnumbered.
-- **Escorts** walk ahead of a forager and clear the dead from where they're going. The forager holds back till
-  it's safe, skips houses with more dead than the escort can handle, and never leaves your villages without
-  an escort: if theirs falls or goes home hurt, they head back to the hall for another.
-- **Healing.** Anyone badly hurt (under half health) goes home and rests in bed till they're mended. Bed rest
-  heals far faster than standing about; herbs patch the worst wounds and the chapel doubles healing.
+- **Foraging parties.** Outside your own villages a forager only goes out with at least 2 soldiers on Escort
+  (up to 3). The party moves quietly in formation, one scouting ahead. They pick only houses with few dead
+  nearby, knife a lone unaware one from behind without raising the alarm, and turn away from anywhere busier.
+  If they're spotted they withdraw instead of fighting; the dead of a village won't follow far past it. If the
+  party drops below 2, the forager heads home and waits for another.
+- **Healing.** Anyone badly hurt (under half health) goes home and rests in bed till they're mended (about half
+  a day). Bed rest heals far faster than standing about; herbs patch the worst wounds and the chapel doubles healing.
 - **Barracks** train soldiers who live there: spearmen (reach), archers (shoot from range, use arrows) and
   men-at-arms (heavy armour).
 - **The realm** (right): click a village to pick it. Yours shows its works; one the dead hold shows **Send the
-  warband**, which marches only the soldiers with the Warband order. When no dead remain and they stand there,
+  warband**, which marches the soldiers with the Warband order (it needs at least 3). When no dead remain and they stand there,
   it's yours. Move villagers in to work its fields.
 - **Victory:** take the Black Crypt and destroy its altar. **Defeat:** everyone dies.
 
