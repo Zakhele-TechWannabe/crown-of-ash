@@ -586,7 +586,7 @@ func _refresh_ui() -> void:
 		n.queue_free()
 	for s in c.people:
 		var role: String = s.job if s.job != "soldier" else Realm.UNITS[s.unit].name.to_lower() + " (" + s.order + ")"
-		var b := _btn("%s · %s · %s" % [s.name, role, c.land.holdings[s.home].name], 14)
+		var b := _btn("%s · %s · %s%s" % [s.name, role, c.land.holdings[s.home].name, "  ✚ resting" if s.resting else ""], 14)
 		b.draw.connect(_hp_strip.bind(b, s))
 		b.custom_minimum_size = Vector2(275, 28)
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT

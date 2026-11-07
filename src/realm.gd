@@ -21,6 +21,8 @@ const GATE_HP := 240.0
 const STAKE_WOOD := 0.25             # wood per palisade cell
 const STAKE_WORK := 2.5              # seconds of work per palisade cell
 const TOWERS := 4
+const WOUNDED := 50.0                # below this, people go home to rest...
+const MENDED := 90.0                 # ...and stay in bed until they're back to this
 
 enum { DAY, NIGHT, LOST, WON }
 enum { IDLE, WANDER, INVESTIGATE, CHASE }
@@ -52,7 +54,7 @@ const UNITS := {
 	"man_at_arms": {"name": "Man-at-arms", "dmg": 75.0, "armor": 0.45, "reach": 0.0, "cost": {"wood": 4, "food": 4}, "time": 45.0, "info": "Mail and a sword: hits hard, hard to kill"},
 }
 const ORDERS := {
-	"escort": "Walks beside a forager and fights whatever comes for them",
+	"escort": "Walks ahead of a forager and clears the way; the forager waits till it's safe",
 	"fields": "Patrols the village's fields and woodcutters",
 	"warband": "Marches when you send the warband to a village",
 }
@@ -198,6 +200,17 @@ func _plan_ring(h: int) -> void:
 				if land.at(k) == Land.FOREST:
 					land.tiles[k.y * Land.W + k.x] = Land.GRASS
 			walls[c] = {"h": h, "hp": 0.0, "up": false, "gate": t == Land.ROAD, "open": false, "work": 0.0, "in": inn}
+	# a gate on every side (except a side lying on the edge of the world), in the middle if no road made one
+	var mid := r.get_center()
+	for side in [[Vector2i(0, -1), r.position.y > 0], [Vector2i(0, 1), r.end.y < Land.H],
+			[Vector2i(-1, 0), r.position.x > 0], [Vector2i(1, 0), r.end.x < Land.W]]:
+		if not side[1]:
+			continue
+		var cells: Array = walls.keys().filter(func(c): return walls[c].h == h and walls[c].in == -side[0])
+		if cells.is_empty() or cells.any(func(c): return walls[c].gate):
+			continue
+		cells.sort_custom(func(a, b): return a.distance_squared_to(mid) < b.distance_squared_to(mid))
+		walls[cells[0]].gate = true
 	for k in [r.position + Vector2i(1, 1), Vector2i(r.end.x - 2, r.position.y + 1), Vector2i(r.position.x + 1, r.end.y - 2), r.end - Vector2i(2, 2)]:
 		if land.at(k) == Land.FOREST:
 			land.tiles[k.y * Land.W + k.x] = Land.GRASS
@@ -251,7 +264,8 @@ func _add_person(home: int, job: String, kind: String) -> Dictionary:
 		"energy": 90.0, "job": job, "trait": kind, "doing": "", "goal": at, "path": [], "carry": {}, "house": -1, "busy": 0.0,
 		"cd": 0.0, "sneak": false, "asleep": false, "hurt_t": 0.0, "step": 0.0, "noise_t": 0.0, "spot": Vector2i(-1, -1),
 		"color": Color.from_hsv(rng.randf(), 0.4, 0.8),
-		"unit": "militia", "order": "fields", "train": "", "train_t": 0.0, "ward": null}
+		"unit": "militia", "order": "fields", "train": "", "train_t": 0.0, "ward": null,
+		"resting": false, "dest": null, "escort": "", "wait_t": 0.0, "avoid": {}}
 	people.append(s)
 	return s
 
@@ -417,6 +431,8 @@ func _dawn() -> void:
 	for cr in land.crates:
 		if cr.searched and rng.randf() < 0.2:
 			cr.searched = false
+	for s in people:
+		s.avoid = {}                                     # a new day: worth another look
 	for h in holdings_owned():
 		if has_built(h, "chapel"):
 			stock.herbs += 1
@@ -478,6 +494,15 @@ func _person(s: Dictionary, dt: float) -> void:
 		s.hp -= dt * 0.7
 	if not s.asleep:
 		s.energy = maxf(0.0, s.energy - dt * 100.0 / 480.0)
+	if s.hp < WOUNDED and not s.resting:
+		s.resting = true
+		s.ward = null
+		note("%s is badly hurt and goes home to rest." % s.name)
+	elif s.hp >= MENDED and s.resting:
+		s.resting = false
+		note("%s's wounds have mended." % s.name)
+	if s.hp < 100.0 and s.hunger > 50.0:
+		s.hp = minf(100.0, s.hp + dt * 0.05)              # small wounds close on their own
 	if in_any_hall(s):
 		var half: bool = rules.rations == "half"
 		if s.hunger < 45.0 and stock.food >= (0.5 if half else 1.0):
@@ -487,18 +512,24 @@ func _person(s: Dictionary, dt: float) -> void:
 			stock.herbs -= 1
 			s.hp = minf(100.0, s.hp + 35.0)
 		if s.hp < 100.0 and s.hunger > 30.0:
-			s.hp = minf(100.0, s.hp + dt * (1.5 if has_built(s.home, "chapel") else 0.6))
+			# rest in bed heals far faster than standing about; the chapel doubles it
+			s.hp = minf(100.0, s.hp + dt * (1.2 if s.asleep else 0.3) * (2.0 if has_built(s.home, "chapel") else 1.0))
 	_decide(s, dt)
 	_walk(s, dt)
 
 
 func _decide(s: Dictionary, dt: float) -> void:
 	var threat: Variant = _chaser_of(s)
-	if threat != null and s.doing != "flee" and s.doing != "fight":
+	if threat != null and s.doing != "flee":
+		# reconsidered every moment: soldiers stand unless outnumbered away from home or badly hurt; then they
+		# fall back onto the walls and towers
 		var n := dead.filter(func(z): return z.state == CHASE and z.target == s).size()
-		if s.job == "soldier" or (s.trait == "Strong" and n <= 2) or (n == 1 and s.hp > 50.0):
+		var odds := 3 if s.unit == "man_at_arms" else 2
+		if (s.job == "soldier" and not s.resting and (n <= odds or at_home(s))) or (s.trait == "Strong" and n <= 2 and not s.resting) or (n == 1 and s.hp > 50.0):
 			s.doing = "fight"
 		else:
+			if s.doing == "fight":
+				note("%s falls back from %d of the dead." % [s.name, n])
 			s.doing = "flee"
 	match s.doing:
 		"fight":
@@ -517,7 +548,7 @@ func _decide(s: Dictionary, dt: float) -> void:
 			return
 	var dusk := phase == DAY and time_left() < 30.0
 	if phase == NIGHT or dusk:
-		if (s.job == "guard" or s.job == "soldier") and s.energy > 15.0 and _post_index(s) < tower_count[s.home]:
+		if (s.job == "guard" or s.job == "soldier") and s.energy > 15.0 and not s.resting and _post_index(s) < tower_count[s.home]:
 			_deposit_if_home(s)
 			_guard(s, dt)
 			return
@@ -528,16 +559,20 @@ func _decide(s: Dictionary, dt: float) -> void:
 			if not at_home(s):
 				return
 		_deposit_if_home(s)
-		if (s.job == "guard" or s.job == "soldier") and s.energy > 15.0:
+		if (s.job == "guard" or s.job == "soldier") and s.energy > 15.0 and not s.resting:
 			_guard(s, dt)
 		else:
 			_sleep(s, dt)
 		return
-	if s.energy < 20.0 or s.hp < 35.0:
+	if s.energy < 20.0 or s.resting:
+		s.dest = null
 		if at_home(s):
+			_deposit_if_home(s)
 			_sleep(s, dt)
+			if s.resting and s.asleep:
+				s.doing = "resting their wounds"
 		else:
-			s.doing = "heading home"
+			s.doing = "going home to rest" if s.resting else "heading home"
 			_go(s, hall_pos(s.home))
 		return
 	s.asleep = false
@@ -798,17 +833,30 @@ func _engage(s: Dictionary, z: Dictionary, what: String) -> void:
 	_melee(s, z)
 
 
+## The soldiers fit to walk with this forager right now.
+func escorts_of(f: Dictionary) -> Array:
+	return people.filter(func(o): return o.ward == f and o.job == "soldier" and o.order == "escort" and o.train == "" and not o.resting and o.energy >= 20.0)
+
+
+func _dead_near(at: Vector2, r: float) -> int:
+	var n := 0
+	for z in dead:
+		if z.p.distance_squared_to(at) < r * r:
+			n += 1
+	return n
+
+
 func _ward(s: Dictionary) -> Variant:
 	var w: Variant = s.ward
-	if w != null and people.has(w) and w.job == "forage":
+	if w != null and people.has(w) and w.job == "forage" and not w.resting:
 		return w
 	s.ward = null
 	var best: Variant = null
 	var bn := 99
 	for f in people:
-		if f.job != "forage":
+		if f.job != "forage" or f.resting:
 			continue
-		var n := people.filter(func(o): return o.job == "soldier" and o.ward == f).size() + (0 if f.home == s.home else 2)
+		var n := escorts_of(f).size() + (0 if f.home == s.home else 2)
 		if n < bn:
 			bn = n
 			best = f
@@ -836,11 +884,36 @@ func _soldier(s: Dictionary, dt: float) -> void:
 				if z != null:
 					_engage(s, z, "defending " + f.name)
 					return
+				# out in front: clear the dead from where the forager means to go
+				if f.dest != null:
+					var bd := 200.0
+					for d in dead:
+						var dd: float = d.p.distance_to(f.dest)
+						if dd < bd:
+							bd = dd
+							z = d
+					if z != null:
+						_engage(s, z, "clearing the way for " + f.name)
+						return
 				s.doing = "escorting " + f.name
-				if s.p.distance_to(f.p) > 45.0:
-					_go(s, f.p - f.face * 26.0)
+				var lead: Vector2
+				if f.dest != null:
+					lead = f.dest
+					# lead, but never so far ahead that the forager is left alone
+					if s.p.distance_to(f.p) > 110.0 and s.p.distance_to(lead) < f.p.distance_to(lead):
+						s.path = []
+						s.goal = s.p
+						s.doing = "waiting for " + f.name
+						return
+				elif at_home(f):
+					lead = f.p + Vector2(18, 0)
+				else:
+					lead = f.p + (hall_pos(f.home) - f.p).normalized() * 30.0   # walking home: still in front
+				if s.p.distance_to(lead) > 16.0:
+					_go(s, lead)
 				else:
 					s.path = []
+					s.goal = s.p
 				return
 			_patrol(s, dt)
 			return
@@ -1100,6 +1173,11 @@ func _forage(s: Dictionary, dt: float) -> void:
 	var carried := 0
 	for k in s.carry:
 		carried += int(s.carry[k])
+	s.dest = null
+	var guards := escorts_of(s)
+	if guards.is_empty() and s.escort != "" and not at_home(s):
+		note("%s lost their escort and heads home for another." % s.name)
+	s.escort = guards[0].name if not guards.is_empty() else ""
 	if carried >= 6 or time_left() < 50.0:
 		s.doing = "bringing things home"
 		if at_home(s):
@@ -1113,8 +1191,8 @@ func _forage(s: Dictionary, dt: float) -> void:
 	if s.house < 0 or crates_left(s.house) == 0:
 		s.house = _pick_house(s)
 		if s.house < 0:
-			s.doing = "nothing left to search"
 			_idle(s)
+			s.doing = "nothing left to search" if s.avoid.is_empty() else "no house safe enough today"
 			return
 	var cr: Variant = null
 	var bd := 1e9
@@ -1126,9 +1204,52 @@ func _forage(s: Dictionary, dt: float) -> void:
 				cr = c
 	if cr == null:
 		return
-	s.doing = "searching " + land.holdings[land.houses[s.house].holding].name
-	if s.p.distance_to(land.center(cr.cell)) > 20.0:
-		_go(s, land.center(cr.cell))
+	var hol: int = land.houses[s.house].holding
+	var spot := land.center(cr.cell)
+	if not land.holdings[hol].claimed and s.p.distance_to(spot) > 20.0:
+		# beyond our own villages nobody goes without a soldier in front
+		if guards.is_empty():
+			s.doing = "waiting at the hall for an escort"
+			if at_home(s):
+				_deposit_if_home(s)
+				s.path = []
+				s.goal = s.p
+			else:
+				_go(s, hall_pos(s.home))
+			return
+		var e: Dictionary = guards[0]
+		s.dest = spot
+		if _dead_near(spot, 250.0) > guards.size() * 2 + 1:   # a pack wakes together: count all of it
+			s.avoid[s.house] = true
+			s.house = -1
+			s.dest = null
+			s.doing = "looking for a safer house"
+			return
+		var wait := ""
+		if _dead_near(s.p, 150.0) > 0 or _dead_near(spot, 200.0) > 0 or str(e.doing).begins_with("defending") \
+				or str(e.doing).begins_with("clearing"):
+			wait = "waiting till it's safe"
+		elif e.p.distance_to(spot) > 50.0 and e.p.distance_to(spot) > s.p.distance_to(spot) - 30.0:
+			wait = "letting %s go first" % e.name
+		if wait != "":
+			s.doing = wait
+			s.wait_t += dt
+			if s.wait_t > 45.0:                               # it isn't clearing: try another house
+				s.wait_t = 0.0
+				s.avoid[s.house] = true
+				s.house = -1
+				s.dest = null
+			elif _dead_near(s.p, 110.0) > 0:
+				s.doing = "falling back behind " + e.name
+				_go(s, hall_pos(s.home))
+			else:
+				s.path = []
+				s.goal = s.p
+			return
+		s.wait_t = 0.0
+	s.doing = "searching " + land.holdings[hol].name
+	if s.p.distance_to(spot) > 20.0:
+		_go(s, spot)
 		return
 	s.path = []
 	s.goal = s.p
@@ -1144,13 +1265,13 @@ func _pick_house(s: Dictionary) -> int:
 	var bd := 1e9
 	for i in land.houses.size():
 		var hol: int = land.houses[i].holding
-		if land.holdings[hol].crypt or crates_left(i) == 0:
+		if land.holdings[hol].crypt or crates_left(i) == 0 or s.avoid.has(i):
 			continue
 		var d := land.center(land.houses[i].rect.get_center()).distance_to(s.p)
 		if marked.has(i):
 			d -= 20000.0
 		elif not land.holdings[hol].claimed:
-			d += 900.0 + dead_in(hol) * 300.0               # the dead still hold it: only if nothing else
+			d += 900.0 + _dead_near(land.center(land.houses[i].rect.get_center()), 250.0) * 500.0   # the quietest edge first
 		if d < bd:
 			bd = d
 			best = i
