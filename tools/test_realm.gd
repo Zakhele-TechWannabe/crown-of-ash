@@ -18,7 +18,7 @@ func _init() -> void:
 			r.queue_upgrade(0, id)
 		var trained := false
 		var frames := 0
-		var order := [2, 1, 3, 6, 4, 5, 7]
+		var order := [3, 6, 1, 4, 5, 7, 2, 8]
 		while r.phase in [Realm.DAY, Realm.NIGHT] and r.day <= days and frames < 60 * 60 * 60:
 			# from day 3, newcomers (and the guard) are raised as a warband once there are enough of them
 			if r.day >= 3:
@@ -44,7 +44,7 @@ func _init() -> void:
 			if r.day != d0:
 				var ring: Rect2i = r.rings[0]
 				var near := r.dead.filter(func(z): return ring.grow(4).has_point(r.land.cell(z.p))).size()
-				print("  dawn %d: people %d food %.0f wood %.0f dead %d (near Ashford %d, lurkers %d)" % [r.day, r.people.size(), r.stock.food, r.stock.wood, r.dead.size(), near, r.dead.filter(func(z): return z.lurker >= 0).size()])
+				print("  dawn %d: people %d food %.0f wood %.0f dead %d (near the capital %d, lurkers %d)" % [r.day, r.people.size(), r.stock.food, r.stock.wood, r.dead.size(), near, r.dead.filter(func(z): return z.lurker >= 0).size()])
 			frames += 1
 		var held := r.holdings_owned().map(func(h): return r.land.holdings[h].name)
 		print("realm %d: %s day %d  people %d  food %.0f wood %.0f arrows %d  held %s  dead %d  built %s" % [seed_val,

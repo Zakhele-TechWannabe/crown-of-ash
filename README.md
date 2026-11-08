@@ -1,7 +1,16 @@
 # Crown of Ash
 
-A medieval colony sim against the undead. You don't control anyone: you set jobs, rules and works,
-and your villagers live their lives. Retake the realm one village at a time, then burn the Black Crypt.
+A medieval colony sim against the undead, set in the Empire of Kambara. You don't control anyone: you set jobs,
+rules and works, and your people live their lives. Only the capital, Ala Kambara, still stands. Retake the
+empire city by city, then break the Black Crypt in the Nyoka peaks.
+
+## The empire
+
+Top-down, laid out after the owner's map of Kambara: Ala Kambara walled in the middle; the Nyoka Mountains across
+the north (the crypt hides in them); the Kambara River down the west, over the upper falls and Kambara Falls,
+bridged where the highways cross; Kiranga Citadel on its plateau to the north-east; Kambara Port and its piers on
+the Golden Coast; the agricultural belt between the capital and Mabele City; and Tenga, Ilanga, Savu, Kifaru and
+Mabele cities around. Province names are written across the land. Water and rock can't be crossed.
 
 ## Run
 

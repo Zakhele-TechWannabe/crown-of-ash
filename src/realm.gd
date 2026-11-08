@@ -163,7 +163,7 @@ func setup(seed_val: int) -> void:
 	# the dead hold every hamlet, and the crypt
 	for h in range(1, land.holdings.size()):
 		var crypt: bool = land.holdings[h].crypt
-		# the further from Ashford, the more of them — and the crypt is a fortress
+		# the further from the capital, the more of them — and the crypt is a fortress
 		var far: float = Vector2(land.holdings[h].center - land.holdings[0].center).length() / 30.0
 		var count := 16 if crypt else int(5 + far * 4) + rng.randi_range(0, 2)
 		var brutes := 4 if crypt else (1 if far > 0.9 else 0)
@@ -171,13 +171,13 @@ func setup(seed_val: int) -> void:
 		while made < count:
 			var a := land.holding_area(h).grow(-3)
 			var c := Vector2i(rng.randi_range(a.position.x, a.end.x - 1), rng.randi_range(a.position.y, a.end.y - 1))
-			if land.at(c) in [Land.WALL, Land.WINDOW, Land.FOREST]:
+			if land.at(c) in [Land.WALL, Land.WINDOW, Land.FOREST, Land.WATER, Land.ROCK]:
 				continue
 			var kind := "brute" if made < brutes else ("runner" if rng.randf() < 0.15 * far else "walker")
 			var z := _make_dead(land.center(c), kind, IDLE)
 			made += 1
 			z.lurker = h
-	note("Ashford stands alone. The dead hold every village from here to the Black Crypt.")
+	note("Ala Kambara stands alone. The dead hold the empire, from the Golden Coast to the Black Crypt in the Nyoka peaks.")
 
 
 ## Every village has its wall ring marked out from the start; building it is the Palisade work. Where a road
@@ -195,8 +195,8 @@ func _plan_ring(h: int) -> void:
 				continue
 			var c := Vector2i(x, y)
 			var t := land.at(c)
-			if t in [Land.WALL, Land.FLOOR, Land.DOOR, Land.WINDOW]:
-				continue
+			if t in [Land.WALL, Land.FLOOR, Land.DOOR, Land.WINDOW, Land.WATER, Land.ROCK]:
+				continue                                 # houses, water and rock need no stakes
 			var inn := Vector2i(1 if x == r.position.x else (-1 if x == r.end.x - 1 else 0), 0)
 			if inn == Vector2i.ZERO:
 				inn = Vector2i(0, 1 if y == r.position.y else -1)
@@ -216,7 +216,7 @@ func _plan_ring(h: int) -> void:
 		cells.sort_custom(func(a, b): return a.distance_squared_to(mid) < b.distance_squared_to(mid))
 		walls[cells[0]].gate = true
 	for k in [r.position + Vector2i(1, 1), Vector2i(r.end.x - 2, r.position.y + 1), Vector2i(r.position.x + 1, r.end.y - 2), r.end - Vector2i(2, 2)]:
-		if land.at(k) == Land.FOREST:
+		if land.at(k) in [Land.FOREST, Land.WATER, Land.ROCK, Land.SAND]:
 			land.tiles[k.y * Land.W + k.x] = Land.GRASS
 		towers[h].append(land.center(k))
 
@@ -332,7 +332,7 @@ func _walk_person(c: Vector2i) -> bool:
 	if wall_standing(w) and not w.gate:
 		return false
 	var t := land.at(c)
-	return not (t == Land.WALL or t == Land.WINDOW or t == Land.FOREST)
+	return not (land.impassable(t) or t == Land.WINDOW or t == Land.FOREST)
 
 
 func _walk_dead(c: Vector2i, calm := false) -> bool:
@@ -340,7 +340,7 @@ func _walk_dead(c: Vector2i, calm := false) -> bool:
 	if wall_standing(w):
 		return w.gate and w.open
 	var t := land.at(c)
-	if t == Land.WALL:
+	if land.impassable(t):
 		return false
 	if t == Land.DOOR:
 		return bool(opening(c).open) or float(opening(c).hp) <= 0.0
@@ -351,7 +351,9 @@ func _walk_dead(c: Vector2i, calm := false) -> bool:
 
 func clear_at(c: Vector2i) -> bool:
 	var t := land.at(c)
-	return t != Land.WALL and t != Land.FOREST and _walk_dead(c)
+	if t == Land.WATER:
+		return true                                      # you can see across the river
+	return t != Land.WALL and t != Land.FOREST and t != Land.ROCK and _walk_dead(c)
 
 
 func _los(a: Vector2, b: Vector2) -> bool:
@@ -449,7 +451,7 @@ func _dawn() -> void:
 				s.p = land.center(land.holdings[h].center + Vector2i(0, 9))
 				note("%s heard the bell of %s and came in from the road. (%s)" % [s.name, land.holdings[h].name, pick])
 				_ev("joined", s.p)
-	note("Day %d. %d souls, %d of 7 villages held." % [day, people.size(), holdings_owned().size()])
+	note("Day %d. %d souls, %d of %d cities held." % [day, people.size(), holdings_owned().size(), land.holdings.size() - 1])
 
 
 # ---------------------------------------------------------------- the warband
@@ -744,7 +746,7 @@ func _clear_shot(a: Vector2, b: Vector2) -> bool:
 	for i in range(1, n):
 		var c := land.cell(a + d * (float(i) / n))
 		var t := land.at(c)
-		if t == Land.WALL or t == Land.FOREST:
+		if t == Land.WALL or t == Land.FOREST or t == Land.ROCK:
 			return false
 		if t == Land.DOOR and not bool(opening(c).open) and float(opening(c).hp) > 0.0:
 			return false
@@ -1570,7 +1572,7 @@ func _passability() -> void:
 	for y in Land.H:
 		for x in Land.W:
 			var c := Vector2i(x, y)
-			pass_alert[y * Land.W + x] = 0 if land.tiles[y * Land.W + x] == Land.WALL else 1
+			pass_alert[y * Land.W + x] = 0 if land.impassable(land.tiles[y * Land.W + x]) else 1
 			_touch(c)
 
 

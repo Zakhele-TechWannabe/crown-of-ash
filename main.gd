@@ -1,6 +1,6 @@
 extends Node2D
 ## CROWN OF ASH — win back a realm from the walking dead. Your villagers live by themselves; you set jobs, rules and
-## works, and send the warband out. Args (after --): --play  --night  --fast  --shot=path.png --frames=N  --windowed
+## works, and send the warband out. Args (after --): --play  --night  --fast  --shot=path.png --frames=N  --windowed  --zoom=Z  --look=x,y
 
 const Realm := preload("res://src/realm.gd")
 const Land := preload("res://src/land.gd")
@@ -64,6 +64,8 @@ var train_row: HBoxContainer
 var order_btns := {}
 var train_btns := {}
 var minimap := Rect2()
+var look_zoom := 0.0                 # --zoom= and --look=x,y (cells): for screenshots
+var look_at := Vector2.ZERO
 
 
 func _ready() -> void:
@@ -113,6 +115,10 @@ func _ready() -> void:
 			shot_frames = int(a.get_slice("=", 1))
 		elif a.begins_with("--select="):
 			pick = int(a.get_slice("=", 1))
+		elif a.begins_with("--zoom="):
+			look_zoom = float(a.get_slice("=", 1))
+		elif a.begins_with("--look="):
+			look_at = Vector2(float(a.get_slice("=", 1).get_slice(",", 0)), float(a.get_slice("=", 1).get_slice(",", 1))) * T
 	if not "--windowed" in OS.get_cmdline_user_args() and shot_path == "":
 		if DisplayServer.get_screen_count() > 1:
 			DisplayServer.window_set_current_screen(1)
@@ -121,6 +127,10 @@ func _ready() -> void:
 		new_game()
 		if pick >= 0:
 			_select(c.people[pick], true)
+		if look_zoom > 0.0:
+			cam.zoom = Vector2(look_zoom, look_zoom)
+		if look_at != Vector2.ZERO:
+			cam.position = look_at
 		if night:
 			c.clock = Realm.DAY_LEN - 3.0
 	else:
@@ -193,7 +203,7 @@ func show_title() -> void:
 	overlay = _panel(1000)
 	var v: VBoxContainer = overlay.get_meta("box")
 	v.add_child(_lbl("CROWN OF ASH", 104, C_GOLD, font_px))
-	v.add_child(_lbl("The dead walk. Ashford stands alone. Your people live by themselves — you set their work, the village rules and what gets built, and you send the warband to win back the land, village by village, to the Black Crypt.", 25, C_DIM))
+	v.add_child(_lbl("The dead walk in the Empire of Kambara. Only the capital, Ala Kambara, still stands. Your people live by themselves — you set their work, the rules and what gets built, and you send the warband to win back the empire, city by city, to the Black Crypt in the Nyoka peaks.", 25, C_DIM))
 	var go := _btn("Raise the banner")
 	go.pressed.connect(new_game)
 	v.add_child(go)
@@ -214,7 +224,7 @@ func new_game() -> void:
 	cam.position = c.hall_pos(0)
 	cam.zoom = Vector2(0.9, 0.9)
 	_build_ui()
-	_banner("DAY 1 — Ashford stands alone")
+	_banner("DAY 1 — Ala Kambara stands alone")
 
 
 func _game_over() -> void:
@@ -227,7 +237,7 @@ func _game_over() -> void:
 	var v: VBoxContainer = overlay.get_meta("box")
 	var won := c.phase == Realm.WON
 	v.add_child(_lbl("THE REALM IS YOURS" if won else "THE LAST FIRE GOES OUT", 60, C_GOLD if won else C_RED, font_px))
-	v.add_child(_lbl("The crypt broken on day %d, with %d souls." % [c.day, c.people.size()] if won else "Ashford fell on day %d." % c.day, 28, C_TEXT))
+	v.add_child(_lbl("The crypt broken on day %d, with %d souls." % [c.day, c.people.size()] if won else "Ala Kambara fell on day %d." % c.day, 28, C_TEXT))
 	var again := _btn("A new reign")
 	again.pressed.connect(new_game)
 	v.add_child(again)
@@ -842,6 +852,9 @@ func _draw_world() -> void:
 				if frac > 0.0:
 					world.draw_rect(Rect2(at + Vector2(-13, 15), Vector2(26 * frac, 4)), C_GOLD)
 	_draw_walls(r)
+	# the provinces of Kambara, written across the land
+	for pv in Land.PROVINCES:
+		world.draw_string(font_px, Vector2(pv[1]) * T, pv[0], HORIZONTAL_ALIGNMENT_LEFT, -1, 54, Color(1.0, 0.92, 0.7, 0.28))
 	# the crypt's altar
 	var ch := c.land.holdings.size() - 1
 	var ap := c.hall_pos(ch)
@@ -879,8 +892,31 @@ func _tile(cell: Vector2i) -> void:
 			world.draw_rect(rect, Color(0.33, 0.47, 0.25).lerp(Color(0.38, 0.5, 0.27), h) if t == Land.GRASS else Color(0.22, 0.32, 0.18))
 			if t == Land.GRASS and h < 0.06:
 				world.draw_circle(rect.get_center() + Vector2(h * 80 - 2, 0), 3, Color(0.85, 0.8, 0.4))
+		Land.WATER:
+			var deep := Color(0.16, 0.36, 0.55) if cell.x > 70 else Color(0.2, 0.45, 0.62)
+			world.draw_rect(rect, deep.lerp(deep.lightened(0.08), h))
+			var wob := sin(Time.get_ticks_msec() * 0.002 + cell.x * 0.7 + cell.y * 1.3)
+			if cell in c.land.falls:
+				for k in 3:
+					world.draw_line(rect.position + Vector2(5 + k * 10 + wob * 2, 2), rect.position + Vector2(5 + k * 10 + wob * 2, T - 2), Color(0.92, 0.96, 1.0, 0.8), 3.0)
+			elif h < 0.3:
+				world.draw_line(rect.position + Vector2(6, 12 + wob * 3), rect.position + Vector2(22, 12 + wob * 3), Color(0.6, 0.8, 0.95, 0.5), 1.5)
+		Land.ROCK:
+			var stone := Color(0.46, 0.44, 0.42).lerp(Color(0.54, 0.52, 0.5), h)
+			world.draw_rect(rect, stone)
+			var peak := PackedVector2Array([rect.position + Vector2(2, T - 2), rect.position + Vector2(T * 0.5 + (h - 0.5) * 8, 4), rect.position + Vector2(T - 2, T - 2)])
+			world.draw_colored_polygon(peak, stone.darkened(0.2))
+			if cell.y < 6:
+				world.draw_colored_polygon(PackedVector2Array([peak[1], peak[1] + Vector2(-6, 9), peak[1] + Vector2(6, 9)]), Color(0.94, 0.95, 0.97))
+		Land.SAND:
+			world.draw_rect(rect, Color(0.84, 0.76, 0.52).lerp(Color(0.8, 0.72, 0.48), h))
 		Land.ROAD:
 			world.draw_rect(rect, Color(0.52, 0.42, 0.3).lerp(Color(0.48, 0.38, 0.27), h))
+			if c.land.at(cell + Vector2i(0, 1)) == Land.WATER or c.land.at(cell - Vector2i(0, 1)) == Land.WATER \
+					or c.land.at(cell + Vector2i(1, 0)) == Land.WATER or c.land.at(cell - Vector2i(1, 0)) == Land.WATER:
+				world.draw_rect(rect, Color(0.42, 0.3, 0.2))     # timber over the water: a bridge or a pier
+				for k in 4:
+					world.draw_line(rect.position + Vector2(0, 4 + k * 8), rect.position + Vector2(T, 4 + k * 8), Color(0.3, 0.2, 0.13), 1.5)
 			world.draw_circle(rect.position + Vector2(8 + h * 16, 10 + h * 10), 2, Color(0.4, 0.32, 0.22))
 		Land.FIELD:
 			world.draw_rect(rect, Color(0.62, 0.52, 0.28))
@@ -1187,7 +1223,7 @@ func _draw_hud() -> void:
 	hud_draw.draw_string(font_px, Vector2(20, 38), ("NIGHT %d" if night else "DAY %d") % c.day, HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color(0.6, 0.7, 1.0) if night else C_GOLD)
 	hud_draw.draw_string(font, Vector2(170, 36), "%d:%02d until %s" % [int(left) / 60, int(left) % 60, "dawn" if night else "dusk"], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
 	var st := c.stock
-	var txt := "Food %d    Wood %d    Arrows %d    Herbs %d    Souls %d    Villages %d/7" % [int(st.food), int(st.wood), st.arrows, st.herbs, c.people.size(), c.holdings_owned().size()]
+	var txt := "Food %d    Wood %d    Arrows %d    Herbs %d    Souls %d    Cities %d/%d" % [int(st.food), int(st.wood), st.arrows, st.herbs, c.people.size(), c.holdings_owned().size(), c.land.holdings.size() - 1]
 	hud_draw.draw_string(font, Vector2(vs.x - 20 - font.get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 21).x, 36), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 21, C_TEXT)
 	# minimap, top right
 	minimap = Rect2(vs.x - 300, 64, 286, 286 * Land.H / float(Land.W))
@@ -1202,6 +1238,9 @@ func _draw_hud() -> void:
 				Land.ROAD: col = Color(0.45, 0.36, 0.25)
 				Land.FIELD: col = Color(0.6, 0.52, 0.28)
 				Land.GRAVE: col = Color(0.3, 0.25, 0.3)
+				Land.WATER: col = Color(0.2, 0.42, 0.6)
+				Land.ROCK: col = Color(0.5, 0.48, 0.46)
+				Land.SAND: col = Color(0.8, 0.72, 0.5)
 			if col.a > 0.0:
 				hud_draw.draw_rect(Rect2(minimap.position + Vector2(x, y) * k, Vector2(2, 2) * k), col)
 	for h in c.land.holdings.size():
