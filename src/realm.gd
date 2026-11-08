@@ -1,18 +1,16 @@
 extends RefCounted
-## Crown of Ash as pure data: a realm of villages against the walking dead. Villagers live by themselves —
-## farming, chopping, foraging, building, keeping watch, fighting — and you set jobs, rules and buildings, and send
-## the warband to win back the land. Units are pixels.
+## Crown of Ash as pure data: an empire against the walking dead. People live by themselves — farming, chopping,
+## foraging, building, keeping watch, fighting, cultivating — and you set jobs, rules and buildings, and send the
+## warband to win back the land. Units are pixels.
 ##
-## The dead don't know where anyone is. They see what's in front of them (little in the dark, much more where a
-## hearth shows through an open window) and go to look wherever they hear a noise.
+## The living are people, each with a name. The dead are numbers: the map is cut into blocks and each block holds a
+## count of them, so there can be millions. Anyone in the open in a block with the dead is fighting them.
 
 const Land := preload("res://src/land.gd")
 const T := Land.T
 
 const DAY_LEN := 300.0
 const NIGHT_LEN := 130.0
-const SR := 11.0
-const ZR := 12.0
 const DOOR_HP := 60.0
 const PLANK_HP := 120.0
 const ALTAR_HP := 700.0
@@ -23,32 +21,37 @@ const STAKE_WORK := 2.5              # seconds of work per palisade cell
 const TOWERS := 4
 const WOUNDED := 50.0                # below this, people go home to rest...
 const MENDED := 90.0                 # ...and stay in bed until they're back to this
-const LEASH := 420.0                 # how far a village's dead follow anyone out of it
 const WARBAND_MIN := 3
-const PARTY := 2                     # soldiers a forager needs before leaving our villages
-const PARTY_MAX := 3
+const BLOCK := 4                     # the dead are counted in blocks of 4x4 cells
+const BW := (Land.W + BLOCK - 1) / BLOCK
+const BH := (Land.H + BLOCK - 1) / BLOCK
+const BITE := 6.0                    # harm one of the dead does each second to someone it reaches
+const GRIP := 3                      # the most of them that can reach one person at once
+const ZOMBIE_HP := 100.0
+const LAYERS := 9                    # Body Refinement, first layer to ninth
+const CULT_NEED := 120.0             # seconds of full-time cultivation for the first layer
 
 enum { DAY, NIGHT, LOST, WON }
-enum { IDLE, WANDER, INVESTIGATE, CHASE }
 
-const JOBS := ["farm", "chop", "forage", "build", "guard", "soldier", "rest"]
+const JOBS := ["farm", "chop", "forage", "build", "guard", "soldier", "cultivate", "rest"]
 const JOB_INFO := {
 	"farm": "Works the village fields by day: food",
 	"chop": "Fells trees for wood — the axe is loud",
 	"forage": "Searches ruined cottages and brings back what they find",
 	"build": "Builds the village's works and mends the gate",
 	"guard": "Watches from the hall with a bow and shoots what comes close",
-	"soldier": "Fights: escorts foragers, guards the fields or marches with the warband",
+	"soldier": "Fights: clears the dead near home or marches with the warband",
+	"cultivate": "Tempers the body full-time: climbs the layers of Body Refinement",
 	"rest": "Stays in the hall and gets their strength back",
 }
 const TRAITS := {
-	"Quiet": "Makes half the noise",
+	"Quiet": "Keeps calm and steady",
 	"Strong": "Hits harder and takes less harm",
 	"Skilled": "Works twice as fast",
 	"Keen-eyed": "A sharper eye and a better shot",
 }
-const NAMES := ["Aldric", "Bryn", "Cedric", "Edith", "Gareth", "Hilda", "Isolde", "Jory", "Maud", "Osric", "Rowan",
-	"Sybil", "Tamsin", "Ulric", "Wynn", "Agnes", "Bertram", "Elena", "Godric", "Leofa", "Merrick", "Nell", "Piers", "Rosamund"]
+const SYLLABLES := ["a", "ba", "bo", "da", "di", "e", "fa", "ga", "ji", "ka", "ki", "ko", "la", "le", "lu", "ma", "mi",
+	"na", "ni", "nyo", "o", "ra", "ri", "sa", "si", "ta", "tu", "wa", "ya", "ze", "zu"]
 
 ## What a soldier is trained as. Militia is everyone's start; the rest need a barracks where they live.
 const UNITS := {
@@ -58,8 +61,7 @@ const UNITS := {
 	"man_at_arms": {"name": "Man-at-arms", "dmg": 75.0, "armor": 0.45, "reach": 0.0, "cost": {"wood": 4, "food": 4}, "time": 45.0, "info": "Mail and a sword: hits hard, hard to kill"},
 }
 const ORDERS := {
-	"escort": "Goes out with a forager in a quiet party of 2-3; avoids fights, only defends",
-	"fields": "Patrols the village's fields and woodcutters",
+	"fields": "Clears the dead standing near home, keeps watch at night",
 	"warband": "Marches when you send the warband to a village",
 }
 const HALL_WORKS := ["mill", "fletcher", "chapel", "barracks", "bell"]
@@ -83,7 +85,9 @@ var rng := RandomNumberGenerator.new()
 var phase := DAY
 var day := 1
 var clock := 0.0
-var stock := {"food": 12.0, "wood": 6.0, "arrows": 10, "herbs": 2}
+var clock_all := 0.0                 # seconds since the realm began
+var step_dt := 0.0
+var stock := {"food": 200.0, "wood": 40.0, "arrows": 60, "herbs": 10}
 var rules := {"hearths": false, "rations": "normal", "close_gate": true}
 var built := {}                      # holding → {upgrade id: true}
 var queue := {}                      # holding → [upgrade ids]
@@ -93,17 +97,26 @@ var marked := {}                     # house index → true: forage here first
 var target := -1                     # the holding the warband is sent to win back
 var altar_hp := ALTAR_HP
 var people: Array = []
-var dead: Array = []                 # the undead
+var horde := PackedInt32Array()      # block → how many of the dead stand there
+var marches: Array = []              # {b, n, goal, t}: the night's packs on the move
+var march_n := PackedInt32Array()    # block → how many of the marching packs are in it
+var danger := PackedByteArray()      # block → 1 while any of the dead are in it
+var block_open := PackedByteArray()  # block → 1 if the dead can cross it
+var hold_blocks := {}                # holding → [blocks]
+var inner := {}                      # block → the holding whose palisade it lies wholly inside
+var walls_of := {}                   # holding → [its palisade cells]
+var hurt_walls := {}                 # palisade cell → true while it needs mending
+var wall_blocks := {}                # block → [palisade cells in it]
+var doors := {}                      # house → its door cell
+var block_fields := {}               # goal block → distance to it from every block
+var hurt_acc := {}                   # block → part of a kill dealt so far
+var spots := {}                      # block → block_spot
+var house_grid := PackedInt32Array() # cell → the house standing on it, or -1
+var rooms := {}                      # holding → [Vector2]: somewhere to sleep, one for each person
 var shots: Array = []
 var noises: Array = []
 var log: Array = []
 var events: Array = []
-var herds_left := 0
-var herd_t := 0.0
-var fields_cache := {}
-var pass_calm := PackedByteArray()
-var pass_alert := PackedByteArray()
-var pass_sight := PackedByteArray()
 var gates := {}                      # holding → its hall's door cell
 var beds := {}                       # holding → [Vector2]
 var posts := {}                      # holding → [Vector2]
@@ -119,6 +132,13 @@ func setup(seed_val: int) -> void:
 	rng.seed = seed_val
 	land = Land.new()
 	land.build(seed_val)
+	house_grid.resize(Land.W * Land.H)
+	house_grid.fill(-1)
+	for i in land.houses.size():
+		var r: Rect2i = land.houses[i].rect
+		for y in range(r.position.y, r.end.y):
+			for x in range(r.position.x, r.end.x):
+				house_grid[y * Land.W + x] = i
 	for c in land.openings:
 		var o: Dictionary = land.openings[c]
 		o.open = false
@@ -135,6 +155,7 @@ func setup(seed_val: int) -> void:
 		beds[h] = []
 		posts[h] = []
 		slots[h] = {}
+		rooms[h] = []
 		for c in land.openings:
 			var o: Dictionary = land.openings[c]
 			if o.house != land.holdings[h].hall:
@@ -144,6 +165,12 @@ func setup(seed_val: int) -> void:
 			posts[h].append(land.center(c) + (land.center(_hall_center(h)) - land.center(c)).normalized() * T)
 		for k in mini(6, hr.size.x - 2):
 			beds[h].append(land.center(Vector2i(hr.position.x + 1 + k, hr.position.y + 1)))
+		# somewhere to sleep for everyone: every floor cell of the holding's houses, hall first
+		for i in land.holdings[h].houses:
+			var r: Rect2i = land.houses[i].rect
+			for y in range(r.position.y + 1, r.end.y - 1):
+				for x in range(r.position.x + 1, r.end.x - 1):
+					rooms[h].append(land.center(Vector2i(x, y)))
 		for u in UPGRADES:
 			slots[h][u.id] = hall_pos(h)
 		for k in HALL_WORKS.size():
@@ -154,30 +181,39 @@ func setup(seed_val: int) -> void:
 			for x in range(p.x - 18, p.x + 19):
 				if land.at(Vector2i(x, y)) == Land.FOREST and _forest_edge(Vector2i(x, y)):
 					woods[h].append(Vector2i(x, y))
-	var jobs := ["farm", "farm", "chop", "forage", "build", "guard", "soldier", "soldier"]
-	var traits := ["Skilled", "Quiet", "Strong", "Quiet", "Skilled", "Keen-eyed", "Strong", "Strong"]
-	for k in jobs.size():
-		_add_person(0, jobs[k], traits[k])
-	people[6].order = "escort"
-	people[7].order = "escort"
-	# the dead hold every hamlet, and the crypt
+	_blocks()
+	# the capital's hundred: most work the land, some keep watch or carry spears, some cultivate
+	var plan := {"farm": 22, "chop": 14, "build": 12, "forage": 6, "guard": 10, "soldier": 14, "cultivate": 12, "rest": 10}
+	for job in plan:
+		for k in plan[job]:
+			var s := _add_person(0, job, TRAITS.keys()[rng.randi() % TRAITS.size()])
+			if job == "soldier" and k >= 8:
+				s.order = "warband"
+	# the dead hold every city and the crypt, more the further from the capital; more wander the wilds
 	for h in range(1, land.holdings.size()):
 		var crypt: bool = land.holdings[h].crypt
-		# the further from the capital, the more of them — and the crypt is a fortress
 		var far: float = Vector2(land.holdings[h].center - land.holdings[0].center).length() / 30.0
-		var count := 16 if crypt else int(5 + far * 4) + rng.randi_range(0, 2)
-		var brutes := 4 if crypt else (1 if far > 0.9 else 0)
-		var made := 0
-		while made < count:
-			var a := land.holding_area(h).grow(-3)
-			var c := Vector2i(rng.randi_range(a.position.x, a.end.x - 1), rng.randi_range(a.position.y, a.end.y - 1))
-			if land.at(c) in [Land.WALL, Land.WINDOW, Land.FOREST, Land.WATER, Land.ROCK]:
-				continue
-			var kind := "brute" if made < brutes else ("runner" if rng.randf() < 0.15 * far else "walker")
-			var z := _make_dead(land.center(c), kind, IDLE)
-			made += 1
-			z.lurker = h
-	note("Ala Kambara stands alone. The dead hold the empire, from the Golden Coast to the Black Crypt in the Nyoka peaks.")
+		var count := 400 if crypt else int(40 + far * 30) + rng.randi_range(0, 20)
+		var a := land.holding_area(h)
+		var core := Rect2i(land.holdings[h].center - Vector2i(5, 4), Vector2i(11, 9))
+		for k in count:
+			var area := core if rng.randf() < 0.5 else a
+			var b := block_of(Vector2i(rng.randi_range(area.position.x, area.end.x - 1), rng.randi_range(area.position.y, area.end.y - 1)))
+			if block_open[b] == 1:
+				horde[b] += 1
+	var home := block_of(land.holdings[0].center)
+	var wild := 0
+	while wild < 40:
+		var b := rng.randi() % (BW * BH)
+		if block_open[b] == 0 or _bdist(b, home) < 6:
+			continue
+		# a band in the wilds, spilling into the blocks around it
+		for o in [0, 1, -1, BW, -BW]:
+			var nb: int = b + o
+			if nb >= 0 and nb < BW * BH and block_open[nb] == 1 and rng.randf() < 0.6:
+				horde[nb] += rng.randi_range(1, 6)
+		wild += 1
+	note("Ala Kambara stands alone, a hundred souls. The dead hold the empire, from the Golden Coast to the Black Crypt in the Nyoka peaks.")
 
 
 ## Every village has its wall ring marked out from the start; building it is the Palisade work. Where a road
@@ -272,21 +308,30 @@ func hall_pos(h: int) -> Vector2:
 
 
 func _add_person(home: int, job: String, kind: String) -> Dictionary:
-	var used := people.map(func(s): return s.name)
-	var name: String = NAMES[0]
-	for n in NAMES:
-		if not n in used:
-			name = n
-			break
 	var at := hall_pos(home) + Vector2(rng.randf_range(-40, 40), rng.randf_range(-20, 20))
-	var s := {"name": name, "home": home, "p": at, "v": Vector2.ZERO, "face": Vector2.RIGHT, "hp": 100.0, "hunger": 85.0,
-		"energy": 90.0, "job": job, "trait": kind, "doing": "", "goal": at, "path": [], "carry": {}, "house": -1, "busy": 0.0,
-		"cd": 0.0, "sneak": false, "asleep": false, "hurt_t": 0.0, "step": 0.0, "noise_t": 0.0, "spot": Vector2i(-1, -1),
-		"color": Color.from_hsv(rng.randf(), 0.4, 0.8),
-		"unit": "militia", "order": "fields", "train": "", "train_t": 0.0, "ward": null,
-		"resting": false, "dest": null, "escort": "", "wait_t": 0.0, "avoid": {}}
+	var s := {"name": _new_name(), "home": home, "p": at, "v": Vector2.ZERO, "face": Vector2.RIGHT, "hp": 100.0, "max_hp": 100.0,
+		"hunger": rng.randf_range(70.0, 95.0), "energy": rng.randf_range(70.0, 95.0), "job": job, "trait": kind, "doing": "", "goal": at,
+		"path": [], "carry": {}, "house": -1, "busy": 0.0, "cd": rng.randf() * 2.0, "sneak": false, "asleep": false, "hurt_t": 0.0,
+		"step": 0.0, "noise_t": 0.0, "spot": Vector2i(-1, -1), "color": Color.from_hsv(rng.randf(), 0.4, 0.8),
+		"unit": "militia", "order": "fields", "train": "", "train_t": 0.0, "resting": false, "avoid": {},
+		"bed": people.size(), "layer": 0, "qi": 0.0, "talent": snappedf(clampf(rng.randfn(1.0, 0.3), 0.4, 2.0), 0.01)}
 	people.append(s)
 	return s
+
+
+## Names made from sounds: two or three syllables, never the same twice.
+func _new_name() -> String:
+	var used := {}
+	for s in people:
+		used[s.name] = true
+	for k in 50:
+		var n := ""
+		for i in rng.randi_range(2, 3):
+			n += SYLLABLES[rng.randi() % SYLLABLES.size()]
+		n = n.capitalize()
+		if not used.has(n) and n.length() <= 9:
+			return n
+	return "Nameless %d" % people.size()
 
 
 func note(text: String) -> void:
@@ -324,8 +369,10 @@ func holdings_owned() -> Array:
 
 
 func dead_in(h: int) -> int:
-	var a := land.holding_area(h)
-	return dead.filter(func(z): return a.has_point(land.cell(z.p))).size()
+	var n := 0
+	for b in hold_blocks[h]:
+		n += dead_at(b)
+	return n
 
 
 func has_built(h: int, id: String) -> bool:
@@ -371,37 +418,27 @@ func clear_at(c: Vector2i) -> bool:
 	return t != Land.WALL and t != Land.FOREST and t != Land.ROCK and _walk_dead(c)
 
 
-func _los(a: Vector2, b: Vector2) -> bool:
-	if pass_sight.is_empty():
-		_passability()
-	var d := b - a
-	var n := int(d.length() / 10.0) + 1
-	for i in range(1, n):
-		var p := a + d * (float(i) / n)
-		var x := int(p.x / T)
-		var y := int(p.y / T)
-		if x < 0 or y < 0 or x >= Land.W or y >= Land.H or pass_sight[y * Land.W + x] == 0:
-			return false
-	return true
-
-
+## Home is any house of the holding someone lives in.
 func at_home(s: Dictionary) -> bool:
-	return land.hall_rect(s.home).has_point(land.cell(s.p))
+	var i := house_of(s.p)
+	return i >= 0 and land.houses[i].holding == s.home
+
+
+func home_pos(s: Dictionary) -> Vector2:
+	var list: Array = rooms[s.home]
+	return list[int(s.bed) % list.size()] if not list.is_empty() else hall_pos(s.home)
 
 
 func in_any_hall(s: Dictionary) -> bool:
-	for h in holdings_owned():
-		if land.hall_rect(h).has_point(land.cell(s.p)):
-			return true
-	return false
+	var i := house_of(s.p)
+	return i >= 0 and land.holdings[land.houses[i].holding].claimed
 
 
 func house_of(p: Vector2) -> int:
 	var c := land.cell(p)
-	for i in land.houses.size():
-		if land.houses[i].rect.has_point(c):
-			return i
-	return -1
+	if c.x < 0 or c.y < 0 or c.x >= Land.W or c.y >= Land.H:
+		return -1
+	return house_grid[c.y * Land.W + c.x]
 
 
 func crates_left(house: int) -> int:
@@ -415,11 +452,12 @@ func step(dt: float) -> void:
 	if phase in [LOST, WON]:
 		return
 	clock += dt
+	clock_all += dt
+	step_dt = dt
 	if phase == DAY and clock >= DAY_LEN:
 		phase = NIGHT
 		clock = 0.0
-		herds_left = 2 + day / 2 + holdings_owned().size() + (0 if altar_hp <= 0.0 else 1)
-		herd_t = 6.0
+		_rise()
 		_ev("night")
 		note("Night %d falls.%s" % [day, " Hearths are lit." if rules.hearths else ""])
 	elif phase == NIGHT and clock >= NIGHT_LEN:
@@ -428,12 +466,11 @@ func step(dt: float) -> void:
 		clock = 0.0
 		_dawn()
 		_ev("dawn")
+	_rank_posts()
 	for s in people:
 		_person(s, dt)
+	_hordes(dt)
 	people = people.filter(func(s): return s.hp > 0.0)
-	if phase == NIGHT:
-		_herds(dt)
-	_dead_step(dt)
 	_campaign(dt)
 	for sh in shots:
 		sh[2] -= dt
@@ -448,7 +485,11 @@ func step(dt: float) -> void:
 
 
 func _dawn() -> void:
-	dead = dead.filter(func(z): return z.state == CHASE or z.get("lurker", -1) >= 0)
+	# the night's packs stop where daylight finds them and stand there
+	for m in marches:
+		horde[m.b] += m.n
+	marches.clear()
+	_recount()
 	for cr in land.crates:
 		if cr.searched and rng.randf() < 0.2:
 			cr.searched = false
@@ -511,87 +552,74 @@ func _campaign(dt: float) -> void:
 func _person(s: Dictionary, dt: float) -> void:
 	s.cd -= dt
 	s.hurt_t -= dt
-	s.hunger = maxf(0.0, s.hunger - dt * 100.0 / 620.0)
+	var drain: float = 1.0 + (0.5 if s.doing == "tempering the body" else 0.0) + 0.05 * s.layer
+	s.hunger = maxf(0.0, s.hunger - dt * 100.0 / 620.0 * drain)
 	if s.hunger <= 0.0:
 		s.hp -= dt * 0.7
 	if not s.asleep:
 		s.energy = maxf(0.0, s.energy - dt * 100.0 / 480.0)
-	if s.hp < WOUNDED and not s.resting:
+	if s.hp < s.max_hp * WOUNDED / 100.0 and not s.resting:
 		s.resting = true
-		s.ward = null
 		note("%s is badly hurt and goes home to rest." % s.name)
-	elif s.hp >= MENDED and s.resting:
+	elif s.hp >= s.max_hp * MENDED / 100.0 and s.resting:
 		s.resting = false
-		note("%s's wounds have mended." % s.name)
-	if s.hp < 100.0 and s.hunger > 50.0:
-		s.hp = minf(100.0, s.hp + dt * 0.05)              # small wounds close on their own
+	if s.hp < s.max_hp and s.hunger > 50.0:
+		s.hp = minf(s.max_hp, s.hp + dt * 0.05 * (1.0 + 0.2 * s.layer))   # small wounds close; a tempered body faster
 	if in_any_hall(s):
 		var half: bool = rules.rations == "half"
 		if s.hunger < 45.0 and stock.food >= (0.5 if half else 1.0):
 			stock.food -= 0.5 if half else 1.0
 			s.hunger = minf(100.0, s.hunger + (30.0 if half else 50.0))
-		if s.hp < 60.0 and stock.herbs > 0:
+		if s.hp < s.max_hp * 0.6 and stock.herbs > 0:
 			stock.herbs -= 1
-			s.hp = minf(100.0, s.hp + 35.0)
-		if s.hp < 100.0 and s.hunger > 30.0:
+			s.hp = minf(s.max_hp, s.hp + 35.0)
+		if s.hp < s.max_hp and s.hunger > 30.0:
 			# rest in bed heals far faster than standing about; the chapel doubles it
-			s.hp = minf(100.0, s.hp + dt * (0.28 if s.asleep else 0.08) * (2.0 if has_built(s.home, "chapel") else 1.0))
+			s.hp = minf(s.max_hp, s.hp + dt * (0.28 if s.asleep else 0.08) * (2.0 if has_built(s.home, "chapel") else 1.0) * (1.0 + 0.2 * s.layer))
 	_decide(s, dt)
 	_walk(s, dt)
 
 
 func _decide(s: Dictionary, dt: float) -> void:
-	var threat: Variant = _chaser_of(s)
-	if threat != null and s.doing != "flee":
-		# reconsidered every moment: soldiers stand unless outnumbered away from home or badly hurt; then they
-		# fall back onto the walls and towers
-		var n := dead.filter(func(z): return z.state == CHASE and z.target == s).size()
-		var odds := 3 if s.unit == "man_at_arms" else 2
-		if s.job == "soldier" and s.order == "escort" and not s.resting and not at_home(s) \
-				and s.p.distance_to(threat.p) > 50.0:
-			if s.doing == "fight":
-				s.doing = ""                               # escorts keep with the party and cover its retreat
-		elif (s.job == "soldier" and not s.resting and (n <= odds or at_home(s))) or (s.trait == "Strong" and n <= 2 and not s.resting) or (n == 1 and s.hp > 50.0):
+	# the dead in the block where they stand: soldiers and well-tempered cultivators fight, the rest run home
+	var n := 0 if _sheltered(s) else dead_at(block_at(s.p))
+	if n > 0:
+		var brave: bool = (s.job == "soldier" or s.layer >= 3 or (s.trait == "Strong" and n <= 2)) and not s.resting
+		if brave:
 			s.doing = "fight"
-		else:
-			if s.doing == "fight":
-				note("%s falls back from %d of the dead." % [s.name, n])
+		elif s.doing != "flee":
 			s.doing = "flee"
+	elif s.doing in ["fight", "flee"]:
+		s.doing = ""
 	match s.doing:
 		"fight":
-			if threat == null:
-				s.doing = ""
-				return
 			s.asleep = false
-			_melee(s, threat)
+			s.path = []
+			s.goal = s.p
+			_temper(s, dt * 0.3)
 			return
 		"flee":
 			s.asleep = false
-			if in_any_hall(s) or threat == null:
+			if at_home(s):
 				s.doing = ""
-				return
-			_go(s, hall_pos(s.home))
+			else:
+				_go(s, home_pos(s))
 			return
 	var dusk := phase == DAY and time_left() < 30.0
 	if phase == NIGHT or dusk:
-		if (s.job == "guard" or (s.job == "soldier" and s.order != "escort")) and s.energy > 15.0 and not s.resting and _post_index(s) < tower_count[s.home]:
+		if (s.job == "guard" or (s.job == "soldier" and s.order == "fields")) and s.energy > 15.0 and not s.resting and _post_index(s) < tower_count[s.home] + 6:
 			_deposit_if_home(s)
 			_guard(s, dt)
 			return
 		if not at_home(s):
 			s.doing = "heading home"
 			_deposit_if_home(s)
-			_go(s, hall_pos(s.home))
-			if not at_home(s):
-				return
+			_go(s, home_pos(s))
+			return
 		_deposit_if_home(s)
-		if (s.job == "guard" or (s.job == "soldier" and s.order != "escort")) and s.energy > 15.0 and not s.resting:
-			_guard(s, dt)
-		else:
-			_sleep(s, dt)
+		_sleep(s, dt)
 		return
 	if s.energy < 20.0 or s.resting:
-		s.dest = null
 		if at_home(s):
 			_deposit_if_home(s)
 			_sleep(s, dt)
@@ -599,7 +627,7 @@ func _decide(s: Dictionary, dt: float) -> void:
 				s.doing = "resting their wounds"
 		else:
 			s.doing = "going home to rest" if s.resting else "heading home"
-			_go(s, hall_pos(s.home))
+			_go(s, home_pos(s))
 		return
 	s.asleep = false
 	match s.job:
@@ -615,6 +643,8 @@ func _decide(s: Dictionary, dt: float) -> void:
 			_guard(s, dt)
 		"soldier":
 			_soldier(s, dt)
+		"cultivate":
+			_cultivate(s, dt)
 		_:
 			if s.energy < 90.0:
 				_sleep(s, dt)
@@ -622,18 +652,29 @@ func _decide(s: Dictionary, dt: float) -> void:
 				_idle(s)
 
 
+## Safe behind a door the dead haven't broken.
+func _sheltered(s: Dictionary) -> bool:
+	var i := house_of(s.p)
+	if i < 0:
+		return false
+	var d: Variant = doors.get(i)
+	return d == null or float(land.openings[d].hp) > 0.0
+
+
 func _idle(s: Dictionary) -> void:
 	s.doing = "idle"
 	if s.p.distance_to(s.goal) < 6.0 or not land.hall_rect(s.home).has_point(land.cell(s.goal)):
+		s.busy += step_dt
+		if s.busy < 4.0 and land.hall_rect(s.home).has_point(land.cell(s.goal)):
+			return                                    # stand about a while before wandering on
+		s.busy = 0.0
 		s.goal = hall_pos(s.home) + Vector2(rng.randf_range(-60, 60), rng.randf_range(-30, 30))
 		s.path = []
 	_go(s, s.goal)
 
 
 func _sleep(s: Dictionary, dt: float) -> void:
-	var list: Array = beds[s.home]
-	var mine := people.filter(func(o): return o.home == s.home)
-	var bed: Vector2 = list[mine.find(s) % list.size()] + Vector2(0, (mine.find(s) / list.size()) * 10.0)
+	var bed := home_pos(s)
 	if s.p.distance_to(bed) > 8.0:
 		s.doing = "going to bed"
 		s.asleep = false
@@ -656,7 +697,7 @@ func _work_at(s: Dictionary, at: Vector2) -> bool:
 
 
 func _speed(s: Dictionary) -> float:
-	return 2.0 if s.trait == "Skilled" else 1.0
+	return (2.0 if s.trait == "Skilled" else 1.0) * (1.0 + 0.05 * s.layer)
 
 
 func _farm(s: Dictionary, dt: float) -> void:
@@ -668,6 +709,7 @@ func _farm(s: Dictionary, dt: float) -> void:
 		s.spot = fields[rng.randi() % fields.size()]
 	s.doing = "working the fields"
 	if _work_at(s, land.center(s.spot)):
+		_temper(s, dt * 0.1)
 		stock.food += dt * 0.03 * _speed(s) * (1.5 if has_built(s.home, "mill") else 1.0)
 		s.busy += dt
 		if s.busy > 6.0:
@@ -697,6 +739,7 @@ func _chop(s: Dictionary, dt: float) -> void:
 			break
 	s.doing = "chopping wood"
 	if _work_at(s, stand):
+		_temper(s, dt * 0.1)
 		stock.wood += dt * 0.035 * _speed(s)
 		s.noise_t -= dt
 		if s.noise_t <= 0.0:
@@ -721,85 +764,34 @@ func _guard(s: Dictionary, dt: float) -> void:
 		s.goal = s.p
 	if s.cd <= 0.0 and stock.arrows > 0:
 		var reach := (300.0 if s.trait == "Keen-eyed" else 230.0) * (1.6 if on_tower else 1.0)
-		var best: Variant = null
-		var bd := reach
-		for z in dead:
-			var d: float = z.p.distance_to(s.p)
-			if d < bd and (z.state in [CHASE, INVESTIGATE] or d < 120.0) and _clear_shot(s.p, z.p):
-				bd = d
-				best = z
-		if best != null:
+		var b := _nearest_dead(s.p, reach, [])
+		if b < 0:
+			s.cd = 0.5                                # nothing in reach: look again in a moment
+		else:
 			s.cd = 1.4
 			stock.arrows -= 1
 			if rng.randf() < 0.6:
 				stock.arrows += 1                         # gathered again in the morning
-			s.face = (best.p - s.p).normalized()
-			shots.append([s.p, best.p, 0.08])
-			_noise(s.p, 50.0)
+			var at := block_center(b) + Vector2(rng.randf_range(-40, 40), rng.randf_range(-40, 40))
+			s.face = (at - s.p).normalized()
+			shots.append([s.p, at, 0.08])
 			_ev("arrow", s.p)
-			if rng.randf() < (0.85 if s.trait == "Keen-eyed" else 0.65):
-				_hit(best, 120.0, s.face * 150.0)
+			if rng.randf() < (0.85 if s.trait == "Keen-eyed" else 0.65) * (1.0 + 0.04 * s.layer):
+				_kill(b, 1)
 
 
 ## Guards take the towers first, then the hall's windows. Soldiers off duty stand behind the guards.
 func _post_index(s: Dictionary) -> int:
-	var k := 0
-	for o in people:
-		if o.home != s.home or o == s:
-			continue
-		if o.job == "guard" and (s.job == "soldier" or people.find(o) < people.find(s)):
-			k += 1
-		elif o.job == "soldier" and s.job == "soldier" and people.find(o) < people.find(s):
-			k += 1
-	return k
+	return int(s.get("post", 0))
 
 
-## Archers shoot out through their own windows; walls, shut doors and trees stop arrows.
-func _clear_shot(a: Vector2, b: Vector2) -> bool:
-	var d := b - a
-	var n := int(d.length() / 10.0) + 1
-	for i in range(1, n):
-		var c := land.cell(a + d * (float(i) / n))
-		var t := land.at(c)
-		if t == Land.WALL or t == Land.FOREST or t == Land.ROCK:
-			return false
-		if t == Land.DOOR and not bool(opening(c).open) and float(opening(c).hp) > 0.0:
-			return false
-	return true
-
-
-func _melee(s: Dictionary, z: Dictionary) -> void:
-	var u: Dictionary = UNITS[s.unit] if s.job == "soldier" else UNITS.militia
-	var d: float = s.p.distance_to(z.p)
-	s.face = (z.p - s.p).normalized()
-	if s.job == "soldier" and s.unit == "archer" and stock.arrows > 0 and d > 45.0:
-		if d < 280.0 and _clear_shot(s.p, z.p):
-			s.path = []
-			s.goal = s.p
-			if s.cd <= 0.0:
-				s.cd = 1.1
-				stock.arrows -= 1
-				if rng.randf() < 0.5:
-					stock.arrows += 1
-				shots.append([s.p, z.p, 0.08])
-				_noise(s.p, 50.0)
-				_ev("arrow", s.p)
-				if rng.randf() < (0.85 if s.trait == "Keen-eyed" else 0.7):
-					_hit(z, 110.0, s.face * 150.0)
-			return
-		_go(s, z.p)
-		return
-	if d < SR + ZR + 14.0 + float(u.reach):
-		s.path = []
-		s.goal = s.p
-		if s.cd <= 0.0:
-			s.cd = 0.7
-			var quiet: bool = z.state != CHASE and s.doing == "quietly dispatching one"   # a blade from behind
-			_hit(z, float(u.dmg) * (1.4 if s.trait == "Strong" else 1.0) * (3.0 if quiet else 1.0), s.face * 160.0)
-			_noise(s.p, 25.0 if quiet else 60.0)
-	elif s.job == "soldier":
-		_go(s, z.p)
-
+func _rank_posts() -> void:
+	var n := {}
+	for job in ["guard", "soldier"]:
+		for s in people:
+			if s.job == job:
+				s.post = int(n.get(s.home, 0))
+				n[s.home] = s.post + 1
 
 func armor(s: Dictionary) -> float:
 	return float(UNITS[s.unit].armor) if s.job == "soldier" else 1.0
@@ -836,62 +828,6 @@ func set_order(s: Dictionary, order: String) -> void:
 	s.path = []
 
 
-## Guards fight what is hunting their people or has come right up to them — they don't go picking fights.
-func _threat(guard: Dictionary, wards: Array, reach: float) -> Variant:
-	var best: Variant = null
-	var bd := 1e9
-	for z in dead:
-		var hunting: bool = z.state == CHASE and (z.target == guard or wards.has(z.target))
-		for w in wards + [guard]:
-			var d: float = z.p.distance_to(w.p)
-			if (d < reach * 0.45 or (hunting and d < reach)) and d < bd:
-				bd = d
-				best = z
-	return best
-
-
-func _engage(s: Dictionary, z: Dictionary, what: String) -> void:
-	s.doing = what
-	s.asleep = false
-	if s.p.distance_to(z.p) < 240.0 and z.state != CHASE:
-		z.state = CHASE                                  # they turn on whoever comes at them
-		z.target = s
-		_rouse(z, s)
-	_melee(s, z)
-
-
-## The soldiers fit to walk with this forager right now.
-func escorts_of(f: Dictionary) -> Array:
-	return people.filter(func(o): return o.ward == f and o.job == "soldier" and o.order == "escort" and o.train == "" and not o.resting and o.energy >= 20.0)
-
-
-func _dead_near(at: Vector2, r: float) -> int:
-	var n := 0
-	for z in dead:
-		if z.p.distance_squared_to(at) < r * r:
-			n += 1
-	return n
-
-
-## Escorts gather into parties: each joins the forager whose party is fullest without being full, so two
-## soldiers make one party that can go out rather than two lone guards who can't.
-func _ward(s: Dictionary) -> Variant:
-	var best: Variant = null
-	var bn := -99
-	for f in people:
-		if f.job != "forage" or f.resting:
-			continue
-		var n := escorts_of(f).filter(func(o): return o != s).size()
-		if n >= PARTY_MAX:
-			continue
-		var score := n * 10 - (0 if f.home == s.home else 25) + (1 if f == s.ward else 0)
-		if score > bn:
-			bn = score
-			best = f
-	s.ward = best
-	return best
-
-
 func _soldier(s: Dictionary, dt: float) -> void:
 	if s.train != "":
 		var u: Dictionary = UNITS[s.train]
@@ -904,67 +840,52 @@ func _soldier(s: Dictionary, dt: float) -> void:
 				note("%s is now %s." % [s.name, "an archer" if s.unit == "archer" else "a " + u.name.to_lower()])
 				_ev("built", s.p)
 		return
-	match s.order:
-		"escort":
-			var f: Variant = _ward(s)
-			if f != null:
-				_escort(s, f)
-				return
-			_patrol(s, dt)
-			return
-		"fields":
-			_patrol(s, dt)
-			return
+	if s.order == "fields":
+		_patrol(s, dt)
+		return
 	if target < 0:
 		_guard(s, dt)
 		return
 	var h := target
-	var a := land.holding_area(h)
-	# fight the nearest of the dead in that village
-	var best: Variant = null
-	var bd := 1e9
-	for z in dead:
-		if not a.has_point(land.cell(z.p)):
-			continue
-		var d: float = z.p.distance_to(s.p)
-		if d < bd:
-			bd = d
-			best = z
-	if best != null:
-		s.doing = "fighting at " + land.holdings[h].name
-		if s.p.distance_to(best.p) < 220.0 and best.state != CHASE:
-			best.state = CHASE                            # the dead turn to meet them
-			best.target = s
-		_melee(s, best)
-		_go(s, best.p)
+	var b := _nearest_dead(s.p, 1e9, hold_blocks[h])
+	if b >= 0:
+		s.doing = "marching on " + land.holdings[h].name
+		_go(s, block_spot(b))
 		return
 	if land.holdings[h].crypt and altar_hp > 0.0:
 		s.doing = "breaking the crypt's altar"
 		if _work_at(s, hall_pos(h)) and s.cd <= 0.0:
 			s.cd = 0.8
-			altar_hp -= 40.0 * (1.4 if s.trait == "Strong" else 1.0)
-			_noise(s.p, 200.0)
+			altar_hp -= 40.0 * (1.4 if s.trait == "Strong" else 1.0) * (1.0 + 0.35 * s.layer)
 			_ev("hit", hall_pos(h))
 		return
 	s.doing = "marching to " + land.holdings[h].name
 	_go(s, hall_pos(h))
 
 
-## Fields order: walk the village's fields and fight anything that comes near the people working outside.
+## Fields order: clear the dead standing near home, a few at a time, then walk the fields.
 func _patrol(s: Dictionary, dt: float) -> void:
-	var wards: Array = []
-	for o in people:
-		if o.home == s.home and o.job in ["farm", "chop", "build"] and not in_any_hall(o):
-			wards.append(o)
-	var z: Variant = _threat(s, wards, 300.0)
-	if z != null:
-		_engage(s, z, "guarding the fields")
+	s.scan_t = float(s.get("scan_t", 0.0)) - dt
+	var b: int = s.get("aim", -1)
+	if s.scan_t <= 0.0 or (b >= 0 and dead_at(b) == 0):
+		s.scan_t = 1.0
+		var near: Array = []
+		var hb := block_of(land.holdings[s.home].center)
+		for k in BW * BH:
+			if dead_at(k) > 0 and dead_at(k) <= 6 and _bdist(k, hb) <= 8:
+				near.append(k)
+		b = _nearest_dead(s.p, 1e9, near) if not near.is_empty() else -1
+		s.aim = b
+	if b >= 0:
+		s.doing = "clearing the dead near " + land.holdings[s.home].name
+		_go(s, block_spot(b))
 		return
 	var fields: Array = land.holdings[s.home].fields
 	if fields.is_empty():
 		_guard(s, dt)
 		return
 	s.doing = "patrolling the fields"
+	_temper(s, dt * 0.05)
 	s.busy += dt
 	if s.spot == Vector2i(-1, -1) or not s.spot in fields or s.busy > 9.0:
 		s.busy = 0.0
@@ -985,7 +906,6 @@ func _build(s: Dictionary, dt: float) -> void:
 					stock.wood -= 1.0
 					o.hp = door_max(o)
 					o.open = false
-					_touch(gates[h])
 					_noise(s.p, 150.0)
 			return
 	if _mend_wall(s, dt):
@@ -1008,6 +928,7 @@ func _build(s: Dictionary, dt: float) -> void:
 		return
 	s.doing = "building: " + up.name
 	if _work_at(s, work_spot(h, up.id)):
+		_temper(s, dt * 0.1)
 		progress[h][up.id] = float(progress[h].get(up.id, 0.0)) + dt * _speed(s)
 		if fmod(float(progress[h][up.id]), 1.5) < dt * _speed(s):
 			_noise(s.p, 90.0)
@@ -1026,9 +947,12 @@ func _mend_wall(s: Dictionary, dt: float) -> bool:
 		return false
 	var best: Variant = null
 	var bd := 1e9
-	for c in walls:
+	for c in hurt_walls.keys():
 		var w: Dictionary = walls[c]
-		if w.h != s.home or not w.up or float(w.hp) >= wall_max(w) - 1.0:
+		if not w.up or float(w.hp) >= wall_max(w) - 1.0:
+			hurt_walls.erase(c)
+			continue
+		if w.h != s.home:
 			continue
 		var d := land.center(c).distance_to(s.p)
 		if d < bd:
@@ -1045,7 +969,6 @@ func _mend_wall(s: Dictionary, dt: float) -> bool:
 			stock.wood -= STAKE_WOOD
 			w.hp = wall_max(w)
 			w.open = false
-			_touch(best)
 			_noise(s.p, 120.0)
 	return true
 
@@ -1055,9 +978,9 @@ func _raise_palisade(s: Dictionary, dt: float, up: Dictionary) -> void:
 	if s.spot == Vector2i(-1, -1) or not walls.has(s.spot) or walls[s.spot].up or walls[s.spot].h != h:
 		s.spot = Vector2i(-1, -1)
 		var bd := 1e9
-		for c in walls:
+		for c in walls_of.get(h, []):
 			var w: Dictionary = walls[c]
-			if w.h == h and not w.up:
+			if not w.up:
 				var d := land.center(c).distance_to(s.p) + (0.0 if float(w.work) > 0.0 else 40.0)
 				if d < bd:
 					bd = d
@@ -1081,7 +1004,6 @@ func _raise_palisade(s: Dictionary, dt: float, up: Dictionary) -> void:
 		if float(w.work) >= STAKE_WORK:
 			w.up = true
 			w.hp = wall_max(w)
-			_touch(s.spot)
 			w.work = 0.0
 			stock.wood -= STAKE_WOOD
 
@@ -1128,14 +1050,12 @@ func _finish(h: int, up: Dictionary) -> void:
 			var o: Dictionary = land.openings[gates[h]]
 			o.planks = 3
 			o.hp = door_max(o)
-			_touch(gates[h])
 		"shutters":
 			for c in land.openings:
 				var o: Dictionary = land.openings[c]
 				if o.kind == "window" and o.house == land.holdings[h].hall:
 					o.planks = 3
 					o.hp = 3 * PLANK_HP
-					_touch(c)
 
 
 func queue_upgrade(h: int, id: String) -> String:
@@ -1164,50 +1084,11 @@ func move_home(s: Dictionary, h: int) -> String:
 
 # ---------------------------------------------------------------- foraging
 
-## A forager and their party, out past our own villages. They go quietly: they pick only houses with no more
-## dead nearby than the party can handle unheard, move together, and turn back rather than start a fight.
-func _escort(s: Dictionary, f: Dictionary) -> void:
-	var party := escorts_of(f)
-	var z: Variant = _threat(s, [f] + party, 220.0)
-	if z != null:
-		if z.state == CHASE:
-			# seen: cover the forager's retreat, striking only what gets close; never chase into the village
-			if f.p.distance_to(z.p) < 70.0 or s.p.distance_to(z.p) < 45.0 or at_home(f):
-				_engage(s, z, "defending " + f.name)
-				return
-		elif f.dest != null and _dead_near(z.p, 150.0) == 1 and s.p.distance_to(f.p) < 160.0:
-			s.doing = "quietly dispatching one"           # a lone one, unaware: a blade from behind, no alarm
-			s.asleep = false
-			_melee(s, z)
-			return
-	var dir := Vector2.RIGHT
-	if f.dest != null:
-		dir = (f.dest - f.p).normalized()
-	elif not at_home(f):
-		dir = (hall_pos(f.home) - f.p).normalized()
-	if dir == Vector2.ZERO:
-		dir = Vector2.RIGHT
-	var i := maxi(0, party.find(s))
-	var side := dir.orthogonal()
-	var slot: Vector2 = f.p + [dir * 38.0, dir * 6.0 + side * 26.0, dir * 6.0 - side * 26.0, -dir * 24.0][mini(i, 3)]
-	s.doing = ("scouting ahead of " if i == 0 and f.dest != null else "escorting ") + f.name
-	if s.p.distance_to(slot) > 10.0:
-		_go(s, slot)
-	else:
-		s.path = []
-		s.goal = s.p
-
-
+## Foragers search houses in our cities, and out past them any house where none of the dead stand.
 func _forage(s: Dictionary, dt: float) -> void:
 	var carried := 0
 	for k in s.carry:
 		carried += int(s.carry[k])
-	s.dest = null
-	var party := escorts_of(s)
-	if party.size() < PARTY and s.escort != "" and not at_home(s) and s.house >= 0 \
-			and not land.holdings[land.houses[s.house].holding].claimed:
-		note("%s's escort is down to %d; they turn for home." % [s.name, party.size()])
-	s.escort = ", ".join(party.map(func(o): return o.name))
 	if carried >= 6 or time_left() < 50.0:
 		s.doing = "bringing things home"
 		if at_home(s):
@@ -1216,21 +1097,20 @@ func _forage(s: Dictionary, dt: float) -> void:
 			if time_left() < 50.0:
 				_idle(s)
 		else:
-			_go(s, hall_pos(s.home))
+			_go(s, home_pos(s))
 		return
-	if s.house >= 0 and crates_left(s.house) > 0 and not _house_safe(s, s.house):
-		s.avoid[s.house] = true                         # the scouts saw too many: give it up, no fighting
-		note("%s's party sees too many dead at %s and turns away." % [s.name, land.holdings[land.houses[s.house].holding].name])
+	if s.house >= 0 and dead_at(block_of(land.houses[s.house].rect.get_center())) > 0:
+		s.avoid[s.house] = true
 		s.house = -1
 	if s.house < 0 or crates_left(s.house) == 0:
 		s.house = _pick_house(s)
 		if s.house < 0:
 			if not at_home(s):
 				s.doing = "heading home"
-				_go(s, hall_pos(s.home))
+				_go(s, home_pos(s))
 				return
 			_idle(s)
-			s.doing = "no house quiet enough to search" if land.crates.any(func(c): return not c.searched) else "nothing left to search"
+			s.doing = "nothing safe left to search"
 			return
 	var cr: Variant = null
 	var bd := 1e9
@@ -1242,49 +1122,8 @@ func _forage(s: Dictionary, dt: float) -> void:
 				cr = c
 	if cr == null:
 		return
-	var hol: int = land.houses[s.house].holding
 	var spot := land.center(cr.cell)
-	if not land.holdings[hol].claimed:
-		# beyond our own villages nobody goes without a party
-		if party.size() < PARTY:
-			s.doing = "waiting at the hall for an escort (%d of %d)" % [party.size(), PARTY]
-			if at_home(s):
-				_deposit_if_home(s)
-				s.path = []
-				s.goal = s.p
-			else:
-				_go(s, hall_pos(s.home))
-			return
-		s.dest = spot
-		if dead.any(func(z): return z.state == CHASE and (z.target == s or party.has(z.target))):
-			s.avoid[s.house] = true                     # spotted: give the house up and slip away home
-			s.house = -1
-			s.dest = null
-			s.doing = "withdrawing"
-			note("The dead spotted %s's party; they withdraw." % s.name)
-			_go(s, hall_pos(s.home))
-			return
-		var wait := ""
-		if party.any(func(o): return o.doing == "quietly dispatching one"):
-			wait = "keeping low till it's quiet"
-		elif party.any(func(o): return o.p.distance_to(s.p) > 70.0):
-			wait = "waiting for the party"
-		if wait != "":
-			s.doing = wait
-			s.wait_t += dt
-			if s.wait_t > 40.0:                           # it isn't settling: try somewhere else
-				s.wait_t = 0.0
-				s.avoid[s.house] = true
-				s.house = -1
-			elif _dead_near(s.p, 110.0) > 0:
-				s.doing = "slipping back behind the party"
-				_go(s, s.p + (s.p - spot).normalized() * 40.0)
-			else:
-				s.path = []
-				s.goal = s.p
-			return
-		s.wait_t = 0.0
-	s.doing = "searching " + land.holdings[hol].name
+	s.doing = "searching " + land.holdings[land.houses[s.house].holding].name
 	if s.p.distance_to(spot) > 20.0:
 		_go(s, spot)
 		return
@@ -1293,19 +1132,7 @@ func _forage(s: Dictionary, dt: float) -> void:
 	s.busy += dt
 	if s.busy >= 1.4:
 		s.busy = 0.0
-		_noise(s.p, 30.0 if s.trait == "Quiet" else 60.0)
 		_loot(s, cr)
-
-
-## Our own villages are always safe to search. Out past them, a house is only worth it if the dead nearby are
-## few enough for the party to deal with quietly: right at the door, one apiece less one to keep watch; within
-## earshot, no more than two apiece.
-func _house_safe(s: Dictionary, i: int) -> bool:
-	if land.holdings[land.houses[i].holding].claimed:
-		return true
-	var c := land.center(land.houses[i].rect.get_center())
-	var n := maxi(PARTY, escorts_of(s).size())
-	return _dead_near(c, 140.0) <= n - 1 and _dead_near(c, 260.0) <= n * 2
 
 
 func _pick_house(s: Dictionary) -> int:
@@ -1313,7 +1140,9 @@ func _pick_house(s: Dictionary) -> int:
 	var bd := 1e9
 	for i in land.houses.size():
 		var hol: int = land.houses[i].holding
-		if land.holdings[hol].crypt or crates_left(i) == 0 or s.avoid.has(i) or not _house_safe(s, i):
+		if land.holdings[hol].crypt or crates_left(i) == 0 or s.avoid.has(i):
+			continue
+		if dead_at(block_of(land.houses[i].rect.get_center())) > 0:
 			continue
 		var d := land.center(land.houses[i].rect.get_center()).distance_to(s.p)
 		if marked.has(i):
@@ -1335,7 +1164,7 @@ func _loot(s: Dictionary, cr: Dictionary) -> void:
 			s.carry[item[0]] = int(s.carry.get(item[0], 0)) + n
 			got.append("%d %s" % [n, item[0]])
 	_ev("loot", s.p, {"text": "+" + ", +".join(got) if not got.is_empty() else "nothing"})
-	if rng.randf() < 0.05 and people.size() < 30:
+	if rng.randf() < 0.05 and people.size() < 150:
 		var pick: String = TRAITS.keys()[rng.randi() % TRAITS.size()]
 		var n2 := _add_person(s.home, "rest", pick)
 		n2.p = s.p + Vector2(14, 0)
@@ -1357,37 +1186,57 @@ func _deposit_if_home(s: Dictionary) -> void:
 # ---------------------------------------------------------------- walking
 
 func _go(s: Dictionary, to: Vector2) -> void:
-	if s.path.is_empty() or land.cell(s.goal) != land.cell(to):
-		s.path = _route(land.cell(s.p), land.cell(to))
+	var moved := land.cell(s.goal) != land.cell(to)
+	if moved or (s.path.is_empty() and clock_all >= float(s.get("retry", 0.0))):
+		s.path = _route(land.cell(s.p), land.cell(to), s.job != "soldier")
+		if s.path.is_empty():
+			s.retry = clock_all + 2.0                # no way there just now: try again in a little while
 	s.goal = to
 
 
-func _route(a: Vector2i, b: Vector2i) -> Array:
+func _route(a: Vector2i, b: Vector2i, wary := false) -> Array:
 	if a == b:
 		return [b]                                    # same cell: walk straight to the spot
-	var prev := {a: a}
-	var q: Array[Vector2i] = [a]
+	var ab := block_of(a)
+	var bb := block_of(b)
+	var start := a.y * Land.W + a.x
+	var end := b.y * Land.W + b.x
+	var prev := PackedInt32Array()
+	prev.resize(Land.W * Land.H)
+	prev.fill(-1)
+	prev[start] = start
+	var q := PackedInt32Array()
+	q.resize(Land.W * Land.H)
+	q[0] = start
+	var tail := 1
 	var head := 0
-	while head < q.size():
-		var c := q[head]
+	while head < tail:
+		var i := q[head]
 		head += 1
-		if c == b:
+		if i == end:
 			break
-		for o in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-			var n: Vector2i = c + o
-			if prev.has(n) or n.x < 0 or n.y < 0 or n.x >= Land.W or n.y >= Land.H or (not _walk_person(n) and n != b):
+		var x := i % Land.W
+		for n in [i + 1 if x < Land.W - 1 else -1, i - 1 if x > 0 else -1, i + Land.W, i - Land.W]:
+			if n < 0 or n >= Land.W * Land.H or prev[n] != -1:
 				continue
-			prev[n] = c
-			q.append(n)
+			var c := Vector2i(n % Land.W, n / Land.W)
+			if n != end and not _walk_person(c):
+				continue
+			if wary:
+				var nb := block_of(c)
+				if nb != ab and nb != bb and danger[nb] == 1:
+					continue                          # the wary walk round the blocks where the dead stand
+			prev[n] = i
+			q[tail] = n
+			tail += 1
 	var out: Array = []
-	if not prev.has(b):
+	if prev[end] == -1:
 		return out
-	var cur := b
-	while cur != a:
-		out.push_front(cur)
+	var cur := end
+	while cur != start:
+		out.push_front(Vector2i(cur % Land.W, cur / Land.W))
 		cur = prev[cur]
 	return out
-
 
 func _walk(s: Dictionary, dt: float) -> void:
 	if s.asleep or s.path.is_empty():
@@ -1397,18 +1246,12 @@ func _walk(s: Dictionary, dt: float) -> void:
 	var tgt: Vector2 = land.center(c) if s.path.size() > 1 else s.goal
 	if land.at(c) == Land.DOOR and not opening(c).open and float(opening(c).hp) > 0.0:
 		opening(c).open = true
-		_touch(c)
-		_noise(land.center(c), 110.0)
 		_ev("door", land.center(c))
 	var wg: Variant = walls.get(c)
 	if wall_standing(wg) and wg.gate and not wg.open:
 		wg.open = true
-		_touch(c)
-		_noise(land.center(c), 110.0)
 		_ev("door", land.center(c))
-	var near := dead.any(func(z): return z.p.distance_to(s.p) < 260.0)
-	s.sneak = near and s.doing != "flee" and (s.job != "soldier" or s.order == "escort")
-	var speed := 230.0 if s.doing == "flee" else (70.0 if s.sneak else 125.0)
+	var speed: float = (230.0 if s.doing == "flee" else 125.0) * (1.0 + 0.04 * s.layer)
 	var d: Vector2 = tgt - s.p
 	if d.length() < 6.0:
 		s.path.pop_front()
@@ -1418,11 +1261,6 @@ func _walk(s: Dictionary, dt: float) -> void:
 	s.face = d.normalized()
 	s.p += s.v * dt
 	s.step += dt * speed * 0.08
-	if not s.sneak:
-		s.noise_t -= dt
-		if s.noise_t <= 0.0 and s.job != "chop":
-			s.noise_t = 0.35 if s.doing == "flee" else 0.6
-			_noise(s.p, 230.0 if s.doing == "flee" else (35.0 if s.trait == "Quiet" else 60.0))
 
 
 func _close_gate_behind(s: Dictionary, passed: Vector2i) -> void:
@@ -1430,390 +1268,339 @@ func _close_gate_behind(s: Dictionary, passed: Vector2i) -> void:
 		return
 	var wg: Variant = walls.get(passed)
 	if wall_standing(wg) and wg.gate and wg.open:
-		var r2 := Rect2(passed.x * T, passed.y * T, T, T).grow(ZR)
-		if not dead.any(func(z): return r2.has_point(z.p)):
-			wg.open = false
-			_touch(passed)
-			_noise(land.center(passed), 80.0)
+		wg.open = false
 		return
-	for h in gates:
-		if gates[h] != passed:
-			continue
-		var o: Dictionary = land.openings[passed]
-		if o.open and float(o.hp) > 0.0:
-			var r := Rect2(passed.x * T, passed.y * T, T, T).grow(ZR)
-			if not dead.any(func(z): return r.has_point(z.p)):
-				o.open = false
-				_touch(passed)
-				_noise(land.center(passed), 80.0)
+	var o: Variant = land.openings.get(passed)
+	if o != null and o.kind == "door" and o.open and float(o.hp) > 0.0:
+		o.open = false
 
 
-func _chaser_of(s: Dictionary) -> Variant:
-	var best: Variant = null
-	var bd := 1e9
-	for z in dead:
-		if z.state == CHASE and z.target == s:
-			var d: float = z.p.distance_to(s.p)
-			if d < bd:
-				bd = d
-				best = z
-	return best
-
-
-func _hit(z: Dictionary, dmg: float, knock: Vector2) -> void:
-	z.hp -= dmg
-	z.v += knock
-	z.stun = 0.4
-	_ev("hit", z.p)
-	if z.hp <= 0.0:
-		dead.erase(z)
-		_ev("kill", z.p)
-
-
-# ---------------------------------------------------------------- noise and sight
 
 func _noise(at: Vector2, radius: float) -> void:
 	noises.append([at, radius, 0.6])
-	for z in dead:
-		if z.state == CHASE:
-			continue
-		var d: float = z.p.distance_to(at)
-		var r := radius if _los(z.p, at) else radius * 0.55
-		if d < r:
-			z.state = INVESTIGATE
-			z.goal = at + Vector2(rng.randf_range(-20, 20), rng.randf_range(-20, 20))
-			z.look = 0.0
+
+# ---------------------------------------------------------------- cultivation
+
+## Body Refinement: tempering flesh and bone, layer by layer. Each layer needs more than the last; talent speeds
+## it. Full-time cultivators gain fastest, labour and fighting give a little.
+func qi_need(layer: int) -> float:
+	return CULT_NEED * pow(1.6, layer)
 
 
-func sight_of(s: Dictionary) -> float:
-	var dark := night_ratio() > 0.5
-	var r := 105.0 if dark else 240.0
-	if dark and house_of(s.p) >= 0:
-		r = 40.0
-		if rules.hearths and in_any_hall(s) and not has_built(s.home, "shutters"):
-			r = 420.0                                      # the hearth shows through the windows
-	if s.sneak:
-		r *= 0.6
-	if s.asleep:
-		r *= 0.5
-	return r
-
-
-func _sees(z: Dictionary, s: Dictionary) -> bool:
-	var d: Vector2 = s.p - z.p
-	if d.length() > sight_of(s):
-		return false
-	if z.state != CHASE and absf(z.face.angle_to(d)) > 1.2:
-		return false
-	return _los(z.p, s.p)
-
-
-# ---------------------------------------------------------------- the dead
-
-func _make_dead(at: Vector2, kind: String, state: int) -> Dictionary:
-	var hpv: float = {"walker": 100.0, "runner": 70.0, "brute": 260.0}[kind]
-	var z := {"p": at, "v": Vector2.ZERO, "hp": hpv, "kind": kind, "state": state, "goal": at, "home": at,
-		"face": Vector2.RIGHT.rotated(rng.randf() * TAU), "sus": 0.0, "lost": 0.0, "look": 0.0, "attack_t": 0.0,
-		"stun": 0.0, "step": rng.randf() * 10.0, "herd": false, "target": null, "lurker": -1, "leash": 0.0, "max_hp": hpv}
-	dead.append(z)
-	return z
-
-
-## At night the dead rise from the graveyards (and the crypt) and drift toward the smell of the living.
-func _herds(dt: float) -> void:
-	herd_t -= dt
-	if herd_t > 0.0 or herds_left <= 0 or clock > NIGHT_LEN - 20.0:
+func _temper(s: Dictionary, amount: float) -> void:
+	if s.layer >= LAYERS or s.hunger < 30.0:
 		return
-	herds_left -= 1
-	herd_t = rng.randf_range(8.0, 16.0)
-	var from: Vector2i = land.graves[rng.randi() % land.graves.size()]
-	if altar_hp > 0.0 and rng.randf() < 0.35:
-		from = land.holdings[land.holdings.size() - 1].center
+	s.qi += amount * s.talent
+	if s.qi >= qi_need(s.layer):
+		s.qi = 0.0
+		s.layer += 1
+		s.max_hp = 100.0 + 25.0 * s.layer
+		s.hp = minf(s.max_hp, s.hp + 25.0)
+		note("%s breaks through to Body Refinement, layer %d." % [s.name, s.layer])
+		_ev("breakthrough", s.p)
+
+
+func realm_name(s: Dictionary) -> String:
+	return "Mortal" if s.layer == 0 else "Body Refinement %d" % s.layer
+
+
+## How hard someone fights: blows a second, in hit points of the dead.
+func power(s: Dictionary) -> float:
+	var base := float(UNITS[s.unit].dmg) / 0.7 if s.job == "soldier" else 15.0
+	return base * (1.0 + 0.35 * s.layer) * (1.4 if s.trait == "Strong" else 1.0)
+
+
+func _cultivate(s: Dictionary, dt: float) -> void:
+	if s.layer >= LAYERS:
+		s.doing = "at the peak of Body Refinement"
+		_idle(s)
+		return
+	var k: int = people.find(s) % 12
+	var spot := hall_pos(s.home) + Vector2(cos(k * TAU / 12.0) * 150.0, sin(k * TAU / 12.0) * 110.0 + 150.0)
+	s.doing = "tempering the body"
+	if _work_at(s, spot):
+		_temper(s, dt)
+
+
+# ---------------------------------------------------------------- the dead, counted in blocks
+
+func block_of(c: Vector2i) -> int:
+	return clampi(c.y / BLOCK, 0, BH - 1) * BW + clampi(c.x / BLOCK, 0, BW - 1)
+
+
+func block_at(p: Vector2) -> int:
+	return block_of(land.cell(p))
+
+
+func block_rect(b: int) -> Rect2i:
+	return Rect2i((b % BW) * BLOCK, (b / BW) * BLOCK, BLOCK, BLOCK)
+
+
+func block_center(b: int) -> Vector2:
+	return (Vector2(b % BW, b / BW) * BLOCK + Vector2(BLOCK, BLOCK) / 2.0) * T
+
+
+## Where someone heading into a block makes for: its open cell nearest the middle.
+func block_spot(b: int) -> Vector2:
+	if not spots.has(b):
+		var best := block_center(b)
+		var bd := 1e9
+		var r := block_rect(b)
+		for y in range(r.position.y, r.end.y):
+			for x in range(r.position.x, r.end.x):
+				var c := Vector2i(x, y)
+				var d := land.center(c).distance_to(block_center(b))
+				if d < bd and not land.impassable(land.at(c)) and land.at(c) != Land.FOREST and house_grid[y * Land.W + x] < 0:
+					bd = d
+					best = land.center(c)
+		spots[b] = best
+	return spots[b]
+
+
+func _bdist(a: int, b: int) -> int:
+	return maxi(absi(a % BW - b % BW), absi(a / BW - b / BW))
+
+
+func dead_at(b: int) -> int:
+	return horde[b] + march_n[b]
+
+
+func _recount() -> void:
+	march_n.fill(0)
+	for m in marches:
+		march_n[m.b] += m.n
+
+
+func dead_total() -> int:
+	var n := 0
+	for v in horde:
+		n += v
+	for m in marches:
+		n += m.n
+	return n
+
+
+## Which blocks the dead can cross, which lie inside each palisade, and which hold its wall.
+func _blocks() -> void:
+	horde.resize(BW * BH)
+	horde.fill(0)
+	danger.resize(BW * BH)
+	danger.fill(0)
+	march_n.resize(BW * BH)
+	march_n.fill(0)
+	block_open.resize(BW * BH)
+	for b in BW * BH:
+		var open := 0
+		var r := block_rect(b)
+		for y in range(r.position.y, r.end.y):
+			for x in range(r.position.x, r.end.x):
+				if not land.at(Vector2i(x, y)) in [Land.WATER, Land.ROCK]:
+					open += 1
+		block_open[b] = 1 if open >= BLOCK * BLOCK / 3 else 0
+	for h in land.holdings.size():
+		hold_blocks[h] = []
+		var a := land.holding_area(h)
+		for b in BW * BH:
+			if a.has_point(block_rect(b).get_center()):
+				hold_blocks[h].append(b)
+			if h in rings:
+				var r := block_rect(b)
+				var all_in := true
+				for y in range(r.position.y, r.end.y):
+					for x in range(r.position.x, r.end.x):
+						if not land.in_ring(h, Vector2i(x, y), 1):
+							all_in = false
+				if all_in:
+					inner[b] = h
+	for c in walls:
+		if not walls_of.has(walls[c].h):
+			walls_of[walls[c].h] = []
+		walls_of[walls[c].h].append(c)
+		var b := block_of(c)
+		if not wall_blocks.has(b):
+			wall_blocks[b] = []
+		wall_blocks[b].append(c)
+	for c in land.openings:
+		if land.openings[c].kind == "door":
+			doors[land.openings[c].house] = c
+
+
+## Nightfall: packs rise from the graveyards and the crypt and set off for one of our cities.
+func _rise() -> void:
 	var owned := holdings_owned()
-	var to: Vector2 = hall_pos(owned[rng.randi() % owned.size()]) + Vector2(rng.randf_range(-200, 200), rng.randf_range(-160, 160))
-	for k in rng.randi_range(3, 3 + day / 2):
-		var kind := "walker"
-		if day >= 3 and rng.randf() < 0.1 + day * 0.02:
-			kind = "runner"
-		elif day >= 6 and rng.randf() < 0.07:
-			kind = "brute"
-		var z := _make_dead(land.center(from) + Vector2(rng.randf_range(-40, 40), rng.randf_range(-40, 40)), kind, WANDER)
-		z.goal = to
-		z.herd = true
+	var packs := 2 + day / 2 + owned.size() + (1 if altar_hp > 0.0 else 0)
+	for k in packs:
+		var from := block_of(land.graves[rng.randi() % land.graves.size()])
+		if altar_hp > 0.0 and rng.randf() < 0.35:
+			from = block_of(land.holdings[land.holdings.size() - 1].center)
+		var goal: int = owned[rng.randi() % owned.size()]
+		marches.append({"b": from, "n": rng.randi_range(4, 6 + day), "goal": goal, "t": rng.randf_range(0.0, 5.0)})
+	_recount()
 
 
-func _field(target_cell: Vector2i, calm: bool) -> PackedInt32Array:
-	var key := Vector3i(target_cell.x, target_cell.y, int(calm))
-	if fields_cache.has(key) and clock - float(fields_cache[key][1]) < (3.0 if calm else 1.2) and fields_cache[key][2] == phase:
-		return fields_cache[key][0]
-	var f := PackedInt32Array()
-	f.resize(Land.W * Land.H)
-	f.fill(-1)
-	if target_cell.x < 0 or target_cell.y < 0 or target_cell.x >= Land.W or target_cell.y >= Land.H:
-		return f
-	if pass_calm.is_empty():
-		_passability()
-	var open := pass_calm if calm else pass_alert
-	var q := PackedInt32Array()
-	q.resize(Land.W * Land.H)
-	var start := target_cell.y * Land.W + target_cell.x
-	q[0] = start
-	var tail := 1
-	f[start] = 0
-	var head := 0
-	while head < tail:
-		var i := q[head]
-		head += 1
-		var x := i % Land.W
-		var nd := f[i] + 1
-		for n in [i + 1 if x < Land.W - 1 else -1, i - 1 if x > 0 else -1, i + Land.W, i - Land.W]:
-			if n < 0 or n >= Land.W * Land.H or f[n] != -1 or open[n] == 0:
-				continue
-			f[n] = nd
-			q[tail] = n
-			tail += 1
-	if fields_cache.size() > 60:
-		fields_cache.clear()
-	fields_cache[key] = [f, clock, phase]
-	return f
-
-
-## Where the dead can walk, cell by cell — refreshed a few times a second for the flow fields.
-func _passability() -> void:
-	pass_calm.resize(Land.W * Land.H)
-	pass_sight.resize(Land.W * Land.H)
-	pass_alert.resize(Land.W * Land.H)
-	pass_sight.resize(Land.W * Land.H)
-	for y in Land.H:
-		for x in Land.W:
-			var c := Vector2i(x, y)
-			pass_alert[y * Land.W + x] = 0 if land.impassable(land.tiles[y * Land.W + x]) else 1
-			_touch(c)
-
-
-## A door, window or stretch of wall changed: update what the dead can see and walk through there.
-func _touch(c: Vector2i) -> void:
-	if pass_calm.is_empty():
-		return
-	var i := c.y * Land.W + c.x
-	pass_calm[i] = 1 if _walk_dead(c, true) else 0
-	pass_sight[i] = 1 if clear_at(c) else 0
-
-
-func _toward(z: Dictionary, goal: Vector2) -> Vector2:
-	var calm: bool = int(z.state) in [IDLE, WANDER]
-	if z.p.distance_squared_to(goal) < 62500.0 and _los(z.p, goal):
-		return (goal - z.p).normalized()
-	var f := _field(land.cell(goal), calm)
-	var c := land.cell(z.p)
-	if c.x < 0 or c.y < 0 or c.x >= Land.W or c.y >= Land.H:
-		return (goal - z.p).normalized()
-	var best := f[c.y * Land.W + c.x]
-	if best <= 0:
-		return (goal - z.p).normalized()
-	var dir := Vector2.ZERO
-	for o in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-		var n: Vector2i = c + o
-		if n.x < 0 or n.y < 0 or n.x >= Land.W or n.y >= Land.H:
+func _hordes(dt: float) -> void:
+	for b in BW * BH:
+		danger[b] = 1 if dead_at(b) > 0 else 0
+	# packs on the march: a block every few seconds, by the shortest way the dead can walk
+	for m in marches:
+		m.t -= dt
+		if m.t > 0.0:
 			continue
-		var d := f[n.y * Land.W + n.x]
-		if d >= 0 and d < best:
-			best = d
-			dir = land.center(n) - z.p
-	return dir.normalized() if dir != Vector2.ZERO else (goal - z.p).normalized()
+		m.t = 5.0
+		var to := _next_block(m.b, block_of(land.hall_rect(m.goal).get_center()))
+		if to < 0:
+			continue
+		if inner.get(to, -1) >= 0 and inner.get(m.b, -1) != inner[to] and wall_blocks.has(m.b) and not _breach(m.b):
+			continue                                      # the palisade holds them: they batter it (below)
+		m.b = to
+	_recount()
+	# the dead batter walls and doors where they stand
+	for b in wall_blocks:
+		var n := dead_at(b)
+		if n > 0 and not _breach(b):
+			var best: Variant = null
+			for c in wall_blocks[b]:
+				if wall_standing(walls[c]) and land.holdings[walls[c].h].claimed and (best == null or float(walls[c].hp) < float(walls[best].hp)):
+					best = c
+			if best != null:
+				_bash_wall(best, minf(n, 20) * 1.5 * dt)
+	var occupied := {}
+	for s in people:
+		occupied[house_of(s.p)] = true
+	for i in doors:
+		var c: Vector2i = doors[i]
+		var o: Dictionary = land.openings[c]
+		if float(o.hp) <= 0.0 or not land.holdings[land.houses[i].holding].claimed:
+			continue
+		var n := dead_at(block_of(c))
+		if n > 0 and occupied.has(i):
+			_bash(c, minf(n, 10) * 1.5 * dt)
+	# and fall on anyone in the open where they stand
+	var by := {}
+	for s in people:
+		if _sheltered(s):
+			continue
+		var b := block_at(s.p)
+		if danger[b] == 0:
+			continue
+		if not by.has(b):
+			by[b] = []
+		by[b].append(s)
+	for b in by:
+		var n := dead_at(b)
+		if n <= 0:
+			continue
+		var here: Array = by[b]
+		var on_each := mini(GRIP, ceili(float(n) / here.size()))
+		var kills := 0.0
+		for s in here:
+			var harm: float = on_each * BITE * dt * armor(s) * (0.6 if s.trait == "Strong" else 1.0) / (1.0 + 0.15 * s.layer)
+			s.hp -= harm
+			s.asleep = false
+			if s.hurt_t <= 0.0:
+				s.hurt_t = 0.5
+				_ev("hurt", s.p)
+			kills += power(s) * dt / ZOMBIE_HP
+			if s.hp <= 0.0:
+				note("%s has fallen." % s.name)
+				_ev("died", s.p)
+		hurt_acc[b] = float(hurt_acc.get(b, 0.0)) + kills
+		var k := int(hurt_acc[b])
+		if k > 0:
+			hurt_acc[b] -= k
+			_kill(b, k)
 
 
-func _slide(at: Vector2, d: Vector2, calm: bool) -> Vector2:
-	var out := at
-	for axis in 2:
-		var mv := Vector2(d.x, 0) if axis == 0 else Vector2(0, d.y)
-		if not _blocked(out + mv, calm):
-			out += mv
-	return out
-
-
-func _blocked(at: Vector2, calm: bool) -> bool:
-	var c0 := land.cell(at - Vector2(ZR, ZR))
-	var c1 := land.cell(at + Vector2(ZR, ZR))
-	for y in range(c0.y, c1.y + 1):
-		for x in range(c0.x, c1.x + 1):
-			if _walk_dead(Vector2i(x, y), calm):
-				continue
-			var rect := Rect2(x * T, y * T, T, T)
-			var q := Vector2(clampf(at.x, rect.position.x, rect.end.x), clampf(at.y, rect.position.y, rect.end.y))
-			if q.distance_squared_to(at) < ZR * ZR:
-				return true
+## A broken stretch of palisade, an open gate or one never raised lets the dead through this block.
+func _breach(b: int) -> bool:
+	for c in wall_blocks[b]:
+		var w: Dictionary = walls[c]
+		if not land.holdings[w.h].claimed or not w.up or float(w.hp) <= 0.0 or (w.gate and w.open):
+			return true
 	return false
 
 
-func _dead_step(dt: float) -> void:
-	var speeds := {"walker": 44.0, "runner": 120.0, "brute": 36.0}
-	for z in dead:
-		z.stun = maxf(0.0, z.stun - dt)
-		z.attack_t -= dt
-		if int(z.state) == IDLE:
-			z.hp = minf(z.max_hp, z.hp + dt * 4.0)        # left alone, the dead knit back together
-		if int(z.state) == IDLE and not people.any(func(s): return z.p.distance_squared_to(s.p) < 250000.0):
-			z.sus = maxf(0.0, z.sus - dt * 0.4)          # nobody about: they just stand and sway
-			if rng.randf() < dt * 0.3:
-				z.face = Vector2.RIGHT.rotated(rng.randf() * TAU)
-			z.v = Vector2.ZERO
+func _kill(b: int, k: int) -> void:
+	for m in marches:
+		if k > 0 and m.b == b:
+			var d := mini(k, m.n)
+			m.n -= d
+			k -= d
+	marches = marches.filter(func(m): return m.n > 0)
+	_recount()
+	var d2 := mini(k, horde[b])
+	horde[b] -= d2
+	for i in mini(d2 + 1, 3):
+		_ev("kill", block_center(b) + Vector2(rng.randf_range(-50, 50), rng.randf_range(-50, 50)))
+
+
+## The next block toward a goal, over blocks the dead can cross.
+func _next_block(from: int, goal: int) -> int:
+	if from == goal:
+		return -1
+	if not block_fields.has(goal):
+		var f := PackedInt32Array()
+		f.resize(BW * BH)
+		f.fill(-1)
+		f[goal] = 0
+		var q := [goal]
+		var head := 0
+		while head < q.size():
+			var c: int = q[head]
+			head += 1
+			for o in [1, -1, BW, -BW]:
+				var n: int = c + o
+				if n < 0 or n >= BW * BH or (absi(o) == 1 and n / BW != c / BW) or f[n] != -1 or block_open[n] == 0:
+					continue
+				f[n] = f[c] + 1
+				q.append(n)
+		block_fields[goal] = f
+	var fld: PackedInt32Array = block_fields[goal]
+	var best := -1
+	var bd := fld[from] if fld[from] >= 0 else 1 << 30
+	for o in [1, -1, BW, -BW]:
+		var n: int = from + o
+		if n < 0 or n >= BW * BH or (absi(o) == 1 and n / BW != from / BW) or fld[n] < 0:
 			continue
-		# the dead of a village don't follow far past it: pulled out, they lose interest and drift back home
-		z.leash = maxf(0.0, z.leash - dt)
-		if z.lurker >= 0 and int(z.state) in [CHASE, INVESTIGATE] and z.p.distance_to(z.home) > LEASH:
-			z.state = IDLE
-			z.target = null
-			z.sus = 0.0
-			z.leash = 10.0
-		var seen: Variant = null
-		for s in people:
-			if z.leash <= 0.0 and z.p.distance_squared_to(s.p) < 180000.0 and _sees(z, s):
-				seen = s
-				break
-		if seen != null:
-			var close := 1.0 - clampf(z.p.distance_to(seen.p) / sight_of(seen), 0.0, 1.0)
-			z.sus = minf(1.0, z.sus + dt * (0.8 + close * 2.5))
-			if z.sus >= 1.0 and z.state != CHASE:
-				z.state = CHASE
-				z.target = seen
-				z.lost = 0.0
-				_ev("noticed", z.p)
-				_rouse(z, seen)
-				if seen.job != "soldier":
-					note("The dead have seen %s!" % seen.name)
-			elif z.state != CHASE:
-				z.face = z.face.slerp((seen.p - z.p).normalized(), minf(1.0, dt * 2.0))
-		elif z.state != CHASE:
-			z.sus = maxf(0.0, z.sus - dt * 0.4)
-		var spd: float = speeds[z.kind]
-		var want := Vector2.ZERO
-		match int(z.state):
-			IDLE:
-				if rng.randf() < dt * 0.3:
-					z.face = Vector2.RIGHT.rotated(rng.randf() * TAU)
-				want = z.face * 0.15 if z.p.distance_to(z.home) < 50.0 else (z.home - z.p).normalized() * 0.3
-			WANDER:
-				want = _toward(z, z.goal) * 0.6
-				if z.p.distance_to(z.goal) < 40.0:
-					z.state = INVESTIGATE
-					z.look = 0.0
-			INVESTIGATE:
-				if z.p.distance_to(z.goal) > 24.0:
-					want = _toward(z, z.goal) * 0.85
-				else:
-					z.look += dt
-					if fmod(z.look, 1.2) < dt:
-						z.face = z.face.rotated(rng.randf_range(1.5, 3.0))
-					if z.look > 6.0:
-						if z.lurker >= 0:
-							z.state = IDLE
-						else:
-							z.state = WANDER
-							z.goal = z.p + Vector2(rng.randf_range(-400, 400), rng.randf_range(-300, 300))
-							z.goal = z.goal.clamp(Vector2(40, 40), Vector2(Land.W, Land.H) * T - Vector2(40, 40))
-			CHASE:
-				var tgt: Variant = z.target
-				if tgt == null or not people.has(tgt):
-					z.state = INVESTIGATE
-					z.look = 0.0
-				else:
-					if _los(z.p, tgt.p) and z.p.distance_to(tgt.p) < sight_of(tgt) * 1.6 + 60.0:
-						z.goal = tgt.p
-						z.lost = 0.0
-					else:
-						z.lost += dt
-						if z.lost > 4.0:
-							z.state = INVESTIGATE
-							z.look = 0.0
-							z.sus = 0.4
-					want = _toward(z, z.goal)
-					spd *= 1.25
-		if int(z.state) in [CHASE, INVESTIGATE] and want != Vector2.ZERO:
-			var ahead := land.cell(z.p + want * (ZR + 8.0))
-			var t := land.at(ahead)
-			if walls.has(ahead) and not _walk_dead(ahead):
-				want = Vector2.ZERO
-				if z.attack_t <= 0.0:
-					z.attack_t = 1.0
-					_bash_wall(ahead, 40.0 if z.kind == "brute" else 12.0)
-			elif (t == Land.DOOR or t == Land.WINDOW) and not _walk_dead(ahead):
-				want = Vector2.ZERO
-				if z.attack_t <= 0.0:
-					z.attack_t = 1.0
-					_bash(ahead, 40.0 if z.kind == "brute" else 12.0)
-		if z.stun > 0.0:
-			want = Vector2.ZERO
-		if land.at(land.cell(z.p)) == Land.WINDOW:
-			spd *= 0.35
-		elif land.at(land.cell(z.p)) == Land.FOREST:
-			spd *= 0.6
-		z.v = z.v.lerp(want * spd, 1.0 - exp(-6.0 * dt))
-		if z.v.length() > 5.0:
-			z.face = z.face.slerp(z.v.normalized(), minf(1.0, dt * 4.0))
-		if z.v.length_squared() > 0.5:
-			z.p = _slide(z.p, z.v * dt, int(z.state) in [IDLE, WANDER])
-		z.step += dt * z.v.length() * 0.08
-		for s in people:
-			if z.p.distance_to(s.p) < SR + ZR + 4.0 and z.attack_t <= 0.0 and z.stun <= 0.0:
-				z.attack_t = 1.0 if z.kind != "runner" else 0.7
-				z.state = CHASE
-				z.target = s
-				s.asleep = false
-				if s.hurt_t <= 0.0:
-					s.hp -= (12.0 if z.kind != "brute" else 28.0) * (0.6 if s.trait == "Strong" else 1.0) * armor(s)
-					s.hurt_t = 0.35
-					_ev("hurt", s.p)
-					if s.hp <= 0.0:
-						note("%s has fallen." % s.name)
-						_ev("died", s.p)
-				break
-	# shoulder each other apart: only neighbours in the same or adjacent cells can touch
-	var grid := {}
-	for z in dead:
-		var k := land.cell(z.p)
-		if grid.has(k):
-			grid[k].append(z)
-		else:
-			grid[k] = [z]
-	for k in grid:
-		var here: Array = grid[k]
-		for nb in [k, k + Vector2i(1, 0), k + Vector2i(1, 1), k + Vector2i(0, 1), k + Vector2i(-1, 1)]:
-			if not grid.has(nb):
-				continue
-			var there: Array = grid[nb]
-			for i in here.size():
-				for j in (range(i + 1, there.size()) if nb == k else range(there.size())):
-					var a: Dictionary = here[i]
-					var b: Dictionary = there[j]
-					var d: Vector2 = a.p - b.p
-					var l := d.length()
-					if l < ZR * 2.0 and l > 0.01:
-						var push := d / l * (ZR * 2.0 - l) * 0.5
-						a.p = _slide(a.p, push, false)
-						b.p = _slide(b.p, -push, false)
+		if fld[n] < bd:
+			bd = fld[n]
+			best = n
+	return best
 
 
-## The dead lurking in a village come as a pack when one of them finds someone.
-func _rouse(z: Dictionary, s: Dictionary) -> void:
-	if int(z.lurker) < 0:
-		return
-	for o in dead:
-		if o.lurker == z.lurker and o.state != CHASE and o.p.distance_to(z.p) < 280.0:
-			o.state = INVESTIGATE
-			o.goal = s.p
-			o.look = 0.0
+## The nearest block with dead in it, within reach (and among the given blocks, if any are given).
+func _nearest_dead(p: Vector2, reach: float, among: Array) -> int:
+	var best := -1
+	var bd := reach
+	if among.is_empty():
+		var c := block_at(p)
+		var k := mini(int(reach / (BLOCK * T)) + 1, maxi(BW, BH))
+		for y in range(maxi(0, c / BW - k), mini(BH, c / BW + k + 1)):
+			for x in range(maxi(0, c % BW - k), mini(BW, c % BW + k + 1)):
+				var b := y * BW + x
+				if dead_at(b) > 0 and block_center(b).distance_to(p) < bd:
+					bd = block_center(b).distance_to(p)
+					best = b
+		return best
+	for b in among:
+		if dead_at(b) <= 0:
+			continue
+		var d := block_center(b).distance_to(p)
+		if d < bd:
+			bd = d
+			best = b
+	return best
 
 
 func _bash_wall(c: Vector2i, dmg: float) -> void:
 	var w: Dictionary = walls[c]
 	w.hp = float(w.hp) - dmg
+	hurt_walls[c] = true
 	_ev("bang", land.center(c))
 	_noise(land.center(c), 220.0)
 	if float(w.hp) <= 0.0:
 		w.hp = 0.0
 		w.open = false
-		_touch(c)
 		_ev("break", land.center(c))
 		note("The %s of %s is broken through!" % ["gate" if w.gate else "palisade", land.holdings[w.h].name])
 
@@ -1826,13 +1613,11 @@ func _bash(c: Vector2i, dmg: float) -> void:
 	if o.kind == "window":
 		while int(o.planks) > 0 and float(o.hp) <= (int(o.planks) - 1) * PLANK_HP:
 			o.planks = int(o.planks) - 1
-			_touch(c)
 			_ev("break", land.center(c))
 	elif float(o.hp) <= 0.0:
 		o.hp = 0.0
 		o.planks = 0
 		o.open = true
-		_touch(c)
 		_ev("break", land.center(c))
 		for h in gates:
 			if gates[h] == c and land.holdings[h].claimed:

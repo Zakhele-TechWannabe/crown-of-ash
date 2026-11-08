@@ -42,16 +42,21 @@ func _init() -> void:
 			var d0 := r.day
 			r.step(1.0 / 30.0)
 			if r.day != d0:
-				var ring: Rect2i = r.rings[0]
-				var near := r.dead.filter(func(z): return ring.grow(4).has_point(r.land.cell(z.p))).size()
-				print("  dawn %d: people %d food %.0f wood %.0f dead %d (near the capital %d, lurkers %d)" % [r.day, r.people.size(), r.stock.food, r.stock.wood, r.dead.size(), near, r.dead.filter(func(z): return z.lurker >= 0).size()])
+				var hb := r.block_of(r.land.holdings[0].center)
+				var near := 0
+				for b in Realm.BW * Realm.BH:
+					if r._bdist(b, hb) <= 6:
+						near += r.dead_at(b)
+				var layers := r.people.map(func(p): return p.layer)
+				print("  dawn %d: people %d food %.0f wood %.0f arrows %d dead %d (near the capital %d)  cultivated %d, best layer %d" % [r.day, r.people.size(),
+					r.stock.food, r.stock.wood, r.stock.arrows, r.dead_total(), near, layers.filter(func(l): return l > 0).size(), layers.max()])
 			frames += 1
 		var held := r.holdings_owned().map(func(h): return r.land.holdings[h].name)
 		print("realm %d: %s day %d  people %d  food %.0f wood %.0f arrows %d  held %s  dead %d  built %s" % [seed_val,
 			["", "", "LOST on", "WON on"][r.phase] if r.phase >= 2 else "reached", r.day, r.people.size(), r.stock.food,
-			r.stock.wood, r.stock.arrows, ", ".join(held), r.dead.size(), ",".join(r.built[0].keys())])
+			r.stock.wood, r.stock.arrows, ", ".join(held), r.dead_total(), ",".join(r.built[0].keys())])
 		var st := r.stakes(0)
-		print("      palisade %d/%d  towers %d  units %s" % [st.x, st.y, r.tower_count[0], ", ".join(r.people.filter(func(p): return p.job == "soldier").map(func(p): return "%s %s %s" % [p.name, p.unit, p.order]))])
+		print("      palisade %d/%d  towers %d  soldiers %d" % [st.x, st.y, r.tower_count[0], r.people.filter(func(p): return p.job == "soldier").size()])
 		for l in r.log.slice(maxi(0, r.log.size() - 8)):
 			print("      day %d: %s" % l)
 	quit()

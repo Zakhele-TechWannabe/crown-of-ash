@@ -17,7 +17,8 @@ const C_BLUE := Color(0.35, 0.55, 0.95)
 const P_BG := Color(0.16, 0.1, 0.06, 0.94)
 const P_EDGE := Color(0.76, 0.58, 0.3)
 const JOB_COL := {"farm": Color(0.95, 0.85, 0.4), "chop": Color(0.65, 0.85, 0.45), "forage": Color(0.95, 0.65, 0.3),
-	"build": Color(0.6, 0.8, 1.0), "guard": Color(0.95, 0.5, 0.45), "soldier": Color(1.0, 0.35, 0.3), "rest": Color(0.75, 0.75, 0.75)}
+	"build": Color(0.6, 0.8, 1.0), "guard": Color(0.95, 0.5, 0.45), "soldier": Color(1.0, 0.35, 0.3), "cultivate": Color(0.8, 0.6, 1.0),
+	"rest": Color(0.75, 0.75, 0.75)}
 
 var c: Realm
 var mode := "title"
@@ -28,6 +29,9 @@ var font_px: Font
 var font_serif: FontVariation
 var ground: Node2D
 var ground_sig := 0
+var mini_tex: ImageTexture
+var crowds: Array[ImageTexture] = []
+var roof_sig := 0
 var sfx: Sfx
 var dark: CanvasModulate
 var world: Node2D
@@ -57,7 +61,8 @@ var rule_btns := {}
 var card_btns := {}
 var job_btns := {}
 var hold_btns := {}
-var people_box: VBoxContainer
+var job_rows := {}
+var cult_lbl: Label
 var unit_card: PanelContainer
 var unit_lbl: Label
 var move_btn: Button
@@ -79,6 +84,7 @@ var look_at := Vector2.ZERO
 func _ready() -> void:
 	font = load("res://assets/fonts/Lato-Bold.ttf")
 	font_px = load("res://assets/fonts/PixelifySans.ttf")
+	_paint_crowds()
 	font_serif = FontVariation.new()
 	font_serif.base_font = load("res://assets/fonts/NotoSerifDisplay-Bold.ttf")
 	font_serif.spacing_glyph = 5
@@ -228,7 +234,7 @@ func show_title() -> void:
 	overlay = _panel(1000)
 	var v: VBoxContainer = overlay.get_meta("box")
 	v.add_child(_lbl("CROWN OF ASH", 104, C_GOLD, font_px))
-	v.add_child(_lbl("The dead walk in the Empire of Kambara. Only the capital, Ala Kambara, still stands. Your people live by themselves — you set their work, the rules and what gets built, and you send the warband to win back the empire, city by city, to the Black Crypt in the Nyoka peaks.", 25, C_DIM))
+	v.add_child(_lbl("The dead walk the empire in their thousands. Only the capital, Ala Kambara, still stands, with a hundred souls. Your people live by themselves and temper their bodies — you set their work, the rules and what gets built, and you send the warband to win back the empire, city by city, to the Black Crypt in the Nyoka peaks.", 25, C_DIM))
 	var go := _btn("Raise the banner")
 	go.pressed.connect(new_game)
 	v.add_child(go)
@@ -249,7 +255,7 @@ func new_game() -> void:
 	cam.position = c.hall_pos(0)
 	cam.zoom = Vector2(0.62, 0.62)
 	_build_ui()
-	_banner("DAY 1 — Ala Kambara stands alone")
+	_banner("DAY 1 — a hundred souls in Ala Kambara")
 
 
 func _game_over() -> void:
@@ -402,13 +408,19 @@ func _build_ui() -> void:
 		task_rows.append([chk, l])
 	var cv := _section(left, "CITIZENS")
 	cit_head = cv.get_child(0)
-	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(262, 290)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	cv.add_child(scroll)
-	people_box = VBoxContainer.new()
-	people_box.add_theme_constant_override("separation", 3)
-	scroll.add_child(people_box)
+	job_rows.clear()
+	for j in Realm.JOBS:
+		var b := _btn("", 14)
+		b.custom_minimum_size = Vector2(262, 26)
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.tooltip_text = Realm.JOB_INFO[j] + "\nClick to look at each of them in turn"
+		b.draw.connect(func(): b.draw_circle(Vector2(15, b.size.y / 2), 5, JOB_COL[j]))
+		b.pressed.connect(_cycle_job.bind(j))
+		cv.add_child(b)
+		job_rows[j] = b
+	cult_lbl = _lbl("", 14, Color(0.85, 0.72, 1.0), null, false)
+	cult_lbl.custom_minimum_size = Vector2(262, 40)
+	cv.add_child(cult_lbl)
 	# right: the holdings, under the minimap
 	var right := VBoxContainer.new()
 	right.anchor_left = 1.0; right.anchor_right = 1.0
@@ -500,7 +512,7 @@ func _build_ui() -> void:
 	uv.add_child(order_row)
 	order_btns.clear()
 	for o in Realm.ORDERS:
-		var b := _btn({"escort": "Escort foragers", "fields": "Guard fields", "warband": "Warband"}[o], 14)
+		var b := _btn({"fields": "Clear near home", "warband": "Warband"}[o], 14)
 		b.custom_minimum_size = Vector2(124, 32)
 		b.tooltip_text = Realm.ORDERS[o]
 		b.pressed.connect(_set_order.bind(o))
@@ -706,18 +718,15 @@ func _refresh_ui() -> void:
 			status = "queued #%d · %s" % [c.queue[place].find(u.id) + 1, status]
 		b.text = "%s\n%s" % [u.name, status]
 		b.add_theme_color_override("font_color", C_OK if c.has_built(place, u.id) else (C_GOLD if u.id in c.queue[place] else C_TEXT))
-	for n in people_box.get_children():
-		n.queue_free()
-	for s in c.people:
-		var role: String = s.job if s.job != "soldier" else Realm.UNITS[s.unit].name.to_lower() + " (" + s.order + ")"
-		var b := _btn("    %s — %s%s" % [s.name, role, "  (resting)" if s.resting else ""], 14)
-		b.tooltip_text = "Lives at " + c.land.holdings[s.home].name
-		b.draw.connect(_hp_strip.bind(b, s))
-		b.custom_minimum_size = Vector2(250, 28)
-		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		b.add_theme_color_override("font_color", JOB_COL[s.job] if s != selected else Color.WHITE)
-		b.pressed.connect(func(): _select(s, true))
-		people_box.add_child(b)
+	var names := {"farm": "Farmers", "chop": "Woodcutters", "forage": "Foragers", "build": "Builders", "guard": "Guards",
+		"soldier": "Soldiers", "cultivate": "Cultivators", "rest": "Resting"}
+	for j in job_rows:
+		var n := c.people.filter(func(p): return p.job == j).size()
+		job_rows[j].text = "      %s  %d" % [names[j], n]
+		job_rows[j].add_theme_color_override("font_color", JOB_COL[j] if n > 0 else C_DIM)
+	var layers := c.people.map(func(p): return p.layer)
+	var refined := layers.filter(func(l): return l > 0).size()
+	cult_lbl.text = "Body Refinement: %d of %d tempered\nHighest: %s" % [refined, c.people.size(), "layer %d" % layers.max() if refined > 0 else "none yet"]
 	unit_card.visible = selected != null
 	if selected != null:
 		var soldier: bool = selected.job == "soldier"
@@ -736,12 +745,12 @@ func _refresh_ui() -> void:
 		move_btn.disabled = c.holdings_owned().size() < 2
 
 
-## A health bar along the bottom of each name in the people list.
-func _hp_strip(b: Button, s: Dictionary) -> void:
-	var f := clampf(s.hp / 100.0, 0.0, 1.0)
-	b.draw_circle(Vector2(15, b.size.y / 2 - 1), 5, JOB_COL[s.job])
-	b.draw_arc(Vector2(15, b.size.y / 2 - 1), 5, 0, TAU, 12, Color(0.08, 0.05, 0.03), 1.5)
-	b.draw_rect(Rect2(4, b.size.y - 5, (b.size.x - 8) * f, 3), Color(0.9, 0.25, 0.2).lerp(Color(0.45, 0.85, 0.35), f))
+## Click a job in the citizens panel: look at each of its people in turn.
+func _cycle_job(j: String) -> void:
+	var list := c.people.filter(func(p): return p.job == j)
+	if list.is_empty():
+		return
+	_select(list[(list.find(selected) + 1) % list.size()], true)
 
 
 func _select(s: Variant, center := false) -> void:
@@ -856,7 +865,8 @@ func _events() -> void:
 				decals.append([p, randf() * TAU, randf_range(5, 10)])
 			"kill":
 				if not quiet: sfx.play("kill", vol)
-				corpses.append([p, randf() * TAU])
+				if corpses.size() < 250:
+					corpses.append([p, randf() * TAU])
 			"arrow":
 				if not quiet: sfx.play("swing", vol, 1.9)
 			"chop":
@@ -870,10 +880,12 @@ func _events() -> void:
 				floats.append([p, "broken!", 1.5, C_RED])
 			"loot":
 				floats.append([p, e.text, 2.0, C_GOLD])
-			"noticed":
-				if not quiet: sfx.groan(vol)
+			"breakthrough":
+				if not quiet: sfx.play("dawn", vol)
+				floats.append([p, "BREAKTHROUGH!", 2.5, Color(0.85, 0.7, 1.0)])
 			"hurt":
-				if not quiet: sfx.play("hurt", vol)
+				if not quiet and near > 0.3: sfx.play("hurt", vol)
+				if not quiet and randf() < 0.1: sfx.groan(vol)
 			"died":
 				if not quiet: sfx.play("die", -4.0)
 			"joined":
@@ -923,8 +935,11 @@ func _update_view(dt: float) -> void:
 		var s: Dictionary = selected
 		var carry := ", ".join(s.carry.keys().map(func(k): return "%d %s" % [s.carry[k], k]))
 		var kind := ("%s · %s\n" % [Realm.UNITS[s.unit].name, Realm.ORDERS[s.order]]) if s.job == "soldier" else ""
-		unit_lbl.text = "%s  (%s — %s)\n%s%s\nHealth %d   Food %d   Strength %d%s" % [s.name, s.trait, Realm.TRAITS[s.trait], kind,
-			{"fight": "fighting!", "flee": "running for the hall!", "": "—"}.get(s.doing, s.doing), int(s.hp), int(s.hunger), int(s.energy), ("\nCarrying " + carry) if carry != "" else ""]
+		var cult := c.realm_name(s)
+		if s.layer < Realm.LAYERS:
+			cult += " — %d%% toward layer %d" % [int(100.0 * s.qi / c.qi_need(s.layer)), s.layer + 1]
+		unit_lbl.text = "%s  (%s — %s)\n%s · talent %.1f\n%s%s\nHealth %d/%d   Food %d   Strength %d%s" % [s.name, s.trait, Realm.TRAITS[s.trait], cult, s.talent, kind,
+			{"fight": "fighting the dead!", "flee": "running home!", "": "—"}.get(s.doing, s.doing), int(s.hp), int(s.max_hp), int(s.hunger), int(s.energy), ("\nCarrying " + carry) if carry != "" else ""]
 		for j in job_btns:
 			job_btns[j].add_theme_color_override("font_color", C_GOLD if s.job == j else C_TEXT)
 	if frame % 30 == 0:
@@ -933,7 +948,10 @@ func _update_view(dt: float) -> void:
 			ground_sig = sig
 			ground.queue_redraw()
 	world.queue_redraw()
-	roofs.queue_redraw()
+	var rs := _roof_state()
+	if rs != roof_sig:
+		roof_sig = rs
+		roofs.queue_redraw()
 	labels.queue_redraw()
 	hud_draw.queue_redraw()
 
@@ -1010,12 +1028,13 @@ func _draw_world() -> void:
 		world.draw_circle(Vector2(14, 0), 6, Color(0.6, 0.62, 0.55))
 	world.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	for cr in c.land.crates:
+		if not r.has_point(cr.cell):
+			continue
 		var p := c.land.center(cr.cell)
 		var col := Color(0.5, 0.36, 0.2) if not cr.searched else Color(0.3, 0.24, 0.18)
 		world.draw_circle(p, 9, col)
 		world.draw_arc(p, 9, 0, TAU, 12, col.darkened(0.4), 2.0)
-	for z in c.dead:
-		_dead(z)
+	_draw_dead(r)
 	for s in c.people:
 		_person(s)
 	for sh in c.shots:
@@ -1027,6 +1046,7 @@ func _draw_world() -> void:
 func _draw_ground() -> void:
 	if c == null:
 		return
+	_bake_minimap()
 	ground.draw_rect(Rect2(0, 0, Land.W * T, Land.H * T), Color(0.38, 0.6, 0.21))
 	for y in Land.H:
 		for x in Land.W:
@@ -1051,6 +1071,26 @@ func _draw_ground() -> void:
 			var at := Vector2(pv[1]) * T + Vector2(0, i * 60)
 			ground.draw_string(font_serif, at + Vector2(3, 3), lines[i], HORIZONTAL_ALIGNMENT_LEFT, -1, 52, Color(0.1, 0.08, 0.04, 0.45))
 			ground.draw_string(font_serif, at, lines[i], HORIZONTAL_ALIGNMENT_LEFT, -1, 52, Color(0.85, 0.95, 1.0, 0.9) if wet else Color(1.0, 0.95, 0.78, 0.88))
+
+
+## The minimap's land, one pixel a cell, made again whenever the ground is.
+func _bake_minimap() -> void:
+	var img := Image.create(Land.W, Land.H, false, Image.FORMAT_RGBA8)
+	for y in Land.H:
+		for x in Land.W:
+			var col := Color(0.36, 0.56, 0.2)
+			match c.land.at(Vector2i(x, y)):
+				Land.FOREST: col = Color(0.16, 0.34, 0.12)
+				Land.ROAD: col = Color(0.72, 0.58, 0.38)
+				Land.PAVE: col = Color(0.72, 0.7, 0.64)
+				Land.FIELD: col = Color(0.88, 0.7, 0.26)
+				Land.GRAVE: col = Color(0.3, 0.25, 0.3)
+				Land.WATER: col = Color(0.2, 0.46, 0.8)
+				Land.ROCK: col = Color(0.56, 0.55, 0.52)
+				Land.SAND: col = Color(0.92, 0.82, 0.55)
+				Land.WALL, Land.FLOOR, Land.DOOR, Land.WINDOW: col = Color(0.8, 0.6, 0.32)
+			img.set_pixel(x, y, col)
+	mini_tex = ImageTexture.create_from_image(img)
 
 
 func _tile(cell: Vector2i) -> void:
@@ -1386,20 +1426,75 @@ func _work_icon(id: String, at: Vector2) -> void:
 			world.draw_line(at + Vector2(-10, 0), at + Vector2(10, 0), Color(0.38, 0.28, 0.16), 3.0)
 
 
-func _dead(z: Dictionary) -> void:
-	var col := Color(0.55, 0.6, 0.52)
-	var size := 1.0
-	match z.kind:
-		"runner":
-			col = Color(0.65, 0.62, 0.5)
-			size = 0.9
-		"brute":
-			col = Color(0.45, 0.48, 0.42)
-			size = 1.5
-	if z.stun > 0.0:
-		col = col.lightened(0.3)
-	var sway := sin(z.step) * 0.25
-	world.draw_set_transform(z.p, z.face.angle(), Vector2(size, size))
+## The dead, counted in blocks: a shadow over the ground, a few shambling figures for the crowd, a red edge on a
+## pack that's on the march.
+func _draw_dead(view: Rect2i) -> void:
+	var tsec := Time.get_ticks_msec() * 0.001
+	for by in range(maxi(0, view.position.y / Realm.BLOCK), mini(Realm.BH, view.end.y / Realm.BLOCK + 1)):
+		for bx in range(maxi(0, view.position.x / Realm.BLOCK), mini(Realm.BW, view.end.x / Realm.BLOCK + 1)):
+			var b := by * Realm.BW + bx
+			var n := c.dead_at(b)
+			if n <= 0:
+				continue
+			var r := Rect2(Vector2(bx, by) * Realm.BLOCK * T, Vector2.ONE * Realm.BLOCK * T)
+			world.draw_rect(r.grow(-2), Color(0.22, 0.1, 0.12, clampf(0.16 + 0.05 * log(float(n)) / log(2.0), 0.16, 0.5)))
+			if c.march_n[b] > 0:
+				world.draw_rect(r.grow(-3), Color(0.85, 0.2, 0.15, 0.7), false, 3.0)
+			if cam.zoom.x >= 1.2:
+				for k in mini(n, 9):
+					var hx := _hash(b * 7 + k, k * 13 + 1)
+					var hy := _hash(k * 5 + 3, b * 11 + k)
+					var p := r.position + Vector2(18 + hx * (r.size.x - 36), 18 + hy * (r.size.y - 36)) + Vector2(sin(tsec * 0.7 + k + b) * 5, cos(tsec * 0.5 + k * 2) * 4)
+					_zombie(p, (hx - 0.5) * TAU + sin(tsec * 0.3 + k) * 0.5, tsec * 3.0 + k, 1.0)
+			else:
+				# further out, a painted crowd for the block: one picture instead of a figure each
+				var v := 0 if n < 3 else (1 if n < 8 else 2)
+				var sway := Vector2(sin(tsec * 0.6 + b) * 4.0, cos(tsec * 0.45 + b * 0.7) * 3.0)
+				world.draw_texture(crowds[v], r.position + sway, Color.WHITE if (b % 2) == 0 else Color(0.92, 0.95, 0.9))
+
+## Three crowds of the dead (a few, some, many), painted once into pictures a block wide.
+func _paint_crowds() -> void:
+	crowds.clear()
+	var px := int(Realm.BLOCK * T)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	for count in [2, 5, 9]:
+		var img := Image.create(px, px, false, Image.FORMAT_RGBA8)
+		img.fill(Color(0, 0, 0, 0))
+		for k in count:
+			var p := Vector2i(rng.randi_range(18, px - 18), rng.randi_range(18, px - 18))
+			_disc(img, p + Vector2i(2, 3), 12, Color(0.08, 0.06, 0.05, 0.5))
+			for y in range(-9, 11):
+				for x in range(-9, 9):
+					_dot(img, p + Vector2i(x, y), Color(0.28, 0.25, 0.22))
+			var arm := 1 if rng.randf() < 0.5 else -1
+			for t in 12:
+				_disc(img, p + Vector2i(arm * (6 + t), -6), 2, Color(0.5, 0.62, 0.42))
+				_disc(img, p + Vector2i(arm * (6 + t), 6), 2, Color(0.5, 0.62, 0.42))
+			_disc(img, p, 9, Color(0.6, 0.74, 0.5))
+			_disc(img, p + Vector2i(arm * 4, -3), 1, Color(0.6, 0.9, 1.0))
+			_disc(img, p + Vector2i(arm * 4, 3), 1, Color(0.6, 0.9, 1.0))
+		crowds.append(ImageTexture.create_from_image(img))
+
+
+func _disc(img: Image, c: Vector2i, r: int, col: Color) -> void:
+	for y in range(-r, r + 1):
+		for x in range(-r, r + 1):
+			if x * x + y * y <= r * r:
+				_dot(img, c + Vector2i(x, y), col)
+
+
+func _dot(img: Image, p: Vector2i, col: Color) -> void:
+	if p.x < 0 or p.y < 0 or p.x >= img.get_width() or p.y >= img.get_height():
+		return
+	img.set_pixelv(p, img.get_pixelv(p).blend(col))
+
+
+func _zombie(p: Vector2, ang: float, step: float, size: float) -> void:
+	var col := Color(0.6, 0.74, 0.5)
+	var sway := sin(step) * 0.25
+	world.draw_set_transform(p, ang, Vector2(size, size))
+	world.draw_circle(Vector2(1, 0), 12.0, Color(0.08, 0.06, 0.05, 0.6))
 	world.draw_line(Vector2(4, -7), Vector2(18, -6 + sway * 8), col.darkened(0.2), 4.0)
 	world.draw_line(Vector2(4, 7), Vector2(18, 6 - sway * 8), col.darkened(0.2), 4.0)
 	world.draw_rect(Rect2(-8, -10, 14, 20), Color(0.28, 0.25, 0.22))
@@ -1419,7 +1514,10 @@ func _person(s: Dictionary) -> void:
 		world.draw_circle(Vector2(-12, 0), 6, Color(0.86, 0.7, 0.55))
 		world.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 		return
-	world.draw_set_transform(s.p, s.face.angle(), Vector2.ONE * (0.85 if s.sneak else 1.0))
+	if s.layer > 0:
+		var aura := Color(1.0, 0.85, 0.4).lerp(Color(0.75, 0.5, 1.0), s.layer / float(Realm.LAYERS))
+		world.draw_arc(s.p, 14.0 + s.layer, 0, TAU, 20, Color(aura, 0.7), 2.0)
+	world.draw_set_transform(s.p, s.face.angle(), Vector2.ONE)
 	world.draw_rect(Rect2(-9, -11, 16, 22), col.darkened(0.25))
 	match s.job:
 		"soldier":
@@ -1493,6 +1591,20 @@ func _draw_roofs() -> void:
 			var dr := Rect2(oc.x * T, oc.y * T, T, T).grow(-5)
 			roofs.draw_rect(dr, _ca(Color(0.42, 0.26, 0.12) if not c.land.openings[oc].open else Color(0.1, 0.08, 0.07), a))
 			roofs.draw_rect(dr, _ca(Color(0.25, 0.15, 0.07), a), false, 2.0)
+
+
+## What the roofs show: how close the camera is, which cottages have someone in, which doors are open and who
+## holds each city. They're only drawn again when this changes.
+func _roof_state() -> int:
+	var parts := [int(cam.zoom.x * 20.0)]
+	for s in c.people:
+		parts.append(c.house_of(s.p))
+	parts.sort()
+	for h in c.land.holdings:
+		parts.append(int(h.claimed))
+	for i in c.doors:
+		parts.append(int(c.land.openings[c.doors[i]].open))
+	return hash(parts)
 
 
 func _ca(col: Color, a: float) -> Color:
@@ -1610,26 +1722,28 @@ func _draw_labels() -> void:
 	for nz in c.noises:
 		var u: float = 1.0 - nz[2] / 0.6
 		labels.draw_arc(nz[0], nz[1] * (0.3 + 0.7 * u), 0, TAU, 40, Color(1.0, 0.85, 0.6, 0.25 * (1.0 - u)), 2.0)
-	for z in c.dead:
-		if n > 0.3:
-			var side: Vector2 = z.face.orthogonal() * 3.0
-			var e: Vector2 = z.p + z.face * 6.0
-			labels.draw_circle(e + side, 1.8, Color(0.6, 0.9, 1.0, 0.85 * n))
-			labels.draw_circle(e - side, 1.8, Color(0.6, 0.9, 1.0, 0.85 * n))
-		var tag := ""
-		var col := C_GOLD
-		if z.state == Realm.CHASE:
-			tag = "!"
-			col = C_RED
-		elif z.state == Realm.INVESTIGATE or z.sus > 0.15:
-			tag = "?"
-		if tag != "":
-			labels.draw_string(font_px, z.p + Vector2(-6, -18), tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 22, col)
+	var view := _view_cells()
+	var k := clampf(1.0 / cam.zoom.x, 0.6, 2.4)
+	for by in range(maxi(0, view.position.y / Realm.BLOCK), mini(Realm.BH, view.end.y / Realm.BLOCK + 1)):
+		for bx in range(maxi(0, view.position.x / Realm.BLOCK), mini(Realm.BW, view.end.x / Realm.BLOCK + 1)):
+			var nd := c.dead_at(by * Realm.BW + bx)
+			if nd <= 0 or (nd < 5 and cam.zoom.x < 0.9):
+				continue
+			var at := Vector2(bx, by) * Realm.BLOCK * T + Vector2(6, 6)
+			var txt := str(nd)
+			var w := font.get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x
+			labels.draw_set_transform(at, 0.0, Vector2(k, k))
+			labels.draw_rect(Rect2(0, 0, w + 10, 19), Color(0.1, 0.05, 0.05, 0.75))
+			labels.draw_string(font, Vector2(5, 15), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color(1.0, 0.6, 0.55))
+			labels.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	for s in c.people:
-		var txt: String = "zzz" if s.asleep else s.name
-		var w := font.get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x
-		labels.draw_string(font, s.p + Vector2(-w / 2, -16), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, JOB_COL[s.job])
-		var f := clampf(s.hp / 100.0, 0.0, 1.0)
+		var f := clampf(s.hp / s.max_hp, 0.0, 1.0)
+		if cam.zoom.x >= 0.9 or s == selected:
+			var txt: String = "zzz" if s.asleep else s.name
+			var w := font.get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x
+			labels.draw_string(font, s.p + Vector2(-w / 2, -16), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, JOB_COL[s.job])
+		elif f > 0.99:
+			continue
 		labels.draw_rect(Rect2(s.p + Vector2(-13, 15), Vector2(26, 4)), Color(0, 0, 0, 0.6))
 		labels.draw_rect(Rect2(s.p + Vector2(-13, 15), Vector2(26 * f, 4)), Color(0.9, 0.25, 0.2).lerp(Color(0.45, 0.85, 0.35), f))
 	# each city: its name on a plaque over the hall
@@ -1675,7 +1789,7 @@ func _draw_hud() -> void:
 	H.draw_string(font, Vector2(430, 30), "%d:%02d until %s" % [int(left) / 60, int(left) % 60, "dawn" if night else "dusk"], HORIZONTAL_ALIGNMENT_LEFT, -1, 18, C_TEXT)
 	var st := c.stock
 	var items := [["food", "Food %d" % int(st.food)], ["wood", "Wood %d" % int(st.wood)], ["arrows", "Arrows %d" % st.arrows],
-		["herbs", "Herbs %d" % st.herbs], ["souls", "Souls %d" % c.people.size()], ["cities", "Cities %d/%d" % [c.holdings_owned().size(), c.land.holdings.size() - 1]]]
+		["herbs", "Herbs %d" % st.herbs], ["souls", "Souls %d" % c.people.size()], ["undead", "Dead %d" % c.dead_total()], ["cities", "Cities %d/%d" % [c.holdings_owned().size(), c.land.holdings.size() - 1]]]
 	var x := vs.x - 14.0
 	items.reverse()
 	for it in items:
@@ -1687,23 +1801,9 @@ func _draw_hud() -> void:
 	# minimap, top right, framed
 	minimap = Rect2(vs.x - 300, 56, 286, 286 * Land.H / float(Land.W))
 	H.draw_rect(minimap.grow(4), Color(0.1, 0.06, 0.03))
-	H.draw_rect(minimap, Color(0.36, 0.56, 0.2))
+	if mini_tex != null:
+		H.draw_texture_rect(mini_tex, minimap, false)
 	var k := minimap.size.x / Land.W
-	for y in range(0, Land.H, 2):
-		for xx in range(0, Land.W, 2):
-			var col := Color.TRANSPARENT
-			match c.land.at(Vector2i(xx, y)):
-				Land.FOREST: col = Color(0.16, 0.34, 0.12)
-				Land.ROAD: col = Color(0.72, 0.58, 0.38)
-				Land.PAVE: col = Color(0.72, 0.7, 0.64)
-				Land.FIELD: col = Color(0.88, 0.7, 0.26)
-				Land.GRAVE: col = Color(0.3, 0.25, 0.3)
-				Land.WATER: col = Color(0.2, 0.46, 0.8)
-				Land.ROCK: col = Color(0.56, 0.55, 0.52)
-				Land.SAND: col = Color(0.92, 0.82, 0.55)
-				Land.WALL, Land.FLOOR, Land.DOOR, Land.WINDOW: col = Color(0.8, 0.6, 0.32)
-			if col.a > 0.0:
-				H.draw_rect(Rect2(minimap.position + Vector2(xx, y) * k, Vector2(2, 2) * k), col)
 	for h in c.land.holdings.size():
 		var hd: Dictionary = c.land.holdings[h]
 		var col := C_BLUE if hd.claimed else (Color(0.6, 0.3, 0.9) if hd.crypt else C_RED)
@@ -1712,6 +1812,11 @@ func _draw_hud() -> void:
 		H.draw_rect(Rect2(mp - Vector2(5, 4), Vector2(10, 8)), Color(0.1, 0.06, 0.03), false, 1.0)
 		if c.target == h:
 			H.draw_arc(mp, 10, 0, TAU, 16, C_GOLD, 2.0)
+	for b in Realm.BW * Realm.BH:
+		var nd := c.dead_at(b)
+		if nd > 0:
+			var r := c.block_rect(b)
+			H.draw_rect(Rect2(minimap.position + Vector2(r.position) * k, Vector2(r.size) * k), Color(0.75, 0.1, 0.1, clampf(0.25 + nd * 0.03, 0.25, 0.85)))
 	for s in c.people:
 		H.draw_rect(Rect2(minimap.position + s.p / T * k - Vector2(1, 1), Vector2(2, 2)), Color(0.9, 0.95, 1.0))
 	var view := Rect2(cam.get_screen_center_position() - vs / cam.zoom / 2.0, vs / cam.zoom)
@@ -1765,6 +1870,11 @@ func _icon(ci: CanvasItem, id: String, at: Vector2, s := 1.0) -> void:
 			ci.draw_rect(Rect2(-11, -11, 22, 22), Color(0.2, 0.36, 0.75) if id == "ours" else Color(0.72, 0.14, 0.1))
 			ci.draw_rect(Rect2(-11, -11, 22, 22), Color(0.1, 0.05, 0.03), false, 1.5)
 			_star(ci, Vector2.ZERO, 8.0, C_GOLD)
+		"undead":
+			ci.draw_circle(Vector2.ZERO, 10, Color(0.55, 0.6, 0.52))
+			ci.draw_circle(Vector2(-4, -1), 2.2, Color(0.6, 0.9, 1.0))
+			ci.draw_circle(Vector2(4, -1), 2.2, Color(0.6, 0.9, 1.0))
+			ci.draw_line(Vector2(-4, 5), Vector2(4, 5), Color(0.2, 0.2, 0.18), 2.0)
 		"crypt":
 			ci.draw_circle(Vector2.ZERO, 11, Color(0.35, 0.15, 0.45))
 			ci.draw_circle(Vector2(-4, -2), 2.8, Color(0.85, 0.7, 1.0))
