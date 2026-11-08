@@ -42,7 +42,14 @@ var shot_frames := 0
 var frame := 0
 var policy_panel: PanelContainer
 var policy_buttons: Array = []
-var descriptions: Array[Label] = []
+var field_label: Label
+var rotation_buttons: Array[Button] = []
+var selected := -1
+var tool := 0
+var marking := false
+var mark_start := Vector2i.ZERO
+var mark_end := Vector2i.ZERO
+var status_label: Label
 var speed_buttons: Array[Button] = []
 
 
@@ -99,23 +106,33 @@ func _build_ui() -> void:
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 12)
 	panel.add_child(column)
-	column.add_child(_lbl("POLICIES", 25, C_GOLD))
-	for index in 3:
-		column.add_child(_lbl(["Labour focus", "Rations", "Growth"][index], 19, C_TEXT, null, false))
-		var row := HBoxContainer.new()
-		column.add_child(row)
-		var buttons: Array[Button] = []
-		for setting in 3:
-			var button := _btn(World.POLICY_NAMES[index][setting], 16)
-			button.toggle_mode = true
-			button.pressed.connect(_set_policy.bind(index, setting))
-			row.add_child(button)
-			buttons.append(button)
-		policy_buttons.append(buttons)
-		var description := _lbl("", 15, C_TEXT, null, false)
-		description.custom_minimum_size = Vector2(315, 48)
-		column.add_child(description)
-		descriptions.append(description)
+	column.add_child(_lbl("TOOLS", 25, C_GOLD))
+	for mode in 3:
+		var button := _btn(["Select / none", "Mark field", "Mark housing"][mode], 18)
+		button.pressed.connect(func(): tool = mode; marking = false)
+		column.add_child(button)
+	column.add_child(_lbl("Drag 2–12 cells per side · Esc cancels", 15, C_TEXT))
+	column.add_child(_lbl("Labour focus", 19, C_GOLD))
+	var row := HBoxContainer.new()
+	column.add_child(row)
+	for setting in 3:
+		var button := _btn(World.POLICY_NAMES[setting], 16)
+		button.toggle_mode = true
+		button.pressed.connect(func(): c.focus = setting)
+		row.add_child(button)
+		policy_buttons.append(button)
+	status_label = _lbl("", 15, C_TEXT)
+	column.add_child(status_label)
+	field_label = _lbl("Click a field to select it.", 16, C_TEXT)
+	column.add_child(field_label)
+	for season_index in 4:
+		var button := _btn("", 16)
+		button.pressed.connect(_cycle_crop.bind(season_index))
+		column.add_child(button)
+		rotation_buttons.append(button)
+	var remove := _btn("Remove selected field", 16)
+	remove.pressed.connect(func(): c.remove_field(selected); selected = -1)
+	column.add_child(remove)
 	var speeds := HBoxContainer.new()
 	speeds.position = Vector2(16, 52)
 	hud_draw.add_child(speeds)
@@ -128,9 +145,17 @@ func _build_ui() -> void:
 
 
 ## A government change takes effect at the next daily allocation.
-func _set_policy(index: int, setting: int) -> void:
-	c.policies[index] = setting
+func _selected_field() -> Dictionary:
+	for f in c.fields:
+		if f.id == selected:
+			return f
+	return {}
 
+func _cycle_crop(season_index: int) -> void:
+	var f := _selected_field()
+	if not f.is_empty():
+		f.plan[season_index] = (int(f.plan[season_index]) + 1) % 4
+		# Plans apply when the next season begins; active crops remain unchanged.
 
 ## Time can be paused without stopping the camera.
 func _set_speed(value: int) -> void:
@@ -146,9 +171,14 @@ func _process(dt: float) -> void:
 		ground_sig = c.revision
 		ground.queue_redraw()
 	for index in 3:
-		descriptions[index].text = World.DESCRIPTIONS[index][c.policies[index]]
-		for setting in 3:
-			policy_buttons[index][setting].set_pressed_no_signal(c.policies[index] == setting)
+		policy_buttons[index].set_pressed_no_signal(c.focus == index)
+	status_label.text = "Fields %d · Building %d · Idle %d" % [c.labour.x, c.labour.y, 10 - c.labour.x - c.labour.y]
+	var f := _selected_field()
+	field_label.text = "Click a field to select it." if f.is_empty() else "Field %d · %d × %d cells\nFertility %.1f · %s\n%s · growth %.0f%%" % [f.id, f.rect.size.x, f.rect.size.y, c.average_fertility(f), World.CROP_NAMES[c.land.crops[c.land.index(f.rect.position)]], f.stage, c.average_growth(f) * 100]
+	for index in 4:
+		rotation_buttons[index].visible = not f.is_empty()
+		if not f.is_empty():
+			rotation_buttons[index].text = "%s: %s" % [World.SEASONS[index], World.CROP_NAMES[f.plan[index]]]
 	for index in 4:
 		speed_buttons[index].set_pressed_no_signal(speed == [0, 1, 2, 4][index])
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
@@ -166,13 +196,35 @@ func _process(dt: float) -> void:
 
 ## Drag to pan, scroll to zoom, or click the minimap to look elsewhere.
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		tool = 0
+		marking = false
+		ground.queue_redraw()
 	if event is InputEventMouseButton:
 		if event.button_index in [MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
 			drag = event.pressed
-		elif event.pressed and event.button_index == MOUSE_BUTTON_LEFT and minimap.has_point(event.position):
-			cam.position = (event.position - minimap.position) / minimap.size * Vector2(Land.W, Land.H) * T
+		elif event.button_index == MOUSE_BUTTON_LEFT:
+			var cell := Vector2i((get_global_mouse_position() / T).floor())
+			if event.pressed:
+				if tool > 0:
+					marking = true
+					mark_start = cell
+					mark_end = cell
+				else:
+					selected = c.land.field_ids[c.land.index(cell)] if c.land._in(cell.x, cell.y) else -1
+			elif marking:
+				mark_end = cell
+				var rect := _mark_rect()
+				if tool == 1:
+					selected = c.mark_field(rect)
+				else:
+					c.mark_housing(rect)
+				marking = false
+			ground.queue_redraw()
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.3, 5.0)
+	elif event is InputEventMouseMotion and marking:
+		mark_end = Vector2i((get_global_mouse_position() / T).floor())
 	elif event is InputEventMouseMotion and drag:
 		cam.position -= event.relative / cam.zoom
 
@@ -193,12 +245,7 @@ func _draw_hud() -> void:
 	h.draw_line(Vector2(0, 45), Vector2(size.x, 45), P_EDGE, 2)
 	_icon(h, Vector2(26, 23))
 	h.draw_string(font_px, Vector2(48, 31), "THE EMPIRE", HORIZONTAL_ALIGNMENT_LEFT, -1, 24, C_GOLD)
-	h.draw_string(font, Vector2(250, 30), "Year %d · Day %d     Population %d     Food %.0f     Housing %d/%d" % [c.year, c.day, c.population, c.food, c.population, c.housing()], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
-	var stats := Rect2(14, policy_panel.position.y + policy_panel.size.y + 10, 340, 100)
-	h.draw_style_box(_box(P_BG, P_EDGE), stats)
-	h.draw_string(font, stats.position + Vector2(12, 25), "DAILY LABOUR", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, C_GOLD)
-	h.draw_string(font, stats.position + Vector2(12, 53), "Farm %.0f   Build %.0f   Idle %.0f" % [c.labour.x, c.labour.y, c.population - c.labour.x - c.labour.y], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, C_TEXT)
-	h.draw_string(font, stats.position + Vector2(12, 82), "This year: %d births · %d deaths" % [c.births, c.deaths], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, C_TEXT)
+	h.draw_string(font, Vector2(250, 30), "Year %d · %s · Day %d    People 10    Wheat %.1f · Barley %.1f · Beans %.1f" % [c.year, World.SEASONS[c.season()], c.day, c.granary[0], c.granary[1], c.granary[2]], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
 	var y := size.y - 24.0
 	for index in range(c.log.size() - 1, maxi(-1, c.log.size() - 6), -1):
 		h.draw_rect(Rect2(14, y - 20, 600, 26), P_BG)
@@ -283,6 +330,12 @@ func _draw_ground() -> void:
 	for y in Land.H:
 		for x in Land.W:
 			_tile(Vector2i(x, y))
+	for zone in c.zones:
+		var r := Rect2(Vector2(zone.position) * T, Vector2(zone.size) * T)
+		for edge in [[r.position, Vector2(r.end.x, r.position.y)], [Vector2(r.end.x, r.position.y), r.end], [r.end, Vector2(r.position.x, r.end.y)], [Vector2(r.position.x, r.end.y), r.position]]:
+			ground.draw_dashed_line(edge[0], edge[1], C_GOLD, 1.5, 6)
+	for f in c.fields:
+		ground.draw_rect(Rect2(Vector2(f.rect.position) * T, Vector2(f.rect.size) * T), C_GOLD if f.id == selected else Color(0.45, 0.3, 0.12), false, 2)
 	for house in c.houses:
 		_hut(house)
 
@@ -294,9 +347,8 @@ func _bake_minimap() -> void:
 		for x in Land.W:
 			var col := Color(0.36, 0.56, 0.2)
 			match c.land.at(Vector2i(x, y)):
-				Land.ROAD: col = Color(0.72, 0.58, 0.38)
+				Land.TILLED: col = Color(0.55, 0.4, 0.2)
 				Land.HOUSE: col = Color(0.85, 0.63, 0.25)
-				Land.FIELD: col = Color(0.88, 0.7, 0.26)
 			img.set_pixel(x, y, col)
 	mini_tex = ImageTexture.create_from_image(img)
 
@@ -321,35 +373,39 @@ func _tile(cell: Vector2i) -> void:
 				var p := rect.position + Vector2(6 + h * 120, 16 + h * 60)
 				g.draw_line(p, p + Vector2(-2, -6), col.darkened(0.25), 1.5)
 				g.draw_line(p, p + Vector2(2, -7), col.darkened(0.25), 1.5)
-		Land.ROAD:
-			g.draw_rect(rect, Color(0.73, 0.59, 0.39).lerp(Color(0.78, 0.64, 0.43), h))
-			g.draw_rect(rect.grow(-3), Color(0.78, 0.64, 0.43))
 		Land.HOUSE:
 			g.draw_rect(rect, Color(0.48, 0.55, 0.25))
-		Land.FIELD:
-			g.draw_rect(rect, Color(0.84, 0.66, 0.22))
+		Land.TILLED:
+			g.draw_rect(rect, Color(0.37, 0.24, 0.13))
+			var i := land.index(cell)
+			var growth: float = land.growth[i]
+			var crop: int = land.crops[i]
 			for k in 4:
-				var x := rect.position.x + 4 + k * 8
-				g.draw_line(Vector2(x, rect.position.y), Vector2(x, rect.end.y), Color(0.96, 0.82, 0.38), 3.0)
-				g.draw_line(Vector2(x + 3, rect.position.y), Vector2(x + 3, rect.end.y), Color(0.66, 0.48, 0.14), 1.0)
-			for o in [Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0)]:
-				if land.at(cell + o) != Land.FIELD:
-					var strip := Rect2(rect.position + Vector2(maxf(0, o.x) * (T - 2), maxf(0, o.y) * (T - 2)), Vector2(2 if o.x != 0 else T, 2 if o.y != 0 else T))
-					g.draw_rect(strip, Color(0.52, 0.36, 0.14))
+				var p := rect.position + Vector2(5 + k * 7, 27)
+				var col := Color(0.85, 0.7, 0.25) if growth >= 0.99 else Color(0.3, 0.6, 0.18)
+				if crop == 3:
+					g.draw_line(p, p + Vector2(2, -6), Color(0.48, 0.47, 0.26), 3)
+				elif growth > 0:
+					g.draw_line(p, p + Vector2(0, -4 - growth * 20), col, 3)
+				else:
+					g.draw_line(p, p + Vector2(0, -25), Color(0.26, 0.17, 0.1), 2)
+	g.draw_rect(rect, Color(0.1, 0.16, 0.05, 0.12), false, 0.5)
 
+func _mark_rect() -> Rect2i:
+	return Rect2i(Vector2i(mini(mark_start.x, mark_end.x), mini(mark_start.y, mark_end.y)), Vector2i(absi(mark_end.x - mark_start.x) + 1, absi(mark_end.y - mark_start.y) + 1))
 
 ## Golden hipped thatch shelters each household.
 func _hut(cell: Vector2i) -> void:
-	var p := Vector2(cell) * T + Vector2(1, 2)
-	var a := p + Vector2(8, 13)
-	var b := p + Vector2(22, 13)
-	ground.draw_rect(Rect2(p + Vector2(3, 7), Vector2(30, 27)), Color(0, 0, 0, 0.3))
-	ground.draw_rect(Rect2(p + Vector2(3, 10), Vector2(24, 20)), Color(0.65, 0.43, 0.23))
-	ground.draw_rect(Rect2(p + Vector2(12, 22), Vector2(7, 8)), Color(0.22, 0.14, 0.07))
-	ground.draw_colored_polygon(PackedVector2Array([p, p + Vector2(30, 0), b, a]), Color(0.96, 0.79, 0.33))
-	ground.draw_colored_polygon(PackedVector2Array([p + Vector2(0, 25), a, b, p + Vector2(30, 25)]), Color(0.69, 0.48, 0.17))
-	ground.draw_colored_polygon(PackedVector2Array([p, a, p + Vector2(0, 25)]), Color(0.84, 0.65, 0.25))
-	ground.draw_colored_polygon(PackedVector2Array([p + Vector2(30, 0), p + Vector2(30, 25), b]), Color(0.77, 0.55, 0.18))
+	var p := Vector2(cell) * T + Vector2(4, 8)
+	var a := p + Vector2(16, 26)
+	var b := p + Vector2(44, 26)
+	ground.draw_rect(Rect2(p + Vector2(6, 14), Vector2(60, 54)), Color(0, 0, 0, 0.3))
+	ground.draw_rect(Rect2(p + Vector2(6, 20), Vector2(48, 40)), Color(0.65, 0.43, 0.23))
+	ground.draw_rect(Rect2(p + Vector2(24, 44), Vector2(14, 16)), Color(0.22, 0.14, 0.07))
+	ground.draw_colored_polygon(PackedVector2Array([p, p + Vector2(60, 0), b, a]), Color(0.96, 0.79, 0.33))
+	ground.draw_colored_polygon(PackedVector2Array([p + Vector2(0, 50), a, b, p + Vector2(60, 50)]), Color(0.69, 0.48, 0.17))
+	ground.draw_colored_polygon(PackedVector2Array([p, a, p + Vector2(0, 50)]), Color(0.84, 0.65, 0.25))
+	ground.draw_colored_polygon(PackedVector2Array([p + Vector2(60, 0), p + Vector2(60, 50), b]), Color(0.77, 0.55, 0.18))
 	for offset in [4, 8]:
 		ground.draw_line(p + Vector2(offset, offset), p + Vector2(30 - offset, offset), Color(0.67, 0.47, 0.18), 1)
 	ground.draw_line(a, b, Color(0.4, 0.26, 0.1), 2)
@@ -359,18 +415,16 @@ func _hut(cell: Vector2i) -> void:
 func _move_people(dt: float) -> void:
 	while figures.size() < mini(c.population, 300):
 		var person := Figure.new()
-		person.position = c.land.center(c.houses[figures.size() % c.houses.size()]) + Vector2(0, 18)
+		person.position = c.land.center(c.center) + Vector2(0, 28)
 		person.target = person.position
 		person.phase = figure_rng.randf_range(0, TAU)
 		person.colour = Color.from_hsv(figure_rng.randf(), 0.35, figure_rng.randf_range(0.55, 0.85))
 		figures.append(person)
 	figures.resize(mini(c.population, 300))
-	var farmers := roundi(c.labour.x * figures.size() / maxf(1, c.population))
-	var builders := roundi(c.labour.y * figures.size() / maxf(1, c.population))
 	for index in figures.size():
 		var person := figures[index]
-		var task := 0 if index < farmers else (1 if index < farmers + builders and c.project >= 0 else 2)
-		var workplace := c.fields[index % c.fields.size()] if task == 0 else (c.site if task == 1 else c.houses[index % c.houses.size()])
+		var task: int = c.assignments[index].task
+		var workplace: Vector2i = c.assignments[index].cell
 		if task != person.task or workplace != person.workplace:
 			person.task = task
 			person.workplace = workplace
@@ -397,8 +451,11 @@ func _pick_spot(person: Figure) -> void:
 
 ## Heads, coloured tunics and swaying limbs keep the crowd inexpensive.
 func _draw_people() -> void:
-	if c.project >= 0:
-		var plot := Rect2(Vector2(c.site) * T + Vector2(2, 2), Vector2(T - 4, T - 4))
+	if marking:
+		var rect := _mark_rect()
+		people.draw_rect(Rect2(Vector2(rect.position) * T, Vector2(rect.size) * T), Color(0.8, 0.9, 0.4, 0.3) if c.can_mark(rect, tool == 1) else Color(1, 0.2, 0.1, 0.4))
+	if c.site.x >= 0:
+		var plot := Rect2(Vector2(c.site) * T + Vector2(2, 2), Vector2(T * 2 - 4, T * 2 - 4))
 		people.draw_rect(plot, Color(0.52, 0.36, 0.19, 0.65))
 		people.draw_rect(plot, C_GOLD, false, 1)
 	for person in figures:

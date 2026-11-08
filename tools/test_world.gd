@@ -1,40 +1,27 @@
 extends SceneTree
-## Compare the same founding landscape under two government policies.
-
 const World := preload("res://src/world.gd")
 
-
-## Each fixed step is one second; reports describe the year just completed.
 func _init() -> void:
-	var years := 5
-	for argument in OS.get_cmdline_user_args():
-		if argument.begins_with("--years="):
-			years = maxi(1, int(argument.get_slice("=", 1)))
-	for mix in [[1, 1, 1], [0, 2, 0]]:
-		var world := World.new()
-		world.policies.assign(mix)
-		print("Policies: %s / %s / %s" % [World.POLICY_NAMES[0][mix[0]], World.POLICY_NAMES[1][mix[1]], World.POLICY_NAMES[2][mix[2]]])
-		var starting_houses := world.houses.size()
-		var starting_fields := world.fields.size()
-		for y in years:
-			for tick in int(World.DAY_LEN * World.DAYS_PER_YEAR):
-				world.step(1.0)
-			print("Year %d: population=%d food=%.0f houses=%d fields=%d births=%d deaths=%d" % [y + 1, world.population, world.food, world.houses.size(), world.fields.size(), world.last_births, world.last_deaths])
-			assert(world.population > 0 and world.population < 1000)
-		if years >= 5:
-			assert(world.houses.size() > starting_houses)
-			assert(world.fields.size() > starting_fields)
-	var default_population := 0
-	for mix in [[1, 1, 1], [1, 0, 1], [1, 1, 2]]:
-		var world := World.new()
-		world.policies.assign(mix)
-		for y in 5:
-			world.step(World.DAY_LEN * World.DAYS_PER_YEAR)
-		if mix == [1, 1, 1]:
-			default_population = world.population
-			assert(world.population >= 15 and world.population <= 20)
-			assert(world.death_fraction < 1.0 and world.last_deaths == 0)
-		else:
-			assert(world.population < default_population)
-			print("Slow growth check (%s / %s): population=%d after 5 years" % [World.POLICY_NAMES[1][mix[1]], World.POLICY_NAMES[2][mix[2]], world.population])
+	var world := World.new()
+	assert(world.population == 10 and world.fields.is_empty() and world.houses.size() == 1)
+	assert(world.mark_field(Rect2i(44, 36, 2, 2), [0, 0, 0, 3]) == 0)
+	assert(world.mark_field(Rect2i(44, 40, 2, 2), [0, 2, 1, 3]) == 1)
+	assert(not world.can_mark(Rect2i(44, 36, 2, 2), true))
+	assert(not world.can_mark(Rect2i(51, 38, 2, 2), true))
+	assert(world.mark_housing(Rect2i(56, 38, 6, 4)))
+	for y in 5:
+		world.step(World.DAY_LEN * World.DAYS_PER_YEAR)
+		for f in world.fields:
+			print("Year %d field %d: Wheat=%.2f Barley=%.2f Beans=%.2f fertility=%.2f houses built=%d" % [y + 1, f.id, f.last_harvest[0], f.last_harvest[1], f.last_harvest[2], world.average_fertility(f), world.houses.size() - 1])
+		assert(world.population == 10)
+	assert(world.average_fertility(world.fields[1]) > world.average_fertility(world.fields[0]))
+	assert(world.houses.size() == 7)
+	# Removing fields releases their cells; large fields progress a cell at a time.
+	world.remove_field(0)
+	assert(world.land.field_ids[world.land.index(Vector2i(44, 36))] == -1)
+	var large := World.new()
+	large.mark_field(Rect2i(20, 20, 12, 12))
+	large.step(World.DAY_LEN)
+	assert(large.land.at(Vector2i(20, 20)) == World.Land.TILLED)
+	assert(large.land.at(Vector2i(31, 31)) == World.Land.GRASS)
 	quit()
