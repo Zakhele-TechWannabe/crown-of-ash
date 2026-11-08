@@ -191,15 +191,26 @@ func _plan_ring(h: int) -> void:
 	rings[h] = r
 	for y in range(r.position.y, r.end.y):
 		for x in range(r.position.x, r.end.x):
-			if not (x == r.position.x or y == r.position.y or x == r.end.x - 1 or y == r.end.y - 1):
-				continue
 			var c := Vector2i(x, y)
+			if not land.in_ring(h, c):
+				continue
+			# the ring is every cell of the octagon with open ground beside it (diagonals too, so it's sealed)
+			var out := Vector2i.ZERO
+			var edge := false
+			for o in [Vector2i(-1, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)]:
+				if not land.in_ring(h, c + o):
+					edge = true
+					if out == Vector2i.ZERO and (o.x == 0 or o.y == 0):
+						out = o
+			if not edge:
+				continue
 			var t := land.at(c)
 			if t in [Land.WALL, Land.FLOOR, Land.DOOR, Land.WINDOW, Land.WATER, Land.ROCK]:
 				continue                                 # houses, water and rock need no stakes
-			var inn := Vector2i(1 if x == r.position.x else (-1 if x == r.end.x - 1 else 0), 0)
-			if inn == Vector2i.ZERO:
-				inn = Vector2i(0, 1 if y == r.position.y else -1)
+			if out == Vector2i.ZERO:
+				var d: Vector2i = c - land.holdings[h].center
+				out = Vector2i(signi(d.x), 0) if absi(d.x) * land.holdings[h].half.y >= absi(d.y) * land.holdings[h].half.x else Vector2i(0, signi(d.y))
+			var inn := -out
 			for k in [c, c + inn]:
 				if land.at(k) == Land.FOREST:
 					land.tiles[k.y * Land.W + k.x] = Land.GRASS
@@ -215,7 +226,11 @@ func _plan_ring(h: int) -> void:
 			continue
 		cells.sort_custom(func(a, b): return a.distance_squared_to(mid) < b.distance_squared_to(mid))
 		walls[cells[0]].gate = true
-	for k in [r.position + Vector2i(1, 1), Vector2i(r.end.x - 2, r.position.y + 1), Vector2i(r.position.x + 1, r.end.y - 2), r.end - Vector2i(2, 2)]:
+	# towers stand inside the four cut corners
+	var hd: Dictionary = land.holdings[h]
+	var cut := land.cut(h)
+	for q in [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(1, 1)]:
+		var k: Vector2i = hd.center + q * (hd.half - Vector2i(cut / 2 + 2, cut / 2 + 2))
 		if land.at(k) in [Land.FOREST, Land.WATER, Land.ROCK, Land.SAND]:
 			land.tiles[k.y * Land.W + k.x] = Land.GRASS
 		towers[h].append(land.center(k))

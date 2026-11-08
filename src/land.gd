@@ -4,7 +4,7 @@ extends RefCounted
 ## Trade Port on the Golden Coast, the agricultural belt to the south-east and the provincial cities around.
 ## The dead hold all of it but the capital, and the Black Crypt lies hidden in the Nyoka peaks.
 
-enum { GRASS, ROAD, FLOOR, WALL, WINDOW, DOOR, FOREST, FIELD, GRAVE, WATER, ROCK, SAND }
+enum { GRASS, ROAD, FLOOR, WALL, WINDOW, DOOR, FOREST, FIELD, GRAVE, WATER, ROCK, SAND, PAVE }
 
 const W := 104
 const H := 78
@@ -12,22 +12,22 @@ const T := 32.0
 
 # name, centre, half-size of its ground, houses
 const PLACES := [
-	["Ala Kambara", Vector2i(52, 38), Vector2i(15, 12), 6],
-	["Tenga City", Vector2i(16, 21), Vector2i(11, 9), 4],
-	["Kiranga Citadel", Vector2i(74, 11), Vector2i(11, 9), 3],
-	["Kambara Port", Vector2i(82, 31), Vector2i(11, 9), 4],
-	["Ilanga City", Vector2i(14, 44), Vector2i(11, 9), 4],
-	["Mabele City", Vector2i(83, 62), Vector2i(11, 9), 4],
-	["Kifaru City", Vector2i(57, 67), Vector2i(11, 9), 4],
-	["Savu City", Vector2i(22, 66), Vector2i(11, 9), 4],
+	["Ala Kambara", Vector2i(52, 38), Vector2i(16, 13), 6],
+	["Tenga City", Vector2i(16, 21), Vector2i(12, 10), 4],
+	["Kiranga Citadel", Vector2i(74, 10), Vector2i(12, 10), 3],
+	["Kambara Port", Vector2i(82, 31), Vector2i(12, 10), 4],
+	["Ilanga City", Vector2i(14, 44), Vector2i(12, 10), 4],
+	["Mabele City", Vector2i(83, 62), Vector2i(12, 10), 4],
+	["Kifaru City", Vector2i(57, 67), Vector2i(12, 10), 4],
+	["Savu City", Vector2i(22, 66), Vector2i(12, 10), 4],
 ]
 const CRYPT := Vector2i(12, 4)
 # provinces, written across the land
 const PROVINCES := [
 	["NYOKA MOUNTAINS", Vector2i(36, 4)], ["NYOKA PROVINCE", Vector2i(5, 12)], ["MALIBA PROVINCE", Vector2i(5, 33)],
 	["BOMANI PROVINCE", Vector2i(4, 56)], ["KASAI PROVINCE", Vector2i(40, 74)], ["LUMBA PROVINCE", Vector2i(70, 74)],
-	["NDELE PROVINCE", Vector2i(88, 48)], ["ZAWADI PROVINCE", Vector2i(70, 27)], ["KIRANGA PLATEAU", Vector2i(86, 4)],
-	["THE GOLDEN COAST", Vector2i(95, 22)], ["THE KAMBARA RIVER", Vector2i(31, 47)], ["THE AGRICULTURAL BELT", Vector2i(68, 52)],
+	["NDELE PROVINCE", Vector2i(88, 48)], ["ZAWADI PROVINCE", Vector2i(69, 41)], ["KIRANGA PLATEAU", Vector2i(86, 4)],
+	["THE GOLDEN COAST", Vector2i(95, 22)], ["THE KAMBARA RIVER", Vector2i(36, 54)], ["THE AGRICULTURAL BELT", Vector2i(68, 52)],
 ]
 const RIVER := [Vector2i(34, 6), Vector2i(33, 14), Vector2i(31, 24), Vector2i(31, 36), Vector2i(32, 48), Vector2i(37, 54),
 	Vector2i(41, 60), Vector2i(41, 68), Vector2i(39, 78)]
@@ -70,6 +70,7 @@ func build(seed_val: int) -> void:
 	_fill(Rect2i(PLACES[3][1].x, PLACES[3][1].y + 2, 14, 2), ROAD)
 	for i in PLACES.size():
 		_holding(i)
+	_streets()
 	_crypt()
 	_belt()
 	for p in [Vector2i(3, 30), Vector2i(98, 72), Vector2i(36, 76), Vector2i(60, 20)]:
@@ -169,7 +170,7 @@ func _road(a: Vector2i, b: Vector2i) -> void:
 func _free(r: Rect2i) -> bool:
 	for y in range(r.position.y, r.end.y):
 		for x in range(r.position.x, r.end.x):
-			if not _in(x, y) or tiles[y * W + x] in [WALL, FLOOR, DOOR, WINDOW, ROAD, FIELD, WATER, ROCK]:
+			if not _in(x, y) or tiles[y * W + x] in [WALL, FLOOR, DOOR, WINDOW, ROAD, FIELD, WATER, ROCK, PAVE]:
 				return false
 	return true
 
@@ -201,17 +202,18 @@ func _spots(h: Dictionary, size: Vector2i) -> Array:
 	for y in [lo.y, hi.y, 0 - size.y / 2]:
 		for x in [lo.x, hi.x, 0 - size.x / 2, lo.x + size.x + 1, hi.x - size.x - 1]:
 			out.append(Rect2i(p + Vector2i(x, y), size))
-	for k in 200:
+	for k in 400:
 		out.append(Rect2i(p + Vector2i(rng.randi_range(lo.x, hi.x), rng.randi_range(lo.y, hi.y)), size))
 	return out
 
 
 func _cottages(h: Dictionary, n: int) -> void:
 	var hi := holdings.find(h)
-	for r in _spots(h, Vector2i(rng.randi_range(5, 6), rng.randi_range(4, 5))):
+	var size := Vector2i(rng.randi_range(4, 5), 4) if hi == 0 else Vector2i(rng.randi_range(5, 6), rng.randi_range(4, 5))
+	for r in _spots(h, size):
 		if h.houses.size() > n:
 			return
-		if _free(r.grow(1)):
+		if _free(r.grow(1)) and _within(hi, r):
 			h.houses.append(_house(r, false, hi))
 
 
@@ -219,12 +221,46 @@ func _patches(h: Dictionary, n: int) -> void:
 	for r in _spots(h, Vector2i(5, 4)):
 		if n <= 0:
 			return
-		if _free(r.grow(1)):
+		if _free(r.grow(1)) and _within(holdings.find(h), r):
 			_fill(r, FIELD)
 			for y in range(r.position.y, r.end.y):
 				for x in range(r.position.x, r.end.x):
 					h.fields.append(Vector2i(x, y))
 			n -= 1
+
+
+## The palisade runs round an octagon: the holding's ground with its corners cut off.
+func cut(h: int) -> int:
+	var half: Vector2i = holdings[h].half
+	return int(mini(half.x, half.y) * 0.45)
+
+
+func in_ring(h: int, c: Vector2i, margin := 0) -> bool:
+	var hd: Dictionary = holdings[h]
+	var d: Vector2i = (c - hd.center).abs()
+	return d.x <= hd.half.x - margin and d.y <= hd.half.y - margin and d.x + d.y <= hd.half.x + hd.half.y - cut(h) - margin
+
+
+## Room to spare between a building or field and its wall.
+func _within(h: int, r: Rect2i) -> bool:
+	for c in [r.position, Vector2i(r.end.x - 1, r.position.y), Vector2i(r.position.x, r.end.y - 1), r.end - Vector2i.ONE]:
+		if not in_ring(h, c, 1):
+			return false
+	return true
+
+
+## Inside the capital's wall: paved streets in a grid and around the palace, with gardens between.
+func _streets() -> void:
+	var h: Dictionary = holdings[0]
+	var hall: Rect2i = houses[h.hall].rect
+	for y in range(h.center.y - h.half.y, h.center.y + h.half.y + 1):
+		for x in range(h.center.x - h.half.x, h.center.x + h.half.x + 1):
+			var c := Vector2i(x, y)
+			if at(c) != GRASS or not in_ring(0, c, 1):
+				continue
+			var d: Vector2i = c - h.center
+			if not in_ring(0, c, 3) or posmod(d.x, 7) == 0 or posmod(d.y, 6) == 0 or hall.grow(2).has_point(c):
+				tiles[y * W + x] = PAVE
 
 
 func _crypt() -> void:

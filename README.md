@@ -12,6 +12,12 @@ bridged where the highways cross; Kiranga Citadel on its plateau to the north-ea
 the Golden Coast; the agricultural belt between the capital and Mabele City; and Tenga, Ilanga, Savu, Kifaru and
 Mabele cities around. Province names are written across the land. Water and rock can't be crossed.
 
+The look follows the owner's mockup: every palisade runs round an octagon with gatehouses and corner towers; the
+capital is paved, with gardens, a red-and-gold palace and townhouses; cities wear name plaques (a crown for the
+capital, blue for ours, red for the dead's). Roofs fade when you zoom in close, so you can see inside. The HUD is
+a framed ledger: rules, tasks and citizens on the left, the realm under the minimap, the build bar along the
+bottom. The ground is drawn once and only redrawn when the land changes.
+
 ## Run
 
     ./play.sh              # windowed game
