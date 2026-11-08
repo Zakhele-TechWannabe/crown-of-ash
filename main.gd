@@ -10,11 +10,25 @@ const C_GOLD := Color(1.0, 0.8, 0.35)
 const P_BG := Color(0.16, 0.1, 0.06, 0.94)
 const P_EDGE := Color(0.76, 0.58, 0.3)
 
+## Visual people carry no simulation state.
+class Figure:
+	var position := Vector2.ZERO
+	var target := Vector2.ZERO
+	var task := -1
+	var workplace := Vector2i(-1, -1)
+	var pause := 0.0
+	var phase := 0.0
+	var walking := false
+	var colour := Color.WHITE
+
+var figures: Array[Figure] = []
+var people: Node2D
+var figure_rng := RandomNumberGenerator.new()
+
 var c := World.new()
 var speed := 1
 var font: Font
 var font_px: Font
-var font_serif: FontVariation
 var ground: Node2D
 var cam: Camera2D
 var hud_draw: Control
@@ -36,17 +50,18 @@ var speed_buttons: Array[Button] = []
 func _ready() -> void:
 	font = load("res://assets/fonts/Lato-Bold.ttf")
 	font_px = load("res://assets/fonts/PixelifySans.ttf")
-	font_serif = FontVariation.new()
-	font_serif.base_font = load("res://assets/fonts/NotoSerifDisplay-Bold.ttf")
-	font_serif.spacing_glyph = 5
 	sfx = Sfx.new()
 	add_child(sfx)
 	ground = Node2D.new()
 	ground.draw.connect(_draw_ground)
 	add_child(ground)
+	people = Node2D.new()
+	people.draw.connect(_draw_people)
+	add_child(people)
+	figure_rng.seed = 719
 	cam = Camera2D.new()
-	cam.position = c.land.center(c.center) - Vector2(180, 0)
-	cam.zoom = Vector2(1.3, 1.3)
+	cam.position = c.land.center(c.center)
+	cam.zoom = Vector2(2.6, 2.6)
 	add_child(cam)
 	var hud := CanvasLayer.new()
 	add_child(hud)
@@ -125,6 +140,8 @@ func _set_speed(value: int) -> void:
 ## Terrain and minimap are rebuilt only after a tile revision.
 func _process(dt: float) -> void:
 	c.step(dt * speed)
+	_move_people(dt * speed)
+	people.queue_redraw()
 	if ground_sig != c.revision:
 		ground_sig = c.revision
 		ground.queue_redraw()
@@ -155,7 +172,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.pressed and event.button_index == MOUSE_BUTTON_LEFT and minimap.has_point(event.position):
 			cam.position = (event.position - minimap.position) / minimap.size * Vector2(Land.W, Land.H) * T
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.3, 3.0)
+			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.3, 5.0)
 	elif event is InputEventMouseMotion and drag:
 		cam.position -= event.relative / cam.zoom
 
@@ -176,11 +193,11 @@ func _draw_hud() -> void:
 	h.draw_line(Vector2(0, 45), Vector2(size.x, 45), P_EDGE, 2)
 	_icon(h, Vector2(26, 23))
 	h.draw_string(font_px, Vector2(48, 31), "THE EMPIRE", HORIZONTAL_ALIGNMENT_LEFT, -1, 24, C_GOLD)
-	h.draw_string(font, Vector2(250, 30), "Year %d · Day %d     Population %d     Food %.0f     Wood %.0f     Housing %d/%d" % [c.year, c.day, c.population, c.food, c.wood, c.population, c.housing()], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
+	h.draw_string(font, Vector2(250, 30), "Year %d · Day %d     Population %d     Food %.0f     Housing %d/%d" % [c.year, c.day, c.population, c.food, c.population, c.housing()], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
 	var stats := Rect2(14, policy_panel.position.y + policy_panel.size.y + 10, 340, 100)
 	h.draw_style_box(_box(P_BG, P_EDGE), stats)
 	h.draw_string(font, stats.position + Vector2(12, 25), "DAILY LABOUR", HORIZONTAL_ALIGNMENT_LEFT, -1, 18, C_GOLD)
-	h.draw_string(font, stats.position + Vector2(12, 53), "Farm %.0f   Wood %.0f   Build %.0f" % [c.labour.x, c.labour.y, c.labour.z], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, C_TEXT)
+	h.draw_string(font, stats.position + Vector2(12, 53), "Farm %.0f   Build %.0f   Idle %.0f" % [c.labour.x, c.labour.y, c.population - c.labour.x - c.labour.y], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, C_TEXT)
 	h.draw_string(font, stats.position + Vector2(12, 82), "This year: %d births · %d deaths" % [c.births, c.deaths], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, C_TEXT)
 	var y := size.y - 24.0
 	for index in range(c.log.size() - 1, maxi(-1, c.log.size() - 6), -1):
@@ -201,6 +218,7 @@ func _icon(item: CanvasItem, at: Vector2) -> void:
 	item.draw_colored_polygon(PackedVector2Array([at + Vector2(-12, 8), at + Vector2(-12, -7), at + Vector2(-6, 0), at + Vector2(0, -10), at + Vector2(6, 0), at + Vector2(12, -7), at + Vector2(12, 8)]), C_GOLD)
 
 
+## Make a label in the shared interface style.
 func _lbl(text: String, size: int, col: Color, f: Font = null, center := true) -> Label:
 	var l := Label.new()
 	l.text = text
@@ -221,6 +239,7 @@ func _fit_label(l: Label) -> void:
 		l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 
+## Frame a panel with the shared border and padding.
 func _box(bg: Color, border: Color) -> StyleBoxFlat:
 	var b := StyleBoxFlat.new()
 	b.bg_color = bg
@@ -231,6 +250,7 @@ func _box(bg: Color, border: Color) -> StyleBoxFlat:
 	return b
 
 
+## Make a policy or speed button with click feedback.
 func _btn(text: String, size := 30) -> Button:
 	var b := Button.new()
 	b.text = text
@@ -247,12 +267,14 @@ func _btn(text: String, size := 30) -> Button:
 	return b
 
 
+## Stable tile variation needs no mutable random state.
 func _hash(x: int, y: int) -> float:
 	var h := (x * 374761393 + y * 668265263) & 0x7fffffff
 	h = (h ^ (h >> 13)) * 1274126177 & 0x7fffffff
 	return float(h % 1000) / 1000.0
 
 
+## Cache the plain and completed settlement plots.
 func _draw_ground() -> void:
 	if c == null:
 		return
@@ -261,28 +283,8 @@ func _draw_ground() -> void:
 	for y in Land.H:
 		for x in Land.W:
 			_tile(Vector2i(x, y))
-	for y in Land.H:
-		for x in Land.W:
-			var cell := Vector2i(x, y)
-			var t := c.land.at(cell)
-			var h := _hash(x, y)
-			if t == Land.FOREST:
-				_tree(cell, 1.0)
-			elif t == Land.GRASS and h > 0.955 and h < 0.975 and cell.distance_to(c.center) > 12:
-				_tree(cell, 0.75)                          # a lone tree out in the fields
 	for house in c.houses:
 		_hut(house)
-	# Province names are only map text.
-	for pv in Land.PROVINCES:
-		var words: PackedStringArray = pv[0].split(" ")
-		var lines := [pv[0]]
-		if words.size() > 1 and words[-1] in ["PROVINCE", "MOUNTAINS", "PLATEAU", "COAST"]:
-			lines = [" ".join(words.slice(0, words.size() - 1)), words[-1]]
-		var wet: bool = "RIVER" in pv[0] or "COAST" in pv[0]
-		for i in lines.size():
-			var at := Vector2(pv[1]) * T + Vector2(0, i * 60)
-			ground.draw_string(font_serif, at + Vector2(3, 3), lines[i], HORIZONTAL_ALIGNMENT_LEFT, -1, 52, Color(0.1, 0.08, 0.04, 0.45))
-			ground.draw_string(font_serif, at, lines[i], HORIZONTAL_ALIGNMENT_LEFT, -1, 52, Color(0.85, 0.95, 1.0, 0.9) if wet else Color(1.0, 0.95, 0.78, 0.88))
 
 
 ## The minimap's land, one pixel a cell, made again whenever the ground is.
@@ -292,18 +294,14 @@ func _bake_minimap() -> void:
 		for x in Land.W:
 			var col := Color(0.36, 0.56, 0.2)
 			match c.land.at(Vector2i(x, y)):
-				Land.FOREST: col = Color(0.16, 0.34, 0.12)
 				Land.ROAD: col = Color(0.72, 0.58, 0.38)
 				Land.HOUSE: col = Color(0.85, 0.63, 0.25)
 				Land.FIELD: col = Color(0.88, 0.7, 0.26)
-				Land.WATER: col = Color(0.2, 0.46, 0.8)
-				Land.ROCK: col = Color(0.56, 0.55, 0.52)
-				Land.SAND: col = Color(0.92, 0.82, 0.55)
 			img.set_pixel(x, y, col)
 	mini_tex = ImageTexture.create_from_image(img)
 
 
-
+## Draw grass, roads and worked plots.
 func _tile(cell: Vector2i) -> void:
 	var g := ground
 	var land := c.land
@@ -312,58 +310,17 @@ func _tile(cell: Vector2i) -> void:
 	var h := _hash(cell.x, cell.y)
 	var patch := _hash(cell.x / 4, cell.y / 4)
 	match t:
-		Land.GRASS, Land.FOREST:
+		Land.GRASS:
 			var col := Color(0.35, 0.56, 0.19).lerp(Color(0.45, 0.66, 0.25), patch * 0.65 + h * 0.35)
-			if t == Land.FOREST:
-				col = col.darkened(0.22)
 			g.draw_rect(rect, col)
-			if t == Land.GRASS:
-				if h < 0.04:
-					var fc: Color = [Color(0.98, 0.9, 0.4), Color(0.96, 0.96, 0.9), Color(0.92, 0.55, 0.62)][int(h * 75) % 3]
-					g.draw_circle(rect.position + Vector2(6 + h * 300, 10), 2.5, fc)
-					g.draw_circle(rect.position + Vector2(20, 24 - h * 100), 2.0, fc)
-				elif h < 0.14:
-					var p := rect.position + Vector2(6 + h * 120, 16 + h * 60)
-					g.draw_line(p, p + Vector2(-2, -6), col.darkened(0.25), 1.5)
-					g.draw_line(p, p + Vector2(2, -7), col.darkened(0.25), 1.5)
-				elif h > 0.985:
-					g.draw_circle(rect.get_center() + Vector2(2, 3), 5, Color(0.2, 0.25, 0.15, 0.4))
-					g.draw_circle(rect.get_center(), 5, Color(0.62, 0.62, 0.58))
-		Land.WATER:
-			var deep := 0
-			for o in [Vector2i(-3, 0), Vector2i(3, 0), Vector2i(0, -3), Vector2i(0, 3), Vector2i(-2, -2), Vector2i(2, 2), Vector2i(2, -2), Vector2i(-2, 2)]:
-				if land.at(cell + o) == Land.WATER:
-					deep += 1
-			var col := Color(0.32, 0.62, 0.9).lerp(Color(0.13, 0.36, 0.7), deep / 8.0)
-			g.draw_rect(rect, col.lerp(col.lightened(0.06), h))
-			for o in [Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0)]:
-				var n := land.at(cell + o)
-				if n == Land.WATER or n == Land.ROAD or not land._in(cell.x + o.x, cell.y + o.y):
-					continue
-				var strip := Rect2(rect.position + Vector2(maxf(0, o.x) * (T - 4), maxf(0, o.y) * (T - 4)), Vector2(4 if o.x != 0 else T, 4 if o.y != 0 else T))
-				g.draw_rect(strip, Color(0.82, 0.93, 1.0, 0.75))
-			if cell in land.falls:
-				g.draw_rect(rect, Color(0.7, 0.86, 0.98, 0.5))
-			elif h < 0.22:
-				var p := rect.position + Vector2(6 + h * 40, 12 + h * 30)
-				g.draw_arc(p, 4, PI * 1.1, PI * 1.9, 5, Color(0.85, 0.95, 1.0, 0.5), 1.5)
-				g.draw_arc(p + Vector2(8, 0), 4, PI * 1.1, PI * 1.9, 5, Color(0.85, 0.95, 1.0, 0.5), 1.5)
-		Land.ROCK:
-			g.draw_rect(rect, Color(0.5, 0.52, 0.42).lerp(Color(0.56, 0.57, 0.48), h))
-			var tall := 10.0 + h * 12.0
-			var top := rect.position + Vector2(T * 0.5 + (h - 0.5) * 10, -tall + 6)
-			var l := rect.position + Vector2(-5, T)
-			var r := rect.position + Vector2(T + 5, T)
-			var mid := rect.position + Vector2(T * 0.5 + (h - 0.5) * 6, T)
-			g.draw_colored_polygon(PackedVector2Array([l, top, mid]), Color(0.74, 0.73, 0.7))
-			g.draw_colored_polygon(PackedVector2Array([mid, top, r]), Color(0.47, 0.46, 0.45))
-			g.draw_polyline(PackedVector2Array([l, top, r]), Color(0.3, 0.29, 0.28), 1.5)
-			if cell.y < 7 or (cell.x > 62 and cell.y < 5):
-				g.draw_colored_polygon(PackedVector2Array([top, top + Vector2(-7, 10), top + Vector2(-1, 7), top + Vector2(6, 10)]), Color(0.96, 0.97, 1.0))
-		Land.SAND:
-			g.draw_rect(rect, Color(0.94, 0.84, 0.57).lerp(Color(0.9, 0.79, 0.5), h))
-			if h < 0.3:
-				g.draw_circle(rect.position + Vector2(8 + h * 50, 20), 1.5, Color(0.75, 0.65, 0.42))
+			if h < 0.04:
+				var fc: Color = [Color(0.98, 0.9, 0.4), Color(0.96, 0.96, 0.9), Color(0.92, 0.55, 0.62)][int(h * 75) % 3]
+				g.draw_circle(rect.position + Vector2(6 + h * 300, 10), 2.5, fc)
+				g.draw_circle(rect.position + Vector2(20, 24 - h * 100), 2.0, fc)
+			elif h < 0.14:
+				var p := rect.position + Vector2(6 + h * 120, 16 + h * 60)
+				g.draw_line(p, p + Vector2(-2, -6), col.darkened(0.25), 1.5)
+				g.draw_line(p, p + Vector2(2, -7), col.darkened(0.25), 1.5)
 		Land.ROAD:
 			g.draw_rect(rect, Color(0.73, 0.59, 0.39).lerp(Color(0.78, 0.64, 0.43), h))
 			g.draw_rect(rect.grow(-3), Color(0.78, 0.64, 0.43))
@@ -381,19 +338,6 @@ func _tile(cell: Vector2i) -> void:
 					g.draw_rect(strip, Color(0.52, 0.36, 0.14))
 
 
-func _tree(cell: Vector2i, size: float) -> void:
-	var g := ground
-	var h := _hash(cell.x, cell.y)
-	var h2 := _hash(cell.y + 7, cell.x + 3)
-	var p := c.land.center(cell) + Vector2((h - 0.5) * 12, (h2 - 0.5) * 12)
-	var r := (13.0 + h * 6.0) * size
-	g.draw_circle(p + Vector2(4, 6), r, Color(0.05, 0.12, 0.04, 0.4))
-	g.draw_circle(p, r + 1.5, Color(0.07, 0.19, 0.06))
-	g.draw_circle(p, r, Color(0.15, 0.38, 0.12).lerp(Color(0.22, 0.47, 0.16), h2))
-	g.draw_circle(p + Vector2(-r * 0.25, -r * 0.3), r * 0.6, Color(0.27, 0.55, 0.2))
-	g.draw_circle(p + Vector2(-r * 0.4, -r * 0.45), r * 0.22, Color(0.45, 0.7, 0.3, 0.8))
-
-
 ## Golden hipped thatch shelters each household.
 func _hut(cell: Vector2i) -> void:
 	var p := Vector2(cell) * T + Vector2(1, 2)
@@ -409,3 +353,64 @@ func _hut(cell: Vector2i) -> void:
 	for offset in [4, 8]:
 		ground.draw_line(p + Vector2(offset, offset), p + Vector2(30 - offset, offset), Color(0.67, 0.47, 0.18), 1)
 	ground.draw_line(a, b, Color(0.4, 0.26, 0.1), 2)
+
+
+## Figures follow the labour counts without feeding anything back into the world.
+func _move_people(dt: float) -> void:
+	while figures.size() < mini(c.population, 300):
+		var person := Figure.new()
+		person.position = c.land.center(c.houses[figures.size() % c.houses.size()]) + Vector2(0, 18)
+		person.target = person.position
+		person.phase = figure_rng.randf_range(0, TAU)
+		person.colour = Color.from_hsv(figure_rng.randf(), 0.35, figure_rng.randf_range(0.55, 0.85))
+		figures.append(person)
+	figures.resize(mini(c.population, 300))
+	var farmers := roundi(c.labour.x * figures.size() / maxf(1, c.population))
+	var builders := roundi(c.labour.y * figures.size() / maxf(1, c.population))
+	for index in figures.size():
+		var person := figures[index]
+		var task := 0 if index < farmers else (1 if index < farmers + builders and c.project >= 0 else 2)
+		var workplace := c.fields[index % c.fields.size()] if task == 0 else (c.site if task == 1 else c.houses[index % c.houses.size()])
+		if task != person.task or workplace != person.workplace:
+			person.task = task
+			person.workplace = workplace
+			_pick_spot(person)
+		var distance := person.position.distance_to(person.target)
+		person.walking = distance > 0.5
+		person.phase += dt * (8.0 if person.walking else 3.0)
+		if person.walking:
+			person.position = person.position.move_toward(person.target, dt * (13.0 + index % 5))
+		else:
+			person.pause -= dt
+			if person.pause <= 0:
+				_pick_spot(person)
+
+
+## Workers stay on their plot; idle people wander just outside their home.
+func _pick_spot(person: Figure) -> void:
+	var spread := 11.0 if person.task == 0 else 19.0
+	person.target = c.land.center(person.workplace) + Vector2(figure_rng.randf_range(-spread, spread), figure_rng.randf_range(-spread, spread))
+	if person.task != 0:
+		person.target.y = c.land.center(person.workplace).y + figure_rng.randf_range(17, 27)
+	person.pause = figure_rng.randf_range(2, 6)
+
+
+## Heads, coloured tunics and swaying limbs keep the crowd inexpensive.
+func _draw_people() -> void:
+	if c.project >= 0:
+		var plot := Rect2(Vector2(c.site) * T + Vector2(2, 2), Vector2(T - 4, T - 4))
+		people.draw_rect(plot, Color(0.52, 0.36, 0.19, 0.65))
+		people.draw_rect(plot, C_GOLD, false, 1)
+	for person in figures:
+		var sway := sin(person.phase)
+		var working := not person.walking and person.task < 2
+		var p := person.position
+		var bend := Vector2(2, 1) * sway if working and person.task == 0 else Vector2.ZERO
+		people.draw_line(p + Vector2(-2, 2), p + Vector2(-2, 5 + sway * float(person.walking)), Color(0.23, 0.17, 0.12), 2)
+		people.draw_line(p + Vector2(2, 2), p + Vector2(2, 5 - sway * float(person.walking)), Color(0.23, 0.17, 0.12), 2)
+		people.draw_rect(Rect2(p + Vector2(-3, -4) + bend, Vector2(6, 7)), person.colour)
+		people.draw_circle(p + Vector2(0, -6) + bend, 2.7, Color(0.65, 0.43, 0.27))
+		if working:
+			var hand := p + Vector2(5, -2 + sway * 3)
+			people.draw_line(p + Vector2(2, -2), hand, Color(0.65, 0.43, 0.27), 2)
+			people.draw_line(hand, hand + Vector2(3, 5 if person.task == 0 else -3), Color(0.35, 0.29, 0.2), 1.5)
