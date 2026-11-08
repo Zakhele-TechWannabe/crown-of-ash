@@ -43,7 +43,8 @@ var frame := 0
 var policy_panel: PanelContainer
 var policy_buttons: Array = []
 var field_label: Label
-var rotation_buttons: Array[Button] = []
+var rotation_buttons: Array[OptionButton] = []
+var granary_rows: Array[Label] = []
 var selected := -1
 var tool := 0
 var marking := false
@@ -126,9 +127,21 @@ func _build_ui() -> void:
 	field_label = _lbl("Click a field to select it.", 16, C_TEXT)
 	column.add_child(field_label)
 	for season_index in 4:
-		var button := _btn("", 16)
-		button.pressed.connect(_cycle_crop.bind(season_index))
-		column.add_child(button)
+		var rotation := HBoxContainer.new()
+		column.add_child(rotation)
+		rotation.add_child(_lbl(World.SEASONS[season_index], 16, C_GOLD))
+		var button := OptionButton.new()
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.add_theme_stylebox_override("normal", _box(P_BG, P_EDGE))
+		button.add_theme_color_override("font_color", C_TEXT)
+		button.add_theme_font_override("font", font)
+		button.add_theme_font_size_override("font_size", 16)
+		for crop_index in World.CROPS.size():
+			var crop: Dictionary = World.CROPS[crop_index]
+			button.add_item("%s (%s)" % [crop.name, crop.kind])
+			button.get_popup().set_item_tooltip(crop_index, crop.info)
+		button.item_selected.connect(_choose_crop.bind(season_index))
+		rotation.add_child(button)
 		rotation_buttons.append(button)
 	var remove := _btn("Remove selected field", 16)
 	remove.pressed.connect(func(): c.remove_field(selected); selected = -1)
@@ -143,6 +156,20 @@ func _build_ui() -> void:
 		speeds.add_child(button)
 		speed_buttons.append(button)
 
+	var stores := PanelContainer.new()
+	stores.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	stores.position = Vector2(-284, 280)
+	stores.custom_minimum_size.x = 270
+	stores.add_theme_stylebox_override("panel", _box(P_BG, P_EDGE))
+	hud_draw.add_child(stores)
+	var contents := VBoxContainer.new()
+	stores.add_child(contents)
+	contents.add_child(_lbl("GRANARY", 20, C_GOLD))
+	for crop in World.CROPS:
+		var label := _lbl("", 16, Color(0.55, 0.9, 0.95) if crop.kind == "spirit root" else C_TEXT, null, false)
+		contents.add_child(label)
+		granary_rows.append(label)
+
 
 ## A government change takes effect at the next daily allocation.
 func _selected_field() -> Dictionary:
@@ -151,10 +178,10 @@ func _selected_field() -> Dictionary:
 			return f
 	return {}
 
-func _cycle_crop(season_index: int) -> void:
+func _choose_crop(crop_index: int, season_index: int) -> void:
 	var f := _selected_field()
 	if not f.is_empty():
-		f.plan[season_index] = (int(f.plan[season_index]) + 1) % 4
+		f.plan[season_index] = crop_index
 		# Plans apply when the next season begins; active crops remain unchanged.
 
 ## Time can be paused without stopping the camera.
@@ -174,13 +201,17 @@ func _process(dt: float) -> void:
 		policy_buttons[index].set_pressed_no_signal(c.focus == index)
 	status_label.text = "Fields %d · Building %d · Idle %d" % [c.labour.x, c.labour.y, 10 - c.labour.x - c.labour.y]
 	var f := _selected_field()
-	field_label.text = "Click a field to select it." if f.is_empty() else "Field %d · %d × %d cells\nFertility %.1f · %s\n%s · growth %.0f%%" % [f.id, f.rect.size.x, f.rect.size.y, c.average_fertility(f), World.CROP_NAMES[c.land.crops[c.land.index(f.rect.position)]], f.stage, c.average_growth(f) * 100]
+	field_label.text = "Click a field to select it." if f.is_empty() else "Field %d · %d × %d cells\nFertility %.1f · %s\n%s · growth %.0f%%" % [f.id, f.rect.size.x, f.rect.size.y, c.average_fertility(f), World.CROPS[f.crop].name, "Idle (season)" if f.idle else f.stage, c.average_growth(f) * 100]
 	for index in 4:
-		rotation_buttons[index].visible = not f.is_empty()
+		rotation_buttons[index].get_parent().visible = not f.is_empty()
 		if not f.is_empty():
-			rotation_buttons[index].text = "%s: %s" % [World.SEASONS[index], World.CROP_NAMES[f.plan[index]]]
+			rotation_buttons[index].select(int(f.plan[index]))
+			rotation_buttons[index].tooltip_text = World.CROPS[f.plan[index]].info
 	for index in 4:
 		speed_buttons[index].set_pressed_no_signal(speed == [0, 1, 2, 4][index])
+	for index in World.CROPS.size():
+		granary_rows[index].visible = c.granary[index] > 0
+		granary_rows[index].text = "%s  %.2f" % [World.CROPS[index].name, c.granary[index]]
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
@@ -245,7 +276,7 @@ func _draw_hud() -> void:
 	h.draw_line(Vector2(0, 45), Vector2(size.x, 45), P_EDGE, 2)
 	_icon(h, Vector2(26, 23))
 	h.draw_string(font_px, Vector2(48, 31), "THE EMPIRE", HORIZONTAL_ALIGNMENT_LEFT, -1, 24, C_GOLD)
-	h.draw_string(font, Vector2(250, 30), "Year %d · %s · Day %d    People 10    Wheat %.1f · Barley %.1f · Beans %.1f" % [c.year, World.SEASONS[c.season()], c.day, c.granary[0], c.granary[1], c.granary[2]], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
+	h.draw_string(font, Vector2(250, 30), "Year %d · %s · Day %d    People 10    Stores %.1f" % [c.year, World.SEASONS[c.season()], c.day, _total_stores()], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, C_TEXT)
 	var y := size.y - 24.0
 	for index in range(c.log.size() - 1, maxi(-1, c.log.size() - 6), -1):
 		h.draw_rect(Rect2(14, y - 20, 600, 26), P_BG)
@@ -258,6 +289,12 @@ func _draw_hud() -> void:
 		var scale := minimap.size / (Vector2(Land.W, Land.H) * T)
 		h.draw_rect(Rect2(minimap.position + view.position * scale, view.size * scale).intersection(minimap), C_TEXT, false, 1.5)
 	h.draw_rect(minimap.grow(2), P_EDGE, false, 2)
+
+func _total_stores() -> float:
+	var total := 0.0
+	for amount in c.granary:
+		total += amount
+	return total
 
 
 ## A crown marks the government view.
@@ -380,11 +417,20 @@ func _tile(cell: Vector2i) -> void:
 			var i := land.index(cell)
 			var growth: float = land.growth[i]
 			var crop: int = land.crops[i]
+			var kind: String = World.CROPS[crop].kind
 			for k in 4:
 				var p := rect.position + Vector2(5 + k * 7, 27)
-				var col := Color(0.85, 0.7, 0.25) if growth >= 0.99 else Color(0.3, 0.6, 0.18)
-				if crop == 3:
+				var col := Color(0.85, 0.7, 0.25) if growth >= 0.99 and kind == "grain" else Color(0.3, 0.6, 0.18)
+				if kind == "none":
 					g.draw_line(p, p + Vector2(2, -6), Color(0.48, 0.47, 0.26), 3)
+				elif growth > 0 and kind in ["root", "spirit root"]:
+					var leaf := Color(0.25, 0.65, 0.25) if kind == "root" else Color(0.5, 0.75, 0.95)
+					for row in 2:
+						var tuft := p + Vector2(0, -row * 13)
+						if kind == "spirit root":
+							g.draw_circle(tuft + Vector2(0, -3), 5 + growth * 3, Color(0.45, 0.3, 0.85, 0.18))
+						g.draw_line(tuft, tuft + Vector2(-3, -3 - growth * 5), leaf, 2)
+						g.draw_line(tuft, tuft + Vector2(3, -4 - growth * 5), leaf, 2)
 				elif growth > 0:
 					g.draw_line(p, p + Vector2(0, -4 - growth * 20), col, 3)
 				else:
