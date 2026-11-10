@@ -164,11 +164,20 @@ func _build_ui() -> void:
 	hud_draw.add_child(stores)
 	var contents := VBoxContainer.new()
 	stores.add_child(contents)
-	contents.add_child(_lbl("GRANARY", 20, C_GOLD))
+	contents.add_child(_lbl("CROPS · GRANARY", 20, C_GOLD))
+	var heading := ""
 	for crop in World.CROPS:
-		var label := _lbl("", 16, Color(0.55, 0.9, 0.95) if crop.kind == "spirit root" else C_TEXT, null, false)
+		# A small heading whenever the kind changes: grains, roots, spirit roots.
+		var group: String = {"grain": "Grains & beans", "legume": "Grains & beans", "none": "Grains & beans", "root": "Roots", "spirit root": "Spirit roots"}[crop.kind]
+		if group != heading:
+			heading = group
+			contents.add_child(_lbl(group, 15, Color(0.55, 0.9, 0.95) if group == "Spirit roots" else C_GOLD, null, false))
+		var label := _lbl("", 15, Color(0.55, 0.9, 0.95) if crop.kind == "spirit root" else C_TEXT, null, false)
+		label.tooltip_text = crop.info
+		label.mouse_filter = Control.MOUSE_FILTER_PASS
 		contents.add_child(label)
 		granary_rows.append(label)
+	contents.add_child(_lbl("Mark a field, then pick its crop\nfor each season in the Tools panel.", 13, C_TEXT, null, false))
 
 
 ## A government change takes effect at the next daily allocation.
@@ -210,8 +219,9 @@ func _process(dt: float) -> void:
 	for index in 4:
 		speed_buttons[index].set_pressed_no_signal(speed == [0, 1, 2, 4][index])
 	for index in World.CROPS.size():
-		granary_rows[index].visible = c.granary[index] > 0
-		granary_rows[index].text = "%s  %.2f" % [World.CROPS[index].name, c.granary[index]]
+		granary_rows[index].visible = World.CROPS[index].kind != "none"
+		granary_rows[index].text = "  %s  %.2f" % [World.CROPS[index].name, c.granary[index]]
+		granary_rows[index].modulate.a = 1.0 if c.granary[index] > 0 else 0.55
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
