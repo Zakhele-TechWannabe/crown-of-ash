@@ -82,8 +82,11 @@ func _ready() -> void:
 	places.add_item("Go to…")
 	for feature: Dictionary in data.features:
 		places.add_item(str(feature.name))
+	places.add_item(str(ground.sect.data.name))
 	places.item_selected.connect(func(index: int) -> void:
-		if index > 0:
+		if index == data.features.size() + 1:
+			_go_to(str(ground.sect.data.name), true)
+		elif index > 0:
 			_go_to(str(data.features[index - 1].name), true))
 	overlay.add_child(places)
 	var reset := Button.new()
@@ -313,6 +316,12 @@ func _draw_overlay() -> void:
 		overlay.draw_string_outline(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color8(244, 236, 214, 217))
 		overlay.draw_string(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, BLUE if kind in ["Rivers", "Lakes"] else INK)
 	overlay.draw_set_transform(Vector2.ZERO)
+	var sect_at: Vector2 = transform * (Vector2(ground.sect.center) * CELL / 16.0)
+	overlay.draw_circle(sect_at, 5, Color8(184, 48, 43))
+	var sect_name: String = ground.sect.data.name
+	var sect_offset := sect_at + Vector2(9, -8)
+	overlay.draw_string_outline(serif, sect_offset, sect_name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, 4, Color8(244, 236, 214))
+	overlay.draw_string(serif, sect_offset, sect_name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, INK)
 	if _inside(selected):
 		var at: Vector2 = transform * ((Vector2(selected) + Vector2.ONE * 0.5) * CELL)
 		overlay.draw_arc(at, 7, 0, TAU, 24, GOLD, 2, true)
@@ -357,6 +366,9 @@ func _reset() -> void:
 
 
 func _go_to(place: String, _animate: bool) -> void:
+	if place.nocasecmp_to(str(ground.sect.data.name)) == 0:
+		_travel_to(ground.sect.center)
+		return
 	for feature: Dictionary in data.features:
 		if str(feature.name).nocasecmp_to(place) != 0:
 			continue

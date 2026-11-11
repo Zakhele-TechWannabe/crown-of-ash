@@ -1,0 +1,421 @@
+{
+	"name": "Unnamed Sect",
+	"center": [
+		1365,
+		2286
+	],
+	"base_level": 9,
+	"seed": 718,
+	"tiers": [
+		{
+			"name": "summit",
+			"y0": -30,
+			"y1": -22,
+			"hw": 7,
+			"lvl": 6
+		},
+		{
+			"name": "inner court",
+			"y0": -21,
+			"y1": -14,
+			"hw": 11,
+			"lvl": 5
+		},
+		{
+			"name": "scripture",
+			"y0": -13,
+			"y1": -6,
+			"hw": 14,
+			"lvl": 4
+		},
+		{
+			"name": "main",
+			"y0": -5,
+			"y1": 6,
+			"hw": 16,
+			"lvl": 3
+		},
+		{
+			"name": "halls",
+			"y0": 7,
+			"y1": 13,
+			"hw": 17,
+			"lvl": 2
+		},
+		{
+			"name": "outer",
+			"y0": 14,
+			"y1": 25,
+			"hw": 20,
+			"lvl": 1
+		},
+		{
+			"name": "gate",
+			"y0": 26,
+			"y1": 30,
+			"hw": 6,
+			"lvl": 0
+		}
+	],
+	"buildings": [
+		{
+			"name": "Leader's Hall",
+			"rect": [
+				-3,
+				-28,
+				7,
+				4
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Seclusion Caves",
+			"rect": [
+				-5,
+				-30,
+				2,
+				1
+			],
+			"kind": "cave"
+		},
+		{
+			"name": "Seclusion Cave",
+			"rect": [
+				4,
+				-30,
+				2,
+				1
+			],
+			"kind": "cave"
+		},
+		{
+			"name": "Inner Courtyard West",
+			"rect": [
+				-9,
+				-20,
+				6,
+				5
+			],
+			"kind": "court"
+		},
+		{
+			"name": "Inner Courtyard East",
+			"rect": [
+				4,
+				-20,
+				6,
+				5
+			],
+			"kind": "court"
+		},
+		{
+			"name": "Scripture Pavilion",
+			"rect": [
+				-11,
+				-12,
+				6,
+				4
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Alchemy Hall",
+			"rect": [
+				4,
+				-12,
+				6,
+				4
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Spirit Spring",
+			"rect": [
+				11,
+				-10,
+				3,
+				3
+			],
+			"kind": "spring"
+		},
+		{
+			"name": "Main Hall",
+			"rect": [
+				-5,
+				-5,
+				11,
+				5
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Great Plaza",
+			"rect": [
+				-10,
+				0,
+				21,
+				7
+			],
+			"kind": "plaza"
+		},
+		{
+			"name": "Mission Hall",
+			"rect": [
+				-14,
+				9,
+				5,
+				3
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Discipline Hall",
+			"rect": [
+				-2,
+				9,
+				5,
+				3
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Treasury",
+			"rect": [
+				8,
+				9,
+				5,
+				3
+			],
+			"kind": "hall"
+		},
+		{
+			"name": "Outer Barracks 1",
+			"rect": [
+				-16,
+				16,
+				8,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "Outer Barracks 2",
+			"rect": [
+				-16,
+				19,
+				8,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "Outer Barracks 3",
+			"rect": [
+				-16,
+				22,
+				8,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "Training Grounds",
+			"rect": [
+				4,
+				16,
+				12,
+				8
+			],
+			"kind": "training"
+		},
+		{
+			"name": "Mountain Gate",
+			"rect": [
+				-3,
+				28,
+				7,
+				2
+			],
+			"kind": "gate"
+		}
+	],
+	"stairs": [
+		{
+			"rect": [
+				-1,
+				-22,
+				3,
+				53
+			]
+		}
+	],
+	"fields": [
+		{
+			"rect": [
+				-30,
+				31,
+				23,
+				14
+			]
+		}
+	],
+	"village": [
+		{
+			"name": "Servants\u2019 Village",
+			"rect": [
+				9,
+				32,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				14,
+				32,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				19,
+				32,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				24,
+				32,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				9,
+				37,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				14,
+				37,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				19,
+				37,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				24,
+				37,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				9,
+				42,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				14,
+				42,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				19,
+				42,
+				2,
+				2
+			],
+			"kind": "house"
+		},
+		{
+			"name": "",
+			"rect": [
+				24,
+				42,
+				2,
+				2
+			],
+			"kind": "house"
+		}
+	],
+	"surfaces": [
+		{
+			"kind": "paving",
+			"rect": [
+				-10,
+				0,
+				21,
+				7
+			]
+		},
+		{
+			"kind": "earth",
+			"rect": [
+				4,
+				16,
+				12,
+				8
+			]
+		},
+		{
+			"kind": "spring",
+			"rect": [
+				11,
+				-10,
+				3,
+				3
+			]
+		}
+	],
+	"road": {
+		"rect": [
+			-1,
+			31,
+			3,
+			29
+		]
+	}
+}

@@ -6,6 +6,7 @@ const TILE := 32.0
 const LIMIT := 16
 const SHADES := 9
 const BANDS := 9
+var sect := preload("res://src/sect_ground.gd").new()
 var world: Node2D
 const SEA := 0.5
 const TERRACE := 0.02
@@ -41,6 +42,8 @@ func setup(map: Node2D) -> void:
 	mountain.fractal_octaves = 3
 	for i in range(0, world.heights.size(), 2):
 		max_level = maxi(max_level, ceili((world.heights.decode_u16(i) / 30000.0 + 0.07 - SEA) / TERRACE))
+	sect.setup()
+	max_level = maxi(max_level, 15)
 	_build_atlas()
 
 
@@ -168,6 +171,13 @@ func sample(tile: Vector2i) -> Dictionary:
 		var outcrop := smoothstep(0.04, 0.12, steep) * 0.15 + smoothstep(0.82, 0.92, height) * 0.2
 		if patch < outcrop and chance < 0.8:
 			decoration = 17 if chance < 0.4 else 19
+	if sect.tiles.has(tile):
+		decoration = -1
+		kind = 10
+		light = 1.0
+		cover = str(sect.tiles[tile].surface)
+	elif sect.heights.has(tile) and decoration in [13, 14, 15]:
+		decoration = 16
 	var shade := clampi(roundi((light - 0.5) / 0.125), 0, SHADES - 1) if kind > 2 else 4
 	return {"kind": kind, "decoration": decoration, "shade": shade, "band": band if kind > 2 else 0, "cover": covers[kind] if kind in [4, 5] else cover, "height": height, "level": terrace_level(tile)}
 
@@ -206,12 +216,18 @@ func ground_height(tile: Vector2i) -> float:
 		var cell := Vector2i(p.floor())
 		var i: int = clampi(cell.y, 0, world.h - 1) * world.w + clampi(cell.x, 0, world.w - 1)
 		height = SEA if world.water[i] == 1 else world._height(cell.x, cell.y)
+	if sect.heights.has(tile):
+		height = maxf(height, float(sect.heights[tile]))
+	if sect.tiles.has(tile) and sect.tiles[tile].has("level"):
+		height = SEA + int(sect.tiles[tile].level) * TERRACE
 	if baking:
 		height_cache[tile] = height
 	return height
 
 
 func terrace_level(tile: Vector2i) -> int:
+	if sect.tiles.has(tile) and sect.tiles[tile].has("level"):
+		return int(sect.tiles[tile].level)
 	return maxi(0, floori((ground_height(tile) - SEA) / TERRACE))
 
 
@@ -317,11 +333,21 @@ func _bake_row(key: Vector2i, y: int) -> void:
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
 			for stripe in range(3, drop, 4):
 				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
+			if sect.tiles.get(tile, {}).get("built", false):
+				var steps: bool = sect.tiles[tile].surface == "stairs"
+				var stone := Color8(137, 147, 149)
+				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), stone)
+				for seam in range(0, drop, 3 if steps else 6):
+					image.fill_rect(Rect2i(x * 16, top + 16 + seam, 16, 1), stone.darkened(0.3))
+					image.fill_rect(Rect2i(x * 16, top + 17 + seam, 16, 1), stone.lightened(0.2))
+					if not steps:
+						image.fill_rect(Rect2i(x * 16 + (4 if seam % 12 == 0 else 12), top + 16 + seam, 1, mini(6, drop - seam)), stone.darkened(0.3))
 		var source := Rect2i(int(info.kind) * 16, (int(info.shade) + int(info.band) * SHADES) * 16, 16, 16)
 		image.blit_rect(atlas_image, source, Vector2i(x * 16, top))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.RIGHT):
 			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Color8(83, 77, 62))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
+		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		if info.decoration >= 0:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))

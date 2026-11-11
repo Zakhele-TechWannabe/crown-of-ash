@@ -59,7 +59,7 @@ func _run() -> void:
 			if not map.ground._sea(p) and map.ground._river_distance(p) <= 0:
 				assert(is_equal_approx(height, map.ground._blend(p)))
 	map.ground.set_exaggeration(20)
-	assert(map.ground.exaggeration == 12 and map.ground.chunks.is_empty())
+	assert(map.ground.exaggeration == 20 and map.ground.chunks.is_empty())
 	map.ground.set_exaggeration(-1)
 	assert(map.ground.exaggeration == 0)
 	assert(sample == map.ground.sample(tile))

@@ -6,6 +6,7 @@ var cam: Camera2D
 var hud: CanvasLayer
 var place: Label
 var readout: Label
+var names: Control
 var active := false
 var dragging := false
 var map: Node2D
@@ -41,6 +42,11 @@ func _ready() -> void:
 	readout.add_theme_stylebox_override("normal", map._box())
 	readout.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(readout)
+	names = Control.new()
+	names.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	names.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	names.draw.connect(_draw_names)
+	hud.add_child(names)
 	hud.hide()
 
 
@@ -69,6 +75,7 @@ func _process(dt: float) -> void:
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
 	_update_readout()
+	names.queue_redraw()
 
 
 func _update_readout() -> void:
@@ -112,3 +119,21 @@ func _clamp_camera() -> void:
 	for axis in 2:
 		cam.position[axis] = extent[axis] / 2.0 if half[axis] * 2.0 >= extent[axis] else clampf(cam.position[axis], half[axis], extent[axis] - half[axis])
 	cam.force_update_scroll()
+
+
+func _draw_names() -> void:
+	if not active:
+		return
+	var transform := get_viewport().get_canvas_transform()
+	for entry: Dictionary in map.ground.sect.labels:
+		var tile: Vector2i = entry.tile
+		var point := (Vector2(tile) + Vector2(0.5, 0.0)) * TILE
+		point.y -= map.ground.terrace_level(tile) * map.ground.exaggeration
+		var at: Vector2 = transform * point - Vector2(0, 8)
+		if not get_viewport_rect().grow(80).has_point(at):
+			continue
+		var text: String = entry.name
+		var px := 19 if text == str(map.ground.sect.data.name) else 13
+		at.x -= map.serif.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x / 2.0
+		names.draw_string_outline(map.serif, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color8(244, 236, 214, 217))
+		names.draw_string(map.serif, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, map.INK)
