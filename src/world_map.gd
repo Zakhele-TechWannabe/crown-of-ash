@@ -89,13 +89,11 @@ func _ready() -> void:
 		places.add_item(str(feature.name))
 	places.add_item(str(ground.sect.data.name))
 	places.add_item("Servants' Village")
+	for name: String in ground.sect.destinations:
+		places.add_item(name)
 	places.item_selected.connect(func(index: int) -> void:
-		if index == data.features.size() + 2:
-			_go_to("Servants' Village", true)
-		elif index == data.features.size() + 1:
-			_go_to(str(ground.sect.data.name), true)
-		elif index > 0:
-			_go_to(str(data.features[index - 1].name), true))
+		if index > 0:
+			_go_to(places.get_item_text(index), true))
 	overlay.add_child(places)
 	var reset := Button.new()
 	reset.text = "World [Home]"
@@ -329,6 +327,12 @@ func _draw_overlay() -> void:
 		overlay.draw_string_outline(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color8(244, 236, 214, 217))
 		overlay.draw_string(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, BLUE if kind in ["Rivers", "Lakes"] else INK)
 	overlay.draw_set_transform(Vector2.ZERO)
+	for name: String in ["Western Market City", "Eastern Hunting Grounds"]:
+		if not ground.sect.destinations.has(name):
+			continue
+		var at: Vector2 = transform * (Vector2(ground.sect.destinations[name]) * CELL / 16.0)
+		overlay.draw_circle(at, 5, Color8(184, 100, 43))
+		overlay.draw_string(serif, at + Vector2(9, -8), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, INK)
 	var sect_at: Vector2 = transform * (Vector2(ground.sect.center) * CELL / 16.0)
 	overlay.draw_circle(sect_at, 5, Color8(184, 48, 43))
 	var sect_name: String = ground.sect.data.name
@@ -379,6 +383,10 @@ func _reset() -> void:
 
 
 func _go_to(place: String, _animate: bool) -> void:
+	for name: String in ground.sect.destinations:
+		if name.nocasecmp_to(place) == 0:
+			_travel_to(ground.sect.destinations[name])
+			return
 	if place.nocasecmp_to("Servants' Village") == 0:
 		_travel_to(life.square)
 		return

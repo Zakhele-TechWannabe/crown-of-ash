@@ -6,7 +6,7 @@ const TILE := 32.0
 const LIMIT := 128
 const SHADES := 9
 const BANDS := 9
-var sect := preload("res://src/sect_ground.gd").new()
+var sect := preload("res://src/sites_ground.gd").new()
 var world: Node2D
 const SEA := 0.5
 const TERRACE := 0.02
@@ -318,17 +318,16 @@ func _far_image(key: Vector2i) -> Image:
 			var tile := key * SIDE + Vector2i(x, y)
 			var index := (y / 16) * 5 + x / 16
 			var height := lerpf(lerpf(heights[index], heights[index + 1], (x % 16) / 16.0), lerpf(heights[index + 5], heights[index + 6], (x % 16) / 16.0), (y % 16) / 16.0)
-			var sect_index := sect.index_at(tile)
-			var level: int = sect.levels[sect_index] if sect_index >= 0 else -1
+			var level: int = sect.level_at(tile)
 			if level < 0:
-				var skirt: float = sect.heights[sect_index] if sect_index >= 0 else 0.0
+				var skirt: float = sect.height_at(tile)
 				level = maxi(0, floori((maxf(height, skirt) - SEA) / TERRACE))
 			var top := y - roundi(level * exaggeration / TILE)
 			var col: Color = colors[index]
 			if kinds[index] > 3 and kinds[index] != 8 and height < 0.84 and float(_hash(tile.x, tile.y) % 1000) / 1000.0 < smoothstep(0.28, 0.8, smoothstep(-0.35, 0.45, woodland.get_noise_2dv((Vector2(tile) + Vector2.ONE * 0.5) / 16.0))) * 0.55:
 				col = Color8(43, 76, 45)
-			if sect_index >= 0 and sect.surfaces[sect_index] != 0:
-				col = sect.far_colors[sect_index]
+			if sect.has_tile(tile):
+				col = sect.far_color(tile)
 			var face_start := maxi(0, top + 1)
 			var face_end := mini(SIDE, y + 2)
 			if face_end > face_start:

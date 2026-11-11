@@ -19,7 +19,7 @@ func run() -> void:
 		assert(is_equal_approx(ledger.size.x, 960))
 		assert(ledger.content.size.x > 500)
 		ledger.toggle_tab(key)
-		await create_timer(0.2).timeout
+		await settle(ledger)
 		assert(not ledger.visible)
 	assert(ledger.kpi_cards.size() == 4)
 	for width: int in [1920, 1366]:
@@ -42,7 +42,7 @@ func run() -> void:
 		ledger.kpi_cards[definition.id].button.pressed.emit()
 		assert(ledger.current == definition.tab and ledger.visible)
 	ledger.ledger_button.pressed.emit()
-	await create_timer(0.2).timeout
+	await settle(ledger)
 	assert(not ledger.visible)
 	ledger.ledger_button.pressed.emit()
 	assert(ledger.visible)
@@ -84,7 +84,7 @@ func run() -> void:
 	assert(ledger.kpi_cards.people.value.get_theme_color("font_color") == Color("a23522"))
 	ledger.open_tab("rice")
 	assert(ledger.current == "food")
-	await create_timer(0.2).timeout
+	await settle(ledger)
 	var before: Vector2 = world.ground_view.cam.zoom
 	var wheel := InputEventMouseButton.new()
 	wheel.button_index = MOUSE_BUTTON_WHEEL_UP
@@ -92,15 +92,23 @@ func run() -> void:
 	world.ground_view._unhandled_input(wheel)
 	assert(world.ground_view.cam.zoom.x > before.x, "World camera remains interactive with drawer open")
 	ledger.close()
-	await create_timer(0.2).timeout
+	await settle(ledger)
 	assert(ledger.current == "food", "Remember last tab")
 	ledger.open_tab("people")
 	var person: TreeItem = ledger.tree.get_root().get_first_child()
 	person.select(0)
-	await create_timer(0.2).timeout
+	await settle(ledger)
 	assert(world.life.followed >= 0 and not ledger.visible)
 	ledger.show_granary()
 	await process_frame
 	assert(ledger.granary_card.visible and ledger.granary_card.size.x >= 460)
 	print("PASS ledger UI: tabs, KPI navigation/states, 1920/1366 layout, speed/keyboard controls, drawer, follow, granary")
 	quit()
+
+# Heavy chunk workers can span a frame; a wall-clock timer does not imply the
+# animation has processed its final callback yet.
+func settle(ledger: PanelContainer) -> void:
+	await create_timer(0.2).timeout
+	if ledger.slide != null and ledger.slide.is_valid() and ledger.slide.is_running():
+		await ledger.slide.finished
+	await process_frame

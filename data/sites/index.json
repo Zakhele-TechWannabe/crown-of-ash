@@ -1,0 +1,37 @@
+{
+	"destinations": {
+		"East Gate": [
+			1464,
+			2381
+		],
+		"Eastern Hunting Grounds": [
+			1800,
+			2310
+		],
+		"Harbour": [
+			499,
+			2220
+		],
+		"Hunters' Lodge": [
+			1506,
+			2380
+		],
+		"Market Square": [
+			602,
+			2186
+		],
+		"West Gate": [
+			1266,
+			2381
+		],
+		"Western Market City": [
+			630,
+			2220
+		]
+	},
+	"sect": "res://data/sects/first_sect.json",
+	"sites": [
+		"city.json",
+		"../roads/west_road.json"
+	]
+}

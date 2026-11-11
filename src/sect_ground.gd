@@ -1,7 +1,10 @@
 extends RefCounted
 ## Dense, bounded overrides: no per-tile dictionaries in storage or drawing.
 const BOUNDS := Rect2i(-160, -210, 320, 620)
-const SURFACES := ["", "grass", "earth", "paving", "stairs", "field", "spring", "cave", "garden"]
+var bounds := BOUNDS
+var source := "res://data/sects/first_sect.json"
+var no_trees := PackedByteArray()
+const SURFACES := ["", "grass", "earth", "paving", "stairs", "field", "spring", "cave", "garden", "bridge", "boundary"]
 var data: Dictionary
 var center: Vector2i
 var surfaces := PackedByteArray()
@@ -16,8 +19,8 @@ var dry: Callable
 
 
 func index_at(at: Vector2i) -> int:
-	var p := at - center - BOUNDS.position
-	return p.y * BOUNDS.size.x + p.x if p.x >= 0 and p.y >= 0 and p.x < BOUNDS.size.x and p.y < BOUNDS.size.y else -1
+	var p := at - center - bounds.position
+	return p.y * bounds.size.x + p.x if p.x >= 0 and p.y >= 0 and p.x < bounds.size.x and p.y < bounds.size.y else -1
 
 
 func has_tile(at: Vector2i) -> bool:
@@ -41,9 +44,12 @@ func surface_at(at: Vector2i) -> String:
 
 func setup(is_dry: Callable) -> void:
 	dry = is_dry
-	data = JSON.parse_string(FileAccess.get_file_as_string("res://data/sects/first_sect.json"))
+	data = JSON.parse_string(FileAccess.get_file_as_string(source))
 	center = Vector2i(int(data.center[0]), int(data.center[1]))
-	var count := BOUNDS.size.x * BOUNDS.size.y
+	if data.has("bounds"):
+		bounds = Rect2i(int(data.bounds[0]), int(data.bounds[1]), int(data.bounds[2]), int(data.bounds[3]))
+	var count := bounds.size.x * bounds.size.y
+	no_trees.resize(count)
 	surfaces.resize(count)
 	levels.resize(count)
 	levels.fill(-1)
@@ -53,11 +59,11 @@ func setup(is_dry: Callable) -> void:
 	town = (load("res://assets/kenney/tiny-town/Tilemap/tilemap_packed.png") as Texture2D).get_image()
 	farm = (load("res://assets/kenney/tiny-farm/Tilemap/tilemap_packed.png") as Texture2D).get_image()
 	var edge := FastNoiseLite.new()
-	edge.seed = int(data.seed)
+	edge.seed = int(data.get("seed", 718))
 	edge.frequency = 0.048
 	# Evaluate each tile against seven terrace envelopes, rather than expanding every tile.
-	for y in range(BOUNDS.position.y, 160):
-		for x in range(BOUNDS.position.x, BOUNDS.end.x):
+	for y in range(bounds.position.y, 160 if data.has("tiers") else bounds.position.y):
+		for x in range(bounds.position.x, bounds.end.x):
 			var at := center + Vector2i(x, y)
 			var i := index_at(at)
 			var envelope := 0.0
@@ -77,18 +83,19 @@ func setup(is_dry: Callable) -> void:
 				heights[i] = envelope
 			if levels[i] >= 0:
 				heights[i] = 0.5 + levels[i] * 0.02
-	for surface: Dictionary in data.surfaces:
+	for surface: Dictionary in data.get("surfaces", []):
 		_paint(surface.rect, str(surface.kind))
-	for field: Dictionary in data.fields:
+	for field: Dictionary in data.get("fields", []):
 		_paint(field.rect, "field")
-	_path(data.road)
-	for path: Dictionary in data.paths:
+	if data.has("road"):
+		_path(data.road)
+	for path: Dictionary in data.get("paths", []):
 		_path(path)
 	var occupied: Array[Rect2i] = []
-	for building: Dictionary in data.buildings + data.village:
+	for building: Dictionary in data.get("buildings", []) + data.get("village", []):
 		# Relocate whole footprints inland; never disguise river water with a cottage.
 		var r: Array = building.rect.duplicate()
-		if int(r[1]) >= 156:
+		if data.has("tiers") and int(r[1]) >= 156:
 			var attempts := 0
 			while not _dry_rect(r) or _overlaps(r, occupied):
 				r[0] = int(r[0]) - 1
@@ -100,6 +107,9 @@ func setup(is_dry: Callable) -> void:
 			occupied.append(Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[3])))
 			building.rect = r
 			_paint([int(r[0]) - 1, int(r[1]) - 1, int(r[2]) + 2, int(r[3]) + 2], "grass")
+		if not data.has("tiers"):
+			_building(building)
+			continue
 		var bx := int(r[0]) + int(r[2]) / 2
 		var by := int(r[1]) + int(r[3])
 		if by < 156:
@@ -107,9 +117,22 @@ func setup(is_dry: Callable) -> void:
 		else:
 			_paint([int(r[0]) - 2, by - 1, int(r[2]) + 4, 2], "earth")
 		_building(building)
-	for stair: Dictionary in data.stairs:
+	for stair: Dictionary in data.get("stairs", []):
 		_paint(stair.rect, "stairs")
-	var colors := [Color8(113, 151, 77), Color8(142, 195, 117), Color8(153, 119, 77), Color8(163, 173, 170), Color8(163, 173, 170), Color8(110, 105, 49), Color8(72, 165, 182), Color8(45, 49, 53), Color8(142, 195, 117)]
+	for plot: Dictionary in data.get("plots", []):
+		var r: Array = plot.rect
+		_paint(r, str(plot.get("surface", "grass")))
+		for yy in range(int(r[1]), int(r[1]) + int(r[3])):
+			for xx in range(int(r[0]), int(r[0]) + int(r[2])):
+				var i := index_at(center + Vector2i(xx, yy))
+				if i >= 0 and (data.has("tiers") or dry.call(center + Vector2i(xx, yy))):
+					levels[i] = int(plot.level)
+					heights[i] = 0.5 + levels[i] * 0.02
+	for stamp: Dictionary in data.get("stamps", []):
+		_stamp(center + Vector2i(int(stamp.at[0]), int(stamp.at[1])), int(stamp.tile))
+	for i in count:
+		no_trees[i] = int(surfaces[i] != 0)
+	var colors := [Color8(113, 151, 77), Color8(142, 195, 117), Color8(153, 119, 77), Color8(163, 173, 170), Color8(163, 173, 170), Color8(110, 105, 49), Color8(72, 165, 182), Color8(45, 49, 53), Color8(142, 195, 117), Color8(144, 99, 59), Color8(145, 159, 111)]
 	var art_colors: Array[Color] = []
 	for index in 132:
 		var total := Color(0, 0, 0, 0)
@@ -118,6 +141,8 @@ func setup(is_dry: Callable) -> void:
 				var col := town.get_pixel((index % 12) * 16 + xx, (index / 12) * 16 + yy)
 				total += Color(col.r * col.a, col.g * col.a, col.b * col.a, col.a)
 		art_colors.append(Color(total.r / maxf(1, total.a), total.g / maxf(1, total.a), total.b / maxf(1, total.a), total.a / 256.0))
+	for extra in 8:
+		art_colors.append(Color8(180 + extra * 5, 104 + extra * 8, 65))
 	far_colors.resize(count)
 	for i in count:
 		var col: Color = colors[surfaces[i]]
@@ -149,7 +174,7 @@ func _path(path: Dictionary) -> void:
 		var b := Vector2(points[j + 1][0], points[j + 1][1])
 		for step in range(ceili(a.distance_to(b)) + 1):
 			var p := Vector2i(a.lerp(b, float(step) / maxf(1.0, ceilf(a.distance_to(b)))))
-			_paint([p.x - int(path.width) / 2, p.y, int(path.width), 1], str(path.kind))
+			_paint([p.x - int(path.width) / 2, p.y - int(path.width) / 2, int(path.width), int(path.width)], str(path.kind))
 
 
 func _paint(rect: Array, surface: String) -> void:
@@ -159,15 +184,17 @@ func _paint(rect: Array, surface: String) -> void:
 			var i := index_at(at)
 			if surface == "field" and (x < int(rect[0]) + absi(y % 5 - 2) or x >= int(rect[0]) + int(rect[2]) - absi(y % 7 - 3)):
 				continue
-			if i >= 0 and (y < 156 or dry.call(at)):
+			if i >= 0 and (data.has("tiers") and y < 156 or dry.call(at) or surface == "bridge"):
 				surfaces[i] = SURFACES.find(surface)
 
 
 func _stamp(at: Vector2i, value: int) -> void:
 	var i := index_at(at)
 	if i >= 0:
+		if not data.has("tiers") and not dry.call(at) and value != 136:
+			return
 		if surfaces[i] == 0:
-			surfaces[i] = 1
+			surfaces[i] = 9 if value == 136 else 1
 		art[i] = value
 
 
@@ -179,6 +206,9 @@ func _building(b: Dictionary) -> void:
 	var kind := str(b.kind)
 	if not str(b.name).is_empty():
 		labels.append({"name": str(b.name), "tile": origin + Vector2i(w / 2, 0)})
+	if kind == "tent":
+		_stamp(origin, 137)
+		return
 	if kind == "marker":
 		return
 	if kind == "prop":
@@ -244,8 +274,16 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 		_blit(image, town, (tile.x + tile.y) % 2, pos)
 		if surface == "garden" and tile.x % 3 == 0 and tile.y % 3 == 0:
 			_blit(image, town, 4, pos)
+	elif surface == "bridge":
+		image.fill_rect(rect, Color8(144, 99, 59))
+		for yy in range(0, 16, 4):
+			image.fill_rect(Rect2i(pos + Vector2i(0, yy), Vector2i(16, 1)), Color8(83, 62, 43))
+	elif surface == "boundary":
+		image.fill_rect(Rect2i(pos + Vector2i(6, 6), Vector2i(4, 4)), Color8(177, 179, 125))
 	elif surface == "earth":
 		_blit(image, town, 25, pos)
+		if tile.x % 3 != 1:
+			image.fill_rect(Rect2i(pos + Vector2i(3, 0), Vector2i(1, 16)), Color8(166, 119, 72))
 	elif surface == "field":
 		image.fill_rect(rect, Color8(124, 81, 48))
 		for row in [2, 7, 12]:
@@ -265,7 +303,27 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 			image.fill_rect(Rect2i(pos + Vector2i(0, y + 1), Vector2i(16, 1)), Color8(199, 206, 194))
 			if surface != "stairs":
 				image.fill_rect(Rect2i(pos + Vector2i(4 if y == 0 else 12, y), Vector2i(1, 8)), Color8(108, 124, 128))
-	if art[i] >= 0:
+	if art[i] >= 132:
+		var value := art[i]
+		if value == 136:
+			# Tapered wooden hull and a pale mooring line.
+			for yy in range(2, 15):
+				var inset := absi(8 - yy) / 3
+				image.fill_rect(Rect2i(pos + Vector2i(3 + inset, yy), Vector2i(10 - inset * 2, 1)), Color8(108, 65, 41))
+			image.fill_rect(Rect2i(pos + Vector2i(7, 4), Vector2i(2, 8)), Color8(205, 160, 101))
+		elif value == 137:
+			for yy in 12:
+				image.fill_rect(Rect2i(pos + Vector2i(7 - yy / 2, yy + 3), Vector2i(2 + yy, 1)), Color8(184, 159, 106))
+		elif value == 138:
+			image.fill_rect(Rect2i(pos + Vector2i(3, 4), Vector2i(10, 10)), Color8(92, 77, 59))
+			image.fill_rect(Rect2i(pos + Vector2i(6, 5), Vector2i(5, 7)), Color8(222, 112, 47))
+		else:
+			var colors := [Color8(191, 66, 52), Color8(76, 133, 157), Color8(211, 167, 62), Color8(120, 153, 91)]
+			image.fill_rect(Rect2i(pos + Vector2i(2, 3), Vector2i(12, 8)), colors[(value - 132) % 4])
+			for xx in [3, 7, 11]:
+				image.fill_rect(Rect2i(pos + Vector2i(xx, 3), Vector2i(2, 8)), Color8(226, 209, 163))
+			image.fill_rect(Rect2i(pos + Vector2i(2, 12), Vector2i(12, 3)), Color8(112, 77, 47))
+	elif art[i] >= 0:
 		_blit(image, town, art[i], pos)
 
 
