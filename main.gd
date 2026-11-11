@@ -109,6 +109,10 @@ func _ready() -> void:
 
 ## Policies are the only controls that change settlement decisions.
 func _build_ui() -> void:
+	var map_button := _btn("World map [M]", 17)
+	map_button.position = Vector2(310, 52)
+	map_button.pressed.connect(_open_world_map)
+	hud_draw.add_child(map_button)
 	var panel := PanelContainer.new()
 	policy_panel = panel
 	panel.position = Vector2(14, 100)
@@ -258,7 +262,14 @@ func _process(dt: float) -> void:
 
 
 ## Drag to pan, scroll to zoom, or click the minimap to look elsewhere.
+func _open_world_map() -> void:
+	get_tree().change_scene_to_file("res://world_map.tscn")
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_M:
+		_open_world_map()
+		return
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		tool = 0
 		marking = false
