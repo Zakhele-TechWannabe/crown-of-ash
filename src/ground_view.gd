@@ -2,6 +2,11 @@ extends Node2D
 ## Camera and screen-space controls for ground travel.
 
 const TILE := 32.0
+var food: Label
+var forecast: Label
+var balance: Label
+var history: RichTextLabel
+var expanded := false
 var shown_minute := -1
 var shown_speed := -1.0
 var shown_paused := false
@@ -44,16 +49,43 @@ func _ready() -> void:
 	clock_label = Label.new()
 	clock_label.position = Vector2(650, 10)
 	bar.add_child(clock_label)
-	for n in 4:
+	for n in 8:
 		var button := Button.new()
-		button.text = ["1x [1]", "4x [2]", "16x [3]", "Pause [Space]"][n]
-		button.position = Vector2(1030 + n * 105, 7)
+		button.text = ["1x [1]", "4x [2]", "16x [3]", "64x [4]", "256x [5]", "1024x [6]", "4096x [7]", "Pause"][n]
+		button.position = Vector2(980 + n * 94, 7)
 		button.pressed.connect(func() -> void:
-			if n == 3:
+			if n == 7:
 				map.life.paused = not map.life.paused
 			else:
-				map.life.speed = [1.0, 4.0, 16.0][n])
+				map.life.speed = [1.0, 4.0, 16.0, 64.0, 256.0, 1024.0, 4096.0][n])
 		bar.add_child(button)
+	var village := PanelContainer.new()
+	village.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	village.position = Vector2(-390, 58)
+	village.custom_minimum_size = Vector2(375, 0)
+	village.add_theme_stylebox_override("panel", map._box())
+	hud.add_child(village)
+	var rows := VBoxContainer.new()
+	village.add_child(rows)
+	var title := Button.new()
+	title.text = "Village · Chronicle ▾"
+	title.pressed.connect(func() -> void:
+		expanded = not expanded
+		history.custom_minimum_size.y = 420 if expanded else 125)
+	rows.add_child(title)
+	food = Label.new()
+	rows.add_child(food)
+	forecast = Label.new()
+	rows.add_child(forecast)
+	balance = Label.new()
+	rows.add_child(balance)
+	var crisis := CheckBox.new()
+	crisis.text = "Pause on crisis"
+	crisis.toggled.connect(func(enabled: bool) -> void: map.life.economy.pause_on_crisis = enabled)
+	rows.add_child(crisis)
+	history = RichTextLabel.new()
+	history.custom_minimum_size = Vector2(350, 125)
+	rows.add_child(history)
 	card = Label.new()
 	card.add_theme_stylebox_override("normal", map._box())
 	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -103,11 +135,26 @@ func _process(dt: float) -> void:
 		shown_speed = map.life.speed
 		shown_paused = map.life.paused
 		clock_label.text = map.life.clock_text() + (" · paused" if map.life.paused else " · %dx" % int(map.life.speed))
+	var economy: RefCounted = map.life.economy
+	food.text = "Food: %d days" % floori(economy.stock / 19.0)
+	food.modulate = Color.INDIAN_RED if economy.stock < 7 * 19 else (Color.ORANGE if economy.stock < 30 * 19 else Color.WHITE)
+	forecast.text = "Next planting in %d days" % (366 - economy.day) if economy.season() == 3 else "Harvest forecast: ~%s" % _grouped(roundi(economy.forecast() / 100.0) * 100)
+	var net: float = economy.produced - economy.consumed - economy.spoiled
+	balance.text = "This year: %s%s" % ["+" if net >= 0 else "−", _grouped(roundi(absf(net)))]
+	balance.modulate = Color.LIGHT_GREEN if net >= 0 else Color.INDIAN_RED
+	var entries := PackedStringArray()
+	for i in range(economy.chronicle.size() - 1, -1, -1):
+		if not expanded and entries.size() >= 6:
+			break
+		entries.append(economy.chronicle[i])
+	var chronicle_text := "\n".join(entries)
+	if history.text != chronicle_text:
+		history.text = chronicle_text
 	var hovered: int = map.life.hover(get_global_mouse_position())
 	card.visible = hovered >= 0
 	if hovered >= 0:
 		var p: Dictionary = map.life.people[hovered]
-		card.text = "%s, %d, %s: %s" % [p.name, p.age, p.job, map.life.activity_text(p)]
+		card.text = "%s, %d, %s · %s · %s" % [p.name, p.age, p.job, economy.HUNGER[int(p.hunger)], map.life.activity_text(p)]
 		card.position = (get_viewport().get_mouse_position() + Vector2(16, 20)).min(get_viewport_rect().size - card.size - Vector2(8, 8))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
@@ -182,3 +229,13 @@ func _draw_names() -> void:
 		at.x -= map.serif.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x / 2.0
 		names.draw_string_outline(map.serif, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color8(244, 236, 214, 217))
 		names.draw_string(map.serif, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, map.INK)
+
+
+func _grouped(value: int) -> String:
+	var text := str(value)
+	var result := ""
+	for i in text.length():
+		if i > 0 and (text.length() - i) % 3 == 0:
+			result += ","
+		result += text[i]
+	return result

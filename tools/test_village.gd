@@ -64,9 +64,9 @@ func _run() -> void:
 	var before: float = life.minutes
 	map.show_map()
 	life._process(1.0)
-	assert(is_equal_approx(life.minutes, before + 4))
+	assert(is_equal_approx(life.minutes, before + 2.4))
 	life.paused = true
 	life._process(1.0)
-	assert(is_equal_approx(life.minutes, before + 4))
+	assert(is_equal_approx(life.minutes, before + 2.4))
 	print("PASS village: jobs, reachable workplaces, schedules, sleep, travel, zoom coverage and clock in both views")
 	quit()

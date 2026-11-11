@@ -6,7 +6,9 @@ var sect: RefCounted
 var grid := AStarGrid2D.new()
 var people: Array[Dictionary] = []
 var routes: Dictionary = {}
-var minutes := 360.0
+var minutes := 300.0
+var economy := preload("res://src/grain_economy.gd").new()
+var granary: Vector2i
 var speed := 1.0
 var paused := false
 var last_minute := -1
@@ -62,7 +64,9 @@ func setup(map: Node2D) -> void:
 		if str(b.name) == "Servants' Village":
 			square = nearest(sect.center + Vector2i(int(b.rect[0]) + 5, int(b.rect[1]) + 5))
 			well = nearest(sect.center + Vector2i(int(b.rect[0]) + 4, int(b.rect[1]) + 6))
-		if b.kind == "hall" and int(b.rect[1]) >= 156:
+		if str(b.name) == "Granary":
+			granary = nearest(sect.center + Vector2i(int(b.rect[0]) + 3, int(b.rect[1]) + int(b.rect[3])))
+		if b.kind == "hall" and str(b.name) != "Granary" and int(b.rect[1]) >= 156:
 			shrine = nearest(sect.center + Vector2i(int(b.rect[0]) + 3, int(b.rect[1]) + int(b.rect[3])))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(sect.data.seed)
@@ -87,11 +91,19 @@ func setup(map: Node2D) -> void:
 		else:
 			work = nearest(square + Vector2i(n % 4 * 2 - 3, n % 3 * 2))
 		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": rng.randi_range(12, 16) if job == 8 else rng.randi_range(18, 60), "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.12, 0.32), rng.randf_range(0.55, 0.85))})
+	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
+	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
+	economy.setup(sect.data, people, int(world.data.get("seed", sect.data.seed)))
 	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--day="):
+			minutes += (clampi(int(arg.trim_prefix("--day=")), 1, 365) - 1) * 1440.0
 		if arg.begins_with("--time="):
 			var parts := arg.trim_prefix("--time=").split(":")
 			if parts.size() == 2:
-				minutes = clampi(int(parts[0]), 0, 23) * 60 + clampi(int(parts[1]), 0, 59)
+				minutes = floorf(minutes / 1440.0) * 1440.0 + clampi(int(parts[0]), 0, 23) * 60 + clampi(int(parts[1]), 0, 59)
+	economy.advance_to(minutes)
+	if "--headless-sim" in OS.get_cmdline_user_args():
+		call_deferred("_headless_sim")
 	draw_order = people.duplicate()
 	_refresh(true)
 
@@ -120,7 +132,7 @@ func _refresh(initial: bool = false) -> void:
 			if time < 390 + variation:
 				activity = "preparing for the day"
 			elif time >= 720 + variation / 2 and time < 780 + variation / 2:
-				target = p.home if n % 2 else square
+				target = granary if n % 2 else square
 				activity = "eating a midday meal"
 			elif time >= 1080 + variation:
 				target = [square, shrine, p.home][(n + day) % 3]
@@ -136,8 +148,32 @@ func _refresh(initial: bool = false) -> void:
 					activity = "bringing logs home"
 				elif p.kind == 8:
 					target = nearest((p.home if cycle % 2 else square) + Vector2i((cycle + n) % 7 - 3, (cycle * 3 + n) % 7 - 3))
+		p.carrying = false
+		if activity.begins_with("weeding"):
+			activity = ["planting the paddies", "tending the paddies", "harvesting the paddies", "repairing tools and gathering firewood"][economy.season()]
+			if economy.season() == 2 and int(time / 45 + n) % 2 == 0:
+				target = granary
+				p.carrying = true
+				activity = "carrying grain to the granary"
+		var harvest_time := economy.season() == 2 and economy.harvest > 0.0
+		if harvest_time and int(p.hunger) >= 2 and int(p.kind) != 8 and time >= 390 and time < 1080:
+			# Hungry hands of every trade join the harvest.
+			if not activity.begins_with("carrying") and not activity.begins_with("harvesting"):
+				target = nearest(sect.center + Vector2i(-95 + n % 6 * 4, 190 + n % 4 * 3))
+				activity = "helping with the harvest"
+		elif int(p.hunger) >= 3 and time >= 390 and time < 1080:
+			target = nearest(sect.center + Vector2i(80 + n % 5 * 2, 245))
+			activity = "foraging along the forest edge"
+			p.carrying = false
 		p.activity = activity
-		if initial or target != p.destination:
+		if speed >= 64:
+			p.destination = target
+			p.pos = Vector2(target)
+			p.path = PackedVector2Array()
+			p.step = 0
+			p.hidden = activity == "sleeping at home"
+			continue
+		if initial or target != p.destination or (p.path.is_empty() and Vector2(p.pos) != Vector2(target)):
 			p.destination = target
 			var start := nearest(Vector2i(Vector2(p.pos).round()))
 			var key := Vector4i(start.x, start.y, target.x, target.y)
@@ -155,12 +191,17 @@ func _refresh(initial: bool = false) -> void:
 
 func _process(dt: float) -> void:
 	var elapsed := 0.0 if paused else dt * speed
-	minutes += elapsed * 4.0
-	if int(minutes) != last_minute:
-		last_minute = int(minutes)
+	minutes += elapsed * 2.4
+	var was_crisis: bool = economy.crisis
+	economy.advance_to(minutes)
+	if economy.pause_on_crisis and economy.crisis and not was_crisis:
+		paused = true
+	var schedule_tick := int(minutes / 720.0) if speed >= 64 else int(minutes)
+	if schedule_tick != last_minute:
+		last_minute = schedule_tick
 		_refresh()
 	for p: Dictionary in people:
-		var distance := elapsed * 1.5
+		var distance: float = elapsed * 1.5 * economy.EFFECT[int(p.hunger)] if speed < 64 else 0.0
 		var path: PackedVector2Array = p.path
 		while distance > 0 and int(p.step) < path.size():
 			var next: Vector2 = path[int(p.step)]
@@ -198,6 +239,9 @@ func _draw() -> void:
 		var index := 108 if sin(phase * 0.3) > 0 else 109
 		draw_texture_rect_region(atlas, Rect2(at - Vector2(size.x / 2, size.y), size), Rect2((index % 12) * 16, (index / 12) * 16, 16, 16), p.tint)
 
+		if p.get("carrying", false):
+			draw_texture_rect_region(atlas, Rect2(at - Vector2(8, size.y + 12), Vector2(16, 16)), Rect2(0, 128, 16, 16))
+
 
 func _feet_before(a: Dictionary, b: Dictionary) -> bool:
 	return point(a).y < point(b).y
@@ -217,9 +261,10 @@ func activity_text(p: Dictionary) -> String:
 
 
 func clock_text() -> String:
-	var hour := int(minutes / 60) % 24
-	var period := "night" if hour < 5 or hour >= 21 else ("morning" if hour < 12 else ("afternoon" if hour < 18 else "evening"))
-	return "Day %d · %02d:%02d · %s" % [int(minutes / 1440) + 1, hour, int(minutes) % 60, period]
+	var absolute_day := int(minutes / 1440)
+	var day := absolute_day % 365 + 1
+	var season := 0 if day <= 91 else (1 if day <= 182 else (2 if day <= 273 else 3))
+	return "Year %d · %s, day %d · %02d:%02d" % [absolute_day / 365 + 1, economy.SEASONS[season], day, int(minutes / 60) % 24, int(minutes) % 60]
 
 
 func _input(event: InputEvent) -> void:
@@ -227,6 +272,20 @@ func _input(event: InputEvent) -> void:
 		if event.keycode == KEY_SPACE:
 			paused = not paused
 			get_viewport().set_input_as_handled()
-		elif event.keycode in [KEY_1, KEY_2, KEY_3]:
-			speed = [1.0, 4.0, 16.0][event.keycode - KEY_1]
+		elif event.keycode in [KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7]:
+			speed = [1.0, 4.0, 16.0, 64.0, 256.0, 1024.0, 4096.0][event.keycode - KEY_1]
 			get_viewport().set_input_as_handled()
+
+
+func _headless_sim() -> void:
+	set_process(false)
+	var years := 1
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--years="):
+			years = maxi(1, int(arg.trim_prefix("--years=")))
+	economy.advance_to(years * 365 * 1440.0)
+	for summary: String in economy.summaries:
+		print(summary)
+	for entry: String in economy.chronicle:
+		print(entry)
+	get_tree().quit()

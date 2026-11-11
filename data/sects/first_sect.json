@@ -857,6 +857,16 @@
 				1
 			],
 			"kind": "marker"
+		},
+		{
+			"name": "Granary",
+			"rect": [
+				42,
+				203,
+				6,
+				5
+			],
+			"kind": "hall"
 		}
 	],
 	"stairs": [
