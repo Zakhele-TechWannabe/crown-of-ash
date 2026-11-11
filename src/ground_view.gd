@@ -70,7 +70,7 @@ func _process(dt: float) -> void:
 		cam.position = map.life.point(map.life.people[map.life.followed])
 	var economy: RefCounted = map.life.economy
 	var hovered: int = map.life.hover(get_global_mouse_position())
-	card.visible = hovered >= 0
+	card.visible = hovered >= 0 and (not ledger.visible or get_viewport().get_mouse_position().x < get_viewport_rect().size.x * 0.5)
 	if hovered >= 0:
 		var p: Dictionary = map.life.people[hovered]
 		card.text = "%s, %d · %s\n%s · rice today: %.1f jin\n%s" % [p.name, p.age, p.job, economy.HUNGER[int(p.hunger)], float(p.rice_today) * 2, map.life.activity_text(p)]
@@ -103,7 +103,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode in [KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5]:
-			ledger.toggle_tab(["overview", "rice", "people", "work", "chronicle"][event.keycode - KEY_F1])
+			ledger.toggle_tab(["overview", "food", "people", "work", "chronicle"][event.keycode - KEY_F1])
 			get_viewport().set_input_as_handled()
 			return
 		if event.keycode == KEY_L or (event.keycode == KEY_ESCAPE and ledger.visible):
@@ -113,8 +113,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				ledger.open_tab(ledger.current)
 			get_viewport().set_input_as_handled()
 			return
-	if ledger.visible:
-		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
 		map.ground.set_exaggeration(map.ground.exaggeration + (1.0 if event.keycode == KEY_BRACKETRIGHT else -1.0))
 		return

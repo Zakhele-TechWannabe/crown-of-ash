@@ -1,8 +1,12 @@
 extends PanelContainer
 ## Tab registry and economy flow keys keep presentation separate from simulation.
-const TABS := {"overview": "Overview", "rice": "Spirit rice", "people": "People", "work": "Work & fields", "chronicle": "Chronicle"}
+const TABS := {"overview": "Overview", "food": "Food", "people": "People", "work": "Work & fields", "chronicle": "Chronicle"}
 const INK := Color("493423")
 const GOLD := Color("a57927")
+var selected_food := "common_rice"
+var collapsed: Dictionary = {}
+var closing := false
+var slide: Tween
 var view: Node2D
 var life: Node2D
 var current := "overview"
@@ -80,22 +84,25 @@ func setup(ground_view: Node2D) -> void:
 	theme = parchment
 	_build_hud(parchment)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	anchor_left = 0.14
-	anchor_right = 0.86
-	anchor_top = 0.14
-	anchor_bottom = 0.88
-	var book := HBoxContainer.new()
+	anchor_left = 0.5
+	anchor_right = 1.0
+	anchor_top = 0.0
+	offset_top = 64
+	anchor_bottom = 1.0
+	var book := VBoxContainer.new()
 	add_child(book)
-	var tabs := VBoxContainer.new()
+	var tabs := HBoxContainer.new()
 	tabs.custom_minimum_size.x = 180
 	book.add_child(tabs)
-	label(tabs, "VILLAGE\nLEDGER", true)
+
 	for key: String in TABS:
-		var tab := button(tabs, TABS[key], func() -> void: open_tab(key))
+		var tab := button(tabs, {"overview": "Overview", "food": "Food", "people": "People", "work": "Work", "chronicle": "Chronicle"}[key], func() -> void: open_tab(key))
 		tab.icon = icon(key)
-	button(tabs, "Close [Esc / L]", close)
+	button(tabs, "×", close)
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	book.add_child(scroll)
 	content = VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -135,7 +142,7 @@ func _build_hud(parchment: Theme) -> void:
 	view.place = label(row, "Servants' Village")
 	view.place.autowrap_mode = TextServer.AUTOWRAP_OFF
 	view.place.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	rice_chip = button(row, "", func() -> void: open_tab("rice"))
+	rice_chip = button(row, "", func() -> void: open_tab("food"))
 	rice_chip.icon = icon("rice")
 	people_chip = button(row, "", func() -> void: open_tab("people"))
 	people_chip.icon = icon("people")
@@ -147,7 +154,7 @@ func _build_hud(parchment: Theme) -> void:
 		button(row, "%dx" % speed, func() -> void: life.speed = speed)
 	var index := 1
 	for key: String in TABS:
-		var b := button(row, ["Overview", "Rice", "People", "Work", "Chronicle"][index - 1], func() -> void: toggle_tab(key))
+		var b := button(row, ["Overview", "Food", "People", "Work", "Chronicle"][index - 1], func() -> void: toggle_tab(key))
 		b.icon = icon(key)
 		b.tooltip_text = "%s [F%d]" % [TABS[key], index]
 		index += 1
@@ -161,15 +168,32 @@ func _build_hud(parchment: Theme) -> void:
 	granary_card.hide()
 
 func close() -> void:
-	hide()
+	closing = true
+	if slide:
+		slide.kill()
+	slide = create_tween().set_parallel(true)
+	slide.tween_property(self, "offset_left", get_viewport_rect().size.x * 0.5, 0.15)
+	slide.tween_property(self, "offset_right", get_viewport_rect().size.x * 0.5, 0.15)
+	slide.chain().tween_callback(hide)
 
 func toggle_tab(key: String) -> void:
-	if visible and current == key:
+	key = "food" if key == "rice" else key
+	if visible and not closing and current == key:
 		close()
 	else:
 		open_tab(key)
 
 func open_tab(key: String) -> void:
+	key = "food" if key == "rice" else key
+	if not visible or closing:
+		closing = false
+		if slide:
+			slide.kill()
+		offset_left = get_viewport_rect().size.x * 0.5
+		offset_right = offset_left
+		slide = create_tween().set_parallel(true)
+		slide.tween_property(self, "offset_left", 0.0, 0.18)
+		slide.tween_property(self, "offset_right", 0.0, 0.18)
 	current = key if TABS.has(key) else "overview"
 	show()
 	refresh()
@@ -179,9 +203,12 @@ func _process(dt: float) -> void:
 	if hud_timer >= 0.3 and view.active:
 		hud_timer = 0.0
 		var e: RefCounted = life.economy
-		rice_chip.text = "%s jin · %d d" % [amount(e.stock), floori(e.days_left())]
+		rice_chip.text = "Food %s jin · %d d" % [amount(e.stock), floori(e.days_left())]
 		rice_chip.modulate = Color("f29b79") if e.days_left() < 7 else (Color("e9bd66") if e.days_left() < 30 else Color.WHITE)
-		rice_chip.tooltip_text = "Spirit rice · Granary\n%s jin (斤) · %.1f days\nDaily need: %s jin · Ration: %d%%\nExpected harvest: %s jin\n1 ration = 2 jin" % [amount(e.stock), e.days_left(), amount(e.daily_need()), roundi(e.ration() * 100), amount(e.forecast())]
+		rice_chip.tooltip_text = "Food (mortal edible): %s jin\n  Grains: %s jin\n    Rice: %s jin" % [amount(e.mortal_food()), amount(e.quantity("grains")), amount(e.quantity("rice"))]
+		for id: String in e.goods:
+			rice_chip.tooltip_text += "\n      %s: %s jin" % [e.goods[id].name, amount(e.stocks[id])]
+
 		people_chip.text = "%d · %d hungry" % [life.people.size(), e.hungry_count]
 		clock.text = life.clock_text()
 	if not visible:
@@ -235,9 +262,9 @@ func refresh_values() -> void:
 	var e: RefCounted = life.economy
 	match current:
 		"overview":
-			label(data, "%d villagers · %d hungry\nSpirit rice in the Granary: %s jin · %.1f days\nRation level: %d%% · Daily need: %s jin\nHarvest forecast: %s jin · This year's balance: %s jin\n%s · %s" % [life.people.size(), e.hungry_count, amount(e.stock), e.days_left(), roundi(e.ration() * 100), amount(e.daily_need()), amount(e.forecast()), amount(e.produced - e.consumed - e.spoiled), e.SEASONS[e.season()], stage()])
+			label(data, "%d villagers · %d hungry\nFood in the Granary: %s jin · %.1f days\nRation level: %d%% · Daily need: %s jin\nHarvest forecast: %s jin · This year's balance: %s jin\n%s · %s" % [life.people.size(), e.hungry_count, amount(e.stock), e.days_left(), roundi(e.ration() * 100), amount(e.daily_need()), amount(e.forecast()), amount(e.produced - e.consumed - e.spoiled), e.SEASONS[e.season()], stage()])
 			var alerts := "Alerts: "
-			alerts += "Low spirit rice. " if e.days_left() < 30 else ""
+			alerts += "Low food. " if e.days_left() < 30 else ""
 			alerts += "Rationing active. " if e.ration() < 1 else ""
 			alerts += "%d villagers hungry." % e.hungry_count if e.hungry_count else ""
 			label(data, alerts if alerts != "Alerts: " else "Alerts: village supplied")
@@ -249,7 +276,7 @@ func refresh_values() -> void:
 			label(data, "Latest chronicle", true)
 			for i in range(e.chronicle.size() - 1, maxi(-1, e.chronicle.size() - 6), -1):
 				label(data, e.chronicle[i])
-		"rice": _rice(data, e)
+		"food": _food(data, e)
 		"people": _people(data)
 		"work": _work(data, e)
 		"chronicle":
@@ -289,47 +316,84 @@ func table(parent: Node, headers: Array, rows: Array, height: float = 200) -> Tr
 	parent.add_child(widget)
 	return widget
 
-func _rice(parent: Node, e: RefCounted) -> void:
-	label(parent, "Spirit rice · 斤 (jin) · 1 ration = 2 jin", true)
-	var standing: float = e.harvest if e.season() == 2 else (e.forecast() if e.season() < 2 else 0.0)
-	label(parent, "Where it is now\nGranary: %s jin\nStanding in the paddies: %s jin %s\nBeing carried: 0 jin · credited directly to the Granary at day end\nTotal stored + standing: %s jin" % [amount(e.stock), amount(standing), "(expected yield)" if e.season() < 2 else "(unharvested)", amount(e.stock + standing)])
+func _food(parent: Node, e: RefCounted) -> void:
+	var widget := table(parent, ["Food", "Stock · jin", "Days", "Year in / out"], [], 265)
+	widget.hide_root = false
+	var root := widget.get_root()
+	var nodes: Dictionary = {"food": root}
+	for category: Dictionary in e.catalogue.categories:
+		var id: String = category.id
+		if id != "food":
+			nodes[id] = widget.create_item(nodes[category.parent])
+		_fill_food_item(nodes[id], id, category.name, e)
+	for id: String in e.goods:
+		var good: Dictionary = e.goods[id]
+		var item := widget.create_item(nodes[good.category_path[-1]])
+		_fill_food_item(item, id, good.name, e)
+		item.set_custom_color(0, Color(good.colour))
+	widget.item_collapsed.connect(func(item: TreeItem) -> void: collapsed[item.get_metadata(0)] = item.collapsed)
+	widget.item_selected.connect(func() -> void: selected_food = str(widget.get_selected().get_metadata(0)); refresh_values())
+	var id := selected_food
+	var is_good: bool = e.goods.has(id)
+	label(parent, e.goods[id].name if is_good else id.capitalize(), true)
+	if is_good:
+		label(parent, e.goods[id].description + " · 斤 (jin) · 1 ration = 2 jin")
+	var standing := 0.0
+	for good: String in e.descendants(id):
+		standing += float(e.standing[good]) if e.season() == 2 else (e.good_forecast(good) if e.season() < 2 else 0.0)
+	label(parent, "Where it is now\nGranary: %s jin · Paddies: %s jin\nCarried: 0 jin (credited at day end) · Total: %s jin" % [amount(e.quantity(id)), amount(standing), amount(e.quantity(id) + standing)])
+	if not is_good:
+		var breakdown := HBoxContainer.new()
+		breakdown.custom_minimum_size.y = 28
+		parent.add_child(breakdown)
+		var children: Array[Dictionary] = []
+		for category: Dictionary in e.catalogue.categories:
+			if category.parent == id:
+				children.append(category)
+		for good: String in e.goods:
+			if e.goods[good].category_path[-1] == id:
+				children.append(e.goods[good])
+		for child: Dictionary in children:
+			var segment := ColorRect.new()
+			segment.color = Color(child.get("colour", "b38a35"))
+			segment.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			segment.size_flags_stretch_ratio = maxf(0.01, e.quantity(child.id))
+			segment.tooltip_text = "%s: %s jin" % [child.name, amount(e.quantity(child.id))]
+			breakdown.add_child(segment)
+
 	var rows: Array = []
-	for key: String in {"harvested": "Harvested in", "adults": "Eaten by adults", "children": "Eaten by children", "foraged": "Foraged wild provisions (separate)", "spoiled": "Spoiled", "delivered": "Delivered to sect · not yet", "sold": "Sold · not yet", "bought": "Bought · not yet"}:
-		var names := {"harvested": "Harvested in", "adults": "Eaten by adults", "children": "Eaten by children", "foraged": "Foraged wild provisions (not rice)", "spoiled": "Spoiled", "delivered": "Delivered to sect · not yet", "sold": "Sold · not yet", "bought": "Bought · not yet"}
+	for key: String in {"harvested": "Harvested", "adults": "Adults ate", "children": "Children ate", "spoiled": "Spoiled", "delivered": "To sect (later)", "sold": "Sold (later)", "bought": "Bought (later)"}:
+		var names := {"harvested": "Harvested", "adults": "Adults ate", "children": "Children ate", "spoiled": "Spoiled", "delivered": "To sect (later)", "sold": "Sold (later)", "bought": "Bought (later)"}
 		var row: Array = [names[key]]
-		for value: float in e.flow_values(key):
+		for value: float in e.node_flow(id, key):
 			row.append(amount(value))
 		rows.append(row)
-	var flows_table := table(parent, ["Flows · jin", "Today", "This season", "This year", "All time"], rows, 275)
-	flows_table.set_column_custom_minimum_width(0, 310)
-	for i in range(5, 8):
-		var item := flows_table.get_root().get_child(i)
-		for col in 5:
-			item.set_custom_color(col, Color("8b7c68"))
-	var children := 0
-	for p: Dictionary in life.people:
-		if int(p.kind) == 8:
-			children += 1
-	label(parent, "Need\n%d adults × 2 jin + %d children × 1 jin = %s jin daily\nCurrent ration: %d%% · %.1f days left\nNext harvest begins in %d days · projected stock then: %s jin (before spoilage; current ration held constant)" % [life.people.size() - children, children, amount(e.daily_need()), roundi(e.ration() * 100), e.days_left(), e.days_to_harvest(), amount(maxf(0, e.stock - e.daily_need() * e.ration() * e.days_to_harvest()))])
-	label(parent, "Harvest forecast\nPaddy area: %d tiles = %d mu · base yield: %.2f jin / mu\nField care so far: %.1f%% · weather: %.2f (%s)\nExpected harvest: %s jin" % [e.field_area, e.field_area, 16000.0 / 3300.0, e.care() * 100, e.weather, "poor" if e.weather < 0.8 else ("good" if e.weather > 1.02 else "fair"), amount(e.forecast())])
-	var chart := preload("res://src/ledger_chart.gd").new()
-	chart.custom_minimum_size.y = 230
-	chart.caption = "Granary stock · last two years"
-	chart.samples = e.stock_history.duplicate()
-	for i in chart.samples.size():
-		chart.samples[i].y *= 2.0
-	chart.samples.sort_custom(func(a: Vector2, b: Vector2) -> bool: return a.x < b.x)
-	parent.add_child(chart)
-	var annual := preload("res://src/ledger_chart.gd").new()
-	annual.custom_minimum_size.y = 200
-	annual.caption = "Harvest per completed year"
-	annual.bars = true
-	annual.samples = e.harvest_history.duplicate()
-	annual.samples.append(Vector2(e.year, e.produced))
-	for i in annual.samples.size():
-		annual.samples[i].y *= 2.0
-	annual.caption = "Harvest by year · current year to date"
-	parent.add_child(annual)
+	table(parent, ["Flows · jin", "Today", "Season", "Year", "All time"], rows, 245)
+	label(parent, "Wild provisions (separate): %s jin today · %s jin this year" % [amount(e.flow_values("foraged")[0]), amount(e.flow_values("foraged")[2])])
+	var edible: bool = not is_good or "mortals" in e.goods[id].edible_by
+	label(parent, "Need: %s jin daily · Ration: %d%%\nDays remaining: %s · Harvest begins in %d days\nProjected stock at harvest: %s jin (before spoilage)\nForecast: %s jin · Care %.1f%% · Weather %.2f" % [amount(e.daily_need() if edible else 0.0), roundi(e.ration() * 100), "%.1f" % (e.edible_quantity(id) / e.daily_need()) if edible else "Reserved for cultivators", e.days_to_harvest(), amount(maxf(0, e.quantity(id) - (e.daily_need() * e.ration() * e.days_to_harvest() if edible else 0.0))), amount(e.good_forecast(id)), e.care() * 100, e.weather])
+	if is_good:
+		label(parent, "Plots: %d mu · Base yield %.2f jin / mu" % [e.areas[id], float(e.goods[id].yield_rations_per_mu) * 2])
+		for annual: bool in [false, true]:
+			var chart := preload("res://src/ledger_chart.gd").new()
+			chart.custom_minimum_size.y = 200
+			chart.bars = annual
+			chart.caption = "Yearly harvest" if annual else "Stock · last two years"
+			chart.samples.assign(e.annual_histories[id] if annual else e.histories[id])
+			if annual:
+				chart.samples.append(Vector2(e.year, e.node_flow(id, "harvested")[2]))
+			for i in chart.samples.size():
+				chart.samples[i].y *= 2
+			parent.add_child(chart)
+
+func _fill_food_item(item: TreeItem, id: String, title: String, e: RefCounted) -> void:
+	item.set_metadata(0, id)
+	item.set_text(0, title)
+	item.set_text(1, amount(e.quantity(id)))
+	var edible: bool = not e.goods.has(id) or "mortals" in e.goods[id].edible_by
+	item.set_text(2, "%.0f" % (e.edible_quantity(id) / e.daily_need()) if edible else "—")
+	item.set_text(3, "%s / %s" % [amount(e.node_flow(id, "harvested")[2]), amount(e.node_flow(id, "adults")[2] + e.node_flow(id, "children")[2] + e.node_flow(id, "spoiled")[2])])
+	item.collapsed = collapsed.get(id, false)
 
 func _people(parent: Node) -> void:
 	var residents: Array[Dictionary] = []
@@ -339,19 +403,18 @@ func _people(parent: Node) -> void:
 		if people_filter not in ["All", "Hungry"] and people_filter != p.job:
 			continue
 		residents.append(p)
-	var keys := ["name", "age", "sex", "job", "home_cottage", "hunger", "rice_today", "activity"]
+	var keys := ["name", "job", "hunger", "activity"]
 	residents.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return a[keys[sort_column]] > b[keys[sort_column]] if sort_reverse else a[keys[sort_column]] < b[keys[sort_column]])
 	var rows: Array = []
 	for p: Dictionary in residents:
-		rows.append([p.name, p.age, p.sex, p.job, "Cottage %d" % (int(p.home_cottage) / 8 + 1), life.economy.HUNGER[int(p.hunger)], "%.1f jin" % (float(p.rice_today) * 2), life.activity_text(p)])
-	tree = table(parent, ["Name", "Age", "Sex", "Job", "Home", "Hunger", "Rice today", "Activity"], rows, 620)
-	tree.set_column_custom_minimum_width(0, 155)
-	tree.set_column_custom_minimum_width(7, 200)
+		rows.append([p.name, p.job, life.economy.HUNGER[int(p.hunger)], life.activity_text(p)])
+	tree = table(parent, ["Name", "Job", "Hunger", "Activity"], rows, 620)
 	for i in residents.size():
 		var item := tree.get_root().get_child(i)
 		item.set_metadata(0, life.people.find(residents[i]))
-		item.set_custom_color(5, Color("a23522") if int(residents[i].hunger) > 0 else Color("49612e"))
+		item.set_tooltip_text(0, "%d · %s · Cottage %d · Rice today %.1f jin" % [residents[i].age, residents[i].sex, int(residents[i].home_cottage) / 8 + 1, float(residents[i].rice_today) * 2])
+		item.set_custom_color(2, Color("a23522") if int(residents[i].hunger) > 0 else Color("49612e"))
 	tree.column_title_clicked.connect(func(col: int, _mouse: int) -> void:
 		sort_reverse = not sort_reverse if sort_column == col else false
 		sort_column = col
@@ -374,9 +437,13 @@ func _work(parent: Node, e: RefCounted) -> void:
 		for p: Dictionary in jobs[job]:
 			names.append(p.name)
 			effectiveness += e.EFFECT[int(p.hunger)]
-		rows.append([job, jobs[job].size(), ", ".join(names), "%d%%" % roundi(effectiveness / jobs[job].size() * 100)])
-	var jobs_table := table(parent, ["Job", "Count", "Names", "Today's effectiveness"], rows, 310)
-	jobs_table.set_column_custom_minimum_width(2, 500)
+		rows.append([job, jobs[job].size(), "%d%%" % roundi(effectiveness / jobs[job].size() * 100), ", ".join(names)])
+	var compact_rows: Array = []
+	for row: Array in rows:
+		compact_rows.append(row.slice(0, 3))
+	var jobs_table := table(parent, ["Job", "Count", "Effectiveness"], compact_rows, 310)
+	for i in rows.size():
+		jobs_table.get_root().get_child(i).set_tooltip_text(0, rows[i][3])
 	label(parent, "Year %d farm calendar · today: day %d\nSpring 1–91: Planting  →  Summer 92–182: Tending  →  Autumn 183–273: Harvest  →  Winter 274–365: Fallow\n▼ Today: %s · %s" % [e.year, e.day, e.SEASONS[e.season()], stage()], true)
 	var bar := ProgressBar.new()
 	bar.max_value = 365
@@ -390,9 +457,9 @@ func _work(parent: Node, e: RefCounted) -> void:
 	var index := 1
 	for field: Dictionary in life.sect.data.fields:
 		var area := int(field.rect[2]) * int(field.rect[3])
-		rows.append(["Paddy %d" % index, "%d tiles / mu" % area, stage(), "%d%%" % roundi(e.care() * 100), "%s jin" % amount(e.forecast() * area / e.field_area)])
+		rows.append(["Paddy %d" % index, "%d tiles / mu" % area, e.goods[field.crop].name, "%d%%" % roundi(e.care() * 100), "%s jin" % amount(e.good_forecast(field.crop) * area / float(e.areas[field.crop]))])
 		index += 1
-	table(parent, ["Plot", "Area", "Stage", "Care", "Expected yield"], rows, 320)
+	table(parent, ["Plot", "Area", "Crop", "Care", "Yield"], rows, 320)
 
 func show_granary() -> void:
 	for child: Node in granary_card.get_children():
@@ -400,7 +467,7 @@ func show_granary() -> void:
 		child.queue_free()
 	var box := VBoxContainer.new()
 	granary_card.add_child(box)
-	label(box, "Granary · %s jin of spirit rice · %d days" % [amount(life.economy.stock), floori(life.economy.days_left())])
-	button(box, "Open ledger", func() -> void: granary_card.hide(); open_tab("rice"))
+	label(box, "Granary · %s jin of food · %d days" % [amount(life.economy.stock), floori(life.economy.days_left())])
+	button(box, "Open ledger", func() -> void: granary_card.hide(); open_tab("food"))
 	button(box, "Close", granary_card.hide)
 	granary_card.show()

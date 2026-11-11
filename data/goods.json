@@ -1,0 +1,80 @@
+{
+	"categories": [
+		{
+			"id": "food",
+			"name": "Food",
+			"parent": ""
+		},
+		{
+			"id": "grains",
+			"name": "Grains",
+			"parent": "food"
+		},
+		{
+			"id": "rice",
+			"name": "Rice",
+			"parent": "grains"
+		},
+		{
+			"id": "vegetables",
+			"name": "Vegetables",
+			"parent": "food"
+		},
+		{
+			"id": "meat",
+			"name": "Meat",
+			"parent": "food"
+		},
+		{
+			"id": "fish",
+			"name": "Fish",
+			"parent": "food"
+		},
+		{
+			"id": "fruit",
+			"name": "Fruit",
+			"parent": "food"
+		}
+	],
+	"goods": [
+		{
+			"id": "common_rice",
+			"name": "Common rice",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"rice"
+			],
+			"description": "White rice from the lower paddies",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "d7ba65",
+			"icon": "rice",
+			"yield_rations_per_mu": 3.8,
+			"starting_rations": 4500,
+			"seasonal_spoilage": 0.02
+		},
+		{
+			"id": "spirit_rice",
+			"name": "Spirit rice",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"rice"
+			],
+			"description": "Grown on qi-rich plots; a faint glow; kept for the sect. Mortals do not eat it.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "70cfc5",
+			"icon": "rice",
+			"yield_rations_per_mu": 1.52,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02
+		}
+	]
+}

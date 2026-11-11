@@ -139,7 +139,7 @@ func _refresh(initial: bool = false) -> void:
 				activity = "resting in the evening"
 			else:
 				target = p.work
-				activity = ["weeding the spirit paddies", "cooking in the canteen", "sweeping the Great Plaza", "tending the barracks", "carrying water", "selling at the market", "tending the shrine", "cutting wood", "playing near home and the square"][int(p.kind)]
+				activity = ["weeding the rice paddies", "cooking in the canteen", "sweeping the Great Plaza", "tending the barracks", "carrying water", "selling at the market", "tending the shrine", "cutting wood", "playing near home and the square"][int(p.kind)]
 				var cycle := int((time + variation) / 25)
 				if p.kind == 4:
 					target = well if cycle % 2 == 0 else (p.home if cycle % 4 == 1 else people[n % 8].work)
@@ -154,7 +154,7 @@ func _refresh(initial: bool = false) -> void:
 			if economy.season() == 2 and int(time / 45 + n) % 2 == 0:
 				target = granary
 				p.carrying = true
-				activity = "carrying spirit rice to the granary"
+				activity = "carrying rice to the granary"
 		var harvest_time := economy.season() == 2 and economy.harvest > 0.0
 		if harvest_time and int(p.hunger) >= 2 and int(p.kind) != 8 and time >= 390 and time < 1080:
 			# Hungry hands of every trade join the harvest.
@@ -228,6 +228,16 @@ func point(p: Dictionary) -> Vector2:
 func _draw() -> void:
 	var camera: Camera2D = world.ground_view.cam
 	var area := Rect2(camera.position - get_viewport_rect().size / camera.zoom / 2.0, get_viewport_rect().size / camera.zoom).grow(64)
+	# A soft pulse on the qi-rich shoots, using the same world projection as people.
+	for field: Dictionary in sect.data.fields:
+		if field.crop != "spirit_rice":
+			continue
+		for y in range(int(field.rect[1]), int(field.rect[1]) + int(field.rect[3]), 2):
+			for x in range(int(field.rect[0]), int(field.rect[0]) + int(field.rect[2]), 2):
+				var tile: Vector2i = sect.center + Vector2i(x, y)
+				var at := (Vector2(tile) + Vector2.ONE * 0.5) * 32 - Vector2(0, world.ground.terrace_level(tile) * world.ground.exaggeration)
+				if area.has_point(at):
+					draw_circle(at, 4, Color(0.3, 0.95, 0.85, 0.18 + 0.08 * sin(minutes + x + y)))
 	draw_order.sort_custom(_feet_before)
 	for p: Dictionary in draw_order:
 		var at := point(p)

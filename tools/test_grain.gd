@@ -22,10 +22,13 @@ func _initialize() -> void:
 			if d % 365 != 364:
 				assert(daily.produced == before, "Grain outside autumn")
 	jump.advance_to(3 * 365 * 1440.0)
+	assert(daily.stocks == jump.stocks)
+	assert(daily.flows == jump.flows)
+	assert(daily.histories == jump.histories)
 	assert(daily.stock == jump.stock)
 	assert(daily.chronicle == jump.chronicle)
 	assert(daily.summaries == jump.summaries)
-	assert(jump.stock > 2500 and jump.stock < 9000)
+	assert(jump.stock > 4500 and jump.stock < 20000)
 	var half: RefCounted = make_economy()
 	for step in 3 * 365 * 2:
 		half.advance_to((step + 1) * 720.0)
@@ -36,6 +39,19 @@ func _initialize() -> void:
 	for p: Dictionary in crisis.people:
 		# Foraged food covers 60% of a child's share, so children hover at hungry; adults starve and forage.
 		assert(p.foraged > 0 and p.hunger >= (1 if int(p.kind) == 8 else 3))
+	assert(jump.stocks.spirit_rice > 0)
+	assert(jump.node_flow("spirit_rice", "adults")[3] == 0)
+	assert(jump.node_flow("spirit_rice", "children")[3] == 0)
+	for id: String in jump.goods:
+		assert(is_equal_approx(float(jump.goods[id].starting_rations) + jump.node_flow(id, "harvested")[3] - jump.node_flow(id, "adults")[3] - jump.node_flow(id, "children")[3] - jump.node_flow(id, "spoiled")[3], float(jump.stocks[id])))
+	assert(jump.areas.spirit_rice == 660 and jump.areas.common_rice == 2640)
+	assert(is_equal_approx(jump.good_forecast("spirit_rice") / 660, jump.good_forecast("common_rice") / 2640 * 0.4))
+	var protected: RefCounted = make_economy()
+	protected.stock = 0
+	protected.stocks.spirit_rice = 1000.0
+	protected.advance_to(720)
+	assert(protected.stocks.spirit_rice == 1000.0 and protected.hungry_count == 20)
+	assert(protected.days_left() == 0)
 	var shortage: RefCounted = make_economy()
 	shortage.stock = 1.0
 	shortage.advance_to(720)
