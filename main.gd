@@ -4,6 +4,13 @@ extends Node2D
 const World := preload("res://src/world.gd")
 const Land := preload("res://src/land.gd")
 const Sfx := preload("res://src/sfx.gd")
+const FARM := preload("res://assets/kenney/tiny-farm/Tilemap/tilemap_packed.png")
+const TOWN := preload("res://assets/kenney/tiny-town/Tilemap/tilemap_packed.png")
+const CROP_ROWS := [64, 64, 40, 0, 16, 16, 4, 16, 52, 40, 28, 4, 52, 16]
+const CROP_TINTS := [Color.WHITE, Color(1, 1, 0.8), Color(0.65, 1, 0.5), Color.WHITE,
+	Color.WHITE, Color(1, 0.4, 0.45), Color.WHITE, Color(0.65, 0.18, 0.3),
+	Color(1, 1, 0.8), Color(0.75, 0.65, 0.4), Color(0.9, 0.6, 0.3),
+	Color(1, 0.95, 0.7), Color(0.5, 1, 0.75), Color(1, 0.3, 0.15)]
 const T := Land.T
 const C_TEXT := Color(0.95, 0.92, 0.85)
 const C_GOLD := Color(1.0, 0.8, 0.35)
@@ -19,7 +26,7 @@ class Figure:
 	var pause := 0.0
 	var phase := 0.0
 	var walking := false
-	var colour := Color.WHITE
+	var facing_left := false
 
 var figures: Array[Figure] = []
 var people: Node2D
@@ -61,15 +68,17 @@ func _ready() -> void:
 	sfx = Sfx.new()
 	add_child(sfx)
 	ground = Node2D.new()
+	ground.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	ground.draw.connect(_draw_ground)
 	add_child(ground)
 	people = Node2D.new()
+	people.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	people.draw.connect(_draw_people)
 	add_child(people)
 	figure_rng.seed = 719
 	cam = Camera2D.new()
 	cam.position = c.land.center(c.center)
-	cam.zoom = Vector2(2.6, 2.6)
+	cam.zoom = Vector2(1.3, 1.3)
 	add_child(cam)
 	var hud := CanvasLayer.new()
 	add_child(hud)
@@ -82,6 +91,8 @@ func _ready() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument == "--fast":
 			speed = 4
+		elif argument == "--demo":
+			_demo()
 		elif argument.begins_with("--shot="):
 			shot_path = argument.trim_prefix("--shot=")
 		elif argument.begins_with("--frames="):
@@ -181,6 +192,17 @@ func _build_ui() -> void:
 
 
 ## A government change takes effect at the next daily allocation.
+## A ready-made village for looking at: a field of every crop and a housing zone, a few days in.
+func _demo() -> void:
+	for k in World.CROPS.size():
+		var at := c.center + Vector2i(-13 + (k % 7) * 4, (3 if k < 7 else 7))
+		c.mark_field(Rect2i(at, Vector2i(3, 3)), [k, k, k, k])
+	c.mark_housing(Rect2i(c.center + Vector2i(3, -5), Vector2i(6, 4)))
+	c.focus = 0
+	for d in 5:
+		c.step(World.DAY_LEN)
+
+
 func _selected_field() -> Dictionary:
 	for f in c.fields:
 		if f.id == selected:
@@ -240,7 +262,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		tool = 0
 		marking = false
-		ground.queue_redraw()
 	if event is InputEventMouseButton:
 		if event.button_index in [MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
 			drag = event.pressed
@@ -261,7 +282,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				else:
 					c.mark_housing(rect)
 				marking = false
-			ground.queue_redraw()
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.3, 5.0)
 	elif event is InputEventMouseMotion and marking:
@@ -381,8 +401,6 @@ func _draw_ground() -> void:
 		var r := Rect2(Vector2(zone.position) * T, Vector2(zone.size) * T)
 		for edge in [[r.position, Vector2(r.end.x, r.position.y)], [Vector2(r.end.x, r.position.y), r.end], [r.end, Vector2(r.position.x, r.end.y)], [Vector2(r.position.x, r.end.y), r.position]]:
 			ground.draw_dashed_line(edge[0], edge[1], C_GOLD, 1.5, 6)
-	for f in c.fields:
-		ground.draw_rect(Rect2(Vector2(f.rect.position) * T, Vector2(f.rect.size) * T), C_GOLD if f.id == selected else Color(0.45, 0.3, 0.12), false, 2)
 	for house in c.houses:
 		_hut(house)
 
@@ -400,71 +418,48 @@ func _bake_minimap() -> void:
 	mini_tex = ImageTexture.create_from_image(img)
 
 
-## Draw grass, roads and worked plots.
+## Atlas regions stay at one tile per world cell.
+func _atlas(item: CanvasItem, texture: Texture2D, index: int, at: Vector2, tint := Color.WHITE, flip := false) -> void:
+	var source := Rect2(Vector2(index % 12, index / 12) * 16, Vector2(16, 16))
+	var rect := Rect2(at, Vector2(T, T))
+	if flip:
+		rect.position.x += T
+		rect.size.x = -T
+	item.draw_texture_rect_region(texture, rect, source, tint)
+
+
+## Grass remains beneath soil and transparent sprites.
 func _tile(cell: Vector2i) -> void:
-	var g := ground
-	var land := c.land
-	var t := land.at(cell)
-	var rect := Rect2(cell.x * T, cell.y * T, T, T)
+	var at := Vector2(cell) * T
 	var h := _hash(cell.x, cell.y)
-	var patch := _hash(cell.x / 4, cell.y / 4)
-	match t:
-		Land.GRASS:
-			var col := Color(0.35, 0.56, 0.19).lerp(Color(0.45, 0.66, 0.25), patch * 0.65 + h * 0.35)
-			g.draw_rect(rect, col)
-			if h < 0.04:
-				var fc: Color = [Color(0.98, 0.9, 0.4), Color(0.96, 0.96, 0.9), Color(0.92, 0.55, 0.62)][int(h * 75) % 3]
-				g.draw_circle(rect.position + Vector2(6 + h * 300, 10), 2.5, fc)
-				g.draw_circle(rect.position + Vector2(20, 24 - h * 100), 2.0, fc)
-			elif h < 0.14:
-				var p := rect.position + Vector2(6 + h * 120, 16 + h * 60)
-				g.draw_line(p, p + Vector2(-2, -6), col.darkened(0.25), 1.5)
-				g.draw_line(p, p + Vector2(2, -7), col.darkened(0.25), 1.5)
-		Land.HOUSE:
-			g.draw_rect(rect, Color(0.48, 0.55, 0.25))
-		Land.TILLED:
-			g.draw_rect(rect, Color(0.37, 0.24, 0.13))
-			var i := land.index(cell)
-			var growth: float = land.growth[i]
-			var crop: int = land.crops[i]
-			var kind: String = World.CROPS[crop].kind
-			for k in 4:
-				var p := rect.position + Vector2(5 + k * 7, 27)
-				var col := Color(0.85, 0.7, 0.25) if growth >= 0.99 and kind == "grain" else Color(0.3, 0.6, 0.18)
-				if kind == "none":
-					g.draw_line(p, p + Vector2(2, -6), Color(0.48, 0.47, 0.26), 3)
-				elif growth > 0 and kind in ["root", "spirit root"]:
-					var leaf := Color(0.25, 0.65, 0.25) if kind == "root" else Color(0.5, 0.75, 0.95)
-					for row in 2:
-						var tuft := p + Vector2(0, -row * 13)
-						if kind == "spirit root":
-							g.draw_circle(tuft + Vector2(0, -3), 5 + growth * 3, Color(0.45, 0.3, 0.85, 0.18))
-						g.draw_line(tuft, tuft + Vector2(-3, -3 - growth * 5), leaf, 2)
-						g.draw_line(tuft, tuft + Vector2(3, -4 - growth * 5), leaf, 2)
-				elif growth > 0:
-					g.draw_line(p, p + Vector2(0, -4 - growth * 20), col, 3)
-				else:
-					g.draw_line(p, p + Vector2(0, -25), Color(0.26, 0.17, 0.1), 2)
-	g.draw_rect(rect, Color(0.1, 0.16, 0.05, 0.12), false, 0.5)
+	_atlas(ground, TOWN, 2 if h < 0.03 else (1 if h < 0.11 else 0), at)
+	var i := c.land.index(cell)
+	var crop: int = c.land.crops[i]
+	if c.land.field_ids[i] < 0:
+		return
+	if World.CROPS[crop].kind == "none":
+		_atlas(ground, FARM, 0, at, Color(1, 1, 1, 0.55))
+	elif c.land.at(cell) == Land.TILLED:
+		_atlas(ground, FARM, 1, at)
+		if c.land.growth[i] > 0 and World.CROPS[crop].kind != "spirit root":
+			_plant(ground, cell, crop, c.land.growth[i])
+
+
+## Ripe produce follows the three leafy growth stages.
+func _plant(item: CanvasItem, cell: Vector2i, crop: int, growth: float) -> void:
+	var stage := 4 if growth >= 0.99 else mini(2, int(growth * 3.0))
+	_atlas(item, FARM, CROP_ROWS[crop] + stage, Vector2(cell) * T, CROP_TINTS[crop])
 
 func _mark_rect() -> Rect2i:
 	return Rect2i(Vector2i(mini(mark_start.x, mark_end.x), mini(mark_start.y, mark_end.y)), Vector2i(absi(mark_end.x - mark_start.x) + 1, absi(mark_end.y - mark_start.y) + 1))
 
-## Golden hipped thatch shelters each household.
+## Two roof tiles sit above the window and door.
 func _hut(cell: Vector2i) -> void:
-	var p := Vector2(cell) * T + Vector2(4, 8)
-	var a := p + Vector2(16, 26)
-	var b := p + Vector2(44, 26)
-	ground.draw_rect(Rect2(p + Vector2(6, 14), Vector2(60, 54)), Color(0, 0, 0, 0.3))
-	ground.draw_rect(Rect2(p + Vector2(6, 20), Vector2(48, 40)), Color(0.65, 0.43, 0.23))
-	ground.draw_rect(Rect2(p + Vector2(24, 44), Vector2(14, 16)), Color(0.22, 0.14, 0.07))
-	ground.draw_colored_polygon(PackedVector2Array([p, p + Vector2(60, 0), b, a]), Color(0.96, 0.79, 0.33))
-	ground.draw_colored_polygon(PackedVector2Array([p + Vector2(0, 50), a, b, p + Vector2(60, 50)]), Color(0.69, 0.48, 0.17))
-	ground.draw_colored_polygon(PackedVector2Array([p, a, p + Vector2(0, 50)]), Color(0.84, 0.65, 0.25))
-	ground.draw_colored_polygon(PackedVector2Array([p + Vector2(60, 0), p + Vector2(60, 50), b]), Color(0.77, 0.55, 0.18))
-	for offset in [4, 8]:
-		ground.draw_line(p + Vector2(offset, offset), p + Vector2(30 - offset, offset), Color(0.67, 0.47, 0.18), 1)
-	ground.draw_line(a, b, Color(0.4, 0.26, 0.1), 2)
+	var at := Vector2(cell) * T
+	_atlas(ground, TOWN, 64, at)
+	_atlas(ground, TOWN, 66, at + Vector2(T, 0))
+	_atlas(ground, TOWN, 84, at + Vector2(0, T))
+	_atlas(ground, TOWN, 85, at + Vector2(T, T))
 
 
 ## Figures follow the labour counts without feeding anything back into the world.
@@ -474,7 +469,6 @@ func _move_people(dt: float) -> void:
 		person.position = c.land.center(c.center) + Vector2(0, 28)
 		person.target = person.position
 		person.phase = figure_rng.randf_range(0, TAU)
-		person.colour = Color.from_hsv(figure_rng.randf(), 0.35, figure_rng.randf_range(0.55, 0.85))
 		figures.append(person)
 	figures.resize(mini(c.population, 300))
 	for index in figures.size():
@@ -489,6 +483,8 @@ func _move_people(dt: float) -> void:
 		person.walking = distance > 0.5
 		person.phase += dt * (8.0 if person.walking else 3.0)
 		if person.walking:
+			if absf(person.target.x - person.position.x) > 0.1:
+				person.facing_left = person.target.x < person.position.x
 			person.position = person.position.move_toward(person.target, dt * (13.0 + index % 5))
 		else:
 			person.pause -= dt
@@ -505,25 +501,32 @@ func _pick_spot(person: Figure) -> void:
 	person.pause = figure_rng.randf_range(2, 6)
 
 
-## Heads, coloured tunics and swaying limbs keep the crowd inexpensive.
+## Glows, selection and moving farmers leave the ground cache untouched.
 func _draw_people() -> void:
+	for f in c.fields:
+		people.draw_rect(Rect2(Vector2(f.rect.position) * T, Vector2(f.rect.size) * T), C_GOLD if f.id == selected else Color(0.45, 0.3, 0.12), false, 2)
+		if World.CROPS[f.crop].kind != "spirit root":
+			continue
+		for cell in c.cells(f.rect):
+			var i := c.land.index(cell)
+			if c.land.at(cell) != Land.TILLED or c.land.growth[i] <= 0:
+				continue
+			var pulse := 0.5 + 0.5 * sin(Time.get_ticks_msec() * 0.002 + _hash(cell.x, cell.y) * TAU)
+			for ring in 3:
+				var glow: Color = CROP_TINTS[f.crop]
+				glow.a = (0.035 + pulse * 0.025) * (ring + 1)
+				people.draw_circle(c.land.center(cell), 15.0 - ring * 3.0, glow)
+			_plant(people, cell, c.land.crops[i], c.land.growth[i])
 	if marking:
 		var rect := _mark_rect()
 		people.draw_rect(Rect2(Vector2(rect.position) * T, Vector2(rect.size) * T), Color(0.8, 0.9, 0.4, 0.3) if c.can_mark(rect, tool == 1) else Color(1, 0.2, 0.1, 0.4))
 	if c.site.x >= 0:
-		var plot := Rect2(Vector2(c.site) * T + Vector2(2, 2), Vector2(T * 2 - 4, T * 2 - 4))
-		people.draw_rect(plot, Color(0.52, 0.36, 0.19, 0.65))
-		people.draw_rect(plot, C_GOLD, false, 1)
-	for person in figures:
-		var sway := sin(person.phase)
-		var working := not person.walking and person.task < 2
-		var p := person.position
-		var bend := Vector2(2, 1) * sway if working and person.task == 0 else Vector2.ZERO
-		people.draw_line(p + Vector2(-2, 2), p + Vector2(-2, 5 + sway * float(person.walking)), Color(0.23, 0.17, 0.12), 2)
-		people.draw_line(p + Vector2(2, 2), p + Vector2(2, 5 - sway * float(person.walking)), Color(0.23, 0.17, 0.12), 2)
-		people.draw_rect(Rect2(p + Vector2(-3, -4) + bend, Vector2(6, 7)), person.colour)
-		people.draw_circle(p + Vector2(0, -6) + bend, 2.7, Color(0.65, 0.43, 0.27))
-		if working:
-			var hand := p + Vector2(5, -2 + sway * 3)
-			people.draw_line(p + Vector2(2, -2), hand, Color(0.65, 0.43, 0.27), 2)
-			people.draw_line(hand, hand + Vector2(3, 5 if person.task == 0 else -3), Color(0.35, 0.29, 0.2), 1.5)
+		var at := Vector2(c.site) * T
+		_atlas(people, TOWN, 84, at + Vector2(0, T), Color(1, 1, 1, 0.5))
+		_atlas(people, TOWN, 85, at + Vector2(T, T), Color(1, 1, 1, 0.5))
+		_atlas(people, FARM, 98, at + Vector2(0, T * 2))
+		_atlas(people, FARM, 99, at + Vector2(T, T * 2))
+		people.draw_rect(Rect2(at + Vector2(2, 2), Vector2(T * 2 - 4, T * 2 - 4)), C_GOLD, false, 1)
+	for index in figures.size():
+		var person := figures[index]
+		_atlas(people, FARM, 108 + index % 2, person.position - Vector2(T / 2, T - 5), Color.WHITE, person.facing_left)
