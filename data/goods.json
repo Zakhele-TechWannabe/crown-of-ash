@@ -99,6 +99,36 @@
 			"id": "mushrooms",
 			"name": "Mushrooms & shoots",
 			"parent": "vegetables"
+		},
+		{
+			"id": "materials",
+			"name": "Materials",
+			"parent": ""
+		},
+		{
+			"id": "wood",
+			"name": "Wood",
+			"parent": "materials"
+		},
+		{
+			"id": "earth",
+			"name": "Stone & earth",
+			"parent": "materials"
+		},
+		{
+			"id": "metal",
+			"name": "Ores & metal",
+			"parent": "materials"
+		},
+		{
+			"id": "fibre",
+			"name": "Fibre & hide",
+			"parent": "materials"
+		},
+		{
+			"id": "other_materials",
+			"name": "Other",
+			"parent": "materials"
 		}
 	],
 	"goods": [
@@ -2404,6 +2434,1411 @@
 			],
 			"facility": "garden",
 			"daily_yield": 0.05
+		},
+		{
+			"id": "firewood",
+			"name": "Firewood",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Split, seasoned wood keeps household cooking fires and winter hearths warm.",
+			"edible_by": [],
+			"colour": "a47b4f",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 150,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0,
+			"recipe": {
+				"pine_logs": 0.3
+			},
+			"recipe_batch": 3
+		},
+		{
+			"id": "pine_logs",
+			"name": "Pine logs",
+			"unit": "pieces",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Straight pine trunks from the forest edge supply the sawhorse and household woodpile.",
+			"edible_by": [],
+			"colour": "a87851",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 2
+		},
+		{
+			"id": "hardwood_logs",
+			"name": "Hardwood logs",
+			"unit": "pieces",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Dense hardwood logs make durable handles and slow-burning charcoal.",
+			"edible_by": [],
+			"colour": "ac7553",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 2
+		},
+		{
+			"id": "bamboo",
+			"name": "Bamboo",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Light bamboo poles serve as baskets, scaffolds and garden supports.",
+			"edible_by": [],
+			"colour": "b07255",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "planks",
+			"name": "Planks",
+			"unit": "pieces",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Sawn pine boards are stacked under cover for repairs and furniture.",
+			"edible_by": [],
+			"colour": "b46f57",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0,
+			"recipe": {
+				"pine_logs": 1
+			},
+			"recipe_batch": 0.45
+		},
+		{
+			"id": "charcoal",
+			"name": "Charcoal",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Hardwood is slowly charred in the covered kiln for clean, hot bloomery fires.",
+			"edible_by": [],
+			"colour": "b86c59",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Kiln",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kiln",
+			"daily_yield": 0,
+			"recipe": {
+				"hardwood_logs": 0.5
+			},
+			"recipe_batch": 0.9
+		},
+		{
+			"id": "spirit_ironwood",
+			"name": "Spirit-ironwood",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Qi-dense timber hard enough to turn an ordinary axe. Not gathered yet.",
+			"edible_by": [],
+			"colour": "bc695b",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0
+		},
+		{
+			"id": "thunder_struck_peach_wood",
+			"name": "Thunder-struck peach wood",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Peach wood marked by heavenly lightning, prized for protective talismans. Not gathered yet.",
+			"edible_by": [],
+			"colour": "c0665d",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0
+		},
+		{
+			"id": "ghost_willow",
+			"name": "Ghost-willow",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Pale willow from yin-rich ground, used in delicate spiritual craft. Not gathered yet.",
+			"edible_by": [],
+			"colour": "c4635f",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 3,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0
+		},
+		{
+			"id": "cloud_pine_heartwood",
+			"name": "Cloud-pine heartwood",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"wood"
+			],
+			"description": "Fragrant heartwood from pines above the mountain clouds. Not gathered yet.",
+			"edible_by": [],
+			"colour": "c86061",
+			"icon": "log",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0
+		},
+		{
+			"id": "fieldstone",
+			"name": "Fieldstone",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Loose stones gathered from the hillside build drains, walls and foundations.",
+			"edible_by": [],
+			"colour": "a1a394",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Quarry",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "cut_stone",
+			"name": "Cut stone",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Quarry blocks are dressed into regular faces for steps and strong foundations.",
+			"edible_by": [],
+			"colour": "a5a096",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Quarry",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "granite",
+			"name": "Granite",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Hard, heavy granite from the quarry is reserved for lasting stonework.",
+			"edible_by": [],
+			"colour": "a99d98",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Quarry",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "clay",
+			"name": "Clay",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Fine earth dug beside the water is kneaded for bricks, roof tiles and simple pots.",
+			"edible_by": [],
+			"colour": "ad9a9a",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Quarry",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 2
+		},
+		{
+			"id": "sand",
+			"name": "Sand",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Clean sand from dry banks mixes into mortar and furnace beds.",
+			"edible_by": [],
+			"colour": "b1979c",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Quarry",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "lime",
+			"name": "Lime",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Pale lime supplies mortar and prepares hides at the outlying tannery.",
+			"edible_by": [],
+			"colour": "b5949e",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Quarry",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "bricks",
+			"name": "Bricks",
+			"unit": "pieces",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Clay and firewood become warm red bricks in the village kiln.",
+			"edible_by": [],
+			"colour": "b991a0",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Kiln",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kiln",
+			"daily_yield": 0,
+			"recipe": {
+				"clay": 1,
+				"firewood": 0.3
+			},
+			"recipe_batch": 0.6
+		},
+		{
+			"id": "roof_tiles",
+			"name": "Roof tiles",
+			"unit": "pieces",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Thin clay tiles are fired in batches to keep cottage roofs dry.",
+			"edible_by": [],
+			"colour": "bd8ea2",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Kiln",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kiln",
+			"daily_yield": 0,
+			"recipe": {
+				"clay": 0.7,
+				"firewood": 0.2
+			},
+			"recipe_batch": 0.45
+		},
+		{
+			"id": "jade_vein_stone",
+			"name": "Jade-vein stone",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Stone threaded with faint green veins of spiritual jade. Not gathered yet.",
+			"edible_by": [],
+			"colour": "c18ba4",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0
+		},
+		{
+			"id": "spirit_jade_raw",
+			"name": "Spirit jade (raw)",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Unworked jade holding a quiet concentration of spiritual energy. Not gathered yet.",
+			"edible_by": [],
+			"colour": "c588a6",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0
+		},
+		{
+			"id": "star_iron_sand",
+			"name": "Star-iron sand",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"earth"
+			],
+			"description": "Heavy metallic grains left by ancient falling stars. Not gathered yet.",
+			"edible_by": [],
+			"colour": "c985a8",
+			"icon": "stone",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 3,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "quarry",
+			"daily_yield": 0
+		},
+		{
+			"id": "iron_ore",
+			"name": "Iron ore",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Iron-bearing rock travels from the mountain adit to the village bloomery.",
+			"edible_by": [],
+			"colour": "8c9299",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Mine",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0.95
+		},
+		{
+			"id": "copper_ore",
+			"name": "Copper ore",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Green-streaked ore is sorted into baskets beside the mine carts.",
+			"edible_by": [],
+			"colour": "908f9b",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Mine",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "tin",
+			"name": "Tin",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Small quantities of tin are saved for bronze casting.",
+			"edible_by": [],
+			"colour": "948c9d",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Mine",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "coal",
+			"name": "Coal",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Dark mineral fuel is kept in a dry heap beside the ore stores.",
+			"edible_by": [],
+			"colour": "98899f",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Mine",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "iron_ingots",
+			"name": "Iron ingots",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Ore and charcoal yield workable iron for the smith and village tool chest.",
+			"edible_by": [],
+			"colour": "9c86a1",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Smith",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "smith",
+			"daily_yield": 0,
+			"recipe": {
+				"iron_ore": 1.4,
+				"charcoal": 0.6
+			},
+			"recipe_batch": 0.45
+		},
+		{
+			"id": "copper",
+			"name": "Copper",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Smelted copper is stored for fittings, vessels and bronze.",
+			"edible_by": [],
+			"colour": "a083a3",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Smith",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "smith",
+			"daily_yield": 0,
+			"recipe": {
+				"copper_ore": 1.2,
+				"charcoal": 0.3
+			},
+			"recipe_batch": 0.2
+		},
+		{
+			"id": "bronze",
+			"name": "Bronze",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Copper and tin are alloyed over charcoal for durable cast fittings.",
+			"edible_by": [],
+			"colour": "a480a5",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Smith",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "smith",
+			"daily_yield": 0,
+			"recipe": {
+				"copper": 0.7,
+				"tin": 0.3,
+				"charcoal": 0.2
+			},
+			"recipe_batch": 0.12
+		},
+		{
+			"id": "tools",
+			"name": "Tools",
+			"unit": "pieces",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Iron heads and hardwood handles replace the village\u2019s slowly wearing tools.",
+			"edible_by": [],
+			"colour": "a87da7",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Smith",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "smith",
+			"daily_yield": 0,
+			"recipe": {
+				"iron_ingots": 0.3,
+				"hardwood_logs": 0.1
+			},
+			"recipe_batch": 0.12
+		},
+		{
+			"id": "cold_iron",
+			"name": "Cold iron",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Iron that carries a persistent spiritual chill into the forge. Not gathered yet.",
+			"edible_by": [],
+			"colour": "ac7aa9",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0
+		},
+		{
+			"id": "black_gold_ore",
+			"name": "Black gold ore",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Dark, lustrous ore reserved for a cultivator\u2019s furnace. Not gathered yet.",
+			"edible_by": [],
+			"colour": "b077ab",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0
+		},
+		{
+			"id": "meteoric_iron",
+			"name": "Meteoric iron",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Sky-fallen iron coveted by spiritual weapon smiths. Not gathered yet.",
+			"edible_by": [],
+			"colour": "b474ad",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 3,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0
+		},
+		{
+			"id": "spirit_copper",
+			"name": "Spirit copper",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"metal"
+			],
+			"description": "Copper whose veins conduct qi as readily as heat. Not gathered yet.",
+			"edible_by": [],
+			"colour": "b871af",
+			"icon": "ore",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "mine",
+			"daily_yield": 0
+		},
+		{
+			"id": "hemp",
+			"name": "Hemp",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Late-summer hemp stalks are dried and retted for the weaver\u2019s winter work.",
+			"edible_by": [],
+			"colour": "c4b58a",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 120,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Weaver",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 10,
+			"gather_days": [
+				153,
+				182
+			]
+		},
+		{
+			"id": "cotton",
+			"name": "Cotton",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Small household cotton plots supply soft fibre to the weaving shed.",
+			"edible_by": [],
+			"colour": "c8b28c",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Weaver",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "silk_cocoons",
+			"name": "Silk cocoons",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Cocoons from household silkworm trays await reeling at the weaving shed.",
+			"edible_by": [],
+			"colour": "ccaf8e",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Weaver",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "cloth",
+			"name": "Cloth",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Hemp fibre becomes plain, sturdy cloth for clothing and household repairs.",
+			"edible_by": [],
+			"colour": "d0ac90",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Weaver",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 0,
+			"recipe": {
+				"hemp": 1
+			},
+			"recipe_batch": 0.45
+		},
+		{
+			"id": "hides",
+			"name": "Hides",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "The hunters bring ordinary game hides back from the Eastern Hunting Grounds.",
+			"edible_by": [],
+			"colour": "d4a992",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Weaver",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "hunt",
+			"daily_yield": 0.25
+		},
+		{
+			"id": "leather",
+			"name": "Leather",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Hides and lime become supple leather at the tannery away from the cottages.",
+			"edible_by": [],
+			"colour": "d8a694",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Tanner",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "tanner",
+			"daily_yield": 0,
+			"recipe": {
+				"hides": 1,
+				"lime": 0.2
+			},
+			"recipe_batch": 0.15
+		},
+		{
+			"id": "rope",
+			"name": "Rope",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Twisted hemp rope binds loads, raises quarry blocks and mends village gear.",
+			"edible_by": [],
+			"colour": "dca396",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Weaver",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 0,
+			"recipe": {
+				"hemp": 0.6
+			},
+			"recipe_batch": 0.4
+		},
+		{
+			"id": "spirit_silk",
+			"name": "Spirit silk",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "Luminous silk spun by qi-fed silkworms. Not gathered yet.",
+			"edible_by": [],
+			"colour": "e0a098",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 0
+		},
+		{
+			"id": "demon_beast_hide",
+			"name": "Demon-beast hide",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"fibre"
+			],
+			"description": "A spirit beast\u2019s tough hide, beyond the village hunters\u2019 present work. Not gathered yet.",
+			"edible_by": [],
+			"colour": "e49d9a",
+			"icon": "spool",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "weaver",
+			"daily_yield": 0
+		},
+		{
+			"id": "lamp_oil",
+			"name": "Lamp oil",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"other_materials"
+			],
+			"description": "A small reserve of mundane oil lights village lamps after sunset.",
+			"edible_by": [],
+			"colour": "a4ad68",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "wax",
+			"name": "Wax",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"other_materials"
+			],
+			"description": "Wax collected during woodland and household beekeeping work is saved for candles.",
+			"edible_by": [],
+			"colour": "a8aa6a",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "common_herbs",
+			"name": "Common herbs",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"other_materials"
+			],
+			"description": "Common hedgerow herbs are gathered for household remedies and fragrant sachets.",
+			"edible_by": [],
+			"colour": "aca76c",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "resin",
+			"name": "Resin",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"other_materials"
+			],
+			"description": "Sticky pine resin seals woodwork and helps kindle the household hearth.",
+			"edible_by": [],
+			"colour": "b0a46e",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 25,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "Covered material store",
+			"source": "Woodcutting",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "spirit_herbs_low_grade",
+			"name": "Spirit herbs (low grade)",
+			"unit": "jin",
+			"category_path": [
+				"materials",
+				"other_materials"
+			],
+			"description": "Low-grade herbs nourished by spiritual soil and mountain mist. Not gathered yet.",
+			"edible_by": [],
+			"colour": "b4a170",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "Covered material store",
+			"source": "Not gathered yet",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "woodcutting",
+			"daily_yield": 0
 		}
 	]
 }

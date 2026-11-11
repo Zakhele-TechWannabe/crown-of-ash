@@ -3,22 +3,25 @@ extends Control
 var samples: Array[Vector2] = []
 var bars := false
 var caption := ""
+var unit := "jin"
 var font: Font = preload("res://assets/fonts/Lato-Bold.ttf")
 
 func _draw() -> void:
 	var ink := Color("513b28")
-	var area := Rect2(76, 32, maxf(100, size.x - 100), maxf(50, size.y - 66))
+	var maximum := 1.0
+	for p: Vector2 in samples:
+		maximum = maxf(maximum, p.y)
+	var maximum_text := "%.0f %s" % [maximum, unit]
+	var left := font.get_string_size(maximum_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x + 16
+	var area := Rect2(left, 32, maxf(100, size.x - left - 24), maxf(50, size.y - 66))
 	draw_string(font, Vector2(8, 20), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
 	draw_line(area.position, Vector2(area.position.x, area.end.y), ink)
 	draw_line(Vector2(area.position.x, area.end.y), area.end, ink)
 	if samples.is_empty():
 		draw_string(font, area.position + Vector2(16, 30), "No completed days / years yet", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
 		return
-	var maximum := 1.0
-	for p: Vector2 in samples:
-		maximum = maxf(maximum, p.y)
-	draw_string(font, Vector2(2, area.position.y + 14), "%.0f jin" % maximum, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
-	draw_string(font, Vector2(45, area.end.y), "0", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
+	draw_string(font, Vector2(2, area.position.y + 14), maximum_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
+	draw_string(font, Vector2(left - 24, area.end.y), "0", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
 	var previous := Vector2.ZERO
 	for i in samples.size():
 		var at := Vector2(area.position.x + (float(i) + 0.5) / samples.size() * area.size.x, area.end.y - samples[i].y / maximum * area.size.y)

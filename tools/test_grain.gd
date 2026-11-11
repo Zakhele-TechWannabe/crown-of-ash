@@ -57,7 +57,7 @@ func _initialize() -> void:
 	assert(jump.node_flow("spirit_rice", "children")[3] == 0)
 	for id: String in jump.goods:
 		assert(is_equal_approx(float(jump.goods[id].starting_rations) + jump.node_flow(id, "harvested")[3] - jump.node_flow(id, "adults")[3] - jump.node_flow(id, "children")[3] - jump.node_flow(id, "spoiled")[3] - jump.node_flow(id, "processed")[3], float(jump.stocks[id])))
-	assert(jump.goods.size() == 78 and jump.areas.spirit_rice == 220 and jump.areas.common_rice > 0)
+	assert(jump.descendants("food").size() == 78 and jump.areas.spirit_rice == 220 and jump.areas.common_rice > 0)
 	assert(is_equal_approx(jump.good_forecast("spirit_rice") / float(jump.areas.spirit_rice), jump.good_forecast("common_rice") / float(jump.areas.common_rice) * 0.4))
 	var protected: RefCounted = make_economy()
 	protected.stock = 0

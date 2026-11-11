@@ -11,7 +11,7 @@ func village() -> RefCounted:
 
 func _initialize() -> void:
 	var e := village()
-	assert(e.goods.size() == 78)
+	assert(e.descendants("food").size() == 78)
 	for id: String in e.goods:
 		var g: Dictionary = e.goods[id]
 		assert(g.has("source") and not g.seasons.is_empty() and not g.description.is_empty())

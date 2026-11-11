@@ -12,7 +12,7 @@ func run() -> void:
 	var ledger: PanelContainer = world.ground_view.ledger
 	world._go_to("Servants' Village", false)
 	var icon_hashes: Dictionary = {}
-	var contact := Image.create(650, 400, false, Image.FORMAT_RGBA8)
+	var contact := Image.create(650, ceili((ledger.life.economy.goods.size() + ledger.life.economy.catalogue.categories.size()) / 13.0) * 50, false, Image.FORMAT_RGBA8)
 	contact.fill(Color("e8dfc9"))
 	var icon_index := 0
 	for id: String in ledger.life.economy.goods:
@@ -28,7 +28,7 @@ func run() -> void:
 		assert(texture.get_image().get_used_rect().has_area())
 		contact.blit_rect(texture.get_image(), Rect2i(0, 0, 40, 40), Vector2i(icon_index % 13 * 50 + 5, icon_index / 13 * 50 + 5))
 		icon_index += 1
-	contact.resize(1300, 800, Image.INTERPOLATE_NEAREST)
+	contact.resize(contact.get_width() * 2, contact.get_height() * 2, Image.INTERPOLATE_NEAREST)
 	contact.save_png("res://out/food-icons.png")
 	for key: String in ledger.TABS:
 		ledger.open_tab(key)
@@ -90,7 +90,7 @@ func run() -> void:
 	space_key.keycode = KEY_SPACE
 	world.life._input(space_key)
 	assert(world.life.paused)
-	for index: int in 5:
+	for index: int in ledger.TABS.size():
 		var tab_key := InputEventKey.new()
 		tab_key.pressed = true
 		tab_key.keycode = KEY_F1 + index
@@ -181,7 +181,61 @@ func run() -> void:
 	ledger.show_granary()
 	await process_frame
 	assert(ledger.granary_card.visible and ledger.granary_card.size.x >= 460)
-	print("PASS ledger UI: tabs, KPI navigation/states, 1920/1366 layout, speed/keyboard controls, inventory paths/selection/back, wheel scrolling/camera isolation, follow, granary")
+	world.life.paused = true
+	world.life.minutes = 199 * 1440.0 + 720
+	world.life.economy.advance_to(world.life.minutes)
+	ledger.set_process(false)
+	for resolution: Vector2i in [Vector2i(1920, 1080), Vector2i(1366, 768)]:
+		root.content_scale_size = resolution
+		root.size = resolution
+		ledger._refresh_hud()
+		await process_frame
+		await process_frame
+		var paths: Array[String] = []
+		for tab: String in ledger.TABS: paths.append(tab)
+		for category: Dictionary in ledger.life.economy.catalogue.categories:
+			var ancestry: Array[String] = [category.id]
+			var ancestor: String = category.parent
+			while not ancestor.is_empty():
+				ancestry.push_front(ancestor)
+				for entry: Dictionary in ledger.life.economy.catalogue.categories:
+					if entry.id == ancestor:
+						ancestor = entry.parent
+						break
+			paths.append("/".join(ancestry))
+		for path: String in paths:
+			ledger.open_tab(path)
+			await settle(ledger)
+			check_text(world.ground_view.hud)
+			assert(ledger.size.x <= resolution.x / 2.0 + 1, "Drawer must remain half width: %s %s %s min %s" % [resolution, path, ledger.size, ledger.get_combined_minimum_size()])
+			if ledger.current in ["food", "materials"]:
+				var goods: Array[String] = []
+				for slot_button: Button in ledger.food_grid.get_children():
+					var id: String = slot_button.get_meta("food_id")
+					if ledger.life.economy.goods.has(id): goods.append(id)
+				for id: String in goods:
+					ledger.selected_food = id
+					ledger.refresh_values()
+					await process_frame
+					await process_frame
+					check_text(world.ground_view.hud)
+		for definition: Dictionary in ledger.KPIS:
+			var tip_panel := PanelContainer.new()
+			tip_panel.theme = ledger.theme
+			root.add_child(tip_panel)
+			tip_panel.add_child(ledger.kpi_cards[definition.id].button._make_custom_tooltip(ledger.kpi_cards[definition.id].button.tooltip_text))
+			await process_frame
+			await process_frame
+			check_text(tip_panel)
+			tip_panel.queue_free()
+		ledger.open_tab("work")
+		for id: String in ledger.workplaces(ledger.life.economy):
+			ledger.selected_work = id
+			ledger.refresh_values()
+			await process_frame
+			await process_frame
+			check_text(world.ground_view.hud)
+	print("PASS ledger UI: navigation, controls, camera isolation, follow, granary; all tabs, food paths/goods and work details fit at 1920x1080 and 1366x768 on day 200")
 	quit()
 
 # Heavy chunk workers can span a frame; a wall-clock timer does not imply the
@@ -191,3 +245,50 @@ func settle(ledger: PanelContainer) -> void:
 	if ledger.slide != null and ledger.slide.is_valid() and ledger.slide.is_running():
 		await ledger.slide.finished
 	await process_frame
+
+# Shape the actual wrapped lines with the inherited font. Check descendants even
+# below the scroll fold, since they become visible when scrolled into view.
+func check_text(node: Node) -> void:
+	if node is Control and not node.is_visible_in_tree(): return
+	if node is Label or node is Button:
+		assert_text(node.global_position.x >= -1 and node.global_position.x + node.size.x <= root.content_scale_size.x + 1, "Text control outside viewport: " + node.text)
+		var text: String = node.text
+		if not text.is_empty():
+			var font: Font = node.get_theme_font("font")
+			var px: int = node.get_theme_font_size("font_size")
+			var available: float = node.size.x
+			var available_height: float = node.size.y
+			if node is Button:
+				var style: StyleBox = node.get_theme_stylebox("normal")
+				available -= style.get_minimum_size().x
+				available_height -= style.get_minimum_size().y
+				if node.icon: available -= node.icon.get_width() + node.get_theme_constant("h_separation")
+			var paragraph := TextParagraph.new()
+			paragraph.width = maxf(1, available)
+			paragraph.break_flags = TextServer.BREAK_MANDATORY
+			if node.autowrap_mode != TextServer.AUTOWRAP_OFF:
+				paragraph.break_flags = TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE
+			paragraph.add_string(text, font, px)
+			for line in paragraph.get_line_count():
+				assert_text(paragraph.get_line_width(line) <= available + 1, "Text overflow: %s (%s > %s)" % [text, paragraph.get_line_width(line), available])
+			assert_text(paragraph.get_size().y <= available_height + 1, "Text height clipped: " + text)
+	if node is Button:
+		if node.has_meta("work_id"):
+			assert_text(is_equal_approx(node.size.x, 176), "Work cards must have consistent widths")
+		for child: Node in node.get_children():
+			if child is Container:
+				assert_text(child.position.y >= 0 and child.position.y + child.size.y <= node.size.y + 1, "Card content extends beyond button")
+	if node is Tree:
+		var item: TreeItem = node.get_root().get_first_child()
+		while item:
+			for col in node.columns:
+				var measured: float = node.get_theme_font("font").get_string_size(item.get_text(col), HORIZONTAL_ALIGNMENT_LEFT, -1, node.get_theme_font_size("font_size")).x
+				assert_text(measured <= node.get_column_width(col) - 12, "Table cell clipped: " + item.get_text(col))
+			item = item.get_next()
+	for child: Node in node.get_children(): check_text(child)
+
+func assert_text(condition: bool, message: String) -> void:
+	if not condition:
+		push_error(message)
+		quit(1)
+	assert(condition, message)

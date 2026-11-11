@@ -2380,5 +2380,108 @@
 				94
 			]
 		}
+	],
+	"material_sites": [
+		{
+			"id": "woodcutting",
+			"name": "Woodcutters\u2019 camp",
+			"at": [
+				95,
+				267
+			]
+		},
+		{
+			"id": "kiln",
+			"name": "Charcoal & brick kilns",
+			"at": [
+				93,
+				282
+			]
+		},
+		{
+			"id": "quarry",
+			"name": "Hillside quarry",
+			"at": [
+				-94,
+				55
+			]
+		},
+		{
+			"id": "clay",
+			"name": "Waterside clay pit",
+			"at": [
+				65,
+				285
+			]
+		},
+		{
+			"id": "mine",
+			"name": "Iron adit",
+			"at": [
+				-69,
+				-100
+			]
+		},
+		{
+			"id": "smith",
+			"name": "Village bloomery",
+			"at": [
+				25,
+				262
+			]
+		},
+		{
+			"id": "weaver",
+			"name": "Hemp & weaving shed",
+			"at": [
+				-35,
+				267
+			]
+		},
+		{
+			"id": "tanner",
+			"name": "Tannery",
+			"at": [
+				95,
+				310
+			]
+		}
+	],
+	"material_workers": [
+		{
+			"resident": 8,
+			"facility": "woodcutting",
+			"job": "woodcutter"
+		},
+		{
+			"resident": 9,
+			"facility": "quarry",
+			"job": "quarryman"
+		},
+		{
+			"resident": 12,
+			"facility": "mine",
+			"job": "miner"
+		},
+		{
+			"resident": 15,
+			"facility": "smith",
+			"job": "smith"
+		},
+		{
+			"resident": 17,
+			"facility": "weaver",
+			"job": "weaver"
+		},
+		{
+			"resident": 16,
+			"facility": "tanner",
+			"job": "tanner"
+		},
+		{
+			"resident": 11,
+			"facility": "kiln",
+			"job": "kiln tender"
+		}
 	]
 }

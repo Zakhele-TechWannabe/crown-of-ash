@@ -25,6 +25,9 @@ func _ready() -> void:
 	card.add_theme_stylebox_override("normal", preload("res://src/village_ledger.gd").skin("panel_beige"))
 	card.add_theme_font_override("font", load("res://assets/fonts/Lato-Bold.ttf"))
 	card.add_theme_font_size_override("font_size", 16)
+	card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	card.custom_minimum_size.x = 384
+	card.size.x = 384
 	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(card)
 	readout = Label.new()
@@ -108,8 +111,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode in [KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5]:
-			ledger.toggle_tab(["overview", "food", "people", "work", "chronicle"][event.keycode - KEY_F1])
+		if event.keycode >= KEY_F1 and event.keycode < KEY_F1 + ledger.TABS.size():
+			ledger.toggle_tab(ledger.TABS.keys()[event.keycode - KEY_F1])
 			get_viewport().set_input_as_handled()
 			return
 		if event.keycode == KEY_L or (event.keycode == KEY_ESCAPE and ledger.visible):

@@ -19,6 +19,8 @@ var square: Vector2i
 var well: Vector2i
 var food_places: Dictionary = {}
 var food_patches: Array[Dictionary] = []
+var material_patches: Array[Dictionary] = []
+var material_places: Dictionary = {}
 var shrine: Vector2i
 
 
@@ -40,7 +42,7 @@ func setup(map: Node2D) -> void:
 			var level: int = sect.level_at(at)
 			var south: bool = y - sect.center.y >= 151
 			var lodge_path: bool = x - sect.center.x >= 110 and y - sect.center.y >= 90 and y - sect.center.y <= 160
-			var walk: bool = (level >= 0 or south or lodge_path or surface == "stairs") and surface != "spring" and surface != "cave" and sect.art[i] < 0
+			var walk: bool = (level >= 0 or sect.dry.call(at) or surface == "stairs") and surface != "spring" and surface != "cave" and sect.art[i] < 0
 			if south or lodge_path:
 				walk = walk and sect.dry.call(at)
 			heights[i] = world.ground.terrace_level(at) if walk else maxi(0, level)
@@ -58,7 +60,7 @@ func setup(map: Node2D) -> void:
 				continue
 			for offset: Vector2i in [Vector2i.RIGHT, Vector2i.DOWN]:
 				var other := at + offset
-				if grid.is_in_boundsv(other) and not grid.is_point_solid(other) and sect.surface_at(other) != "stairs" and absi(heights[sect.index_at(at)] - heights[sect.index_at(other)]) > (1 if y - sect.center.y >= 151 or (x - sect.center.x >= 110 and y - sect.center.y >= 90) else 0):
+				if grid.is_in_boundsv(other) and not grid.is_point_solid(other) and sect.surface_at(other) != "stairs" and absi(heights[sect.index_at(at)] - heights[sect.index_at(other)]) > (1 if sect.level_at(at) < 0 or y - sect.center.y >= 151 or (x - sect.center.x >= 110 and y - sect.center.y >= 90) else 0):
 					faces.append(at)
 	for at: Vector2i in faces:
 		grid.set_point_solid(at)
@@ -72,6 +74,7 @@ func setup(map: Node2D) -> void:
 		if b.kind == "hall" and str(b.name) != "Granary" and int(b.rect[1]) >= 156:
 			shrine = nearest(sect.center + Vector2i(int(b.rect[0]) + 3, int(b.rect[1]) + int(b.rect[3])))
 	_setup_food_places()
+	_setup_material_places()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(sect.data.seed)
 	var families := ["Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Zhao", "Huang"]
@@ -102,6 +105,11 @@ func setup(map: Node2D) -> void:
 		people[n].job = trades[n - 8]
 		people[n].food_work = facilities[n - 8]
 		people[n].work = food_places[facilities[n - 8]]
+	# Shared morning food duties and afternoon material trades keep all twenty residents.
+	for assignment: Dictionary in sect.data.material_workers:
+		var n := int(assignment.resident)
+		people[n].material_work = str(assignment.facility)
+		people[n].job = str(assignment.job)
 	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
 	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
 	economy.setup(sect.data, people, int(world.data.get("seed", sect.data.seed)))
@@ -162,6 +170,21 @@ func _refresh(initial: bool = false) -> void:
 					activity = "bringing logs home"
 				elif p.kind == 8:
 					target = nearest((p.home if cycle % 2 else square) + Vector2i((cycle + n) % 7 - 3, (cycle * 3 + n) % 7 - 3))
+		if p.has("material_work") and activity not in ["sleeping at home", "preparing for the day", "eating a midday meal", "resting in the evening"]:
+			var trade: String = p.material_work
+			if time >= 840:
+				target = material_places[trade]
+				activity = "working at " + trade
+				if trade == "quarry" and economy.day % 3 == 0:
+					target = material_places.clay
+					activity = "digging clay beside the water"
+				if trade == "woodcutting" and economy.season() == 2:
+					activity = "stacking firewood for winter"
+				if trade == "weaver":
+					activity = "harvesting late-summer hemp" if economy.day >= 153 and economy.day <= 182 else "weaving cloth and twisting rope"
+				if trade in ["quarry", "mine"] and economy.season() == 3:
+					target = material_places.smith
+					activity = "winter maintenance in the smithy"
 		p.carrying = false
 		if activity.begins_with("weeding"):
 			activity = ["planting the paddies", "tending the paddies", "harvesting the paddies", "repairing tools and gathering firewood"][economy.season()]
@@ -253,6 +276,7 @@ func _draw() -> void:
 				if area.has_point(at):
 					draw_circle(at, 4, Color(0.3, 0.95, 0.85, 0.18 + 0.08 * sin(minutes + x + y)))
 	_draw_food_places(area)
+	_draw_material_places(area)
 	draw_order.sort_custom(_feet_before)
 	for p: Dictionary in draw_order:
 		var at := point(p)
@@ -310,8 +334,11 @@ func _headless_sim() -> void:
 			years = maxi(1, int(arg.trim_prefix("--years=")))
 	for y in years:
 		economy.advance_to((y * 365 + 199) * 1440.0)
-		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry"]:
-			print("DAY200 Year %d %s: %.2f jin" % [y + 1, group, economy.quantity(group) * 2])
+		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry", "wood", "earth", "metal", "fibre", "other_materials"]:
+			print("DAY200 Year %d %s: %.2f %s" % [y + 1, group, economy.quantity(group) * 2, "jin / pieces" if group in ["wood", "earth", "metal", "fibre", "other_materials"] else "jin"])
+		for id: String in economy.descendants("materials"):
+			if economy.goods[id].grade == "mortal":
+				print("DAY200 Year %d %s: %.2f %s" % [y + 1, id, float(economy.stocks[id]) * 2, economy.goods[id].unit])
 		economy.advance_to((y + 1) * 365 * 1440.0)
 	for summary: String in economy.summaries:
 		print(summary)
@@ -340,7 +367,7 @@ func _setup_food_places() -> void:
 		var at: Vector2i = sect.center + Vector2i(int(b.rect[0]) - 3, int(b.rect[1]) + 2)
 		food_patches.append({"kind": "garden", "tile": at, "tiles": _food_footprint(at, Vector2i(2, 2), occupied)})
 
-func _food_footprint(origin: Vector2i, size: Vector2i, occupied: Dictionary) -> Array[Vector2i]:
+func _food_footprint(origin: Vector2i, size: Vector2i, occupied: Dictionary, max_slope: int = -1) -> Array[Vector2i]:
 	for radius in range(25):
 		for dy in range(-radius, radius + 1):
 			for dx in range(-radius, radius + 1):
@@ -355,6 +382,14 @@ func _food_footprint(origin: Vector2i, size: Vector2i, occupied: Dictionary) -> 
 						if i < 0 or occupied.has(at) or sect.surface_at(at) not in ["", "grass", "garden"] or sect.art[i] >= 0 or not sect.dry.call(at):
 							valid = false
 						tiles.append(at)
+				if valid and max_slope >= 0:
+					var low := 1000
+					var high := -1000
+					for tile: Vector2i in tiles:
+						var level: int = world.ground.terrace_level(tile)
+						low = mini(low, level)
+						high = maxi(high, level)
+					valid = high - low <= max_slope
 				if valid:
 					for at: Vector2i in tiles:
 						occupied[at] = true
@@ -431,3 +466,85 @@ func _draw_food_places(area: Rect2) -> void:
 				for i in 4:
 					draw_line(at + Vector2(i * 10 - 14, -26), at + Vector2(i * 10 - 14, -19), Color("c3b492"), 1)
 					draw_rect(Rect2(at + Vector2(i * 10 - 17, -19), Vector2(6, 11)), Color("b4775e"))
+
+func _setup_material_places() -> void:
+	var occupied: Dictionary = {}
+	for patch: Dictionary in food_patches:
+		for tile: Vector2i in patch.tiles: occupied[tile] = true
+	for plan: Dictionary in sect.data.material_sites:
+		var origin: Vector2i = sect.center + Vector2i(int(plan.at[0]), int(plan.at[1]))
+		var tiles := _food_footprint(origin, Vector2i(6, 4), occupied, 2)
+		assert(not tiles.is_empty(), "No dry material footprint: " + str(plan.id))
+		var low := 1000
+		var high := -1000
+		for tile: Vector2i in tiles:
+			var level: int = world.ground.terrace_level(tile)
+			low = mini(low, level)
+			high = maxi(high, level)
+		assert(high - low <= 3, "Unsafe worksite slope: " + str(plan.id))
+		var at := nearest(tiles[0])
+		assert(Vector2(at).distance_to(Vector2(tiles[0])) <= 8, "Workplace too far from material site")
+		material_places[plan.id] = at
+		material_patches.append({"kind": plan.id, "tiles": tiles, "tile": at})
+		sect.labels.append({"name": plan.name, "tile": tiles[0]})
+		print("MATERIAL SITE %s: %s levels %d..%d dry tiles %d" % [plan.id, tiles[0] - sect.center, low, high, tiles.size()])
+
+func _draw_material_places(area: Rect2) -> void:
+	for patch: Dictionary in material_patches:
+		var at := (_food_point(patch.tiles[0]) + _food_point(patch.tiles[-1])) * 0.5
+		if not area.grow(500).has_point(at): continue
+		var timber := Color("795336")
+		var rock := Color("99988b")
+		for tile: Vector2i in patch.tiles:
+			draw_rect(Rect2(_food_point(tile) - Vector2(16, 16), Vector2(32, 32)), Color("8d785b"))
+		match str(patch.kind):
+			"woodcutting":
+				for x in [-65, 65]:
+					draw_rect(Rect2(at + Vector2(x - 8, -30), Vector2(16, 14)), timber)
+					draw_circle(at + Vector2(x, -30), 9, Color("c69b69"))
+					draw_arc(at + Vector2(x, -30), 5, 0, TAU, 12, timber, 1)
+				for i in 5:
+					var pos := at + Vector2(i * 24 - 50, i % 2 * 24)
+					draw_rect(Rect2(pos, Vector2(25, 10)), timber)
+					draw_circle(pos, 6, Color("c69b69"))
+				draw_line(at + Vector2(-20, -25), at + Vector2(20, -25), timber, 6)
+				for x in [-15, 15]: draw_line(at + Vector2(x, -25), at + Vector2(x * 1.5, 0), timber, 4)
+			"quarry", "mine":
+				draw_rect(Rect2(at + Vector2(-60, -45), Vector2(120, 30)), rock)
+				for i in 4: draw_rect(Rect2(at + Vector2(i * 26 - 50, 10), Vector2(22, 16)), rock.lightened(0.15))
+				if patch.kind == "mine":
+					draw_rect(Rect2(at + Vector2(-18, -42), Vector2(36, 32)), Color("292c2d"))
+					for x in [-40, 20]:
+						draw_rect(Rect2(at + Vector2(x, 0), Vector2(25, 14)), timber)
+						draw_circle(at + Vector2(x + 5, 16), 4, Color("454848"))
+						draw_circle(at + Vector2(x + 20, 16), 4, Color("454848"))
+						draw_circle(at + Vector2(x + 12, 1), 6, rock.darkened(0.25))
+				else:
+					draw_line(at + Vector2(35, -65), at + Vector2(15, 5), timber, 4)
+					draw_line(at + Vector2(35, -65), at + Vector2(60, 5), timber, 4)
+					draw_line(at + Vector2(35, -65), at + Vector2(35, -5), Color("d3c7a3"), 2)
+			"clay":
+				_draw_material_pit(at, Color("aa7654"))
+			"kiln", "smith":
+				for x in [-35, 25]:
+					draw_circle(at + Vector2(x, 0), 22, Color("55554c") if x < 0 and patch.kind == "kiln" else Color("aa7352"))
+					draw_rect(Rect2(at + Vector2(x - 7, -8), Vector2(14, 18)), Color("302e2c"))
+					draw_rect(Rect2(at + Vector2(x - 3, 0), Vector2(6, 8)), Color("e29b45"))
+			"weaver":
+				draw_rect(Rect2(at + Vector2(-32, -60), Vector2(64, 30)), timber)
+				draw_rect(Rect2(at + Vector2(-37, -65), Vector2(74, 8)), Color("8e6547"))
+				for i in 12:
+					var pos := at + Vector2(i % 6 * 20 - 60, i / 6 * 24)
+					draw_line(pos, pos - Vector2(0, 26), Color("648348"), 3)
+					draw_line(pos - Vector2(8, 15), pos + Vector2(8, -22), Color("789950"), 3)
+				draw_rect(Rect2(at + Vector2(-25, -58), Vector2(50, 22)), timber)
+				for i in 10: draw_line(at + Vector2(i * 4 - 18, -55), at + Vector2(i * 4 - 18, -37), Color("e2d3a2"), 1)
+			"tanner":
+				for x in [-40, 0, 40]:
+					draw_rect(Rect2(at + Vector2(x - 12, -30), Vector2(24, 38)), timber, false, 3)
+					draw_rect(Rect2(at + Vector2(x - 8, -25), Vector2(16, 26)), Color("b59a72"))
+
+func _draw_material_pit(at: Vector2, colour: Color) -> void:
+	draw_set_transform(at, 0, Vector2(2, 1))
+	draw_circle(Vector2.ZERO, 25, colour)
+	draw_set_transform(Vector2.ZERO)

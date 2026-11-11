@@ -299,6 +299,7 @@ func _thresholds() -> void:
 
 func _finish_day() -> void:
 	_food_production()
+	_material_production()
 	var labor := 0.0
 	if not no_farmers:
 		var autumn := day > 182 and day <= 273
@@ -367,8 +368,9 @@ func _finish_day() -> void:
 		p.rice_today = 0.0
 	if day == 365:
 		harvest_history.append(Vector2(year, produced))
-		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry"]:
-			summaries.append("Year %d %s: stored %.2f jin | produced %.2f | eaten %.2f | processed %.2f | spoiled %.2f" % [year, group, quantity(group) * 2, node_flow(group, "harvested")[2] * 2, (node_flow(group, "adults")[2] + node_flow(group, "children")[2]) * 2, node_flow(group, "processed")[2] * 2, node_flow(group, "spoiled")[2] * 2])
+		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry", "wood", "earth", "metal", "fibre", "other_materials"]:
+			var units := "jin / pieces" if group in ["wood", "earth", "metal", "fibre", "other_materials"] else "jin"
+			summaries.append("Year %d %s: stored %.2f %s | produced %.2f | eaten %.2f | processed %.2f | spoiled %.2f" % [year, group, quantity(group) * 2, units, node_flow(group, "harvested")[2] * 2, (node_flow(group, "adults")[2] + node_flow(group, "children")[2]) * 2, node_flow(group, "processed")[2] * 2, node_flow(group, "spoiled")[2] * 2])
 		summaries.append("Year %d: stock %.2f | harvest %.2f | consumed %.2f | spoilage %.2f | balance %+.2f | minimum %.2f | hungry %d" % [year, stock, produced, consumed, spoiled, produced - consumed - spoiled - flow_values("processed")[2], minimum, hungry_count])
 
 func after_harvest_days() -> float:
@@ -413,7 +415,7 @@ func _recipe(output: String, ingredients: Dictionary, batch: float) -> void:
 		return
 	for id: String in ingredients:
 		var used := possible * float(ingredients[id])
-		stocks[id] -= used
+		stocks[id] = maxf(0.0, float(stocks[id]) - used)
 		record_good(id, "processed", used)
 	_add_food(output, possible)
 
@@ -426,7 +428,7 @@ func _food_production() -> void:
 		workers[facility] = float(workers.get(facility, 0.0)) + EFFECT[int(p.hunger)]
 	for id: String in goods:
 		var g: Dictionary = goods[id]
-		if not g.has("facility") or SEASONS[season()] not in g.seasons:
+		if "food" not in g.category_path or not g.has("facility") or SEASONS[season()] not in g.seasons:
 			continue
 		var staffing := minf(1.0, float(workers.get(g.facility, 0.0)))
 		if g.facility == "apiary":
@@ -461,3 +463,33 @@ func _food_production() -> void:
 		note("Autumn slaughter; the kitchen salts fish and cures pork for winter")
 	elif day == 273:
 		note("Pickling done; jars and dried provisions fill the winter pantry")
+
+# Materials share the ledger's half-unit storage convention; UI converts to jin/pieces.
+func _material_production() -> void:
+	var staffing: Dictionary = {}
+	for person: Dictionary in people:
+		var trade := str(person.get("material_work", ""))
+		staffing[trade] = float(staffing.get(trade, 0.0)) + EFFECT[int(person.hunger)]
+		if person.get("food_work", "") == "hunt":
+			staffing["hunt"] = EFFECT[int(person.hunger)]
+	for id: String in goods:
+		var g: Dictionary = goods[id]
+		if "materials" not in g.category_path or g.grade != "mortal" or SEASONS[season()] not in g.seasons:
+			continue
+		var hands := minf(1.0, float(staffing.get(g.facility, 0.0)))
+		if hands <= 0:
+			continue
+		if g.has("recipe"):
+			_recipe(id, g.recipe, float(g.recipe_batch) * hands)
+		elif not g.has("gather_days") or (day >= int(g.gather_days[0]) and day <= int(g.gather_days[1])):
+			_add_food(id, float(g.daily_yield) * hands * (1.5 if g.facility == "woodcutting" and season() == 2 else 1.0))
+	for id: String in ["firewood", "tools", "cloth"]:
+		var wanted := (1.4 if season() == 3 else 0.7) if id == "firewood" else 0.025
+		var used := minf(float(stocks[id]), wanted)
+		stocks[id] = maxf(0.0, float(stocks[id]) - used)
+		record_good(id, "processed", used)
+	if year == 1 and day == 1:
+		if node_flow("bricks", "harvested")[3] > 0: note("First bricks fired in the village kiln")
+		if node_flow("iron_ingots", "harvested")[3] > 0: note("First iron smelted in the bloomery")
+	if day == 273 and float(stocks.firewood) >= 130:
+		note("Winter woodpile ready; cooking and heating fuel sheltered")

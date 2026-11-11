@@ -1,8 +1,18 @@
 extends PanelContainer
 ## Tab registry and economy flow keys keep presentation separate from simulation.
-const TABS := {"overview": "Overview", "food": "Food", "people": "People", "work": "Work & fields", "chronicle": "Chronicle"}
+class LedgerButton extends Button:
+	func _make_custom_tooltip(for_text: String) -> Object:
+		var tip := Label.new()
+		tip.text = for_text
+		tip.custom_minimum_size.x = minf(448, get_viewport_rect().size.x - 32)
+		tip.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		return tip
+
+const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "work": "Work & fields", "chronicle": "Chronicle"}
 const INK := Color("493423")
 const GOLD := Color("a57927")
+var selected_work := ""
 var selected_food := ""
 var food_path: Array[String] = ["food"]
 var food_grid: GridContainer
@@ -51,7 +61,7 @@ static func skin(file: String) -> StyleBoxTexture:
 	box.texture = load("res://assets/ui/kenney-rpg/" + file + ".png")
 	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
 		box.set_texture_margin(side, 8)
-		box.set_content_margin(side, 10)
+		box.set_content_margin(side, 8)
 	return box
 
 func icon(kind: String) -> Texture2D:
@@ -82,12 +92,20 @@ func setup(ground_view: Node2D) -> void:
 	body_font.opentype_features = {"tnum": 1}
 	parchment.default_font = body_font
 	parchment.default_font_size = 16
+	for container_type: String in ["HBoxContainer", "VBoxContainer"]:
+		parchment.set_constant("separation", container_type, 8)
+	parchment.set_font("font", "TooltipLabel", body_font)
+	parchment.set_font_size("font_size", "TooltipLabel", 14)
+	parchment.set_color("font_color", "TooltipLabel", INK)
+	parchment.set_stylebox("panel", "TooltipPanel", skin("panel_beige"))
 	for type: String in ["Label", "Button", "CheckBox", "Tree", "OptionButton"]:
 		parchment.set_color("font_color", type, INK)
 		parchment.set_color("font_hover_color", type, INK)
 		parchment.set_color("font_pressed_color", type, INK)
 	parchment.set_stylebox("panel", "PanelContainer", skin("panel_beige"))
 	parchment.set_stylebox("panel", "Tree", skin("panelInset_beigeLight"))
+	parchment.set_stylebox("background", "ProgressBar", skin("barBack_horizontalMid"))
+	parchment.set_stylebox("fill", "ProgressBar", skin("barYellow_horizontalMid"))
 	for state: String in ["normal", "hover", "focus", "disabled"]:
 		var button_skin := skin("buttonLong_brown")
 		button_skin.set_content_margin(SIDE_LEFT, 5)
@@ -100,6 +118,8 @@ func setup(ground_view: Node2D) -> void:
 	mouse_force_pass_scroll_events = false
 	theme = parchment
 	_build_hud(parchment)
+	get_viewport().size_changed.connect(func() -> void:
+		if visible: refresh.call_deferred())
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	anchor_left = 0.5
 	anchor_right = 1.0
@@ -113,7 +133,7 @@ func setup(ground_view: Node2D) -> void:
 	book.add_child(tabs)
 
 	for key: String in TABS:
-		var tab := button(tabs, {"overview": "Overview", "food": "Food", "people": "People", "work": "Work", "chronicle": "Chronicle"}[key], func() -> void: open_tab(key))
+		var tab := button(tabs, {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "work": "Work", "chronicle": "Chronicle"}[key], func() -> void: open_tab(key))
 		tab.icon = icon(key)
 	button(tabs, "×", close)
 	var scroll := ScrollContainer.new()
@@ -125,7 +145,7 @@ func setup(ground_view: Node2D) -> void:
 	book.add_child(scroll)
 	content = VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", 12)
+	content.add_theme_constant_override("separation", 8)
 	scroll.add_child(content)
 	hide()
 	for arg: String in OS.get_cmdline_user_args():
@@ -144,8 +164,10 @@ func label(parent: Node, text: String, heading: bool = false) -> Label:
 	return node
 
 func button(parent: Node, text: String, action: Callable) -> Button:
-	var node := Button.new()
+	var node := LedgerButton.new()
 	node.text = text
+	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	node.pressed.connect(action)
 	parent.add_child(node)
 	return node
@@ -159,7 +181,7 @@ func _build_hud(parchment: Theme) -> void:
 	row.add_theme_constant_override("separation", 8)
 	hud_panel.add_child(row)
 	var location := VBoxContainer.new()
-	location.custom_minimum_size.x = 240
+	location.custom_minimum_size.x = 208
 	location.add_theme_constant_override("separation", 0)
 	row.add_child(location)
 	view.place = label(location, "Servants' Village")
@@ -199,7 +221,7 @@ func _build_hud(parchment: Theme) -> void:
 	space.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(space)
 	var speed_group := HBoxContainer.new()
-	speed_group.add_theme_constant_override("separation", 2)
+	speed_group.add_theme_constant_override("separation", 8)
 	row.add_child(speed_group)
 	pause_button = button(speed_group, "Ⅱ", func() -> void: life.paused = not life.paused; _refresh_hud())
 	pause_button.custom_minimum_size.x = 32
@@ -253,14 +275,14 @@ func open_tab(key: String) -> void:
 		slide = create_tween().set_parallel(true)
 		slide.tween_property(self, "offset_left", 0.0, 0.18)
 		slide.tween_property(self, "offset_right", 0.0, 0.18)
-	if key.begins_with("food"):
-		food_path = ["food"]
+	if key.begins_with("food") or key.begins_with("materials"):
+		food_path = ["materials" if key.begins_with("materials") else "food"]
 		selected_food = ""
 		for part: String in key.split("/").slice(1):
 			for category: Dictionary in life.economy.catalogue.categories:
 				if category.id == part and category.parent == food_path[-1]:
 					food_path.append(part)
-		key = "food"
+		key = food_path[0]
 	current = key if TABS.has(key) else "overview"
 	show()
 	refresh()
@@ -329,13 +351,21 @@ func _refresh_hud() -> void:
 		var entry: Dictionary = kpi_cards[definition.id]
 		entry.label.visible = not narrow
 		entry.button.custom_minimum_size.x = 112 if narrow else 126
+		var font: Font = entry.value.get_theme_font("font")
+		var available: float = entry.button.custom_minimum_size.x - 48
+		var px := 19
+		if font.get_string_size(entry.value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x > available:
+			px = 18
+		entry.value.add_theme_font_size_override("font_size", px)
+		if definition.id == "harvest" and e.season() != 3 and font.get_string_size(entry.value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x > available:
+			entry.value.text = "~%.0fk" % (e.forecast() * 2.0 / 1000.0)
 
 
 func refresh() -> void:
 	for child: Node in content.get_children():
 		content.remove_child(child)
 		child.queue_free()
-	label(content, TABS[current], true)
+	section(content, TABS[current])
 	if current == "people":
 		var filters := HBoxContainer.new()
 		content.add_child(filters)
@@ -370,26 +400,12 @@ func refresh_values() -> void:
 	var data := VBoxContainer.new()
 	data.set_meta("data", true)
 	data.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	data.add_theme_constant_override("separation", 12)
+	data.add_theme_constant_override("separation", 8)
 	content.add_child(data)
 	var e: RefCounted = life.economy
 	match current:
-		"overview":
-			label(data, "%d villagers · %d hungry\nFood in the Granary: %s jin · %.1f days\nRation level: %d%% · Daily need: %s jin\nHarvest forecast: %s jin · Balance so far this year: %s jin\n%s · %s" % [life.people.size(), e.hungry_count, amount(e.stock), e.days_left(), roundi(e.ration() * 100), amount(e.daily_need()), amount(e.forecast()), amount(e.produced - e.consumed - e.spoiled - e.flow_values("processed")[2]), e.SEASONS[e.season()], stage()])
-			var alerts := "Alerts: "
-			alerts += "Low food. " if e.days_left() < 30 else ""
-			alerts += "Rationing active. " if e.ration() < 1 else ""
-			alerts += "%d villagers hungry." % e.hungry_count if e.hungry_count else ""
-			label(data, alerts if alerts != "Alerts: " else "Alerts: village supplied")
-			var crisis := CheckBox.new()
-			crisis.text = "Pause on crisis"
-			crisis.button_pressed = e.pause_on_crisis
-			crisis.toggled.connect(func(value: bool) -> void: e.pause_on_crisis = value)
-			data.add_child(crisis)
-			label(data, "Latest chronicle", true)
-			for i in range(e.chronicle.size() - 1, maxi(-1, e.chronicle.size() - 6), -1):
-				label(data, e.chronicle[i])
-		"food": _food(data, e)
+		"overview": _overview(data, e)
+		"food", "materials": _food(data, e)
 		"people": _people(data)
 		"work": _work(data, e)
 		"chronicle":
@@ -420,13 +436,32 @@ func table(parent: Node, headers: Array, rows: Array, _height: float = 200) -> T
 	widget.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for i in headers.size():
 		widget.set_column_title(i, headers[i])
-		widget.set_column_expand(i, true)
+		widget.set_column_expand(i, false)
+		var available := maxf(400, get_viewport_rect().size.x * 0.5 - 56)
+		var share := 1.0 / headers.size()
+		if headers.size() > 2:
+			share = 0.32 if i == 0 else 0.68 / (headers.size() - 1)
+		widget.set_column_custom_minimum_width(i, int(available * share))
 	var root := widget.create_item()
+	var widths: Array[int] = []
+	for i in headers.size():
+		var share := (0.32 if i == 0 else 0.68 / (headers.size() - 1)) if headers.size() > 2 else 0.5
+		widths.append(int(maxf(400, get_viewport_rect().size.x * 0.5 - 56) * share))
 	for row: Array in rows:
 		var item := widget.create_item(root)
 		for i in row.size():
-			item.set_text(i, str(row[i]))
-			if i > 0:
+			var text := str(row[i])
+			item.set_tooltip_text(i, text)
+			var font := get_theme_font("font", "Tree")
+			var limit: int = widths[i] - 16
+			var numeric := text.replace(",", "").replace("−", "-")
+			if numeric.is_valid_float() and font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x > limit:
+				var value := float(numeric)
+				text = "%.1fm" % (value / 1000000.0) if absf(value) >= 1000000 else "%.1fk" % (value / 1000.0)
+			while font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x > limit and text.length() > 1:
+				text = text.left(text.length() - 2) + "…"
+			item.set_text(i, text)
+			if i > 0 and headers[i] not in ["Job", "Fare", "Activity", "Status", "Crop", "Stage"]:
 				item.set_text_alignment(i, HORIZONTAL_ALIGNMENT_RIGHT)
 	parent.add_child(widget)
 	return widget
@@ -449,7 +484,7 @@ func _food(parent: Node, e: RefCounted) -> void:
 	food_grid.add_theme_constant_override("h_separation", 8)
 	food_grid.add_theme_constant_override("v_separation", 8)
 	parent.add_child(food_grid)
-	food_grid.columns = maxi(1, int((size.x - 48) / 112))
+	food_grid.columns = maxi(1, int((get_viewport_rect().size.x * 0.5 - 48) / 112))
 	food_grid.resized.connect(func() -> void:
 		food_grid.columns = maxi(1, int(food_grid.size.x / 112)))
 	for category: Dictionary in e.catalogue.categories:
@@ -468,11 +503,18 @@ func _food(parent: Node, e: RefCounted) -> void:
 	if is_good:
 		var g: Dictionary = e.goods[id]
 		label(parent, g.description)
+		if g.has("recipe"):
+			var ingredients: Array[String] = []
+			for ingredient: String in g.recipe:
+				ingredients.append("%s %s" % [str(g.recipe[ingredient]), e.goods[ingredient].name])
+			label(parent, "Recipe ratio: " + ", ".join(ingredients))
+		if g.get("gather_days", []).size() == 2:
+			label(parent, "Harvest days %d–%d · late summer" % [int(g.gather_days[0]), int(g.gather_days[1])])
 		label(parent, "Source: %s\nSeason: %s\nStore: %s · Spoilage each season: %d%%\nUnit: %s" % [g.get("source", "Sect fields"), ", ".join(g.get("seasons", ["Autumn"])), g.store, roundi(float(g.seasonal_spoilage) * 100), g.unit])
 	var standing := 0.0
 	for good: String in e.descendants(id):
 		standing += float(e.standing[good]) if e.season() == 2 else (e.good_forecast(good) if e.season() < 2 else 0.0)
-	label(parent, "Stored in %s: %s %s" % [e.goods[id].store if is_good else "village stores", amount(e.quantity(id)), "eggs" if id == "eggs" else "jin"])
+	label(parent, "Stored in %s: %s %s" % [e.goods[id].store if is_good else "village stores", amount(e.quantity(id)), str(e.goods[id].unit) if is_good else "jin / pieces"])
 	if standing > 0:
 		label(parent, "Standing in fields: %s jin" % amount(standing))
 	if not is_good:
@@ -495,19 +537,20 @@ func _food(parent: Node, e: RefCounted) -> void:
 			breakdown.add_child(segment)
 
 	var rows: Array = []
-	for key: String in {"harvested": "Produced / gathered", "adults": "Adults ate", "children": "Children ate", "spoiled": "Spoiled", "processed": "Kitchen ingredients"}:
-		var names := {"harvested": "Produced / gathered", "adults": "Adults ate", "children": "Children ate", "spoiled": "Spoiled", "processed": "Kitchen ingredients"}
+	for key: String in {"harvested": "Produced / gathered", "adults": "Adults ate", "children": "Children ate", "spoiled": "Spoiled", "processed": "Used / ingredients"}:
+		var names := {"harvested": "Produced / gathered", "adults": "Adults ate", "children": "Children ate", "spoiled": "Spoiled", "processed": "Used / ingredients"}
 		var row: Array = [names[key]]
 		for value: float in e.node_flow(id, key):
 			row.append(amount(value))
 		rows.append(row)
-	table(parent, ["Flows · eggs" if id == "eggs" else "Flows · jin", "Today", "Season", "Year", "All time"], rows, 245)
-	label(parent, "Wild provisions (separate): %s jin today · %s jin this year" % [amount(e.flow_values("foraged")[0]), amount(e.flow_values("foraged")[2])])
+	table(parent, ["Flows · " + str(e.goods[id].unit) if is_good else "Flows · units", "Today", "Season", "Year", "All time"], rows, 245)
+	if current == "food":
+		label(parent, "Wild provisions (separate): %s jin today · %s jin this year" % [amount(e.flow_values("foraged")[0]), amount(e.flow_values("foraged")[2])])
 	var edible: bool = not is_good or "mortals" in e.goods[id].edible_by
 	if "grains" in (e.goods[id].category_path if is_good else [id]):
 		label(parent, "Need: %s jin daily · Ration: %d%%\nDays remaining: %s · Harvest begins in %d days\nProjected stock at harvest: %s jin (before spoilage)\nForecast: %s jin · Care %.1f%% · Weather %.2f" % [amount(e.daily_need() if edible else 0.0), roundi(e.ration() * 100), "%.1f" % (e.edible_quantity(id) / e.daily_need()) if edible else "Reserved for cultivators", e.days_to_harvest(), amount(maxf(0, e.quantity(id) - (e.daily_need() * e.ration() * e.days_to_harvest() if edible else 0.0))), amount(e.good_forecast(id)), e.care() * 100, e.weather])
 	else:
-		label(parent, "Fresh provisions reach the table first. The village kitchen turns autumn surpluses into winter stores.")
+		label(parent, "Mortal resources supply households and crafts. Spirit materials are not gathered yet." if current == "materials" else "Fresh provisions reach the table first. The village kitchen turns autumn surpluses into winter stores.")
 	if is_good:
 		if "grains" in e.goods[id].category_path:
 			label(parent, "Plots: %d mu · Base yield %.2f jin / mu" % [e.areas[id], float(e.goods[id].yield_rations_per_mu) * 2])
@@ -516,6 +559,7 @@ func _food(parent: Node, e: RefCounted) -> void:
 			chart.custom_minimum_size.y = 200
 			chart.bars = annual
 			chart.caption = "Yearly production" if annual else "Stock · last two years"
+			chart.unit = str(e.goods[id].unit)
 			chart.samples.assign(e.annual_histories[id] if annual else e.histories[id])
 			if annual:
 				chart.samples.append(Vector2(e.year, e.node_flow(id, "harvested")[2]))
@@ -539,7 +583,7 @@ func owns_pointer(event: InputEvent) -> bool:
 	return is_visible_in_tree() and event is InputEventMouse and get_global_rect().has_point(event.position)
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and current == "food":
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and current in ["food", "materials"]:
 		food_up()
 	if event is InputEventMouse:
 		accept_event()
@@ -548,11 +592,11 @@ func _input(event: InputEvent) -> void:
 	if owns_pointer(event):
 		view.dragging = false
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.pressed and current == "food":
+			if event.pressed and current in ["food", "materials"]:
 				food_up()
 			get_viewport().set_input_as_handled()
 			return
-	if is_visible_in_tree() and current == "food" and event is InputEventKey and event.pressed and event.keycode == KEY_BACKSPACE:
+	if is_visible_in_tree() and current in ["food", "materials"] and event is InputEventKey and event.pressed and event.keycode == KEY_BACKSPACE:
 		food_up()
 		get_viewport().set_input_as_handled()
 
@@ -562,9 +606,9 @@ func grain_icon(id: String, colour: Color) -> Texture2D:
 	var image := Image.create(40, 40, false, Image.FORMAT_RGBA8)
 	image.fill(Color.TRANSPARENT)
 	var seed_value := absi(id.hash())
-	var kind := str(life.economy.goods[id].icon) if life.economy.goods.has(id) else str({"grains": "grain", "rice": "rice", "vegetables": "cabbage", "greens": "leaf", "roots": "root", "gourds": "gourd", "legumes": "bean", "mushrooms": "mushroom", "fruit": "fruit", "meat": "meat", "fish": "fish", "pantry": "jar"}.get(id, "grain"))
+	var kind := str(life.economy.goods[id].icon) if life.economy.goods.has(id) else str({"wood": "log", "earth": "stone", "metal": "ore", "fibre": "spool", "other_materials": "bottle", "grains": "grain", "rice": "rice", "vegetables": "cabbage", "greens": "leaf", "roots": "root", "gourds": "gourd", "legumes": "bean", "mushrooms": "mushroom", "fruit": "fruit", "meat": "meat", "fish": "fish", "pantry": "jar"}.get(id, "grain"))
 	if not life.economy.goods.has(id):
-		colour = Color({"cabbage": "70a64c", "leaf": "358250", "root": "e5a46f", "gourd": "dfa439", "bean": "9fbd58", "mushroom": "b98165", "fruit": "ec9b91", "meat": "c97568", "fish": "71a9b4", "jar": "b68b55", "grain": "d9bd65", "rice": "e4d9ad"}.get(kind, "d9bd65"))
+		colour = Color({"log": "a47b4f", "stone": "a1a394", "ore": "8c9299", "spool": "c4b58a", "bottle": "a4ad68", "cabbage": "70a64c", "leaf": "358250", "root": "e5a46f", "gourd": "dfa439", "bean": "9fbd58", "mushroom": "b98165", "fruit": "ec9b91", "meat": "c97568", "fish": "71a9b4", "jar": "b68b55", "grain": "d9bd65", "rice": "e4d9ad"}.get(kind, "d9bd65"))
 	for y in range(4, 36):
 		for x in range(5, 35):
 			var p := Vector2(x - 20, y - 22)
@@ -584,6 +628,9 @@ func grain_icon(id: String, colour: Color) -> Texture2D:
 				"fish": mark = pow(p.x / 12, 2) + pow(p.y / 6, 2) < 1 or (p.x < -8 and absf(p.y) < -p.x * 0.5)
 				"meat": mark = Vector2(p.x + 3, p.y + 2).length() < 10 or (p.x > 2 and p.x < 13 and absf(p.y - 6) < 3)
 				"egg": mark = pow(p.x / (8 + p.y * 0.1), 2) + pow(p.y / 12, 2) < 1
+				"log": mark = absf(p.y) < 7 and absf(p.x) < 14
+				"stone", "ore": mark = absf(p.x) + absf(p.y) < 16
+				"spool": mark = absf(p.x) < 10 and absf(p.y) < 13
 				"jar": mark = (absf(p.x) < 11 and p.y > -6 and p.y < 10) or (absf(p.x) < 7 and p.y > -12 and p.y <= -6)
 				"bottle": mark = (absf(p.x) < 7 and p.y > -4 and p.y < 11) or (absf(p.x) < 3 and p.y > -15 and p.y <= -4)
 				"rice": mark = (p.length() < 12 - absf(p.y) * 0.16) or (y in [7, 8, 9] and x > 14 and x < 26)
@@ -605,7 +652,7 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 			selected_food = ""
 		refresh_values())
 	slot.set_meta("food_id", id)
-	slot.custom_minimum_size = Vector2(104, 104)
+	slot.custom_minimum_size = Vector2(104, 176)
 	slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var frame := skin("panelInset_beigeLight")
 	slot.add_theme_stylebox_override("normal", frame)
@@ -620,13 +667,13 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 		slot.add_theme_stylebox_override("normal", glow)
 	var box := VBoxContainer.new()
 	box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	box.offset_left = 5
-	box.offset_right = -5
-	box.offset_top = 4
-	box.offset_bottom = -4
+	box.offset_left = 8
+	box.offset_right = -8
+	box.offset_top = 8
+	box.offset_bottom = -8
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	slot.add_child(box)
-	var mark := label(box, "✦" if spirit else "")
+	var mark := label(box, "✦ Tier %d" % int(e.goods[id].spirit_tier) if spirit else "")
 	mark.add_theme_font_size_override("font_size", 11)
 	mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	var picture := TextureRect.new()
@@ -639,14 +686,16 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 	var caption := label(box, title)
 	caption.add_theme_font_size_override("font_size", 12)
 	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var badge := label(box, amount(e.quantity(id)) + (" eggs" if id == "eggs" else " jin"))
+	var badge := label(box, amount(e.quantity(id)) + (" " + str(e.goods[id].unit) if is_good else " units"))
+	if spirit and e.quantity(id) == 0:
+		badge.text += "\nnot gathered yet"
 	badge.add_theme_font_size_override("font_size", 11)
 	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	for child: Control in box.get_children():
 		child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if is_good and e.quantity(id) == 0:
 		box.modulate.a = 0.45
-	slot.tooltip_text = e.goods[id].description if is_good else title + " · " + amount(e.quantity(id)) + " jin"
+	slot.tooltip_text = (e.goods[id].description + (" · Not gathered yet" if spirit else "")) if is_good else title + " · " + amount(e.quantity(id)) + " jin"
 
 func _people(parent: Node) -> void:
 	var residents: Array[Dictionary] = []
@@ -661,7 +710,7 @@ func _people(parent: Node) -> void:
 		return a[keys[sort_column]] > b[keys[sort_column]] if sort_reverse else a[keys[sort_column]] < b[keys[sort_column]])
 	var rows: Array = []
 	for p: Dictionary in residents:
-		rows.append([p.name, p.job, str(p.get("mood", "content")) + (" · " + life.economy.HUNGER[int(p.hunger)] if int(p.hunger) > 0 else ""), life.activity_text(p)])
+		rows.append([p.name, p.job, life.economy.HUNGER[int(p.hunger)] if int(p.hunger) > 0 else str(p.get("mood", "content")), life.activity_text(p)])
 	tree = table(parent, ["Name", "Job", "Fare", "Activity"], rows, 620)
 	for i in residents.size():
 		var item := tree.get_root().get_child(i)
@@ -677,42 +726,189 @@ func _people(parent: Node) -> void:
 		close())
 	label(parent, "Click a villager to follow them. Click column headings to sort.")
 
-func _work(parent: Node, e: RefCounted) -> void:
-	var jobs: Dictionary = {}
-	for p: Dictionary in life.people:
-		if not jobs.has(p.job):
-			jobs[p.job] = []
-		jobs[p.job].append(p)
+func section(parent: Node, title: String) -> void:
+	label(parent, title, true)
+	parent.add_child(HSeparator.new())
+
+# Resource facilities and resident jobs are the registry; unknown additions still get a card.
+func workplaces(e: RefCounted) -> Dictionary:
+	var result: Dictionary = {}
+	for id: String in e.goods:
+		var g: Dictionary = e.goods[id]
+		var facility := str(g.get("facility", "fields" if float(g.yield_rations_per_mu) > 0 else "kitchen"))
+		if facility == "apiary":
+			facility = "orchard"
+		if not result.has(facility):
+			result[facility] = {"people": [], "goods": [], "flow": [0.0, 0.0, 0.0], "active": false}
+		result[facility].goods.append(id)
+		if e.SEASONS[e.season()] in g.seasons and g.grade != "spirit":
+			result[facility].active = true
+		if facility == "fields":
+			result[facility].active = e.season() != 3
+		var output: Array = e.node_flow(id, "harvested")
+		for i in 3:
+			result[facility].flow[i] += output[i]
+	for person: Dictionary in life.people:
+		if person.has("material_work") and result.has(person.material_work):
+			result[person.material_work].people.append(person)
+		var facility := str(person.get("food_work", "fields" if person.kind == 0 else person.job))
+		if not result.has(facility):
+			result[facility] = {"people": [], "goods": [], "flow": [0.0, 0.0, 0.0], "active": true}
+		result[facility].people.append(person)
+	return result
+
+func work_name(id: String) -> String:
+	return str({"fields": "Paddies", "garden": "Vegetable plots & gardens", "orchard": "Orchard & bees", "herd": "Livestock", "fishery": "Fish pond", "hunt": "Hunting", "logs": "Mushroom logs", "kitchen": "Kitchen & pickling", "child": "Household", "woodcutting": "Woodcutters’ camp", "quarry": "Quarry & clay pit", "mine": "Iron mine", "smith": "Smithy & bloomery", "kiln": "Charcoal & brick kilns", "weaver": "Hemp & weaving", "tanner": "Tannery"}.get(id, id.capitalize()))
+
+func work_group(id: String) -> String:
+	if id in ["woodcutting", "quarry", "mine"]: return "Forest, quarry & mine"
+	if id in ["smith", "kiln", "weaver", "tanner"]: return "Crafts"
+	return str({"fields": "Fields", "garden": "Gardens & orchard", "orchard": "Gardens & orchard", "herd": "Livestock & fish", "fishery": "Livestock & fish", "hunt": "Forest & hunting", "logs": "Forest & hunting", "kitchen": "Kitchen & stores"}.get(id, "Household / unassigned"))
+
+func work_status(record: Dictionary) -> String:
+	return "idle" if record.people.is_empty() or record.goods.is_empty() else ("working" if record.active else "off-season")
+
+func _overview(parent: Node, e: RefCounted) -> void:
+	section(parent, "Village")
+	var children := 0
+	var filled := 0
+	var moods := {"content": 0, "well fed": 0, "plain fare": 0}
+	for person: Dictionary in life.people:
+		children += int(int(person.kind) == 8)
+		filled += int(int(person.kind) != 8)
+		var mood := str(person.get("mood", "content"))
+		moods[mood] = int(moods.get(mood, 0)) + 1
+	table(parent, ["Measure", "Count / level"], [
+		["Population · adults / children", "%d / %d" % [life.people.size() - children, children]],
+		["Jobs filled", filled], ["Content / well fed / plain fare", "%d / %d / %d" % [moods.content, moods["well fed"], moods["plain fare"]]],
+		["Hungry", e.hungry_count], ["Ration level", "%d%%" % roundi(e.ration() * 100)]])
+	var crisis := CheckBox.new()
+	crisis.text = "Pause on crisis"
+	crisis.button_pressed = e.pause_on_crisis
+	crisis.toggled.connect(func(value: bool) -> void: e.pause_on_crisis = value)
+	parent.add_child(crisis)
+	section(parent, "Food by group · jin")
+	label(parent, "In / out: today · Net: this season · Days: village food needs")
 	var rows: Array = []
-	for job: String in jobs:
-		var names := PackedStringArray()
-		var effectiveness := 0.0
-		for p: Dictionary in jobs[job]:
-			names.append(p.name)
-			effectiveness += e.EFFECT[int(p.hunger)]
-		rows.append([job, jobs[job].size(), "%d%%" % roundi(effectiveness / jobs[job].size() * 100), ", ".join(names)])
-	var compact_rows: Array = []
-	for row: Array in rows:
-		compact_rows.append(row.slice(0, 3))
-	var jobs_table := table(parent, ["Job", "Count", "Effectiveness"], compact_rows, 310)
-	for i in rows.size():
-		jobs_table.get_root().get_child(i).set_tooltip_text(0, rows[i][3])
-	label(parent, "Year %d farm calendar · today: day %d\nSpring 1–91: Planting  →  Summer 92–182: Tending  →  Autumn 183–273: Harvest  →  Winter 274–365: Fallow\n▼ Today: %s · %s" % [e.year, e.day, e.SEASONS[e.season()], stage()], true)
-	var bar := ProgressBar.new()
-	bar.max_value = 365
-	bar.value = e.day
-	bar.show_percentage = false
-	bar.custom_minimum_size.y = 22
-	bar.add_theme_stylebox_override("background", skin("barBack_horizontalMid"))
-	bar.add_theme_stylebox_override("fill", skin("barYellow_horizontalMid"))
-	parent.add_child(bar)
+	var paths: Array[String] = []
+	for category: Dictionary in e.catalogue.categories:
+		if category.parent != "food" and category.id != "spirit_grains":
+			continue
+		var id: String = category.id
+		var incoming: Array = e.node_flow(id, "harvested")
+		var out := [0.0, 0.0]
+		for key: String in ["adults", "children", "spoiled", "processed"]:
+			var flow: Array = e.node_flow(id, key)
+			for i in 2:
+				out[i] += flow[i]
+		var net: float = incoming[1] - out[1]
+		rows.append([category.name, amount(e.quantity(id)), "—" if id == "spirit_grains" else "%.1f" % (e.edible_quantity(id) / e.daily_need()), amount(incoming[0]), amount(out[0]), amount(net), "↑" if net > 0 else ("↓" if net < 0 else "→")])
+		paths.append("food/grains/spirit_grains" if id == "spirit_grains" else "food/" + id)
+	var food_table := table(parent, ["Group", "Stock", "Days", "In", "Out", "Net", "Trend"], rows)
+	food_table.item_selected.connect(func() -> void: open_tab(paths[food_table.get_selected().get_index()]))
+	section(parent, "Materials · jin / pieces")
+	var material_rows: Array = []
+	var material_paths: Array[String] = []
+	for category: Dictionary in e.catalogue.categories:
+		if category.parent == "materials":
+			material_paths.append("materials/" + str(category.id))
+			material_rows.append([category.name, amount(e.quantity(category.id)), amount(e.node_flow(category.id, "harvested")[2]), amount(e.node_flow(category.id, "processed")[2])])
+	var material_table := table(parent, ["Group", "Stored", "Year in", "Year used"], material_rows)
+	material_table.item_selected.connect(func() -> void: open_tab(material_paths[material_table.get_selected().get_index()]))
+	section(parent, "Production · jin")
 	rows = []
-	var index := 1
-	for field: Dictionary in life.sect.data.fields:
-		var area := int(field.rect[2]) * int(field.rect[3])
-		rows.append(["Paddy %d" % index, "%d tiles / mu" % area, e.goods[field.crop].name, "%d%%" % roundi(e.care() * 100), "%s jin" % amount(e.good_forecast(field.crop) * area / float(e.areas[field.crop]))])
-		index += 1
-	table(parent, ["Plot", "Area", "Crop", "Care", "Yield"], rows, 320)
+	var registry := workplaces(e)
+	for id: String in registry:
+		var record: Dictionary = registry[id]
+		rows.append([work_name(id), record.people.size(), amount(record.flow[0]), amount(record.flow[1]), work_status(record)])
+	table(parent, ["Workplace", "Workers", "Today", "Season", "Status"], rows)
+	section(parent, "Season & calendar")
+	table(parent, ["Measure", "Value"], [["Season / day", "%s / %d" % [e.SEASONS[e.season()], e.day]], ["Days to harvest", e.days_to_harvest()], ["Harvest forecast · jin", amount(e.forecast())], ["Weather", "Poor" if e.weather < 0.8 else "Favourable"]])
+	var alerts: Array[String] = []
+	if e.days_left() < 30: alerts.append("Low food")
+	if e.ration() < 1: alerts.append("Rationing active")
+	if e.hungry_count > 0: alerts.append("%d villagers hungry" % e.hungry_count)
+	if not alerts.is_empty():
+		section(parent, "Alerts")
+		for alert: String in alerts: label(parent, alert)
+	section(parent, "Latest chronicle")
+	for i in range(e.chronicle.size() - 1, maxi(-1, e.chronicle.size() - 6), -1):
+		label(parent, e.chronicle[i])
+
+func _work(parent: Node, e: RefCounted) -> void:
+	label(parent, "Y%d · Day %d · %s · %s" % [e.year, e.day, e.SEASONS[e.season()], stage()])
+	var calendar := ProgressBar.new()
+	calendar.max_value = 365
+	calendar.value = e.day
+	calendar.show_percentage = false
+	calendar.custom_minimum_size.y = 8
+	parent.add_child(calendar)
+	label(parent, "Spring: plant · Summer: tend · Autumn: harvest · Winter: fallow")
+	var registry := workplaces(e)
+	var groups: Dictionary = {}
+	for id: String in registry:
+		var group := work_group(id)
+		if not groups.has(group): groups[group] = []
+		groups[group].append(id)
+	for group: String in groups:
+		section(parent, group)
+		var grid := GridContainer.new()
+		grid.columns = maxi(2, int((get_viewport_rect().size.x * 0.5 - 48) / 192))
+		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_theme_constant_override("h_separation", 8)
+		grid.add_theme_constant_override("v_separation", 8)
+		parent.add_child(grid)
+		for id: String in groups[group]:
+			var record: Dictionary = registry[id]
+			var card := button(grid, "", func() -> void: selected_work = id; refresh_values())
+			card.set_meta("work_id", id)
+			card.custom_minimum_size = Vector2(176, 224)
+			card.size_flags_horizontal = Control.SIZE_FILL
+			card.add_theme_stylebox_override("normal", skin("panelInset_beigeLight"))
+			var box := VBoxContainer.new()
+			card.add_child(box)
+			box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			box.offset_left = 8
+			box.offset_right = -8
+			box.offset_top = 8
+			box.offset_bottom = -8
+			box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var picture := TextureRect.new()
+			picture.texture = grain_icon(record.goods[0], Color(e.goods[record.goods[0]].colour)) if not record.goods.is_empty() else icon("people")
+			picture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+			box.add_child(picture)
+			label(box, work_name(id)).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			label(box, "%d / ∞ workers" % record.people.size()).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			label(box, amount(record.flow[0]) + (" units" if work_group(id) in ["Forest, quarry & mine", "Crafts"] else " jin")).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			var status := label(box, work_status(record))
+			status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			status.add_theme_color_override("font_color", Color("49612e") if status.text == "working" else GOLD)
+			var effectiveness := ProgressBar.new()
+			effectiveness.show_percentage = false
+			effectiveness.custom_minimum_size.y = 8
+			var total := 0.0
+			for person: Dictionary in record.people: total += e.EFFECT[int(person.hunger)]
+			effectiveness.value = total / maxf(1, record.people.size()) * 100
+			card.tooltip_text = "%s · %d workers / no capacity limit\nEffectiveness: %d%%" % [work_name(id), record.people.size(), roundi(effectiveness.value)]
+			box.add_child(effectiveness)
+			for child: Control in box.get_children(): child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if not registry.has(selected_work): return
+	var chosen: Dictionary = registry[selected_work]
+	section(parent, work_name(selected_work) + " · details")
+	label(parent, "Schedule: prepare 05:30–06:30 · work 06:30–18:00 · meal 12:00–13:00 · rest until 21:00. Resident offsets: up to 60 minutes. Harvest and hunger can change assignments.")
+	for person: Dictionary in chosen.people:
+		button(parent, person.name + " · " + life.activity_text(person), func() -> void:
+			life.followed = life.people.find(person)
+			close())
+	table(parent, ["Output · jin", "Today", "Season", "Year"], [["Produced", amount(chosen.flow[0]), amount(chosen.flow[1]), amount(chosen.flow[2])]])
+	if selected_work == "fields":
+		var rows: Array = []
+		var index := 0
+		for field: Dictionary in life.sect.data.fields:
+			index += 1
+			var area := int(field.rect[2]) * int(field.rect[3])
+			rows.append(["Plot %d" % index, e.goods[field.crop].name, stage(), "%d%%" % roundi(e.care() * 100), amount(e.good_forecast(field.crop) * area / maxf(1, e.areas[field.crop]))])
+		table(parent, ["Plot", "Crop", "Stage", "Care", "Yield · jin"], rows)
 
 func show_granary() -> void:
 	for child: Node in granary_card.get_children():

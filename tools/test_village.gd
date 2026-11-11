@@ -21,8 +21,13 @@ func _run() -> void:
 	for count: int in households.values():
 		assert(count >= 2 and count <= 3)
 	assert(jobs["field hand"] == 8 and jobs["child"] == 2)
-	for job: String in ["gardener", "orchard keeper", "herder", "fisher", "hunter", "cook / pickler", "mushroom grower"]:
+	for job: String in ["orchard keeper", "fisher", "hunter", "woodcutter", "quarryman", "miner", "smith", "weaver", "tanner", "kiln tender"]:
 		assert(jobs.has(job))
+	var food_duties: Dictionary = {}
+	for person: Dictionary in life.people:
+		var duty := str(person.get("food_work", ""))
+		food_duties[duty] = int(food_duties.get(duty, 0)) + 1
+	assert(food_duties.garden == 2 and food_duties.herd == 2 and food_duties.kitchen == 2)
 	assert(life.food_patches.size() == 17)
 	assert(Vector2(life.food_places.hunt).distance_to(Vector2(life.sect.center + Vector2i(141, 94))) < 4.0)
 	for id: String in life.food_places:
