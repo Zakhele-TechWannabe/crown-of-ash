@@ -8,6 +8,10 @@ const BLUE := Color8(36, 79, 102)
 const PANEL := Color(0.16, 0.1, 0.06, 0.94)
 const DIRECTIONS := [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
 
+var ground: Node2D
+var terrain: Sprite2D
+var travel: Tween
+var selected_tile := Vector2i(-1, -1)
 var data: Dictionary
 var w: int
 var h: int
@@ -56,6 +60,10 @@ func _ready() -> void:
 	peak_art = Node2D.new()
 	peak_art.draw.connect(_draw_peaks)
 	add_child(peak_art)
+	ground = preload("res://src/ground_terrain.gd").new()
+	add_child(ground)
+	ground.setup(self)
+	ground.modulate.a = 0.0
 	cam = Camera2D.new()
 	cam.position = Vector2(w, h) * CELL / 2.0
 	add_child(cam)
@@ -76,13 +84,39 @@ func _ready() -> void:
 	visit.add_theme_stylebox_override("normal", _box())
 	visit.pressed.connect(_visit)
 	overlay.add_child(visit)
+	var places := OptionButton.new()
+	places.position = Vector2(300, 7)
+	places.size = Vector2(240, 32)
+	places.add_item("Go to…")
+	for feature: Dictionary in data.features:
+		places.add_item(str(feature.name))
+	places.item_selected.connect(func(index: int) -> void:
+		if index > 0:
+			_go_to(str(data.features[index - 1].name), true))
+	overlay.add_child(places)
+	var reset := Button.new()
+	reset.text = "World [Home]"
+	reset.position = Vector2(550, 7)
+	reset.pressed.connect(_reset)
+	overlay.add_child(reset)
 	get_viewport().size_changed.connect(_resize)
 	_resize()
+	var destination := ""
+	var initial_zoom := -1.0
 	for argument in OS.get_cmdline_user_args():
-		if argument.begins_with("--shot="):
+		if argument.begins_with("--goto="):
+			destination = argument.trim_prefix("--goto=")
+		elif argument.begins_with("--zoom="):
+			initial_zoom = float(argument.trim_prefix("--zoom="))
+		elif argument.begins_with("--shot="):
 			shot_path = argument.trim_prefix("--shot=")
 		elif argument.begins_with("--frames="):
 			shot_frames = int(argument.get_slice("=", 1))
+	if not destination.is_empty():
+		_go_to(destination, false)
+	if initial_zoom > 0.0:
+		cam.zoom = Vector2.ONE * clampf(initial_zoom, fit_zoom, 80.0)
+	_clamp_camera()
 	if not "--windowed" in OS.get_cmdline_user_args() and shot_path.is_empty():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 
@@ -115,7 +149,7 @@ func _bake_terrain() -> void:
 			var grain := float(((x * 374761393 + y * 668265263) & 0x7fffffff) % 9)
 			col += Vector3.ONE * grain
 			image.set_pixel(x, y, Color(col.x / 255.0, col.y / 255.0, col.z / 255.0))
-	var terrain := Sprite2D.new()
+	terrain = Sprite2D.new()
 	terrain.texture = ImageTexture.create_from_image(image)
 	terrain.centered = false
 	terrain.scale = Vector2.ONE * CELL
@@ -152,7 +186,7 @@ func _resize() -> void:
 	var size := get_viewport_rect().size - Vector2(0, 88)
 	var previous := fit_zoom
 	fit_zoom = minf(size.x / (w * CELL), size.y / (h * CELL))
-	cam.zoom = Vector2.ONE * clampf(cam.zoom.x * fit_zoom / previous, fit_zoom, fit_zoom * 8.0)
+	cam.zoom = Vector2.ONE * clampf(fit_zoom if is_equal_approx(cam.zoom.x, previous) else cam.zoom.x, fit_zoom, 80.0)
 	_clamp_camera()
 
 
@@ -168,9 +202,19 @@ func _process(dt: float) -> void:
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
+	var complete: bool = ground.update_chunks(cam, 4 if not shot_path.is_empty() else 1)
+	var fade := smoothstep(3.0, 5.0, cam.zoom.x * ground.TILE)
+	# Keep the painted map until all visible chunks are ready.
+	if not complete:
+		fade = 0.0
+	fade = move_toward(ground.modulate.a, fade, dt * 5.0)
+	ground.modulate.a = fade
+	terrain.modulate.a = 1.0 - fade
+	river_art.modulate.a = 1.0 - fade
+	peak_art.modulate.a = 1.0 - smoothstep(2.5, 4.0, cam.zoom.x)
 	overlay.queue_redraw()
 	frame += 1
-	if not shot_path.is_empty() and frame >= maxi(1, shot_frames) and not taking_shot:
+	if not shot_path.is_empty() and frame >= maxi(1, shot_frames) and not taking_shot and complete:
 		taking_shot = true
 		await RenderingServer.frame_post_draw
 		var error := get_viewport().get_texture().get_image().save_png(shot_path)
@@ -180,7 +224,9 @@ func _process(dt: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_P:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_HOME:
+		_reset()
+	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_P:
 		_visit()
 	elif event is InputEventMouseButton:
 		if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE]:
@@ -189,9 +235,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				drag_distance = 0.0
 			elif event.button_index == MOUSE_BUTTON_LEFT and drag_distance < 5.0:
 				selected = _mouse_cell()
+				selected_tile = Vector2i((get_global_mouse_position() / 0.5).floor())
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
 			var before := get_global_mouse_position()
-			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.15 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.15), fit_zoom, fit_zoom * 8.0)
+			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.15 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.15), fit_zoom, 80.0)
 			cam.force_update_scroll()
 			cam.position += before - get_global_mouse_position()
 			_clamp_camera()
@@ -228,6 +275,9 @@ func _info(cell: Vector2i) -> String:
 			nearest = feature
 	if not nearest.is_empty():
 		result += " · near the %s" % nearest.name
+	if cam.zoom.x >= 12.0:
+		var tile := selected_tile if cell == selected else Vector2i((get_global_mouse_position() / 0.5).floor())
+		result += " · tile %d, %d · %s" % [tile.x, tile.y, ground.sample(tile).cover]
 	return result
 
 
@@ -260,7 +310,7 @@ func _draw_overlay() -> void:
 		overlay.draw_arc(at, 7, 0, TAU, 24, GOLD, 2, true)
 		overlay.draw_line(at - Vector2(11, 0), at + Vector2(11, 0), GOLD, 1)
 		overlay.draw_line(at - Vector2(0, 11), at + Vector2(0, 11), GOLD, 1)
-		var card := Rect2(size.x - 430, 60, 412, 112)
+		var card := Rect2(size.x - 430, 60, 412, 160)
 		overlay.draw_style_box(_box(), card)
 		overlay.draw_string(font, card.position + Vector2(12, 24), "SELECTED · %d, %d" % [selected.x, selected.y], HORIZONTAL_ALIGNMENT_LEFT, -1, 17, GOLD)
 		var lines := _info(selected).replace(" · ", "\n").split("\n")
@@ -271,13 +321,14 @@ func _draw_overlay() -> void:
 	overlay.draw_string(font, Vector2(size.x - 420, 29), "Seed %s" % data.seed, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.95, 0.92, 0.85))
 	overlay.draw_style_box(_box(), Rect2(0, size.y - 42, size.x, 42))
 	overlay.draw_string(font, Vector2(18, size.y - 16), _info(_mouse_cell()), HORIZONTAL_ALIGNMENT_LEFT, size.x - 36, 17, Color(0.95, 0.92, 0.85))
-	var length := 50.0 * CELL * cam.zoom.x
+	var scale_cells := 50.0 if cam.zoom.x < 2.0 else (5.0 if cam.zoom.x < 12.0 else 0.25)
+	var length := scale_cells * CELL * cam.zoom.x
 	var base := Vector2(24, size.y - 66)
 	overlay.draw_style_box(_box(), Rect2(base - Vector2(10, 28), Vector2(length + 20, 42)))
 	overlay.draw_line(base, base + Vector2(length, 0), GOLD, 2)
 	for x in [0.0, length]:
 		overlay.draw_line(base + Vector2(x, -5), base + Vector2(x, 3), GOLD, 2)
-	overlay.draw_string(font, base + Vector2(0, -9), "500 li", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, GOLD)
+	overlay.draw_string(font, base + Vector2(0, -9), "%.1f li" % (scale_cells * 10.0), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, GOLD)
 
 
 func _box() -> StyleBoxFlat:
@@ -291,3 +342,29 @@ func _box() -> StyleBoxFlat:
 
 func _visit() -> void:
 	get_tree().change_scene_to_file("res://main.tscn")
+
+
+func _reset() -> void:
+	if travel:
+		travel.kill()
+	travel = create_tween().set_parallel(true)
+	travel.tween_property(cam, "zoom", Vector2.ONE * fit_zoom, 0.65)
+	travel.tween_property(cam, "position", Vector2(w, h) * CELL / 2.0, 0.65)
+
+
+func _go_to(place: String, animate: bool) -> void:
+	for feature: Dictionary in data.features:
+		if str(feature.name).nocasecmp_to(place) != 0:
+			continue
+		var target := Vector2(float(feature.x), float(feature.y)) * CELL
+		if travel:
+			travel.kill()
+		if animate:
+			travel = create_tween().set_parallel(true).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			travel.tween_property(cam, "position", target, 1.0)
+			travel.tween_property(cam, "zoom", Vector2.ONE * 40.0, 1.0)
+		else:
+			cam.position = target
+			cam.zoom = Vector2.ONE * 40.0
+		return
+	push_warning("Unknown place: %s" % place)
