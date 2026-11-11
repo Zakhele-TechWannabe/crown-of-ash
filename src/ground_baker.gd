@@ -151,6 +151,8 @@ func ground_height(tile: Vector2i) -> float:
 		height = SEA if world.water[i] == 1 else world._height(cell.x, cell.y)
 	if sect.height_at(tile) > 0.0:
 		height = maxf(height, sect.height_at(tile))
+	if sect.has_method("site_height"):
+		height = sect.site_height(tile, height)
 	if sect.level_at(tile) >= 0:
 		height = SEA + sect.level_at(tile) * TERRACE
 	if baking:
@@ -197,7 +199,8 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
-		if info.decoration >= 0:
+		preload("res://src/hunting_ground.gd").draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
+		if info.decoration >= 0 and preload("res://src/hunting_ground.gd").weight(tile) < 0.25:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))
 
 func bake(key: Vector2i) -> void:

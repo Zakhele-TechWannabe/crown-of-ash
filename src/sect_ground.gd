@@ -16,6 +16,7 @@ var town: Image
 var farm: Image
 var far_colors := PackedColorArray()
 var dry: Callable
+var crop_colours: Dictionary = {}
 
 
 func index_at(at: Vector2i) -> int:
@@ -44,6 +45,8 @@ func surface_at(at: Vector2i) -> String:
 
 func setup(is_dry: Callable) -> void:
 	dry = is_dry
+	for good: Dictionary in JSON.parse_string(FileAccess.get_file_as_string("res://data/goods.json")).goods:
+		crop_colours[good.id] = Color(good.colour)
 	data = JSON.parse_string(FileAccess.get_file_as_string(source))
 	center = Vector2i(int(data.center[0]), int(data.center[1]))
 	if data.has("bounds"):
@@ -289,6 +292,14 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 		for row in [2, 7, 12]:
 			image.fill_rect(Rect2i(pos + Vector2i(0, row), Vector2i(16, 2)), Color8(84, 57, 38))
 		_blit(image, farm, 64 if tile.y % 2 == 0 else 65, pos)
+		for field: Dictionary in data.get("fields", []):
+			var r: Array = field.rect
+			if Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[3])).has_point(tile - center):
+				var col: Color = crop_colours[field.crop]
+				for xx in range(2, 16, 4):
+					image.fill_rect(Rect2i(pos + Vector2i(xx, 3 + (tile.y % 3)), Vector2i(2, 8)), col.darkened(0.25))
+					image.fill_rect(Rect2i(pos + Vector2i(xx - 1, 2 + (tile.y % 3)), Vector2i(4, 3)), col)
+
 	elif surface == "spring":
 		image.fill_rect(rect, Color8(157, 219, 212))
 		image.fill_rect(Rect2i(pos + Vector2i(2, 2), Vector2i(12, 12)), Color8(72, 165, 182))

@@ -25,6 +25,11 @@ func run() -> void:
 		map._go_to(name, false)
 		assert(map.on_ground)
 		assert(g.pick_tile(map.ground_view.cam.position) == g.sect.destinations[name])
+	var hunt := preload("res://src/hunting_ground.gd")
+	assert(g.ground_height(Vector2i(1990, 2320)) - g.ground_height(Vector2i(1580, 2320)) > 0.38)
+	for at in [Vector2i(1510, 2300), Vector2i(2115, 2300), Vector2i(1800, 2100), Vector2i(1800, 2520)]:
+		assert(absf(g.ground_height(at) - g.ground_height(at + Vector2i.RIGHT)) < 0.03)
+	assert(hunt.color(Vector2i(1800, 2310)).g < 0.2)
 	var city: RefCounted = g.sect.sites[0]
 	var count := 0
 	for b: Dictionary in city.data.buildings:
@@ -34,12 +39,15 @@ func run() -> void:
 				for x in int(b.rect[2]):
 					var at: Vector2i = city.center + Vector2i(int(b.rect[0]) + x, int(b.rect[1]) + y)
 					assert(city.dry.call(at), "Wet building " + str(at))
+	var unsafe_tiles := 0
 	for y in city.bounds.size.y:
 		for x in city.bounds.size.x:
 			var at: Vector2i = city.center + city.bounds.position + Vector2i(x, y)
 			var i: int = city.index_at(at)
 			if city.has_tile(at) and city.surfaces[i] != 9:
-				assert(city.dry.call(at), "City overlay in water " + str(at))
+				if not g.natural_dry(at):
+					unsafe_tiles += 1
+	assert(unsafe_tiles == 0, "City building/wall/street tiles on natural water or beach: %d" % unsafe_tiles)
 	for plot: Dictionary in city.data.plots:
 		var at: Vector2i = city.center + Vector2i(int(plot.rect[0]), int(plot.rect[1]))
 		if city.dry.call(at):

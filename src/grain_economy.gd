@@ -58,7 +58,7 @@ func node_flow(id: String, key: String) -> Array:
 
 func record_good(id: String, key: String, value: float) -> void:
 	flow(id + ":" + key, value)
-	if id == "common_rice":
+	if "mortals" in goods[id].edible_by:
 		flow(key, value)
 var field_area := 0
 var seed_value := 718
@@ -175,7 +175,11 @@ func care() -> float:
 	return work / (8.0 * minf(day, 182))
 
 func forecast() -> float:
-	return good_forecast("common_rice")
+	var total := 0.0
+	for id: String in goods:
+		if "mortals" in goods[id].edible_by:
+			total += good_forecast(id)
+	return total
 
 func advance_to(minutes: float) -> void:
 	while next_event <= minutes:
@@ -231,10 +235,18 @@ func _meal() -> void:
 		p.foraged += wild
 		flow("foraged", wild)
 		var eaten := minf(stock, need * share - wild) if need * share > wild else 0.0
-		stock -= eaten
+		var remaining := eaten
+		while remaining > 0.000001:
+			var chosen := ""
+			for id: String in goods:
+				if "mortals" in goods[id].edible_by and (chosen.is_empty() or float(stocks[id]) > float(stocks[chosen])):
+					chosen = id
+			var portion := minf(remaining, float(stocks[chosen]))
+			stocks[chosen] -= portion
+			remaining -= portion
+			record_good(chosen, "children" if int(p.kind) == 8 else "adults", portion)
 		consumed += eaten
 		p.rice_today = eaten
-		record_good("common_rice", "children" if int(p.kind) == 8 else "adults", eaten)
 		var got := eaten + wild
 		if got >= need - 0.000001:
 			p.hunger = maxi(0, int(p.hunger) - 1)
@@ -294,7 +306,7 @@ func _finish_day() -> void:
 			record_good(id, "harvested", batch)
 			if float(standing[id]) <= 0.000001 and batch > 0:
 				note("Harvest brought in: %d jin of %s" % [roundi(node_flow(id, "harvested")[2] * 2), goods[id].name])
-			if id == "common_rice":
+			if "mortals" in goods[id].edible_by:
 				produced += batch
 		harvest = float(standing.common_rice)
 
@@ -310,7 +322,7 @@ func _finish_day() -> void:
 			var loss := float(stocks[id]) * float(goods[id].seasonal_spoilage)
 			stocks[id] -= loss
 			record_good(id, "spoiled", loss)
-			if id == "common_rice":
+			if "mortals" in goods[id].edible_by:
 				spoiled += loss
 			note("%s spoilage %d jin" % [goods[id].name, roundi(loss * 2)])
 			if day == 273:
@@ -334,3 +346,12 @@ func _finish_day() -> void:
 	if day == 365:
 		harvest_history.append(Vector2(year, produced))
 		summaries.append("Year %d: stock %.2f | harvest %.2f | consumed %.2f | spoilage %.2f | balance %+.2f | minimum %.2f | hungry %d" % [year, stock, produced, consumed, spoiled, produced - consumed - spoiled, minimum, hungry_count])
+
+func after_harvest_days() -> float:
+	var incoming := forecast()
+	if day >= 183 and day <= 273:
+		incoming = 0.0
+		for id: String in goods:
+			if "mortals" in goods[id].edible_by:
+				incoming += float(standing[id])
+	return (stock + incoming - daily_need() * days_to_harvest()) / maxf(0.001, daily_need())

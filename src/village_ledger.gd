@@ -296,11 +296,12 @@ func _refresh_hud() -> void:
 	if e.season() == 3:
 		harvest.value.text = "%d d" % (366 - e.day)
 		harvest.button.tooltip_text = harvest.label.text
-	var balance: float = e.produced - e.consumed - e.spoiled
+	var projected: float = e.after_harvest_days()
 	var annual: Dictionary = kpi_cards.year
-	annual.value.text = ("+" if balance >= 0 else "") + amount(balance)
-	annual.value.add_theme_color_override("font_color", Color("49612e") if balance >= 0 else Color("a23522"))
-	annual.button.tooltip_text = "This year's food balance: %s jin" % annual.value.text
+	annual.value.text = "%.0f d" % projected
+	annual.label.text = "after harvest"
+	annual.value.add_theme_color_override("font_color", Color("49612e") if projected > 365 else (Color("a23522") if projected < 60 else Color("a07826")))
+	annual.button.tooltip_text = "Next harvest: food stock + remaining forecast − full food consumption until harvest, in days of food. Forecast is weather and care dependent."
 	clock.text = life.clock_text()
 	pause_button.text = "▶" if life.paused else "Ⅱ"
 	pause_button.tooltip_text = ("Resume" if life.paused else "Pause") + " [Space]"
@@ -356,7 +357,7 @@ func refresh_values() -> void:
 	var e: RefCounted = life.economy
 	match current:
 		"overview":
-			label(data, "%d villagers · %d hungry\nFood in the Granary: %s jin · %.1f days\nRation level: %d%% · Daily need: %s jin\nHarvest forecast: %s jin · This year's balance: %s jin\n%s · %s" % [life.people.size(), e.hungry_count, amount(e.stock), e.days_left(), roundi(e.ration() * 100), amount(e.daily_need()), amount(e.forecast()), amount(e.produced - e.consumed - e.spoiled), e.SEASONS[e.season()], stage()])
+			label(data, "%d villagers · %d hungry\nFood in the Granary: %s jin · %.1f days\nRation level: %d%% · Daily need: %s jin\nHarvest forecast: %s jin · Balance so far this year: %s jin\n%s · %s" % [life.people.size(), e.hungry_count, amount(e.stock), e.days_left(), roundi(e.ration() * 100), amount(e.daily_need()), amount(e.forecast()), amount(e.produced - e.consumed - e.spoiled), e.SEASONS[e.season()], stage()])
 			var alerts := "Alerts: "
 			alerts += "Low food. " if e.days_left() < 30 else ""
 			alerts += "Rationing active. " if e.ration() < 1 else ""
@@ -424,7 +425,7 @@ func _food(parent: Node, e: RefCounted) -> void:
 		var good: Dictionary = e.goods[id]
 		var item := widget.create_item(nodes[good.category_path[-1]])
 		_fill_food_item(item, id, good.name, e)
-		item.set_custom_color(0, Color(good.colour))
+		item.set_custom_color(0, Color(good.colour).darkened(0.5) if e.quantity(id) == 0 else Color(good.colour))
 	widget.item_collapsed.connect(func(item: TreeItem) -> void: collapsed[item.get_metadata(0)] = item.collapsed)
 	widget.item_selected.connect(func() -> void: selected_food = str(widget.get_selected().get_metadata(0)); refresh_values())
 	var id := selected_food
@@ -435,7 +436,7 @@ func _food(parent: Node, e: RefCounted) -> void:
 	var standing := 0.0
 	for good: String in e.descendants(id):
 		standing += float(e.standing[good]) if e.season() == 2 else (e.good_forecast(good) if e.season() < 2 else 0.0)
-	label(parent, "Where it is now\nGranary: %s jin · Paddies: %s jin\nCarried: 0 jin (credited at day end) · Total: %s jin" % [amount(e.quantity(id)), amount(standing), amount(e.quantity(id) + standing)])
+	label(parent, "Where it is now\n%s: %s jin · Fields: %s jin\nCarried: 0 jin (credited at day end) · Total: %s jin" % ["Sect store" if is_good and e.goods[id].grade == "spirit" else "Granary", amount(e.quantity(id)), amount(standing), amount(e.quantity(id) + standing)])
 	if not is_good:
 		var breakdown := HBoxContainer.new()
 		breakdown.custom_minimum_size.y = 28

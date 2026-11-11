@@ -49,10 +49,8 @@ func setup(map: Node2D) -> void:
 	mountain.fractal_octaves = 3
 	for i in range(0, world.heights.size(), 2):
 		max_level = maxi(max_level, ceili((world.heights.decode_u16(i) / 30000.0 + 0.07 - SEA) / TERRACE))
-	sect.setup(func(at: Vector2i) -> bool:
-		var p := (Vector2(at) + Vector2.ONE * 0.5) / 16.0
-		return not _sea(p) and _river_distance(p) > 1.5)
-	max_level = maxi(max_level, 21)
+	sect.setup(natural_dry)
+	max_level = maxi(max_level, 45)
 	_build_atlas()
 	snapshot = preload("res://src/ground_snapshot.gd").new()
 	for property: String in ["w", "h", "heights", "water", "biome", "rivers", "directions", "data"]:
@@ -240,6 +238,8 @@ func ground_height(tile: Vector2i) -> float:
 		height = SEA if world.water[i] == 1 else world._height(cell.x, cell.y)
 	if sect.height_at(tile) > 0.0:
 		height = maxf(height, sect.height_at(tile))
+	if sect.has_method("site_height"):
+		height = sect.site_height(tile, height)
 	if sect.level_at(tile) >= 0:
 		height = SEA + sect.level_at(tile) * TERRACE
 	if baking:
@@ -328,6 +328,8 @@ func _far_image(key: Vector2i) -> Image:
 				col = Color8(43, 76, 45)
 			if sect.has_tile(tile):
 				col = sect.far_color(tile)
+			if preload("res://src/hunting_ground.gd").weight(tile) > 0.25 and not sect.has_tile(tile):
+				col = preload("res://src/hunting_ground.gd").color(tile)
 			var face_start := maxi(0, top + 1)
 			var face_end := mini(SIDE, y + 2)
 			if face_end > face_start:
@@ -443,5 +445,15 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
-		if info.decoration >= 0:
+		preload("res://src/hunting_ground.gd").draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
+		if info.decoration >= 0 and preload("res://src/hunting_ground.gd").weight(tile) < 0.25:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))
+
+func natural_dry(at: Vector2i) -> bool:
+	var p := (Vector2(at) + Vector2.ONE * 0.5) / 16.0
+	for offset in [Vector2.ZERO, Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]:
+		if _sea(p + offset / 16.0):
+			return false
+	var warped := p + Vector2(noise.get_noise_2dv(p * 1.3), noise.get_noise_2dv(p * 1.3 + Vector2(51, 83))) * 0.9
+	var b: int = world.biome[clampi(int(warped.y), 0, world.h - 1) * world.w + clampi(int(warped.x), 0, world.w - 1)]
+	return b != 3 and _river_distance(p) > 1.5

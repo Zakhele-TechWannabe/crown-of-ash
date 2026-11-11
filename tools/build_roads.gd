@@ -2,6 +2,7 @@ extends SceneTree
 ## Offline deterministic terrain survey, city plots and weighted A* road generation.
 var g: Node2D
 var occupied: Array[Rect2i] = []
+var dry_cache: Dictionary = {}
 var city := {"name": "Western Market City", "center": [630, 2220], "bounds": [-180, -110, 320, 220], "buildings": [], "plots": [], "paths": [], "stamps": []}
 var road := {"name": "Roads", "center": [0, 0], "bounds": [450, 2000, 1700, 650], "buildings": [], "plots": [], "paths": [], "stamps": []}
 
@@ -9,8 +10,9 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func dry(at: Vector2i) -> bool:
-	var p := (Vector2(at) + Vector2.ONE * 0.5) / 16.0
-	return not g._sea(p) and g._river_distance(p) > 1.5
+	if not dry_cache.has(at):
+		dry_cache[at] = g.natural_dry(at)
+	return dry_cache[at]
 
 func save_json(path: String, value: Dictionary) -> void:
 	var file := FileAccess.open(path, FileAccess.WRITE)
@@ -77,28 +79,25 @@ func run() -> void:
 		if int(avenue.width) == 5:
 			avenue.points[0] = [harbour.x - 630, 0]
 	city.buildings.append({"name": "Harbour", "kind": "marker", "rect": [harbour.x - 630, 0, 1, 1]})
-	# Stone perimeter follows dry terrain; openings are cut before gate arches.
+	# Erode the city envelope by four dry tiles; its contour bends around every inlet.
+	var interior: Dictionary = {}
 	for y in range(2122, 2318):
 		for x in range(502, 758):
-			if x not in [502, 757] and y not in [2122, 2317]:
-				continue
-			if not dry(Vector2i(x, y)) or (absi(y - 2220) < 4 and x == 757) or (absi(x - (550 if y == 2122 else 720)) < 4 and y in [2122, 2317]):
-				continue
-			city.stamps.append({"at": [x - 630, y - 2220], "tile": 96 if x % 20 == 0 or y % 20 == 0 else 97})
-	for edge_x in [502, 755]:
-		for edge_y in range(2122, 2318, 39):
-			for yy in 3:
-				for xx in 3:
-					if dry(Vector2i(edge_x + xx, edge_y + yy)):
-						city.stamps.append({"at": [edge_x + xx - 630, edge_y + yy - 2220], "tile": 96 + xx + yy * 12})
-	for edge_y in [2122, 2315]:
-		for edge_x in range(520, 750, 39):
-			for yy in 3:
-				for xx in 3:
-					if dry(Vector2i(edge_x + xx, edge_y + yy)):
-						city.stamps.append({"at": [edge_x + xx - 630, edge_y + yy - 2220], "tile": 96 + xx + yy * 12})
-	for entry: Array in [[754, 2219, "East Gate"], [547, 2122, "North Gate"], [717, 2316, "South Gate"]]:
-		city.buildings.append({"name": entry[2], "kind": "gate", "rect": [entry[0] - 630, entry[1] - 2220, 7, 2]})
+			var at := Vector2i(x, y)
+			var safe := true
+			for offset in [Vector2i.ZERO, Vector2i(-4, 0), Vector2i(4, 0), Vector2i(0, -4), Vector2i(0, 4)]:
+				if not dry(at + offset):
+					safe = false
+			if safe:
+				interior[at] = true
+	for at: Vector2i in interior:
+		var edge := false
+		for offset in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+			if not interior.has(at + offset):
+				edge = true
+		if edge and not (at.x >= 754 and absi(at.y - 2220) < 4):
+			city.stamps.append({"at": [at.x - 630, at.y - 2220], "tile": 96 if (at.x + at.y) % 20 == 0 else 97})
+	city.buildings.append({"name": "East Gate", "kind": "gate", "rect": [124, -1, 7, 2]})
 	save_json("res://data/sites/city.json", city)
 	# Weighted A*: cache natural terrain costs in a bounded grid, never run in-game.
 	var grid := AStarGrid2D.new()
@@ -151,24 +150,27 @@ func run() -> void:
 	path_to([[1464, 2381], [1490, 2381]], 3, "stairs")
 	for x in [1263, 1461]:
 		road.buildings.append({"name": "West Gate" if x == 1263 else "East Gate", "kind": "gate", "rect": [x, 2380, 7, 2]})
-	path_to([[1490, 2381], [1530, 2360], [1570, 2380], [1620, 2330], [1680, 2345], [1740, 2280], [1810, 2300], [1880, 2240], [1950, 2260]], 2)
+	# Densely sampled sinusoidal switchbacks have smooth rounded turns.
+	var ascent: Array = []
+	for step in 481:
+		var x := 1510 + step
+		ascent.append([x, roundi(2320 + 65 * cos(step / 480.0 * TAU * 2))])
+	path_to(ascent, 2)
 	for i in 3:
 		var x := 1610 + i * 125
-		path_to([[x, 2335 - i * 35], [x + 30, 2410], [x + 70, 2440]], 1)
-		road.buildings.append({"name": "Hunting Camp %d" % (i + 1), "kind": "tent", "rect": [x, 2330 - i * 35, 4, 3]})
-		for offset in [Vector2i(5, 3), Vector2i(7, 0)]:
-			road.stamps.append({"at": [x + offset.x, 2330 - i * 35 + offset.y], "tile": 138 if offset.x == 5 else 116})
+		var y := roundi(2320 + 65 * cos((x - 1510) / 480.0 * TAU * 2))
+		road.buildings.append({"name": "Hunting Camp %d" % (i + 1), "kind": "tent", "rect": [x, y - 5, 4, 3]})
+		var branch: Array = []
+		for step in 65:
+			branch.append([x + step, y + roundi(35 * sin(step / 64.0 * PI))])
+		path_to(branch, 1)
+	road.buildings.append({"name": "Eastern Hunting Grounds", "kind": "marker", "rect": [1800, 2180, 1, 1]})
+	road.buildings.append({"name": "Cloudwatch Shrine", "kind": "hall", "rect": [1984, 2375, 7, 4]})
 	for at in [[1497, 2362], [1500, 2362], [1512, 2362], [1518, 2370]]:
 		road.stamps.append({"at": at, "tile": 116})
 	road.buildings.append({"name": "Skinning Shed", "kind": "house", "rect": [1520, 2368, 5, 3]})
 	road.buildings.append({"name": "Kennel", "kind": "house", "rect": [1520, 2375, 3, 3]})
 	road.buildings.append({"name": "Hunters' Lodge", "kind": "court", "rect": [1495, 2365, 22, 20]})
-	for x in range(1500, 2100, 8):
-		for y in [2110, 2510]:
-			path_to([[x, y], [x + 3, y]], 1, "boundary")
-	for y in range(2110, 2510, 8):
-		for x in [1500, 2100]:
-			path_to([[x, y], [x, y + 3]], 1, "boundary")
 	for side in [-1, 1]:
 		for step in 25:
 			var x: int = 1365 + side * (99 + step)

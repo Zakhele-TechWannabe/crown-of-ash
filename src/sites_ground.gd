@@ -60,3 +60,6 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 func far_color(tile: Vector2i) -> Color:
 	var site := overlay_at(tile)
 	return site.far_color(tile) if site != null else super.far_color(tile)
+
+func site_height(tile: Vector2i, natural: float) -> float:
+	return preload("res://src/hunting_ground.gd").mountain_height(tile, natural)

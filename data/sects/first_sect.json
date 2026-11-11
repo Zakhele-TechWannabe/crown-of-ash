@@ -912,7 +912,7 @@
 				22,
 				10
 			],
-			"crop": "spirit_rice"
+			"crop": "jade_ear_wheat"
 		},
 		{
 			"rect": [
@@ -921,7 +921,7 @@
 				22,
 				10
 			],
-			"crop": "spirit_rice"
+			"crop": "golden_bead_millet"
 		},
 		{
 			"rect": [
@@ -993,7 +993,7 @@
 				22,
 				10
 			],
-			"crop": "common_rice"
+			"crop": "fragrant_rice"
 		},
 		{
 			"rect": [
@@ -1002,7 +1002,7 @@
 				22,
 				10
 			],
-			"crop": "common_rice"
+			"crop": "glutinous_rice"
 		},
 		{
 			"rect": [
@@ -1011,7 +1011,7 @@
 				22,
 				10
 			],
-			"crop": "common_rice"
+			"crop": "foxtail_millet"
 		},
 		{
 			"rect": [
@@ -1020,7 +1020,7 @@
 				22,
 				10
 			],
-			"crop": "common_rice"
+			"crop": "wheat"
 		},
 		{
 			"rect": [
@@ -1029,7 +1029,7 @@
 				22,
 				10
 			],
-			"crop": "common_rice"
+			"crop": "sorghum"
 		}
 	],
 	"village": [

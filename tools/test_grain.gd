@@ -12,6 +12,19 @@ func make_economy(no_farmers: bool = false) -> RefCounted:
 	return economy
 
 func _initialize() -> void:
+	var mixed: RefCounted = make_economy()
+	for id: String in mixed.goods:
+		var good: Dictionary = mixed.goods[id]
+		assert(good.has("grade") and good.has("spirit_tier") and good.has("yield_relative_to_common_rice"))
+		assert(good.spirit_tier >= 0 and good.spirit_tier <= 3)
+	mixed.stocks.common_rice = 0.0
+	mixed.stocks.wheat = 100.0
+	mixed.stocks.foxtail_millet = 25.0
+	mixed.stocks.jade_ear_wheat = 500.0
+	mixed.advance_to(720)
+	assert(mixed.stocks.wheat < 100 and mixed.stocks.foxtail_millet == 25)
+	assert(mixed.stocks.jade_ear_wheat == 500)
+	assert(mixed.node_flow("wheat", "adults")[3] > 0)
 	var daily: RefCounted = make_economy()
 	var jump: RefCounted = make_economy()
 	for d in 3 * 365:
@@ -44,8 +57,8 @@ func _initialize() -> void:
 	assert(jump.node_flow("spirit_rice", "children")[3] == 0)
 	for id: String in jump.goods:
 		assert(is_equal_approx(float(jump.goods[id].starting_rations) + jump.node_flow(id, "harvested")[3] - jump.node_flow(id, "adults")[3] - jump.node_flow(id, "children")[3] - jump.node_flow(id, "spoiled")[3], float(jump.stocks[id])))
-	assert(jump.areas.spirit_rice == 660 and jump.areas.common_rice == 2640)
-	assert(is_equal_approx(jump.good_forecast("spirit_rice") / 660, jump.good_forecast("common_rice") / 2640 * 0.4))
+	assert(jump.goods.size() == 20 and jump.areas.spirit_rice == 220 and jump.areas.common_rice > 0)
+	assert(is_equal_approx(jump.good_forecast("spirit_rice") / float(jump.areas.spirit_rice), jump.good_forecast("common_rice") / float(jump.areas.common_rice) * 0.4))
 	var protected: RefCounted = make_economy()
 	protected.stock = 0
 	protected.stocks.spirit_rice = 1000.0

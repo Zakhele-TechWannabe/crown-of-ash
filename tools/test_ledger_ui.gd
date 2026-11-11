@@ -22,6 +22,9 @@ func run() -> void:
 		await settle(ledger)
 		assert(not ledger.visible)
 	assert(ledger.kpi_cards.size() == 4)
+	assert(ledger.kpi_cards.year.label.text == "after harvest")
+	assert(ledger.kpi_cards.year.value.text.ends_with(" d"))
+	assert("Next harvest" in ledger.kpi_cards.year.button.tooltip_text)
 	for width: int in [1920, 1366]:
 		root.content_scale_size = Vector2i(width, 1080)
 		root.size = Vector2i(width, 1080)

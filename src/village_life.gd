@@ -230,7 +230,7 @@ func _draw() -> void:
 	var area := Rect2(camera.position - get_viewport_rect().size / camera.zoom / 2.0, get_viewport_rect().size / camera.zoom).grow(64)
 	# A soft pulse on the qi-rich shoots, using the same world projection as people.
 	for field: Dictionary in sect.data.fields:
-		if field.crop != "spirit_rice":
+		if economy.goods[field.crop].grade != "spirit":
 			continue
 		for y in range(int(field.rect[1]), int(field.rect[1]) + int(field.rect[3]), 2):
 			for x in range(int(field.rect[0]), int(field.rect[0]) + int(field.rect[2]), 2):

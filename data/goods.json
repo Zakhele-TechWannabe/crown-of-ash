@@ -16,6 +16,41 @@
 			"parent": "grains"
 		},
 		{
+			"id": "spirit_grains",
+			"name": "Spirit grains",
+			"parent": "grains"
+		},
+		{
+			"id": "oats_grains",
+			"name": "Oats",
+			"parent": "grains"
+		},
+		{
+			"id": "buckwheat_grains",
+			"name": "Buckwheat",
+			"parent": "grains"
+		},
+		{
+			"id": "sorghum_grains",
+			"name": "Sorghum",
+			"parent": "grains"
+		},
+		{
+			"id": "barley_grains",
+			"name": "Barley",
+			"parent": "grains"
+		},
+		{
+			"id": "wheat_grains",
+			"name": "Wheat",
+			"parent": "grains"
+		},
+		{
+			"id": "millet",
+			"name": "Millet",
+			"parent": "grains"
+		},
+		{
 			"id": "vegetables",
 			"name": "Vegetables",
 			"parent": "food"
@@ -46,7 +81,7 @@
 				"grains",
 				"rice"
 			],
-			"description": "White rice from the lower paddies",
+			"description": "White pearls gathered from the lower paddies.",
 			"edible_by": [
 				"mortals",
 				"cultivators"
@@ -54,8 +89,252 @@
 			"colour": "d7ba65",
 			"icon": "rice",
 			"yield_rations_per_mu": 3.8,
+			"yield_relative_to_common_rice": 1,
 			"starting_rations": 4500,
-			"seasonal_spoilage": 0.02
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "fragrant_rice",
+			"name": "Fragrant rice",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"rice"
+			],
+			"description": "A warm bowl carries the scent of rain and flowers.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e6d99a",
+			"icon": "rice",
+			"yield_rations_per_mu": 3.61,
+			"yield_relative_to_common_rice": 0.95,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "red_rice",
+			"name": "Red rice",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"rice"
+			],
+			"description": "Rust-red kernels hold the strength of river clay.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "ad6051",
+			"icon": "rice",
+			"yield_rations_per_mu": 3.42,
+			"yield_relative_to_common_rice": 0.9,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "glutinous_rice",
+			"name": "Glutinous rice",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"rice"
+			],
+			"description": "Sticky white grains bind festival cakes together.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "eee0b4",
+			"icon": "rice",
+			"yield_rations_per_mu": 3.8,
+			"yield_relative_to_common_rice": 1,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "foxtail_millet",
+			"name": "Foxtail millet",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"millet"
+			],
+			"description": "Golden tails bow in the dry hillside wind.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "c6a646",
+			"icon": "grain",
+			"yield_rations_per_mu": 4.18,
+			"yield_relative_to_common_rice": 1.1,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "broomcorn_millet",
+			"name": "Broomcorn millet",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"millet"
+			],
+			"description": "Small amber seeds endure the long summer heat.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "c99a4c",
+			"icon": "grain",
+			"yield_rations_per_mu": 3.9899999999999998,
+			"yield_relative_to_common_rice": 1.05,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "wheat",
+			"name": "Wheat",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"wheat_grains"
+			],
+			"description": "Heavy ears whisper above the sun-warmed terraces.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "d4b578",
+			"icon": "grain",
+			"yield_rations_per_mu": 4.18,
+			"yield_relative_to_common_rice": 1.1,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "barley",
+			"name": "Barley",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"barley_grains"
+			],
+			"description": "Bearded heads ripen beneath a pale autumn sky.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b5a16c",
+			"icon": "grain",
+			"yield_rations_per_mu": 3.8,
+			"yield_relative_to_common_rice": 1,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "sorghum",
+			"name": "Sorghum",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"sorghum_grains"
+			],
+			"description": "Copper seed heads burn above sturdy stalks.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "a55441",
+			"icon": "grain",
+			"yield_rations_per_mu": 4.369999999999999,
+			"yield_relative_to_common_rice": 1.15,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "buckwheat",
+			"name": "Buckwheat",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"buckwheat_grains"
+			],
+			"description": "Pale blossoms yield dark triangular seeds.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b9a4a1",
+			"icon": "grain",
+			"yield_rations_per_mu": 3.23,
+			"yield_relative_to_common_rice": 0.85,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
+		},
+		{
+			"id": "oats",
+			"name": "Oats",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"oats_grains"
+			],
+			"description": "Silver-green panicles sway in the cool upland air.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "c2bd87",
+			"icon": "grain",
+			"yield_rations_per_mu": 3.61,
+			"yield_relative_to_common_rice": 0.95,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "granary"
 		},
 		{
 			"id": "spirit_rice",
@@ -66,15 +345,203 @@
 				"grains",
 				"rice"
 			],
-			"description": "Grown on qi-rich plots; a faint glow; kept for the sect. Mortals do not eat it.",
+			"description": "Jade shoots drink the quiet qi of the terraces.",
 			"edible_by": [
 				"cultivators"
 			],
 			"colour": "70cfc5",
 			"icon": "rice",
 			"yield_rations_per_mu": 1.52,
+			"yield_relative_to_common_rice": 0.4,
 			"starting_rations": 0,
-			"seasonal_spoilage": 0.02
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "sect"
+		},
+		{
+			"id": "jade_ear_wheat",
+			"name": "Jade-ear wheat",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"wheat_grains"
+			],
+			"description": "Green ears ring softly when touched by dawn.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "69ba83",
+			"icon": "grain",
+			"yield_rations_per_mu": 1.5959999999999999,
+			"yield_relative_to_common_rice": 0.42,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "sect"
+		},
+		{
+			"id": "golden_bead_millet",
+			"name": "Golden-bead millet",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"millet"
+			],
+			"description": "Golden beads gather qi beneath their husks.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "edc957",
+			"icon": "grain",
+			"yield_rations_per_mu": 1.71,
+			"yield_relative_to_common_rice": 0.45,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 1,
+			"store": "sect"
+		},
+		{
+			"id": "moon_dew_rice",
+			"name": "Moon-dew rice",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"rice"
+			],
+			"description": "Blue pearls hold a drop of moonlight.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "a5bbef",
+			"icon": "rice",
+			"yield_rations_per_mu": 1.14,
+			"yield_relative_to_common_rice": 0.3,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "sect"
+		},
+		{
+			"id": "cloud_barley",
+			"name": "Cloud barley",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"barley_grains"
+			],
+			"description": "Mist curls around each pearl-grey ear.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "c1dce0",
+			"icon": "grain",
+			"yield_rations_per_mu": 1.3299999999999998,
+			"yield_relative_to_common_rice": 0.35,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "sect"
+		},
+		{
+			"id": "ember_sorghum",
+			"name": "Ember sorghum",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"sorghum_grains"
+			],
+			"description": "Red kernels keep the warmth of banked coals.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "ec784e",
+			"icon": "grain",
+			"yield_rations_per_mu": 1.3299999999999998,
+			"yield_relative_to_common_rice": 0.35,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "sect"
+		},
+		{
+			"id": "frost_oats",
+			"name": "Frost oats",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"oats_grains"
+			],
+			"description": "Ice-blue husks glitter through the summer heat.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "a4dcf0",
+			"icon": "grain",
+			"yield_rations_per_mu": 1.14,
+			"yield_relative_to_common_rice": 0.3,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 2,
+			"store": "sect"
+		},
+		{
+			"id": "thunder_husk_grain",
+			"name": "Thunder-husk grain",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"spirit_grains"
+			],
+			"description": "Violet husks crackle before the mountain storms.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "a08be0",
+			"icon": "grain",
+			"yield_rations_per_mu": 0.836,
+			"yield_relative_to_common_rice": 0.22,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 3,
+			"store": "sect"
+		},
+		{
+			"id": "nine_sun_grain",
+			"name": "Nine-sun grain",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"grains",
+				"spirit_grains"
+			],
+			"description": "Nine golden sparks sleep within every kernel.",
+			"edible_by": [
+				"cultivators"
+			],
+			"colour": "ffb64c",
+			"icon": "grain",
+			"yield_rations_per_mu": 0.76,
+			"yield_relative_to_common_rice": 0.2,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.01,
+			"grade": "spirit",
+			"spirit_tier": 3,
+			"store": "sect"
 		}
 	]
 }
