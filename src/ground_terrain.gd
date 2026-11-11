@@ -223,6 +223,16 @@ func _river_distance(p: Vector2) -> float:
 func ground_height(tile: Vector2i) -> float:
 	if baking and height_cache.has(tile):
 		return height_cache[tile]
+	# Inside the full mountain override, natural height contributes zero.
+	# Avoid evaluating the river/noise sampler just to discard its result.
+	if sect.hunting.cached_weight(tile) >= 1.0:
+		var overridden: float = sect.hunting.cached_height(tile, 0.0)
+		var level: int = sect.level_at(tile)
+		if level >= 0:
+			overridden = SEA + level * TERRACE
+		if baking:
+			height_cache[tile] = overridden
+		return overridden
 	var p := (Vector2(tile) + Vector2.ONE * 0.5) / 16.0
 	var base := _blend(p)
 	var height := base
@@ -282,10 +292,12 @@ func _new_baker() -> RefCounted:
 	var baker := preload("res://src/ground_baker.gd").new()
 	baker.world = snapshot
 	baker.sect = sect
+	baker.hunting = sect.hunting.worker_copy()
 	baker.noise = noise.duplicate()
 	baker.mountain = mountain.duplicate()
 	baker.woodland = woodland.duplicate()
 	baker.atlas_image = atlas_image
+	baker.far_colors = far_colors
 	baker.max_level = max_level
 	baker.exaggeration = exaggeration
 	return baker
@@ -296,62 +308,12 @@ func _far_image(key: Vector2i) -> Image:
 		far_lru.erase(key)
 		far_lru.append(key)
 		return far_cache[key]
-	var started := Time.get_ticks_usec()
-	var image := Image.create(SIDE, SIDE, false, Image.FORMAT_RGBA8)
-	# Sample displaced source rows too, so elevated tops crossing a chunk edge
-	# belong to the destination chunk and leave no transparent seams.
-	baking = true
-	# FAR interpolates deterministic terrain samples on a 16-tile grid.
-	# Dense sect overrides remain per tile; detailed rendering is unchanged.
-	var rows := SIDE + ceili(max_level * exaggeration / TILE) + 1
-	var heights := PackedFloat32Array()
-	var colors := PackedColorArray()
-	var kinds := PackedInt32Array()
-	for gy in range(ceili(rows / 16.0) + 1):
-		for gx in 5:
-			var info := sample(key * SIDE + Vector2i(gx * 16, gy * 16))
-			heights.append(info.height)
-			colors.append(far_colors[(info.band * SHADES + info.shade) * 20 + info.kind])
-			kinds.append(info.kind)
-	for y in range(rows):
-		for x in SIDE:
-			var tile := key * SIDE + Vector2i(x, y)
-			var index := (y / 16) * 5 + x / 16
-			var height := lerpf(lerpf(heights[index], heights[index + 1], (x % 16) / 16.0), lerpf(heights[index + 5], heights[index + 6], (x % 16) / 16.0), (y % 16) / 16.0)
-			var level: int = sect.level_at(tile)
-			if level < 0:
-				var skirt: float = sect.height_at(tile)
-				level = maxi(0, floori((maxf(height, skirt) - SEA) / TERRACE))
-			var top := y - roundi(level * exaggeration / TILE)
-			var col: Color = colors[index]
-			if kinds[index] > 3 and kinds[index] != 8 and height < 0.84 and float(_hash(tile.x, tile.y) % 1000) / 1000.0 < smoothstep(0.28, 0.8, smoothstep(-0.35, 0.45, woodland.get_noise_2dv((Vector2(tile) + Vector2.ONE * 0.5) / 16.0))) * 0.55:
-				col = Color8(43, 76, 45)
-			if sect.has_tile(tile):
-				col = sect.far_color(tile)
-			var forest_weight := preload("res://src/hunting_ground.gd").weight(tile)
-			if forest_weight > 0.0 and not sect.has_tile(tile):
-				var forest_color := preload("res://src/hunting_ground.gd").color(tile)
-				if not preload("res://src/hunting_ground.gd").clearing(tile) and not preload("res://src/hunting_ground.gd").rocky(tile):
-					forest_color *= 0.76 + preload("res://src/hunting_ground.gd").hash_at(tile.x, tile.y) % 100 / 500.0
-				forest_color.a = 1.0
-				col = col.lerp(forest_color, forest_weight)
-				var local: Array = sect.hunting.segments.get(Vector2i(floori(tile.x / 16.0), floori(tile.y / 16.0)), [])
-				col = col.lerp(Color8(78, 76, 49), sect.hunting.trail(Vector2(tile) + Vector2.ONE * 0.5, local) * 0.6)
-				level = maxi(0, floori((preload("res://src/hunting_ground.gd").mountain_height(tile, height) - SEA) / TERRACE))
-				top = y - roundi(level * exaggeration / TILE)
-			var face_start := maxi(0, top + 1)
-			var face_end := mini(SIDE, y + 2)
-			if face_end > face_start:
-				image.fill_rect(Rect2i(x, face_start, 1, face_end - face_start), col.darkened(0.3))
-			if top >= 0 and top < SIDE:
-				image.set_pixel(x, top, col)
-	baking = false
-	height_cache.clear()
+	var baker := _new_baker()
+	var image: Image = baker._far_image(key)
 	far_cache[key] = image
 	far_lru.append(key)
 	while far_lru.size() > 400:
 		far_cache.erase(far_lru.pop_front())
-	print("FAR %s %.2f ms" % [key, (Time.get_ticks_usec() - started) / 1000.0])
 	return image
 
 
@@ -378,45 +340,49 @@ func update_chunks(camera: Camera2D, budget: int) -> bool:
 			detailed.erase(key)
 	for key: Vector2i in jobs.keys():
 		var job: Dictionary = jobs[key]
-		if key not in wanted or not near:
+		if key not in wanted or (job.detail and not near):
 			job.cancelled = true
 		if not WorkerThreadPool.is_task_completed(job.id):
 			continue
 		WorkerThreadPool.wait_for_task_completion(job.id)
-		if job.generation == generation and not job.cancelled and chunks.has(key):
+		if job.generation == generation and not job.cancelled:
 			var result: Dictionary = job.baker.pending
-			var sprite: Sprite2D = chunks[key]
-			sprite.texture = ImageTexture.create_from_image(result.image)
-			sprite.position = Vector2(key) * SIDE * TILE - Vector2(0, (int(result.overflow) - int(result.min_y)) * 2)
-			sprite.scale = Vector2.ONE * 2.0
-			detailed[key] = true
-			last_bake_ms = result.elapsed
-			print("Worker %s %.2f ms" % [key, last_bake_ms])
+			if job.detail:
+				if chunks.has(key):
+					var sprite: Sprite2D = chunks[key]
+					sprite.texture = ImageTexture.create_from_image(result.image)
+					sprite.position = Vector2(key) * SIDE * TILE - Vector2(0, (int(result.overflow) - int(result.min_y)) * 2)
+					sprite.scale = Vector2.ONE * 2.0
+					detailed[key] = true
+					last_bake_ms = result.elapsed
+			else:
+				var sprite := Sprite2D.new()
+				sprite.texture = ImageTexture.create_from_image(result.image)
+				sprite.centered = false
+				sprite.position = Vector2(key) * SIDE * TILE
+				sprite.scale = Vector2.ONE * TILE
+				sprite.z_index = key.y
+				sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+				add_child(sprite)
+				chunks[key] = sprite
 		jobs.erase(key)
 	if budget <= 0:
 		pending = jobs.duplicate()
 		return false
-	var deadline := Time.get_ticks_usec() + 12000
+	# Both LODs rasterize on workers. Never synchronously bake a panning frame.
 	for key: Vector2i in wanted:
-		if not chunks.has(key):
-			var sprite := Sprite2D.new()
-			sprite.texture = ImageTexture.create_from_image(_far_image(key))
-			sprite.centered = false
-			sprite.position = Vector2(key) * SIDE * TILE
-			sprite.scale = Vector2.ONE * TILE
-			sprite.z_index = key.y
-			sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-			add_child(sprite)
-			chunks[key] = sprite
-		if Time.get_ticks_usec() >= deadline:
+		if jobs.size() >= 2:
 			break
+		if not chunks.has(key) and not jobs.has(key):
+			var baker := _new_baker()
+			jobs[key] = {"baker": baker, "id": WorkerThreadPool.add_task(baker.bake_far.bind(key)), "generation": generation, "cancelled": false, "detail": false}
 	if near:
 		for key: Vector2i in wanted:
 			if jobs.size() >= 2:
 				break
 			if not detailed.has(key) and not jobs.has(key) and chunks.has(key):
 				var baker := _new_baker()
-				jobs[key] = {"baker": baker, "id": WorkerThreadPool.add_task(baker.bake.bind(key)), "generation": generation, "cancelled": false}
+				jobs[key] = {"baker": baker, "id": WorkerThreadPool.add_task(baker.bake.bind(key)), "generation": generation, "cancelled": false, "detail": true}
 	pending = jobs.duplicate()
 	return detailed.size() == wanted.size() if near else chunks.size() == wanted.size()
 
@@ -433,10 +399,10 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		pending.min_y = mini(pending.min_y, top)
 		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
 		if drop > 0:
-			var face := Color8(110, 99, 85).lerp(Color8(43, 49, 39), preload("res://src/hunting_ground.gd").weight(tile)).darkened(minf(0.45, drop * 0.012))
+			var face := Color8(110, 99, 85).lerp(Color8(43, 49, 39), sect.hunting.cached_weight(tile)).darkened(minf(0.45, drop * 0.012))
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
-			for stripe in range(3, drop, 4) if preload("res://src/hunting_ground.gd").weight(tile) < 0.1 else []:
+			for stripe in range(3, drop, 4) if sect.hunting.cached_weight(tile) < 0.1 else []:
 				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
 			if sect.level_at(tile) >= 0:
 				var steps: bool = sect.surface_at(tile) == "stairs"
@@ -455,7 +421,7 @@ func _bake_row(key: Vector2i, y: int) -> void:
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		sect.hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
-		if info.decoration >= 0 and preload("res://src/hunting_ground.gd").weight(tile) < 0.25:
+		if info.decoration >= 0 and sect.hunting.cached_weight(tile) < 0.25:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))
 
 func natural_dry(at: Vector2i) -> bool:

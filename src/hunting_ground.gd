@@ -1,6 +1,173 @@
 extends RefCounted
 ## World-coordinate foliage and local segment buckets; immutable during worker baking.
 var segments: Dictionary = {}
+var crown_atlas: Array[Image] = []
+var floor_atlas: Array[Image] = []
+var crown_cache: Dictionary = {}
+var candidates: Dictionary = {}
+var render_tiles: Dictionary = {}
+var prepared := false
+const CACHE_ORIGIN := Vector2i(1376, 1976)
+const CACHE_SIZE := Vector2i(849, 669)
+var weights := PackedFloat32Array()
+var elevations := PackedFloat32Array()
+var shades := PackedColorArray()
+var flags := PackedByteArray()
+
+func cache_index(tile: Vector2i) -> int:
+	var at := tile - CACHE_ORIGIN
+	return at.y * CACHE_SIZE.x + at.x if at.x >= 0 and at.y >= 0 and at.x < CACHE_SIZE.x and at.y < CACHE_SIZE.y else -1
+
+func cached_weight(tile: Vector2i) -> float:
+	var i := cache_index(tile)
+	return weights[i] if i >= 0 else 0.0
+
+func cached_height(tile: Vector2i, natural: float) -> float:
+	var i := cache_index(tile)
+	return natural * (1.0 - weights[i]) + elevations[i] if i >= 0 else natural
+
+func cached_color(tile: Vector2i) -> Color:
+	return shades[cache_index(tile)]
+
+func cached_flag(tile: Vector2i, bit: int) -> bool:
+	var i := cache_index(tile)
+	return i >= 0 and (flags[i] & bit) != 0
+
+func build_samples() -> void:
+	# Bounded packed maps (~14 MiB), shared by all worker copies.
+	var count := CACHE_SIZE.x * CACHE_SIZE.y
+	weights.resize(count)
+	elevations.resize(count)
+	shades.resize(count)
+	flags.resize(count)
+	for y in CACHE_SIZE.y:
+		for x in CACHE_SIZE.x:
+			var at := CACHE_ORIGIN + Vector2i(x, y)
+			var i := y * CACHE_SIZE.x + x
+			var w := weight(at)
+			weights[i] = w
+			if w <= 0:
+				continue
+			elevations[i] = mountain_height(at, 0)
+			flags[i] = (1 if clearing(at) else 0) | (2 if rocky(at) else 0)
+
+	# Reuse packed heights for hillshade instead of evaluating four neighbours again.
+	for y in CACHE_SIZE.y:
+		for x in CACHE_SIZE.x:
+			var at := CACHE_ORIGIN + Vector2i(x, y)
+			var i := y * CACHE_SIZE.x + x
+			if weights[i] <= 0:
+				continue
+			var col := Color8(22, 44, 36).lerp(Color8(44, 62, 39), (field(Vector2(at), 23) + 1) * 0.5)
+			if (flags[i] & 1) != 0:
+				col = Color8(67, 77, 43)
+			if (flags[i] & 2) != 0:
+				col = Color8(66, 77, 72) * (0.8 + (field(Vector2(at), 6) + 1) * 0.24)
+			var dx := cached_height(at + Vector2i(3, 0), 0.8) - cached_height(at - Vector2i(3, 0), 0.8)
+			var dy := cached_height(at + Vector2i(0, 3), 0.8) - cached_height(at - Vector2i(0, 3), 0.8)
+			col *= clampf(1.0 - (dx + dy) * 12.0, 0.55, 1.4)
+			col.a = 1
+			shades[i] = col
+
+func worker_copy() -> RefCounted:
+	var copy := new()
+	copy.weights = weights
+	copy.elevations = elevations
+	copy.shades = shades
+	copy.flags = flags
+	copy.segments = segments
+	copy.crown_atlas = crown_atlas
+	copy.floor_atlas = floor_atlas
+	return copy
+
+func crowns_at(cell: Vector2i) -> Array:
+	if crown_cache.has(cell):
+		return crown_cache[cell]
+	var result: Array = []
+	for cy in range(cell.y - 2, cell.y + 3):
+		for cx in range(cell.x - 2, cell.x + 3):
+			var key := Vector2i(cx, cy)
+			if not candidates.has(key):
+				var h := hash_at(cx, cy)
+				var center := Vector2(cx * 3 + (h % 1000) / 333.0, cy * 3 + ((h >> 10) % 1000) / 333.0)
+				var radius := 1.0 + ((h >> 7) % 1000) / 666.0
+				var at := Vector2i(center)
+				var valid := h % 1000 <= cached_weight(at) * 960 and not cached_flag(at, 1) and not cached_flag(at, 2) and trail(center, segments.get(Vector2i(floori(center.x / 16.0), floori(center.y / 16.0)), [])) <= 0.1
+				candidates[key] = [center, radius, h] if valid else []
+			if not candidates[key].is_empty():
+				result.append(candidates[key])
+	result.sort_custom(func(a: Array, b: Array) -> bool: return a[0].x < b[0].x if a[0].y == b[0].y else a[0].y < b[0].y)
+	crown_cache[cell] = result
+	return result
+
+func prepare_chunk(key: Vector2i) -> void:
+	prepared = true
+	render_tiles.clear()
+	var low := key * 64
+	if not Rect2i(low, Vector2i(64, 64)).intersects(Rect2i(CACHE_ORIGIN, CACHE_SIZE)):
+		return
+	var trees: Array = []
+	for cy in range(floori((low.y - 6) / 3.0), ceili((low.y + 70) / 3.0)):
+		for cx in range(floori((low.x - 6) / 3.0), ceili((low.x + 70) / 3.0)):
+			# crowns_at populates the candidate cache once per world cell.
+			var cell := Vector2i(cx, cy)
+			if not candidates.has(cell):
+				crowns_at(cell)
+			if not candidates[cell].is_empty():
+				trees.append(candidates[cell])
+	trees.sort_custom(func(a: Array, b: Array) -> bool: return a[0].x < b[0].x if a[0].y == b[0].y else a[0].y < b[0].y)
+	for crown: Array in trees:
+		var center: Vector2 = crown[0] * 16.0
+		var origin := Vector2i(center.round()) - Vector2i(48, 48)
+		var seed: int = crown[2]
+		var variant := 0 if seed % 67 == 0 else 1 + seed % 23
+		var size := clampi(roundi((float(crown[1]) - 1.0) / 0.75), 0, 2)
+		var extent := float(crown[1]) * 20 + 12
+		for y in range(maxi(low.y, floori((center.y - extent) / 16)), mini(low.y + 64, ceili((center.y + extent) / 16))):
+			for x in range(maxi(low.x, floori((center.x - extent) / 16)), mini(low.x + 64, ceili((center.x + extent) / 16))):
+				var tile := Vector2i(x, y)
+				if center.distance_squared_to(Vector2(tile * 16) + Vector2(8, 8)) > extent * extent:
+					continue
+				var clipped := Rect2i(tile * 16, Vector2i(16, 16)).intersection(Rect2i(origin, Vector2i(96, 96)))
+				if not clipped.has_area():
+					continue
+				if not render_tiles.has(tile):
+					render_tiles[tile] = []
+				render_tiles[tile].append([Rect2i(clipped.position - origin, clipped.size), clipped.position - tile * 16, size * 24 + variant])
+
+func build_atlas() -> void:
+	# 72 small transparent crowns, shared read-only by workers (~2 MiB).
+	for size in 3:
+		for variant in 24:
+			var image := Image.create(96, 96, false, Image.FORMAT_RGBA8)
+			var radius := 16.0 + size * 12.0
+			var tint := Color8(10, 28, 29).lerp(Color8(36, 57, 36), variant / 24.0)
+			if variant == 0:
+				tint = Color8(63, 67, 57)
+			for step in ceili(radius):
+				for side in [-1, 0, 1]:
+					image.set_pixel(48 + roundi(step * side * 0.36), 48 + step, Color8(59, 55, 39))
+			for blob in range(3 + variant % 4):
+				var bh := hash_at(variant, blob)
+				var center := Vector2(48, 48) + Vector2(cos(bh % 628 / 100.0), sin(bh % 628 / 100.0)) * radius * 0.46
+				var r := radius * (0.48 + bh % 29 / 100.0)
+				for y in range(maxi(0, ceili(center.y - r)), mini(96, floori(center.y + r) + 1)):
+					var dy := (y + 0.5 - center.y) / r
+					var span := sqrt(maxf(0, 1 - dy * dy)) * r
+					for x in range(maxi(0, ceili(center.x - span)), mini(96, ceili(center.x + span))):
+						var band := clampi(floori((x - center.x + r) / (r * 0.5)), 0, 3)
+						var col := tint * clampf(1.13 - band * 0.12 - dy * 0.2, 0.6, 1.3)
+						col.a = 1
+						image.set_pixel(x, y, col)
+			crown_atlas.append(image)
+	for variant in 24:
+		var image := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+		for y in 16:
+			for x in 16:
+				var h := hash_at(x + variant * 16, y)
+				var shift := (h % 17 - 7) / 100.0
+				image.set_pixel(x, y, Color(1, 1, 1, shift * 0.2) if shift > 0 else Color(0, 0, 0, -shift))
+		floor_atlas.append(image)
 
 static func hash_at(x: int, y: int) -> int:
 	var h := (x * 374761393 + y * 668265263 + 718) & 0x7fffffff
@@ -58,6 +225,8 @@ static func color(tile: Vector2i) -> Color:
 	return col
 
 func setup() -> void:
+	build_samples()
+	build_atlas()
 	if not FileAccess.file_exists("res://data/roads/hunting_trails.json"):
 		return
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/roads/hunting_trails.json"))
@@ -80,63 +249,40 @@ func trail(p: Vector2, local: Array) -> float:
 	return amount
 
 func draw(image: Image, tile: Vector2i, pos: Vector2i, occupied: bool) -> void:
-	var w := weight(tile)
+	var w := cached_weight(tile)
 	if w <= 0.0 or occupied:
 		return
-	var clear := clearing(tile)
-	var rock := rocky(tile)
-	var base := color(tile)
+	var clear := cached_flag(tile, 1)
+	var rock := cached_flag(tile, 2)
+	var base := cached_color(tile)
+	if clear:
+		base = base.lightened(maxf(0, field(Vector2(tile) + Vector2(0.5, 0.5), 2.7) - 0.25) * 0.22)
 	var local: Array = []
 	for segment: Array in segments.get(Vector2i(floori(tile.x / 16.0), floori(tile.y / 16.0)), []):
 		if (Vector2(tile) + Vector2.ONE * 0.5).distance_to(Geometry2D.get_closest_point_to_segment(Vector2(tile) + Vector2.ONE * 0.5, segment[0], segment[1])) < 1.6:
 			local.append(segment)
-	var crowns: Array = []
-	var cell := Vector2i(floori(tile.x / 3.0), floori(tile.y / 3.0))
-	for cy in range(cell.y - 2, cell.y + 3):
-		for cx in range(cell.x - 2, cell.x + 3):
-			var h := hash_at(cx, cy)
-			var center := Vector2(cx * 3 + (h % 1000) / 333.0, cy * 3 + ((h >> 10) % 1000) / 333.0)
-			var radius := 1.0 + ((h >> 7) % 1000) / 666.0
-			if center.distance_to(Vector2(tile) + Vector2.ONE * 0.5) > radius * 1.23 + 0.71:
-				continue
-			var at := Vector2i(center)
-			var crown_segments: Array = segments.get(Vector2i(floori(center.x / 16.0), floori(center.y / 16.0)), [])
-			if h % 1000 > weight(at) * 960 or clearing(at) or rocky(at) or trail(center, crown_segments) > 0.1:
-				continue
-			crowns.append([center, radius, h])
-	crowns.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
-	var blobs: Array = []
-	for crown: Array in crowns:
-		var seed: int = crown[2]
-		var tint := Color8(10, 28, 29).lerp(Color8(36, 57, 36), float(seed % 100) / 100.0) * clampf(base.g * 255.0 / 52.0, 0.65, 1.25)
-		if seed % 67 == 0:
-			tint = Color8(63, 67, 57)
-		for blob in range(3 + seed % 4):
-			var bh := hash_at(seed % 100003, blob)
-			var offset := Vector2(cos(bh % 628 / 100.0), sin(bh % 628 / 100.0)) * float(crown[1]) * 0.46
-			blobs.append([crown[0] + offset, float(crown[1]) * (0.48 + bh % 29 / 100.0), tint])
 	var bounds := Rect2i(pos, Vector2i(16, 16))
-	for yy in 16:
-		for xx in 16:
-			var p := Vector2(tile) + Vector2(xx + 0.5, yy + 0.5) / 16.0
-			var h := hash_at(tile.x * 16 + xx, tile.y * 16 + yy)
-			var col := base * (0.93 + h % 17 / 100.0)
-			if clear:
-				col = col.lightened(maxf(0, field(p, 2.7) - 0.25) * 0.22)
-			elif rock:
+	# Native image blits replace pixel-level canopy blob evaluation.
+	if w > 0.99:
+		image.fill_rect(bounds, base)
+	else:
+		var ground := Image.create(16, 16, false, Image.FORMAT_RGBA8)
+		ground.fill(Color(base, w))
+		image.blend_rect(ground, Rect2i(0, 0, 16, 16), pos)
+	if w > 0.99:
+		image.blend_rect(floor_atlas[hash_at(tile.x, tile.y) % 24], Rect2i(0, 0, 16, 16), pos)
+	if rock:
+		for yy in 16:
+			for xx in 16:
+				var p := Vector2(tile) + Vector2(xx + 0.5, yy + 0.5) / 16.0
+				var col := base
 				var seam := field(p, 3.8) + field(p, 1.7) * 0.35
 				if absf(seam) < 0.028:
 					col = col.darkened(0.3)
 				elif seam > 0.4:
 					col = col.lightened(0.09)
-			else:
-				if h % 193 == 0:
-					col = Color8(51, 76, 43)
-				elif h % 197 < 2:
-					col = Color8(61, 57, 39)
-			col.a = 1.0
-			var at := pos + Vector2i(xx, yy)
-			image.set_pixelv(at, image.get_pixelv(at).lerp(col, w))
+				var at := pos + Vector2i(xx, yy)
+				image.set_pixelv(at, image.get_pixelv(at).lerp(col, w))
 	if not clear and not rock:
 		var detail := hash_at(tile.x, tile.y)
 		if detail % 23 == 0:
@@ -146,35 +292,31 @@ func draw(image: Image, tile: Vector2i, pos: Vector2i, occupied: bool) -> void:
 			for step in 5:
 				for side in [-1, 1]:
 					image.fill_rect(Rect2i(pos + Vector2i(8 + side * step, 9 - step / 2), Vector2i(2, 1)), Color8(47, 70, 41))
-	# Roots and fallen wood are painted underneath the crowns, visible only in gaps.
-	for crown: Array in crowns:
-		var center: Vector2 = Vector2(pos) + (crown[0] - Vector2(tile)) * 16.0
-		for step in range(0, ceili(float(crown[1]) * 16)):
-			for side in [-1, 0, 1]:
-				var at := Vector2i(center) + Vector2i(roundi(step * side * 0.36), step)
-				if bounds.has_point(at):
-					image.set_pixelv(at, Color8(59, 55, 39))
-	# Scanline spans avoid searching every crown at every pixel. All clipping is tile-local.
-	for blob: Array in blobs:
-		var center: Vector2 = Vector2(pos) + (blob[0] - Vector2(tile)) * 16.0
-		var r: float = blob[1] * 16.0
-		for y in range(maxi(pos.y, ceili(center.y - r)), mini(pos.y + 16, floori(center.y + r) + 1)):
-			var dy := (y + 0.5 - center.y) / r
-			var half_span := sqrt(maxf(0, 1.0 - dy * dy)) * r
-			var left := maxi(pos.x, ceili(center.x - half_span))
-			var right := mini(pos.x + 16, ceili(center.x + half_span))
-			for band in 4:
-				var x0 := maxi(left, floori(center.x - r + band * r * 0.5))
-				var x1 := mini(right, floori(center.x - r + (band + 1) * r * 0.5))
-				if x1 <= x0:
+		if prepared and w > 0.99:
+			for operation: Array in render_tiles.get(tile, []):
+				image.blend_rect(crown_atlas[operation[2]], operation[0], pos + operation[1])
+		else:
+			for crown: Array in crowns_at(Vector2i(floori(tile.x / 3.0), floori(tile.y / 3.0))):
+				var center: Vector2 = Vector2(pos) + (crown[0] - Vector2(tile)) * 16.0
+				if center.distance_squared_to(Vector2(pos) + Vector2(8, 8)) > pow(float(crown[1]) * 20 + 12, 2):
 					continue
-				var col: Color = blob[2] * clampf(1.13 - band * 0.12 - dy * 0.2, 0.6, 1.3)
-				col.a = 1.0
+				var origin := Vector2i(center.round()) - Vector2i(48, 48)
+				var clipped := bounds.intersection(Rect2i(origin, Vector2i(96, 96)))
+				if not clipped.has_area():
+					continue
+				var seed: int = crown[2]
+				var variant := 0 if seed % 67 == 0 else 1 + seed % 23
+				var size := clampi(roundi((float(crown[1]) - 1.0) / 0.75), 0, 2)
 				if w > 0.99:
-					image.fill_rect(Rect2i(x0, y, x1 - x0, 1), col)
+					image.blend_rect(crown_atlas[size * 24 + variant], Rect2i(clipped.position - origin, clipped.size), clipped.position)
 				else:
-					for x in range(x0, x1):
-						image.set_pixel(x, y, image.get_pixel(x, y).lerp(col, w))
+					var patch := crown_atlas[size * 24 + variant].get_region(Rect2i(clipped.position - origin, clipped.size))
+					for y in patch.get_height():
+						for x in patch.get_width():
+							var col := patch.get_pixel(x, y)
+							col.a *= w
+							patch.set_pixel(x, y, col)
+					image.blend_rect(patch, Rect2i(Vector2i.ZERO, patch.get_size()), clipped.position)
 	# The packed-earth ribbon has subpixel coverage and a textured, soft edge.
 	if not local.is_empty():
 		for yy in 16:

@@ -88,12 +88,59 @@ func run() -> void:
 	ledger.open_tab("rice")
 	assert(ledger.current == "food")
 	await settle(ledger)
+	ledger.open_tab("food/grains/rice")
+	await settle(ledger)
+	assert(ledger.food_path == ["food", "grains", "rice"])
+	assert(ledger.food_grid.columns >= 3)
+	assert(ledger.food_grid.get_child_count() > 0)
+	var slot: Button = ledger.food_grid.get_child(0)
+	var good_id: String = slot.get_meta("food_id")
+	assert(world.life.economy.goods.has(good_id))
+	slot.pressed.emit()
+	assert(ledger.selected_food == good_id)
+	ledger.food_up()
+	assert(ledger.selected_food.is_empty())
+	assert(ledger.food_path == ["food", "grains"])
+	ledger.open_tab("food/grains/rice")
+	await settle(ledger)
+	ledger.food_grid.get_child(0).pressed.emit()
+	await process_frame
+	await process_frame
+	var scroll_before: int = ledger.drawer_scroll.scroll_vertical
 	var before: Vector2 = world.ground_view.cam.zoom
 	var wheel := InputEventMouseButton.new()
-	wheel.button_index = MOUSE_BUTTON_WHEEL_UP
+	wheel.button_index = MOUSE_BUTTON_WHEEL_DOWN
 	wheel.pressed = true
+	wheel.position = ledger.global_position + Vector2(80, 250)
+	root.push_input(wheel)
+	await process_frame
+	assert(world.ground_view.cam.zoom == before, "Drawer wheel must not zoom camera")
+	assert(ledger.drawer_scroll.scroll_vertical > scroll_before, "Good details scroll in the outer container")
+	var back := InputEventKey.new()
+	back.pressed = true
+	back.keycode = KEY_BACKSPACE
+	root.push_input(back)
+	assert(ledger.food_path == ["food", "grains"])
+	var right := InputEventMouseButton.new()
+	right.pressed = true
+	right.button_index = MOUSE_BUTTON_RIGHT
+	right.position = wheel.position
+	root.push_input(right)
+	assert(ledger.food_path == ["food"])
+	# Exercise the camera guard directly, including a drag crossing into the drawer.
+	world.ground_view.dragging = true
+	var motion := InputEventMouseMotion.new()
+	motion.position = wheel.position
+	motion.relative = Vector2(30, 20)
+	var camera_position: Vector2 = world.ground_view.cam.position
+	world.ground_view._unhandled_input(motion)
+	assert(not world.ground_view.dragging)
+	assert(world.ground_view.cam.position == camera_position)
+	wheel.position = Vector2(30, 300)
 	world.ground_view._unhandled_input(wheel)
-	assert(world.ground_view.cam.zoom.x > before.x, "World camera remains interactive with drawer open")
+	assert(world.ground_view.cam.zoom.x < before.x, "World area remains interactive")
+	ledger.open_tab("food")
+	assert(ledger.food_path == ["food"] and ledger.selected_food.is_empty())
 	ledger.close()
 	await settle(ledger)
 	assert(ledger.current == "food", "Remember last tab")
@@ -105,7 +152,7 @@ func run() -> void:
 	ledger.show_granary()
 	await process_frame
 	assert(ledger.granary_card.visible and ledger.granary_card.size.x >= 460)
-	print("PASS ledger UI: tabs, KPI navigation/states, 1920/1366 layout, speed/keyboard controls, drawer, follow, granary")
+	print("PASS ledger UI: tabs, KPI navigation/states, 1920/1366 layout, speed/keyboard controls, inventory paths/selection/back, wheel scrolling/camera isolation, follow, granary")
 	quit()
 
 # Heavy chunk workers can span a frame; a wall-clock timer does not imply the

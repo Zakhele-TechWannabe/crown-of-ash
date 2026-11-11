@@ -101,6 +101,12 @@ func _update_readout() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not active:
 		return
+	if ledger.owns_pointer(event):
+		dragging = false
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and ledger.current == "food":
+			ledger.food_up()
+		get_viewport().set_input_as_handled()
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode in [KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5]:
 			ledger.toggle_tab(["overview", "food", "people", "work", "chronicle"][event.keycode - KEY_F1])

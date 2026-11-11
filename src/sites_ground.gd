@@ -64,4 +64,4 @@ func far_color(tile: Vector2i) -> Color:
 	return site.far_color(tile) if site != null else super.far_color(tile)
 
 func site_height(tile: Vector2i, natural: float) -> float:
-	return preload("res://src/hunting_ground.gd").mountain_height(tile, natural)
+	return hunting.cached_height(tile, natural)

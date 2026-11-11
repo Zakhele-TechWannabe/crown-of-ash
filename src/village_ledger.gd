@@ -3,7 +3,10 @@ extends PanelContainer
 const TABS := {"overview": "Overview", "food": "Food", "people": "People", "work": "Work & fields", "chronicle": "Chronicle"}
 const INK := Color("493423")
 const GOLD := Color("a57927")
-var selected_food := "common_rice"
+var selected_food := ""
+var food_path: Array[String] = ["food"]
+var food_grid: GridContainer
+var drawer_scroll: ScrollContainer
 var collapsed: Dictionary = {}
 var closing := false
 var slide: Tween
@@ -93,6 +96,7 @@ func setup(ground_view: Node2D) -> void:
 	parchment.set_stylebox("pressed", "Button", skin("buttonLong_brown_pressed"))
 	parchment.set_stylebox("pressed", "OptionButton", skin("buttonLong_brown_pressed"))
 	view.hud.add_child(self)
+	mouse_force_pass_scroll_events = false
 	theme = parchment
 	_build_hud(parchment)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -112,6 +116,8 @@ func setup(ground_view: Node2D) -> void:
 		tab.icon = icon(key)
 	button(tabs, "×", close)
 	var scroll := ScrollContainer.new()
+	drawer_scroll = scroll
+	scroll.mouse_force_pass_scroll_events = false
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -246,6 +252,14 @@ func open_tab(key: String) -> void:
 		slide = create_tween().set_parallel(true)
 		slide.tween_property(self, "offset_left", 0.0, 0.18)
 		slide.tween_property(self, "offset_right", 0.0, 0.18)
+	if key.begins_with("food"):
+		food_path = ["food"]
+		selected_food = ""
+		for part: String in key.split("/").slice(1):
+			for category: Dictionary in life.economy.catalogue.categories:
+				if category.id == part and category.parent == food_path[-1]:
+					food_path.append(part)
+		key = "food"
 	current = key if TABS.has(key) else "overview"
 	show()
 	refresh()
@@ -391,12 +405,14 @@ func refresh_values() -> void:
 func stage() -> String:
 	return ["Planting", "Tending", "Harvest", "Fallow"][life.economy.season()]
 
-func table(parent: Node, headers: Array, rows: Array, height: float = 200) -> Tree:
+func table(parent: Node, headers: Array, rows: Array, _height: float = 200) -> Tree:
 	var widget := Tree.new()
 	widget.columns = headers.size()
 	widget.hide_root = true
 	widget.column_titles_visible = true
-	widget.custom_minimum_size.y = height
+	widget.custom_minimum_size.y = maxf(60, (rows.size() + 1) * 30)
+	widget.scroll_vertical_enabled = false
+	widget.scroll_horizontal_enabled = false
 	widget.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for i in headers.size():
 		widget.set_column_title(i, headers[i])
@@ -412,22 +428,36 @@ func table(parent: Node, headers: Array, rows: Array, height: float = 200) -> Tr
 	return widget
 
 func _food(parent: Node, e: RefCounted) -> void:
-	var widget := table(parent, ["Food", "Stock · jin", "Days", "Year in / out"], [], 265)
-	widget.hide_root = false
-	var root := widget.get_root()
-	var nodes: Dictionary = {"food": root}
+	var crumbs := HBoxContainer.new()
+	parent.add_child(crumbs)
+	for index in food_path.size():
+		var at := index
+		if index > 0:
+			var arrow := label(crumbs, "›")
+			arrow.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+			arrow.autowrap_mode = TextServer.AUTOWRAP_OFF
+		button(crumbs, food_title(food_path[index]), func() -> void:
+			food_path.resize(at + 1)
+			selected_food = ""
+			refresh_values())
+	food_grid = GridContainer.new()
+	food_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	food_grid.add_theme_constant_override("h_separation", 8)
+	food_grid.add_theme_constant_override("v_separation", 8)
+	parent.add_child(food_grid)
+	food_grid.columns = maxi(1, int((size.x - 48) / 112))
+	food_grid.resized.connect(func() -> void:
+		food_grid.columns = maxi(1, int(food_grid.size.x / 112)))
 	for category: Dictionary in e.catalogue.categories:
-		var id: String = category.id
-		if id != "food":
-			nodes[id] = widget.create_item(nodes[category.parent])
-		_fill_food_item(nodes[id], id, category.name, e)
-	for id: String in e.goods:
-		var good: Dictionary = e.goods[id]
-		var item := widget.create_item(nodes[good.category_path[-1]])
-		_fill_food_item(item, id, good.name, e)
-		item.set_custom_color(0, Color(good.colour).darkened(0.5) if e.quantity(id) == 0 else Color(good.colour))
-	widget.item_collapsed.connect(func(item: TreeItem) -> void: collapsed[item.get_metadata(0)] = item.collapsed)
-	widget.item_selected.connect(func() -> void: selected_food = str(widget.get_selected().get_metadata(0)); refresh_values())
+		if category.parent == food_path[-1]:
+			food_slot(category.id, category.name, false, e)
+	for good: String in e.goods:
+		if e.goods[good].category_path[-1] == food_path[-1]:
+			food_slot(good, e.goods[good].name, true, e)
+	if food_grid.get_child_count() == 0:
+		label(parent, "No provisions recorded in this category.")
+	if selected_food.is_empty():
+		return
 	var id := selected_food
 	var is_good: bool = e.goods.has(id)
 	label(parent, e.goods[id].name if is_good else id.capitalize(), true)
@@ -481,14 +511,108 @@ func _food(parent: Node, e: RefCounted) -> void:
 				chart.samples[i].y *= 2
 			parent.add_child(chart)
 
-func _fill_food_item(item: TreeItem, id: String, title: String, e: RefCounted) -> void:
-	item.set_metadata(0, id)
-	item.set_text(0, title)
-	item.set_text(1, amount(e.quantity(id)))
-	var edible: bool = not e.goods.has(id) or "mortals" in e.goods[id].edible_by
-	item.set_text(2, "%.0f" % (e.edible_quantity(id) / e.daily_need()) if edible else "—")
-	item.set_text(3, "%s / %s" % [amount(e.node_flow(id, "harvested")[2]), amount(e.node_flow(id, "adults")[2] + e.node_flow(id, "children")[2] + e.node_flow(id, "spoiled")[2])])
-	item.collapsed = collapsed.get(id, false)
+func food_title(id: String) -> String:
+	for category: Dictionary in life.economy.catalogue.categories:
+		if category.id == id:
+			return category.name
+	return id.capitalize()
+
+func food_up() -> void:
+	selected_food = ""
+	if food_path.size() > 1:
+		food_path.pop_back()
+	refresh_values()
+
+func owns_pointer(event: InputEvent) -> bool:
+	return is_visible_in_tree() and event is InputEventMouse and get_global_rect().has_point(event.position)
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and current == "food":
+		food_up()
+	if event is InputEventMouse:
+		accept_event()
+
+func _input(event: InputEvent) -> void:
+	if owns_pointer(event):
+		view.dragging = false
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed and current == "food":
+				food_up()
+			get_viewport().set_input_as_handled()
+			return
+	if is_visible_in_tree() and current == "food" and event is InputEventKey and event.pressed and event.keycode == KEY_BACKSPACE:
+		food_up()
+		get_viewport().set_input_as_handled()
+
+func grain_icon(id: String, colour: Color) -> Texture2D:
+	if icons.has(id):
+		return icons[id]
+	var image := Image.create(40, 40, false, Image.FORMAT_RGBA8)
+	var seed_value := absi(id.hash())
+	for y in range(4, 36):
+		for x in range(5, 35):
+			var p := Vector2(x - 20, y - 22)
+			var mark := false
+			match seed_value % 3:
+				0: mark = p.length() < 12 - absf(p.y) * 0.16 or (y in [7, 8, 9] and x > 14 and x < 26)
+				1: mark = absf(x - 20) < 1.5 or (y % 7 < 4 and absf(absf(x - 20) - 5) < 3 and y < 29)
+				2: mark = pow(p.x / 8, 2) + pow(p.y / 14, 2) < 1
+			if mark:
+				image.set_pixel(x, y, colour.darkened(0.22 if (x + y + seed_value) % 7 < 2 else 0))
+	icons[id] = ImageTexture.create_from_image(image)
+	return icons[id]
+
+func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
+	var slot := button(food_grid, "", func() -> void:
+		if is_good:
+			selected_food = id
+		else:
+			food_path.append(id)
+			selected_food = ""
+		refresh_values())
+	slot.set_meta("food_id", id)
+	slot.custom_minimum_size = Vector2(104, 104)
+	slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var frame := skin("panelInset_beigeLight")
+	slot.add_theme_stylebox_override("normal", frame)
+	var spirit: bool = is_good and e.goods[id].grade == "spirit"
+	if spirit:
+		var glow := StyleBoxFlat.new()
+		glow.bg_color = Color("e2dfc4")
+		glow.border_color = Color("9babc0")
+		glow.set_border_width_all(2)
+		glow.shadow_color = Color(0.5, 0.65, 0.9, 0.2)
+		glow.shadow_size = 3
+		slot.add_theme_stylebox_override("normal", glow)
+	var box := VBoxContainer.new()
+	box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	box.offset_left = 5
+	box.offset_right = -5
+	box.offset_top = 4
+	box.offset_bottom = -4
+	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	slot.add_child(box)
+	var mark := label(box, "✦" if spirit else ("M" if is_good else "▣"))
+	mark.add_theme_font_size_override("font_size", 11)
+	mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	var picture := TextureRect.new()
+	picture.texture = grain_icon(id, Color(e.goods[id].colour) if is_good else GOLD)
+	picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	picture.custom_minimum_size.y = 32
+	picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	box.add_child(picture)
+	var caption := label(box, title)
+	caption.add_theme_font_size_override("font_size", 12)
+	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var badge := label(box, amount(e.quantity(id)) + " jin")
+	badge.add_theme_font_size_override("font_size", 11)
+	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	for child: Control in box.get_children():
+		child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if is_good and e.quantity(id) == 0:
+		box.modulate.a = 0.45
+	slot.tooltip_text = e.goods[id].description if is_good else title + " · " + amount(e.quantity(id)) + " jin"
 
 func _people(parent: Node) -> void:
 	var residents: Array[Dictionary] = []
