@@ -69,6 +69,7 @@ func _ready() -> void:
 	life = preload("res://src/village_life.gd").new()
 	add_child(life)
 	life.setup(self)
+	ground_view.ledger.setup(ground_view)
 	cam = Camera2D.new()
 	cam.position = Vector2(w, h) * CELL / 2.0
 	add_child(cam)

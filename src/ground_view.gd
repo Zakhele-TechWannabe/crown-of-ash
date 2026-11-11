@@ -2,15 +2,7 @@ extends Node2D
 ## Camera and screen-space controls for ground travel.
 
 const TILE := 32.0
-var food: Label
-var forecast: Label
-var balance: Label
-var history: RichTextLabel
-var expanded := false
-var shown_minute := -1
-var shown_speed := -1.0
-var shown_paused := false
-var clock_label: Label
+var ledger: PanelContainer
 var card: Label
 var cam: Camera2D
 var hud: CanvasLayer
@@ -29,65 +21,10 @@ func _ready() -> void:
 	add_child(cam)
 	hud = CanvasLayer.new()
 	add_child(hud)
-	var bar := Panel.new()
-	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	bar.offset_bottom = 46
-	bar.add_theme_stylebox_override("panel", map._box())
-	hud.add_child(bar)
-	place = Label.new()
-	place.position = Vector2(18, 9)
-	place.add_theme_font_override("font", map.font)
-	place.add_theme_color_override("font_color", map.GOLD)
-	bar.add_child(place)
-	var back := Button.new()
-	back.text = "World map [M]"
-	back.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	back.position = Vector2(-180, 7)
-	back.size = Vector2(166, 32)
-	back.pressed.connect(map.show_map)
-	bar.add_child(back)
-	clock_label = Label.new()
-	clock_label.position = Vector2(650, 10)
-	bar.add_child(clock_label)
-	for n in 8:
-		var button := Button.new()
-		button.text = ["1x [1]", "4x [2]", "16x [3]", "64x [4]", "256x [5]", "1024x [6]", "4096x [7]", "Pause"][n]
-		button.position = Vector2(980 + n * 94, 7)
-		button.pressed.connect(func() -> void:
-			if n == 7:
-				map.life.paused = not map.life.paused
-			else:
-				map.life.speed = [1.0, 4.0, 16.0, 64.0, 256.0, 1024.0, 4096.0][n])
-		bar.add_child(button)
-	var village := PanelContainer.new()
-	village.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	village.position = Vector2(-390, 58)
-	village.custom_minimum_size = Vector2(375, 0)
-	village.add_theme_stylebox_override("panel", map._box())
-	hud.add_child(village)
-	var rows := VBoxContainer.new()
-	village.add_child(rows)
-	var title := Button.new()
-	title.text = "Village · Chronicle ▾"
-	title.pressed.connect(func() -> void:
-		expanded = not expanded
-		history.custom_minimum_size.y = 420 if expanded else 125)
-	rows.add_child(title)
-	food = Label.new()
-	rows.add_child(food)
-	forecast = Label.new()
-	rows.add_child(forecast)
-	balance = Label.new()
-	rows.add_child(balance)
-	var crisis := CheckBox.new()
-	crisis.text = "Pause on crisis"
-	crisis.toggled.connect(func(enabled: bool) -> void: map.life.economy.pause_on_crisis = enabled)
-	rows.add_child(crisis)
-	history = RichTextLabel.new()
-	history.custom_minimum_size = Vector2(350, 125)
-	rows.add_child(history)
 	card = Label.new()
-	card.add_theme_stylebox_override("normal", map._box())
+	card.add_theme_stylebox_override("normal", preload("res://src/village_ledger.gd").skin("panel_beige"))
+	card.add_theme_font_override("font", load("res://assets/fonts/Lato-Bold.ttf"))
+	card.add_theme_font_size_override("font_size", 16)
 	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(card)
 	readout = Label.new()
@@ -101,6 +38,7 @@ func _ready() -> void:
 	names.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	names.draw.connect(_draw_names)
 	hud.add_child(names)
+	ledger = preload("res://src/village_ledger.gd").new()
 	hud.hide()
 
 
@@ -130,31 +68,13 @@ func _process(dt: float) -> void:
 		map.life.followed = -1
 	if map.life.followed >= 0:
 		cam.position = map.life.point(map.life.people[map.life.followed])
-	if shown_minute != int(map.life.minutes) or shown_speed != map.life.speed or shown_paused != map.life.paused:
-		shown_minute = int(map.life.minutes)
-		shown_speed = map.life.speed
-		shown_paused = map.life.paused
-		clock_label.text = map.life.clock_text() + (" · paused" if map.life.paused else " · %dx" % int(map.life.speed))
 	var economy: RefCounted = map.life.economy
-	food.text = "Food: %d days" % floori(economy.stock / 19.0)
-	food.modulate = Color.INDIAN_RED if economy.stock < 7 * 19 else (Color.ORANGE if economy.stock < 30 * 19 else Color.WHITE)
-	forecast.text = "Next planting in %d days" % (366 - economy.day) if economy.season() == 3 else "Harvest forecast: ~%s" % _grouped(roundi(economy.forecast() / 100.0) * 100)
-	var net: float = economy.produced - economy.consumed - economy.spoiled
-	balance.text = "This year: %s%s" % ["+" if net >= 0 else "−", _grouped(roundi(absf(net)))]
-	balance.modulate = Color.LIGHT_GREEN if net >= 0 else Color.INDIAN_RED
-	var entries := PackedStringArray()
-	for i in range(economy.chronicle.size() - 1, -1, -1):
-		if not expanded and entries.size() >= 6:
-			break
-		entries.append(economy.chronicle[i])
-	var chronicle_text := "\n".join(entries)
-	if history.text != chronicle_text:
-		history.text = chronicle_text
 	var hovered: int = map.life.hover(get_global_mouse_position())
 	card.visible = hovered >= 0
 	if hovered >= 0:
 		var p: Dictionary = map.life.people[hovered]
-		card.text = "%s, %d, %s · %s · %s" % [p.name, p.age, p.job, economy.HUNGER[int(p.hunger)], map.life.activity_text(p)]
+		card.text = "%s, %d · %s\n%s · rice today: %.1f jin\n%s" % [p.name, p.age, p.job, economy.HUNGER[int(p.hunger)], float(p.rice_today) * 2, map.life.activity_text(p)]
+		card.add_theme_color_override("font_color", Color("a23522") if int(p.hunger) > 0 else Color("49612e"))
 		card.position = (get_viewport().get_mouse_position() + Vector2(16, 20)).min(get_viewport_rect().size - card.size - Vector2(8, 8))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
@@ -171,14 +91,29 @@ func _update_readout() -> void:
 		if d < distance:
 			distance = d
 			nearest = str(feature.name)
-	place.text = "%s · relief %.0f [ / ]" % [nearest, map.ground.exaggeration]
+	place.text = nearest
 	var tile: Vector2i = map.ground.pick_tile(get_global_mouse_position())
 	var cell := Vector2i(floori(tile.x / 16.0), floori(tile.y / 16.0))
+	readout.visible = Input.is_physical_key_pressed(KEY_ALT)
 	readout.text = "%s\n%s · tile %d, %d" % [map._info(cell, tile), map.ground.sample(tile).cover, tile.x, tile.y]
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not active:
+		return
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode in [KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5]:
+			ledger.toggle_tab(["overview", "rice", "people", "work", "chronicle"][event.keycode - KEY_F1])
+			get_viewport().set_input_as_handled()
+			return
+		if event.keycode == KEY_L or (event.keycode == KEY_ESCAPE and ledger.visible):
+			if ledger.visible:
+				ledger.close()
+			else:
+				ledger.open_tab(ledger.current)
+			get_viewport().set_input_as_handled()
+			return
+	if ledger.visible:
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
 		map.ground.set_exaggeration(map.ground.exaggeration + (1.0 if event.keycode == KEY_BRACKETRIGHT else -1.0))
@@ -192,6 +127,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			map.life.followed = map.life.hover(get_global_mouse_position())
+			var tile: Vector2i = map.ground.pick_tile(get_global_mouse_position())
+			for building: Dictionary in map.ground.sect.data.buildings:
+				if building.name == "Granary":
+					var r: Array = building.rect
+					if Rect2i(map.ground.sect.center + Vector2i(int(r[0]), int(r[1])), Vector2i(int(r[2]), int(r[3]))).has_point(tile):
+						ledger.show_granary()
 		if event.button_index in [MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
 			dragging = event.pressed
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
@@ -225,7 +166,7 @@ func _draw_names() -> void:
 		if not get_viewport_rect().grow(80).has_point(at):
 			continue
 		var text: String = entry.name
-		var px := 19 if text == str(map.ground.sect.data.name) else 13
+		var px := 19 if text == str(map.ground.sect.data.name) else 16
 		at.x -= map.serif.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x / 2.0
 		names.draw_string_outline(map.serif, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color8(244, 236, 214, 217))
 		names.draw_string(map.serif, at, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, map.INK)

@@ -154,7 +154,7 @@ func _refresh(initial: bool = false) -> void:
 			if economy.season() == 2 and int(time / 45 + n) % 2 == 0:
 				target = granary
 				p.carrying = true
-				activity = "carrying grain to the granary"
+				activity = "carrying spirit rice to the granary"
 		var harvest_time := economy.season() == 2 and economy.harvest > 0.0
 		if harvest_time and int(p.hunger) >= 2 and int(p.kind) != 8 and time >= 390 and time < 1080:
 			# Hungry hands of every trade join the harvest.
@@ -264,7 +264,7 @@ func clock_text() -> String:
 	var absolute_day := int(minutes / 1440)
 	var day := absolute_day % 365 + 1
 	var season := 0 if day <= 91 else (1 if day <= 182 else (2 if day <= 273 else 3))
-	return "Year %d · %s, day %d · %02d:%02d" % [absolute_day / 365 + 1, economy.SEASONS[season], day, int(minutes / 60) % 24, int(minutes) % 60]
+	return "Year %d · %s %d · %02d:%02d" % [absolute_day / 365 + 1, economy.SEASONS[season], day - [0, 91, 182, 273][season], int(minutes / 60) % 24, int(minutes) % 60]
 
 
 func _input(event: InputEvent) -> void:
