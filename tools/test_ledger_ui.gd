@@ -11,6 +11,25 @@ func run() -> void:
 	await process_frame
 	var ledger: PanelContainer = world.ground_view.ledger
 	world._go_to("Servants' Village", false)
+	var icon_hashes: Dictionary = {}
+	var contact := Image.create(650, 400, false, Image.FORMAT_RGBA8)
+	contact.fill(Color("e8dfc9"))
+	var icon_index := 0
+	for id: String in ledger.life.economy.goods:
+		var texture: Texture2D = ledger.grain_icon(id, Color(ledger.life.economy.goods[id].colour))
+		assert(texture.get_image().get_pixel(0, 0).a == 0.0)
+		var fingerprint := texture.get_image().get_data().hex_encode()
+		assert(not icon_hashes.has(fingerprint), "Duplicate good icon: " + id)
+		icon_hashes[fingerprint] = id
+		contact.blit_rect(texture.get_image(), Rect2i(0, 0, 40, 40), Vector2i(icon_index % 13 * 50 + 5, icon_index / 13 * 50 + 5))
+		icon_index += 1
+	for category: Dictionary in ledger.life.economy.catalogue.categories:
+		var texture: Texture2D = ledger.grain_icon(category.id, Color.WHITE)
+		assert(texture.get_image().get_used_rect().has_area())
+		contact.blit_rect(texture.get_image(), Rect2i(0, 0, 40, 40), Vector2i(icon_index % 13 * 50 + 5, icon_index / 13 * 50 + 5))
+		icon_index += 1
+	contact.resize(1300, 800, Image.INTERPOLATE_NEAREST)
+	contact.save_png("res://out/food-icons.png")
 	for key: String in ledger.TABS:
 		ledger.open_tab(key)
 		await process_frame
@@ -149,6 +168,16 @@ func run() -> void:
 	person.select(0)
 	await settle(ledger)
 	assert(world.life.followed >= 0 and not ledger.visible)
+	for path: String in ["food/vegetables/greens", "food/fruit", "food/meat", "food/fish", "food/pantry"]:
+		ledger.open_tab(path)
+		await process_frame
+		assert(ledger.food_grid.get_child_count() > 0)
+		ledger.food_grid.get_child(0).pressed.emit()
+		await process_frame
+		assert(not ledger.selected_food.is_empty())
+		assert(ledger.grain_icon(ledger.selected_food, Color.WHITE) != null)
+	assert("Vegetables" in ledger.kpi_cards.food.button.tooltip_text)
+	assert("Preserved & pantry" in ledger.kpi_cards.food.button.tooltip_text)
 	ledger.show_granary()
 	await process_frame
 	assert(ledger.granary_card.visible and ledger.granary_card.size.x >= 460)

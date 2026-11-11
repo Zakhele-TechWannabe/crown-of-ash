@@ -13,7 +13,12 @@ var histories: Dictionary = {}
 var annual_histories: Dictionary = {}
 var stock: float:
 	get: return mortal_food()
-	set(value): stocks["common_rice"] = value
+	set(value):
+		# Compatibility/debug override sets the total edible reserve.
+		for id: String in goods:
+			if "mortals" in goods[id].edible_by:
+				stocks[id] = 0.0
+		stocks["common_rice"] = value
 
 func mortal_food() -> float:
 	var total := 0.0
@@ -142,6 +147,9 @@ func setup(data: Dictionary, residents: Array[Dictionary], world_seed: int) -> v
 	var adults: Array[int] = []
 	for n in people.size():
 		people[n].hunger = 0
+		people[n].diet_variety = 0
+		people[n].contentment = 0.6
+		people[n].mood = "content"
 		people[n].foraged = 0.0
 		people[n].rice_today = 0.0
 		if int(people[n].kind) == 8:
@@ -236,15 +244,27 @@ func _meal() -> void:
 		flow("foraged", wild)
 		var eaten := minf(stock, need * share - wild) if need * share > wild else 0.0
 		var remaining := eaten
-		while remaining > 0.000001:
-			var chosen := ""
-			for id: String in goods:
-				if "mortals" in goods[id].edible_by and (chosen.is_empty() or float(stocks[id]) > float(stocks[chosen])):
-					chosen = id
-			var portion := minf(remaining, float(stocks[chosen]))
-			stocks[chosen] -= portion
-			remaining -= portion
-			record_good(chosen, "children" if int(p.kind) == 8 else "adults", portion)
+		var groups: Dictionary = {}
+		var key := "children" if int(p.kind) == 8 else "adults"
+		# A bowl of staple, seasonal greens, occasional protein and orchard fruit.
+		for course: Array in [["vegetables", 0.30], ["meat", 0.08 if day % 3 != 0 else 0.0], ["fish", 0.08 if day % 3 == 0 else 0.0], ["fruit", 0.08], ["pantry", 0.04], ["grains", 0.50]]:
+			var taken := _eat_group(str(course[0]), minf(remaining, eaten * float(course[1])), key)
+			remaining -= taken
+			if taken > 0.000001:
+				groups[course[0]] = true
+		# Shortages substitute from any edible store, still using the most perishable first.
+		remaining -= _eat_group("food", remaining, key, groups)
+		p.diet_variety = groups.size()
+		var comfort := 1.0 if groups.size() >= 4 else (0.65 if groups.size() >= 2 else 0.3)
+		p.contentment = lerpf(float(p.contentment), comfort * minf(1.0, eaten / need), 0.12)
+		p.mood = "well fed" if float(p.contentment) >= 0.78 else ("content" if float(p.contentment) >= 0.45 else "plain fare")
+		# Condiments and tea accompany meals but cannot replace a hunger ration.
+		for seasoning: String in ["soy_sauce", "vinegar", "cooking_oil", "tea", "rice_wine"]:
+			if seasoning == "rice_wine" and int(p.kind) == 8:
+				continue
+			var used := minf(float(stocks[seasoning]), 0.0015 * need)
+			stocks[seasoning] -= used
+			record_good(seasoning, key, used)
 		consumed += eaten
 		p.rice_today = eaten
 		var got := eaten + wild
@@ -278,6 +298,7 @@ func _thresholds() -> void:
 		crisis = false
 
 func _finish_day() -> void:
+	_food_production()
 	var labor := 0.0
 	if not no_farmers:
 		var autumn := day > 182 and day <= 273
@@ -324,7 +345,8 @@ func _finish_day() -> void:
 			record_good(id, "spoiled", loss)
 			if "mortals" in goods[id].edible_by:
 				spoiled += loss
-			note("%s spoilage %d jin" % [goods[id].name, roundi(loss * 2)])
+			if loss >= 1.0 and "grains" in goods[id].category_path:
+				note("%s spoilage %d jin" % [goods[id].name, roundi(loss * 2)])
 			if day == 273:
 				standing[id] = 0.0
 
@@ -345,7 +367,9 @@ func _finish_day() -> void:
 		p.rice_today = 0.0
 	if day == 365:
 		harvest_history.append(Vector2(year, produced))
-		summaries.append("Year %d: stock %.2f | harvest %.2f | consumed %.2f | spoilage %.2f | balance %+.2f | minimum %.2f | hungry %d" % [year, stock, produced, consumed, spoiled, produced - consumed - spoiled, minimum, hungry_count])
+		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry"]:
+			summaries.append("Year %d %s: stored %.2f jin | produced %.2f | eaten %.2f | processed %.2f | spoiled %.2f" % [year, group, quantity(group) * 2, node_flow(group, "harvested")[2] * 2, (node_flow(group, "adults")[2] + node_flow(group, "children")[2]) * 2, node_flow(group, "processed")[2] * 2, node_flow(group, "spoiled")[2] * 2])
+		summaries.append("Year %d: stock %.2f | harvest %.2f | consumed %.2f | spoilage %.2f | balance %+.2f | minimum %.2f | hungry %d" % [year, stock, produced, consumed, spoiled, produced - consumed - spoiled - flow_values("processed")[2], minimum, hungry_count])
 
 func after_harvest_days() -> float:
 	var incoming := forecast()
@@ -355,3 +379,85 @@ func after_harvest_days() -> float:
 			if "mortals" in goods[id].edible_by:
 				incoming += float(standing[id])
 	return (stock + incoming - daily_need() * days_to_harvest()) / maxf(0.001, daily_need())
+
+# Food stocks use the existing internal ration accounting convention (one ration = two jin).
+func _eat_group(group: String, wanted: float, key: String, groups: Dictionary = {}) -> float:
+	var remaining := wanted
+	while remaining > 0.000001:
+		var chosen := ""
+		for id: String in goods:
+			if group not in goods[id].category_path or "mortals" not in goods[id].edible_by or float(stocks[id]) <= 0.000001:
+				continue
+			if chosen.is_empty() or float(goods[id].seasonal_spoilage) > float(goods[chosen].seasonal_spoilage) or (goods[id].seasonal_spoilage == goods[chosen].seasonal_spoilage and float(stocks[id]) > float(stocks[chosen])):
+				chosen = id
+		if chosen.is_empty():
+			break
+		var portion := minf(remaining, float(stocks[chosen]))
+		stocks[chosen] -= portion
+		remaining -= portion
+		record_good(chosen, key, portion)
+		groups[goods[chosen].category_path[1]] = true
+	return wanted - remaining
+
+func _add_food(id: String, batch: float) -> void:
+	stocks[id] += batch
+	record_good(id, "harvested", batch)
+	if "mortals" in goods[id].edible_by:
+		produced += batch
+
+func _recipe(output: String, ingredients: Dictionary, batch: float) -> void:
+	var possible := batch
+	for id: String in ingredients:
+		possible = minf(possible, float(stocks[id]) / float(ingredients[id]))
+	if possible <= 0.000001:
+		return
+	for id: String in ingredients:
+		var used := possible * float(ingredients[id])
+		stocks[id] -= used
+		record_good(id, "processed", used)
+	_add_food(output, possible)
+
+func _food_production() -> void:
+	if no_farmers:
+		return
+	var workers: Dictionary = {}
+	for p: Dictionary in people:
+		var facility := str(p.get("food_work", ""))
+		workers[facility] = float(workers.get(facility, 0.0)) + EFFECT[int(p.hunger)]
+	for id: String in goods:
+		var g: Dictionary = goods[id]
+		if not g.has("facility") or SEASONS[season()] not in g.seasons:
+			continue
+		var staffing := minf(1.0, float(workers.get(g.facility, 0.0)))
+		if g.facility == "apiary":
+			staffing = minf(1.0, float(workers.get("orchard", 0.0)))
+		var batch := float(g.daily_yield) * staffing
+		if id in ["pork", "venison", "wild_boar"] and season() == 2:
+			batch *= 2.0
+		if batch > 0:
+			_add_food(id, batch)
+	if float(workers.get("kitchen", 0.0)) <= 0:
+		return
+	_recipe("tofu", {"soybeans": 0.6}, 0.35)
+	_recipe("soy_sauce", {"soybeans": 0.8, "salt": 0.05}, 0.025)
+	_recipe("vinegar", {"common_rice": 1.0}, 0.02)
+	_recipe("rice_wine", {"common_rice": 1.0}, 0.025)
+	_recipe("cooking_oil", {"soybeans": 2.0}, 0.02)
+	# Keep generous fresh reserves; the kitchen dries, salts and pickles the excess.
+	for id: String in goods:
+		var group: String = goods[id].category_path[1]
+		var output := ""
+		match group:
+			"vegetables": output = "dried_mushrooms" if goods[id].icon == "mushroom" else "pickled_vegetables"
+			"fruit": output = "dried_fruit"
+			"meat": output = "cured_pork" if id in ["pork", "wild_boar"] else ""
+			"fish": output = "salted_fish"
+		if not output.is_empty():
+			var surplus := maxf(0.0, float(stocks[id]) - 65.0)
+			_recipe(output, {id: 1.25}, surplus * 0.06)
+	if day == 92:
+		note("First peaches ripen in the village orchard")
+	elif day == 183:
+		note("Autumn slaughter; the kitchen salts fish and cures pork for winter")
+	elif day == 273:
+		note("Pickling done; jars and dried provisions fill the winter pantry")

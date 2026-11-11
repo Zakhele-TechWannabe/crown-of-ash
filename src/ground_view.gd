@@ -73,7 +73,7 @@ func _process(dt: float) -> void:
 	card.visible = hovered >= 0 and (not ledger.visible or get_viewport().get_mouse_position().x < get_viewport_rect().size.x * 0.5)
 	if hovered >= 0:
 		var p: Dictionary = map.life.people[hovered]
-		card.text = "%s, %d · %s\n%s · rice today: %.1f jin\n%s" % [p.name, p.age, p.job, economy.HUNGER[int(p.hunger)], float(p.rice_today) * 2, map.life.activity_text(p)]
+		card.text = "%s, %d · %s\n%s · food today: %.1f jin · %s\n%s" % [p.name, p.age, p.job, economy.HUNGER[int(p.hunger)], float(p.rice_today) * 2, p.get("mood", "content"), map.life.activity_text(p)]
 		card.add_theme_color_override("font_color", Color("a23522") if int(p.hunger) > 0 else Color("49612e"))
 		card.position = (get_viewport().get_mouse_position() + Vector2(16, 20)).min(get_viewport_rect().size - card.size - Vector2(8, 8))
 	cam.position += motion * dt * 650.0 / cam.zoom.x

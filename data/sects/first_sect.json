@@ -2322,5 +2322,63 @@
 			"width": 2,
 			"kind": "earth"
 		}
+	],
+	"food_sites": [
+		{
+			"id": "garden",
+			"name": "Vegetable plots",
+			"at": [
+				12,
+				229
+			]
+		},
+		{
+			"id": "orchard",
+			"name": "Village orchard & beehives",
+			"at": [
+				-7,
+				244
+			]
+		},
+		{
+			"id": "herd",
+			"name": "Pig sty, coop & duck pond",
+			"at": [
+				48,
+				233
+			]
+		},
+		{
+			"id": "fishery",
+			"name": "Fish pond & nets",
+			"at": [
+				67,
+				237
+			]
+		},
+		{
+			"id": "logs",
+			"name": "Mushroom logs",
+			"at": [
+				76,
+				251
+			]
+		},
+		{
+			"id": "kitchen",
+			"name": "Village kitchen & pickling shed",
+			"at": [
+				38,
+				223
+			]
+		},
+		{
+			"id": "hunt",
+			"name": "Hunters' Lodge",
+			"at": [
+				141,
+				94
+			]
+		}
 	]
 }

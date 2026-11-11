@@ -21,6 +21,13 @@ func _run() -> void:
 	for count: int in households.values():
 		assert(count >= 2 and count <= 3)
 	assert(jobs["field hand"] == 8 and jobs["child"] == 2)
+	for job: String in ["gardener", "orchard keeper", "herder", "fisher", "hunter", "cook / pickler", "mushroom grower"]:
+		assert(jobs.has(job))
+	assert(life.food_patches.size() == 17)
+	assert(Vector2(life.food_places.hunt).distance_to(Vector2(life.sect.center + Vector2i(141, 94))) < 4.0)
+	for id: String in life.food_places:
+		assert(not life.grid.is_point_solid(life.food_places[id]))
+		print("FOOD PLACE %s: %s" % [id, life.food_places[id] - life.sect.center])
 	life.minutes = 540
 	life._refresh(true)
 	for p: Dictionary in life.people:
@@ -68,5 +75,15 @@ func _run() -> void:
 	life.paused = true
 	life._process(1.0)
 	assert(is_equal_approx(life.minutes, before + 2.4))
+	var claimed: Dictionary = {}
+	for patch: Dictionary in life.food_patches:
+		assert(not patch.tiles.is_empty(), "Missing footprint: " + str(patch.kind))
+		if patch.kind == "orchard": assert(patch.tiles.size() == 120)
+		for tile: Vector2i in patch.tiles:
+			assert(not claimed.has(tile))
+			assert(life.sect.surface_at(tile) in ["", "grass", "garden"])
+			assert(life.sect.art[life.sect.index_at(tile)] < 0)
+			assert(life.sect.dry.call(tile))
+			claimed[tile] = true
 	print("PASS village: jobs, reachable workplaces, schedules, sleep, travel, zoom coverage and clock in both views")
 	quit()

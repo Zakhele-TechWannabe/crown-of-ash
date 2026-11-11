@@ -6,7 +6,7 @@ func make_economy(no_farmers: bool = false) -> RefCounted:
 	economy.no_farmers = no_farmers
 	var residents: Array[Dictionary] = []
 	for n in 20:
-		residents.append({"kind": 0 if n < 8 else (8 if n >= 18 else 1)})
+		residents.append({"kind": 0 if n < 8 else (8 if n >= 18 else 1), "food_work": "" if n < 8 or n >= 18 else ["garden", "garden", "orchard", "herd", "herd", "fishery", "hunt", "kitchen", "logs", "kitchen"][n - 8]})
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/sects/first_sect.json"))
 	economy.setup(data, residents, 718)
 	return economy
@@ -28,12 +28,12 @@ func _initialize() -> void:
 	var daily: RefCounted = make_economy()
 	var jump: RefCounted = make_economy()
 	for d in 3 * 365:
-		var before: float = daily.produced
+		var before: float = daily.node_flow("grains", "harvested")[2]
 		daily.advance_to((d + 1) * 1440.0)
 		assert(daily.minimum > 0)
 		if d % 365 < 182 or d % 365 > 272:
 			if d % 365 != 364:
-				assert(daily.produced == before, "Grain outside autumn")
+				assert(daily.node_flow("grains", "harvested")[2] == before, "Grain outside autumn")
 	jump.advance_to(3 * 365 * 1440.0)
 	assert(daily.stocks == jump.stocks)
 	assert(daily.flows == jump.flows)
@@ -41,7 +41,7 @@ func _initialize() -> void:
 	assert(daily.stock == jump.stock)
 	assert(daily.chronicle == jump.chronicle)
 	assert(daily.summaries == jump.summaries)
-	assert(jump.stock > 4500 and jump.stock < 20000)
+	assert(jump.stock > 4500) # Comfortable surplus is intentional; accounting is checked below.
 	var half: RefCounted = make_economy()
 	for step in 3 * 365 * 2:
 		half.advance_to((step + 1) * 720.0)
@@ -56,8 +56,8 @@ func _initialize() -> void:
 	assert(jump.node_flow("spirit_rice", "adults")[3] == 0)
 	assert(jump.node_flow("spirit_rice", "children")[3] == 0)
 	for id: String in jump.goods:
-		assert(is_equal_approx(float(jump.goods[id].starting_rations) + jump.node_flow(id, "harvested")[3] - jump.node_flow(id, "adults")[3] - jump.node_flow(id, "children")[3] - jump.node_flow(id, "spoiled")[3], float(jump.stocks[id])))
-	assert(jump.goods.size() == 20 and jump.areas.spirit_rice == 220 and jump.areas.common_rice > 0)
+		assert(is_equal_approx(float(jump.goods[id].starting_rations) + jump.node_flow(id, "harvested")[3] - jump.node_flow(id, "adults")[3] - jump.node_flow(id, "children")[3] - jump.node_flow(id, "spoiled")[3] - jump.node_flow(id, "processed")[3], float(jump.stocks[id])))
+	assert(jump.goods.size() == 78 and jump.areas.spirit_rice == 220 and jump.areas.common_rice > 0)
 	assert(is_equal_approx(jump.good_forecast("spirit_rice") / float(jump.areas.spirit_rice), jump.good_forecast("common_rice") / float(jump.areas.common_rice) * 0.4))
 	var protected: RefCounted = make_economy()
 	protected.stock = 0
@@ -65,7 +65,7 @@ func _initialize() -> void:
 	protected.advance_to(720)
 	assert(protected.stocks.spirit_rice == 1000.0 and protected.hungry_count == 20)
 	assert(protected.days_left() == 0)
-	var shortage: RefCounted = make_economy()
+	var shortage: RefCounted = make_economy(true)
 	shortage.stock = 1.0
 	shortage.advance_to(720)
 	# Rationing gives everyone a short share; children are served first so they're never worse off than adults.
@@ -78,7 +78,7 @@ func _initialize() -> void:
 	assert(shortage.people[0].hunger == 3, "Recovery takes multiple meals")
 	var boundary: RefCounted = make_economy()
 	boundary.advance_to(182 * 1440.0)
-	assert(boundary.produced == 0)
+	assert(boundary.node_flow("grains", "harvested")[2] == 0)
 	boundary.advance_to(183 * 1440.0)
 	assert(boundary.produced > 0)
 	print("PASS grain: balance, hunger/foraging, survival, deterministic daily/half-day/jump ledger, autumn-only harvest")

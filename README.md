@@ -22,3 +22,32 @@ terrain arrays (including unsigned 16-bit heights), biome palettes, rivers, peak
 and named features. Godot reads that snapshot and adds deterministic ground detail.
 
 Ground checks: `godot --headless --path . -s res://tools/test_continuous.gd`.
+
+The servants’ village keeps a seasonal mortal pantry: cottage greens, orchard
+fruit, pond fish, livestock, forest game and kitchen preserves. Eight rice hands
+remain on the paddies; the other adults tend food trades. Each midday meal takes
+a staple, vegetables, occasional protein and fruit, using the most perishable
+stock first. Winter relies on stored roots, beans and preserved food. Diet variety
+gently changes the words on person cards; hunger never kills anyone.
+
+Generous yields and starting reserves keep every food group stocked. The kitchen
+preserves surplus above a fresh reserve of 130 jin per good; seasonal yields and
+losses still make fresh stocks rise and fall. Vegetable fields cover 15 tiles,
+cottage gardens four tiles, and the orchard holds 30 trees in rows. Footprints
+exclude roads, paddies and buildings and are drawn outside chunk baking.
+
+Food sites are declared in `data/sects/first_sect.json`; small pixel decorations
+are drawn separately from terrain chunks. `data/goods.json` defines sources,
+seasons, starting stores and seasonal spoilage. Stocks retain the original internal
+ration scale (displayed as two jin, or two eggs, per internal unit). Tea and cooking
+condiments accompany meals without substituting for edible rations. Salt is a
+large finite city reserve; sea fish stays at zero until trade is implemented.
+Kitchen recipes debit ingredients and credit output with separate ledger flows.
+
+For a deterministic three-year group report:
+`godot --headless --path . -- --headless-sim --years=3`.
+Run each `tools/test*.gd` with `godot --headless --path . --script <path>`, one
+process at a time. `tools/test_foods.gd` covers seasonal yields, staffing, recipes,
+meal variety, survival, daily group reserves, day-200 abundance, annual pantry
+growth, and stock reconciliation across daily and jumped time. The report also
+prints day-200 group stocks for each year.

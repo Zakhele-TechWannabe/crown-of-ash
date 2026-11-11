@@ -17,6 +17,8 @@ var atlas: Texture2D
 var heights := PackedInt32Array()
 var square: Vector2i
 var well: Vector2i
+var food_places: Dictionary = {}
+var food_patches: Array[Dictionary] = []
 var shrine: Vector2i
 
 
@@ -37,11 +39,12 @@ func setup(map: Node2D) -> void:
 			var surface: String = sect.surface_at(at)
 			var level: int = sect.level_at(at)
 			var south: bool = y - sect.center.y >= 151
-			var walk: bool = (level >= 0 or south or surface == "stairs") and surface != "spring" and surface != "cave" and sect.art[i] < 0
-			if south:
+			var lodge_path: bool = x - sect.center.x >= 110 and y - sect.center.y >= 90 and y - sect.center.y <= 160
+			var walk: bool = (level >= 0 or south or lodge_path or surface == "stairs") and surface != "spring" and surface != "cave" and sect.art[i] < 0
+			if south or lodge_path:
 				walk = walk and sect.dry.call(at)
 			heights[i] = world.ground.terrace_level(at) if walk else maxi(0, level)
-			if walk and not south and surface != "stairs":
+			if walk and not south and not lodge_path and surface != "stairs":
 				for offset: Vector2i in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
 					if sect.level_at(at + offset) != level and sect.surface_at(at + offset) != "stairs":
 						walk = false
@@ -55,7 +58,7 @@ func setup(map: Node2D) -> void:
 				continue
 			for offset: Vector2i in [Vector2i.RIGHT, Vector2i.DOWN]:
 				var other := at + offset
-				if grid.is_in_boundsv(other) and not grid.is_point_solid(other) and sect.surface_at(other) != "stairs" and absi(heights[sect.index_at(at)] - heights[sect.index_at(other)]) > (1 if y - sect.center.y >= 151 else 0):
+				if grid.is_in_boundsv(other) and not grid.is_point_solid(other) and sect.surface_at(other) != "stairs" and absi(heights[sect.index_at(at)] - heights[sect.index_at(other)]) > (1 if y - sect.center.y >= 151 or (x - sect.center.x >= 110 and y - sect.center.y >= 90) else 0):
 					faces.append(at)
 	for at: Vector2i in faces:
 		grid.set_point_solid(at)
@@ -68,6 +71,7 @@ func setup(map: Node2D) -> void:
 			granary = nearest(sect.center + Vector2i(int(b.rect[0]) + 3, int(b.rect[1]) + int(b.rect[3])))
 		if b.kind == "hall" and str(b.name) != "Granary" and int(b.rect[1]) >= 156:
 			shrine = nearest(sect.center + Vector2i(int(b.rect[0]) + 3, int(b.rect[1]) + int(b.rect[3])))
+	_setup_food_places()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(sect.data.seed)
 	var families := ["Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Zhao", "Huang"]
@@ -91,6 +95,13 @@ func setup(map: Node2D) -> void:
 		else:
 			work = nearest(square + Vector2i(n % 4 * 2 - 3, n % 3 * 2))
 		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": rng.randi_range(12, 16) if job == 8 else rng.randi_range(18, 60), "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.12, 0.32), rng.randf_range(0.55, 0.85))})
+	var trades := ["gardener", "gardener", "orchard keeper", "herder", "herder", "fisher", "hunter", "cook / pickler", "mushroom grower", "cook / pickler"]
+	# Keep the first eight adults on rice, and the two children at home.
+	var facilities := ["garden", "garden", "orchard", "herd", "herd", "fishery", "hunt", "kitchen", "logs", "kitchen"]
+	for n in range(8, 18):
+		people[n].job = trades[n - 8]
+		people[n].food_work = facilities[n - 8]
+		people[n].work = food_places[facilities[n - 8]]
 	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
 	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
 	economy.setup(sect.data, people, int(world.data.get("seed", sect.data.seed)))
@@ -141,7 +152,10 @@ func _refresh(initial: bool = false) -> void:
 				target = p.work
 				activity = ["weeding the rice paddies", "cooking in the canteen", "sweeping the Great Plaza", "tending the barracks", "carrying water", "selling at the market", "tending the shrine", "cutting wood", "playing near home and the square"][int(p.kind)]
 				var cycle := int((time + variation) / 25)
-				if p.kind == 4:
+				if p.has("food_work"):
+					target = p.work
+					activity = {"garden": "tending seasonal vegetables", "orchard": "tending orchard and beehives", "herd": "feeding pigs, chickens and ducks", "fishery": "checking pond nets", "hunt": "bringing game from the Eastern Hunting Grounds to the lodge", "logs": "gathering mushrooms from the forest logs", "kitchen": "cooking, drying and pickling in the village kitchen"}[p.food_work]
+				elif p.kind == 4:
 					target = well if cycle % 2 == 0 else (p.home if cycle % 4 == 1 else people[n % 8].work)
 				elif p.kind == 7 and cycle % 2:
 					target = p.home
@@ -238,6 +252,7 @@ func _draw() -> void:
 				var at := (Vector2(tile) + Vector2.ONE * 0.5) * 32 - Vector2(0, world.ground.terrace_level(tile) * world.ground.exaggeration)
 				if area.has_point(at):
 					draw_circle(at, 4, Color(0.3, 0.95, 0.85, 0.18 + 0.08 * sin(minutes + x + y)))
+	_draw_food_places(area)
 	draw_order.sort_custom(_feet_before)
 	for p: Dictionary in draw_order:
 		var at := point(p)
@@ -293,9 +308,126 @@ func _headless_sim() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--years="):
 			years = maxi(1, int(arg.trim_prefix("--years=")))
-	economy.advance_to(years * 365 * 1440.0)
+	for y in years:
+		economy.advance_to((y * 365 + 199) * 1440.0)
+		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry"]:
+			print("DAY200 Year %d %s: %.2f jin" % [y + 1, group, economy.quantity(group) * 2])
+		economy.advance_to((y + 1) * 365 * 1440.0)
 	for summary: String in economy.summaries:
 		print(summary)
 	for entry: String in economy.chronicle:
 		print(entry)
 	get_tree().quit()
+
+# Small foreground decorations bypass chunk rasterization entirely.
+func _setup_food_places() -> void:
+	for plan: Dictionary in sect.data.food_sites:
+		var at := nearest(sect.center + Vector2i(int(plan.at[0]), int(plan.at[1])))
+		# Nearest valid path point keeps every trade reachable on natural terrain.
+		food_places[plan.id] = at
+		food_patches.append({"kind": plan.id, "tile": at})
+		if plan.id != "hunt":
+			sect.labels.append({"name": plan.name, "tile": at})
+	# Claim complete dry footprints once; drawing never touches chunk baking.
+	var occupied: Dictionary = {}
+	for patch: Dictionary in food_patches:
+		var size := Vector2i(5, 3) if patch.kind == "garden" else (Vector2i(12, 10) if patch.kind == "orchard" else Vector2i(4, 3))
+		patch.tiles = _food_footprint(patch.tile, size, occupied)
+	for offset: Vector2i in [Vector2i(8, 0), Vector2i(0, 8)]:
+		food_patches.append({"kind": "garden", "tile": food_places.garden + offset, "tiles": _food_footprint(food_places.garden + offset, Vector2i(5, 3), occupied)})
+	for n in range(0, 64, 8):
+		var b: Dictionary = sect.data.village[n]
+		var at: Vector2i = sect.center + Vector2i(int(b.rect[0]) - 3, int(b.rect[1]) + 2)
+		food_patches.append({"kind": "garden", "tile": at, "tiles": _food_footprint(at, Vector2i(2, 2), occupied)})
+
+func _food_footprint(origin: Vector2i, size: Vector2i, occupied: Dictionary) -> Array[Vector2i]:
+	for radius in range(25):
+		for dy in range(-radius, radius + 1):
+			for dx in range(-radius, radius + 1):
+				if maxi(absi(dx), absi(dy)) != radius:
+					continue
+				var tiles: Array[Vector2i] = []
+				var valid := true
+				for y in size.y:
+					for x in size.x:
+						var at := origin + Vector2i(dx + x, dy + y)
+						var i: int = sect.index_at(at)
+						if i < 0 or occupied.has(at) or sect.surface_at(at) not in ["", "grass", "garden"] or sect.art[i] >= 0 or not sect.dry.call(at):
+							valid = false
+						tiles.append(at)
+				if valid:
+					for at: Vector2i in tiles:
+						occupied[at] = true
+					return tiles
+	return []
+
+func _food_point(tile: Vector2i) -> Vector2:
+	return (Vector2(tile) + Vector2.ONE * 0.5) * 32 - Vector2(0, heights[sect.index_at(tile)] * world.ground.exaggeration)
+
+func _draw_food_places(area: Rect2) -> void:
+	for patch: Dictionary in food_patches:
+		var at := (_food_point(patch.tiles[0]) + _food_point(patch.tiles[-1])) * 0.5 if not patch.tiles.is_empty() else _food_point(patch.tile)
+		if not area.grow(500).has_point(at):
+			continue
+		var brown := Color("805731")
+		match str(patch.kind):
+			"garden":
+				for tile: Vector2i in patch.tiles:
+					var pos := _food_point(tile)
+					draw_rect(Rect2(pos - Vector2(16, 16), Vector2(32, 32)), Color("936440"))
+					for row in 3:
+						for col in 3:
+							var crop := Color(["78a64c", "c1b476", "c68d43", "598745"][posmod(tile.x + tile.y, 4)])
+							draw_rect(Rect2(pos + Vector2(col * 10 - 13, row * 10 - 12), Vector2(7, 5)), crop if economy.season() != 3 else Color("b3a577"))
+			"orchard":
+				for i in patch.tiles.size():
+					if i % 12 % 2 != 0 or i / 12 % 2 != 0:
+						continue
+					var pos := _food_point(patch.tiles[i]) + Vector2(1, 32)
+					draw_rect(Rect2(pos - Vector2(3, 20), Vector2(6, 24)), brown)
+					draw_circle(pos - Vector2(0, 29), 17, Color("527b43") if economy.season() != 3 else Color("82785d"))
+					if economy.season() != 3:
+						for j in 5:
+							draw_circle(pos + Vector2(j * 6 - 12, -28 + j % 2 * 7), 3, Color("f2c7cd") if economy.season() == 0 else Color("e8a268"))
+			"herd", "fishery":
+				for tile: Vector2i in patch.tiles:
+					var pos := _food_point(tile)
+					draw_rect(Rect2(pos - Vector2(15, 15), Vector2(30, 30)), Color("61949b") if patch.kind == "fishery" else Color("95744c"))
+					draw_line(pos - Vector2(15, 14), pos + Vector2(15, -14), brown, 2)
+					draw_line(pos - Vector2(14, 15), pos + Vector2(-14, 15), brown, 2)
+					if patch.kind == "herd":
+						draw_circle(pos, 5, Color("d4a599") if tile.x % 2 == 0 else Color("efdfbd"))
+					else:
+						draw_line(pos - Vector2(12, 12), pos + Vector2(12, 12), Color("c4c3a0"), 1)
+				draw_rect(Rect2(at - Vector2(26, 18), Vector2(52, 36)), Color("61949b") if patch.kind == "fishery" else Color("95744c"))
+				for i in 5:
+					var pos := at + Vector2(i * 10 - 22, -16)
+					draw_line(pos, pos + Vector2(0, 32), brown if patch.kind == "herd" else Color("c4c3a0"), 2)
+				if patch.kind == "herd":
+					draw_rect(Rect2(at + Vector2(-18, -5), Vector2(15, 9)), Color("d4a599"))
+					draw_rect(Rect2(at + Vector2(8, -4), Vector2(7, 6)), Color("efdfbd"))
+					draw_rect(Rect2(at + Vector2(28, -5), Vector2(25, 18)), Color("61949b"))
+					draw_rect(Rect2(at + Vector2(33, 0), Vector2(8, 5)), Color("eee4bf"))
+					draw_rect(Rect2(at + Vector2(-18, -33), Vector2(22, 13)), brown)
+				else:
+					for i in 3:
+						draw_line(at + Vector2(-24, i * 10 - 12), at + Vector2(24, i * 10 - 12), Color("c4c3a0"), 1)
+			"logs":
+				for i in 4:
+					var pos := at + Vector2(i % 2 * 24, i / 2 * 16)
+					draw_rect(Rect2(pos, Vector2(20, 7)), brown)
+					draw_rect(Rect2(pos + Vector2(5, -4), Vector2(7, 5)), Color("c0aa89"))
+			"kitchen":
+				draw_rect(Rect2(at - Vector2(22, 25), Vector2(44, 25)), Color("bca174"))
+				draw_rect(Rect2(at - Vector2(26, 32), Vector2(52, 9)), Color("795245"))
+				for i in 5:
+					draw_rect(Rect2(at + Vector2(i * 9 - 20, 4), Vector2(6, 9)), Color("a97945"))
+
+			"hunt":
+				# A game drying rack beside the existing lodge destination.
+				for x in [-20, 20]:
+					draw_rect(Rect2(at + Vector2(x, -28), Vector2(3, 32)), brown)
+				draw_line(at + Vector2(-20, -26), at + Vector2(23, -26), brown, 3)
+				for i in 4:
+					draw_line(at + Vector2(i * 10 - 14, -26), at + Vector2(i * 10 - 14, -19), Color("c3b492"), 1)
+					draw_rect(Rect2(at + Vector2(i * 10 - 17, -19), Vector2(6, 11)), Color("b4775e"))

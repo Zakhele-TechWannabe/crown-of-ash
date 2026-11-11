@@ -57,18 +57,48 @@
 		},
 		{
 			"id": "meat",
-			"name": "Meat",
+			"name": "Meat & game",
 			"parent": "food"
 		},
 		{
 			"id": "fish",
-			"name": "Fish",
+			"name": "Fish & river food",
 			"parent": "food"
 		},
 		{
 			"id": "fruit",
 			"name": "Fruit",
 			"parent": "food"
+		},
+		{
+			"id": "pantry",
+			"name": "Preserved & pantry",
+			"parent": "food"
+		},
+		{
+			"id": "greens",
+			"name": "Greens",
+			"parent": "vegetables"
+		},
+		{
+			"id": "roots",
+			"name": "Roots & aromatics",
+			"parent": "vegetables"
+		},
+		{
+			"id": "gourds",
+			"name": "Gourds & melons",
+			"parent": "vegetables"
+		},
+		{
+			"id": "legumes",
+			"name": "Beans & legumes",
+			"parent": "vegetables"
+		},
+		{
+			"id": "mushrooms",
+			"name": "Mushrooms & shoots",
+			"parent": "vegetables"
 		}
 	],
 	"goods": [
@@ -94,7 +124,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "fragrant_rice",
@@ -118,7 +152,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "red_rice",
@@ -142,7 +180,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "glutinous_rice",
@@ -166,7 +208,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "foxtail_millet",
@@ -190,7 +236,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "broomcorn_millet",
@@ -214,7 +264,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "wheat",
@@ -238,7 +292,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "barley",
@@ -262,7 +320,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "sorghum",
@@ -286,7 +348,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "buckwheat",
@@ -310,7 +376,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "oats",
@@ -334,7 +404,11 @@
 			"seasonal_spoilage": 0.02,
 			"grade": "mortal",
 			"spirit_tier": 0,
-			"store": "granary"
+			"store": "granary",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "spirit_rice",
@@ -357,7 +431,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 1,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "jade_ear_wheat",
@@ -380,7 +458,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 1,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "golden_bead_millet",
@@ -403,7 +485,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 1,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "moon_dew_rice",
@@ -426,7 +512,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 2,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "cloud_barley",
@@ -449,7 +539,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 2,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "ember_sorghum",
@@ -472,7 +566,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 2,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "frost_oats",
@@ -495,7 +593,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 2,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "thunder_husk_grain",
@@ -518,7 +620,11 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 3,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
 		},
 		{
 			"id": "nine_sun_grain",
@@ -541,7 +647,1763 @@
 			"seasonal_spoilage": 0.01,
 			"grade": "spirit",
 			"spirit_tier": 3,
-			"store": "sect"
+			"store": "sect",
+			"source": "Sect paddies and grain terraces",
+			"seasons": [
+				"Autumn"
+			]
+		},
+		{
+			"id": "napa_cabbage",
+			"name": "Napa cabbage",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"greens"
+			],
+			"description": "Pale, tightly wrapped heads sweeten soups and fill autumn pickle crocks.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "82b751",
+			"icon": "cabbage",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Spring",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "bok_choy",
+			"name": "Bok choy",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"greens"
+			],
+			"description": "Tender jade stems are cut young for the communal wok.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "458b49",
+			"icon": "cabbage",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Spring",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "water_spinach",
+			"name": "Water spinach",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"greens"
+			],
+			"description": "Hollow stems thrive beside the wet summer paddies.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "2f7957",
+			"icon": "cabbage",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "radish",
+			"name": "Radish",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Peppery white roots keep well in the cool earthen cellar.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e9d7bb",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.3,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "turnip",
+			"name": "Turnip",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Firm roots stretch winter stews with a mild sweetness.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b8a0bf",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.3,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "taro",
+			"name": "Taro",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Starchy corms are steamed thoroughly before reaching the table.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "aa8b79",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.3,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "lotus_root",
+			"name": "Lotus root",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Crisp, hollow slices are lifted from the village pond mud.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "dbc29a",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.3,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "yam",
+			"name": "Yam",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Long mountain tubers enrich porridge through the cold months.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "cfa568",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.3,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "garlic",
+			"name": "Garlic",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Braided bulbs bring warmth to greens and winter pickles.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "efe2c2",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.1,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "scallions",
+			"name": "Scallions",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "A handful of green stalks perfumes a bowl of rice.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "719948",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "ginger",
+			"name": "Ginger",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"roots"
+			],
+			"description": "Knobbled roots warm fish broth and the cook\u2019s autumn sauces.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "d3b17b",
+			"icon": "root",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.15,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "winter_melon",
+			"name": "Winter melon",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"gourds"
+			],
+			"description": "Wax-skinned gourds hang under the eaves until the soup pot needs them.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "92b67e",
+			"icon": "gourd",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.35,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Summer",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "bitter_melon",
+			"name": "Bitter melon",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"gourds"
+			],
+			"description": "Ridged green gourds lend a cooling bitterness to summer meals.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "588939",
+			"icon": "gourd",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.35,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Summer",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "pumpkin",
+			"name": "Pumpkin",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"gourds"
+			],
+			"description": "Golden flesh and hard skins make a dependable autumn store.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e49c39",
+			"icon": "gourd",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.35,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Summer",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "soybeans",
+			"name": "Soybeans",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"legumes"
+			],
+			"description": "Dry yellow beans become bean curd, sauce and kitchen oil.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "cdb978",
+			"icon": "bean",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.08,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Summer",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "mung_beans",
+			"name": "Mung beans",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"legumes"
+			],
+			"description": "Small green beans simmer into cooling summer soups.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "83a351",
+			"icon": "bean",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.08,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Summer",
+				"Autumn"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "broad_beans",
+			"name": "Broad beans",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"legumes"
+			],
+			"description": "Spring pods yield tender beans for the first fresh bowls.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "538c5a",
+			"icon": "bean",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.08,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Kitchen gardens and vegetable plots",
+			"seasons": [
+				"Spring"
+			],
+			"facility": "garden",
+			"daily_yield": 1.92
+		},
+		{
+			"id": "shiitake",
+			"name": "Shiitake",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"mushrooms"
+			],
+			"description": "Oak logs fruit after warm rains; spare caps dry beneath the eaves.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "a18168",
+			"icon": "mushroom",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Forest-edge mushroom logs and bamboo grove",
+			"seasons": [
+				"Spring",
+				"Autumn"
+			],
+			"facility": "logs",
+			"daily_yield": 1.44
+		},
+		{
+			"id": "wood_ear",
+			"name": "Wood ear",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"mushrooms"
+			],
+			"description": "Dark ruffled mushrooms soften in broth with a pleasant crunch.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "675345",
+			"icon": "mushroom",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Forest-edge mushroom logs and bamboo grove",
+			"seasons": [
+				"Spring",
+				"Autumn"
+			],
+			"facility": "logs",
+			"daily_yield": 1.44
+		},
+		{
+			"id": "bamboo_shoots",
+			"name": "Bamboo shoots",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"vegetables",
+				"mushrooms"
+			],
+			"description": "Young spring shoots are peeled and boiled before serving.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b4ac69",
+			"icon": "mushroom",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Forest-edge mushroom logs and bamboo grove",
+			"seasons": [
+				"Spring"
+			],
+			"facility": "logs",
+			"daily_yield": 1.44
+		},
+		{
+			"id": "peach",
+			"name": "Peach",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Fragrant blush fruit marks the first generous days of summer.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "f0a49a",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "plum",
+			"name": "Plum",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Tart purple fruit is shared fresh or laid out to dry.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "9874a2",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "apricot",
+			"name": "Apricot",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Small golden fruit ripens on the warm side of the orchard.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "efb45a",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "lychee",
+			"name": "Lychee",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Rough red shells hide translucent summer sweetness.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "d1726f",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "mulberries",
+			"name": "Mulberries",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Dark berries stain the fingers of children along the orchard hedge.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "7e557e",
+			"icon": "berries",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "wild_berries",
+			"name": "Wild berries",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Hedgerow berries join the orchard baskets in summer.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "c26388",
+			"icon": "berries",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.7,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "persimmon",
+			"name": "Persimmon",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Amber fruit sweetens in autumn; strings of peeled fruit dry for winter.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e38b40",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.45,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "jujube",
+			"name": "Jujube",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Red dates keep their honeyed sweetness after drying.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b16c53",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.45,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "pear",
+			"name": "Pear",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Crisp orchard pears refresh the autumn harvest crews.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "c7c66e",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.45,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "tangerine",
+			"name": "Tangerine",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Bright peel scents the cool autumn pantry.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "f0a13f",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.45,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "loquat",
+			"name": "Loquat",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fruit"
+			],
+			"description": "Golden spring fruit ripens beneath broad evergreen leaves.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e6bc62",
+			"icon": "fruit",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.65,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village orchard and hedgerows",
+			"seasons": [
+				"Spring"
+			],
+			"facility": "orchard",
+			"daily_yield": 1.36
+		},
+		{
+			"id": "pork",
+			"name": "Pork",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Autumn pig shares go to the kitchen and curing shed.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "d9918a",
+			"icon": "meat",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village pig sty, chicken coop and duck pond",
+			"seasons": [
+				"Autumn"
+			],
+			"facility": "herd",
+			"daily_yield": 0.64
+		},
+		{
+			"id": "chicken",
+			"name": "Chicken",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Small flock shares enrich broth on feast and rest days.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "d5af83",
+			"icon": "drumstick",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village pig sty, chicken coop and duck pond",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "herd",
+			"daily_yield": 0.64
+		},
+		{
+			"id": "duck",
+			"name": "Duck",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Pond-raised ducks provide rich broth and tender meat.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b89476",
+			"icon": "drumstick",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village pig sty, chicken coop and duck pond",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "herd",
+			"daily_yield": 0.64
+		},
+		{
+			"id": "eggs",
+			"name": "Eggs",
+			"unit": "count",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Fresh coop and pond eggs are counted into the kitchen baskets.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "f1e3bf",
+			"icon": "egg",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.35,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village pig sty, chicken coop and duck pond",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "herd",
+			"daily_yield": 0.64
+		},
+		{
+			"id": "venison",
+			"name": "Venison",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Lean deer meat brought home by the Eastern Hunting Grounds hunters.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b6635b",
+			"icon": "meat",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Hunters\u2019 Lodge \u2014 Eastern Hunting Grounds",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "hunt",
+			"daily_yield": 0.44
+		},
+		{
+			"id": "wild_boar",
+			"name": "Wild boar",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Forest boar is shared through the lodge and autumn curing shed.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "946653",
+			"icon": "meat",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Hunters\u2019 Lodge \u2014 Eastern Hunting Grounds",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "hunt",
+			"daily_yield": 0.44
+		},
+		{
+			"id": "hare",
+			"name": "Hare",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "Small game from the forest margins goes straight into stew.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "c59589",
+			"icon": "meat",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Hunters\u2019 Lodge \u2014 Eastern Hunting Grounds",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "hunt",
+			"daily_yield": 0.44
+		},
+		{
+			"id": "pheasant",
+			"name": "Pheasant",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"meat"
+			],
+			"description": "A forest bird lends a savoury broth to the village table.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "bc8760",
+			"icon": "drumstick",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Hunters\u2019 Lodge \u2014 Eastern Hunting Grounds",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "hunt",
+			"daily_yield": 0.44
+		},
+		{
+			"id": "carp",
+			"name": "Carp",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fish"
+			],
+			"description": "Pond carp are lifted from the nets for soup or autumn salting.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "7dabb7",
+			"icon": "fish",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village fish pond and nets",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "fishery",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "grass_carp",
+			"name": "Grass carp",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fish"
+			],
+			"description": "Grass-fed pond fish provide firm slices for the communal pot.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "7a9d83",
+			"icon": "fish",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village fish pond and nets",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "fishery",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "catfish",
+			"name": "Catfish",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fish"
+			],
+			"description": "Bottom-feeding fish thrive in the village\u2019s deep pond corners.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "82929e",
+			"icon": "fish",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village fish pond and nets",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "fishery",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "eel",
+			"name": "Eel",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fish"
+			],
+			"description": "Slender eels shelter beneath the pond banks.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b9a271",
+			"icon": "fish",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village fish pond and nets",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "fishery",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "river_shrimp",
+			"name": "River shrimp",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fish"
+			],
+			"description": "Fine nets gather small freshwater shrimp for broth.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e4aa95",
+			"icon": "fish",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Village fish pond and nets",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "fishery",
+			"daily_yield": 0.6
+		},
+		{
+			"id": "sea_fish",
+			"name": "Sea fish",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"fish"
+			],
+			"description": "Coastal fish await a future trade route from Western Market City.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "819fbb",
+			"icon": "fish",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 0,
+			"seasonal_spoilage": 0.4,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "cool pantry",
+			"source": "Western Market City coast \u2014 future trade only",
+			"seasons": [
+				"Summer"
+			],
+			"facility": "city",
+			"daily_yield": 0
+		},
+		{
+			"id": "salted_fish",
+			"name": "Salted fish",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Autumn fish packed in salt for the lean winter months.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "a6b5ad",
+			"icon": "jar",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.04,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "cured_pork",
+			"name": "Cured pork",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Salt-rubbed pork hangs in the airy kitchen shed.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "b87865",
+			"icon": "jar",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.04,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "pickled_vegetables",
+			"name": "Pickled vegetables",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Cabbage ferments in salted crocks for winter rice bowls.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "9fbb69",
+			"icon": "jar",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.04,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "dried_mushrooms",
+			"name": "Dried mushrooms",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Dried shiitake return their woodland fragrance to a winter broth.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "927256",
+			"icon": "jar",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.02,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "dried_fruit",
+			"name": "Dried fruit",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Persimmon slices dry slowly beneath the kitchen eaves.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "bf8e5b",
+			"icon": "jar",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.03,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "tofu",
+			"name": "Tofu",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Fresh bean curd is pressed daily from soaked soybeans and water.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "eaddb7",
+			"icon": "jar",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.8,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "soy_sauce",
+			"name": "Soy sauce",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "A small daily batch of fermented bean sauce seasons the common pot.",
+			"edible_by": [],
+			"colour": "654b39",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.01,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "vinegar",
+			"name": "Vinegar",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Rice vinegar brightens vegetables and dipping bowls.",
+			"edible_by": [],
+			"colour": "aa8653",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.01,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "rice_wine",
+			"name": "Rice wine",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "A little rice wine warms adult tables and cooking pots.",
+			"edible_by": [],
+			"colour": "c4b9a0",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.01,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "salt",
+			"name": "Salt",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "A deep reserve of city salt sustains the village\u2019s curing and pickling.",
+			"edible_by": [],
+			"colour": "e7e6d9",
+			"icon": "salt",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 300,
+			"seasonal_spoilage": 0,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Salt reserve from Western Market City; no automatic imports",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "cooking_oil",
+			"name": "Cooking oil",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Pressed soybean oil carries the fragrance of scallions through the wok.",
+			"edible_by": [],
+			"colour": "e6c36b",
+			"icon": "bottle",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.06,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village kitchen and pantry workshop",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn",
+				"Winter"
+			],
+			"facility": "kitchen",
+			"daily_yield": 0
+		},
+		{
+			"id": "honey",
+			"name": "Honey",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Beehive combs lend a gentle sweetness to pantry bowls.",
+			"edible_by": [
+				"mortals",
+				"cultivators"
+			],
+			"colour": "e7b44c",
+			"icon": "honeycomb",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.005,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village beehive row",
+			"seasons": [
+				"Spring",
+				"Summer",
+				"Autumn"
+			],
+			"facility": "apiary",
+			"daily_yield": 0.12
+		},
+		{
+			"id": "tea",
+			"name": "Tea",
+			"unit": "jin",
+			"category_path": [
+				"food",
+				"pantry"
+			],
+			"description": "Spring hedge leaves are dried for the village kettle.",
+			"edible_by": [],
+			"colour": "638957",
+			"icon": "leaf",
+			"yield_rations_per_mu": 0,
+			"yield_relative_to_common_rice": 0,
+			"starting_rations": 60,
+			"seasonal_spoilage": 0.05,
+			"grade": "mortal",
+			"spirit_tier": 0,
+			"store": "dry pantry",
+			"source": "Village tea hedge",
+			"seasons": [
+				"Spring"
+			],
+			"facility": "garden",
+			"daily_yield": 0.05
 		}
 	]
 }
