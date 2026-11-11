@@ -8,15 +8,10 @@ const BLUE := Color8(36, 79, 102)
 const PANEL := Color(0.16, 0.1, 0.06, 0.94)
 const DIRECTIONS := [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
 
-const Land := preload("res://src/land.gd")
-const World := preload("res://src/world.gd")
-var settlement: Node2D
+var ground_view: Node2D
 var map_layer: CanvasLayer
 var on_ground := false
 var travel_button: Button
-var settle_button: Button
-var ground_info: Label
-var hover_tile := Vector2i(-1, -1)
 var ground: Node2D
 var terrain: Sprite2D
 var travel: Tween
@@ -73,7 +68,8 @@ func _ready() -> void:
 	add_child(ground)
 	ground.setup(self)
 	ground.hide()
-	_create_settlement(_find_home())
+	ground_view = preload("res://src/ground_view.gd").new()
+	add_child(ground_view)
 	cam = Camera2D.new()
 	cam.position = Vector2(w, h) * CELL / 2.0
 	add_child(cam)
@@ -85,28 +81,15 @@ func _ready() -> void:
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.draw.connect(_draw_overlay)
 	layer.add_child(overlay)
-	var visit := Button.new()
-	visit.text = "Home (the family)"
-	visit.position = Vector2(-220, 7)
-	visit.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	visit.size = Vector2(206, 32)
-	visit.add_theme_font_override("font", font)
-	visit.add_theme_color_override("font_color", GOLD)
-	visit.add_theme_stylebox_override("normal", _box())
-	visit.pressed.connect(func() -> void: _travel_home())
-	overlay.add_child(visit)
 	var places := OptionButton.new()
 	places.position = Vector2(300, 7)
 	places.size = Vector2(240, 32)
 	places.add_item("Go to…")
-	places.add_item("Home (the family)")
 	for feature: Dictionary in data.features:
 		places.add_item(str(feature.name))
 	places.item_selected.connect(func(index: int) -> void:
-		if index == 1:
-			_travel_home()
-		elif index > 1:
-			_go_to(str(data.features[index - 2].name), true))
+		if index > 0:
+			_go_to(str(data.features[index - 1].name), true))
 	overlay.add_child(places)
 	var reset := Button.new()
 	reset.text = "World [Home]"
@@ -117,44 +100,33 @@ func _ready() -> void:
 	travel_button.text = "Travel here"
 	travel_button.pressed.connect(func() -> void: _travel_to(selected_tile))
 	overlay.add_child(travel_button)
-	settle_button = Button.new()
-	settle_button.text = "Settle the family here"
-	settle_button.pressed.connect(func() -> void:
-		_create_settlement(selected_tile)
-		_travel_home())
-	overlay.add_child(settle_button)
-	var info_layer := CanvasLayer.new()
-	add_child(info_layer)
-	ground_info = Label.new()
-	ground_info.position = Vector2(630, 62)
-	ground_info.add_theme_stylebox_override("normal", _box())
-	ground_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	info_layer.add_child(ground_info)
 	get_viewport().size_changed.connect(_resize)
 	_resize()
 	var destination := ""
-	var start_home := false
+	var start_at := false
+	var at := Vector2i.ZERO
 	var start_map := false
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--goto="):
 			destination = argument.trim_prefix("--goto=")
-		elif argument == "--home":
-			start_home = true
+		elif argument.begins_with("--at="):
+			var coordinates := argument.trim_prefix("--at=").split(",")
+			if coordinates.size() == 2 and coordinates[0].is_valid_int() and coordinates[1].is_valid_int():
+				at = Vector2i(int(coordinates[0]), int(coordinates[1]))
+				start_at = true
+			else:
+				push_warning("Expected --at=X,Y")
 		elif argument == "--map":
 			start_map = true
 		elif argument.begins_with("--shot="):
 			shot_path = argument.trim_prefix("--shot=")
 		elif argument.begins_with("--frames="):
 			shot_frames = int(argument.get_slice("=", 1))
-	if "--demo" in OS.get_cmdline_user_args():
-		settlement._demo()
-	if "--fast" in OS.get_cmdline_user_args():
-		settlement.speed = 4
 	if not start_map:
 		if not destination.is_empty():
 			_go_to(destination, false)
-		elif start_home:
-			_travel_home()
+		elif start_at:
+			_travel_to(at)
 	_window_setup()
 
 
@@ -238,12 +210,7 @@ func _clamp_camera() -> void:
 func _process(dt: float) -> void:
 	var complete := true
 	if on_ground:
-		complete = ground.update_chunks(settlement.cam, 8 if not shot_path.is_empty() else 2)
-		var tile := Vector2i((get_global_mouse_position() / 32.0).floor())
-		if tile != hover_tile:
-			hover_tile = tile
-			var cell := Vector2i(floori(tile.x / 16.0), floori(tile.y / 16.0))
-			ground_info.text = "%s\n%s · tile %d, %d" % [_info(cell, tile), ground.sample(tile).cover, tile.x, tile.y]
+		complete = ground.update_chunks(ground_view.cam, 8 if not shot_path.is_empty() else 2)
 	else:
 		var motion := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		motion += Vector2(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
@@ -251,12 +218,7 @@ func _process(dt: float) -> void:
 		_clamp_camera()
 		overlay.queue_redraw()
 	travel_button.visible = _inside(selected)
-	settle_button.visible = _inside(selected)
-	if _inside(selected):
-		settle_button.disabled = not Land.is_open(ground.sample(selected_tile))
 	travel_button.position = Vector2(overlay.size.x - 418, 224)
-	settle_button.position = Vector2(overlay.size.x - 285, 224)
-	ground_info.visible = on_ground
 	frame += 1
 	if not shot_path.is_empty() and frame >= maxi(1, shot_frames) and not taking_shot and complete and DisplayServer.get_name() != "headless":
 		taking_shot = true
@@ -271,15 +233,13 @@ func _process(dt: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_M and not on_ground:
-		_travel_to(Vector2i(settlement.cam.position / 32.0))
+		_travel_to(Vector2i(ground_view.cam.position / 32.0))
 		get_viewport().set_input_as_handled()
 		return
 	if on_ground:
 		return
 	if event is InputEventKey and event.pressed and event.keycode == KEY_HOME:
 		_reset()
-	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_P:
-		_travel_home()
 	elif event is InputEventMouseButton:
 		if event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and event.double_click:
@@ -420,30 +380,14 @@ func _travel_to(tile: Vector2i) -> void:
 	peak_art.hide()
 	map_layer.hide()
 	ground.show()
-	settlement.show()
-	settlement.active = true
-	settlement.hud.show()
-	settlement.cam.enabled = true
-	settlement.cam.make_current()
-	settlement.cam.position = (Vector2(tile) + Vector2.ONE * 0.5) * 32.0
-	settlement._clamp_camera()
-	hover_tile = Vector2i(-1, -1)
-
-
-func _travel_home() -> void:
-	_travel_to(settlement.origin + settlement.c.center)
+	ground_view.enter(tile)
 
 
 func show_map() -> void:
 	on_ground = false
-	settlement.active = false
-	settlement.marking = false
-	settlement.drag = false
-	settlement.hide()
-	settlement.hud.hide()
-	settlement.cam.enabled = false
+	ground_view.leave()
 	cam.make_current()
-	cam.position = settlement.cam.position / 64.0
+	cam.position = ground_view.cam.position / 64.0
 	var margin := cam.position.min(Vector2(w, h) * CELL - cam.position).max(Vector2.ONE)
 	var required := get_viewport_rect().size / (margin * 2.0)
 	cam.zoom = Vector2.ONE * clampf(maxf(cam.zoom.x, maxf(required.x, required.y)), fit_zoom, 8.0)
@@ -454,52 +398,6 @@ func show_map() -> void:
 	peak_art.show()
 	map_layer.show()
 	get_viewport().set_input_as_handled()
-
-
-func _create_settlement(at: Vector2i) -> void:
-	if settlement != null:
-		remove_child(settlement)
-		settlement.queue_free()
-	settlement = preload("res://src/settlement.gd").new()
-	settlement.origin = Vector2i(clampi(at.x - 52, 0, w * 16 - 104), clampi(at.y - 39, 0, h * 16 - 78))
-	settlement.c = World.new(41, ground, settlement.origin)
-	add_child(settlement)
-	settlement.cam.enabled = false
-	settlement.hide()
-	settlement.hud.hide()
-	print("Settlement tile %s · %s" % [settlement.origin + settlement.c.center, ground.sample(settlement.origin + settlement.c.center).cover])
-
-
-func _find_home() -> Vector2i:
-	var candidates: Array[Vector2i] = []
-	for y in range(h / 2, h * 4 / 5):
-		for x in range(w / 4, w * 3 / 4):
-			var i := y * w + x
-			if rivers[i] > 0 and biome[i] in [4, 5, 6, 7]:
-				candidates.append(Vector2i(x, y))
-	var target := Vector2(w * 0.5, h * 0.65)
-	candidates.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Vector2(a).distance_squared_to(target) < Vector2(b).distance_squared_to(target))
-	for cell in candidates:
-		for offset in [Vector2i(16, 0), Vector2i(-16, 0), Vector2i(0, 16), Vector2i(0, -16), Vector2i(24, 24), Vector2i(-24, 24), Vector2i(32, 0), Vector2i(0, 32), Vector2i(-32, 0), Vector2i(0, -32)]:
-			var tile: Vector2i = cell * 16 + Vector2i(8, 8) + offset
-			var clear := true
-			var low := INF
-			var high := -INF
-			for y in range(-3, 5):
-				for x in range(-3, 5):
-					var at: Vector2i = tile + Vector2i(x, y)
-					if not Land.is_open(ground.sample(at)):
-						clear = false
-						break
-					var elevation: float = ground._relief((Vector2(at) + Vector2.ONE * 0.5) / 16.0)
-					low = minf(low, elevation)
-					high = maxf(high, elevation)
-				if not clear:
-					break
-			if clear and high - low < 0.035:
-				return tile
-	push_error("No clear river settlement found")
-	return Vector2i(w * 8, h * 10)
 
 
 func _window_setup() -> void:
