@@ -37,19 +37,19 @@ func _run() -> void:
 		await process_frame
 	assert(ground.detailed.is_empty())
 	# Check the worker's world snapshot and raster output against the original path.
-	var key := Vector2i(21, 35)
-	var baker: RefCounted = ground._new_baker()
-	var task := WorkerThreadPool.add_task(baker.bake.bind(key))
-	WorkerThreadPool.wait_for_task_completion(task)
-	var overflow := ceili(ground.max_level * ground.exaggeration / 2.0) + 16
-	ground.pending = {"image": Image.create(1024, 1024 + overflow, false, Image.FORMAT_RGBA8), "overflow": overflow, "min_y": 1024 + overflow, "max_y": 0}
-	ground.baking = true
-	for y in 64:
-		ground._bake_row(key, y)
-	ground.baking = false
-	var expected: Image = ground.pending.image.get_region(Rect2i(0, ground.pending.min_y, 1024, int(ground.pending.max_y) - int(ground.pending.min_y)))
-	assert(expected.get_data() == baker.pending.image.get_data())
-	ground.pending.clear()
-	ground.height_cache.clear()
+	for key: Vector2i in [Vector2i(21, 35), Vector2i(28, 36)]:
+		var baker: RefCounted = ground._new_baker()
+		var task := WorkerThreadPool.add_task(baker.bake.bind(key))
+		WorkerThreadPool.wait_for_task_completion(task)
+		var overflow := ceili(ground.max_level * ground.exaggeration / 2.0) + 16
+		ground.pending = {"image": Image.create(1024, 1024 + overflow, false, Image.FORMAT_RGBA8), "overflow": overflow, "min_y": 1024 + overflow, "max_y": 0}
+		ground.baking = true
+		for y in 64:
+			ground._bake_row(key, y)
+		ground.baking = false
+		var expected: Image = ground.pending.image.get_region(Rect2i(0, ground.pending.min_y, 1024, int(ground.pending.max_y) - int(ground.pending.min_y)))
+		assert(expected.get_data() == baker.pending.image.get_data())
+		ground.pending.clear()
+		ground.height_cache.clear()
 	print("PASS LOD: far fill, opaque pixels, worker upgrade, relief invalidation")
 	quit()

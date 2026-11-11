@@ -1,5 +1,6 @@
 extends "res://src/sect_ground.gd"
 ## Immutable after setup. Chunk buckets bound lookup work to local overlays.
+var hunting := preload("res://src/hunting_ground.gd").new()
 var buckets: Dictionary = {}
 var destinations: Dictionary = {}
 var sites: Array[RefCounted] = []
@@ -8,6 +9,7 @@ func setup(is_dry: Callable) -> void:
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/sites/index.json"))
 	source = str(manifest.get("sect", source))
 	super.setup(is_dry)
+	hunting.setup()
 	for argument: String in OS.get_cmdline_args():
 		if argument.ends_with("build_roads.gd"):
 			return

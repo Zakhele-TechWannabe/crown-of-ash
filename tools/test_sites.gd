@@ -30,6 +30,19 @@ func run() -> void:
 	for at in [Vector2i(1510, 2300), Vector2i(2115, 2300), Vector2i(1800, 2100), Vector2i(1800, 2520)]:
 		assert(absf(g.ground_height(at) - g.ground_height(at + Vector2i.RIGHT)) < 0.03)
 	assert(hunt.color(Vector2i(1800, 2310)).g < 0.2)
+	var trails: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/roads/hunting_trails.json"))
+	var ascent: Array = trails.paths[0].points
+	var entrance := Vector2i(ascent[0][0], ascent[0][1])
+	var summit := Vector2i(ascent[-1][0], ascent[-1][1])
+	var climb: int = g.terrace_level(summit) - g.terrace_level(entrance)
+	assert(climb >= 20 and climb <= 30)
+	assert(is_equal_approx(float(trails.paths[0].width), 1.5))
+	for i in range(1, ascent.size()):
+		var previous := Vector2(ascent[i - 1][0], ascent[i - 1][1])
+		var current := Vector2(ascent[i][0], ascent[i][1])
+		assert(previous.distance_to(current) < 2.0)
+	assert(hunt.weight(Vector2i(1800, 2310)) > 0.9)
+	assert(hunt.weight(Vector2i(1475, 2100)) < 0.1)
 	var city: RefCounted = g.sect.sites[0]
 	var count := 0
 	for b: Dictionary in city.data.buildings:

@@ -328,8 +328,17 @@ func _far_image(key: Vector2i) -> Image:
 				col = Color8(43, 76, 45)
 			if sect.has_tile(tile):
 				col = sect.far_color(tile)
-			if preload("res://src/hunting_ground.gd").weight(tile) > 0.25 and not sect.has_tile(tile):
-				col = preload("res://src/hunting_ground.gd").color(tile)
+			var forest_weight := preload("res://src/hunting_ground.gd").weight(tile)
+			if forest_weight > 0.0 and not sect.has_tile(tile):
+				var forest_color := preload("res://src/hunting_ground.gd").color(tile)
+				if not preload("res://src/hunting_ground.gd").clearing(tile) and not preload("res://src/hunting_ground.gd").rocky(tile):
+					forest_color *= 0.76 + preload("res://src/hunting_ground.gd").hash_at(tile.x, tile.y) % 100 / 500.0
+				forest_color.a = 1.0
+				col = col.lerp(forest_color, forest_weight)
+				var local: Array = sect.hunting.segments.get(Vector2i(floori(tile.x / 16.0), floori(tile.y / 16.0)), [])
+				col = col.lerp(Color8(78, 76, 49), sect.hunting.trail(Vector2(tile) + Vector2.ONE * 0.5, local) * 0.6)
+				level = maxi(0, floori((preload("res://src/hunting_ground.gd").mountain_height(tile, height) - SEA) / TERRACE))
+				top = y - roundi(level * exaggeration / TILE)
 			var face_start := maxi(0, top + 1)
 			var face_end := mini(SIDE, y + 2)
 			if face_end > face_start:
@@ -424,10 +433,10 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		pending.min_y = mini(pending.min_y, top)
 		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
 		if drop > 0:
-			var face := Color8(110, 99, 85).darkened(minf(0.45, drop * 0.012))
+			var face := Color8(110, 99, 85).lerp(Color8(43, 49, 39), preload("res://src/hunting_ground.gd").weight(tile)).darkened(minf(0.45, drop * 0.012))
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
-			for stripe in range(3, drop, 4):
+			for stripe in range(3, drop, 4) if preload("res://src/hunting_ground.gd").weight(tile) < 0.1 else []:
 				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
 			if sect.level_at(tile) >= 0:
 				var steps: bool = sect.surface_at(tile) == "stairs"
@@ -445,7 +454,7 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
-		preload("res://src/hunting_ground.gd").draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
+		sect.hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
 		if info.decoration >= 0 and preload("res://src/hunting_ground.gd").weight(tile) < 0.25:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))
 

@@ -150,20 +150,9 @@ func run() -> void:
 	path_to([[1464, 2381], [1490, 2381]], 3, "stairs")
 	for x in [1263, 1461]:
 		road.buildings.append({"name": "West Gate" if x == 1263 else "East Gate", "kind": "gate", "rect": [x, 2380, 7, 2]})
-	# Densely sampled sinusoidal switchbacks have smooth rounded turns.
-	var ascent: Array = []
-	for step in 481:
-		var x := 1510 + step
-		ascent.append([x, roundi(2320 + 65 * cos(step / 480.0 * TAU * 2))])
-	path_to(ascent, 2)
-	for i in 3:
-		var x := 1610 + i * 125
-		var y := roundi(2320 + 65 * cos((x - 1510) / 480.0 * TAU * 2))
-		road.buildings.append({"name": "Hunting Camp %d" % (i + 1), "kind": "tent", "rect": [x, y - 5, 4, 3]})
-		var branch: Array = []
-		for step in 65:
-			branch.append([x + step, y + roundi(35 * sin(step / 64.0 * PI))])
-		path_to(branch, 1)
+	# The mountain trail is generated separately by build_hunting_trails.gd.
+	for at: Array in [[1610, 2350], [1740, 2290], [1870, 2340]]:
+		road.buildings.append({"name": "Hunting Camp", "kind": "tent", "rect": [at[0], at[1] - 5, 4, 3]})
 	road.buildings.append({"name": "Eastern Hunting Grounds", "kind": "marker", "rect": [1800, 2180, 1, 1]})
 	road.buildings.append({"name": "Cloudwatch Shrine", "kind": "hall", "rect": [1984, 2375, 7, 4]})
 	for at in [[1497, 2362], [1500, 2362], [1512, 2362], [1518, 2370]]:

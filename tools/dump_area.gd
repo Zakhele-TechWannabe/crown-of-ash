@@ -6,18 +6,32 @@ func _initialize() -> void:
 	var at := Vector2i(1365, 2286)
 	var r := 40
 	var step := 2
+	var trail := false
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--at="):
 			var p := a.trim_prefix("--at=").split(",")
 			at = Vector2i(int(p[0]), int(p[1]))
 		elif a.begins_with("--r="):
 			r = int(a.trim_prefix("--r="))
+		elif a == "--trail":
+			trail = true
 		elif a.begins_with("--step="):
 			step = int(a.trim_prefix("--step="))
 	var map: Node = load("res://world_map.tscn").instantiate()
 	root.add_child(map)
 	await process_frame
 	var g = map.ground
+	if trail:
+		var routes: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/roads/hunting_trails.json"))
+		var points: Array = routes.paths[0].points
+		for i in range(0, points.size(), 80):
+			var t := Vector2i(points[i][0], points[i][1])
+			print("trail %d %s height %.3f level %d" % [i, t, g.ground_height(t), g.terrace_level(t)])
+		var first := Vector2i(points[0][0], points[0][1])
+		var last := Vector2i(points[-1][0], points[-1][1])
+		print("trail climb %d -> %d (%d levels)" % [g.terrace_level(first), g.terrace_level(last), g.terrace_level(last) - g.terrace_level(first)])
+		quit()
+		return
 	var best := at
 	var best_h := -1.0
 	for y in range(at.y - r, at.y + r + 1, step):
