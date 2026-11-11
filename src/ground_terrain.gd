@@ -42,8 +42,10 @@ func setup(map: Node2D) -> void:
 	mountain.fractal_octaves = 3
 	for i in range(0, world.heights.size(), 2):
 		max_level = maxi(max_level, ceili((world.heights.decode_u16(i) / 30000.0 + 0.07 - SEA) / TERRACE))
-	sect.setup()
-	max_level = maxi(max_level, 15)
+	sect.setup(func(at: Vector2i) -> bool:
+		var p := (Vector2(at) + Vector2.ONE * 0.5) / 16.0
+		return not _sea(p) and _river_distance(p) > 1.5)
+	max_level = maxi(max_level, 21)
 	_build_atlas()
 
 
@@ -171,13 +173,19 @@ func sample(tile: Vector2i) -> Dictionary:
 		var outcrop := smoothstep(0.04, 0.12, steep) * 0.15 + smoothstep(0.82, 0.92, height) * 0.2
 		if patch < outcrop and chance < 0.8:
 			decoration = 17 if chance < 0.4 else 19
-	if sect.tiles.has(tile):
+	if sect.has_tile(tile):
 		decoration = -1
 		kind = 10
 		light = 1.0
-		cover = str(sect.tiles[tile].surface)
-	elif sect.heights.has(tile) and decoration in [13, 14, 15]:
-		decoration = 16
+		cover = sect.surface_at(tile)
+	elif sect.height_at(tile) > 0.0:
+		var skirt_patch := woodland.get_noise_2dv(Vector2(tile) * 0.3)
+		if skirt_patch > 0.12 and chance < 0.36:
+			decoration = 16
+		elif skirt_patch < -0.25 and chance < 0.3:
+			decoration = 17
+		elif decoration in [13, 14, 15]:
+			decoration = 16
 	var shade := clampi(roundi((light - 0.5) / 0.125), 0, SHADES - 1) if kind > 2 else 4
 	return {"kind": kind, "decoration": decoration, "shade": shade, "band": band if kind > 2 else 0, "cover": covers[kind] if kind in [4, 5] else cover, "height": height, "level": terrace_level(tile)}
 
@@ -216,18 +224,18 @@ func ground_height(tile: Vector2i) -> float:
 		var cell := Vector2i(p.floor())
 		var i: int = clampi(cell.y, 0, world.h - 1) * world.w + clampi(cell.x, 0, world.w - 1)
 		height = SEA if world.water[i] == 1 else world._height(cell.x, cell.y)
-	if sect.heights.has(tile):
-		height = maxf(height, float(sect.heights[tile]))
-	if sect.tiles.has(tile) and sect.tiles[tile].has("level"):
-		height = SEA + int(sect.tiles[tile].level) * TERRACE
+	if sect.height_at(tile) > 0.0:
+		height = maxf(height, sect.height_at(tile))
+	if sect.level_at(tile) >= 0:
+		height = SEA + sect.level_at(tile) * TERRACE
 	if baking:
 		height_cache[tile] = height
 	return height
 
 
 func terrace_level(tile: Vector2i) -> int:
-	if sect.tiles.has(tile) and sect.tiles[tile].has("level"):
-		return int(sect.tiles[tile].level)
+	if sect.level_at(tile) >= 0:
+		return sect.level_at(tile)
 	return maxi(0, floori((ground_height(tile) - SEA) / TERRACE))
 
 
@@ -333,8 +341,8 @@ func _bake_row(key: Vector2i, y: int) -> void:
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
 			for stripe in range(3, drop, 4):
 				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
-			if sect.tiles.get(tile, {}).get("built", false):
-				var steps: bool = sect.tiles[tile].surface == "stairs"
+			if sect.level_at(tile) >= 0:
+				var steps: bool = sect.surface_at(tile) == "stairs"
 				var stone := Color8(137, 147, 149)
 				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), stone)
 				for seam in range(0, drop, 3 if steps else 6):
