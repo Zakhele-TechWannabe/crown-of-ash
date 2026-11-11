@@ -8,6 +8,7 @@ const BLUE := Color8(36, 79, 102)
 const PANEL := Color(0.16, 0.1, 0.06, 0.94)
 const DIRECTIONS := [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
 
+var life: Node2D
 var ground_view: Node2D
 var map_layer: CanvasLayer
 var on_ground := false
@@ -65,6 +66,9 @@ func _ready() -> void:
 	ground.hide()
 	ground_view = preload("res://src/ground_view.gd").new()
 	add_child(ground_view)
+	life = preload("res://src/village_life.gd").new()
+	add_child(life)
+	life.setup(self)
 	cam = Camera2D.new()
 	cam.position = Vector2(w, h) * CELL / 2.0
 	add_child(cam)
@@ -83,8 +87,11 @@ func _ready() -> void:
 	for feature: Dictionary in data.features:
 		places.add_item(str(feature.name))
 	places.add_item(str(ground.sect.data.name))
+	places.add_item("Servants' Village")
 	places.item_selected.connect(func(index: int) -> void:
-		if index == data.features.size() + 1:
+		if index == data.features.size() + 2:
+			_go_to("Servants' Village", true)
+		elif index == data.features.size() + 1:
 			_go_to(str(ground.sect.data.name), true)
 		elif index > 0:
 			_go_to(str(data.features[index - 1].name), true))
@@ -366,6 +373,9 @@ func _reset() -> void:
 
 
 func _go_to(place: String, _animate: bool) -> void:
+	if place.nocasecmp_to("Servants' Village") == 0:
+		_travel_to(life.square)
+		return
 	if place.nocasecmp_to(str(ground.sect.data.name)) == 0:
 		_travel_to(ground.sect.center)
 		return

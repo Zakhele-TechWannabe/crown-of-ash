@@ -3,7 +3,7 @@ extends Node2D
 
 const SIDE := 64
 const TILE := 32.0
-const LIMIT := 16
+const LIMIT := 48
 const SHADES := 9
 const BANDS := 9
 var sect := preload("res://src/sect_ground.gd").new()

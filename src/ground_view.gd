@@ -2,6 +2,11 @@ extends Node2D
 ## Camera and screen-space controls for ground travel.
 
 const TILE := 32.0
+var shown_minute := -1
+var shown_speed := -1.0
+var shown_paused := false
+var clock_label: Label
+var card: Label
 var cam: Camera2D
 var hud: CanvasLayer
 var place: Label
@@ -36,6 +41,23 @@ func _ready() -> void:
 	back.size = Vector2(166, 32)
 	back.pressed.connect(map.show_map)
 	bar.add_child(back)
+	clock_label = Label.new()
+	clock_label.position = Vector2(650, 10)
+	bar.add_child(clock_label)
+	for n in 4:
+		var button := Button.new()
+		button.text = ["1x [1]", "4x [2]", "16x [3]", "Pause [Space]"][n]
+		button.position = Vector2(1030 + n * 105, 7)
+		button.pressed.connect(func() -> void:
+			if n == 3:
+				map.life.paused = not map.life.paused
+			else:
+				map.life.speed = [1.0, 4.0, 16.0][n])
+		bar.add_child(button)
+	card = Label.new()
+	card.add_theme_stylebox_override("normal", map._box())
+	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hud.add_child(card)
 	readout = Label.new()
 	readout.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	readout.offset_top = -62
@@ -72,6 +94,21 @@ func _process(dt: float) -> void:
 	if not active:
 		return
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
+	if motion != Vector2.ZERO:
+		map.life.followed = -1
+	if map.life.followed >= 0:
+		cam.position = map.life.point(map.life.people[map.life.followed])
+	if shown_minute != int(map.life.minutes) or shown_speed != map.life.speed or shown_paused != map.life.paused:
+		shown_minute = int(map.life.minutes)
+		shown_speed = map.life.speed
+		shown_paused = map.life.paused
+		clock_label.text = map.life.clock_text() + (" · paused" if map.life.paused else " · %dx" % int(map.life.speed))
+	var hovered: int = map.life.hover(get_global_mouse_position())
+	card.visible = hovered >= 0
+	if hovered >= 0:
+		var p: Dictionary = map.life.people[hovered]
+		card.text = "%s, %d, %s: %s" % [p.name, p.age, p.job, map.life.activity_text(p)]
+		card.position = (get_viewport().get_mouse_position() + Vector2(16, 20)).min(get_viewport_rect().size - card.size - Vector2(8, 8))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
 	_update_readout()
@@ -99,16 +136,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
 		map.ground.set_exaggeration(map.ground.exaggeration + (1.0 if event.keycode == KEY_BRACKETRIGHT else -1.0))
 		return
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE and map.life.followed >= 0:
+		map.life.followed = -1
+		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_M, KEY_ESCAPE]:
 		map.show_map()
 		return
 	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			map.life.followed = map.life.hover(get_global_mouse_position())
 		if event.button_index in [MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
 			dragging = event.pressed
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.5, 2.0)
+			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.2, 2.0)
 			_clamp_camera()
 	elif event is InputEventMouseMotion and dragging:
+		map.life.followed = -1
 		cam.position -= event.relative / cam.zoom
 		_clamp_camera()
 
@@ -126,6 +169,8 @@ func _draw_names() -> void:
 		return
 	var transform := get_viewport().get_canvas_transform()
 	for entry: Dictionary in map.ground.sect.labels:
+		if cam.zoom.x < 0.45 and not entry.name in ["Unnamed Sect", "Leader's Hall", "Main Hall", "Great Plaza", "Mountain Gate", "Servants' Village", "Spirit Fields"]:
+			continue
 		var tile: Vector2i = entry.tile
 		var point := (Vector2(tile) + Vector2(0.5, 0.0)) * TILE
 		point.y -= map.ground.terrace_level(tile) * map.ground.exaggeration
