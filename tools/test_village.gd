@@ -57,7 +57,7 @@ func _run() -> void:
 	assert(life.followed == -1 and map.on_ground)
 	map.ground_view.cam.zoom = Vector2.ONE * 0.2
 	map.ground.update_chunks(map.ground_view.cam, 0)
-	assert(map.ground.wanted.size() > 16 and map.ground.wanted.size() <= 48)
+	assert(map.ground.wanted.size() > 16 and map.ground.wanted.size() <= map.ground.LIMIT)
 	map.ground_view.cam.zoom = Vector2.ONE
 	map.ground.update_chunks(map.ground_view.cam, 0)
 	assert(map.ground.wanted.size() <= 20)

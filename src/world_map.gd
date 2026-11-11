@@ -111,6 +111,7 @@ func _ready() -> void:
 	var start_at := false
 	var at := Vector2i.ZERO
 	var start_map := false
+	var ground_zoom := 0.0
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--goto="):
 			destination = argument.trim_prefix("--goto=")
@@ -125,6 +126,8 @@ func _ready() -> void:
 			ground.set_exaggeration(float(argument.get_slice("=", 1)))
 		elif argument == "--map":
 			start_map = true
+		elif argument.begins_with("--zoom="):
+			ground_zoom = float(argument.get_slice("=", 1))
 		elif argument.begins_with("--shot="):
 			shot_path = argument.trim_prefix("--shot=")
 		elif argument.begins_with("--frames="):
@@ -134,6 +137,8 @@ func _ready() -> void:
 			_go_to(destination, false)
 		elif start_at:
 			_travel_to(at)
+	if ground_zoom > 0.0:
+		ground_view.cam.zoom = Vector2.ONE * clampf(ground_zoom, 0.2, 2.0)
 	_window_setup()
 
 

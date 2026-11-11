@@ -11,6 +11,7 @@ var art := PackedInt32Array()
 var labels: Array[Dictionary] = []
 var town: Image
 var farm: Image
+var far_colors := PackedColorArray()
 var dry: Callable
 
 
@@ -108,6 +109,21 @@ func setup(is_dry: Callable) -> void:
 		_building(building)
 	for stair: Dictionary in data.stairs:
 		_paint(stair.rect, "stairs")
+	var colors := [Color8(113, 151, 77), Color8(142, 195, 117), Color8(153, 119, 77), Color8(163, 173, 170), Color8(163, 173, 170), Color8(110, 105, 49), Color8(72, 165, 182), Color8(45, 49, 53), Color8(142, 195, 117)]
+	var art_colors: Array[Color] = []
+	for index in 132:
+		var total := Color(0, 0, 0, 0)
+		for yy in 16:
+			for xx in 16:
+				var col := town.get_pixel((index % 12) * 16 + xx, (index / 12) * 16 + yy)
+				total += Color(col.r * col.a, col.g * col.a, col.b * col.a, col.a)
+		art_colors.append(Color(total.r / maxf(1, total.a), total.g / maxf(1, total.a), total.b / maxf(1, total.a), total.a / 256.0))
+	far_colors.resize(count)
+	for i in count:
+		var col: Color = colors[surfaces[i]]
+		if art[i] >= 0:
+			col = col.blend(art_colors[art[i]])
+		far_colors[i] = col
 
 
 func _overlaps(r: Array, occupied: Array[Rect2i]) -> bool:
@@ -255,3 +271,7 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 
 func _blit(image: Image, source: Image, index: int, pos: Vector2i) -> void:
 	image.blend_rect(source, Rect2i((index % 12) * 16, (index / 12) * 16, 16, 16), pos)
+
+
+func far_color(tile: Vector2i) -> Color:
+	return far_colors[index_at(tile)]

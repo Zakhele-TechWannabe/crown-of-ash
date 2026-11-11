@@ -3,7 +3,7 @@ extends Node2D
 
 const SIDE := 64
 const TILE := 32.0
-const LIMIT := 48
+const LIMIT := 128
 const SHADES := 9
 const BANDS := 9
 var sect := preload("res://src/sect_ground.gd").new()
@@ -17,6 +17,13 @@ var mountain := FastNoiseLite.new()
 var height_cache: Dictionary = {}
 var baking := false
 var pending: Dictionary = {}
+var jobs: Dictionary = {}
+var generation := 0
+var far_cache: Dictionary = {}
+var far_lru: Array[Vector2i] = []
+var detailed: Dictionary = {}
+var snapshot: RefCounted
+var far_colors: Array[Color] = []
 var last_bake_ms := 0.0
 var max_slice_ms := 0.0
 var max_level := 0
@@ -47,6 +54,13 @@ func setup(map: Node2D) -> void:
 		return not _sea(p) and _river_distance(p) > 1.5)
 	max_level = maxi(max_level, 21)
 	_build_atlas()
+	snapshot = preload("res://src/ground_snapshot.gd").new()
+	for property: String in ["w", "h", "heights", "water", "biome", "rivers", "directions", "data"]:
+		snapshot.set(property, world.get(property))
+	for band in BANDS:
+		for shade in SHADES:
+			for kind in 20:
+				far_colors.append(atlas_image.get_pixel(kind * 16 + 8, (shade + band * SHADES) * 16 + 8))
 
 
 func _build_atlas() -> void:
@@ -247,6 +261,10 @@ func set_exaggeration(value: float) -> void:
 	chunks.clear()
 	pending.clear()
 	height_cache.clear()
+	generation += 1
+	far_cache.clear()
+	far_lru.clear()
+	detailed.clear()
 
 
 func pick_tile(point: Vector2) -> Vector2i:
@@ -260,68 +278,137 @@ func pick_tile(point: Vector2) -> Vector2i:
 	return Vector2i(column, row)
 
 
+func _new_baker() -> RefCounted:
+	var baker := preload("res://src/ground_baker.gd").new()
+	baker.world = snapshot
+	baker.sect = sect
+	baker.noise = noise.duplicate()
+	baker.mountain = mountain.duplicate()
+	baker.woodland = woodland.duplicate()
+	baker.atlas_image = atlas_image
+	baker.max_level = max_level
+	baker.exaggeration = exaggeration
+	return baker
+
+
+func _far_image(key: Vector2i) -> Image:
+	if far_cache.has(key):
+		far_lru.erase(key)
+		far_lru.append(key)
+		return far_cache[key]
+	var started := Time.get_ticks_usec()
+	var image := Image.create(SIDE, SIDE, false, Image.FORMAT_RGBA8)
+	# Sample displaced source rows too, so elevated tops crossing a chunk edge
+	# belong to the destination chunk and leave no transparent seams.
+	baking = true
+	# FAR interpolates deterministic terrain samples on a 16-tile grid.
+	# Dense sect overrides remain per tile; detailed rendering is unchanged.
+	var rows := SIDE + ceili(max_level * exaggeration / TILE) + 1
+	var heights := PackedFloat32Array()
+	var colors := PackedColorArray()
+	var kinds := PackedInt32Array()
+	for gy in range(ceili(rows / 16.0) + 1):
+		for gx in 5:
+			var info := sample(key * SIDE + Vector2i(gx * 16, gy * 16))
+			heights.append(info.height)
+			colors.append(far_colors[(info.band * SHADES + info.shade) * 20 + info.kind])
+			kinds.append(info.kind)
+	for y in range(rows):
+		for x in SIDE:
+			var tile := key * SIDE + Vector2i(x, y)
+			var index := (y / 16) * 5 + x / 16
+			var height := lerpf(lerpf(heights[index], heights[index + 1], (x % 16) / 16.0), lerpf(heights[index + 5], heights[index + 6], (x % 16) / 16.0), (y % 16) / 16.0)
+			var sect_index := sect.index_at(tile)
+			var level: int = sect.levels[sect_index] if sect_index >= 0 else -1
+			if level < 0:
+				var skirt: float = sect.heights[sect_index] if sect_index >= 0 else 0.0
+				level = maxi(0, floori((maxf(height, skirt) - SEA) / TERRACE))
+			var top := y - roundi(level * exaggeration / TILE)
+			var col: Color = colors[index]
+			if kinds[index] > 3 and kinds[index] != 8 and height < 0.84 and float(_hash(tile.x, tile.y) % 1000) / 1000.0 < smoothstep(0.28, 0.8, smoothstep(-0.35, 0.45, woodland.get_noise_2dv((Vector2(tile) + Vector2.ONE * 0.5) / 16.0))) * 0.55:
+				col = Color8(43, 76, 45)
+			if sect_index >= 0 and sect.surfaces[sect_index] != 0:
+				col = sect.far_colors[sect_index]
+			var face_start := maxi(0, top + 1)
+			var face_end := mini(SIDE, y + 2)
+			if face_end > face_start:
+				image.fill_rect(Rect2i(x, face_start, 1, face_end - face_start), col.darkened(0.3))
+			if top >= 0 and top < SIDE:
+				image.set_pixel(x, top, col)
+	baking = false
+	height_cache.clear()
+	far_cache[key] = image
+	far_lru.append(key)
+	while far_lru.size() > 400:
+		far_cache.erase(far_lru.pop_front())
+	print("FAR %s %.2f ms" % [key, (Time.get_ticks_usec() - started) / 1000.0])
+	return image
+
+
+func _exit_tree() -> void:
+	for job: Dictionary in jobs.values():
+		WorkerThreadPool.wait_for_task_completion(job.id)
+
+
 func update_chunks(camera: Camera2D, budget: int) -> bool:
 	var half := get_viewport_rect().size / camera.zoom / 2.0
 	var low := Vector2i(((camera.position - half) / (SIDE * TILE)).floor()) - Vector2i.ONE
 	var high := Vector2i(((camera.position + half + Vector2(0, max_level * exaggeration)) / (SIDE * TILE)).floor()) + Vector2i.ONE
-	if low != cached_low or high != cached_high:
-		cached_low = low
-		cached_high = high
-		wanted.clear()
-		for y in range(maxi(0, low.y), mini(world.h / 4 - 1, high.y) + 1):
-			for x in range(maxi(0, low.x), mini(world.w / 4 - 1, high.x) + 1):
-				wanted.append(Vector2i(x, y))
-		var center := camera.position / (SIDE * TILE) - Vector2.ONE * 0.5
-		wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
-		if wanted.size() > LIMIT:
-			wanted.resize(LIMIT)
+	wanted.clear()
+	for y in range(maxi(0, low.y), mini(world.h / 4 - 1, high.y) + 1):
+		for x in range(maxi(0, low.x), mini(world.w / 4 - 1, high.x) + 1):
+			wanted.append(Vector2i(x, y))
+	var center := camera.position / (SIDE * TILE) - Vector2.ONE * 0.5
+	wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
+	var near := camera.zoom.x >= 0.45
 	for key: Vector2i in chunks.keys():
-		if not key in wanted:
-			chunks[key].texture = null
+		if key not in wanted or (not near and detailed.has(key)):
 			chunks[key].free()
 			chunks.erase(key)
-	if not pending.is_empty() and not pending.key in wanted:
-		pending.clear()
-		height_cache.clear()
-	var deadline := Time.get_ticks_usec() + 16000
-	for key in wanted:
-		if chunks.has(key):
+			detailed.erase(key)
+	for key: Vector2i in jobs.keys():
+		var job: Dictionary = jobs[key]
+		if key not in wanted or not near:
+			job.cancelled = true
+		if not WorkerThreadPool.is_task_completed(job.id):
 			continue
-		if pending.is_empty():
-			if budget <= 0:
-				return false
-			budget -= 1
-			# Reserve overflow from the world's maximum height and relief bound.
-			var overflow := ceili(max_level * exaggeration / 2.0) + 16
-			pending = {"key": key, "row": 0, "overflow": overflow, "image": Image.create(1024, 1024 + overflow, false, Image.FORMAT_RGBA8), "elapsed": 0, "min_y": 1024 + overflow, "max_y": 0}
-		if pending.key != key:
-			continue
-		baking = true
-		while pending.row < SIDE:
-			var started := Time.get_ticks_usec()
-			_bake_row(key, pending.row)
-			pending.row += 1
-			pending.elapsed += Time.get_ticks_usec() - started
-			max_slice_ms = maxf(max_slice_ms, (Time.get_ticks_usec() - (deadline - 16000)) / 1000.0)
-			if Time.get_ticks_usec() >= deadline:
-				baking = false
-				return false
-		baking = false
-		var sprite := Sprite2D.new()
-		var cropped: Image = pending.image.get_region(Rect2i(0, pending.min_y, 1024, int(pending.max_y) - int(pending.min_y)))
-		sprite.texture = ImageTexture.create_from_image(cropped)
-		sprite.centered = false
-		sprite.position = Vector2(key) * SIDE * TILE - Vector2(0, (int(pending.overflow) - int(pending.min_y)) * 2)
-		sprite.scale = Vector2.ONE * 2.0
-		sprite.z_index = key.y
-		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		add_child(sprite)
-		chunks[key] = sprite
-		last_bake_ms = pending.elapsed / 1000.0
-		print("Chunk %s bake %.2f ms, max slice %.2f ms, texture %.2f MiB" % [key, last_bake_ms, max_slice_ms, cropped.get_data_size() / 1048576.0])
-		pending.clear()
-		height_cache.clear()
-	return chunks.size() == wanted.size()
+		WorkerThreadPool.wait_for_task_completion(job.id)
+		if job.generation == generation and not job.cancelled and chunks.has(key):
+			var result: Dictionary = job.baker.pending
+			var sprite: Sprite2D = chunks[key]
+			sprite.texture = ImageTexture.create_from_image(result.image)
+			sprite.position = Vector2(key) * SIDE * TILE - Vector2(0, (int(result.overflow) - int(result.min_y)) * 2)
+			sprite.scale = Vector2.ONE * 2.0
+			detailed[key] = true
+			last_bake_ms = result.elapsed
+			print("Worker %s %.2f ms" % [key, last_bake_ms])
+		jobs.erase(key)
+	if budget <= 0:
+		pending = jobs.duplicate()
+		return false
+	var deadline := Time.get_ticks_usec() + 12000
+	for key: Vector2i in wanted:
+		if not chunks.has(key):
+			var sprite := Sprite2D.new()
+			sprite.texture = ImageTexture.create_from_image(_far_image(key))
+			sprite.centered = false
+			sprite.position = Vector2(key) * SIDE * TILE
+			sprite.scale = Vector2.ONE * TILE
+			sprite.z_index = key.y
+			sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			add_child(sprite)
+			chunks[key] = sprite
+		if Time.get_ticks_usec() >= deadline:
+			break
+	if near:
+		for key: Vector2i in wanted:
+			if jobs.size() >= 2:
+				break
+			if not detailed.has(key) and not jobs.has(key) and chunks.has(key):
+				var baker := _new_baker()
+				jobs[key] = {"baker": baker, "id": WorkerThreadPool.add_task(baker.bake.bind(key)), "generation": generation, "cancelled": false}
+	pending = jobs.duplicate()
+	return detailed.size() == wanted.size() if near else chunks.size() == wanted.size()
 
 
 func _bake_row(key: Vector2i, y: int) -> void:
