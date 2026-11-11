@@ -39,11 +39,22 @@ var granary := PackedFloat32Array()
 var next_id := 0
 var assignments: Array[Dictionary] = []
 
-func _init(seed_value: int = 41) -> void:
+func _init(seed_value: int = 41, terrain: Node2D = null, origin := Vector2i.ZERO) -> void:
 	granary.resize(CROPS.size())
-	land.build(seed_value)
-	mark_housing(Rect2i(center - Vector2i.ONE, Vector2i(2, 2)))
-	_finish_house(center - Vector2i.ONE)
+	land.build(seed_value, terrain, origin)
+	var home := center - Vector2i.ONE
+	if not can_mark(Rect2i(home, Vector2i(2, 2)), false):
+		var distance := INF
+		for y in range(Land.H - 1):
+			for x in range(Land.W - 1):
+				var candidate := Vector2i(x, y)
+				var d := Vector2(candidate - (center - Vector2i.ONE)).length_squared()
+				if d < distance and can_mark(Rect2i(candidate, Vector2i(2, 2)), false):
+					distance = d
+					home = candidate
+		center = home + Vector2i.ONE
+	if mark_housing(Rect2i(home, Vector2i(2, 2))):
+		_finish_house(home)
 	site = Vector2i(-1, -1)
 	_note("A family of 10 settles here.")
 	_allocate()

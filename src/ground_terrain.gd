@@ -2,8 +2,8 @@ extends Node2D
 ## Disposable chunks share one small atlas; samples never depend on visit order.
 
 const SIDE := 64
-const TILE := 0.5
-const LIMIT := 144
+const TILE := 32.0
+const LIMIT := 16
 const SHADES := 9
 const BANDS := 9
 var world: Node2D
@@ -12,6 +12,8 @@ var noise := FastNoiseLite.new()
 var woodland := FastNoiseLite.new()
 var chunks: Dictionary = {}
 var wanted: Array[Vector2i] = []
+var cached_low := Vector2i(-999, -999)
+var cached_high := Vector2i(-999, -999)
 var covers := ["deep water", "shallow water", "river", "sand", "bare rock", "snow", "tundra", "marsh", "desert", "steppe", "grass", "tufts", "flowers", "tree", "autumn tree", "spirit tree", "bamboo", "rock", "bush", "stump"]
 
 
@@ -176,22 +178,26 @@ func _relief(p: Vector2) -> float:
 
 
 func update_chunks(camera: Camera2D, budget: int) -> bool:
-	if camera.zoom.x < 5.5:
-		for chunk: Node2D in chunks.values():
-			chunk.free()
-		chunks.clear()
-		return true
 	var half := get_viewport_rect().size / camera.zoom / 2.0
-	var low := Vector2i(((camera.position - half) / 32.0).floor()) - Vector2i.ONE
-	var high := Vector2i(((camera.position + half) / 32.0).floor()) + Vector2i.ONE
-	wanted.clear()
-	for y in range(maxi(0, low.y), mini(world.h / 4 - 1, high.y) + 1):
-		for x in range(maxi(0, low.x), mini(world.w / 4 - 1, high.x) + 1):
-			wanted.append(Vector2i(x, y))
-	var center := camera.position / 32.0
-	wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
-	if wanted.size() > LIMIT:
-		wanted.resize(LIMIT)
+	var low := Vector2i(((camera.position - half) / (SIDE * TILE)).floor()) - Vector2i.ONE
+	var high := Vector2i(((camera.position + half) / (SIDE * TILE)).floor()) + Vector2i.ONE
+	if low != cached_low or high != cached_high:
+		cached_low = low
+		cached_high = high
+		wanted.clear()
+		for y in range(maxi(0, low.y), mini(world.h / 4 - 1, high.y) + 1):
+			for x in range(maxi(0, low.x), mini(world.w / 4 - 1, high.x) + 1):
+				wanted.append(Vector2i(x, y))
+		var center := camera.position / (SIDE * TILE) - Vector2.ONE * 0.5
+		var visible_rect := Rect2(camera.position - half, half * 2.0)
+		wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+			var a_visible := visible_rect.intersects(Rect2(Vector2(a) * SIDE * TILE, Vector2.ONE * SIDE * TILE))
+			var b_visible := visible_rect.intersects(Rect2(Vector2(b) * SIDE * TILE, Vector2.ONE * SIDE * TILE))
+			if a_visible != b_visible:
+				return a_visible
+			return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
+		if wanted.size() > LIMIT:
+			wanted.resize(LIMIT)
 	for key: Vector2i in chunks.keys():
 		if not key in wanted:
 			chunks[key].free()
@@ -205,8 +211,8 @@ func update_chunks(camera: Camera2D, budget: int) -> bool:
 			continue
 		budget -= 1
 		var chunk := Node2D.new()
-		chunk.position = Vector2(key) * 32.0 + Vector2.ONE * 0.25
-		chunk.scale = Vector2.ONE * (0.5 / 16.0)
+		chunk.position = Vector2(key) * SIDE * TILE
+		chunk.scale = Vector2.ONE * (TILE / 16.0)
 		chunk.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		add_child(chunk)
 		chunks[key] = chunk

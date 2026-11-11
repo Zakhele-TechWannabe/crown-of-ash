@@ -32,7 +32,10 @@ var figures: Array[Figure] = []
 var people: Node2D
 var figure_rng := RandomNumberGenerator.new()
 
-var c := World.new()
+var c: World
+var active := false
+var hud: CanvasLayer
+var origin := Vector2i.ZERO
 var speed := 1
 var font: Font
 var font_px: Font
@@ -40,13 +43,8 @@ var ground: Node2D
 var cam: Camera2D
 var hud_draw: Control
 var sfx: Sfx
-var mini_tex: ImageTexture
-var minimap := Rect2()
 var ground_sig := -1
 var drag := false
-var shot_path := ""
-var shot_frames := 0
-var frame := 0
 var policy_panel: PanelContainer
 var policy_buttons: Array = []
 var field_label: Label
@@ -77,10 +75,10 @@ func _ready() -> void:
 	add_child(people)
 	figure_rng.seed = 719
 	cam = Camera2D.new()
-	cam.position = c.land.center(c.center)
-	cam.zoom = Vector2(1.3, 1.3)
+	cam.position = Vector2(origin) * T + c.land.center(c.center)
+	cam.zoom = Vector2.ONE
 	add_child(cam)
-	var hud := CanvasLayer.new()
+	hud = CanvasLayer.new()
 	add_child(hud)
 	hud_draw = Control.new()
 	hud_draw.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -88,23 +86,8 @@ func _ready() -> void:
 	hud_draw.draw.connect(_draw_hud)
 	hud.add_child(hud_draw)
 	_build_ui()
-	for argument in OS.get_cmdline_user_args():
-		if argument == "--fast":
-			speed = 4
-		elif argument == "--demo":
-			_demo()
-		elif argument.begins_with("--shot="):
-			shot_path = argument.trim_prefix("--shot=")
-		elif argument.begins_with("--frames="):
-			shot_frames = int(argument.get_slice("=", 1))
-		elif argument.begins_with("--zoom="):
-			cam.zoom = Vector2.ONE * maxf(0.2, float(argument.get_slice("=", 1)))
-		elif argument.begins_with("--look="):
-			var parts := argument.get_slice("=", 1).split(",")
-			if parts.size() == 2:
-				cam.position = Vector2(float(parts[0]), float(parts[1])) * T
-	if not "--windowed" in OS.get_cmdline_user_args() and shot_path.is_empty():
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+	ground.position = Vector2(origin) * T
+	people.position = ground.position
 
 
 ## Policies are the only controls that change settlement decisions.
@@ -127,7 +110,7 @@ func _build_ui() -> void:
 		var button := _btn(["Select / none", "Mark field", "Mark housing"][mode], 18)
 		button.pressed.connect(func(): tool = mode; marking = false)
 		column.add_child(button)
-	column.add_child(_lbl("Drag 2–12 cells per side · Esc cancels", 15, C_TEXT))
+	column.add_child(_lbl("Drag 2–12 tiles · M / Esc: map", 15, C_TEXT))
 	column.add_child(_lbl("Labour focus", 19, C_GOLD))
 	var row := HBoxContainer.new()
 	column.add_child(row)
@@ -199,9 +182,22 @@ func _build_ui() -> void:
 ## A ready-made village for looking at: a field of every crop and a housing zone, a few days in.
 func _demo() -> void:
 	for k in World.CROPS.size():
-		var at := c.center + Vector2i(-13 + (k % 7) * 4, (3 if k < 7 else 7))
-		c.mark_field(Rect2i(at, Vector2i(3, 3)), [k, k, k, k])
-	c.mark_housing(Rect2i(c.center + Vector2i(3, -5), Vector2i(6, 4)))
+		var placed := false
+		for y in range(24, Land.H - 4, 4):
+			for x in range(24, Land.W - 4, 4):
+				if c.mark_field(Rect2i(x, y, 3, 3), [k, k, k, k]) >= 0:
+					placed = true
+					break
+			if placed:
+				break
+	for y in range(20, Land.H - 4):
+		var placed := false
+		for x in range(20, Land.W - 4):
+			if c.mark_housing(Rect2i(x, y, 4, 4)):
+				placed = true
+				break
+		if placed:
+			break
 	c.focus = 0
 	for d in 5:
 		c.step(World.DAY_LEN)
@@ -224,7 +220,7 @@ func _set_speed(value: int) -> void:
 	speed = value
 
 
-## Terrain and minimap are rebuilt only after a tile revision.
+## Settlement art is rebuilt only after a tile revision.
 func _process(dt: float) -> void:
 	c.step(dt * speed)
 	_move_people(dt * speed)
@@ -248,36 +244,30 @@ func _process(dt: float) -> void:
 		granary_rows[index].visible = World.CROPS[index].kind != "none"
 		granary_rows[index].text = "  %s  %.2f" % [World.CROPS[index].name, c.granary[index]]
 		granary_rows[index].modulate.a = 1.0 if c.granary[index] > 0 else 0.55
+	if not active:
+		return
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
 	hud_draw.queue_redraw()
-	frame += 1
-	if shot_path != "" and frame >= maxi(1, shot_frames):
-		await RenderingServer.frame_post_draw
-		var error := get_viewport().get_texture().get_image().save_png(shot_path)
-		if error != OK:
-			push_error("Screenshot failed: %s" % error_string(error))
-		get_tree().quit()
 
 
-## Drag to pan, scroll to zoom, or click the minimap to look elsewhere.
+## Drag to pan or scroll to zoom.
 func _open_world_map() -> void:
-	get_tree().change_scene_to_file("res://world_map.tscn")
+	get_parent().show_map()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_M:
+	if not active:
+		return
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_M, KEY_ESCAPE]:
 		_open_world_map()
 		return
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		tool = 0
-		marking = false
 	if event is InputEventMouseButton:
 		if event.button_index in [MOUSE_BUTTON_MIDDLE, MOUSE_BUTTON_RIGHT]:
 			drag = event.pressed
 		elif event.button_index == MOUSE_BUTTON_LEFT:
-			var cell := Vector2i((get_global_mouse_position() / T).floor())
+			var cell := Vector2i((get_global_mouse_position() / T - Vector2(origin)).floor())
 			if event.pressed:
 				if tool > 0:
 					marking = true
@@ -294,9 +284,9 @@ func _unhandled_input(event: InputEvent) -> void:
 					c.mark_housing(rect)
 				marking = false
 		elif event.pressed and event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.3, 5.0)
+			cam.zoom = Vector2.ONE * clampf(cam.zoom.x * (1.12 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 1.12), 0.5, 2.0)
 	elif event is InputEventMouseMotion and marking:
-		mark_end = Vector2i((get_global_mouse_position() / T).floor())
+		mark_end = Vector2i((get_global_mouse_position() / T - Vector2(origin)).floor())
 	elif event is InputEventMouseMotion and drag:
 		cam.position -= event.relative / cam.zoom
 
@@ -304,7 +294,7 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Keep the view inside the land, centering any axis smaller than the viewport.
 func _clamp_camera() -> void:
 	var half := get_viewport_rect().size / cam.zoom / 2.0
-	var extent := Vector2(Land.W, Land.H) * T
+	var extent := Vector2(get_parent().w * 16, get_parent().h * 16) * T
 	for axis in 2:
 		cam.position[axis] = extent[axis] / 2.0 if half[axis] * 2.0 >= extent[axis] else clampf(cam.position[axis], half[axis], extent[axis] - half[axis])
 
@@ -323,13 +313,6 @@ func _draw_hud() -> void:
 		h.draw_rect(Rect2(14, y - 20, 600, 26), P_BG)
 		h.draw_string(font, Vector2(24, y), c.log[index], HORIZONTAL_ALIGNMENT_LEFT, 580, 16, C_TEXT)
 		y -= 28
-	minimap = Rect2(size.x - 284, 60, 270, 270.0 * Land.H / Land.W)
-	if mini_tex:
-		h.draw_texture_rect(mini_tex, minimap, false)
-		var view := Rect2(cam.position - size / cam.zoom / 2.0, size / cam.zoom)
-		var scale := minimap.size / (Vector2(Land.W, Land.H) * T)
-		h.draw_rect(Rect2(minimap.position + view.position * scale, view.size * scale).intersection(minimap), C_TEXT, false, 1.5)
-	h.draw_rect(minimap.grow(2), P_EDGE, false, 2)
 
 func _total_stores() -> float:
 	var total := 0.0
@@ -399,12 +382,11 @@ func _hash(x: int, y: int) -> float:
 	return float(h % 1000) / 1000.0
 
 
-## Cache the plain and completed settlement plots.
+## Cache completed settlement plots.
 func _draw_ground() -> void:
 	if c == null:
 		return
-	_bake_minimap()
-	ground.draw_rect(Rect2(0, 0, Land.W * T, Land.H * T), Color(0.38, 0.6, 0.21))
+
 	for y in Land.H:
 		for x in Land.W:
 			_tile(Vector2i(x, y))
@@ -414,19 +396,6 @@ func _draw_ground() -> void:
 			ground.draw_dashed_line(edge[0], edge[1], C_GOLD, 1.5, 6)
 	for house in c.houses:
 		_hut(house)
-
-
-## The minimap's land, one pixel a cell, made again whenever the ground is.
-func _bake_minimap() -> void:
-	var img := Image.create(Land.W, Land.H, false, Image.FORMAT_RGBA8)
-	for y in Land.H:
-		for x in Land.W:
-			var col := Color(0.36, 0.56, 0.2)
-			match c.land.at(Vector2i(x, y)):
-				Land.TILLED: col = Color(0.55, 0.4, 0.2)
-				Land.HOUSE: col = Color(0.85, 0.63, 0.25)
-			img.set_pixel(x, y, col)
-	mini_tex = ImageTexture.create_from_image(img)
 
 
 ## Atlas regions stay at one tile per world cell.
@@ -442,8 +411,6 @@ func _atlas(item: CanvasItem, texture: Texture2D, index: int, at: Vector2, tint 
 ## Grass remains beneath soil and transparent sprites.
 func _tile(cell: Vector2i) -> void:
 	var at := Vector2(cell) * T
-	var h := _hash(cell.x, cell.y)
-	_atlas(ground, TOWN, 2 if h < 0.03 else (1 if h < 0.11 else 0), at)
 	var i := c.land.index(cell)
 	var crop: int = c.land.crops[i]
 	if c.land.field_ids[i] < 0:

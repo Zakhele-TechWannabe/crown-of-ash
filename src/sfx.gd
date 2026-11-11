@@ -11,6 +11,8 @@ var wind: AudioStreamPlayer
 
 
 func _ready() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
 	rng.seed = 4
 	sounds.click = _synth(0.04, func(u, tt): return _sq(tt * 900.0), 0.12, 3.0)
 	for i in 14:
@@ -95,3 +97,10 @@ func play(name: String, vol_db := 0.0, pitch := 1.0, delay := 0.0) -> void:
 			p.pitch_scale = pitch * rng.randf_range(0.95, 1.05)
 			p.play()
 			return
+
+
+func _exit_tree() -> void:
+	for player in players:
+		player.stop()
+	if is_instance_valid(wind):
+		wind.stop()
