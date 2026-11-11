@@ -7,7 +7,18 @@ const LIMIT := 16
 const SHADES := 9
 const BANDS := 9
 var world: Node2D
-var atlas: TileSet
+const SEA := 0.5
+const TERRACE := 0.02
+const E := 24.0
+var exaggeration := E
+var atlas_image: Image
+var mountain := FastNoiseLite.new()
+var height_cache: Dictionary = {}
+var baking := false
+var pending: Dictionary = {}
+var last_bake_ms := 0.0
+var max_slice_ms := 0.0
+var max_level := 0
 var noise := FastNoiseLite.new()
 var woodland := FastNoiseLite.new()
 var chunks: Dictionary = {}
@@ -25,6 +36,11 @@ func setup(map: Node2D) -> void:
 	woodland.seed = noise.seed ^ 0x35ab91
 	woodland.frequency = 0.65
 	woodland.fractal_octaves = 3
+	mountain.seed = noise.seed ^ 0x712ac
+	mountain.frequency = 0.2
+	mountain.fractal_octaves = 3
+	for i in range(0, world.heights.size(), 2):
+		max_level = maxi(max_level, ceili((world.heights.decode_u16(i) / 30000.0 + 0.07 - SEA) / TERRACE))
 	_build_atlas()
 
 
@@ -69,18 +85,10 @@ func _build_atlas() -> void:
 					if kind >= 3 and kind < 10 or kind == 10 or kind == 11 or kind == 12:
 						var palettes := [Color8(113, 151, 77), Color8(122, 154, 79), Color8(132, 152, 82), Color8(141, 149, 88), Color8(148, 143, 96), Color8(140, 134, 116), Color8(160, 160, 155), Color8(206, 216, 214), Color8(236, 242, 240)]
 						var tint: Color = palettes[band]
-						col = col.lerp(tint, 0.85 if kind != 3 else 0.2)
+						col = col.lerp(tint, 0.2 if kind in [3, 4, 5] else 0.85)
 					var light := 0.50 + shade * 0.125
 					image.set_pixel(kind * 16 + x, row * 16 + y, Color(col.r * light, col.g * light, col.b * light, col.a))
-	atlas = TileSet.new()
-	atlas.tile_size = Vector2i(16, 16)
-	var source := TileSetAtlasSource.new()
-	source.texture = ImageTexture.create_from_image(image)
-	source.texture_region_size = Vector2i(16, 16)
-	for x in 20:
-		for y in SHADES * BANDS:
-			source.create_tile(Vector2i(x, y))
-	atlas.add_source(source, 0)
+	atlas_image = image
 
 
 func _hash(x: int, y: int) -> int:
@@ -115,20 +123,8 @@ func sample(tile: Vector2i) -> Dictionary:
 		for offset in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]:
 			if _sea(p + offset / 16.0):
 				kind = 3
-		var cell := Vector2i(p.floor())
-		for dy in range(-1, 2):
-			for dx in range(-1, 2):
-				var at := cell + Vector2i(dx, dy)
-				if not world._inside(at):
-					continue
-				var i: int = at.y * world.w + at.x
-				if world.rivers[i] == 0 or world.directions[i] > 7:
-					continue
-				var start := Vector2(at) + Vector2.ONE * 0.5
-				var end := start + Vector2(world.DIRECTIONS[world.directions[i]])
-				var distance := p.distance_to(Geometry2D.get_closest_point_to_segment(p, start, end)) * 16.0
-				if distance + noise.get_noise_2dv(p * 9.0) * 0.4 < 0.6 + world.rivers[i] / 10.0 * 0.9:
-					kind = 2
+		if _river_distance(p) < 0.0:
+			kind = 2
 	var warped := p + Vector2(noise.get_noise_2dv(p * 1.3), noise.get_noise_2dv(p * 1.3 + Vector2(51, 83))) * 0.9
 	var b: int = world.biome[clampi(int(warped.y), 0, world.h - 1) * world.w + clampi(int(warped.x), 0, world.w - 1)]
 	var cover: String = str(world.data.biome_names[b]).to_lower()
@@ -137,19 +133,24 @@ func sample(tile: Vector2i) -> Dictionary:
 	else:
 		cover = covers[kind]
 	# The same global height function is used on both sides of chunk boundaries.
-	var height := _relief(p)
-	var west := _relief(p - Vector2(1.0 / 16.0, 0))
-	var east := _relief(p + Vector2(1.0 / 16.0, 0))
-	var north := _relief(p - Vector2(0, 1.0 / 16.0))
-	var south := _relief(p + Vector2(0, 1.0 / 16.0))
+	var height := ground_height(tile)
+	var west := ground_height(tile + Vector2i.LEFT)
+	var east := ground_height(tile + Vector2i.RIGHT)
+	var north := ground_height(tile + Vector2i.UP)
+	var south := ground_height(tile + Vector2i.DOWN)
 	var gradient := Vector2(east - west, south - north) * 8.0
 	var steep := gradient.length()
-	var light := clampf(1.0 + (gradient.x + gradient.y) * 3.5, 0.7, 1.3)
+	var light := clampf(1.0 - (gradient.x + gradient.y) * 3.5, 0.7, 1.3)
 	# Downhill south/east edges read as exposed dark rock faces.
 	var cliff := steep > 0.12
 	if cliff and kind > 3:
 		kind = 4
 		light *= 0.72 if gradient.x + gradient.y < 0.0 else 0.9
+	if kind > 3:
+		if height > 0.92 + noise.get_noise_2dv(p * 4.0) * 0.01:
+			kind = 5
+		elif height > 0.82 + noise.get_noise_2dv(p * 4.0) * 0.015:
+			kind = 4
 	var band := clampi(roundi((height - 0.52 + noise.get_noise_2dv(p * 7.0) * 0.018) / 0.06), 0, BANDS - 1)
 	var decoration := -1
 	var chance := float(_hash(tile.x, tile.y) % 1000) / 1000.0
@@ -158,8 +159,8 @@ func sample(tile: Vector2i) -> Dictionary:
 	var trees := smoothstep(0.28 if forest else 0.63, 0.8, density)
 	if b == 11:
 		trees = smoothstep(0.3, 0.8, density) * (1.0 - smoothstep(0.05, 0.12, steep))
-	trees *= 1.0 - smoothstep(0.82, 0.9, height)
-	if kind > 3 and kind != 8 and height < 0.88 and not cliff and chance < trees * 0.85:
+	trees *= 1.0 - smoothstep(0.76, 0.83, height)
+	if kind > 3 and kind != 8 and height < 0.84 and not cliff and chance < trees * 0.85:
 		decoration = 16 if b == 11 else (15 if b == 6 else (14 if b == 7 else 13))
 	elif kind > 3:
 		# Coherent outcrops plus shared 2x2 patch decisions make boulder groups.
@@ -168,19 +169,77 @@ func sample(tile: Vector2i) -> Dictionary:
 		if patch < outcrop and chance < 0.8:
 			decoration = 17 if chance < 0.4 else 19
 	var shade := clampi(roundi((light - 0.5) / 0.125), 0, SHADES - 1) if kind > 2 else 4
-	return {"kind": kind, "decoration": decoration, "shade": shade, "band": band if kind > 2 else 0, "cover": cover}
+	return {"kind": kind, "decoration": decoration, "shade": shade, "band": band if kind > 2 else 0, "cover": covers[kind] if kind in [4, 5] else cover, "height": height, "level": terrace_level(tile)}
 
 
-func _relief(p: Vector2) -> float:
-	# Detail disappears near water; coastline and river masks stay world-derived.
+func _river_distance(p: Vector2) -> float:
+	var nearest := 100.0
+	var cell := Vector2i(p.floor())
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			var at := cell + Vector2i(dx, dy)
+			if not world._inside(at):
+				continue
+			var i: int = at.y * world.w + at.x
+			if world.rivers[i] == 0 or world.directions[i] > 7:
+				continue
+			var start := Vector2(at) + Vector2.ONE * 0.5
+			var end := start + Vector2(world.DIRECTIONS[world.directions[i]])
+			var distance := p.distance_to(Geometry2D.get_closest_point_to_segment(p, start, end)) * 16.0
+			nearest = minf(nearest, distance + noise.get_noise_2dv(p * 9.0) * 0.4 - (0.6 + world.rivers[i] / 10.0 * 0.9))
+	return nearest
+
+
+func ground_height(tile: Vector2i) -> float:
+	if baking and height_cache.has(tile):
+		return height_cache[tile]
+	var p := (Vector2(tile) + Vector2.ONE * 0.5) / 16.0
 	var base := _blend(p)
-	return base + noise.get_noise_2dv(p * 2.4) * 0.04 * smoothstep(0.50, 0.56, base)
+	var height := base
+	if not _sea(p):
+		var river := _river_distance(p)
+		var ridge := pow(1.0 - absf(mountain.get_noise_2dv(p)), 2.0)
+		var relief := noise.get_noise_2dv(p * 1.2) * 0.012
+		relief += (ridge - 0.45) * 0.10 * smoothstep(SEA + 0.12, SEA + 0.32, base)
+		height += relief * smoothstep(0.0, 5.0, river) * smoothstep(SEA, SEA + 0.06, base)
+	else:
+		var cell := Vector2i(p.floor())
+		var i: int = clampi(cell.y, 0, world.h - 1) * world.w + clampi(cell.x, 0, world.w - 1)
+		height = SEA if world.water[i] == 1 else world._height(cell.x, cell.y)
+	if baking:
+		height_cache[tile] = height
+	return height
+
+
+func terrace_level(tile: Vector2i) -> int:
+	return maxi(0, floori((ground_height(tile) - SEA) / TERRACE))
+
+
+func set_exaggeration(value: float) -> void:
+	exaggeration = clampf(value, 0.0, 48.0)
+	for chunk: Sprite2D in chunks.values():
+		chunk.texture = null
+		chunk.free()
+	chunks.clear()
+	pending.clear()
+	height_cache.clear()
+
+
+func pick_tile(point: Vector2) -> Vector2i:
+	var column := floori(point.x / TILE)
+	var row := floori(point.y / TILE)
+	for y in range(row + ceili(max_level * exaggeration / TILE) + 1, row - 2, -1):
+		var tile := Vector2i(column, y)
+		var top := y * TILE - terrace_level(tile) * exaggeration
+		if point.y >= top and point.y < top + TILE:
+			return tile
+	return Vector2i(column, row)
 
 
 func update_chunks(camera: Camera2D, budget: int) -> bool:
 	var half := get_viewport_rect().size / camera.zoom / 2.0
 	var low := Vector2i(((camera.position - half) / (SIDE * TILE)).floor()) - Vector2i.ONE
-	var high := Vector2i(((camera.position + half) / (SIDE * TILE)).floor()) + Vector2i.ONE
+	var high := Vector2i(((camera.position + half + Vector2(0, max_level * exaggeration)) / (SIDE * TILE)).floor()) + Vector2i.ONE
 	if low != cached_low or high != cached_high:
 		cached_low = low
 		cached_high = high
@@ -189,44 +248,80 @@ func update_chunks(camera: Camera2D, budget: int) -> bool:
 			for x in range(maxi(0, low.x), mini(world.w / 4 - 1, high.x) + 1):
 				wanted.append(Vector2i(x, y))
 		var center := camera.position / (SIDE * TILE) - Vector2.ONE * 0.5
-		var visible_rect := Rect2(camera.position - half, half * 2.0)
-		wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
-			var a_visible := visible_rect.intersects(Rect2(Vector2(a) * SIDE * TILE, Vector2.ONE * SIDE * TILE))
-			var b_visible := visible_rect.intersects(Rect2(Vector2(b) * SIDE * TILE, Vector2.ONE * SIDE * TILE))
-			if a_visible != b_visible:
-				return a_visible
-			return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
+		wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
 		if wanted.size() > LIMIT:
 			wanted.resize(LIMIT)
 	for key: Vector2i in chunks.keys():
 		if not key in wanted:
+			chunks[key].texture = null
 			chunks[key].free()
 			chunks.erase(key)
-	var complete := true
+	if not pending.is_empty() and not pending.key in wanted:
+		pending.clear()
+		height_cache.clear()
+	var deadline := Time.get_ticks_usec() + 16000
 	for key in wanted:
 		if chunks.has(key):
 			continue
-		if budget <= 0:
-			complete = false
+		if pending.is_empty():
+			if budget <= 0:
+				return false
+			budget -= 1
+			# Reserve overflow from the world's maximum height and relief bound.
+			var overflow := ceili(max_level * exaggeration / 2.0) + 16
+			pending = {"key": key, "row": 0, "overflow": overflow, "image": Image.create(1024, 1024 + overflow, false, Image.FORMAT_RGBA8), "elapsed": 0, "min_y": 1024 + overflow, "max_y": 0}
+		if pending.key != key:
 			continue
-		budget -= 1
-		var chunk := Node2D.new()
-		chunk.position = Vector2(key) * SIDE * TILE
-		chunk.scale = Vector2.ONE * (TILE / 16.0)
-		chunk.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		add_child(chunk)
-		chunks[key] = chunk
-		var base := TileMapLayer.new()
-		base.tile_set = atlas
-		chunk.add_child(base)
-		var props := TileMapLayer.new()
-		props.tile_set = atlas
-		chunk.add_child(props)
-		for y in SIDE:
-			for x in SIDE:
-				var tile := Vector2i(x, y)
-				var info := sample(key * SIDE + tile)
-				base.set_cell(tile, 0, Vector2i(info.kind, info.shade + info.band * SHADES))
-				if info.decoration >= 0:
-					props.set_cell(tile, 0, Vector2i(info.decoration, info.shade))
-	return complete
+		baking = true
+		while pending.row < SIDE:
+			var started := Time.get_ticks_usec()
+			_bake_row(key, pending.row)
+			pending.row += 1
+			pending.elapsed += Time.get_ticks_usec() - started
+			max_slice_ms = maxf(max_slice_ms, (Time.get_ticks_usec() - (deadline - 16000)) / 1000.0)
+			if Time.get_ticks_usec() >= deadline:
+				baking = false
+				return false
+		baking = false
+		var sprite := Sprite2D.new()
+		var cropped: Image = pending.image.get_region(Rect2i(0, pending.min_y, 1024, int(pending.max_y) - int(pending.min_y)))
+		sprite.texture = ImageTexture.create_from_image(cropped)
+		sprite.centered = false
+		sprite.position = Vector2(key) * SIDE * TILE - Vector2(0, (int(pending.overflow) - int(pending.min_y)) * 2)
+		sprite.scale = Vector2.ONE * 2.0
+		sprite.z_index = key.y
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		add_child(sprite)
+		chunks[key] = sprite
+		last_bake_ms = pending.elapsed / 1000.0
+		print("Chunk %s bake %.2f ms, max slice %.2f ms, texture %.2f MiB" % [key, last_bake_ms, max_slice_ms, cropped.get_data_size() / 1048576.0])
+		pending.clear()
+		height_cache.clear()
+	return chunks.size() == wanted.size()
+
+
+func _bake_row(key: Vector2i, y: int) -> void:
+	var image: Image = pending.image
+	for x in SIDE:
+		var tile := key * SIDE + Vector2i(x, y)
+		var info := sample(tile)
+		var level: int = info.level
+		var top := y * 16 + int(pending.overflow) - roundi(level * exaggeration / 2.0)
+		var south := terrace_level(tile + Vector2i.DOWN)
+		var drop := roundi((level - south) * exaggeration / 2.0) if info.kind > 2 else 0
+		pending.min_y = mini(pending.min_y, top)
+		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
+		if drop > 0:
+			var face := Color8(110, 99, 85).darkened(minf(0.45, drop * 0.012))
+			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
+			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
+			for stripe in range(3, drop, 4):
+				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
+		var source := Rect2i(int(info.kind) * 16, (int(info.shade) + int(info.band) * SHADES) * 16, 16, 16)
+		image.blit_rect(atlas_image, source, Vector2i(x * 16, top))
+		if info.kind > 2 and level > terrace_level(tile + Vector2i.RIGHT):
+			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Color8(83, 77, 62))
+		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
+			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
+		if info.decoration >= 0:
+			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))

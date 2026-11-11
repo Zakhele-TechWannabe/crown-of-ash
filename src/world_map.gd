@@ -28,7 +28,6 @@ var temperature: PackedByteArray
 var cam: Camera2D
 var overlay: Control
 var river_art: Node2D
-var peak_art: Node2D
 var serif: SystemFont
 var font: Font
 var fit_zoom := 1.0
@@ -60,10 +59,6 @@ func _ready() -> void:
 	river_art = Node2D.new()
 	river_art.draw.connect(_draw_rivers)
 	add_child(river_art)
-	data.peaks.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return float(a.y) < float(b.y))
-	peak_art = Node2D.new()
-	peak_art.draw.connect(_draw_peaks)
-	add_child(peak_art)
 	ground = preload("res://src/ground_terrain.gd").new()
 	add_child(ground)
 	ground.setup(self)
@@ -116,6 +111,8 @@ func _ready() -> void:
 				start_at = true
 			else:
 				push_warning("Expected --at=X,Y")
+		elif argument.begins_with("--exag="):
+			ground.set_exaggeration(float(argument.get_slice("=", 1)))
 		elif argument == "--map":
 			start_map = true
 		elif argument.begins_with("--shot="):
@@ -135,6 +132,14 @@ func _height(x: int, y: int) -> float:
 	return float(heights.decode_u16(i)) / 30000.0
 
 
+func _smooth_height(x: int, y: int) -> float:
+	var total := 0.0
+	for dy in range(-1, 2):
+		for dx in range(-1, 2):
+			total += _height(x + dx, y + dy) * (2.0 if dx == 0 else 1.0) * (2.0 if dy == 0 else 1.0)
+	return total / 16.0
+
+
 func _bake_terrain() -> void:
 	var image := Image.create(w, h, false, Image.FORMAT_RGB8)
 	for y in h:
@@ -143,7 +148,11 @@ func _bake_terrain() -> void:
 			var rgb: Array = data.biome_colors[biome[i]]
 			var col := Vector3(float(rgb[0]), float(rgb[1]), float(rgb[2]))
 			if water[i] == 0:
-				col *= 1.0 + clampf((_height(x - 1, y - 1) - _height(x + 1, y + 1)) * 9.0, -0.35, 0.35)
+				var elevation := _height(x, y)
+				col = col.lerp(Vector3(145, 119, 86), smoothstep(0.60, 0.80, elevation) * 0.7)
+				col = col.lerp(Vector3(153, 153, 149), smoothstep(0.79, 0.87, elevation))
+				col = col.lerp(Vector3(241, 243, 237), smoothstep(0.90, 0.96, elevation))
+				col *= clampf(1.0 + (_smooth_height(x - 1, y) - _smooth_height(x + 1, y) + _smooth_height(x, y - 1) - _smooth_height(x, y + 1)) * 12.0, 0.6, 1.35)
 			elif water[i] == 1:
 				var depth := minf(1.0, (0.5 - _height(x, y)) * 5.0)
 				col *= Vector3(1.0 - depth * 0.25, 1.0 - depth * 0.2, 1.0 - depth * 0.12)
@@ -175,20 +184,6 @@ func _draw_rivers() -> void:
 			var at := (Vector2(x, y) + Vector2.ONE * 0.5) * CELL
 			var end := at + Vector2(DIRECTIONS[directions[i]]) * CELL
 			river_art.draw_line(at, end, Color8(58, 104, 128), minf(2.4, 0.4 + rivers[i] / 10.0 * 0.32) * CELL, true)
-
-
-func _draw_peaks() -> void:
-	for peak: Dictionary in data.peaks:
-		var at := Vector2(float(peak.x), float(peak.y)) * CELL
-		var k := float(peak.s) * CELL
-		var left := at + Vector2(-k, 0.35 * k)
-		var top := at + Vector2(-0.1 * k, -k)
-		var right := at + Vector2(0.9 * k, 0.35 * k)
-		peak_art.draw_colored_polygon(PackedVector2Array([left, top, right]), Color8(122, 112, 96, 235))
-		peak_art.draw_colored_polygon(PackedVector2Array([top, right, at + Vector2(0.15 * k, 0.35 * k)]), Color8(78, 70, 60, 217))
-		if peak.snow:
-			peak_art.draw_colored_polygon(PackedVector2Array([at + Vector2(-0.45 * k, -0.42 * k), top, at + Vector2(0.3 * k, -0.45 * k)]), Color8(246, 242, 232, 242))
-		peak_art.draw_polyline(PackedVector2Array([left, top, right, left]), Color8(40, 33, 26, 204), 1.5, true)
 
 
 func _resize() -> void:
@@ -275,7 +270,7 @@ func _info(cell: Vector2i, tile := Vector2i(-1, -1)) -> String:
 	if not _inside(cell):
 		return "Hover to read the land · Drag to pan · Scroll to zoom · WASD / arrows to travel"
 	var i := cell.y * w + cell.x
-	var height: float = ground._relief((Vector2(tile) + Vector2.ONE * 0.5) / 16.0) if tile.x >= 0 else _height(cell.x, cell.y)
+	var height: float = ground.ground_height(tile) if tile.x >= 0 else _height(cell.x, cell.y)
 	var elevation := roundi((height - 0.5) / 0.5 * 2400.0)
 	var t := temperature[i] / 200.0
 	var climate := "freezing" if t < 0.25 else ("cold" if t < 0.45 else ("mild" if t < 0.7 else "hot"))
@@ -377,7 +372,6 @@ func _travel_to(tile: Vector2i) -> void:
 	dragging = false
 	terrain.hide()
 	river_art.hide()
-	peak_art.hide()
 	map_layer.hide()
 	ground.show()
 	ground_view.enter(tile)
@@ -395,7 +389,6 @@ func show_map() -> void:
 	ground.hide()
 	terrain.show()
 	river_art.show()
-	peak_art.show()
 	map_layer.show()
 	get_viewport().set_input_as_handled()
 

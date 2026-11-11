@@ -50,6 +50,7 @@ func enter(tile: Vector2i) -> void:
 	cam.enabled = true
 	cam.make_current()
 	cam.position = (Vector2(tile) + Vector2.ONE * 0.5) * TILE
+	cam.position.y -= map.ground.terrace_level(tile) * map.ground.exaggeration
 	_clamp_camera()
 	_update_readout()
 
@@ -79,14 +80,17 @@ func _update_readout() -> void:
 		if d < distance:
 			distance = d
 			nearest = str(feature.name)
-	place.text = nearest
-	var tile := Vector2i((get_global_mouse_position() / TILE).floor())
+	place.text = "%s · relief %.0f [ / ]" % [nearest, map.ground.exaggeration]
+	var tile: Vector2i = map.ground.pick_tile(get_global_mouse_position())
 	var cell := Vector2i(floori(tile.x / 16.0), floori(tile.y / 16.0))
 	readout.text = "%s\n%s · tile %d, %d" % [map._info(cell, tile), map.ground.sample(tile).cover, tile.x, tile.y]
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not active:
+		return
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
+		map.ground.set_exaggeration(map.ground.exaggeration + (1.0 if event.keycode == KEY_BRACKETRIGHT else -1.0))
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_M, KEY_ESCAPE]:
 		map.show_map()
