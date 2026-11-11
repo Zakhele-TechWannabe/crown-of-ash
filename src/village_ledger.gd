@@ -17,8 +17,18 @@ var sort_column := 0
 var sort_reverse := false
 var year_filter := 0
 var tree: Tree
-var rice_chip: Button
-var people_chip: Button
+const SPEEDS: Array[int] = [1, 4, 16, 64, 256, 1024, 4096]
+const KPIS: Array[Dictionary] = [
+	{"id": "food", "icon": "rice", "tab": "food", "label": "food left"},
+	{"id": "people", "icon": "people", "tab": "people", "label": "0 hungry"},
+	{"id": "harvest", "icon": "work", "tab": "food", "label": "forecast jin"},
+	{"id": "year", "icon": "overview", "tab": "food", "label": "food balance"},
+]
+var kpi_cards: Dictionary = {}
+var hud_panel: PanelContainer
+var pause_button: Button
+var speed_selector: OptionButton
+var ledger_button: Button
 var clock: Label
 var granary_card: PanelContainer
 var hud_timer := 0.0
@@ -79,7 +89,9 @@ func setup(ground_view: Node2D) -> void:
 		button_skin.set_content_margin(SIDE_LEFT, 5)
 		button_skin.set_content_margin(SIDE_RIGHT, 5)
 		parchment.set_stylebox(state, "Button", button_skin)
+		parchment.set_stylebox(state, "OptionButton", button_skin)
 	parchment.set_stylebox("pressed", "Button", skin("buttonLong_brown_pressed"))
+	parchment.set_stylebox("pressed", "OptionButton", skin("buttonLong_brown_pressed"))
 	view.hud.add_child(self)
 	theme = parchment
 	_build_hud(parchment)
@@ -132,33 +144,73 @@ func button(parent: Node, text: String, action: Callable) -> Button:
 	return node
 
 func _build_hud(parchment: Theme) -> void:
-	var panel := PanelContainer.new()
-	panel.theme = parchment
-	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	view.hud.add_child(panel)
+	hud_panel = PanelContainer.new()
+	hud_panel.theme = parchment
+	hud_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	view.hud.add_child(hud_panel)
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 6)
-	panel.add_child(row)
-	view.place = label(row, "Servants' Village")
+	row.add_theme_constant_override("separation", 8)
+	hud_panel.add_child(row)
+	var location := VBoxContainer.new()
+	location.custom_minimum_size.x = 240
+	location.add_theme_constant_override("separation", 0)
+	row.add_child(location)
+	view.place = label(location, "Servants' Village")
 	view.place.autowrap_mode = TextServer.AUTOWRAP_OFF
-	view.place.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	rice_chip = button(row, "", func() -> void: open_tab("food"))
-	rice_chip.icon = icon("rice")
-	people_chip = button(row, "", func() -> void: open_tab("people"))
-	people_chip.icon = icon("people")
-	clock = label(row, "")
+	view.place.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	clock = label(location, "")
 	clock.autowrap_mode = TextServer.AUTOWRAP_OFF
-	clock.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	button(row, "Ⅱ", func() -> void: life.paused = not life.paused).tooltip_text = "Pause [Space]"
-	for speed: int in [1, 4, 16, 64, 256, 1024, 4096]:
-		button(row, "%dx" % speed, func() -> void: life.speed = speed)
-	var index := 1
-	for key: String in TABS:
-		var b := button(row, ["Overview", "Food", "People", "Work", "Chronicle"][index - 1], func() -> void: toggle_tab(key))
-		b.icon = icon(key)
-		b.tooltip_text = "%s [F%d]" % [TABS[key], index]
-		index += 1
+	clock.add_theme_font_size_override("font_size", 12)
+	for definition: Dictionary in KPIS:
+		var card_button := button(row, "", func() -> void: open_tab(definition.tab))
+		card_button.custom_minimum_size = Vector2(126, 44)
+		var card_row := HBoxContainer.new()
+		card_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		card_row.offset_left = 8
+		card_row.offset_right = -8
+		card_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card_button.add_child(card_row)
+		var picture := TextureRect.new()
+		picture.texture = icon(definition.icon)
+		picture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+		picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card_row.add_child(picture)
+		var words := VBoxContainer.new()
+		words.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		words.alignment = BoxContainer.ALIGNMENT_CENTER
+		words.add_theme_constant_override("separation", 0)
+		words.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card_row.add_child(words)
+		var value := label(words, "—")
+		value.autowrap_mode = TextServer.AUTOWRAP_OFF
+		value.add_theme_font_size_override("font_size", 19)
+		var caption := label(words, definition.label)
+		caption.autowrap_mode = TextServer.AUTOWRAP_OFF
+		caption.add_theme_font_size_override("font_size", 11)
+		kpi_cards[definition.id] = {"button": card_button, "value": value, "label": caption}
+	var space := Control.new()
+	space.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(space)
+	var speed_group := HBoxContainer.new()
+	speed_group.add_theme_constant_override("separation", 2)
+	row.add_child(speed_group)
+	pause_button = button(speed_group, "Ⅱ", func() -> void: life.paused = not life.paused; _refresh_hud())
+	pause_button.custom_minimum_size.x = 32
+	speed_selector = OptionButton.new()
+	speed_selector.custom_minimum_size.x = 100
+	for speed: int in SPEEDS:
+		speed_selector.add_item("%dx" % speed)
+	speed_selector.item_selected.connect(func(index: int) -> void: life.speed = SPEEDS[index]; _refresh_hud())
+	speed_selector.tooltip_text = "Simulation speed [1–7]"
+	speed_group.add_child(speed_selector)
+	ledger_button = button(row, "Ledger [L]", func() -> void:
+		if visible and not closing:
+			close()
+		else:
+			open_tab(current))
+	ledger_button.icon = icon("overview")
 	button(row, "World map [M]", view.map.show_map)
+	_refresh_hud()
 	granary_card = PanelContainer.new()
 	granary_card.theme = parchment
 	granary_card.position = Vector2(24, 90)
@@ -202,21 +254,63 @@ func _process(dt: float) -> void:
 	hud_timer += dt
 	if hud_timer >= 0.3 and view.active:
 		hud_timer = 0.0
-		var e: RefCounted = life.economy
-		rice_chip.text = "Food %s jin · %d d" % [amount(e.stock), floori(e.days_left())]
-		rice_chip.modulate = Color("f29b79") if e.days_left() < 7 else (Color("e9bd66") if e.days_left() < 30 else Color.WHITE)
-		rice_chip.tooltip_text = "Food (mortal edible): %s jin\n  Grains: %s jin\n    Rice: %s jin" % [amount(e.mortal_food()), amount(e.quantity("grains")), amount(e.quantity("rice"))]
-		for id: String in e.goods:
-			rice_chip.tooltip_text += "\n      %s: %s jin" % [e.goods[id].name, amount(e.stocks[id])]
-
-		people_chip.text = "%d · %d hungry" % [life.people.size(), e.hungry_count]
-		clock.text = life.clock_text()
+		_refresh_hud()
 	if not visible:
 		return
 	timer += dt
 	if timer >= 0.5:
 		timer = 0.0
 		refresh_values()
+
+func _food_tooltip(id: String, depth: int) -> String:
+	var e: RefCounted = life.economy
+	var title := id.capitalize()
+	for category: Dictionary in e.catalogue.categories:
+		if category.id == id:
+			title = category.name
+	var text := "%s%s: %s jin" % ["  ".repeat(depth), title, amount(e.quantity(id))]
+	for category: Dictionary in e.catalogue.categories:
+		if category.parent == id:
+			text += "\n" + _food_tooltip(category.id, depth + 1)
+	for good: String in e.goods:
+		if e.goods[good].category_path[-1] == id:
+			text += "\n%s%s: %s jin" % ["  ".repeat(depth + 1), e.goods[good].name, amount(e.stocks[good])]
+	return text
+
+
+func _refresh_hud() -> void:
+	var e: RefCounted = life.economy
+	var food: Dictionary = kpi_cards.food
+	food.value.text = "%d d" % floori(e.days_left())
+	food.value.add_theme_color_override("font_color", Color("a23522") if e.days_left() < 7 else (GOLD if e.days_left() < 30 else INK))
+	food.button.tooltip_text = "Mortal edible: %s jin\n%s" % [amount(e.mortal_food()), _food_tooltip("food", 0)]
+	var people: Dictionary = kpi_cards.people
+	people.value.text = str(life.people.size())
+	people.label.text = "%d hungry" % e.hungry_count
+	people.value.add_theme_color_override("font_color", Color("a23522") if e.hungry_count > 0 else INK)
+	people.button.tooltip_text = "%d people · %d hungry" % [life.people.size(), e.hungry_count]
+	var harvest: Dictionary = kpi_cards.harvest
+	harvest.value.text = "~" + amount(roundf(e.forecast() / 50.0) * 50.0)
+	harvest.label.text = "planting in %d d" % (366 - e.day) if e.season() == 3 else "forecast jin"
+	harvest.button.tooltip_text = "Harvest forecast: %s jin" % amount(e.forecast())
+	if e.season() == 3:
+		harvest.value.text = "%d d" % (366 - e.day)
+		harvest.button.tooltip_text = harvest.label.text
+	var balance: float = e.produced - e.consumed - e.spoiled
+	var annual: Dictionary = kpi_cards.year
+	annual.value.text = ("+" if balance >= 0 else "") + amount(balance)
+	annual.value.add_theme_color_override("font_color", Color("49612e") if balance >= 0 else Color("a23522"))
+	annual.button.tooltip_text = "This year's food balance: %s jin" % annual.value.text
+	clock.text = life.clock_text()
+	pause_button.text = "▶" if life.paused else "Ⅱ"
+	pause_button.tooltip_text = ("Resume" if life.paused else "Pause") + " [Space]"
+	speed_selector.select(SPEEDS.find(int(life.speed)))
+	var narrow := get_viewport_rect().size.x < 1500
+	for definition: Dictionary in KPIS:
+		var entry: Dictionary = kpi_cards[definition.id]
+		entry.label.visible = not narrow
+		entry.button.custom_minimum_size.x = 112 if narrow else 126
+
 
 func refresh() -> void:
 	for child: Node in content.get_children():

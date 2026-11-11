@@ -21,7 +21,67 @@ func run() -> void:
 		ledger.toggle_tab(key)
 		await create_timer(0.2).timeout
 		assert(not ledger.visible)
-	assert(ledger.rice_chip.get_parent().get_parent().get_combined_minimum_size().x <= 1920, "HUD must fit viewport")
+	assert(ledger.kpi_cards.size() == 4)
+	for width: int in [1920, 1366]:
+		root.content_scale_size = Vector2i(width, 1080)
+		root.size = Vector2i(width, 1080)
+		ledger._refresh_hud()
+		await process_frame
+		await process_frame
+		assert(ledger.hud_panel.get_combined_minimum_size().x <= width, "HUD must fit viewport")
+		assert(ledger.hud_panel.size.y <= 64, "HUD must stay one thin row")
+		var row: HBoxContainer = ledger.hud_panel.get_child(0)
+		var previous_right := 0.0
+		for child: Control in row.get_children():
+			assert(child.position.x >= previous_right, "HUD controls must not overlap")
+			previous_right = child.position.x + child.size.x
+			if child is Button:
+				assert(child.text not in ["Overview", "Food", "People", "Work", "Chronicle"])
+		assert(previous_right <= width)
+	for definition: Dictionary in ledger.KPIS:
+		ledger.kpi_cards[definition.id].button.pressed.emit()
+		assert(ledger.current == definition.tab and ledger.visible)
+	ledger.ledger_button.pressed.emit()
+	await create_timer(0.2).timeout
+	assert(not ledger.visible)
+	ledger.ledger_button.pressed.emit()
+	assert(ledger.visible)
+	for index: int in ledger.SPEEDS.size():
+		ledger.speed_selector.item_selected.emit(index)
+		assert(world.life.speed == ledger.SPEEDS[index])
+	world.life.speed = 1
+	world.life.paused = true
+	ledger._refresh_hud()
+	assert(ledger.pause_button.text == "▶")
+	ledger.pause_button.pressed.emit()
+	assert(not world.life.paused)
+	for index: int in 7:
+		var speed_key := InputEventKey.new()
+		speed_key.pressed = true
+		speed_key.keycode = KEY_1 + index
+		world.life._input(speed_key)
+		ledger._refresh_hud()
+		assert(ledger.speed_selector.selected == index)
+	world.life.speed = 1
+	var space_key := InputEventKey.new()
+	space_key.pressed = true
+	space_key.keycode = KEY_SPACE
+	world.life._input(space_key)
+	assert(world.life.paused)
+	for index: int in 5:
+		var tab_key := InputEventKey.new()
+		tab_key.pressed = true
+		tab_key.keycode = KEY_F1 + index
+		world.ground_view._unhandled_input(tab_key)
+		assert(ledger.current == ledger.TABS.keys()[index])
+	world.life.economy.day = 300
+	ledger._refresh_hud()
+	assert(ledger.kpi_cards.harvest.label.text == "planting in 66 d")
+	world.life.economy.day = 1
+	world.life.economy.hungry_count = 2
+	ledger._refresh_hud()
+	assert(ledger.kpi_cards.people.label.text == "2 hungry")
+	assert(ledger.kpi_cards.people.value.get_theme_color("font_color") == Color("a23522"))
 	ledger.open_tab("rice")
 	assert(ledger.current == "food")
 	await create_timer(0.2).timeout
@@ -42,5 +102,5 @@ func run() -> void:
 	ledger.show_granary()
 	await process_frame
 	assert(ledger.granary_card.visible and ledger.granary_card.size.x >= 460)
-	print("PASS ledger UI: all tabs, drawer sizing, same-key close, person follow, granary card")
+	print("PASS ledger UI: tabs, KPI navigation/states, 1920/1366 layout, speed/keyboard controls, drawer, follow, granary")
 	quit()
