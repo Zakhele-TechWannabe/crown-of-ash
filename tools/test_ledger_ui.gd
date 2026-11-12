@@ -41,6 +41,11 @@ func run() -> void:
 		await settle(ledger)
 		assert(not ledger.visible)
 	assert(ledger.kpi_cards.size() == 4)
+	for entry: Dictionary in ledger.kpi_cards.values():
+		assert(entry.button.size.x >= 150 and entry.button.size.x <= 170, "KPI cards remain compact")
+	var tab_strip: HBoxContainer = ledger.get_child(0).get_child(0)
+	var close_button: Button = tab_strip.get_child(tab_strip.get_child_count() - 1)
+	assert(close_button.size.x <= 40, "Close button remains a small square")
 	assert(ledger.kpi_cards.year.label.text == "after harvest")
 	assert(ledger.kpi_cards.year.value.text.ends_with(" d"))
 	assert("Next harvest" in ledger.kpi_cards.year.button.tooltip_text)
@@ -273,8 +278,11 @@ func check_text(node: Node) -> void:
 				assert_text(paragraph.get_line_width(line) <= available + 1, "Text overflow: %s (%s > %s)" % [text, paragraph.get_line_width(line), available])
 			assert_text(paragraph.get_size().y <= available_height + 1, "Text height clipped: " + text)
 	if node is Button:
+		if node.get_parent() is HBoxContainer and node.get_parent().get_parent().has_meta("data") and node.text != "":
+			assert_text(node.size_flags_horizontal != Control.SIZE_EXPAND_FILL, "Breadcrumbs stay compact")
 		if node.has_meta("work_id"):
-			assert_text(is_equal_approx(node.size.x, 176), "Work cards must have consistent widths")
+			assert_text(is_equal_approx(node.size.x, 264), "Work cards must have consistent widths")
+			assert_text(node.size.y <= 112, "Work cards must remain compact")
 		for child: Node in node.get_children():
 			if child is Container:
 				assert_text(child.position.y >= 0 and child.position.y + child.size.y <= node.size.y + 1, "Card content extends beyond button")

@@ -88,6 +88,14 @@ var crisis := false
 var warning := 2
 var hungry_count := 0
 var flows: Dictionary = {}
+var yesterday_flows: Dictionary = {}
+
+func yesterday_flow(id: String, key: String) -> float:
+	var total := 0.0
+	for good: String in descendants(id):
+		total += float(yesterday_flows.get(good + ":" + key, 0.0))
+	return total
+
 var stock_history: Array[Vector2] = []
 var harvest_history: Array[Vector2] = []
 var history_cursor := 0
@@ -373,6 +381,10 @@ func _finish_day() -> void:
 			summaries.append("Year %d %s: stored %.2f %s | produced %.2f | eaten %.2f | processed %.2f | spoiled %.2f" % [year, group, quantity(group) * 2, units, node_flow(group, "harvested")[2] * 2, (node_flow(group, "adults")[2] + node_flow(group, "children")[2]) * 2, node_flow(group, "processed")[2] * 2, node_flow(group, "spoiled")[2] * 2])
 		summaries.append("Year %d: stock %.2f | harvest %.2f | consumed %.2f | spoilage %.2f | balance %+.2f | minimum %.2f | hungry %d" % [year, stock, produced, consumed, spoiled, produced - consumed - spoiled - flow_values("processed")[2], minimum, hungry_count])
 
+	yesterday_flows.clear()
+	for key: String in flows:
+		yesterday_flows[key] = flow_values(key)[0]
+
 func after_harvest_days() -> float:
 	var incoming := forecast()
 	if day >= 183 and day <= 273:
@@ -474,7 +486,7 @@ func _material_production() -> void:
 			staffing["hunt"] = EFFECT[int(person.hunger)]
 	for id: String in goods:
 		var g: Dictionary = goods[id]
-		if "materials" not in g.category_path or g.grade != "mortal" or SEASONS[season()] not in g.seasons:
+		if "materials" not in g.category_path or g.get("trade_only", false) or g.grade != "mortal" or SEASONS[season()] not in g.seasons:
 			continue
 		var hands := minf(1.0, float(staffing.get(g.facility, 0.0)))
 		if hands <= 0:

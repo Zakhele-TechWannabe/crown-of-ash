@@ -48,6 +48,12 @@ func run() -> void:
 		e.advance_to((d + 1) * 1440.0)
 		assert(e.hungry_count == 0 and e.people.size() == 20 and e.days_left() > 90)
 		assert(e.stocks.firewood > 0 and e.stocks.tools > 0 and e.stocks.cloth > 0)
+		if d == 198:
+			var seen_stocks: Dictionary = {}
+			for id: String in ["fieldstone", "cut_stone", "granite", "sand", "coal"]:
+				assert(not seen_stocks.has(e.stocks[id]), "Distinct material reserves: " + id)
+				seen_stocks[e.stocks[id]] = true
+			assert(e.yesterday_flow("materials", "harvested") > 0)
 		for id: String in e.descendants("materials"):
 			assert(float(e.stocks[id]) >= 0)
 			if e.goods[id].grade == "spirit": assert(e.stocks[id] == 0)
@@ -59,7 +65,9 @@ func run() -> void:
 	for id: String in e.descendants("materials"):
 		assert(is_equal_approx(float(e.goods[id].starting_rations) + e.node_flow(id,"harvested")[3] - e.node_flow(id,"processed")[3], float(e.stocks[id])))
 	for id: String in e.descendants("materials"):
-		if e.goods[id].grade == "mortal":
+		if e.goods[id].get("trade_only", false):
+			assert(e.stocks[id] == 0)
+		elif e.goods[id].grade == "mortal":
 			assert(float(e.stocks[id]) > float(e.goods[id].starting_rations), "Material reserve should grow: " + id)
 	var winter_ore: float = jump.stocks.iron_ore
 	jump.day = 320

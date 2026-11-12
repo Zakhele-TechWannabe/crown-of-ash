@@ -2466,7 +2466,7 @@
 			"recipe": {
 				"pine_logs": 0.3
 			},
-			"recipe_batch": 3
+			"recipe_batch": 3.3
 		},
 		{
 			"id": "pine_logs",
@@ -2490,12 +2490,11 @@
 			"source": "Woodcutting",
 			"seasons": [
 				"Spring",
-				"Summer",
 				"Autumn",
 				"Winter"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 2
+			"daily_yield": 3.2
 		},
 		{
 			"id": "hardwood_logs",
@@ -2518,13 +2517,11 @@
 			"store": "Covered material store",
 			"source": "Woodcutting",
 			"seasons": [
-				"Spring",
-				"Summer",
 				"Autumn",
 				"Winter"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 2
+			"daily_yield": 1.65
 		},
 		{
 			"id": "bamboo",
@@ -2548,12 +2545,10 @@
 			"source": "Woodcutting",
 			"seasons": [
 				"Spring",
-				"Summer",
-				"Autumn",
-				"Winter"
+				"Summer"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 0.6
+			"daily_yield": 2.4
 		},
 		{
 			"id": "planks",
@@ -2586,7 +2581,7 @@
 			"recipe": {
 				"pine_logs": 1
 			},
-			"recipe_batch": 0.45
+			"recipe_batch": 1.05
 		},
 		{
 			"id": "charcoal",
@@ -2619,7 +2614,7 @@
 			"recipe": {
 				"hardwood_logs": 0.5
 			},
-			"recipe_batch": 0.9
+			"recipe_batch": 1.18
 		},
 		{
 			"id": "spirit_ironwood",
@@ -2763,7 +2758,7 @@
 				"Autumn"
 			],
 			"facility": "quarry",
-			"daily_yield": 0.6
+			"daily_yield": 1.45
 		},
 		{
 			"id": "cut_stone",
@@ -2787,11 +2782,10 @@
 			"source": "Quarry",
 			"seasons": [
 				"Spring",
-				"Summer",
 				"Autumn"
 			],
 			"facility": "quarry",
-			"daily_yield": 0.6
+			"daily_yield": 0.82
 		},
 		{
 			"id": "granite",
@@ -2814,12 +2808,11 @@
 			"store": "Covered material store",
 			"source": "Quarry",
 			"seasons": [
-				"Spring",
 				"Summer",
 				"Autumn"
 			],
 			"facility": "quarry",
-			"daily_yield": 0.6
+			"daily_yield": 0.53
 		},
 		{
 			"id": "clay",
@@ -2847,7 +2840,7 @@
 				"Autumn"
 			],
 			"facility": "quarry",
-			"daily_yield": 2
+			"daily_yield": 3.1
 		},
 		{
 			"id": "sand",
@@ -2870,12 +2863,11 @@
 			"store": "Covered material store",
 			"source": "Quarry",
 			"seasons": [
-				"Spring",
 				"Summer",
 				"Autumn"
 			],
 			"facility": "quarry",
-			"daily_yield": 0.6
+			"daily_yield": 1.12
 		},
 		{
 			"id": "lime",
@@ -2899,11 +2891,10 @@
 			"source": "Quarry",
 			"seasons": [
 				"Spring",
-				"Summer",
-				"Autumn"
+				"Summer"
 			],
 			"facility": "quarry",
-			"daily_yield": 0.6
+			"daily_yield": 0.73
 		},
 		{
 			"id": "bricks",
@@ -2937,7 +2928,7 @@
 				"clay": 1,
 				"firewood": 0.3
 			},
-			"recipe_batch": 0.6
+			"recipe_batch": 0.94
 		},
 		{
 			"id": "roof_tiles",
@@ -2971,7 +2962,7 @@
 				"clay": 0.7,
 				"firewood": 0.2
 			},
-			"recipe_batch": 0.45
+			"recipe_batch": 1.27
 		},
 		{
 			"id": "jade_vein_stone",
@@ -3083,7 +3074,7 @@
 				"Autumn"
 			],
 			"facility": "mine",
-			"daily_yield": 0.95
+			"daily_yield": 1.62
 		},
 		{
 			"id": "copper_ore",
@@ -3107,11 +3098,10 @@
 			"source": "Mine",
 			"seasons": [
 				"Spring",
-				"Summer",
-				"Autumn"
+				"Summer"
 			],
 			"facility": "mine",
-			"daily_yield": 0.6
+			"daily_yield": 0.91
 		},
 		{
 			"id": "tin",
@@ -3134,12 +3124,11 @@
 			"store": "Covered material store",
 			"source": "Mine",
 			"seasons": [
-				"Spring",
 				"Summer",
 				"Autumn"
 			],
 			"facility": "mine",
-			"daily_yield": 0.6
+			"daily_yield": 0.48
 		},
 		{
 			"id": "coal",
@@ -3167,7 +3156,7 @@
 				"Autumn"
 			],
 			"facility": "mine",
-			"daily_yield": 0.6
+			"daily_yield": 1.83
 		},
 		{
 			"id": "iron_ingots",
@@ -3201,7 +3190,7 @@
 				"iron_ore": 1.4,
 				"charcoal": 0.6
 			},
-			"recipe_batch": 0.45
+			"recipe_batch": 0.54
 		},
 		{
 			"id": "copper",
@@ -3235,7 +3224,7 @@
 				"copper_ore": 1.2,
 				"charcoal": 0.3
 			},
-			"recipe_batch": 0.2
+			"recipe_batch": 0.32
 		},
 		{
 			"id": "bronze",
@@ -3270,7 +3259,7 @@
 				"tin": 0.3,
 				"charcoal": 0.2
 			},
-			"recipe_batch": 0.12
+			"recipe_batch": 0.19
 		},
 		{
 			"id": "tools",
@@ -3304,7 +3293,7 @@
 				"iron_ingots": 0.3,
 				"hardwood_logs": 0.1
 			},
-			"recipe_batch": 0.12
+			"recipe_batch": 0.17
 		},
 		{
 			"id": "cold_iron",
@@ -3439,13 +3428,11 @@
 			"store": "Covered material store",
 			"source": "Weaver",
 			"seasons": [
-				"Spring",
 				"Summer",
-				"Autumn",
-				"Winter"
+				"Autumn"
 			],
 			"facility": "weaver",
-			"daily_yield": 10,
+			"daily_yield": 10.4,
 			"gather_days": [
 				153,
 				182
@@ -3459,18 +3446,18 @@
 				"materials",
 				"fibre"
 			],
-			"description": "Small household cotton plots supply soft fibre to the weaving shed.",
+			"description": "Small household cotton plots supply soft fibre to the weaving shed. Trade only: the village has no local source.",
 			"edible_by": [],
 			"colour": "c8b28c",
 			"icon": "spool",
 			"yield_rations_per_mu": 0,
 			"yield_relative_to_common_rice": 0,
-			"starting_rations": 25,
+			"starting_rations": 0,
 			"seasonal_spoilage": 0,
 			"grade": "mortal",
 			"spirit_tier": 0,
 			"store": "Covered material store",
-			"source": "Weaver",
+			"source": "Trade only; no local cultivation or silkworm shed",
 			"seasons": [
 				"Spring",
 				"Summer",
@@ -3478,7 +3465,8 @@
 				"Winter"
 			],
 			"facility": "weaver",
-			"daily_yield": 0.6
+			"daily_yield": 0,
+			"trade_only": true
 		},
 		{
 			"id": "silk_cocoons",
@@ -3488,18 +3476,18 @@
 				"materials",
 				"fibre"
 			],
-			"description": "Cocoons from household silkworm trays await reeling at the weaving shed.",
+			"description": "Cocoons from household silkworm trays await reeling at the weaving shed. Trade only: the village has no local source.",
 			"edible_by": [],
 			"colour": "ccaf8e",
 			"icon": "spool",
 			"yield_rations_per_mu": 0,
 			"yield_relative_to_common_rice": 0,
-			"starting_rations": 25,
+			"starting_rations": 0,
 			"seasonal_spoilage": 0,
 			"grade": "mortal",
 			"spirit_tier": 0,
 			"store": "Covered material store",
-			"source": "Weaver",
+			"source": "Trade only; no local cultivation or silkworm shed",
 			"seasons": [
 				"Spring",
 				"Summer",
@@ -3507,7 +3495,8 @@
 				"Winter"
 			],
 			"facility": "weaver",
-			"daily_yield": 0.6
+			"daily_yield": 0,
+			"trade_only": true
 		},
 		{
 			"id": "cloth",
@@ -3563,12 +3552,10 @@
 			"store": "Covered material store",
 			"source": "Weaver",
 			"seasons": [
-				"Spring",
-				"Summer",
 				"Autumn"
 			],
 			"facility": "hunt",
-			"daily_yield": 0.25
+			"daily_yield": 1.4
 		},
 		{
 			"id": "leather",
@@ -3602,7 +3589,7 @@
 				"hides": 1,
 				"lime": 0.2
 			},
-			"recipe_batch": 0.15
+			"recipe_batch": 0.26
 		},
 		{
 			"id": "rope",
@@ -3635,7 +3622,7 @@
 			"recipe": {
 				"hemp": 0.6
 			},
-			"recipe_batch": 0.4
+			"recipe_batch": 0.39
 		},
 		{
 			"id": "spirit_silk",
@@ -3716,13 +3703,11 @@
 			"store": "Covered material store",
 			"source": "Woodcutting",
 			"seasons": [
-				"Spring",
-				"Summer",
 				"Autumn",
 				"Winter"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 0.6
+			"daily_yield": 0.41
 		},
 		{
 			"id": "wax",
@@ -3745,13 +3730,11 @@
 			"store": "Covered material store",
 			"source": "Woodcutting",
 			"seasons": [
-				"Spring",
 				"Summer",
-				"Autumn",
-				"Winter"
+				"Autumn"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 0.6
+			"daily_yield": 0.28
 		},
 		{
 			"id": "common_herbs",
@@ -3775,12 +3758,10 @@
 			"source": "Woodcutting",
 			"seasons": [
 				"Spring",
-				"Summer",
-				"Autumn",
-				"Winter"
+				"Summer"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 0.6
+			"daily_yield": 0.67
 		},
 		{
 			"id": "resin",
@@ -3805,11 +3786,10 @@
 			"seasons": [
 				"Spring",
 				"Summer",
-				"Autumn",
-				"Winter"
+				"Autumn"
 			],
 			"facility": "woodcutting",
-			"daily_yield": 0.6
+			"daily_yield": 0.36
 		},
 		{
 			"id": "spirit_herbs_low_grade",

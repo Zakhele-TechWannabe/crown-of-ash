@@ -134,8 +134,11 @@ func setup(ground_view: Node2D) -> void:
 
 	for key: String in TABS:
 		var tab := button(tabs, {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "work": "Work", "chronicle": "Chronicle"}[key], func() -> void: open_tab(key))
+		tab.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		tab.icon = icon(key)
-	button(tabs, "×", close)
+		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var close_button := button(tabs, "×", close)
+	close_button.custom_minimum_size = Vector2(36, 36)
 	var scroll := ScrollContainer.new()
 	drawer_scroll = scroll
 	scroll.mouse_force_pass_scroll_events = false
@@ -166,8 +169,8 @@ func label(parent: Node, text: String, heading: bool = false) -> Label:
 func button(parent: Node, text: String, action: Callable) -> Button:
 	var node := LedgerButton.new()
 	node.text = text
-	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	node.autowrap_mode = TextServer.AUTOWRAP_OFF
+	node.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	node.pressed.connect(action)
 	parent.add_child(node)
 	return node
@@ -350,7 +353,7 @@ func _refresh_hud() -> void:
 	for definition: Dictionary in KPIS:
 		var entry: Dictionary = kpi_cards[definition.id]
 		entry.label.visible = not narrow
-		entry.button.custom_minimum_size.x = 112 if narrow else 126
+		entry.button.custom_minimum_size.x = 112 if narrow else 160
 		var font: Font = entry.value.get_theme_font("font")
 		var available: float = entry.button.custom_minimum_size.x - 48
 		var px := 19
@@ -686,7 +689,7 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 	var caption := label(box, title)
 	caption.add_theme_font_size_override("font_size", 12)
 	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var badge := label(box, amount(e.quantity(id)) + (" " + str(e.goods[id].unit) if is_good else " units"))
+	var badge := label(box, quantity_text(e, id))
 	if spirit and e.quantity(id) == 0:
 		badge.text += "\nnot gathered yet"
 	badge.add_theme_font_size_override("font_size", 11)
@@ -695,7 +698,18 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 		child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if is_good and e.quantity(id) == 0:
 		box.modulate.a = 0.45
-	slot.tooltip_text = (e.goods[id].description + (" · Not gathered yet" if spirit else "")) if is_good else title + " · " + amount(e.quantity(id)) + " jin"
+	slot.tooltip_text = (e.goods[id].description + (" · Not gathered yet" if spirit else "")) if is_good else title + " · " + quantity_text(e, id)
+
+func quantity_text(e: RefCounted, id: String, yesterday: bool = false) -> String:
+	var totals: Dictionary = {}
+	for good: String in e.descendants(id):
+		var unit := "pcs" if e.goods[good].unit == "pieces" else str(e.goods[good].unit)
+		var value: float = e.yesterday_flow(good, "harvested") if yesterday else float(e.stocks[good])
+		totals[unit] = float(totals.get(unit, 0.0)) + value
+	var parts: Array[String] = []
+	for unit: String in totals:
+		parts.append(amount(totals[unit]) + " " + unit)
+	return " · ".join(parts)
 
 func _people(parent: Node) -> void:
 	var residents: Array[Dictionary] = []
@@ -782,13 +796,8 @@ func _overview(parent: Node, e: RefCounted) -> void:
 		["Population · adults / children", "%d / %d" % [life.people.size() - children, children]],
 		["Jobs filled", filled], ["Content / well fed / plain fare", "%d / %d / %d" % [moods.content, moods["well fed"], moods["plain fare"]]],
 		["Hungry", e.hungry_count], ["Ration level", "%d%%" % roundi(e.ration() * 100)]])
-	var crisis := CheckBox.new()
-	crisis.text = "Pause on crisis"
-	crisis.button_pressed = e.pause_on_crisis
-	crisis.toggled.connect(func(value: bool) -> void: e.pause_on_crisis = value)
-	parent.add_child(crisis)
 	section(parent, "Food by group · jin")
-	label(parent, "In / out: today · Net: this season · Days: village food needs")
+	label(parent, "In / out: yesterday · Net: this season · Days: village food needs")
 	var rows: Array = []
 	var paths: Array[String] = []
 	for category: Dictionary in e.catalogue.categories:
@@ -802,9 +811,9 @@ func _overview(parent: Node, e: RefCounted) -> void:
 			for i in 2:
 				out[i] += flow[i]
 		var net: float = incoming[1] - out[1]
-		rows.append([category.name, amount(e.quantity(id)), "—" if id == "spirit_grains" else "%.1f" % (e.edible_quantity(id) / e.daily_need()), amount(incoming[0]), amount(out[0]), amount(net), "↑" if net > 0 else ("↓" if net < 0 else "→")])
+		rows.append([category.name, amount(e.quantity(id)), "—" if id == "spirit_grains" else "%.1f" % (e.edible_quantity(id) / e.daily_need()), amount(e.yesterday_flow(id, "harvested")), amount(e.yesterday_flow(id, "adults") + e.yesterday_flow(id, "children") + e.yesterday_flow(id, "spoiled") + e.yesterday_flow(id, "processed")), amount(net), "↑" if net > 0 else ("↓" if net < 0 else "→")])
 		paths.append("food/grains/spirit_grains" if id == "spirit_grains" else "food/" + id)
-	var food_table := table(parent, ["Group", "Stock", "Days", "In", "Out", "Net", "Trend"], rows)
+	var food_table := table(parent, ["Group", "Stock", "Days", "In (yday)", "Out (yday)", "Net", "Trend"], rows)
 	food_table.item_selected.connect(func() -> void: open_tab(paths[food_table.get_selected().get_index()]))
 	section(parent, "Materials · jin / pieces")
 	var material_rows: Array = []
@@ -812,7 +821,7 @@ func _overview(parent: Node, e: RefCounted) -> void:
 	for category: Dictionary in e.catalogue.categories:
 		if category.parent == "materials":
 			material_paths.append("materials/" + str(category.id))
-			material_rows.append([category.name, amount(e.quantity(category.id)), amount(e.node_flow(category.id, "harvested")[2]), amount(e.node_flow(category.id, "processed")[2])])
+			material_rows.append([category.name, quantity_text(e, category.id), amount(e.node_flow(category.id, "harvested")[2]), amount(e.node_flow(category.id, "processed")[2])])
 	var material_table := table(parent, ["Group", "Stored", "Year in", "Year used"], material_rows)
 	material_table.item_selected.connect(func() -> void: open_tab(material_paths[material_table.get_selected().get_index()]))
 	section(parent, "Production · jin")
@@ -835,6 +844,14 @@ func _overview(parent: Node, e: RefCounted) -> void:
 	for i in range(e.chronicle.size() - 1, maxi(-1, e.chronicle.size() - 6), -1):
 		label(parent, e.chronicle[i])
 
+	var crisis := CheckBox.new()
+	crisis.text = "Pause on crisis"
+	crisis.button_pressed = e.pause_on_crisis
+	crisis.toggled.connect(func(value: bool) -> void: e.pause_on_crisis = value)
+	var options := HBoxContainer.new()
+	parent.add_child(options)
+	options.add_child(crisis)
+
 func _work(parent: Node, e: RefCounted) -> void:
 	label(parent, "Y%d · Day %d · %s · %s" % [e.year, e.day, e.SEASONS[e.season()], stage()])
 	var calendar := ProgressBar.new()
@@ -853,7 +870,7 @@ func _work(parent: Node, e: RefCounted) -> void:
 	for group: String in groups:
 		section(parent, group)
 		var grid := GridContainer.new()
-		grid.columns = maxi(2, int((get_viewport_rect().size.x * 0.5 - 48) / 192))
+		grid.columns = maxi(2, int((get_viewport_rect().size.x * 0.5 - 48) / 280))
 		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		grid.add_theme_constant_override("h_separation", 8)
 		grid.add_theme_constant_override("v_separation", 8)
@@ -862,7 +879,7 @@ func _work(parent: Node, e: RefCounted) -> void:
 			var record: Dictionary = registry[id]
 			var card := button(grid, "", func() -> void: selected_work = id; refresh_values())
 			card.set_meta("work_id", id)
-			card.custom_minimum_size = Vector2(176, 224)
+			card.custom_minimum_size = Vector2(264, 112)
 			card.size_flags_horizontal = Control.SIZE_FILL
 			card.add_theme_stylebox_override("normal", skin("panelInset_beigeLight"))
 			var box := VBoxContainer.new()
@@ -873,19 +890,40 @@ func _work(parent: Node, e: RefCounted) -> void:
 			box.offset_top = 8
 			box.offset_bottom = -8
 			box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			box.add_theme_constant_override("separation", 3)
+			var heading := HBoxContainer.new()
+			box.add_child(heading)
 			var picture := TextureRect.new()
 			picture.texture = grain_icon(record.goods[0], Color(e.goods[record.goods[0]].colour)) if not record.goods.is_empty() else icon("people")
-			picture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-			box.add_child(picture)
-			label(box, work_name(id)).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			label(box, "%d / ∞ workers" % record.people.size()).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			label(box, amount(record.flow[0]) + (" units" if work_group(id) in ["Forest, quarry & mine", "Crafts"] else " jin")).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			var status := label(box, work_status(record))
-			status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			status.add_theme_color_override("font_color", Color("49612e") if status.text == "working" else GOLD)
+			picture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			picture.custom_minimum_size = Vector2(24, 24)
+			picture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			heading.add_child(picture)
+			var name_label := label(heading, work_name(id))
+			name_label.add_theme_font_size_override("font_size", 14)
+			var status := label(heading, "●")
+			status.size_flags_horizontal = Control.SIZE_SHRINK_END
+			status.autowrap_mode = TextServer.AUTOWRAP_OFF
+			status.add_theme_color_override("font_color", Color("49612e") if work_status(record) == "working" else GOLD)
+			var summary := HBoxContainer.new()
+			box.add_child(summary)
+			label(summary, "%d workers" % record.people.size()).add_theme_font_size_override("font_size", 13)
+			var use_yesterday: bool = record.flow[0] == 0 or fmod(life.minutes, 1440.0) < 390
+			var totals: Dictionary = {}
+			for good: String in record.goods:
+				var unit := "pcs" if e.goods[good].unit == "pieces" else str(e.goods[good].unit)
+				var value: float = e.yesterday_flow(good, "harvested") if use_yesterday else e.node_flow(good, "harvested")[0]
+				totals[unit] = float(totals.get(unit, 0.0)) + value
+			var output: Array[String] = []
+			for unit: String in totals: output.append(amount(totals[unit]) + " " + unit)
+			label(summary, ("yesterday " if use_yesterday else "today ") + " · ".join(output)).add_theme_font_size_override("font_size", 12)
 			var effectiveness := ProgressBar.new()
 			effectiveness.show_percentage = false
-			effectiveness.custom_minimum_size.y = 8
+			effectiveness.custom_minimum_size.y = 4
+			for style_name: String in ["background", "fill"]:
+				var thin := StyleBoxFlat.new()
+				thin.bg_color = GOLD if style_name == "fill" else Color("baa77b")
+				effectiveness.add_theme_stylebox_override(style_name, thin)
 			var total := 0.0
 			for person: Dictionary in record.people: total += e.EFFECT[int(person.hunger)]
 			effectiveness.value = total / maxf(1, record.people.size()) * 100
