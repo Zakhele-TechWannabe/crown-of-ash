@@ -454,6 +454,7 @@ func begin_tick(on_day: int) -> void:
 	index_day = on_day
 	index_cursor = 0
 	social_pending = true
+	if temper: temper.wild.week(social_days, on_day)
 	var year := on_day / 365
 	if archive and year != archived_year:
 		if archived_year >= 0: archive.year_end(year - 1)

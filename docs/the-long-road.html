@@ -144,6 +144,49 @@ button.chip:disabled{opacity:.4;cursor:not-allowed}
 .mtrack{height:10px;border-radius:5px;background:var(--line);position:relative;overflow:hidden}
 .mtrack span{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
 .mtrack i{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink)}
+/* Interface mock-ups: game colours are fixed (they show the game, not this page) */
+.mockwrap{overflow-x:auto;border-radius:10px}
+.mock{position:relative;min-width:640px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:10px;overflow:hidden;font:12px/1.35 var(--body);color:#3b2b1a;
+  background-color:#8cbf62;background-image:repeating-linear-gradient(90deg,transparent 0 17%,#d9a066 17% 19%,transparent 19% 41%,#d9a066 41% 43%,transparent 43%)}
+.mock .road{position:absolute;left:0;right:0;height:3%;background:#d9a066}
+.mock .house{position:absolute;width:7%;height:9%;background:#c8553d;border-bottom:4px solid #7a3324;border-radius:2px}
+.mock .tree{position:absolute;width:2.2%;aspect-ratio:1;border-radius:50%;background:#2f7a3c}
+.mock .dot{position:absolute;width:1.6%;aspect-ratio:1;border-radius:50%;background:#3b2b1a;border:2px solid #f3e2b8}
+.mock .dot.sel{outline:3px solid #f1c24b;outline-offset:2px}
+.mock .panel{position:absolute;background:#ecdcb3;border:2px solid #8a6a3a;border-radius:6px;box-shadow:0 2px 0 #8a6a3a}
+.mock .top{left:0;right:0;top:0;height:7%;border-radius:0;display:flex;align-items:center;gap:10px;padding:0 10px;font-size:11px;border-width:0 0 2px}
+.mock .top b{font:700 12px var(--display)} .mock .top .sp{margin-left:auto}
+.mock .alert{background:#f6e7c1;border:1px solid #b08a4a;border-radius:10px;padding:1px 7px;font-size:10.5px}
+.mock .alert.hot{background:#f3d2c4;border-color:#b23a26}
+.mock .rail{left:1%;top:10%;width:21%;display:grid;gap:5px;padding:6px}
+.mock .rail .h{font:700 12px var(--display)}
+.mock .story{background:#f6e9c6;border:1px solid #c7a76a;border-radius:4px;padding:4px 6px;font-size:10.5px}
+.mock .story i{font-style:normal;color:#8a6a3a;font-size:9.5px;display:block}
+.mock .vcard{left:1%;bottom:2%;width:34%;display:grid;grid-template-columns:22% 1fr;gap:6px;padding:7px}
+.mock .vcard h5{margin:0;font:700 14px var(--display)}
+.mock .vcard .btns{display:flex;gap:4px;margin-top:4px}
+.mock .vcard .btns span,.mock .bk .tabs span,.mock .tourcard .btns span{background:#b9935a;color:#fff8e6;border-radius:3px;padding:2px 6px;font-size:10px}
+.mock svg{width:100%;height:auto}
+.mock .dim{position:absolute;inset:0;background:rgba(30,20,10,.45)}
+.mock .bk{left:4%;right:4%;top:9%;bottom:3%;padding:10px 14px;display:grid;grid-template-rows:auto auto 1fr;gap:6px}
+.mock .bk h4{margin:0;font:700 18px var(--display)}
+.mock .bk .tabs{display:flex;gap:4px;flex-wrap:wrap}
+.mock .bk .tabs span{background:#d8c08f;color:#3b2b1a}
+.mock .bk .tabs span.on{background:#3b2b1a;color:#f3e2b8}
+.mock .bk .page{display:grid;grid-template-columns:20% 1fr 1fr;gap:12px;min-height:0}
+.mock .lay{display:grid;grid-template-columns:1fr auto;gap:2px 8px;font-size:11px}
+.mock .lay .g{font:600 10px var(--mono)}
+.mock .gate{background:#f3d2c4;border:1px solid #b23a26;border-radius:4px;padding:5px 7px;font-size:11px}
+.mock .tl{font-size:10.5px;display:grid;gap:3px}
+.mock .tl b{font-family:var(--mono);font-weight:500;color:#8a6a3a;margin-right:4px}
+.mock .tourcard{left:38%;bottom:6%;width:34%;padding:9px 11px;display:grid;gap:5px;border-color:#b23a26}
+.mock .tourcard .k{font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#b23a26}
+.mock .tourcard h5{margin:0;font:700 14px var(--display)}
+.mock .tourcard .btns{display:flex;gap:5px}
+.mock .tourcard .btns span.alt{background:#d8c08f;color:#3b2b1a}
+.mock .arrow{position:absolute;left:35.5%;bottom:14%;width:3%;height:3px;background:#b23a26}
+.mock .arrow::before{content:"";position:absolute;left:-6px;top:-5px;border:6px solid transparent;border-right-color:#b23a26;border-left:0}
+.mock .lift{z-index:2}
 footer{padding-block:30px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -156,7 +199,7 @@ footer{padding-block:30px;color:var(--muted);font-size:13px;border-top:1px solid
 </header>
 
 <nav class="rail" aria-label="Sections">
-  <a href="#emergence">Emergence</a><a href="#cultivation">Cultivation</a><a href="#body">Body tempering</a><a href="#skills">Skill tree</a><a href="#relationships">Relationships</a><a href="#family">Family &amp; lineage</a><a href="#factions">Factions</a><a href="#mind">Mind</a><a href="#archive">Archive</a><a href="#performance">Performance</a>
+  <a href="#emergence">Emergence</a><a href="#cultivation">Cultivation</a><a href="#body">Body tempering</a><a href="#skills">Skill tree</a><a href="#relationships">Relationships</a><a href="#family">Family &amp; lineage</a><a href="#factions">Factions</a><a href="#mind">Mind</a><a href="#archive">Archive</a><a href="#performance">Performance</a><a href="#interface">Interface &amp; tour</a>
 </nav>
 
 <!-- ============ EMERGENCE ============ -->
@@ -471,6 +514,51 @@ strain per day    = training hours × (1 − medicine soothing)</code>
     </ul></div>
 </section>
 
+<!-- ============ INTERFACE ============ -->
+<section class="view" id="v-interface" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Draft 1 · how the game should feel to use</span><h2>See the valley, not a spreadsheet</h2>
+      <p>The simulation is rich now, but the screen hides it. Today, everything about a person sits in one long scrolling column on the right half of the screen. The world shrinks to a strip, empty rows ("None known") take more space than real ones, and nothing tells you where to look.</p>
+      <p>The fix follows the city-builder style you like: the world stays big, a thin bar sits on top, a small card follows whoever you click, and the full record opens as a book with one page per topic, so it never becomes a long scroll.</p></div>
+    <div class="box"><span class="eyebrow">What goes wrong today</span><h3>From your screenshot</h3>
+      <ul class="clean">
+        <li><b>Nothing points you anywhere.</b> On day 5 nobody has tempered yet, and the game doesn't say who will, or who already has.</li>
+        <li><b>One long column</b> mixes graphs, bars, family and decisions. The interesting line is three screens down.</li>
+        <li><b>Empty states are loud.</b> "None known" six times, an empty body figure, empty feeling bars.</li>
+        <li><b>The world shrinks</b> to under half the screen whenever you read about someone.</li>
+        <li><b>Numbers without meaning.</b> "Strength 10.9 / 20" says less than "stronger than most".</li>
+      </ul></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Mock-up · switch between the three screens</span><h2>The new flow</h2>
+    <div class="chips" id="ui-tabs"></div>
+    <div class="mockwrap"><div class="mock" id="ui-mock"></div></div>
+    <p class="muted" id="ui-cap"></p>
+  </div>
+
+  <div class="grid3">
+    <div class="box"><span class="tag">Thin top bar</span><p>Date and season, speed, people, and up to three live alerts that take you somewhere: "3 waiting at a gate", "iron-bark is tight", "a wanderer is on the West Road".</p></div>
+    <div class="box"><span class="tag">Stories rail</span><p>The chronicle becomes a short feed of cards on the left. Each card jumps to the person and the moment. You can filter it to tempering, family, cultivation or conflict. It replaces hunting through tabs.</p></div>
+    <div class="box"><span class="tag">Villager card</span><p>Click anyone in the world or a story: a small card shows who they are, what they are doing now, what they want, and their body figure. Three buttons: Follow, Open their book, Show their ties.</p></div>
+    <div class="box"><span class="tag">The book</span><p>A full-screen overlay styled like this page. Tabs: <b>Story</b> (their life as a timeline) · <b>Body &amp; cultivation</b> · <b>Heart &amp; mind</b> · <b>Family &amp; lineage</b> · <b>Ties</b> · <b>Skills</b>. Each tab fits one screen. Esc closes it.</p></div>
+    <div class="box"><span class="tag">Valley pages</span><p>The same book, opened on the valley instead of a person: People (sortable, with "notable" filters), Tempering (who is where, grades), Forest (supply against demand, like the materials model here), Food, Work.</p></div>
+    <div class="box"><span class="tag gold">Words before numbers</span><p>"Stronger than most (11 of 20)", "a little tired", "close to the gate of Iron Bone". The exact numbers sit in tooltips. Empty sections hide themselves.</p></div>
+  </div>
+
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">A guided tour of the whole game</span><h2>The Long Road tour</h2>
+      <p>A small card walks you through the game, one stop at a time. Each stop points at the part of the screen it's about. Its <b>Show me</b> button finds the best real example in your current world, jumps there, and speeds time up if nothing has happened yet. You can leave and resume the tour at any stop. It's offered on first launch and lives in the top bar afterwards.</p>
+      <div class="tablewrap"><table><thead><tr><th>#</th><th>Stop</th><th>"Show me" finds</th></tr></thead><tbody id="tour-stops"></tbody></table></div></div>
+    <div class="box"><span class="eyebrow">Build order, if you approve</span><h3>Three steps, after body tempering step 2</h3>
+      <ol class="clean" style="padding-left:20px">
+        <li><b>Card and book:</b> the villager card, the book overlay with tabs (starting with Story and Body), the thin top bar, and empty sections hidden. The world gets its full width back.</li>
+        <li><b>Stories and finding people:</b> the stories rail, live alerts, a "notable" filter in People, and the valley pages for Tempering and Forest.</li>
+        <li><b>The tour:</b> the ten stops with Show me, auto-speed, and resume. It's written last so it points at the finished screens.</li>
+      </ol>
+      <p class="muted">Each step keeps the game playable, and I check each one with screenshots before handing it over. The current art (Kenney tiles, parchment panels) stays. Only the layout and the way information is grouped change.</p></div>
+  </div>
+</section>
+
 <!-- ============ SKILLS ============ -->
 <section class="view" id="v-skills" hidden>
   <div class="grid2">
@@ -783,7 +871,7 @@ const fmt = n => n.toLocaleString('en-US',{maximumFractionDigits:0});
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
 /* ---------- routing ---------- */
-const VIEWS=['emergence','cultivation','body','skills','relationships','family','factions','mind','archive','performance'];
+const VIEWS=['emergence','cultivation','body','skills','relationships','family','factions','mind','archive','performance','interface'];
 function route(){
   let h=(location.hash||'').slice(1); if(!VIEWS.includes(h)) h='emergence';
   VIEWS.forEach(v=>{ $('#v-'+v).hidden = v!==h; });
@@ -791,6 +879,7 @@ function route(){
   if(h==='relationships') startGraph();
   if(h==='cultivation') startCult();
   if(h==='body') startBody();
+  if(h==='interface') startInterface();
   if(h==='skills') startSkillGraph();
   if(h==='family') startFamily();
 }
@@ -1185,6 +1274,57 @@ function startBody(){ if(btStarted) return; btStarted=true;
   $('#m-presets').innerHTML=P.map((p,k)=>`<button class="chip" data-k="${k}">${p[0]}</button>`).join('');
   $('#m-presets').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; const p=P[+b.dataset.k]; $('#m-n').value=p[1]; $('#m-deep').value=p[2]; mCalc();});
   btShow(btSel); btCalc(); mCalc(); }
+
+/* ---------- interface mock-ups ---------- */
+const TOUR=[
+ ['The valley and time','Speed controls in the top bar','jumps a season ahead if it is still day 1'],
+ ['A villager','Click anyone for their card','the person with the most going on right now'],
+ ['Stories','The feed on the left','the latest big moment'],
+ ['Body tempering','The body figure on the card','someone drilling right now'],
+ ['Grades','Low, Middle, High, Perfect','the best-graded body in the valley'],
+ ['At the gate','What a breakthrough needs','someone waiting for iron-bark or marrow'],
+ ['The forest','The Forest valley page','the most stripped patch and the herd'],
+ ['Heart and mind','Why people do things','a decision with its reasons'],
+ ['Family and lineage','Blood and teachers','the largest family'],
+ ['The Book of Lives','Everything, outside the game','opens the viewer on this world']];
+function uiFigure(grades,scale){ const f=$('#bt-fig').cloneNode(true); f.removeAttribute('id'); f.style.maxWidth=scale||'100%';
+  const GO=[.5,.7,.9,1]; for(let i=1;i<=9;i++) f.querySelectorAll('.bt-l'+i).forEach(g=>{g.style.opacity=i<=grades.length?GO[grades[i-1]]:.07; g.classList.remove('bt-cur','bt-perf','bt-off');});
+  return f.outerHTML; }
+function uiMap(){ let h='<div class="road" style="top:40%"></div><div class="road" style="top:78%"></div>';
+  [[30,14],[48,12],[66,15],[84,13],[30,52],[50,56],[70,52],[86,58]].forEach(([x,y])=>h+=`<div class="house" style="left:${x}%;top:${y}%"></div>`);
+  [[26,30],[44,33],[61,30],[79,31],[93,44],[38,66],[58,70],[77,68],[95,20],[25,88],[64,90]].forEach(([x,y])=>h+=`<div class="tree" style="left:${x}%;top:${y}%"></div>`);
+  [[40,44],[53,47],[62,43],[71,74],[46,80],[82,46]].forEach(([x,y],i)=>h+=`<div class="dot${i===1?' sel':''}" style="left:${x}%;top:${y}%"></div>`);
+  return h; }
+const UI_TOP=`<div class="panel top"><b>White Crane River</b><span>Year 12 · Summer 3</span><span class="alert hot">3 at a gate</span><span class="alert">iron-bark tight</span><span class="alert">wanderer on the West Road</span><span class="sp">▶ 1× · 16× · 256×</span><span>72 people</span><span class="alert">Tour</span><span class="alert">Valley book</span></div>`;
+const UI_RAIL=`<div class="panel rail"><span class="h">Stories</span>
+  <div class="story"><i>Summer 2 · tempering</i>Han Bo forged a middle-grade Steel Sinew</div>
+  <div class="story"><i>Summer 1 · forest</i>Wang Li took the last iron-bark from fox gully</div>
+  <div class="story"><i>Spring 28 · family</i>Zhou Mei married Chen Fu</div>
+  <div class="story"><i>Spring 19 · forest</i>Li Gang was gored hunting and must rest</div></div>`;
+const UI_CARD=g=>`<div class="panel vcard${g?' lift':''}"><div>${uiFigure([1,0,1])}</div><div><h5>Han Bo</h5>
+  <div>34 · woodcutter · Wang household</div><div><b>Steel Sinew</b> · Middle overall</div><div>Now: drilling 2 h a day under Zhao Song</div><div>Wants: iron-bark for Iron Bone (has 2 of 4 roots)</div>
+  <div class="btns"><span>Follow</span><span>Open book</span><span>Ties</span></div></div></div>`;
+const UI_SCREENS={
+ 'Valley view':[()=>uiMap()+UI_TOP+UI_RAIL+UI_CARD(false),'The world keeps the whole screen. Stories on the left, the card of whoever you clicked at the bottom, alerts in the top bar.'],
+ "Villager's book":[()=>uiMap()+UI_TOP+`<div class="dim"></div><div class="panel bk"><h4>Han Bo <span style="font:400 12px var(--body)">· 34 · woodcutter</span></h4>
+   <div class="tabs"><span>Story</span><span class="on">Body &amp; cultivation</span><span>Heart &amp; mind</span><span>Family &amp; lineage</span><span>Ties</span><span>Skills</span><span style="margin-left:auto">Esc ✕</span></div>
+   <div class="page"><div>${uiFigure([1,0,1])}</div>
+   <div style="display:grid;gap:6px;align-content:start"><b style="font:700 13px var(--display)">Forged layers</b>
+     <div class="lay"><span>1 · Copper Skin</span><span class="g">MIDDLE</span><span>2 · Dense Flesh</span><span class="g">LOW · from labour</span><span>3 · Steel Sinew</span><span class="g">MIDDLE</span></div>
+     <div>Method: a tempering manual (from Zhao Song)<br>Best grade still possible: High</div>
+     <div class="gate"><b>At the gate of Iron Bone</b><br>Needs iron-bark baths: has 2 of 4 roots. Fox gully was stripped last month.</div></div>
+   <div class="tl"><b style="font:700 13px var(--display);color:#3b2b1a">This year</b><div><b>Sum 2</b>forged Steel Sinew (Middle)</div><div><b>Spr 30</b>found the east thicket stripped</div><div><b>Spr 11</b>gathered 2 roots at the north ridge</div><div><b>Spr 2</b>chose to train: ambition, pride</div><div><b>Win 40</b>learned a tempering manual from Zhao Song</div></div></div></div>`,'The book opens over the world, one topic per tab, each fitting on one screen. Shown here: the Body tab. Story, Mind and Family follow the same pattern.'],
+ 'Tour':[()=>uiMap()+UI_TOP+UI_RAIL+`<div class="dim"></div>`+UI_CARD(true)+`<div class="arrow lift"></div><div class="panel tourcard lift"><span class="k">Tour · stop 4 of 10 · Body tempering</span><h5>Bodies are forged in layers</h5>
+   <div>Anyone can harden their body in nine layers. The figure on Han Bo's card lights up as he forges them: faint parts are Low grade, bright parts High. He is drilling now, two hours a day.</div>
+   <div class="btns"><span>Show me another</span><span class="alt">Back</span><span>Next: grades →</span><span class="alt" style="margin-left:auto">Leave tour</span></div></div>`,'Each stop dims everything else and points at the part it explains. "Show me" picks a real example from your world.']};
+let uiStarted=false;
+function uiShow(k){ $('#ui-mock').innerHTML=UI_SCREENS[k][0](); $('#ui-cap').textContent=UI_SCREENS[k][1];
+  document.querySelectorAll('#ui-tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k)); }
+function startInterface(){ if(uiStarted) return; uiStarted=true;
+  $('#ui-tabs').innerHTML=Object.keys(UI_SCREENS).map(k=>`<button class="chip" data-k="${k}">${k}</button>`).join('');
+  $('#ui-tabs').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) uiShow(b.dataset.k);});
+  $('#tour-stops').innerHTML=TOUR.map((t,i)=>`<tr><td class="num">${i+1}</td><td><b>${t[0]}</b><br><span class="muted">${t[1]}</span></td><td>${t[2]}</td></tr>`).join('');
+  uiShow('Valley view'); }
 
 route();
 </script>

@@ -88,7 +88,12 @@
   "habit": 1.0,
   "refusal_cooldown_days": 365,
   "explore_time_away": 0.6,
-  "visit_friend_need": 0.4,
-  "train_time_after_work": 0.5,
-  "train_renew": 0.5
+  "visit_friend_need": 0.25,
+  "train_time_after_work": 0.8,
+  "train_renew": 0.5,
+  "gate_time_away": 1.0,
+  "train_without_method": 0.7,
+  "train_without_medicine": 0.3,
+  "routine_when_blocked": 0.5,
+  "temper_max_age": 70
 }

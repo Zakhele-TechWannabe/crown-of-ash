@@ -2,6 +2,7 @@ extends RefCounted
 ## Body Tempering: nine layers anyone can forge with drills, hardship and medicine. Tempering fills a layer, a gate
 ## names what the breakthrough needs, and each layer is stamped with a grade (Low, Middle, High, Perfect) for life.
 ## The method caps the grade; Perfect needs every layer below to be Perfect too. Training builds strain, rest clears it.
+const WildSupply = preload("res://src/wild_supply.gd")
 const LAYERS := 9
 enum {LOW, MIDDLE, HIGH, PERFECT}
 
@@ -16,12 +17,15 @@ var hours := PackedByteArray()
 var regimen_until := PackedInt32Array()
 var teacher := PackedInt32Array()
 var gate_since := PackedInt32Array()
+var aim_doses := PackedByteArray()
+var wild: RefCounted
 var medicine: Dictionary = {}
 var perfect_bodies := 0
 var _labour_jobs: Dictionary = {}
 
 func _init(society: RefCounted) -> void:
 	society_ref = weakref(society)
+	wild = WildSupply.new(society)
 	for id: String in config.medicine_names: medicine[id] = PackedByteArray()
 
 func add_person() -> void:
@@ -34,6 +38,7 @@ func add_person() -> void:
 	regimen_until.append(0)
 	teacher.append(-1)
 	gate_since.append(0)
+	aim_doses.append(1)
 	for id: String in medicine: medicine[id].append(0)
 
 func layer_name(l: int) -> String:
@@ -44,6 +49,10 @@ func grade(p: int, l: int) -> int:
 
 func cost(l: int) -> float:
 	return float(config.first_cost) * pow(float(config.cost_growth), l - 1)
+
+## Tempering is stored in 32-bit floats, so a full layer can sit a hair below its cost.
+func at_gate(p: int) -> bool:
+	return body_layer[p] < LAYERS and tempering[p] >= cost(body_layer[p] + 1) - 0.01
 
 func training(p: int, on_day: int) -> bool:
 	return hours[p] > 0 and regimen_until[p] > on_day
@@ -104,8 +113,16 @@ func gate_need(p: int) -> String:
 	# Labour alone carries the body only through the first layers.
 	if not training(p, society_ref.get_ref().population.day) and (l >= int(config.labour_max_layer) or _labour_hours(p) == 0): return "drills"
 	var med: String = config.gate_medicine[l]
-	if not med.is_empty() and medicine[med][p] == 0: return str(config.medicine_names[med])
+	if not med.is_empty() and medicine[med][p] < wild.units(med): return str(config.medicine_names[med])
 	return ""
+
+## The medicine a person should be laying in for their next gate, or "" if they have enough or are not close.
+func wanted_medicine(p: int) -> String:
+	var l: int = body_layer[p]
+	if l >= LAYERS or method[p] < int(config.gate_method[l]): return ""
+	var med: String = config.gate_medicine[l]
+	if med.is_empty() or tempering[p] < cost(l + 1) * float(wild.config.prepare_from_progress): return ""
+	return med if medicine[med][p] < aim_doses[p] * wild.units(med) else ""
 
 func polish_goal(p: int) -> int:
 	var store: RefCounted = society_ref.get_ref().population
@@ -134,7 +151,7 @@ func weekly(p: int, days: int, on_day: int) -> void:
 	if body_layer[p] >= LAYERS: return
 	var need := cost(body_layer[p] + 1)
 	tempering[p] = minf(need, tempering[p] + rate(p, on_day) * days)
-	if tempering[p] < need: return
+	if not at_gate(p): return
 	# At the gate: wait for what it needs, then polish the layer for as long as the person's temper allows.
 	if gate_since[p] == 0:
 		gate_since[p] = on_day
@@ -151,8 +168,13 @@ func break_through(p: int, on_day: int) -> int:
 	var store: RefCounted = society.population
 	var l: int = body_layer[p]
 	var med: String = config.gate_medicine[l]
-	if not med.is_empty(): medicine[med][p] -= 1
 	var points: float = float(config.grade_base) + store.rng.randf_range(-float(config.luck), float(config.luck))
+	# Extra doses of medicine only help a body that can still forge High or better.
+	if not med.is_empty():
+		var held: int = medicine[med][p] / wild.units(med)
+		var doses := clampi(mini(held, aim_doses[p]), 1, int(wild.config.max_doses)) if grade_ceiling(p) >= HIGH else 1
+		medicine[med][p] -= doses * wild.units(med)
+		points += float(wild.config.dose_bonus[doses - 1])
 	var strong: bool = store.potential[p * 8] >= 17 and store.potential[p * 8 + 1] >= 17
 	if store.constitution[p] == 1: points += float(config.talent_physique)
 	elif strong: points += float(config.talent_strong)
@@ -221,7 +243,7 @@ func start_regimen(p: int, drill_hours: int, on_day: int) -> String:
 	regimen_until[p] = on_day + int(config.regimen_weeks) * 7
 	teacher[p] = find_teacher(p)
 	if teacher[p] >= 0: society.ties.event(p, teacher[p], "teaching", on_day)
-	var lacking := gate_need(p) if tempering[p] >= cost(body_layer[p] + 1) else ""
+	var lacking := gate_need(p) if at_gate(p) else ""
 	if not lacking.is_empty() and lacking != "drills": return "trained, but the gate of %s needs %s" % [layer_name(body_layer[p] + 1), lacking]
 	return "drilled %d h a day under %s" % [hours[p], store.names[teacher[p]]] if teacher[p] >= 0 else "drilled %d h a day alone" % hours[p]
 
@@ -259,12 +281,18 @@ func describe(p: int) -> Dictionary:
 	var store: RefCounted = society.population
 	var layers: Array = []
 	for l in body_layer[p]: layers.append([layer_name(l + 1), config.grade_names[grades[p * LAYERS + l]]])
-	var at_gate: bool = body_layer[p] < LAYERS and tempering[p] >= cost(body_layer[p] + 1)
+	var gate_reached := at_gate(p)
 	return {"layer": body_layer[p], "name": layer_name(body_layer[p]) if body_layer[p] else "untempered", "layers": layers,
 		"progress": tempering[p] / cost(mini(LAYERS, body_layer[p] + 1)), "method": config.method_names[method[p]],
 		"training": training(p, store.day), "hours": hours[p], "teacher": store.names[teacher[p]] if teacher[p] >= 0 and training(p, store.day) else "",
-		"strain": strain[p], "gate": gate_need(p) if at_gate else "", "ceiling": config.grade_names[grade_ceiling(p)],
-		"grade": config.grade_names[roundi(body_grade(p))] if body_layer[p] else ""}
+		"strain": strain[p], "gate": gate_need(p) if gate_reached else "", "ceiling": config.grade_names[grade_ceiling(p)],
+		"grade": config.grade_names[roundi(body_grade(p))] if body_layer[p] else "", "holds": holds(p)}
+
+func holds(p: int) -> PackedStringArray:
+	var out: PackedStringArray = []
+	for id: String in medicine:
+		if medicine[id][p] > 0: out.append("%d %s" % [medicine[id][p], {"iron_bark": "iron-bark roots", "beast_marrow": "beast marrow", "seven_leaf": "seven-leaf herbs"}[id]])
+	return out
 
 func summary() -> Dictionary:
 	var by_layer := PackedInt32Array()
@@ -274,11 +302,14 @@ func summary() -> Dictionary:
 	var methods := PackedInt32Array()
 	methods.resize(4)
 	var drilling := 0
+	var wanting: Dictionary = {}
 	var society: RefCounted = society_ref.get_ref()
 	for p in body_layer.size():
 		if not society.alive[p]: continue
 		by_layer[body_layer[p]] += 1
 		methods[method[p]] += 1
 		if training(p, society.population.day): drilling += 1
+		var want := wanted_medicine(p)
+		if not want.is_empty(): wanting[want] = int(wanting.get(want, 0)) + 1
 		for l in body_layer[p]: by_grade[grades[p * LAYERS + l]] += 1
-	return {"layers": Array(by_layer), "grades": Array(by_grade), "methods": Array(methods), "drilling": drilling}
+	return {"layers": Array(by_layer), "grades": Array(by_grade), "methods": Array(methods), "drilling": drilling, "wanting": wanting, "wild": wild.summary()}

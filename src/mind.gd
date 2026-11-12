@@ -18,9 +18,9 @@ const INPUT_NAMES := ["mood", "hunger", "anger", "grief", "joy", "fear", "age", 
 const EMOTIONS := ["anger", "grief", "joy", "fear"]
 enum {SPITE, LONGING, FEAR, PRIDE, RESTLESS, DEVOTION, AMBITION, CURIOSITY}
 enum {ANGER, GRIEF, JOY, AFRAID}
-enum Option {ROUTINE, COURT, SEEK_MASTER, CULTIVATE, EXPLORE, CONFRONT, RECONCILE, HELP, GOSSIP, TRAIN}
+enum Option {ROUTINE, COURT, SEEK_MASTER, CULTIVATE, EXPLORE, CONFRONT, RECONCILE, HELP, GOSSIP, TRAIN, GATHER, HUNT}
 const OPTION_NAMES := ["keep to the daily routine", "court", "seek a master", "cultivate in earnest", "explore the wilds",
-	"confront", "make peace with", "help", "gossip about", "temper the body"]
+	"confront", "make peace with", "help", "gossip about", "temper the body", "gather tempering herbs", "hunt a beast for marrow"]
 enum Goal {NONE, MARRY, FIND_MASTER, ASCEND, MASTER_CRAFT, AVENGE, PROVIDE, TEMPER}
 const GOAL_NAMES := ["", "find a spouse", "find a master", "break through", "master a craft", "settle a grudge", "provide for the family", "temper the body"]
 const GOAL_OPTION := [-1, Option.COURT, Option.SEEK_MASTER, Option.CULTIVATE, Option.ROUTINE, Option.CONFRONT, Option.HELP, Option.TRAIN]
@@ -261,7 +261,7 @@ func _option(p: int, kind: int, target: int, questions: Array, push: Dictionary,
 		Option.COURT, Option.HELP: score *= (1.0 - 0.5 * anger) * (1.0 + 0.5 * joy) * (1.0 - 0.5 * grief)
 		Option.EXPLORE: score *= (1.0 - 0.7 * fear) * (1.0 + 0.3 * joy) * (1.0 - 0.5 * grief)
 		_: score *= 1.0 - 0.4 * grief
-	if goal[p] != Goal.NONE and GOAL_OPTION[goal[p]] == kind: score *= float(config.goal_bonus)
+	if goal[p] != Goal.NONE and (GOAL_OPTION[goal[p]] == kind or (goal[p] == Goal.TEMPER and kind in [Option.GATHER, Option.HUNT])): score *= float(config.goal_bonus)
 	var reasons: Array = []
 	for q: Array in questions: reasons.append([q[0], snappedf(q[1], .01)])
 	if not strongest.is_empty(): reasons.append(["heart: " + strongest, snappedf(strongest_value, .01)])
@@ -270,6 +270,11 @@ func _option(p: int, kind: int, target: int, questions: Array, push: Dictionary,
 	if joy >= .3: reasons.append(["joy", snappedf(joy, .01)])
 	if fear >= .3: reasons.append(["fear", snappedf(fear, .01)])
 	return {"option": kind, "target": target, "score": score, "reasons": reasons}
+
+## Training still makes sense without a method (that is how drills are learned), much less while waiting on medicine.
+func _way_forward(temper: RefCounted, lacking: String) -> float:
+	if lacking.is_empty() or lacking == "drills": return 1.0
+	return float(config.train_without_medicine) if lacking in temper.config.medicine_names.values() else float(config.train_without_method)
 
 func _ramp(x: float, low: float, high: float) -> float:
 	return clampf((x - low) / (high - low), 0.0, 1.0)
@@ -339,14 +344,31 @@ func _options(p: int, urge: PackedFloat32Array) -> Array[Dictionary]:
 			options.append(_option(p, Option.GOSSIP, foe, [["dislike", _ramp(-foe_opinion, 0, 60)], ["a willing ear", _ramp(friend_opinion, 30, 80)]],
 				{"spite": 0.8, "curiosity": 0.4, "devotion": -0.4}, urge))
 	var temper: RefCounted = society.temper
-	if temper and years >= 12 and years <= 60 and temper.body_layer[p] < temper.LAYERS:
-		var at_gate: bool = temper.tempering[p] >= temper.cost(temper.body_layer[p] + 1)
+	if temper and years >= 12 and years <= int(config.temper_max_age) and temper.body_layer[p] < temper.LAYERS:
+		var at_gate: bool = temper.at_gate(p)
 		var lacking: String = temper.gate_need(p) if at_gate else ""
 		var train := _option(p, Option.TRAIN, -1, [["health", 0.0 if society.injury_until[p] > store.day else 1.0], ["rested", 1.0 - minf(temper.strain[p], 1.0)],
-			["time after work", float(config.train_time_after_work)], ["a way forward", 0.3 if not lacking.is_empty() and lacking != "drills" else 1.0],
+			["time after work", float(config.train_time_after_work)], ["a way forward", _way_forward(temper, lacking)],
 			["already drilling", float(config.train_renew) if temper.training(p, store.day) else 1.0]], {"ambition": 1.0, "pride": 0.6, "restlessness": 0.3, "fear": -0.3}, urge)
 		train["hours"] = 1 + roundi(2.0 * urge[AMBITION] + urge[PRIDE])
 		options.append(train)
+		# Stuck at a gate for want of medicine, the daily routine stops feeling like enough.
+		if at_gate and lacking in temper.config.medicine_names.values(): options[0].score *= float(config.routine_when_blocked)
+		# Ambitious, proud people lay in extra doses to forge a better grade, if their body can still reach High.
+		var drive: float = urge[AMBITION] + urge[PRIDE]
+		temper.aim_doses[p] = 1 if temper.grade_ceiling(p) < temper.HIGH else 1 + int(drive > 1.1) + int(drive > 1.4)
+		var want: String = temper.wanted_medicine(p)
+		var urgency := 1.0 if at_gate else 0.6
+		var away: float = float(config.gate_time_away) if at_gate else float(config.explore_time_away)
+		if want == "beast_marrow":
+			options.append(_option(p, Option.HUNT, -1, [["need", urgency], ["health", 0.0 if society.injury_until[p] > store.day else 1.0],
+				["nerve", 1.0 - 0.7 * emotion[p * 4 + AFRAID]], ["strength", 0.6 + _ramp(store.attributes[p * 8], 8, 16) * 0.4], ["time away from work", away]],
+				{"ambition": 0.8, "restlessness": 0.5, "pride": 0.4, "fear": -1.0}, urge))
+		elif not want.is_empty():
+			var gather := _option(p, Option.GATHER, -1, [["need", urgency], ["health", 0.0 if society.injury_until[p] > store.day else 1.0], ["time away from work", away]],
+				{"ambition": 0.8, "curiosity": 0.3, "fear": -0.2}, urge)
+			gather["medicine"] = want
+			options.append(gather)
 	var helped := needy if needy >= 0 else friend
 	if helped >= 0:
 		options.append(_option(p, Option.HELP, helped, [["need", 1.0 if helped == needy else float(config.visit_friend_need)], ["bond", _ramp(ties.opinion[ties.find(p, helped)], 20, 80)]],
@@ -445,6 +467,35 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 			return "spread a rumour"
 		Option.TRAIN:
 			return society.temper.start_regimen(p, int(chosen.get("hours", 2)), on_day)
+		Option.GATHER:
+			var temper: RefCounted = society.temper
+			if chosen.get("medicine", "") == "seven_leaf":
+				if temper.wild.gather_herb(p):
+					temper.medicine["seven_leaf"][p] += 1
+					society.note(p, "gathering", "%s picked a seven-leaf herb at the spirit spring" % store.names[p])
+					return "picked a seven-leaf herb"
+				feel(p, ANGER, 0.1)
+				return "found no seven-leaf herb at the spring"
+			var trip: Dictionary = temper.wild.gather_bark(p)
+			if trip.taken == 0:
+				feel(p, ANGER, 0.1)
+				return "found %s stripped bare" % trip.place
+			temper.medicine["iron_bark"][p] += trip.taken
+			if trip.get("emptied", false): society.note(p, "gathering", "%s took the last iron-bark from %s" % [store.names[p], trip.place])
+			return "gathered %d iron-bark roots at %s" % [trip.taken, trip.place]
+		Option.HUNT:
+			var hunt: Dictionary = society.temper.wild.hunt(p)
+			if hunt.hurt:
+				var days: Array = society.temper.wild.config.beasts.injury_days
+				society.injury_until[p] = on_day + store.rng.randi_range(int(days[0]), int(days[1]))
+				society.note(p, "injury", "%s was gored hunting a forest beast and must rest" % store.names[p])
+				return "was gored"
+			if hunt.kill:
+				society.temper.medicine["beast_marrow"][p] += 1
+				society.note(p, "hunt", "%s brought down a forest beast for marrow broth" % store.names[p])
+				feel(p, JOY, 0.2)
+				return "brought down a beast"
+			return "came back empty-handed"
 	return "carried on"
 
 ## Life goals are chosen from the heart's strongest fitting urge and checked whenever the person decides.

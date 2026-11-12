@@ -1,0 +1,26 @@
+{
+  "richness": 0.5,
+  "iron_bark": {
+    "patches": ["the north ridge", "the old cedar hollow", "the stream bend", "the burnt slope", "fox gully", "the east thicket"],
+    "regrow_per_patch_year": 5,
+    "cap_per_patch": 8,
+    "take_per_trip": 2
+  },
+  "beasts": {
+    "herd": 40,
+    "growth_per_year": 0.2,
+    "drift_in_per_year": 0.5,
+    "hunt_success": 0.45,
+    "hunt_injury": 0.08,
+    "injury_days": [14, 60]
+  },
+  "seven_leaf": {
+    "place": "the spirit spring",
+    "per_year": 3,
+    "cap": 4
+  },
+  "dose_units": {"iron_bark": 4, "beast_marrow": 1, "seven_leaf": 1},
+  "dose_bonus": [0, 0.75, 1.25],
+  "max_doses": 3,
+  "prepare_from_progress": 0.5
+}

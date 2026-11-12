@@ -519,6 +519,7 @@ func _body_record() -> void:
 	if not forged.is_empty(): text(info, ", ".join(forged))
 	if state.layer > 0 or state.training: text(info, "Method: %s · best grade still possible: %s" % [state.method, state.ceiling])
 	if state.training: text(info, "Drilling %d h a day%s · strain %d%%" % [state.hours, (" under " + str(state.teacher)) if not str(state.teacher).is_empty() else " alone", roundi(state.strain * 100)])
+	if not state.holds.is_empty(): text(info, "Holds " + ", ".join(state.holds))
 	if not str(state.gate).is_empty(): text(info, "At the gate of %s: needs %s" % [temper.layer_name(state.layer + 1), state.gate])
 	elif state.layer < temper.LAYERS:
 		var bar := ProgressBar.new()
