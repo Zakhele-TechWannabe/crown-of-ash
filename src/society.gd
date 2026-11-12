@@ -1,6 +1,7 @@
 extends RefCounted
 ## Social simulation owns packed birth/master/cultivation columns; kin is derived.
 const Relationships = preload("res://src/relationships.gd")
+const Mind = preload("res://src/mind.gd")
 var ties := Relationships.new()
 var store_ref: WeakRef
 var population: RefCounted:
@@ -48,14 +49,18 @@ var faction_keys: Dictionary = {}
 var faction_relations: Dictionary = {}
 var memberships: Dictionary = {}
 var archive: RefCounted = null
+var mind: RefCounted = null
 var archived_year := -1
 
 func _init(store: RefCounted) -> void:
 	store_ref = weakref(store)
 	lifespan_death_enabled = bool(ProjectSettings.get_setting("simulation/lifespan_death_enabled", false))
+	var probe: RefCounted = Mind.new(self)
+	if probe.config.enabled: mind = probe
 
 func add_person() -> void:
 	ties.add_person()
+	if mind: mind.add_person()
 	father.append(-1)
 	spouse.append(-1)
 	master.append(-1)
@@ -84,8 +89,24 @@ func note(person: int, kind: String, words: String) -> void:
 	chronicle.append({"day": store.day, "person": person, "kind": kind, "text": words})
 	if chronicle.size() > 2048: chronicle.pop_front()
 	if archive: archive.event(store.day, person, kind, words)
+	if mind and person >= 0: _feel_event(person, kind)
 	if store.retain_events and store.events.size() < 8192:
 		store.events.append({"day": store.day, "person": person, "kind": kind, "text": words})
+
+# Feelings that follow what happens to someone; strong ones interrupt their routine and force a fresh decision.
+func _feel_event(person: int, kind: String) -> void:
+	match kind:
+		"marriage":
+			mind.feel(person, Mind.JOY, .6)
+			if spouse[person] >= 0: mind.feel(spouse[person], Mind.JOY, .6)
+		"birth":
+			for parent: int in parents(person):
+				if parent >= 0: mind.feel(parent, Mind.JOY, .5)
+		"awakening", "breakthrough", "manual", "technique": mind.feel(person, Mind.JOY, .5)
+		"setback": mind.feel(person, Mind.AFRAID, .5)
+		"old_age":
+			for kin: int in children(person): mind.feel(kin, Mind.GRIEF, .8)
+			if spouse[person] >= 0: mind.feel(spouse[person], Mind.GRIEF, 1.0)
 
 func root_count(person: int) -> int:
 	var store: RefCounted = store_ref.get_ref()
@@ -342,6 +363,7 @@ func betray(person: int) -> void:
 func inherit(child: int, mother: int, dad: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
 	father[child] = dad
+	if mind: mind.inherit(child, mother, dad)
 	if annual_index and index_day == store.day:
 		for parent: int in [mother, dad]:
 			if not annual_children.has(parent): annual_children[parent] = PackedInt32Array()
@@ -378,6 +400,9 @@ func seed() -> void:
 		if child < 0: continue
 		store.parent_id[child] = store.names.find(family.mother)
 		father[child] = store.names.find(family.father)
+		if mind:
+			for parent: int in [store.parent_id[child], father[child]]:
+				if parent >= 0: mind.child_count[parent] = mini(255, mind.child_count[parent] + 1)
 		var parent: int = store.parent_id[child] if store.parent_id[child] >= 0 else father[child]
 		if parent >= 0 and store.age(child) >= 12 and store.age(child) < 18:
 			var duties: Array = ["chores", store.schedules[store.job[parent]][-1]]
@@ -527,12 +552,13 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		technique_element[p] = store.rng.randi_range(0, 9)
 		note(p, "manual", "%s received %s from the West Road wanderer" % [store.names[p], "a complete Profound method" if technique[p] == 2 else "a Yellow breathing fragment"])
 	cultivate(p, days)
+	if mind: mind.weekly(p, days, on_day, n)
 	if master[p] >= 0 and on_day % 30 < 7:
 		ties.event(p, master[p], "teaching", on_day)
 		if realm[master[p]] >= 2 and technique[master[p]] > technique[p]:
 			technique[p] = technique[master[p]]
 			technique_element[p] = technique_element[master[p]]
-	if years >= 18 and spouse[p] < 0 and social_flags & 1:
+	if mind == null and years >= 18 and spouse[p] < 0 and social_flags & 1:
 		var e := ties.head[p]
 		while e >= 0:
 			var other := ties.target[e]
@@ -545,7 +571,7 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		var dad := spouse[p]
 		last_birth[p] = on_day
 		store.add_child(child_name(store.names[dad].get_slice(" ", 0), store.size() % 2), p, dad)
-	if years >= 12 and years < 30 and master[p] < 0 and social_flags & 2:
+	if mind == null and years >= 12 and years < 30 and master[p] < 0 and social_flags & 2:
 		var e := ties.head[p]
 		while e >= 0:
 			if ties.opinion[e] >= 20 and accept(ties.target[e], p): break
@@ -1052,6 +1078,17 @@ func social_event(observer: int, actor: int, kind: String) -> void:
 	if observer == actor: return
 	var store: RefCounted = store_ref.get_ref()
 	ties.event(observer, actor, kind, store.day)
+	if mind:
+		if kind in ["theft", "festival_insult", "competition"]: mind.feel(observer, Mind.ANGER, .5 if kind == "theft" else .35)
+		if kind == "betrayal":
+			mind.feel(observer, Mind.ANGER, .9)
+			mind.feel(observer, Mind.AFRAID, .4)
+			# Betrayal leaves people wary and bitter for life.
+			mind.scar(observer, Mind.FEAR, .3)
+			mind.scar(observer, Mind.SPITE, .2)
+		if kind == "saved_life":
+			mind.feel(observer, Mind.JOY, .5)
+			mind.scar(observer, Mind.DEVOTION, .25)
 	if kind == "saved_life": ties.bonds[ties.tie(actor, observer)] |= Relationships.DEBTOR
 	if kind in ["theft", "betrayal", "festival_insult"]:
 		reputation[actor] = maxf(-100, reputation[actor] - (20 if kind == "theft" else 5))

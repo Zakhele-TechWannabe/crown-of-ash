@@ -28,7 +28,7 @@ tr.click:hover{background:#2a231d;cursor:pointer}
 .scroll{max-height:62vh;overflow:auto}
 .mute{color:var(--mute)}
 a{color:var(--gold);cursor:pointer;text-decoration:none}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
 @media(max-width:800px){.split{grid-template-columns:1fr}}
 canvas{width:100%;display:block;background:#0f0d0b;border-radius:8px}
 #graph{height:68vh}
@@ -146,6 +146,7 @@ const VIEWS = {
       <div class="split">
         <div class="panel"><h3>Population and cultivation by year</h3><canvas id="c1" style="height:240px"></canvas>
           <div class="legend"><span><i style="background:#eae0d2"></i>people</span><span><i style="background:${REALM_COLORS[0]}"></i>mortal</span><span><i style="background:${REALM_COLORS[1]}"></i>body</span><span><i style="background:${REALM_COLORS[2]}"></i>qi</span><span><i style="background:${REALM_COLORS[3]}"></i>beyond</span></div></div>
+        <div class="panel"><h3>What people chose</h3><table>${(s.choices || []).map(c => `<tr><td>${esc(c.option)}</td><td>${c.n}</td><td class="mute">${c.impulsive} on impulse</td></tr>`).join('') || '<tr><td class="mute">No decisions recorded.</td></tr>'}</table></div>
         <div class="panel"><h3>What happened, by kind</h3><div class="scroll" style="max-height:270px"><table>${s.kinds.map(k => `<tr class="click" data-k="${esc(k.kind)}"><td>${esc(k.kind)}</td><td>${k.n}</td></tr>`).join('')}</table></div></div>
       </div>
       <div class="panel story"><h3>Turning points</h3>${story.map(e => `<p><span class="yr">Year ${yearOf(e.day)}</span>${esc(e.text)}</p>`).join('') || '<p class="mute">Nothing notable yet.</p>'}</div>`;
@@ -189,7 +190,7 @@ const VIEWS = {
         <p><a id="toGraph">Show in the knowledge graph →</a></p></div>
       <div class="split">
         <div class="panel story"><h3>Life story</h3><div class="scroll" style="max-height:420px">
-          ${d.events.map(e => `<p><span class="yr">Year ${yearOf(e.day)}</span>${esc(e.text)}</p>`).join('') || '<p class="mute">No recorded events.</p>'}
+          ${[...d.events.map(e => ({day: e.day, html: esc(e.text)})), ...d.decisions.map(c => ({day: c.day, html: `<span class="mute">Chose to</span> ${esc(c.option)} ${c.target >= 0 ? personLink(c.target, c.target_name) : ''} <span class="mute">→ ${esc(c.outcome)}${c.impulse ? ' · ' + esc(c.impulse) : ''}</span><br><span class="mute" style="font-size:12px;margin-left:74px">because ${c.reasons.slice(0, 3).map(r => esc(r[0]) + ' ' + r[1]).join(', ')}${c.goal ? ' · wants to ' + esc(c.goal) : ''}${c.alternatives.length ? ' · instead of ' + c.alternatives.map(a => esc(a[0]) + ' ' + a[1]).join(', ') : ''}</span>`}))].sort((a, b) => a.day - b.day).map(x => `<p><span class="yr">Year ${yearOf(x.day)}</span>${x.html}</p>`).join('') || '<p class="mute">No recorded events.</p>'}
           ${realmSteps.length > 1 ? '<h3 style="margin-top:12px">Cultivation path</h3>' + realmSteps.map(h => `<p><span class="yr">Year ${h.year + 1}</span>${esc(h.realm_label)}</p>`).join('') : ''}
         </div></div>
         <div class="panel"><h3>Skills now</h3>${d.skills.map(s => `<div style="margin-bottom:6px"><div class="row" style="margin:0;justify-content:space-between"><span>${esc(skillName(s.skill))}</span><span class="mute">level ${s.level}</span></div><div class="bar"><i style="width:${100 * s.level / maxLevel}%"></i></div></div>`).join('') || '<p class="mute">None recorded.</p>'}

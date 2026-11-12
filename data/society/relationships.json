@@ -87,6 +87,15 @@
     "first_cultivator": {
       "opinion": 25,
       "trust": 5
+    },
+    "courtship": {
+      "opinion": 6,
+      "familiarity": 6,
+      "trust": 2
+    },
+    "kindness": {
+      "opinion": 7,
+      "trust": 4
     }
   }
 }

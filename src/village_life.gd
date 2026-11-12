@@ -427,6 +427,11 @@ func _headless_sim() -> void:
 		if (y + 1) % 10 == 0 or y == years - 1:
 			print("DECADE %d SKILLS %s" % [y + 1, population.tier_distribution()])
 			print("DECADE %d SOCIETY %s" % [y + 1, JSON.stringify(population.society.summary())])
+			var mind: RefCounted = population.society.mind
+			if mind:
+				var mix: Dictionary = {}
+				for i in mind.OPTION_NAMES.size(): mix[mind.OPTION_NAMES[i]] = mind.choice_counts[i]
+				print("DECADE %d MIND decisions=%d ms=%d %s" % [y + 1, mind.decisions, mind.decide_usec / 1000, JSON.stringify(mix)])
 			var records: Array = population.society.top_events(maxi(0, (y - 9) * 365))
 			for event: Dictionary in records:
 				print("CHRONICLE day=%d %s" % [event.day, event.text])

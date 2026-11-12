@@ -31,10 +31,13 @@ create table if not exists ties(run text, year int, a int, b int, opinion real, 
 create table if not exists factions(run text, year int, fid int, type text, name text, leader int, size int, members text,
   cohesion real, reputation real, absorbed_into int, primary key(run, year, fid));
 create table if not exists events(run text, src text, day int, person int, kind text, text text);
+create table if not exists decisions(run text, src text, day int, person int, option text, target int, score real,
+  reasons text, urges text, goal text, impulse text, outcome text, alternatives text);
 create index if not exists skills_at on skills(run, year, id);
 create index if not exists ties_at on ties(run, year, a);
 create index if not exists events_at on events(run, day);
 create index if not exists events_person on events(run, person);
+create index if not exists decisions_person on decisions(run, person, day);
 '''
 
 
@@ -71,6 +74,11 @@ def index(db: sqlite3.Connection, archive: Path) -> None:
                 db.execute('delete from events where run=? and src=?', (run, rel))
                 db.executemany('insert into events values (?,?,?,?,?,?)',
                                ((run, rel, e['day'], e['person'], e['kind'], e['text']) for e in read_lines(path)))
+            elif path.name.startswith('decisions'):
+                db.execute('delete from decisions where run=? and src=?', (run, rel))
+                db.executemany('insert into decisions values (?,?,?,?,?,?,?,?,?,?,?,?,?)', (
+                    (run, rel, d['day'], d['person'], d['option'], d['target'], d['score'], json.dumps(d['reasons']), json.dumps(d['urges']),
+                     d['goal'], d['impulse'], d['outcome'], json.dumps(d.get('alternatives', []))) for d in read_lines(path)))
             elif path.name.startswith('people'):
                 for table in ('people', 'skills', 'ties'):
                     db.execute(f'delete from {table} where run=? and year=?', (run, year))
@@ -160,7 +168,8 @@ class Api:
             sum(realm>=3) as beyond, sum(spouse>=0)/2 as couples, sum(master>=0) as disciples, round(avg(reputation),1) as reputation
             from people where run=? and alive=1 group by year order by year''', (run,))
         kinds = rows(db, 'select kind, count(*) as n from events where run=? group by kind order by n desc', (run,))
-        return {'years': years, 'kinds': kinds}
+        choices = rows(db, 'select option, count(*) as n, sum(impulse != "") as impulsive from decisions where run=? group by option order by n desc', (run,))
+        return {'years': years, 'kinds': kinds, 'choices': choices}
 
     def api_people(self, db, q):
         run = q['run']
@@ -192,7 +201,12 @@ class Api:
         for key in ('mother', 'father', 'spouse', 'master'):
             if person.get(key, -1) is not None and person.get(key, -1) >= 0:
                 person[key + '_name'] = names.get(person[key], f'#{person[key]}')
-        return {'person': person, 'history': history, 'skills': skills, 'growth': growth, 'ties': ties,
+        decisions = rows(db, 'select day, option, target, score, reasons, urges, goal, impulse, outcome, alternatives from decisions where run=? and person=? order by day', (run, pid))
+        for d in decisions:
+            for key in ('reasons', 'urges', 'alternatives'):
+                d[key] = json.loads(d[key])
+            d['target_name'] = names.get(d['target'], '') if d['target'] is not None and d['target'] >= 0 else ''
+        return {'decisions': decisions, 'person': person, 'history': history, 'skills': skills, 'growth': growth, 'ties': ties,
                 'children': children, 'disciples': disciples, 'events': events}
 
     def api_graph(self, db, q):

@@ -1,11 +1,12 @@
 extends RefCounted
 ## Append-only life archive on disk, one folder per run. Read by tools/archive_index.py and docs/archive_viewer.html.
-## Layout: meta.json, then year_NNNN/{events,people,factions}.jsonl.gz (standard gzip, one JSON object per line).
+## Layout: meta.json, then year_NNNN/{events,decisions,people,factions}.jsonl.gz (standard gzip, one JSON object per line).
 const VERSION := 1
 var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))
 var store_ref: WeakRef
 var root := ""
 var pending: Dictionary = {}
+var pending_decisions: Dictionary = {}
 var last_snapshot_year := -1
 
 func _init(store: RefCounted, seed_value: int) -> void:
@@ -24,6 +25,11 @@ func event(day: int, person: int, kind: String, text: String) -> void:
 	if not pending.has(year): pending[year] = PackedStringArray()
 	pending[year].append(JSON.stringify({"day": day, "person": person, "kind": kind, "text": text}))
 
+func decision(record: Dictionary) -> void:
+	var year: int = int(record.day) / 365
+	if not pending_decisions.has(year): pending_decisions[year] = PackedStringArray()
+	pending_decisions[year].append(JSON.stringify(record))
+
 ## Called once as a game year closes: flushes its events and, on cadence, snapshots everyone.
 func year_end(year: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
@@ -39,14 +45,16 @@ func close() -> void:
 	_flush_events(func(_y: int) -> bool: return true)
 
 func _flush_events(due: Callable) -> void:
-	for year: int in pending.keys():
-		if not due.call(year): continue
-		var lines: PackedStringArray = pending[year]
-		pending.erase(year)
-		var path := "%s/year_%04d/events.jsonl.gz" % [root, year]
-		# A run never reopens a closed year, but a mid-year close then year_end may both write; keep both.
-		if FileAccess.file_exists(path): path = path.replace("events.jsonl", "events_%d.jsonl" % Time.get_ticks_msec())
-		_write_gz(path, lines)
+	for kind: String in ["events", "decisions"]:
+		var buffers: Dictionary = pending if kind == "events" else pending_decisions
+		for year: int in buffers.keys():
+			if not due.call(year): continue
+			var lines: PackedStringArray = buffers[year]
+			buffers.erase(year)
+			var path := "%s/year_%04d/%s.jsonl.gz" % [root, year, kind]
+			# A run never reopens a closed year, but a mid-year close then year_end may both write; keep both.
+			if FileAccess.file_exists(path): path = path.replace(kind + ".jsonl", "%s_%d.jsonl" % [kind, Time.get_ticks_msec()])
+			_write_gz(path, lines)
 
 func _snapshot(year: int) -> void:
 	var store: RefCounted = store_ref.get_ref()

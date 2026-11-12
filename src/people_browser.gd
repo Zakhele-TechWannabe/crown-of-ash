@@ -450,6 +450,7 @@ func _social_record() -> void:
 	qi_bar.custom_minimum_size.y = 8
 	qi_bar.tooltip_text = "%.1f / %.1f qi" % [society.qi[person], society.qi_cost(person)]
 	add_child(qi_bar)
+	_mind_record()
 	text(self, "Family", true)
 	text(self, "Parents")
 	_person_links(self, society.parents(person))
@@ -491,6 +492,37 @@ func _social_record() -> void:
 		if society.ties.has_grudge(row.entry):
 			var grudge: Dictionary = society.ties.grudge_record(row.entry)
 			text(box, "Grudge %.0f · %s · %s" % [grudge.intensity, grudge.cause, grudge.resolution])
+
+func _mind_record() -> void:
+	var mind: RefCounted = population.society.mind
+	if mind == null: return
+	var state: Dictionary = mind.describe(person)
+	text(self, "Heart and mind", true)
+	var urges: Array = state.urges
+	text(self, "Driven most by %s and %s%s" % [urges[0][0], urges[1][0], (" · wants to " + str(state.goal)) if not str(state.goal).is_empty() else ""])
+	var grid := GridContainer.new()
+	grid.columns = 4
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	add_child(grid)
+	for feeling: Array in state.feelings:
+		var cell := VBoxContainer.new()
+		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_child(cell)
+		text(cell, str(feeling[0]).capitalize())
+		var bar := ProgressBar.new()
+		bar.max_value = 1
+		bar.value = feeling[1]
+		bar.show_percentage = false
+		_thin_bar(bar)
+		bar.custom_minimum_size.y = 4
+		cell.add_child(bar)
+	if state.recent.is_empty(): text(self, "No recent decisions yet.")
+	for record: Dictionary in state.recent.slice(0, 4):
+		var target: int = record.target
+		var reasons: PackedStringArray = []
+		for reason: Array in record.reasons.slice(0, 3): reasons.append("%s %.2f" % [reason[0], reason[1]])
+		text(self, "Day %d: chose to %s%s, %s (%s)%s" % [record.day, record.option, (" " + population.names[target]) if target >= 0 else "", record.outcome,
+			", ".join(reasons), " · on impulse" if not str(record.impulse).is_empty() else ""])
 
 func _thin_bar(bar: ProgressBar) -> void:
 	var background := StyleBoxFlat.new()

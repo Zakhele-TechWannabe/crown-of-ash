@@ -1,0 +1,92 @@
+{
+  "enabled": true,
+  "decide_every_weeks": 4,
+  "large_population": 5000,
+  "large_decide_every_weeks": 26,
+  "founder_weight_spread": 0.6,
+  "mutation": 0.15,
+  "pure_impulse": 0.003,
+  "near_best": 0.6,
+  "emotion_decay_per_week": {
+    "anger": 0.25,
+    "grief": 0.015,
+    "joy": 0.35,
+    "fear": 0.2
+  },
+  "interrupt_emotion": 0.45,
+  "goal_bonus": 1.6,
+  "explore_spirit_fruit": 0.012,
+  "explore_manual": 0.004,
+  "explore_injury": 0.02,
+  "recent_decisions": 2048,
+  "trait_urges": {
+    "hot_tempered": {
+      "spite": 1.0,
+      "pride": 0.3
+    },
+    "cautious": {
+      "fear": 0.8,
+      "restlessness": -0.4
+    },
+    "brave": {
+      "fear": -0.9
+    },
+    "ambitious": {
+      "ambition": 1.0,
+      "pride": 0.3
+    },
+    "contented": {
+      "ambition": -0.6,
+      "restlessness": -0.5
+    },
+    "curious": {
+      "curiosity": 1.0
+    },
+    "restless": {
+      "restlessness": 1.0
+    },
+    "impulsive": {
+      "restlessness": 0.6
+    },
+    "generous": {
+      "devotion": 0.7
+    },
+    "hearth_heart": {
+      "devotion": 0.9
+    },
+    "sociable": {
+      "longing": 0.6
+    },
+    "shy": {
+      "longing": -0.4,
+      "fear": 0.3
+    },
+    "stubborn": {
+      "pride": 0.8
+    },
+    "patient": {
+      "spite": -0.4,
+      "restlessness": -0.3
+    },
+    "melancholic": {
+      "fear": 0.3,
+      "longing": 0.3
+    },
+    "cheerful": {
+      "spite": -0.5
+    },
+    "honest": {
+      "spite": -0.3
+    },
+    "diligent": {
+      "ambition": 0.4
+    },
+    "lazy": {
+      "ambition": -0.5
+    }
+  },
+  "habit": 1.0,
+  "refusal_cooldown_days": 365,
+  "explore_time_away": 0.6,
+  "visit_friend_need": 0.4
+}
