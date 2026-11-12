@@ -1,0 +1,110 @@
+{
+  "id": "estate_management",
+  "disciplines": [
+    {
+      "id": "estate_management.land_assessment",
+      "domain": "estate_management",
+      "name": "Land assessment",
+      "description": "Land assessment applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.tenant_relations",
+      "domain": "estate_management",
+      "name": "Tenant relations",
+      "description": "Tenant relations applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.rent_ledgers",
+      "domain": "estate_management",
+      "name": "Rent ledgers",
+      "description": "Rent ledgers applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.boundary_marking",
+      "domain": "estate_management",
+      "name": "Boundary marking",
+      "description": "Boundary marking applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.harvest_accounting",
+      "domain": "estate_management",
+      "name": "Harvest accounting",
+      "description": "Harvest accounting applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.labour_scheduling",
+      "domain": "estate_management",
+      "name": "Labour scheduling",
+      "description": "Labour scheduling applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.storehouse_oversight",
+      "domain": "estate_management",
+      "name": "Storehouse oversight",
+      "description": "Storehouse oversight applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.seed_allocation",
+      "domain": "estate_management",
+      "name": "Seed allocation",
+      "description": "Seed allocation applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.tool_inventories",
+      "domain": "estate_management",
+      "name": "Tool inventories",
+      "description": "Tool inventories applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.water_rights",
+      "domain": "estate_management",
+      "name": "Water rights",
+      "description": "Water rights applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.livestock_contracts",
+      "domain": "estate_management",
+      "name": "Livestock contracts",
+      "description": "Livestock contracts applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.estate_petitions",
+      "domain": "estate_management",
+      "name": "Estate petitions",
+      "description": "Estate petitions applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.disaster_relief",
+      "domain": "estate_management",
+      "name": "Disaster relief",
+      "description": "Disaster relief applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.granary_audits",
+      "domain": "estate_management",
+      "name": "Granary audits",
+      "description": "Granary audits applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "estate_management.steward_succession",
+      "domain": "estate_management",
+      "name": "Steward succession",
+      "description": "Steward succession applies estate management to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

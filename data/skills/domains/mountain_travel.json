@@ -1,0 +1,110 @@
+{
+  "id": "mountain_travel",
+  "disciplines": [
+    {
+      "id": "mountain_travel.slope_reading",
+      "domain": "mountain_travel",
+      "name": "Slope reading",
+      "description": "Slope reading applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.scree_crossing",
+      "domain": "mountain_travel",
+      "name": "Scree crossing",
+      "description": "Scree crossing applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.cliff_paths",
+      "domain": "mountain_travel",
+      "name": "Cliff paths",
+      "description": "Cliff paths applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.rope_climbing",
+      "domain": "mountain_travel",
+      "name": "Rope climbing",
+      "description": "Rope climbing applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.pack_balancing",
+      "domain": "mountain_travel",
+      "name": "Pack balancing",
+      "description": "Pack balancing applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.pass_finding",
+      "domain": "mountain_travel",
+      "name": "Pass finding",
+      "description": "Pass finding applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.snow_travel",
+      "domain": "mountain_travel",
+      "name": "Snow travel",
+      "description": "Snow travel applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.river_crossings",
+      "domain": "mountain_travel",
+      "name": "River crossings",
+      "description": "River crossings applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.camp_placement",
+      "domain": "mountain_travel",
+      "name": "Camp placement",
+      "description": "Camp placement applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.altitude_care",
+      "domain": "mountain_travel",
+      "name": "Altitude care",
+      "description": "Altitude care applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.trail_repair",
+      "domain": "mountain_travel",
+      "name": "Trail repair",
+      "description": "Trail repair applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.load_hauling",
+      "domain": "mountain_travel",
+      "name": "Load hauling",
+      "description": "Load hauling applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.weather_retreat",
+      "domain": "mountain_travel",
+      "name": "Weather retreat",
+      "description": "Weather retreat applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.guide_work",
+      "domain": "mountain_travel",
+      "name": "Guide work",
+      "description": "Guide work applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mountain_travel.pilgrim_routes",
+      "domain": "mountain_travel",
+      "name": "Pilgrim routes",
+      "description": "Pilgrim routes applies mountain travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

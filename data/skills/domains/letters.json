@@ -1,0 +1,4064 @@
+{
+  "id": "letters",
+  "disciplines": [
+    {
+      "id": "letters.scholarship",
+      "domain": "letters",
+      "name": "Scholarship",
+      "description": "Scholarship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.reading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.scholarship.reading",
+          "discipline": "letters.scholarship",
+          "name": "Reading",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.scholarship.writing",
+          "discipline": "letters.scholarship",
+          "name": "Writing",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.scholarship.calligraphy",
+          "discipline": "letters.scholarship",
+          "name": "Calligraphy",
+          "unlock_level": 15,
+          "attribute_requirements": {
+            "dexterity": 11
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.scholarship.classics",
+          "discipline": "letters.scholarship",
+          "name": "Classics",
+          "unlock_level": 25,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.scholarship.perk_5",
+          "level": 5,
+          "name": "Scholarship: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Scholarship output +2%"
+        },
+        {
+          "id": "letters.scholarship.perk_10",
+          "level": 10,
+          "name": "Scholarship: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Scholarship waste -5%"
+        },
+        {
+          "id": "letters.scholarship.perk_15",
+          "level": 15,
+          "name": "Scholarship: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Scholarship quality roll +1"
+        },
+        {
+          "id": "letters.scholarship.perk_20",
+          "level": 20,
+          "name": "Scholarship: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Scholarship care +5%"
+        },
+        {
+          "id": "letters.scholarship.perk_25",
+          "level": 25,
+          "name": "Scholarship: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Scholarship speed +3%"
+        },
+        {
+          "id": "letters.scholarship.perk_30",
+          "level": 30,
+          "name": "Scholarship: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Scholarship output +5%"
+        },
+        {
+          "id": "letters.scholarship.perk_35",
+          "level": 35,
+          "name": "Scholarship: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Scholarship spoilage -10%"
+        },
+        {
+          "id": "letters.scholarship.perk_40",
+          "level": 40,
+          "name": "Scholarship: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Scholarship quality roll +1"
+        },
+        {
+          "id": "letters.scholarship.perk_45",
+          "level": 45,
+          "name": "Scholarship: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Scholarship speed +5%"
+        },
+        {
+          "id": "letters.scholarship.perk_50",
+          "level": 50,
+          "name": "Scholarship: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Scholarship output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise scholarship for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful scholarship (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of scholarship; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a scholarship task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn scholarship from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of scholarship, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.reading",
+      "domain": "letters",
+      "name": "Reading",
+      "description": "Reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.writing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.reading.reading_basics",
+          "discipline": "letters.reading",
+          "name": "Reading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.reading.reading_seasonal_practice",
+          "discipline": "letters.reading",
+          "name": "Reading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.reading.reading_precision_work",
+          "discipline": "letters.reading",
+          "name": "Reading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.reading.reading_master_technique",
+          "discipline": "letters.reading",
+          "name": "Reading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.reading.perk_5",
+          "level": 5,
+          "name": "Reading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Reading output +2%"
+        },
+        {
+          "id": "letters.reading.perk_10",
+          "level": 10,
+          "name": "Reading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Reading waste -5%"
+        },
+        {
+          "id": "letters.reading.perk_15",
+          "level": 15,
+          "name": "Reading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Reading quality roll +1"
+        },
+        {
+          "id": "letters.reading.perk_20",
+          "level": 20,
+          "name": "Reading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Reading care +5%"
+        },
+        {
+          "id": "letters.reading.perk_25",
+          "level": 25,
+          "name": "Reading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Reading speed +3%"
+        },
+        {
+          "id": "letters.reading.perk_30",
+          "level": 30,
+          "name": "Reading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Reading output +5%"
+        },
+        {
+          "id": "letters.reading.perk_35",
+          "level": 35,
+          "name": "Reading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Reading spoilage -10%"
+        },
+        {
+          "id": "letters.reading.perk_40",
+          "level": 40,
+          "name": "Reading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Reading quality roll +1"
+        },
+        {
+          "id": "letters.reading.perk_45",
+          "level": 45,
+          "name": "Reading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Reading speed +5%"
+        },
+        {
+          "id": "letters.reading.perk_50",
+          "level": 50,
+          "name": "Reading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Reading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise reading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful reading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of reading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a reading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn reading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of reading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.writing",
+      "domain": "letters",
+      "name": "Writing",
+      "description": "Writing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.classics"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.writing.writing_basics",
+          "discipline": "letters.writing",
+          "name": "Writing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.writing.writing_seasonal_practice",
+          "discipline": "letters.writing",
+          "name": "Writing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.writing.writing_precision_work",
+          "discipline": "letters.writing",
+          "name": "Writing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.writing.writing_master_technique",
+          "discipline": "letters.writing",
+          "name": "Writing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.writing.perk_5",
+          "level": 5,
+          "name": "Writing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Writing output +2%"
+        },
+        {
+          "id": "letters.writing.perk_10",
+          "level": 10,
+          "name": "Writing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Writing waste -5%"
+        },
+        {
+          "id": "letters.writing.perk_15",
+          "level": 15,
+          "name": "Writing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Writing quality roll +1"
+        },
+        {
+          "id": "letters.writing.perk_20",
+          "level": 20,
+          "name": "Writing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Writing care +5%"
+        },
+        {
+          "id": "letters.writing.perk_25",
+          "level": 25,
+          "name": "Writing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Writing speed +3%"
+        },
+        {
+          "id": "letters.writing.perk_30",
+          "level": 30,
+          "name": "Writing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Writing output +5%"
+        },
+        {
+          "id": "letters.writing.perk_35",
+          "level": 35,
+          "name": "Writing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Writing spoilage -10%"
+        },
+        {
+          "id": "letters.writing.perk_40",
+          "level": 40,
+          "name": "Writing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Writing quality roll +1"
+        },
+        {
+          "id": "letters.writing.perk_45",
+          "level": 45,
+          "name": "Writing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Writing speed +5%"
+        },
+        {
+          "id": "letters.writing.perk_50",
+          "level": 50,
+          "name": "Writing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Writing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise writing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful writing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of writing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a writing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn writing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of writing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.classics",
+      "domain": "letters",
+      "name": "Classics",
+      "description": "Classics: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.document_copying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.classics.classics_basics",
+          "discipline": "letters.classics",
+          "name": "Classics basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.classics.classics_seasonal_practice",
+          "discipline": "letters.classics",
+          "name": "Classics seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.classics.classics_precision_work",
+          "discipline": "letters.classics",
+          "name": "Classics precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.classics.classics_master_technique",
+          "discipline": "letters.classics",
+          "name": "Classics master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.classics.perk_5",
+          "level": 5,
+          "name": "Classics: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Classics output +2%"
+        },
+        {
+          "id": "letters.classics.perk_10",
+          "level": 10,
+          "name": "Classics: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Classics waste -5%"
+        },
+        {
+          "id": "letters.classics.perk_15",
+          "level": 15,
+          "name": "Classics: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Classics quality roll +1"
+        },
+        {
+          "id": "letters.classics.perk_20",
+          "level": 20,
+          "name": "Classics: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Classics care +5%"
+        },
+        {
+          "id": "letters.classics.perk_25",
+          "level": 25,
+          "name": "Classics: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Classics speed +3%"
+        },
+        {
+          "id": "letters.classics.perk_30",
+          "level": 30,
+          "name": "Classics: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Classics output +5%"
+        },
+        {
+          "id": "letters.classics.perk_35",
+          "level": 35,
+          "name": "Classics: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Classics spoilage -10%"
+        },
+        {
+          "id": "letters.classics.perk_40",
+          "level": 40,
+          "name": "Classics: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Classics quality roll +1"
+        },
+        {
+          "id": "letters.classics.perk_45",
+          "level": 45,
+          "name": "Classics: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Classics speed +5%"
+        },
+        {
+          "id": "letters.classics.perk_50",
+          "level": 50,
+          "name": "Classics: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Classics output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise classics for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful classics (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of classics; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a classics task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn classics from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of classics, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.document_copying",
+      "domain": "letters",
+      "name": "Document copying",
+      "description": "Document copying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.archive_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.document_copying.document_copying_basics",
+          "discipline": "letters.document_copying",
+          "name": "Document copying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.document_copying.document_copying_seasonal_practice",
+          "discipline": "letters.document_copying",
+          "name": "Document copying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.document_copying.document_copying_precision_work",
+          "discipline": "letters.document_copying",
+          "name": "Document copying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.document_copying.document_copying_master_technique",
+          "discipline": "letters.document_copying",
+          "name": "Document copying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.document_copying.perk_5",
+          "level": 5,
+          "name": "Document copying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Document copying output +2%"
+        },
+        {
+          "id": "letters.document_copying.perk_10",
+          "level": 10,
+          "name": "Document copying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Document copying waste -5%"
+        },
+        {
+          "id": "letters.document_copying.perk_15",
+          "level": 15,
+          "name": "Document copying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Document copying quality roll +1"
+        },
+        {
+          "id": "letters.document_copying.perk_20",
+          "level": 20,
+          "name": "Document copying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Document copying care +5%"
+        },
+        {
+          "id": "letters.document_copying.perk_25",
+          "level": 25,
+          "name": "Document copying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Document copying speed +3%"
+        },
+        {
+          "id": "letters.document_copying.perk_30",
+          "level": 30,
+          "name": "Document copying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Document copying output +5%"
+        },
+        {
+          "id": "letters.document_copying.perk_35",
+          "level": 35,
+          "name": "Document copying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Document copying spoilage -10%"
+        },
+        {
+          "id": "letters.document_copying.perk_40",
+          "level": 40,
+          "name": "Document copying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Document copying quality roll +1"
+        },
+        {
+          "id": "letters.document_copying.perk_45",
+          "level": 45,
+          "name": "Document copying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Document copying speed +5%"
+        },
+        {
+          "id": "letters.document_copying.perk_50",
+          "level": 50,
+          "name": "Document copying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Document copying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise document copying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful document copying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of document copying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a document copying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn document copying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of document copying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.archive_keeping",
+      "domain": "letters",
+      "name": "Archive keeping",
+      "description": "Archive keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.letter_composition"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.archive_keeping.archive_keeping_basics",
+          "discipline": "letters.archive_keeping",
+          "name": "Archive keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.archive_keeping.archive_keeping_seasonal_practice",
+          "discipline": "letters.archive_keeping",
+          "name": "Archive keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.archive_keeping.archive_keeping_precision_work",
+          "discipline": "letters.archive_keeping",
+          "name": "Archive keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.archive_keeping.archive_keeping_master_technique",
+          "discipline": "letters.archive_keeping",
+          "name": "Archive keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.archive_keeping.perk_5",
+          "level": 5,
+          "name": "Archive keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Archive keeping output +2%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_10",
+          "level": 10,
+          "name": "Archive keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Archive keeping waste -5%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_15",
+          "level": 15,
+          "name": "Archive keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Archive keeping quality roll +1"
+        },
+        {
+          "id": "letters.archive_keeping.perk_20",
+          "level": 20,
+          "name": "Archive keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Archive keeping care +5%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_25",
+          "level": 25,
+          "name": "Archive keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Archive keeping speed +3%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_30",
+          "level": 30,
+          "name": "Archive keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Archive keeping output +5%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_35",
+          "level": 35,
+          "name": "Archive keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Archive keeping spoilage -10%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_40",
+          "level": 40,
+          "name": "Archive keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Archive keeping quality roll +1"
+        },
+        {
+          "id": "letters.archive_keeping.perk_45",
+          "level": 45,
+          "name": "Archive keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Archive keeping speed +5%"
+        },
+        {
+          "id": "letters.archive_keeping.perk_50",
+          "level": 50,
+          "name": "Archive keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Archive keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise archive keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful archive keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of archive keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a archive keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn archive keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of archive keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.letter_composition",
+      "domain": "letters",
+      "name": "Letter composition",
+      "description": "Letter composition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.text_commentary"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.letter_composition.letter_composition_basics",
+          "discipline": "letters.letter_composition",
+          "name": "Letter composition basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.letter_composition.letter_composition_seasonal_practice",
+          "discipline": "letters.letter_composition",
+          "name": "Letter composition seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.letter_composition.letter_composition_precision_work",
+          "discipline": "letters.letter_composition",
+          "name": "Letter composition precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.letter_composition.letter_composition_master_technique",
+          "discipline": "letters.letter_composition",
+          "name": "Letter composition master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.letter_composition.perk_5",
+          "level": 5,
+          "name": "Letter composition: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Letter composition output +2%"
+        },
+        {
+          "id": "letters.letter_composition.perk_10",
+          "level": 10,
+          "name": "Letter composition: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Letter composition waste -5%"
+        },
+        {
+          "id": "letters.letter_composition.perk_15",
+          "level": 15,
+          "name": "Letter composition: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Letter composition quality roll +1"
+        },
+        {
+          "id": "letters.letter_composition.perk_20",
+          "level": 20,
+          "name": "Letter composition: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Letter composition care +5%"
+        },
+        {
+          "id": "letters.letter_composition.perk_25",
+          "level": 25,
+          "name": "Letter composition: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Letter composition speed +3%"
+        },
+        {
+          "id": "letters.letter_composition.perk_30",
+          "level": 30,
+          "name": "Letter composition: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Letter composition output +5%"
+        },
+        {
+          "id": "letters.letter_composition.perk_35",
+          "level": 35,
+          "name": "Letter composition: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Letter composition spoilage -10%"
+        },
+        {
+          "id": "letters.letter_composition.perk_40",
+          "level": 40,
+          "name": "Letter composition: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Letter composition quality roll +1"
+        },
+        {
+          "id": "letters.letter_composition.perk_45",
+          "level": 45,
+          "name": "Letter composition: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Letter composition speed +5%"
+        },
+        {
+          "id": "letters.letter_composition.perk_50",
+          "level": 50,
+          "name": "Letter composition: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Letter composition output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise letter composition for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful letter composition (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of letter composition; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a letter composition task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn letter composition from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of letter composition, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.text_commentary",
+      "domain": "letters",
+      "name": "Text commentary",
+      "description": "Text commentary: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.village_records"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.text_commentary.text_commentary_basics",
+          "discipline": "letters.text_commentary",
+          "name": "Text commentary basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.text_commentary.text_commentary_seasonal_practice",
+          "discipline": "letters.text_commentary",
+          "name": "Text commentary seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.text_commentary.text_commentary_precision_work",
+          "discipline": "letters.text_commentary",
+          "name": "Text commentary precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.text_commentary.text_commentary_master_technique",
+          "discipline": "letters.text_commentary",
+          "name": "Text commentary master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.text_commentary.perk_5",
+          "level": 5,
+          "name": "Text commentary: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Text commentary output +2%"
+        },
+        {
+          "id": "letters.text_commentary.perk_10",
+          "level": 10,
+          "name": "Text commentary: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Text commentary waste -5%"
+        },
+        {
+          "id": "letters.text_commentary.perk_15",
+          "level": 15,
+          "name": "Text commentary: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Text commentary quality roll +1"
+        },
+        {
+          "id": "letters.text_commentary.perk_20",
+          "level": 20,
+          "name": "Text commentary: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Text commentary care +5%"
+        },
+        {
+          "id": "letters.text_commentary.perk_25",
+          "level": 25,
+          "name": "Text commentary: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Text commentary speed +3%"
+        },
+        {
+          "id": "letters.text_commentary.perk_30",
+          "level": 30,
+          "name": "Text commentary: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Text commentary output +5%"
+        },
+        {
+          "id": "letters.text_commentary.perk_35",
+          "level": 35,
+          "name": "Text commentary: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Text commentary spoilage -10%"
+        },
+        {
+          "id": "letters.text_commentary.perk_40",
+          "level": 40,
+          "name": "Text commentary: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Text commentary quality roll +1"
+        },
+        {
+          "id": "letters.text_commentary.perk_45",
+          "level": 45,
+          "name": "Text commentary: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Text commentary speed +5%"
+        },
+        {
+          "id": "letters.text_commentary.perk_50",
+          "level": 50,
+          "name": "Text commentary: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Text commentary output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise text commentary for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful text commentary (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of text commentary; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a text commentary task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn text commentary from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of text commentary, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.village_records",
+      "domain": "letters",
+      "name": "Village records",
+      "description": "Village records: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.oral_transcription"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.village_records.village_records_basics",
+          "discipline": "letters.village_records",
+          "name": "Village records basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.village_records.village_records_seasonal_practice",
+          "discipline": "letters.village_records",
+          "name": "Village records seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.village_records.village_records_precision_work",
+          "discipline": "letters.village_records",
+          "name": "Village records precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.village_records.village_records_master_technique",
+          "discipline": "letters.village_records",
+          "name": "Village records master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.village_records.perk_5",
+          "level": 5,
+          "name": "Village records: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Village records output +2%"
+        },
+        {
+          "id": "letters.village_records.perk_10",
+          "level": 10,
+          "name": "Village records: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Village records waste -5%"
+        },
+        {
+          "id": "letters.village_records.perk_15",
+          "level": 15,
+          "name": "Village records: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Village records quality roll +1"
+        },
+        {
+          "id": "letters.village_records.perk_20",
+          "level": 20,
+          "name": "Village records: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Village records care +5%"
+        },
+        {
+          "id": "letters.village_records.perk_25",
+          "level": 25,
+          "name": "Village records: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Village records speed +3%"
+        },
+        {
+          "id": "letters.village_records.perk_30",
+          "level": 30,
+          "name": "Village records: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Village records output +5%"
+        },
+        {
+          "id": "letters.village_records.perk_35",
+          "level": 35,
+          "name": "Village records: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Village records spoilage -10%"
+        },
+        {
+          "id": "letters.village_records.perk_40",
+          "level": 40,
+          "name": "Village records: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Village records quality roll +1"
+        },
+        {
+          "id": "letters.village_records.perk_45",
+          "level": 45,
+          "name": "Village records: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Village records speed +5%"
+        },
+        {
+          "id": "letters.village_records.perk_50",
+          "level": 50,
+          "name": "Village records: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Village records output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise village records for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful village records (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of village records; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a village records task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn village records from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of village records, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.oral_transcription",
+      "domain": "letters",
+      "name": "Oral transcription",
+      "description": "Oral transcription: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.lexicography"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.oral_transcription.oral_transcription_basics",
+          "discipline": "letters.oral_transcription",
+          "name": "Oral transcription basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.oral_transcription.oral_transcription_seasonal_practice",
+          "discipline": "letters.oral_transcription",
+          "name": "Oral transcription seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.oral_transcription.oral_transcription_precision_work",
+          "discipline": "letters.oral_transcription",
+          "name": "Oral transcription precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.oral_transcription.oral_transcription_master_technique",
+          "discipline": "letters.oral_transcription",
+          "name": "Oral transcription master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.oral_transcription.perk_5",
+          "level": 5,
+          "name": "Oral transcription: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Oral transcription output +2%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_10",
+          "level": 10,
+          "name": "Oral transcription: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Oral transcription waste -5%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_15",
+          "level": 15,
+          "name": "Oral transcription: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Oral transcription quality roll +1"
+        },
+        {
+          "id": "letters.oral_transcription.perk_20",
+          "level": 20,
+          "name": "Oral transcription: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Oral transcription care +5%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_25",
+          "level": 25,
+          "name": "Oral transcription: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Oral transcription speed +3%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_30",
+          "level": 30,
+          "name": "Oral transcription: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Oral transcription output +5%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_35",
+          "level": 35,
+          "name": "Oral transcription: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Oral transcription spoilage -10%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_40",
+          "level": 40,
+          "name": "Oral transcription: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Oral transcription quality roll +1"
+        },
+        {
+          "id": "letters.oral_transcription.perk_45",
+          "level": 45,
+          "name": "Oral transcription: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Oral transcription speed +5%"
+        },
+        {
+          "id": "letters.oral_transcription.perk_50",
+          "level": 50,
+          "name": "Oral transcription: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Oral transcription output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise oral transcription for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful oral transcription (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of oral transcription; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a oral transcription task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn oral transcription from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of oral transcription, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.lexicography",
+      "domain": "letters",
+      "name": "Lexicography",
+      "description": "Lexicography: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.manuscript_repair"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.lexicography.lexicography_basics",
+          "discipline": "letters.lexicography",
+          "name": "Lexicography basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.lexicography.lexicography_seasonal_practice",
+          "discipline": "letters.lexicography",
+          "name": "Lexicography seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.lexicography.lexicography_precision_work",
+          "discipline": "letters.lexicography",
+          "name": "Lexicography precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.lexicography.lexicography_master_technique",
+          "discipline": "letters.lexicography",
+          "name": "Lexicography master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.lexicography.perk_5",
+          "level": 5,
+          "name": "Lexicography: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Lexicography output +2%"
+        },
+        {
+          "id": "letters.lexicography.perk_10",
+          "level": 10,
+          "name": "Lexicography: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Lexicography waste -5%"
+        },
+        {
+          "id": "letters.lexicography.perk_15",
+          "level": 15,
+          "name": "Lexicography: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lexicography quality roll +1"
+        },
+        {
+          "id": "letters.lexicography.perk_20",
+          "level": 20,
+          "name": "Lexicography: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Lexicography care +5%"
+        },
+        {
+          "id": "letters.lexicography.perk_25",
+          "level": 25,
+          "name": "Lexicography: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Lexicography speed +3%"
+        },
+        {
+          "id": "letters.lexicography.perk_30",
+          "level": 30,
+          "name": "Lexicography: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lexicography output +5%"
+        },
+        {
+          "id": "letters.lexicography.perk_35",
+          "level": 35,
+          "name": "Lexicography: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Lexicography spoilage -10%"
+        },
+        {
+          "id": "letters.lexicography.perk_40",
+          "level": 40,
+          "name": "Lexicography: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lexicography quality roll +1"
+        },
+        {
+          "id": "letters.lexicography.perk_45",
+          "level": 45,
+          "name": "Lexicography: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Lexicography speed +5%"
+        },
+        {
+          "id": "letters.lexicography.perk_50",
+          "level": 50,
+          "name": "Lexicography: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lexicography output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise lexicography for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful lexicography (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of lexicography; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a lexicography task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn lexicography from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of lexicography, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.manuscript_repair",
+      "domain": "letters",
+      "name": "Manuscript repair",
+      "description": "Manuscript repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.reading_circles"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.manuscript_repair.manuscript_repair_basics",
+          "discipline": "letters.manuscript_repair",
+          "name": "Manuscript repair basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.manuscript_repair.manuscript_repair_seasonal_practice",
+          "discipline": "letters.manuscript_repair",
+          "name": "Manuscript repair seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.manuscript_repair.manuscript_repair_precision_work",
+          "discipline": "letters.manuscript_repair",
+          "name": "Manuscript repair precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.manuscript_repair.manuscript_repair_master_technique",
+          "discipline": "letters.manuscript_repair",
+          "name": "Manuscript repair master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.manuscript_repair.perk_5",
+          "level": 5,
+          "name": "Manuscript repair: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Manuscript repair output +2%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_10",
+          "level": 10,
+          "name": "Manuscript repair: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Manuscript repair waste -5%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_15",
+          "level": 15,
+          "name": "Manuscript repair: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Manuscript repair quality roll +1"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_20",
+          "level": 20,
+          "name": "Manuscript repair: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Manuscript repair care +5%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_25",
+          "level": 25,
+          "name": "Manuscript repair: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Manuscript repair speed +3%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_30",
+          "level": 30,
+          "name": "Manuscript repair: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Manuscript repair output +5%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_35",
+          "level": 35,
+          "name": "Manuscript repair: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Manuscript repair spoilage -10%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_40",
+          "level": 40,
+          "name": "Manuscript repair: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Manuscript repair quality roll +1"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_45",
+          "level": 45,
+          "name": "Manuscript repair: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Manuscript repair speed +5%"
+        },
+        {
+          "id": "letters.manuscript_repair.perk_50",
+          "level": 50,
+          "name": "Manuscript repair: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Manuscript repair output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise manuscript repair for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful manuscript repair (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of manuscript repair; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a manuscript repair task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn manuscript repair from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of manuscript repair, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.reading_circles",
+      "domain": "letters",
+      "name": "Reading circles",
+      "description": "Reading circles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.research_methods"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.reading_circles.reading_circles_basics",
+          "discipline": "letters.reading_circles",
+          "name": "Reading circles basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.reading_circles.reading_circles_seasonal_practice",
+          "discipline": "letters.reading_circles",
+          "name": "Reading circles seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.reading_circles.reading_circles_precision_work",
+          "discipline": "letters.reading_circles",
+          "name": "Reading circles precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.reading_circles.reading_circles_master_technique",
+          "discipline": "letters.reading_circles",
+          "name": "Reading circles master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.reading_circles.perk_5",
+          "level": 5,
+          "name": "Reading circles: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Reading circles output +2%"
+        },
+        {
+          "id": "letters.reading_circles.perk_10",
+          "level": 10,
+          "name": "Reading circles: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Reading circles waste -5%"
+        },
+        {
+          "id": "letters.reading_circles.perk_15",
+          "level": 15,
+          "name": "Reading circles: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Reading circles quality roll +1"
+        },
+        {
+          "id": "letters.reading_circles.perk_20",
+          "level": 20,
+          "name": "Reading circles: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Reading circles care +5%"
+        },
+        {
+          "id": "letters.reading_circles.perk_25",
+          "level": 25,
+          "name": "Reading circles: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Reading circles speed +3%"
+        },
+        {
+          "id": "letters.reading_circles.perk_30",
+          "level": 30,
+          "name": "Reading circles: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Reading circles output +5%"
+        },
+        {
+          "id": "letters.reading_circles.perk_35",
+          "level": 35,
+          "name": "Reading circles: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Reading circles spoilage -10%"
+        },
+        {
+          "id": "letters.reading_circles.perk_40",
+          "level": 40,
+          "name": "Reading circles: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Reading circles quality roll +1"
+        },
+        {
+          "id": "letters.reading_circles.perk_45",
+          "level": 45,
+          "name": "Reading circles: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Reading circles speed +5%"
+        },
+        {
+          "id": "letters.reading_circles.perk_50",
+          "level": 50,
+          "name": "Reading circles: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Reading circles output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise reading circles for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful reading circles (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of reading circles; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a reading circles task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn reading circles from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of reading circles, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.research_methods",
+      "domain": "letters",
+      "name": "Research methods",
+      "description": "Research methods: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.scholarly_teaching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.research_methods.research_methods_basics",
+          "discipline": "letters.research_methods",
+          "name": "Research methods basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.research_methods.research_methods_seasonal_practice",
+          "discipline": "letters.research_methods",
+          "name": "Research methods seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.research_methods.research_methods_precision_work",
+          "discipline": "letters.research_methods",
+          "name": "Research methods precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.research_methods.research_methods_master_technique",
+          "discipline": "letters.research_methods",
+          "name": "Research methods master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.research_methods.perk_5",
+          "level": 5,
+          "name": "Research methods: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Research methods output +2%"
+        },
+        {
+          "id": "letters.research_methods.perk_10",
+          "level": 10,
+          "name": "Research methods: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Research methods waste -5%"
+        },
+        {
+          "id": "letters.research_methods.perk_15",
+          "level": 15,
+          "name": "Research methods: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Research methods quality roll +1"
+        },
+        {
+          "id": "letters.research_methods.perk_20",
+          "level": 20,
+          "name": "Research methods: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Research methods care +5%"
+        },
+        {
+          "id": "letters.research_methods.perk_25",
+          "level": 25,
+          "name": "Research methods: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Research methods speed +3%"
+        },
+        {
+          "id": "letters.research_methods.perk_30",
+          "level": 30,
+          "name": "Research methods: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Research methods output +5%"
+        },
+        {
+          "id": "letters.research_methods.perk_35",
+          "level": 35,
+          "name": "Research methods: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Research methods spoilage -10%"
+        },
+        {
+          "id": "letters.research_methods.perk_40",
+          "level": 40,
+          "name": "Research methods: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Research methods quality roll +1"
+        },
+        {
+          "id": "letters.research_methods.perk_45",
+          "level": 45,
+          "name": "Research methods: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Research methods speed +5%"
+        },
+        {
+          "id": "letters.research_methods.perk_50",
+          "level": 50,
+          "name": "Research methods: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Research methods output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise research methods for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful research methods (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of research methods; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a research methods task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn research methods from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of research methods, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "letters.scholarly_teaching",
+      "domain": "letters",
+      "name": "Scholarly teaching",
+      "description": "Scholarly teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "intellect",
+        "willpower"
+      ],
+      "related_disciplines": [
+        "letters.scholarship"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "letters.scholarly_teaching.scholarly_teaching_basics",
+          "discipline": "letters.scholarly_teaching",
+          "name": "Scholarly teaching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 8
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.scholarly_teaching.scholarly_teaching_seasonal_practice",
+          "discipline": "letters.scholarly_teaching",
+          "name": "Scholarly teaching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.scholarly_teaching.scholarly_teaching_precision_work",
+          "discipline": "letters.scholarly_teaching",
+          "name": "Scholarly teaching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "intellect": 12
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "letters.scholarly_teaching.scholarly_teaching_master_technique",
+          "discipline": "letters.scholarly_teaching",
+          "name": "Scholarly teaching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "intellect": 14
+          },
+          "key_attributes": [
+            "intellect",
+            "willpower"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "letters.scholarly_teaching.perk_5",
+          "level": 5,
+          "name": "Scholarly teaching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Scholarly teaching output +2%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_10",
+          "level": 10,
+          "name": "Scholarly teaching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Scholarly teaching waste -5%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_15",
+          "level": 15,
+          "name": "Scholarly teaching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Scholarly teaching quality roll +1"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_20",
+          "level": 20,
+          "name": "Scholarly teaching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Scholarly teaching care +5%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_25",
+          "level": 25,
+          "name": "Scholarly teaching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Scholarly teaching speed +3%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_30",
+          "level": 30,
+          "name": "Scholarly teaching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Scholarly teaching output +5%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_35",
+          "level": 35,
+          "name": "Scholarly teaching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Scholarly teaching spoilage -10%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_40",
+          "level": 40,
+          "name": "Scholarly teaching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Scholarly teaching quality roll +1"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_45",
+          "level": 45,
+          "name": "Scholarly teaching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Scholarly teaching speed +5%"
+        },
+        {
+          "id": "letters.scholarly_teaching.perk_50",
+          "level": 50,
+          "name": "Scholarly teaching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Scholarly teaching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise scholarly teaching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful scholarly teaching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of scholarly teaching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a scholarly teaching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn scholarly teaching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of scholarly teaching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

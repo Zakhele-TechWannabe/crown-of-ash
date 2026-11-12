@@ -1,0 +1,4079 @@
+{
+  "id": "grain_farming",
+  "disciplines": [
+    {
+      "id": "grain_farming.farming",
+      "domain": "grain_farming",
+      "name": "Farming",
+      "description": "Farming: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.nursery_care"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.farming.paddy_rice",
+          "discipline": "grain_farming.farming",
+          "name": "Paddy rice",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.farming.dry_grains",
+          "discipline": "grain_farming.farming",
+          "name": "Dry grains",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.farming.irrigation",
+          "discipline": "grain_farming.farming",
+          "name": "Irrigation",
+          "unlock_level": 15,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.farming.seed_selection",
+          "discipline": "grain_farming.farming",
+          "name": "Seed selection",
+          "unlock_level": 25,
+          "attribute_requirements": {
+            "intellect": 11
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.farming.spirit_fields",
+          "discipline": "grain_farming.farming",
+          "name": "Spirit fields",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.farming.perk_5",
+          "level": 5,
+          "name": "Farming: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Farming output +2%"
+        },
+        {
+          "id": "grain_farming.farming.perk_10",
+          "level": 10,
+          "name": "Reads the weather",
+          "effect": "bad_year_loss",
+          "value": -0.25,
+          "description": "bad_year_loss -0.25"
+        },
+        {
+          "id": "grain_farming.farming.perk_15",
+          "level": 15,
+          "name": "Farming: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Farming quality roll +1"
+        },
+        {
+          "id": "grain_farming.farming.perk_20",
+          "level": 20,
+          "name": "Paddy sense",
+          "effect": "care",
+          "value": 0.15,
+          "description": "care +0.15"
+        },
+        {
+          "id": "grain_farming.farming.perk_25",
+          "level": 25,
+          "name": "Farming: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Farming speed +3%"
+        },
+        {
+          "id": "grain_farming.farming.perk_30",
+          "level": 30,
+          "name": "Hundred-harvest hands",
+          "effect": "output",
+          "value": 0.2,
+          "description": "output +0.2"
+        },
+        {
+          "id": "grain_farming.farming.perk_35",
+          "level": 35,
+          "name": "Farming: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Farming spoilage -10%"
+        },
+        {
+          "id": "grain_farming.farming.perk_40",
+          "level": 40,
+          "name": "Farming: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Farming quality roll +1"
+        },
+        {
+          "id": "grain_farming.farming.perk_45",
+          "level": 45,
+          "name": "Farming: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Farming speed +5%"
+        },
+        {
+          "id": "grain_farming.farming.perk_50",
+          "level": 50,
+          "name": "Farming: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Farming output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise farming for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful farming (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of farming; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a farming task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn farming from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of farming, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.nursery_care",
+      "domain": "grain_farming",
+      "name": "Nursery care",
+      "description": "Nursery care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.transplanting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.nursery_care.nursery_care_basics",
+          "discipline": "grain_farming.nursery_care",
+          "name": "Nursery care basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.nursery_care.nursery_care_seasonal_practice",
+          "discipline": "grain_farming.nursery_care",
+          "name": "Nursery care seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.nursery_care.nursery_care_precision_work",
+          "discipline": "grain_farming.nursery_care",
+          "name": "Nursery care precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.nursery_care.nursery_care_master_technique",
+          "discipline": "grain_farming.nursery_care",
+          "name": "Nursery care master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.nursery_care.perk_5",
+          "level": 5,
+          "name": "Nursery care: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Nursery care output +2%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_10",
+          "level": 10,
+          "name": "Nursery care: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Nursery care waste -5%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_15",
+          "level": 15,
+          "name": "Nursery care: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nursery care quality roll +1"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_20",
+          "level": 20,
+          "name": "Nursery care: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Nursery care care +5%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_25",
+          "level": 25,
+          "name": "Nursery care: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Nursery care speed +3%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_30",
+          "level": 30,
+          "name": "Nursery care: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nursery care output +5%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_35",
+          "level": 35,
+          "name": "Nursery care: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Nursery care spoilage -10%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_40",
+          "level": 40,
+          "name": "Nursery care: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nursery care quality roll +1"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_45",
+          "level": 45,
+          "name": "Nursery care: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Nursery care speed +5%"
+        },
+        {
+          "id": "grain_farming.nursery_care.perk_50",
+          "level": 50,
+          "name": "Nursery care: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nursery care output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise nursery care for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful nursery care (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of nursery care; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a nursery care task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn nursery care from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of nursery care, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.transplanting",
+      "domain": "grain_farming",
+      "name": "Transplanting",
+      "description": "Transplanting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.dryland_sowing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.transplanting.transplanting_basics",
+          "discipline": "grain_farming.transplanting",
+          "name": "Transplanting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.transplanting.transplanting_seasonal_practice",
+          "discipline": "grain_farming.transplanting",
+          "name": "Transplanting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.transplanting.transplanting_precision_work",
+          "discipline": "grain_farming.transplanting",
+          "name": "Transplanting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.transplanting.transplanting_master_technique",
+          "discipline": "grain_farming.transplanting",
+          "name": "Transplanting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.transplanting.perk_5",
+          "level": 5,
+          "name": "Transplanting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Transplanting output +2%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_10",
+          "level": 10,
+          "name": "Transplanting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Transplanting waste -5%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_15",
+          "level": 15,
+          "name": "Transplanting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Transplanting quality roll +1"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_20",
+          "level": 20,
+          "name": "Transplanting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Transplanting care +5%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_25",
+          "level": 25,
+          "name": "Transplanting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Transplanting speed +3%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_30",
+          "level": 30,
+          "name": "Transplanting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Transplanting output +5%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_35",
+          "level": 35,
+          "name": "Transplanting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Transplanting spoilage -10%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_40",
+          "level": 40,
+          "name": "Transplanting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Transplanting quality roll +1"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_45",
+          "level": 45,
+          "name": "Transplanting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Transplanting speed +5%"
+        },
+        {
+          "id": "grain_farming.transplanting.perk_50",
+          "level": 50,
+          "name": "Transplanting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Transplanting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise transplanting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful transplanting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of transplanting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a transplanting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn transplanting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of transplanting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.dryland_sowing",
+      "domain": "grain_farming",
+      "name": "Dryland sowing",
+      "description": "Dryland sowing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.terrace_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.dryland_sowing.dryland_sowing_basics",
+          "discipline": "grain_farming.dryland_sowing",
+          "name": "Dryland sowing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.dryland_sowing.dryland_sowing_seasonal_practice",
+          "discipline": "grain_farming.dryland_sowing",
+          "name": "Dryland sowing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.dryland_sowing.dryland_sowing_precision_work",
+          "discipline": "grain_farming.dryland_sowing",
+          "name": "Dryland sowing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.dryland_sowing.dryland_sowing_master_technique",
+          "discipline": "grain_farming.dryland_sowing",
+          "name": "Dryland sowing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.dryland_sowing.perk_5",
+          "level": 5,
+          "name": "Dryland sowing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Dryland sowing output +2%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_10",
+          "level": 10,
+          "name": "Dryland sowing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Dryland sowing waste -5%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_15",
+          "level": 15,
+          "name": "Dryland sowing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dryland sowing quality roll +1"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_20",
+          "level": 20,
+          "name": "Dryland sowing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Dryland sowing care +5%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_25",
+          "level": 25,
+          "name": "Dryland sowing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Dryland sowing speed +3%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_30",
+          "level": 30,
+          "name": "Dryland sowing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dryland sowing output +5%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_35",
+          "level": 35,
+          "name": "Dryland sowing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Dryland sowing spoilage -10%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_40",
+          "level": 40,
+          "name": "Dryland sowing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dryland sowing quality roll +1"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_45",
+          "level": 45,
+          "name": "Dryland sowing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Dryland sowing speed +5%"
+        },
+        {
+          "id": "grain_farming.dryland_sowing.perk_50",
+          "level": 50,
+          "name": "Dryland sowing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dryland sowing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise dryland sowing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful dryland sowing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of dryland sowing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a dryland sowing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn dryland sowing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of dryland sowing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.terrace_tending",
+      "domain": "grain_farming",
+      "name": "Terrace tending",
+      "description": "Terrace tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.water_scheduling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.terrace_tending.terrace_tending_basics",
+          "discipline": "grain_farming.terrace_tending",
+          "name": "Terrace tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.terrace_tending.terrace_tending_seasonal_practice",
+          "discipline": "grain_farming.terrace_tending",
+          "name": "Terrace tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.terrace_tending.terrace_tending_precision_work",
+          "discipline": "grain_farming.terrace_tending",
+          "name": "Terrace tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.terrace_tending.terrace_tending_master_technique",
+          "discipline": "grain_farming.terrace_tending",
+          "name": "Terrace tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.terrace_tending.perk_5",
+          "level": 5,
+          "name": "Terrace tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Terrace tending output +2%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_10",
+          "level": 10,
+          "name": "Terrace tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Terrace tending waste -5%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_15",
+          "level": 15,
+          "name": "Terrace tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Terrace tending quality roll +1"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_20",
+          "level": 20,
+          "name": "Terrace tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Terrace tending care +5%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_25",
+          "level": 25,
+          "name": "Terrace tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Terrace tending speed +3%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_30",
+          "level": 30,
+          "name": "Terrace tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Terrace tending output +5%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_35",
+          "level": 35,
+          "name": "Terrace tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Terrace tending spoilage -10%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_40",
+          "level": 40,
+          "name": "Terrace tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Terrace tending quality roll +1"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_45",
+          "level": 45,
+          "name": "Terrace tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Terrace tending speed +5%"
+        },
+        {
+          "id": "grain_farming.terrace_tending.perk_50",
+          "level": 50,
+          "name": "Terrace tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Terrace tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise terrace tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful terrace tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of terrace tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a terrace tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn terrace tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of terrace tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.water_scheduling",
+      "domain": "grain_farming",
+      "name": "Water scheduling",
+      "description": "Water scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.seed_husbandry"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.water_scheduling.water_scheduling_basics",
+          "discipline": "grain_farming.water_scheduling",
+          "name": "Water scheduling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.water_scheduling.water_scheduling_seasonal_practice",
+          "discipline": "grain_farming.water_scheduling",
+          "name": "Water scheduling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.water_scheduling.water_scheduling_precision_work",
+          "discipline": "grain_farming.water_scheduling",
+          "name": "Water scheduling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.water_scheduling.water_scheduling_master_technique",
+          "discipline": "grain_farming.water_scheduling",
+          "name": "Water scheduling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.water_scheduling.perk_5",
+          "level": 5,
+          "name": "Water scheduling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Water scheduling output +2%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_10",
+          "level": 10,
+          "name": "Water scheduling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Water scheduling waste -5%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_15",
+          "level": 15,
+          "name": "Water scheduling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Water scheduling quality roll +1"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_20",
+          "level": 20,
+          "name": "Water scheduling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Water scheduling care +5%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_25",
+          "level": 25,
+          "name": "Water scheduling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Water scheduling speed +3%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_30",
+          "level": 30,
+          "name": "Water scheduling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Water scheduling output +5%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_35",
+          "level": 35,
+          "name": "Water scheduling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Water scheduling spoilage -10%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_40",
+          "level": 40,
+          "name": "Water scheduling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Water scheduling quality roll +1"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_45",
+          "level": 45,
+          "name": "Water scheduling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Water scheduling speed +5%"
+        },
+        {
+          "id": "grain_farming.water_scheduling.perk_50",
+          "level": 50,
+          "name": "Water scheduling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Water scheduling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise water scheduling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful water scheduling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of water scheduling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a water scheduling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn water scheduling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of water scheduling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.seed_husbandry",
+      "domain": "grain_farming",
+      "name": "Seed husbandry",
+      "description": "Seed husbandry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.grain_threshing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.seed_husbandry.seed_husbandry_basics",
+          "discipline": "grain_farming.seed_husbandry",
+          "name": "Seed husbandry basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.seed_husbandry.seed_husbandry_seasonal_practice",
+          "discipline": "grain_farming.seed_husbandry",
+          "name": "Seed husbandry seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.seed_husbandry.seed_husbandry_precision_work",
+          "discipline": "grain_farming.seed_husbandry",
+          "name": "Seed husbandry precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.seed_husbandry.seed_husbandry_master_technique",
+          "discipline": "grain_farming.seed_husbandry",
+          "name": "Seed husbandry master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.seed_husbandry.perk_5",
+          "level": 5,
+          "name": "Seed husbandry: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Seed husbandry output +2%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_10",
+          "level": 10,
+          "name": "Seed husbandry: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Seed husbandry waste -5%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_15",
+          "level": 15,
+          "name": "Seed husbandry: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seed husbandry quality roll +1"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_20",
+          "level": 20,
+          "name": "Seed husbandry: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Seed husbandry care +5%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_25",
+          "level": 25,
+          "name": "Seed husbandry: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Seed husbandry speed +3%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_30",
+          "level": 30,
+          "name": "Seed husbandry: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seed husbandry output +5%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_35",
+          "level": 35,
+          "name": "Seed husbandry: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Seed husbandry spoilage -10%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_40",
+          "level": 40,
+          "name": "Seed husbandry: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seed husbandry quality roll +1"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_45",
+          "level": 45,
+          "name": "Seed husbandry: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Seed husbandry speed +5%"
+        },
+        {
+          "id": "grain_farming.seed_husbandry.perk_50",
+          "level": 50,
+          "name": "Seed husbandry: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seed husbandry output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise seed husbandry for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful seed husbandry (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of seed husbandry; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a seed husbandry task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn seed husbandry from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of seed husbandry, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.grain_threshing",
+      "domain": "grain_farming",
+      "name": "Grain threshing",
+      "description": "Grain threshing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.winnowing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.grain_threshing.grain_threshing_basics",
+          "discipline": "grain_farming.grain_threshing",
+          "name": "Grain threshing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.grain_threshing.grain_threshing_seasonal_practice",
+          "discipline": "grain_farming.grain_threshing",
+          "name": "Grain threshing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.grain_threshing.grain_threshing_precision_work",
+          "discipline": "grain_farming.grain_threshing",
+          "name": "Grain threshing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.grain_threshing.grain_threshing_master_technique",
+          "discipline": "grain_farming.grain_threshing",
+          "name": "Grain threshing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.grain_threshing.perk_5",
+          "level": 5,
+          "name": "Grain threshing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Grain threshing output +2%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_10",
+          "level": 10,
+          "name": "Grain threshing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Grain threshing waste -5%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_15",
+          "level": 15,
+          "name": "Grain threshing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grain threshing quality roll +1"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_20",
+          "level": 20,
+          "name": "Grain threshing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Grain threshing care +5%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_25",
+          "level": 25,
+          "name": "Grain threshing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Grain threshing speed +3%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_30",
+          "level": 30,
+          "name": "Grain threshing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grain threshing output +5%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_35",
+          "level": 35,
+          "name": "Grain threshing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Grain threshing spoilage -10%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_40",
+          "level": 40,
+          "name": "Grain threshing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grain threshing quality roll +1"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_45",
+          "level": 45,
+          "name": "Grain threshing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Grain threshing speed +5%"
+        },
+        {
+          "id": "grain_farming.grain_threshing.perk_50",
+          "level": 50,
+          "name": "Grain threshing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grain threshing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise grain threshing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful grain threshing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of grain threshing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a grain threshing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn grain threshing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of grain threshing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.winnowing",
+      "domain": "grain_farming",
+      "name": "Winnowing",
+      "description": "Winnowing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.harvest_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.winnowing.winnowing_basics",
+          "discipline": "grain_farming.winnowing",
+          "name": "Winnowing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.winnowing.winnowing_seasonal_practice",
+          "discipline": "grain_farming.winnowing",
+          "name": "Winnowing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.winnowing.winnowing_precision_work",
+          "discipline": "grain_farming.winnowing",
+          "name": "Winnowing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.winnowing.winnowing_master_technique",
+          "discipline": "grain_farming.winnowing",
+          "name": "Winnowing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.winnowing.perk_5",
+          "level": 5,
+          "name": "Winnowing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Winnowing output +2%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_10",
+          "level": 10,
+          "name": "Winnowing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Winnowing waste -5%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_15",
+          "level": 15,
+          "name": "Winnowing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Winnowing quality roll +1"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_20",
+          "level": 20,
+          "name": "Winnowing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Winnowing care +5%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_25",
+          "level": 25,
+          "name": "Winnowing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Winnowing speed +3%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_30",
+          "level": 30,
+          "name": "Winnowing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Winnowing output +5%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_35",
+          "level": 35,
+          "name": "Winnowing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Winnowing spoilage -10%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_40",
+          "level": 40,
+          "name": "Winnowing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Winnowing quality roll +1"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_45",
+          "level": 45,
+          "name": "Winnowing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Winnowing speed +5%"
+        },
+        {
+          "id": "grain_farming.winnowing.perk_50",
+          "level": 50,
+          "name": "Winnowing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Winnowing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise winnowing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful winnowing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of winnowing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a winnowing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn winnowing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of winnowing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.harvest_planning",
+      "domain": "grain_farming",
+      "name": "Harvest planning",
+      "description": "Harvest planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.pest_watching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.harvest_planning.harvest_planning_basics",
+          "discipline": "grain_farming.harvest_planning",
+          "name": "Harvest planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.harvest_planning.harvest_planning_seasonal_practice",
+          "discipline": "grain_farming.harvest_planning",
+          "name": "Harvest planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.harvest_planning.harvest_planning_precision_work",
+          "discipline": "grain_farming.harvest_planning",
+          "name": "Harvest planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.harvest_planning.harvest_planning_master_technique",
+          "discipline": "grain_farming.harvest_planning",
+          "name": "Harvest planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.harvest_planning.perk_5",
+          "level": 5,
+          "name": "Harvest planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Harvest planning output +2%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_10",
+          "level": 10,
+          "name": "Harvest planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Harvest planning waste -5%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_15",
+          "level": 15,
+          "name": "Harvest planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Harvest planning quality roll +1"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_20",
+          "level": 20,
+          "name": "Harvest planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Harvest planning care +5%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_25",
+          "level": 25,
+          "name": "Harvest planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Harvest planning speed +3%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_30",
+          "level": 30,
+          "name": "Harvest planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Harvest planning output +5%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_35",
+          "level": 35,
+          "name": "Harvest planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Harvest planning spoilage -10%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_40",
+          "level": 40,
+          "name": "Harvest planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Harvest planning quality roll +1"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_45",
+          "level": 45,
+          "name": "Harvest planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Harvest planning speed +5%"
+        },
+        {
+          "id": "grain_farming.harvest_planning.perk_50",
+          "level": 50,
+          "name": "Harvest planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Harvest planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise harvest planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful harvest planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of harvest planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a harvest planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn harvest planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of harvest planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.pest_watching",
+      "domain": "grain_farming",
+      "name": "Pest watching",
+      "description": "Pest watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.fallow_rotation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.pest_watching.pest_watching_basics",
+          "discipline": "grain_farming.pest_watching",
+          "name": "Pest watching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.pest_watching.pest_watching_seasonal_practice",
+          "discipline": "grain_farming.pest_watching",
+          "name": "Pest watching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.pest_watching.pest_watching_precision_work",
+          "discipline": "grain_farming.pest_watching",
+          "name": "Pest watching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.pest_watching.pest_watching_master_technique",
+          "discipline": "grain_farming.pest_watching",
+          "name": "Pest watching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.pest_watching.perk_5",
+          "level": 5,
+          "name": "Pest watching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pest watching output +2%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_10",
+          "level": 10,
+          "name": "Pest watching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pest watching waste -5%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_15",
+          "level": 15,
+          "name": "Pest watching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pest watching quality roll +1"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_20",
+          "level": 20,
+          "name": "Pest watching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pest watching care +5%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_25",
+          "level": 25,
+          "name": "Pest watching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pest watching speed +3%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_30",
+          "level": 30,
+          "name": "Pest watching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pest watching output +5%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_35",
+          "level": 35,
+          "name": "Pest watching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pest watching spoilage -10%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_40",
+          "level": 40,
+          "name": "Pest watching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pest watching quality roll +1"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_45",
+          "level": 45,
+          "name": "Pest watching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pest watching speed +5%"
+        },
+        {
+          "id": "grain_farming.pest_watching.perk_50",
+          "level": 50,
+          "name": "Pest watching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pest watching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pest watching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pest watching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pest watching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pest watching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pest watching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pest watching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.fallow_rotation",
+      "domain": "grain_farming",
+      "name": "Fallow rotation",
+      "description": "Fallow rotation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.draft_ploughing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.fallow_rotation.fallow_rotation_basics",
+          "discipline": "grain_farming.fallow_rotation",
+          "name": "Fallow rotation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.fallow_rotation.fallow_rotation_seasonal_practice",
+          "discipline": "grain_farming.fallow_rotation",
+          "name": "Fallow rotation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.fallow_rotation.fallow_rotation_precision_work",
+          "discipline": "grain_farming.fallow_rotation",
+          "name": "Fallow rotation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.fallow_rotation.fallow_rotation_master_technique",
+          "discipline": "grain_farming.fallow_rotation",
+          "name": "Fallow rotation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.fallow_rotation.perk_5",
+          "level": 5,
+          "name": "Fallow rotation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fallow rotation output +2%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_10",
+          "level": 10,
+          "name": "Fallow rotation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fallow rotation waste -5%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_15",
+          "level": 15,
+          "name": "Fallow rotation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fallow rotation quality roll +1"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_20",
+          "level": 20,
+          "name": "Fallow rotation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fallow rotation care +5%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_25",
+          "level": 25,
+          "name": "Fallow rotation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fallow rotation speed +3%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_30",
+          "level": 30,
+          "name": "Fallow rotation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fallow rotation output +5%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_35",
+          "level": 35,
+          "name": "Fallow rotation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fallow rotation spoilage -10%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_40",
+          "level": 40,
+          "name": "Fallow rotation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fallow rotation quality roll +1"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_45",
+          "level": 45,
+          "name": "Fallow rotation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fallow rotation speed +5%"
+        },
+        {
+          "id": "grain_farming.fallow_rotation.perk_50",
+          "level": 50,
+          "name": "Fallow rotation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fallow rotation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fallow rotation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fallow rotation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fallow rotation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fallow rotation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fallow rotation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fallow rotation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.draft_ploughing",
+      "domain": "grain_farming",
+      "name": "Draft ploughing",
+      "description": "Draft ploughing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.grain_storage"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.draft_ploughing.draft_ploughing_basics",
+          "discipline": "grain_farming.draft_ploughing",
+          "name": "Draft ploughing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.draft_ploughing.draft_ploughing_seasonal_practice",
+          "discipline": "grain_farming.draft_ploughing",
+          "name": "Draft ploughing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.draft_ploughing.draft_ploughing_precision_work",
+          "discipline": "grain_farming.draft_ploughing",
+          "name": "Draft ploughing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.draft_ploughing.draft_ploughing_master_technique",
+          "discipline": "grain_farming.draft_ploughing",
+          "name": "Draft ploughing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.draft_ploughing.perk_5",
+          "level": 5,
+          "name": "Draft ploughing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Draft ploughing output +2%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_10",
+          "level": 10,
+          "name": "Draft ploughing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Draft ploughing waste -5%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_15",
+          "level": 15,
+          "name": "Draft ploughing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Draft ploughing quality roll +1"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_20",
+          "level": 20,
+          "name": "Draft ploughing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Draft ploughing care +5%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_25",
+          "level": 25,
+          "name": "Draft ploughing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Draft ploughing speed +3%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_30",
+          "level": 30,
+          "name": "Draft ploughing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Draft ploughing output +5%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_35",
+          "level": 35,
+          "name": "Draft ploughing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Draft ploughing spoilage -10%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_40",
+          "level": 40,
+          "name": "Draft ploughing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Draft ploughing quality roll +1"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_45",
+          "level": 45,
+          "name": "Draft ploughing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Draft ploughing speed +5%"
+        },
+        {
+          "id": "grain_farming.draft_ploughing.perk_50",
+          "level": 50,
+          "name": "Draft ploughing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Draft ploughing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise draft ploughing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful draft ploughing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of draft ploughing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a draft ploughing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn draft ploughing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of draft ploughing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.grain_storage",
+      "domain": "grain_farming",
+      "name": "Grain storage",
+      "description": "Grain storage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.field_stewardship"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.grain_storage.grain_storage_basics",
+          "discipline": "grain_farming.grain_storage",
+          "name": "Grain storage basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.grain_storage.grain_storage_seasonal_practice",
+          "discipline": "grain_farming.grain_storage",
+          "name": "Grain storage seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.grain_storage.grain_storage_precision_work",
+          "discipline": "grain_farming.grain_storage",
+          "name": "Grain storage precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.grain_storage.grain_storage_master_technique",
+          "discipline": "grain_farming.grain_storage",
+          "name": "Grain storage master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.grain_storage.perk_5",
+          "level": 5,
+          "name": "Grain storage: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Grain storage output +2%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_10",
+          "level": 10,
+          "name": "Grain storage: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Grain storage waste -5%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_15",
+          "level": 15,
+          "name": "Grain storage: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grain storage quality roll +1"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_20",
+          "level": 20,
+          "name": "Grain storage: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Grain storage care +5%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_25",
+          "level": 25,
+          "name": "Grain storage: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Grain storage speed +3%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_30",
+          "level": 30,
+          "name": "Grain storage: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grain storage output +5%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_35",
+          "level": 35,
+          "name": "Grain storage: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Grain storage spoilage -10%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_40",
+          "level": 40,
+          "name": "Grain storage: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grain storage quality roll +1"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_45",
+          "level": 45,
+          "name": "Grain storage: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Grain storage speed +5%"
+        },
+        {
+          "id": "grain_farming.grain_storage.perk_50",
+          "level": 50,
+          "name": "Grain storage: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grain storage output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise grain storage for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful grain storage (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of grain storage; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a grain storage task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn grain storage from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of grain storage, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "grain_farming.field_stewardship",
+      "domain": "grain_farming",
+      "name": "Field stewardship",
+      "description": "Field stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "grain_farming.farming"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "grain_farming.field_stewardship.field_stewardship_basics",
+          "discipline": "grain_farming.field_stewardship",
+          "name": "Field stewardship basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.field_stewardship.field_stewardship_seasonal_practice",
+          "discipline": "grain_farming.field_stewardship",
+          "name": "Field stewardship seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.field_stewardship.field_stewardship_precision_work",
+          "discipline": "grain_farming.field_stewardship",
+          "name": "Field stewardship precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "grain_farming.field_stewardship.field_stewardship_master_technique",
+          "discipline": "grain_farming.field_stewardship",
+          "name": "Field stewardship master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "grain_farming.field_stewardship.perk_5",
+          "level": 5,
+          "name": "Field stewardship: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Field stewardship output +2%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_10",
+          "level": 10,
+          "name": "Field stewardship: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Field stewardship waste -5%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_15",
+          "level": 15,
+          "name": "Field stewardship: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Field stewardship quality roll +1"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_20",
+          "level": 20,
+          "name": "Field stewardship: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Field stewardship care +5%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_25",
+          "level": 25,
+          "name": "Field stewardship: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Field stewardship speed +3%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_30",
+          "level": 30,
+          "name": "Field stewardship: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Field stewardship output +5%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_35",
+          "level": 35,
+          "name": "Field stewardship: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Field stewardship spoilage -10%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_40",
+          "level": 40,
+          "name": "Field stewardship: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Field stewardship quality roll +1"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_45",
+          "level": 45,
+          "name": "Field stewardship: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Field stewardship speed +5%"
+        },
+        {
+          "id": "grain_farming.field_stewardship.perk_50",
+          "level": 50,
+          "name": "Field stewardship: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Field stewardship output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise field stewardship for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful field stewardship (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of field stewardship; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a field stewardship task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn field stewardship from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of field stewardship, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

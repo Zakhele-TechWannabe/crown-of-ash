@@ -1,0 +1,4064 @@
+{
+  "id": "wild_harvest",
+  "disciplines": [
+    {
+      "id": "wild_harvest.foraging",
+      "domain": "wild_harvest",
+      "name": "Foraging",
+      "description": "Foraging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.mushroom_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.foraging.mushrooms",
+          "discipline": "wild_harvest.foraging",
+          "name": "Mushrooms",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.foraging.wild_herbs",
+          "discipline": "wild_harvest.foraging",
+          "name": "Wild herbs",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.foraging.wild_fruit",
+          "discipline": "wild_harvest.foraging",
+          "name": "Wild fruit",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.foraging.spirit_herb_gathering",
+          "discipline": "wild_harvest.foraging",
+          "name": "Spirit herb gathering",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.foraging.perk_5",
+          "level": 5,
+          "name": "Foraging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Foraging output +2%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_10",
+          "level": 10,
+          "name": "Foraging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Foraging waste -5%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_15",
+          "level": 15,
+          "name": "Foraging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Foraging quality roll +1"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_20",
+          "level": 20,
+          "name": "Foraging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Foraging care +5%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_25",
+          "level": 25,
+          "name": "Foraging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Foraging speed +3%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_30",
+          "level": 30,
+          "name": "Foraging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Foraging output +5%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_35",
+          "level": 35,
+          "name": "Foraging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Foraging spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_40",
+          "level": 40,
+          "name": "Foraging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Foraging quality roll +1"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_45",
+          "level": 45,
+          "name": "Foraging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Foraging speed +5%"
+        },
+        {
+          "id": "wild_harvest.foraging.perk_50",
+          "level": 50,
+          "name": "Foraging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Foraging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise foraging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful foraging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of foraging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a foraging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn foraging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of foraging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.mushroom_tending",
+      "domain": "wild_harvest",
+      "name": "Mushroom tending",
+      "description": "Mushroom tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.herb_gathering"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.mushroom_tending.mushroom_tending_basics",
+          "discipline": "wild_harvest.mushroom_tending",
+          "name": "Mushroom tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.mushroom_tending_seasonal_practice",
+          "discipline": "wild_harvest.mushroom_tending",
+          "name": "Mushroom tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.mushroom_tending_precision_work",
+          "discipline": "wild_harvest.mushroom_tending",
+          "name": "Mushroom tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.mushroom_tending_master_technique",
+          "discipline": "wild_harvest.mushroom_tending",
+          "name": "Mushroom tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.mushroom_tending.perk_5",
+          "level": 5,
+          "name": "Mushroom tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mushroom tending output +2%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_10",
+          "level": 10,
+          "name": "Mushroom tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mushroom tending waste -5%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_15",
+          "level": 15,
+          "name": "Mushroom tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mushroom tending quality roll +1"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_20",
+          "level": 20,
+          "name": "Mushroom tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mushroom tending care +5%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_25",
+          "level": 25,
+          "name": "Mushroom tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mushroom tending speed +3%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_30",
+          "level": 30,
+          "name": "Mushroom tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mushroom tending output +5%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_35",
+          "level": 35,
+          "name": "Mushroom tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mushroom tending spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_40",
+          "level": 40,
+          "name": "Mushroom tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mushroom tending quality roll +1"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_45",
+          "level": 45,
+          "name": "Mushroom tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mushroom tending speed +5%"
+        },
+        {
+          "id": "wild_harvest.mushroom_tending.perk_50",
+          "level": 50,
+          "name": "Mushroom tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mushroom tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mushroom tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mushroom tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mushroom tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mushroom tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mushroom tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mushroom tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.herb_gathering",
+      "domain": "wild_harvest",
+      "name": "Herb gathering",
+      "description": "Herb gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.wild_fruit_gathering"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.herb_gathering.herb_gathering_basics",
+          "discipline": "wild_harvest.herb_gathering",
+          "name": "Herb gathering basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.herb_gathering.herb_gathering_seasonal_practice",
+          "discipline": "wild_harvest.herb_gathering",
+          "name": "Herb gathering seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.herb_gathering.herb_gathering_precision_work",
+          "discipline": "wild_harvest.herb_gathering",
+          "name": "Herb gathering precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.herb_gathering.herb_gathering_master_technique",
+          "discipline": "wild_harvest.herb_gathering",
+          "name": "Herb gathering master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.herb_gathering.perk_5",
+          "level": 5,
+          "name": "Herb gathering: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Herb gathering output +2%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_10",
+          "level": 10,
+          "name": "Herb gathering: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Herb gathering waste -5%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_15",
+          "level": 15,
+          "name": "Herb gathering: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herb gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_20",
+          "level": 20,
+          "name": "Herb gathering: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Herb gathering care +5%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_25",
+          "level": 25,
+          "name": "Herb gathering: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Herb gathering speed +3%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_30",
+          "level": 30,
+          "name": "Herb gathering: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herb gathering output +5%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_35",
+          "level": 35,
+          "name": "Herb gathering: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Herb gathering spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_40",
+          "level": 40,
+          "name": "Herb gathering: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herb gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_45",
+          "level": 45,
+          "name": "Herb gathering: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Herb gathering speed +5%"
+        },
+        {
+          "id": "wild_harvest.herb_gathering.perk_50",
+          "level": 50,
+          "name": "Herb gathering: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herb gathering output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise herb gathering for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful herb gathering (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of herb gathering; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a herb gathering task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn herb gathering from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of herb gathering, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.wild_fruit_gathering",
+      "domain": "wild_harvest",
+      "name": "Wild fruit gathering",
+      "description": "Wild fruit gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.nut_gathering"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.wild_fruit_gathering.wild_fruit_gathering_basics",
+          "discipline": "wild_harvest.wild_fruit_gathering",
+          "name": "Wild fruit gathering basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.wild_fruit_gathering_seasonal_practice",
+          "discipline": "wild_harvest.wild_fruit_gathering",
+          "name": "Wild fruit gathering seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.wild_fruit_gathering_precision_work",
+          "discipline": "wild_harvest.wild_fruit_gathering",
+          "name": "Wild fruit gathering precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.wild_fruit_gathering_master_technique",
+          "discipline": "wild_harvest.wild_fruit_gathering",
+          "name": "Wild fruit gathering master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_5",
+          "level": 5,
+          "name": "Wild fruit gathering: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wild fruit gathering output +2%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_10",
+          "level": 10,
+          "name": "Wild fruit gathering: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wild fruit gathering waste -5%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_15",
+          "level": 15,
+          "name": "Wild fruit gathering: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wild fruit gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_20",
+          "level": 20,
+          "name": "Wild fruit gathering: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wild fruit gathering care +5%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_25",
+          "level": 25,
+          "name": "Wild fruit gathering: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wild fruit gathering speed +3%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_30",
+          "level": 30,
+          "name": "Wild fruit gathering: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wild fruit gathering output +5%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_35",
+          "level": 35,
+          "name": "Wild fruit gathering: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wild fruit gathering spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_40",
+          "level": 40,
+          "name": "Wild fruit gathering: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wild fruit gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_45",
+          "level": 45,
+          "name": "Wild fruit gathering: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wild fruit gathering speed +5%"
+        },
+        {
+          "id": "wild_harvest.wild_fruit_gathering.perk_50",
+          "level": 50,
+          "name": "Wild fruit gathering: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wild fruit gathering output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wild fruit gathering for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wild fruit gathering (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wild fruit gathering; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wild fruit gathering task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wild fruit gathering from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wild fruit gathering, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.nut_gathering",
+      "domain": "wild_harvest",
+      "name": "Nut gathering",
+      "description": "Nut gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.bamboo_shoots"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.nut_gathering.nut_gathering_basics",
+          "discipline": "wild_harvest.nut_gathering",
+          "name": "Nut gathering basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.nut_gathering.nut_gathering_seasonal_practice",
+          "discipline": "wild_harvest.nut_gathering",
+          "name": "Nut gathering seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.nut_gathering.nut_gathering_precision_work",
+          "discipline": "wild_harvest.nut_gathering",
+          "name": "Nut gathering precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.nut_gathering.nut_gathering_master_technique",
+          "discipline": "wild_harvest.nut_gathering",
+          "name": "Nut gathering master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.nut_gathering.perk_5",
+          "level": 5,
+          "name": "Nut gathering: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Nut gathering output +2%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_10",
+          "level": 10,
+          "name": "Nut gathering: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Nut gathering waste -5%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_15",
+          "level": 15,
+          "name": "Nut gathering: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nut gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_20",
+          "level": 20,
+          "name": "Nut gathering: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Nut gathering care +5%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_25",
+          "level": 25,
+          "name": "Nut gathering: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Nut gathering speed +3%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_30",
+          "level": 30,
+          "name": "Nut gathering: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nut gathering output +5%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_35",
+          "level": 35,
+          "name": "Nut gathering: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Nut gathering spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_40",
+          "level": 40,
+          "name": "Nut gathering: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nut gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_45",
+          "level": 45,
+          "name": "Nut gathering: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Nut gathering speed +5%"
+        },
+        {
+          "id": "wild_harvest.nut_gathering.perk_50",
+          "level": 50,
+          "name": "Nut gathering: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nut gathering output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise nut gathering for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful nut gathering (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of nut gathering; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a nut gathering task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn nut gathering from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of nut gathering, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.bamboo_shoots",
+      "domain": "wild_harvest",
+      "name": "Bamboo shoots",
+      "description": "Bamboo shoots: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.reed_gathering"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.bamboo_shoots.bamboo_shoots_basics",
+          "discipline": "wild_harvest.bamboo_shoots",
+          "name": "Bamboo shoots basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.bamboo_shoots_seasonal_practice",
+          "discipline": "wild_harvest.bamboo_shoots",
+          "name": "Bamboo shoots seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.bamboo_shoots_precision_work",
+          "discipline": "wild_harvest.bamboo_shoots",
+          "name": "Bamboo shoots precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.bamboo_shoots_master_technique",
+          "discipline": "wild_harvest.bamboo_shoots",
+          "name": "Bamboo shoots master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_5",
+          "level": 5,
+          "name": "Bamboo shoots: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bamboo shoots output +2%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_10",
+          "level": 10,
+          "name": "Bamboo shoots: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bamboo shoots waste -5%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_15",
+          "level": 15,
+          "name": "Bamboo shoots: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bamboo shoots quality roll +1"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_20",
+          "level": 20,
+          "name": "Bamboo shoots: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bamboo shoots care +5%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_25",
+          "level": 25,
+          "name": "Bamboo shoots: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bamboo shoots speed +3%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_30",
+          "level": 30,
+          "name": "Bamboo shoots: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bamboo shoots output +5%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_35",
+          "level": 35,
+          "name": "Bamboo shoots: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bamboo shoots spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_40",
+          "level": 40,
+          "name": "Bamboo shoots: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bamboo shoots quality roll +1"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_45",
+          "level": 45,
+          "name": "Bamboo shoots: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bamboo shoots speed +5%"
+        },
+        {
+          "id": "wild_harvest.bamboo_shoots.perk_50",
+          "level": 50,
+          "name": "Bamboo shoots: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bamboo shoots output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bamboo shoots for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bamboo shoots (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bamboo shoots; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bamboo shoots task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bamboo shoots from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bamboo shoots, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.reed_gathering",
+      "domain": "wild_harvest",
+      "name": "Reed gathering",
+      "description": "Reed gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.edible_roots"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.reed_gathering.reed_gathering_basics",
+          "discipline": "wild_harvest.reed_gathering",
+          "name": "Reed gathering basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.reed_gathering.reed_gathering_seasonal_practice",
+          "discipline": "wild_harvest.reed_gathering",
+          "name": "Reed gathering seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.reed_gathering.reed_gathering_precision_work",
+          "discipline": "wild_harvest.reed_gathering",
+          "name": "Reed gathering precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.reed_gathering.reed_gathering_master_technique",
+          "discipline": "wild_harvest.reed_gathering",
+          "name": "Reed gathering master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.reed_gathering.perk_5",
+          "level": 5,
+          "name": "Reed gathering: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Reed gathering output +2%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_10",
+          "level": 10,
+          "name": "Reed gathering: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Reed gathering waste -5%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_15",
+          "level": 15,
+          "name": "Reed gathering: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Reed gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_20",
+          "level": 20,
+          "name": "Reed gathering: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Reed gathering care +5%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_25",
+          "level": 25,
+          "name": "Reed gathering: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Reed gathering speed +3%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_30",
+          "level": 30,
+          "name": "Reed gathering: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Reed gathering output +5%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_35",
+          "level": 35,
+          "name": "Reed gathering: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Reed gathering spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_40",
+          "level": 40,
+          "name": "Reed gathering: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Reed gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_45",
+          "level": 45,
+          "name": "Reed gathering: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Reed gathering speed +5%"
+        },
+        {
+          "id": "wild_harvest.reed_gathering.perk_50",
+          "level": 50,
+          "name": "Reed gathering: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Reed gathering output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise reed gathering for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful reed gathering (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of reed gathering; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a reed gathering task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn reed gathering from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of reed gathering, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.edible_roots",
+      "domain": "wild_harvest",
+      "name": "Edible roots",
+      "description": "Edible roots: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.poison_recognition"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.edible_roots.edible_roots_basics",
+          "discipline": "wild_harvest.edible_roots",
+          "name": "Edible roots basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.edible_roots.edible_roots_seasonal_practice",
+          "discipline": "wild_harvest.edible_roots",
+          "name": "Edible roots seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.edible_roots.edible_roots_precision_work",
+          "discipline": "wild_harvest.edible_roots",
+          "name": "Edible roots precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.edible_roots.edible_roots_master_technique",
+          "discipline": "wild_harvest.edible_roots",
+          "name": "Edible roots master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.edible_roots.perk_5",
+          "level": 5,
+          "name": "Edible roots: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Edible roots output +2%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_10",
+          "level": 10,
+          "name": "Edible roots: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Edible roots waste -5%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_15",
+          "level": 15,
+          "name": "Edible roots: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Edible roots quality roll +1"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_20",
+          "level": 20,
+          "name": "Edible roots: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Edible roots care +5%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_25",
+          "level": 25,
+          "name": "Edible roots: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Edible roots speed +3%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_30",
+          "level": 30,
+          "name": "Edible roots: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Edible roots output +5%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_35",
+          "level": 35,
+          "name": "Edible roots: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Edible roots spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_40",
+          "level": 40,
+          "name": "Edible roots: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Edible roots quality roll +1"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_45",
+          "level": 45,
+          "name": "Edible roots: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Edible roots speed +5%"
+        },
+        {
+          "id": "wild_harvest.edible_roots.perk_50",
+          "level": 50,
+          "name": "Edible roots: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Edible roots output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise edible roots for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful edible roots (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of edible roots; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a edible roots task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn edible roots from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of edible roots, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.poison_recognition",
+      "domain": "wild_harvest",
+      "name": "Poison recognition",
+      "description": "Poison recognition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.forest_gardening"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.poison_recognition.poison_recognition_basics",
+          "discipline": "wild_harvest.poison_recognition",
+          "name": "Poison recognition basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.poison_recognition.poison_recognition_seasonal_practice",
+          "discipline": "wild_harvest.poison_recognition",
+          "name": "Poison recognition seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.poison_recognition.poison_recognition_precision_work",
+          "discipline": "wild_harvest.poison_recognition",
+          "name": "Poison recognition precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.poison_recognition.poison_recognition_master_technique",
+          "discipline": "wild_harvest.poison_recognition",
+          "name": "Poison recognition master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.poison_recognition.perk_5",
+          "level": 5,
+          "name": "Poison recognition: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Poison recognition output +2%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_10",
+          "level": 10,
+          "name": "Poison recognition: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Poison recognition waste -5%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_15",
+          "level": 15,
+          "name": "Poison recognition: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Poison recognition quality roll +1"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_20",
+          "level": 20,
+          "name": "Poison recognition: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Poison recognition care +5%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_25",
+          "level": 25,
+          "name": "Poison recognition: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Poison recognition speed +3%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_30",
+          "level": 30,
+          "name": "Poison recognition: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Poison recognition output +5%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_35",
+          "level": 35,
+          "name": "Poison recognition: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Poison recognition spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_40",
+          "level": 40,
+          "name": "Poison recognition: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Poison recognition quality roll +1"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_45",
+          "level": 45,
+          "name": "Poison recognition: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Poison recognition speed +5%"
+        },
+        {
+          "id": "wild_harvest.poison_recognition.perk_50",
+          "level": 50,
+          "name": "Poison recognition: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Poison recognition output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise poison recognition for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful poison recognition (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of poison recognition; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a poison recognition task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn poison recognition from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of poison recognition, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.forest_gardening",
+      "domain": "wild_harvest",
+      "name": "Forest gardening",
+      "description": "Forest gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.resin_gathering"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.forest_gardening.forest_gardening_basics",
+          "discipline": "wild_harvest.forest_gardening",
+          "name": "Forest gardening basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.forest_gardening.forest_gardening_seasonal_practice",
+          "discipline": "wild_harvest.forest_gardening",
+          "name": "Forest gardening seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.forest_gardening.forest_gardening_precision_work",
+          "discipline": "wild_harvest.forest_gardening",
+          "name": "Forest gardening precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.forest_gardening.forest_gardening_master_technique",
+          "discipline": "wild_harvest.forest_gardening",
+          "name": "Forest gardening master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.forest_gardening.perk_5",
+          "level": 5,
+          "name": "Forest gardening: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Forest gardening output +2%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_10",
+          "level": 10,
+          "name": "Forest gardening: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Forest gardening waste -5%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_15",
+          "level": 15,
+          "name": "Forest gardening: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Forest gardening quality roll +1"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_20",
+          "level": 20,
+          "name": "Forest gardening: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Forest gardening care +5%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_25",
+          "level": 25,
+          "name": "Forest gardening: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Forest gardening speed +3%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_30",
+          "level": 30,
+          "name": "Forest gardening: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Forest gardening output +5%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_35",
+          "level": 35,
+          "name": "Forest gardening: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Forest gardening spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_40",
+          "level": 40,
+          "name": "Forest gardening: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Forest gardening quality roll +1"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_45",
+          "level": 45,
+          "name": "Forest gardening: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Forest gardening speed +5%"
+        },
+        {
+          "id": "wild_harvest.forest_gardening.perk_50",
+          "level": 50,
+          "name": "Forest gardening: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Forest gardening output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise forest gardening for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful forest gardening (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of forest gardening; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a forest gardening task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn forest gardening from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of forest gardening, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.resin_gathering",
+      "domain": "wild_harvest",
+      "name": "Resin gathering",
+      "description": "Resin gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.wild_honey"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.resin_gathering.resin_gathering_basics",
+          "discipline": "wild_harvest.resin_gathering",
+          "name": "Resin gathering basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.resin_gathering.resin_gathering_seasonal_practice",
+          "discipline": "wild_harvest.resin_gathering",
+          "name": "Resin gathering seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.resin_gathering.resin_gathering_precision_work",
+          "discipline": "wild_harvest.resin_gathering",
+          "name": "Resin gathering precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.resin_gathering.resin_gathering_master_technique",
+          "discipline": "wild_harvest.resin_gathering",
+          "name": "Resin gathering master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.resin_gathering.perk_5",
+          "level": 5,
+          "name": "Resin gathering: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Resin gathering output +2%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_10",
+          "level": 10,
+          "name": "Resin gathering: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Resin gathering waste -5%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_15",
+          "level": 15,
+          "name": "Resin gathering: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Resin gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_20",
+          "level": 20,
+          "name": "Resin gathering: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Resin gathering care +5%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_25",
+          "level": 25,
+          "name": "Resin gathering: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Resin gathering speed +3%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_30",
+          "level": 30,
+          "name": "Resin gathering: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Resin gathering output +5%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_35",
+          "level": 35,
+          "name": "Resin gathering: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Resin gathering spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_40",
+          "level": 40,
+          "name": "Resin gathering: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Resin gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_45",
+          "level": 45,
+          "name": "Resin gathering: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Resin gathering speed +5%"
+        },
+        {
+          "id": "wild_harvest.resin_gathering.perk_50",
+          "level": 50,
+          "name": "Resin gathering: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Resin gathering output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise resin gathering for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful resin gathering (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of resin gathering; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a resin gathering task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn resin gathering from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of resin gathering, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.wild_honey",
+      "domain": "wild_harvest",
+      "name": "Wild honey",
+      "description": "Wild honey: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.medicinal_bark"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.wild_honey.wild_honey_basics",
+          "discipline": "wild_harvest.wild_honey",
+          "name": "Wild honey basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.wild_honey.wild_honey_seasonal_practice",
+          "discipline": "wild_harvest.wild_honey",
+          "name": "Wild honey seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.wild_honey.wild_honey_precision_work",
+          "discipline": "wild_harvest.wild_honey",
+          "name": "Wild honey precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.wild_honey.wild_honey_master_technique",
+          "discipline": "wild_harvest.wild_honey",
+          "name": "Wild honey master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.wild_honey.perk_5",
+          "level": 5,
+          "name": "Wild honey: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wild honey output +2%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_10",
+          "level": 10,
+          "name": "Wild honey: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wild honey waste -5%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_15",
+          "level": 15,
+          "name": "Wild honey: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wild honey quality roll +1"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_20",
+          "level": 20,
+          "name": "Wild honey: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wild honey care +5%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_25",
+          "level": 25,
+          "name": "Wild honey: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wild honey speed +3%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_30",
+          "level": 30,
+          "name": "Wild honey: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wild honey output +5%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_35",
+          "level": 35,
+          "name": "Wild honey: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wild honey spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_40",
+          "level": 40,
+          "name": "Wild honey: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wild honey quality roll +1"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_45",
+          "level": 45,
+          "name": "Wild honey: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wild honey speed +5%"
+        },
+        {
+          "id": "wild_harvest.wild_honey.perk_50",
+          "level": 50,
+          "name": "Wild honey: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wild honey output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wild honey for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wild honey (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wild honey; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wild honey task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wild honey from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wild honey, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.medicinal_bark",
+      "domain": "wild_harvest",
+      "name": "Medicinal bark",
+      "description": "Medicinal bark: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.seasonal_gathering"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.medicinal_bark.medicinal_bark_basics",
+          "discipline": "wild_harvest.medicinal_bark",
+          "name": "Medicinal bark basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.medicinal_bark_seasonal_practice",
+          "discipline": "wild_harvest.medicinal_bark",
+          "name": "Medicinal bark seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.medicinal_bark_precision_work",
+          "discipline": "wild_harvest.medicinal_bark",
+          "name": "Medicinal bark precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.medicinal_bark_master_technique",
+          "discipline": "wild_harvest.medicinal_bark",
+          "name": "Medicinal bark master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.medicinal_bark.perk_5",
+          "level": 5,
+          "name": "Medicinal bark: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Medicinal bark output +2%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_10",
+          "level": 10,
+          "name": "Medicinal bark: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Medicinal bark waste -5%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_15",
+          "level": 15,
+          "name": "Medicinal bark: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medicinal bark quality roll +1"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_20",
+          "level": 20,
+          "name": "Medicinal bark: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Medicinal bark care +5%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_25",
+          "level": 25,
+          "name": "Medicinal bark: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Medicinal bark speed +3%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_30",
+          "level": 30,
+          "name": "Medicinal bark: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medicinal bark output +5%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_35",
+          "level": 35,
+          "name": "Medicinal bark: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Medicinal bark spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_40",
+          "level": 40,
+          "name": "Medicinal bark: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medicinal bark quality roll +1"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_45",
+          "level": 45,
+          "name": "Medicinal bark: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Medicinal bark speed +5%"
+        },
+        {
+          "id": "wild_harvest.medicinal_bark.perk_50",
+          "level": 50,
+          "name": "Medicinal bark: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medicinal bark output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise medicinal bark for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful medicinal bark (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of medicinal bark; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a medicinal bark task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn medicinal bark from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of medicinal bark, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.seasonal_gathering",
+      "domain": "wild_harvest",
+      "name": "Seasonal gathering",
+      "description": "Seasonal gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.harvest_conservation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.seasonal_gathering.seasonal_gathering_basics",
+          "discipline": "wild_harvest.seasonal_gathering",
+          "name": "Seasonal gathering basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.seasonal_gathering_seasonal_practice",
+          "discipline": "wild_harvest.seasonal_gathering",
+          "name": "Seasonal gathering seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.seasonal_gathering_precision_work",
+          "discipline": "wild_harvest.seasonal_gathering",
+          "name": "Seasonal gathering precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.seasonal_gathering_master_technique",
+          "discipline": "wild_harvest.seasonal_gathering",
+          "name": "Seasonal gathering master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_5",
+          "level": 5,
+          "name": "Seasonal gathering: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Seasonal gathering output +2%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_10",
+          "level": 10,
+          "name": "Seasonal gathering: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Seasonal gathering waste -5%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_15",
+          "level": 15,
+          "name": "Seasonal gathering: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seasonal gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_20",
+          "level": 20,
+          "name": "Seasonal gathering: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Seasonal gathering care +5%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_25",
+          "level": 25,
+          "name": "Seasonal gathering: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Seasonal gathering speed +3%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_30",
+          "level": 30,
+          "name": "Seasonal gathering: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seasonal gathering output +5%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_35",
+          "level": 35,
+          "name": "Seasonal gathering: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Seasonal gathering spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_40",
+          "level": 40,
+          "name": "Seasonal gathering: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seasonal gathering quality roll +1"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_45",
+          "level": 45,
+          "name": "Seasonal gathering: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Seasonal gathering speed +5%"
+        },
+        {
+          "id": "wild_harvest.seasonal_gathering.perk_50",
+          "level": 50,
+          "name": "Seasonal gathering: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seasonal gathering output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise seasonal gathering for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful seasonal gathering (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of seasonal gathering; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a seasonal gathering task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn seasonal gathering from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of seasonal gathering, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "wild_harvest.harvest_conservation",
+      "domain": "wild_harvest",
+      "name": "Harvest conservation",
+      "description": "Harvest conservation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "wild_harvest.foraging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "wild_harvest.harvest_conservation.harvest_conservation_basics",
+          "discipline": "wild_harvest.harvest_conservation",
+          "name": "Harvest conservation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.harvest_conservation_seasonal_practice",
+          "discipline": "wild_harvest.harvest_conservation",
+          "name": "Harvest conservation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.harvest_conservation_precision_work",
+          "discipline": "wild_harvest.harvest_conservation",
+          "name": "Harvest conservation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.harvest_conservation_master_technique",
+          "discipline": "wild_harvest.harvest_conservation",
+          "name": "Harvest conservation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "wild_harvest.harvest_conservation.perk_5",
+          "level": 5,
+          "name": "Harvest conservation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Harvest conservation output +2%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_10",
+          "level": 10,
+          "name": "Harvest conservation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Harvest conservation waste -5%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_15",
+          "level": 15,
+          "name": "Harvest conservation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Harvest conservation quality roll +1"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_20",
+          "level": 20,
+          "name": "Harvest conservation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Harvest conservation care +5%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_25",
+          "level": 25,
+          "name": "Harvest conservation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Harvest conservation speed +3%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_30",
+          "level": 30,
+          "name": "Harvest conservation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Harvest conservation output +5%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_35",
+          "level": 35,
+          "name": "Harvest conservation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Harvest conservation spoilage -10%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_40",
+          "level": 40,
+          "name": "Harvest conservation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Harvest conservation quality roll +1"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_45",
+          "level": 45,
+          "name": "Harvest conservation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Harvest conservation speed +5%"
+        },
+        {
+          "id": "wild_harvest.harvest_conservation.perk_50",
+          "level": 50,
+          "name": "Harvest conservation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Harvest conservation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise harvest conservation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful harvest conservation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of harvest conservation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a harvest conservation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn harvest conservation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of harvest conservation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

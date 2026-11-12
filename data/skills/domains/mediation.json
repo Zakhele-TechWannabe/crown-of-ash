@@ -1,0 +1,110 @@
+{
+  "id": "mediation",
+  "disciplines": [
+    {
+      "id": "mediation.listening",
+      "domain": "mediation",
+      "name": "Listening",
+      "description": "Listening applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.dispute_framing",
+      "domain": "mediation",
+      "name": "Dispute framing",
+      "description": "Dispute framing applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.family_mediation",
+      "domain": "mediation",
+      "name": "Family mediation",
+      "description": "Family mediation applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.trade_mediation",
+      "domain": "mediation",
+      "name": "Trade mediation",
+      "description": "Trade mediation applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.land_mediation",
+      "domain": "mediation",
+      "name": "Land mediation",
+      "description": "Land mediation applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.workplace_mediation",
+      "domain": "mediation",
+      "name": "Workplace mediation",
+      "description": "Workplace mediation applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.restitution_plans",
+      "domain": "mediation",
+      "name": "Restitution plans",
+      "description": "Restitution plans applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.oath_witnessing",
+      "domain": "mediation",
+      "name": "Oath witnessing",
+      "description": "Oath witnessing applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.rumour_correction",
+      "domain": "mediation",
+      "name": "Rumour correction",
+      "description": "Rumour correction applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.council_facilitation",
+      "domain": "mediation",
+      "name": "Council facilitation",
+      "description": "Council facilitation applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.de_escalation",
+      "domain": "mediation",
+      "name": "De escalation",
+      "description": "De escalation applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.agreement_drafting",
+      "domain": "mediation",
+      "name": "Agreement drafting",
+      "description": "Agreement drafting applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.follow_up_visits",
+      "domain": "mediation",
+      "name": "Follow up visits",
+      "description": "Follow up visits applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.community_dialogue",
+      "domain": "mediation",
+      "name": "Community dialogue",
+      "description": "Community dialogue applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mediation.mediator_teaching",
+      "domain": "mediation",
+      "name": "Mediator teaching",
+      "description": "Mediator teaching applies mediation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

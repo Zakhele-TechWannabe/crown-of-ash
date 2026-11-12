@@ -1,0 +1,110 @@
+{
+  "id": "talismans",
+  "disciplines": [
+    {
+      "id": "talismans.talismans",
+      "domain": "talismans",
+      "name": "Talismans",
+      "description": "Talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.spirit_paper",
+      "domain": "talismans",
+      "name": "Spirit paper",
+      "description": "Spirit paper applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.cinnabar_inks",
+      "domain": "talismans",
+      "name": "Cinnabar inks",
+      "description": "Cinnabar inks applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.talisman_strokes",
+      "domain": "talismans",
+      "name": "Talisman strokes",
+      "description": "Talisman strokes applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.qi_infusion",
+      "domain": "talismans",
+      "name": "Qi infusion",
+      "description": "Qi infusion applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.fire_talismans",
+      "domain": "talismans",
+      "name": "Fire talismans",
+      "description": "Fire talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.water_talismans",
+      "domain": "talismans",
+      "name": "Water talismans",
+      "description": "Water talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.warding_talismans",
+      "domain": "talismans",
+      "name": "Warding talismans",
+      "description": "Warding talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.message_talismans",
+      "domain": "talismans",
+      "name": "Message talismans",
+      "description": "Message talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.sealing_talismans",
+      "domain": "talismans",
+      "name": "Sealing talismans",
+      "description": "Sealing talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.movement_talismans",
+      "domain": "talismans",
+      "name": "Movement talismans",
+      "description": "Movement talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.talisman_activation",
+      "domain": "talismans",
+      "name": "Talisman activation",
+      "description": "Talisman activation applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.talisman_arrays",
+      "domain": "talismans",
+      "name": "Talisman arrays",
+      "description": "Talisman arrays applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.script_research",
+      "domain": "talismans",
+      "name": "Script research",
+      "description": "Script research applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "talismans.talisman_teaching",
+      "domain": "talismans",
+      "name": "Talisman teaching",
+      "description": "Talisman teaching applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

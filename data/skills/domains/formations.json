@@ -1,0 +1,110 @@
+{
+  "id": "formations",
+  "disciplines": [
+    {
+      "id": "formations.formations",
+      "domain": "formations",
+      "name": "Formations",
+      "description": "Formations applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.formation_geometry",
+      "domain": "formations",
+      "name": "Formation geometry",
+      "description": "Formation geometry applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.array_flags",
+      "domain": "formations",
+      "name": "Array flags",
+      "description": "Array flags applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.spirit_stone_placement",
+      "domain": "formations",
+      "name": "Spirit stone placement",
+      "description": "Spirit stone placement applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.qi_conduits",
+      "domain": "formations",
+      "name": "Qi conduits",
+      "description": "Qi conduits applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.gathering_arrays",
+      "domain": "formations",
+      "name": "Gathering arrays",
+      "description": "Gathering arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.warding_arrays",
+      "domain": "formations",
+      "name": "Warding arrays",
+      "description": "Warding arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.illusion_arrays",
+      "domain": "formations",
+      "name": "Illusion arrays",
+      "description": "Illusion arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.sealing_arrays",
+      "domain": "formations",
+      "name": "Sealing arrays",
+      "description": "Sealing arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.killing_arrays",
+      "domain": "formations",
+      "name": "Killing arrays",
+      "description": "Killing arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.transport_arrays",
+      "domain": "formations",
+      "name": "Transport arrays",
+      "description": "Transport arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.array_maintenance",
+      "domain": "formations",
+      "name": "Array maintenance",
+      "description": "Array maintenance applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.formation_breaking",
+      "domain": "formations",
+      "name": "Formation breaking",
+      "description": "Formation breaking applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.landform_arrays",
+      "domain": "formations",
+      "name": "Landform arrays",
+      "description": "Landform arrays applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "formations.formation_design",
+      "domain": "formations",
+      "name": "Formation design",
+      "description": "Formation design applies formations to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

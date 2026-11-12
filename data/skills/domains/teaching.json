@@ -1,0 +1,4051 @@
+{
+  "id": "teaching",
+  "disciplines": [
+    {
+      "id": "teaching.teaching",
+      "domain": "teaching",
+      "name": "Teaching",
+      "description": "Teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.apprenticing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.teaching.apprenticing",
+          "discipline": "teaching.teaching",
+          "name": "Apprenticing",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.teaching.child_rearing",
+          "discipline": "teaching.teaching",
+          "name": "Child rearing",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.teaching.demonstration",
+          "discipline": "teaching.teaching",
+          "name": "Demonstration",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.teaching.perk_5",
+          "level": 5,
+          "name": "Teaching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Teaching output +2%"
+        },
+        {
+          "id": "teaching.teaching.perk_10",
+          "level": 10,
+          "name": "Teaching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Teaching waste -5%"
+        },
+        {
+          "id": "teaching.teaching.perk_15",
+          "level": 15,
+          "name": "Teaching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Teaching quality roll +1"
+        },
+        {
+          "id": "teaching.teaching.perk_20",
+          "level": 20,
+          "name": "Teaching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Teaching care +5%"
+        },
+        {
+          "id": "teaching.teaching.perk_25",
+          "level": 25,
+          "name": "Teaching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Teaching speed +3%"
+        },
+        {
+          "id": "teaching.teaching.perk_30",
+          "level": 30,
+          "name": "Teaching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Teaching output +5%"
+        },
+        {
+          "id": "teaching.teaching.perk_35",
+          "level": 35,
+          "name": "Teaching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Teaching spoilage -10%"
+        },
+        {
+          "id": "teaching.teaching.perk_40",
+          "level": 40,
+          "name": "Teaching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Teaching quality roll +1"
+        },
+        {
+          "id": "teaching.teaching.perk_45",
+          "level": 45,
+          "name": "Teaching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Teaching speed +5%"
+        },
+        {
+          "id": "teaching.teaching.perk_50",
+          "level": 50,
+          "name": "Teaching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Teaching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise teaching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful teaching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of teaching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a teaching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn teaching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of teaching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.apprenticing",
+      "domain": "teaching",
+      "name": "Apprenticing",
+      "description": "Apprenticing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.demonstration"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.apprenticing.apprenticing_basics",
+          "discipline": "teaching.apprenticing",
+          "name": "Apprenticing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.apprenticing.apprenticing_seasonal_practice",
+          "discipline": "teaching.apprenticing",
+          "name": "Apprenticing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.apprenticing.apprenticing_precision_work",
+          "discipline": "teaching.apprenticing",
+          "name": "Apprenticing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.apprenticing.apprenticing_master_technique",
+          "discipline": "teaching.apprenticing",
+          "name": "Apprenticing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.apprenticing.perk_5",
+          "level": 5,
+          "name": "Apprenticing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Apprenticing output +2%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_10",
+          "level": 10,
+          "name": "Apprenticing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Apprenticing waste -5%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_15",
+          "level": 15,
+          "name": "Apprenticing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Apprenticing quality roll +1"
+        },
+        {
+          "id": "teaching.apprenticing.perk_20",
+          "level": 20,
+          "name": "Apprenticing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Apprenticing care +5%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_25",
+          "level": 25,
+          "name": "Apprenticing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Apprenticing speed +3%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_30",
+          "level": 30,
+          "name": "Apprenticing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Apprenticing output +5%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_35",
+          "level": 35,
+          "name": "Apprenticing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Apprenticing spoilage -10%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_40",
+          "level": 40,
+          "name": "Apprenticing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Apprenticing quality roll +1"
+        },
+        {
+          "id": "teaching.apprenticing.perk_45",
+          "level": 45,
+          "name": "Apprenticing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Apprenticing speed +5%"
+        },
+        {
+          "id": "teaching.apprenticing.perk_50",
+          "level": 50,
+          "name": "Apprenticing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Apprenticing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise apprenticing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful apprenticing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of apprenticing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a apprenticing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn apprenticing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of apprenticing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.demonstration",
+      "domain": "teaching",
+      "name": "Demonstration",
+      "description": "Demonstration: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.lesson_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.demonstration.demonstration_basics",
+          "discipline": "teaching.demonstration",
+          "name": "Demonstration basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.demonstration.demonstration_seasonal_practice",
+          "discipline": "teaching.demonstration",
+          "name": "Demonstration seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.demonstration.demonstration_precision_work",
+          "discipline": "teaching.demonstration",
+          "name": "Demonstration precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.demonstration.demonstration_master_technique",
+          "discipline": "teaching.demonstration",
+          "name": "Demonstration master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.demonstration.perk_5",
+          "level": 5,
+          "name": "Demonstration: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Demonstration output +2%"
+        },
+        {
+          "id": "teaching.demonstration.perk_10",
+          "level": 10,
+          "name": "Demonstration: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Demonstration waste -5%"
+        },
+        {
+          "id": "teaching.demonstration.perk_15",
+          "level": 15,
+          "name": "Demonstration: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Demonstration quality roll +1"
+        },
+        {
+          "id": "teaching.demonstration.perk_20",
+          "level": 20,
+          "name": "Demonstration: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Demonstration care +5%"
+        },
+        {
+          "id": "teaching.demonstration.perk_25",
+          "level": 25,
+          "name": "Demonstration: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Demonstration speed +3%"
+        },
+        {
+          "id": "teaching.demonstration.perk_30",
+          "level": 30,
+          "name": "Demonstration: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Demonstration output +5%"
+        },
+        {
+          "id": "teaching.demonstration.perk_35",
+          "level": 35,
+          "name": "Demonstration: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Demonstration spoilage -10%"
+        },
+        {
+          "id": "teaching.demonstration.perk_40",
+          "level": 40,
+          "name": "Demonstration: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Demonstration quality roll +1"
+        },
+        {
+          "id": "teaching.demonstration.perk_45",
+          "level": 45,
+          "name": "Demonstration: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Demonstration speed +5%"
+        },
+        {
+          "id": "teaching.demonstration.perk_50",
+          "level": 50,
+          "name": "Demonstration: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Demonstration output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise demonstration for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful demonstration (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of demonstration; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a demonstration task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn demonstration from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of demonstration, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.lesson_planning",
+      "domain": "teaching",
+      "name": "Lesson planning",
+      "description": "Lesson planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.literacy_teaching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.lesson_planning.lesson_planning_basics",
+          "discipline": "teaching.lesson_planning",
+          "name": "Lesson planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.lesson_planning.lesson_planning_seasonal_practice",
+          "discipline": "teaching.lesson_planning",
+          "name": "Lesson planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.lesson_planning.lesson_planning_precision_work",
+          "discipline": "teaching.lesson_planning",
+          "name": "Lesson planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.lesson_planning.lesson_planning_master_technique",
+          "discipline": "teaching.lesson_planning",
+          "name": "Lesson planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.lesson_planning.perk_5",
+          "level": 5,
+          "name": "Lesson planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Lesson planning output +2%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_10",
+          "level": 10,
+          "name": "Lesson planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Lesson planning waste -5%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_15",
+          "level": 15,
+          "name": "Lesson planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lesson planning quality roll +1"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_20",
+          "level": 20,
+          "name": "Lesson planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Lesson planning care +5%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_25",
+          "level": 25,
+          "name": "Lesson planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Lesson planning speed +3%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_30",
+          "level": 30,
+          "name": "Lesson planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lesson planning output +5%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_35",
+          "level": 35,
+          "name": "Lesson planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Lesson planning spoilage -10%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_40",
+          "level": 40,
+          "name": "Lesson planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lesson planning quality roll +1"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_45",
+          "level": 45,
+          "name": "Lesson planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Lesson planning speed +5%"
+        },
+        {
+          "id": "teaching.lesson_planning.perk_50",
+          "level": 50,
+          "name": "Lesson planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lesson planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise lesson planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful lesson planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of lesson planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a lesson planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn lesson planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of lesson planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.literacy_teaching",
+      "domain": "teaching",
+      "name": "Literacy teaching",
+      "description": "Literacy teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.numeracy_teaching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.literacy_teaching.literacy_teaching_basics",
+          "discipline": "teaching.literacy_teaching",
+          "name": "Literacy teaching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.literacy_teaching.literacy_teaching_seasonal_practice",
+          "discipline": "teaching.literacy_teaching",
+          "name": "Literacy teaching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.literacy_teaching.literacy_teaching_precision_work",
+          "discipline": "teaching.literacy_teaching",
+          "name": "Literacy teaching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.literacy_teaching.literacy_teaching_master_technique",
+          "discipline": "teaching.literacy_teaching",
+          "name": "Literacy teaching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.literacy_teaching.perk_5",
+          "level": 5,
+          "name": "Literacy teaching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Literacy teaching output +2%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_10",
+          "level": 10,
+          "name": "Literacy teaching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Literacy teaching waste -5%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_15",
+          "level": 15,
+          "name": "Literacy teaching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Literacy teaching quality roll +1"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_20",
+          "level": 20,
+          "name": "Literacy teaching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Literacy teaching care +5%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_25",
+          "level": 25,
+          "name": "Literacy teaching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Literacy teaching speed +3%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_30",
+          "level": 30,
+          "name": "Literacy teaching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Literacy teaching output +5%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_35",
+          "level": 35,
+          "name": "Literacy teaching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Literacy teaching spoilage -10%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_40",
+          "level": 40,
+          "name": "Literacy teaching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Literacy teaching quality roll +1"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_45",
+          "level": 45,
+          "name": "Literacy teaching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Literacy teaching speed +5%"
+        },
+        {
+          "id": "teaching.literacy_teaching.perk_50",
+          "level": 50,
+          "name": "Literacy teaching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Literacy teaching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise literacy teaching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful literacy teaching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of literacy teaching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a literacy teaching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn literacy teaching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of literacy teaching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.numeracy_teaching",
+      "domain": "teaching",
+      "name": "Numeracy teaching",
+      "description": "Numeracy teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.craft_mentoring"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.numeracy_teaching.numeracy_teaching_basics",
+          "discipline": "teaching.numeracy_teaching",
+          "name": "Numeracy teaching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.numeracy_teaching.numeracy_teaching_seasonal_practice",
+          "discipline": "teaching.numeracy_teaching",
+          "name": "Numeracy teaching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.numeracy_teaching.numeracy_teaching_precision_work",
+          "discipline": "teaching.numeracy_teaching",
+          "name": "Numeracy teaching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.numeracy_teaching.numeracy_teaching_master_technique",
+          "discipline": "teaching.numeracy_teaching",
+          "name": "Numeracy teaching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.numeracy_teaching.perk_5",
+          "level": 5,
+          "name": "Numeracy teaching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Numeracy teaching output +2%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_10",
+          "level": 10,
+          "name": "Numeracy teaching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Numeracy teaching waste -5%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_15",
+          "level": 15,
+          "name": "Numeracy teaching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Numeracy teaching quality roll +1"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_20",
+          "level": 20,
+          "name": "Numeracy teaching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Numeracy teaching care +5%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_25",
+          "level": 25,
+          "name": "Numeracy teaching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Numeracy teaching speed +3%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_30",
+          "level": 30,
+          "name": "Numeracy teaching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Numeracy teaching output +5%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_35",
+          "level": 35,
+          "name": "Numeracy teaching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Numeracy teaching spoilage -10%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_40",
+          "level": 40,
+          "name": "Numeracy teaching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Numeracy teaching quality roll +1"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_45",
+          "level": 45,
+          "name": "Numeracy teaching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Numeracy teaching speed +5%"
+        },
+        {
+          "id": "teaching.numeracy_teaching.perk_50",
+          "level": 50,
+          "name": "Numeracy teaching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Numeracy teaching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise numeracy teaching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful numeracy teaching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of numeracy teaching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a numeracy teaching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn numeracy teaching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of numeracy teaching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.craft_mentoring",
+      "domain": "teaching",
+      "name": "Craft mentoring",
+      "description": "Craft mentoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.field_instruction"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.craft_mentoring.craft_mentoring_basics",
+          "discipline": "teaching.craft_mentoring",
+          "name": "Craft mentoring basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.craft_mentoring.craft_mentoring_seasonal_practice",
+          "discipline": "teaching.craft_mentoring",
+          "name": "Craft mentoring seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.craft_mentoring.craft_mentoring_precision_work",
+          "discipline": "teaching.craft_mentoring",
+          "name": "Craft mentoring precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.craft_mentoring.craft_mentoring_master_technique",
+          "discipline": "teaching.craft_mentoring",
+          "name": "Craft mentoring master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.craft_mentoring.perk_5",
+          "level": 5,
+          "name": "Craft mentoring: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Craft mentoring output +2%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_10",
+          "level": 10,
+          "name": "Craft mentoring: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Craft mentoring waste -5%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_15",
+          "level": 15,
+          "name": "Craft mentoring: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Craft mentoring quality roll +1"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_20",
+          "level": 20,
+          "name": "Craft mentoring: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Craft mentoring care +5%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_25",
+          "level": 25,
+          "name": "Craft mentoring: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Craft mentoring speed +3%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_30",
+          "level": 30,
+          "name": "Craft mentoring: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Craft mentoring output +5%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_35",
+          "level": 35,
+          "name": "Craft mentoring: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Craft mentoring spoilage -10%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_40",
+          "level": 40,
+          "name": "Craft mentoring: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Craft mentoring quality roll +1"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_45",
+          "level": 45,
+          "name": "Craft mentoring: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Craft mentoring speed +5%"
+        },
+        {
+          "id": "teaching.craft_mentoring.perk_50",
+          "level": 50,
+          "name": "Craft mentoring: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Craft mentoring output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise craft mentoring for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful craft mentoring (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of craft mentoring; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a craft mentoring task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn craft mentoring from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of craft mentoring, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.field_instruction",
+      "domain": "teaching",
+      "name": "Field instruction",
+      "description": "Field instruction: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.story_instruction"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.field_instruction.field_instruction_basics",
+          "discipline": "teaching.field_instruction",
+          "name": "Field instruction basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.field_instruction.field_instruction_seasonal_practice",
+          "discipline": "teaching.field_instruction",
+          "name": "Field instruction seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.field_instruction.field_instruction_precision_work",
+          "discipline": "teaching.field_instruction",
+          "name": "Field instruction precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.field_instruction.field_instruction_master_technique",
+          "discipline": "teaching.field_instruction",
+          "name": "Field instruction master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.field_instruction.perk_5",
+          "level": 5,
+          "name": "Field instruction: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Field instruction output +2%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_10",
+          "level": 10,
+          "name": "Field instruction: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Field instruction waste -5%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_15",
+          "level": 15,
+          "name": "Field instruction: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Field instruction quality roll +1"
+        },
+        {
+          "id": "teaching.field_instruction.perk_20",
+          "level": 20,
+          "name": "Field instruction: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Field instruction care +5%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_25",
+          "level": 25,
+          "name": "Field instruction: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Field instruction speed +3%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_30",
+          "level": 30,
+          "name": "Field instruction: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Field instruction output +5%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_35",
+          "level": 35,
+          "name": "Field instruction: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Field instruction spoilage -10%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_40",
+          "level": 40,
+          "name": "Field instruction: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Field instruction quality roll +1"
+        },
+        {
+          "id": "teaching.field_instruction.perk_45",
+          "level": 45,
+          "name": "Field instruction: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Field instruction speed +5%"
+        },
+        {
+          "id": "teaching.field_instruction.perk_50",
+          "level": 50,
+          "name": "Field instruction: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Field instruction output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise field instruction for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful field instruction (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of field instruction; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a field instruction task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn field instruction from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of field instruction, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.story_instruction",
+      "domain": "teaching",
+      "name": "Story instruction",
+      "description": "Story instruction: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.assessment"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.story_instruction.story_instruction_basics",
+          "discipline": "teaching.story_instruction",
+          "name": "Story instruction basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.story_instruction.story_instruction_seasonal_practice",
+          "discipline": "teaching.story_instruction",
+          "name": "Story instruction seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.story_instruction.story_instruction_precision_work",
+          "discipline": "teaching.story_instruction",
+          "name": "Story instruction precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.story_instruction.story_instruction_master_technique",
+          "discipline": "teaching.story_instruction",
+          "name": "Story instruction master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.story_instruction.perk_5",
+          "level": 5,
+          "name": "Story instruction: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Story instruction output +2%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_10",
+          "level": 10,
+          "name": "Story instruction: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Story instruction waste -5%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_15",
+          "level": 15,
+          "name": "Story instruction: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Story instruction quality roll +1"
+        },
+        {
+          "id": "teaching.story_instruction.perk_20",
+          "level": 20,
+          "name": "Story instruction: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Story instruction care +5%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_25",
+          "level": 25,
+          "name": "Story instruction: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Story instruction speed +3%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_30",
+          "level": 30,
+          "name": "Story instruction: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Story instruction output +5%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_35",
+          "level": 35,
+          "name": "Story instruction: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Story instruction spoilage -10%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_40",
+          "level": 40,
+          "name": "Story instruction: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Story instruction quality roll +1"
+        },
+        {
+          "id": "teaching.story_instruction.perk_45",
+          "level": 45,
+          "name": "Story instruction: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Story instruction speed +5%"
+        },
+        {
+          "id": "teaching.story_instruction.perk_50",
+          "level": 50,
+          "name": "Story instruction: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Story instruction output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise story instruction for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful story instruction (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of story instruction; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a story instruction task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn story instruction from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of story instruction, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.assessment",
+      "domain": "teaching",
+      "name": "Assessment",
+      "description": "Assessment: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.patient_correction"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.assessment.assessment_basics",
+          "discipline": "teaching.assessment",
+          "name": "Assessment basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.assessment.assessment_seasonal_practice",
+          "discipline": "teaching.assessment",
+          "name": "Assessment seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.assessment.assessment_precision_work",
+          "discipline": "teaching.assessment",
+          "name": "Assessment precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.assessment.assessment_master_technique",
+          "discipline": "teaching.assessment",
+          "name": "Assessment master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.assessment.perk_5",
+          "level": 5,
+          "name": "Assessment: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Assessment output +2%"
+        },
+        {
+          "id": "teaching.assessment.perk_10",
+          "level": 10,
+          "name": "Assessment: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Assessment waste -5%"
+        },
+        {
+          "id": "teaching.assessment.perk_15",
+          "level": 15,
+          "name": "Assessment: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Assessment quality roll +1"
+        },
+        {
+          "id": "teaching.assessment.perk_20",
+          "level": 20,
+          "name": "Assessment: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Assessment care +5%"
+        },
+        {
+          "id": "teaching.assessment.perk_25",
+          "level": 25,
+          "name": "Assessment: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Assessment speed +3%"
+        },
+        {
+          "id": "teaching.assessment.perk_30",
+          "level": 30,
+          "name": "Assessment: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Assessment output +5%"
+        },
+        {
+          "id": "teaching.assessment.perk_35",
+          "level": 35,
+          "name": "Assessment: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Assessment spoilage -10%"
+        },
+        {
+          "id": "teaching.assessment.perk_40",
+          "level": 40,
+          "name": "Assessment: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Assessment quality roll +1"
+        },
+        {
+          "id": "teaching.assessment.perk_45",
+          "level": 45,
+          "name": "Assessment: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Assessment speed +5%"
+        },
+        {
+          "id": "teaching.assessment.perk_50",
+          "level": 50,
+          "name": "Assessment: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Assessment output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise assessment for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful assessment (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of assessment; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a assessment task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn assessment from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of assessment, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.patient_correction",
+      "domain": "teaching",
+      "name": "Patient correction",
+      "description": "Patient correction: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.study_circles"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.patient_correction.patient_correction_basics",
+          "discipline": "teaching.patient_correction",
+          "name": "Patient correction basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.patient_correction.patient_correction_seasonal_practice",
+          "discipline": "teaching.patient_correction",
+          "name": "Patient correction seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.patient_correction.patient_correction_precision_work",
+          "discipline": "teaching.patient_correction",
+          "name": "Patient correction precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.patient_correction.patient_correction_master_technique",
+          "discipline": "teaching.patient_correction",
+          "name": "Patient correction master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.patient_correction.perk_5",
+          "level": 5,
+          "name": "Patient correction: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Patient correction output +2%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_10",
+          "level": 10,
+          "name": "Patient correction: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Patient correction waste -5%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_15",
+          "level": 15,
+          "name": "Patient correction: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Patient correction quality roll +1"
+        },
+        {
+          "id": "teaching.patient_correction.perk_20",
+          "level": 20,
+          "name": "Patient correction: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Patient correction care +5%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_25",
+          "level": 25,
+          "name": "Patient correction: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Patient correction speed +3%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_30",
+          "level": 30,
+          "name": "Patient correction: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Patient correction output +5%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_35",
+          "level": 35,
+          "name": "Patient correction: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Patient correction spoilage -10%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_40",
+          "level": 40,
+          "name": "Patient correction: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Patient correction quality roll +1"
+        },
+        {
+          "id": "teaching.patient_correction.perk_45",
+          "level": 45,
+          "name": "Patient correction: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Patient correction speed +5%"
+        },
+        {
+          "id": "teaching.patient_correction.perk_50",
+          "level": 50,
+          "name": "Patient correction: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Patient correction output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise patient correction for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful patient correction (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of patient correction; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a patient correction task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn patient correction from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of patient correction, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.study_circles",
+      "domain": "teaching",
+      "name": "Study circles",
+      "description": "Study circles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.manual_writing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.study_circles.study_circles_basics",
+          "discipline": "teaching.study_circles",
+          "name": "Study circles basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.study_circles.study_circles_seasonal_practice",
+          "discipline": "teaching.study_circles",
+          "name": "Study circles seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.study_circles.study_circles_precision_work",
+          "discipline": "teaching.study_circles",
+          "name": "Study circles precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.study_circles.study_circles_master_technique",
+          "discipline": "teaching.study_circles",
+          "name": "Study circles master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.study_circles.perk_5",
+          "level": 5,
+          "name": "Study circles: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Study circles output +2%"
+        },
+        {
+          "id": "teaching.study_circles.perk_10",
+          "level": 10,
+          "name": "Study circles: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Study circles waste -5%"
+        },
+        {
+          "id": "teaching.study_circles.perk_15",
+          "level": 15,
+          "name": "Study circles: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Study circles quality roll +1"
+        },
+        {
+          "id": "teaching.study_circles.perk_20",
+          "level": 20,
+          "name": "Study circles: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Study circles care +5%"
+        },
+        {
+          "id": "teaching.study_circles.perk_25",
+          "level": 25,
+          "name": "Study circles: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Study circles speed +3%"
+        },
+        {
+          "id": "teaching.study_circles.perk_30",
+          "level": 30,
+          "name": "Study circles: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Study circles output +5%"
+        },
+        {
+          "id": "teaching.study_circles.perk_35",
+          "level": 35,
+          "name": "Study circles: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Study circles spoilage -10%"
+        },
+        {
+          "id": "teaching.study_circles.perk_40",
+          "level": 40,
+          "name": "Study circles: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Study circles quality roll +1"
+        },
+        {
+          "id": "teaching.study_circles.perk_45",
+          "level": 45,
+          "name": "Study circles: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Study circles speed +5%"
+        },
+        {
+          "id": "teaching.study_circles.perk_50",
+          "level": 50,
+          "name": "Study circles: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Study circles output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise study circles for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful study circles (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of study circles; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a study circles task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn study circles from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of study circles, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.manual_writing",
+      "domain": "teaching",
+      "name": "Manual writing",
+      "description": "Manual writing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.teacher_training"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.manual_writing.manual_writing_basics",
+          "discipline": "teaching.manual_writing",
+          "name": "Manual writing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.manual_writing.manual_writing_seasonal_practice",
+          "discipline": "teaching.manual_writing",
+          "name": "Manual writing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.manual_writing.manual_writing_precision_work",
+          "discipline": "teaching.manual_writing",
+          "name": "Manual writing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.manual_writing.manual_writing_master_technique",
+          "discipline": "teaching.manual_writing",
+          "name": "Manual writing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.manual_writing.perk_5",
+          "level": 5,
+          "name": "Manual writing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Manual writing output +2%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_10",
+          "level": 10,
+          "name": "Manual writing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Manual writing waste -5%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_15",
+          "level": 15,
+          "name": "Manual writing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Manual writing quality roll +1"
+        },
+        {
+          "id": "teaching.manual_writing.perk_20",
+          "level": 20,
+          "name": "Manual writing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Manual writing care +5%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_25",
+          "level": 25,
+          "name": "Manual writing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Manual writing speed +3%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_30",
+          "level": 30,
+          "name": "Manual writing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Manual writing output +5%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_35",
+          "level": 35,
+          "name": "Manual writing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Manual writing spoilage -10%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_40",
+          "level": 40,
+          "name": "Manual writing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Manual writing quality roll +1"
+        },
+        {
+          "id": "teaching.manual_writing.perk_45",
+          "level": 45,
+          "name": "Manual writing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Manual writing speed +5%"
+        },
+        {
+          "id": "teaching.manual_writing.perk_50",
+          "level": 50,
+          "name": "Manual writing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Manual writing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise manual writing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful manual writing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of manual writing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a manual writing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn manual writing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of manual writing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.teacher_training",
+      "domain": "teaching",
+      "name": "Teacher training",
+      "description": "Teacher training: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.school_stewardship"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.teacher_training.teacher_training_basics",
+          "discipline": "teaching.teacher_training",
+          "name": "Teacher training basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.teacher_training.teacher_training_seasonal_practice",
+          "discipline": "teaching.teacher_training",
+          "name": "Teacher training seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.teacher_training.teacher_training_precision_work",
+          "discipline": "teaching.teacher_training",
+          "name": "Teacher training precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.teacher_training.teacher_training_master_technique",
+          "discipline": "teaching.teacher_training",
+          "name": "Teacher training master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.teacher_training.perk_5",
+          "level": 5,
+          "name": "Teacher training: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Teacher training output +2%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_10",
+          "level": 10,
+          "name": "Teacher training: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Teacher training waste -5%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_15",
+          "level": 15,
+          "name": "Teacher training: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Teacher training quality roll +1"
+        },
+        {
+          "id": "teaching.teacher_training.perk_20",
+          "level": 20,
+          "name": "Teacher training: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Teacher training care +5%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_25",
+          "level": 25,
+          "name": "Teacher training: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Teacher training speed +3%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_30",
+          "level": 30,
+          "name": "Teacher training: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Teacher training output +5%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_35",
+          "level": 35,
+          "name": "Teacher training: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Teacher training spoilage -10%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_40",
+          "level": 40,
+          "name": "Teacher training: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Teacher training quality roll +1"
+        },
+        {
+          "id": "teaching.teacher_training.perk_45",
+          "level": 45,
+          "name": "Teacher training: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Teacher training speed +5%"
+        },
+        {
+          "id": "teaching.teacher_training.perk_50",
+          "level": 50,
+          "name": "Teacher training: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Teacher training output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise teacher training for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful teacher training (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of teacher training; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a teacher training task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn teacher training from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of teacher training, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "teaching.school_stewardship",
+      "domain": "teaching",
+      "name": "School stewardship",
+      "description": "School stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "teaching.teaching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "teaching.school_stewardship.school_stewardship_basics",
+          "discipline": "teaching.school_stewardship",
+          "name": "School stewardship basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.school_stewardship.school_stewardship_seasonal_practice",
+          "discipline": "teaching.school_stewardship",
+          "name": "School stewardship seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.school_stewardship.school_stewardship_precision_work",
+          "discipline": "teaching.school_stewardship",
+          "name": "School stewardship precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "teaching.school_stewardship.school_stewardship_master_technique",
+          "discipline": "teaching.school_stewardship",
+          "name": "School stewardship master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "teaching.school_stewardship.perk_5",
+          "level": 5,
+          "name": "School stewardship: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "School stewardship output +2%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_10",
+          "level": 10,
+          "name": "School stewardship: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "School stewardship waste -5%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_15",
+          "level": 15,
+          "name": "School stewardship: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "School stewardship quality roll +1"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_20",
+          "level": 20,
+          "name": "School stewardship: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "School stewardship care +5%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_25",
+          "level": 25,
+          "name": "School stewardship: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "School stewardship speed +3%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_30",
+          "level": 30,
+          "name": "School stewardship: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "School stewardship output +5%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_35",
+          "level": 35,
+          "name": "School stewardship: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "School stewardship spoilage -10%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_40",
+          "level": 40,
+          "name": "School stewardship: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "School stewardship quality roll +1"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_45",
+          "level": 45,
+          "name": "School stewardship: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "School stewardship speed +5%"
+        },
+        {
+          "id": "teaching.school_stewardship.perk_50",
+          "level": 50,
+          "name": "School stewardship: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "School stewardship output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise school stewardship for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful school stewardship (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of school stewardship; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a school stewardship task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn school stewardship from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of school stewardship, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

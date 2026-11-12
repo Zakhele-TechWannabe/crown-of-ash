@@ -1,0 +1,4079 @@
+{
+  "id": "mines_and_ores",
+  "disciplines": [
+    {
+      "id": "mines_and_ores.mining",
+      "domain": "mines_and_ores",
+      "name": "Mining",
+      "description": "Mining: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.prospecting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.mining.prospecting",
+          "discipline": "mines_and_ores.mining",
+          "name": "Prospecting",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 11
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mining.tunnelling",
+          "discipline": "mines_and_ores.mining",
+          "name": "Tunnelling",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 11
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mining.ore_sorting",
+          "discipline": "mines_and_ores.mining",
+          "name": "Ore sorting",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mining.shoring",
+          "discipline": "mines_and_ores.mining",
+          "name": "Shoring",
+          "unlock_level": 20,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mining.spirit_vein_mining",
+          "discipline": "mines_and_ores.mining",
+          "name": "Spirit-vein mining",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.mining.perk_5",
+          "level": 5,
+          "name": "Mining: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mining output +2%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_10",
+          "level": 10,
+          "name": "Mining: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mining waste -5%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_15",
+          "level": 15,
+          "name": "Mining: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mining quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_20",
+          "level": 20,
+          "name": "Mining: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mining care +5%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_25",
+          "level": 25,
+          "name": "Mining: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mining speed +3%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_30",
+          "level": 30,
+          "name": "Mining: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mining output +5%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_35",
+          "level": 35,
+          "name": "Mining: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mining spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_40",
+          "level": 40,
+          "name": "Mining: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mining quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_45",
+          "level": 45,
+          "name": "Mining: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mining speed +5%"
+        },
+        {
+          "id": "mines_and_ores.mining.perk_50",
+          "level": 50,
+          "name": "Mining: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mining output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mining for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mining (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mining; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mining task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mining from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mining, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.prospecting",
+      "domain": "mines_and_ores",
+      "name": "Prospecting",
+      "description": "Prospecting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.tunnel_digging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.prospecting.prospecting_basics",
+          "discipline": "mines_and_ores.prospecting",
+          "name": "Prospecting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.prospecting.prospecting_seasonal_practice",
+          "discipline": "mines_and_ores.prospecting",
+          "name": "Prospecting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.prospecting.prospecting_precision_work",
+          "discipline": "mines_and_ores.prospecting",
+          "name": "Prospecting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.prospecting.prospecting_master_technique",
+          "discipline": "mines_and_ores.prospecting",
+          "name": "Prospecting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.prospecting.perk_5",
+          "level": 5,
+          "name": "Prospecting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Prospecting output +2%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_10",
+          "level": 10,
+          "name": "Prospecting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Prospecting waste -5%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_15",
+          "level": 15,
+          "name": "Prospecting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Prospecting quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_20",
+          "level": 20,
+          "name": "Prospecting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Prospecting care +5%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_25",
+          "level": 25,
+          "name": "Prospecting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Prospecting speed +3%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_30",
+          "level": 30,
+          "name": "Prospecting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Prospecting output +5%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_35",
+          "level": 35,
+          "name": "Prospecting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Prospecting spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_40",
+          "level": 40,
+          "name": "Prospecting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Prospecting quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_45",
+          "level": 45,
+          "name": "Prospecting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Prospecting speed +5%"
+        },
+        {
+          "id": "mines_and_ores.prospecting.perk_50",
+          "level": 50,
+          "name": "Prospecting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Prospecting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise prospecting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful prospecting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of prospecting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a prospecting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn prospecting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of prospecting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.tunnel_digging",
+      "domain": "mines_and_ores",
+      "name": "Tunnel digging",
+      "description": "Tunnel digging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.ore_sorting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.tunnel_digging.tunnel_digging_basics",
+          "discipline": "mines_and_ores.tunnel_digging",
+          "name": "Tunnel digging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.tunnel_digging_seasonal_practice",
+          "discipline": "mines_and_ores.tunnel_digging",
+          "name": "Tunnel digging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.tunnel_digging_precision_work",
+          "discipline": "mines_and_ores.tunnel_digging",
+          "name": "Tunnel digging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.tunnel_digging_master_technique",
+          "discipline": "mines_and_ores.tunnel_digging",
+          "name": "Tunnel digging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_5",
+          "level": 5,
+          "name": "Tunnel digging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tunnel digging output +2%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_10",
+          "level": 10,
+          "name": "Tunnel digging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tunnel digging waste -5%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_15",
+          "level": 15,
+          "name": "Tunnel digging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tunnel digging quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_20",
+          "level": 20,
+          "name": "Tunnel digging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tunnel digging care +5%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_25",
+          "level": 25,
+          "name": "Tunnel digging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tunnel digging speed +3%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_30",
+          "level": 30,
+          "name": "Tunnel digging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tunnel digging output +5%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_35",
+          "level": 35,
+          "name": "Tunnel digging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tunnel digging spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_40",
+          "level": 40,
+          "name": "Tunnel digging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tunnel digging quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_45",
+          "level": 45,
+          "name": "Tunnel digging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tunnel digging speed +5%"
+        },
+        {
+          "id": "mines_and_ores.tunnel_digging.perk_50",
+          "level": 50,
+          "name": "Tunnel digging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tunnel digging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tunnel digging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tunnel digging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tunnel digging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tunnel digging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tunnel digging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tunnel digging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.ore_sorting",
+      "domain": "mines_and_ores",
+      "name": "Ore sorting",
+      "description": "Ore sorting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.mine_shoring"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.ore_sorting.ore_sorting_basics",
+          "discipline": "mines_and_ores.ore_sorting",
+          "name": "Ore sorting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.ore_sorting_seasonal_practice",
+          "discipline": "mines_and_ores.ore_sorting",
+          "name": "Ore sorting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.ore_sorting_precision_work",
+          "discipline": "mines_and_ores.ore_sorting",
+          "name": "Ore sorting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.ore_sorting_master_technique",
+          "discipline": "mines_and_ores.ore_sorting",
+          "name": "Ore sorting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.ore_sorting.perk_5",
+          "level": 5,
+          "name": "Ore sorting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ore sorting output +2%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_10",
+          "level": 10,
+          "name": "Ore sorting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ore sorting waste -5%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_15",
+          "level": 15,
+          "name": "Ore sorting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ore sorting quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_20",
+          "level": 20,
+          "name": "Ore sorting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ore sorting care +5%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_25",
+          "level": 25,
+          "name": "Ore sorting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ore sorting speed +3%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_30",
+          "level": 30,
+          "name": "Ore sorting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ore sorting output +5%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_35",
+          "level": 35,
+          "name": "Ore sorting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ore sorting spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_40",
+          "level": 40,
+          "name": "Ore sorting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ore sorting quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_45",
+          "level": 45,
+          "name": "Ore sorting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ore sorting speed +5%"
+        },
+        {
+          "id": "mines_and_ores.ore_sorting.perk_50",
+          "level": 50,
+          "name": "Ore sorting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ore sorting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ore sorting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ore sorting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ore sorting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ore sorting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ore sorting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ore sorting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.mine_shoring",
+      "domain": "mines_and_ores",
+      "name": "Mine shoring",
+      "description": "Mine shoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.mine_drainage"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.mine_shoring.mine_shoring_basics",
+          "discipline": "mines_and_ores.mine_shoring",
+          "name": "Mine shoring basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.mine_shoring_seasonal_practice",
+          "discipline": "mines_and_ores.mine_shoring",
+          "name": "Mine shoring seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.mine_shoring_precision_work",
+          "discipline": "mines_and_ores.mine_shoring",
+          "name": "Mine shoring precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.mine_shoring_master_technique",
+          "discipline": "mines_and_ores.mine_shoring",
+          "name": "Mine shoring master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.mine_shoring.perk_5",
+          "level": 5,
+          "name": "Mine shoring: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mine shoring output +2%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_10",
+          "level": 10,
+          "name": "Mine shoring: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mine shoring waste -5%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_15",
+          "level": 15,
+          "name": "Mine shoring: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine shoring quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_20",
+          "level": 20,
+          "name": "Mine shoring: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mine shoring care +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_25",
+          "level": 25,
+          "name": "Mine shoring: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mine shoring speed +3%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_30",
+          "level": 30,
+          "name": "Mine shoring: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine shoring output +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_35",
+          "level": 35,
+          "name": "Mine shoring: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mine shoring spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_40",
+          "level": 40,
+          "name": "Mine shoring: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine shoring quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_45",
+          "level": 45,
+          "name": "Mine shoring: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mine shoring speed +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_shoring.perk_50",
+          "level": 50,
+          "name": "Mine shoring: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine shoring output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mine shoring for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mine shoring (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mine shoring; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mine shoring task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mine shoring from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mine shoring, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.mine_drainage",
+      "domain": "mines_and_ores",
+      "name": "Mine drainage",
+      "description": "Mine drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.ventilation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.mine_drainage.mine_drainage_basics",
+          "discipline": "mines_and_ores.mine_drainage",
+          "name": "Mine drainage basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.mine_drainage_seasonal_practice",
+          "discipline": "mines_and_ores.mine_drainage",
+          "name": "Mine drainage seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.mine_drainage_precision_work",
+          "discipline": "mines_and_ores.mine_drainage",
+          "name": "Mine drainage precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.mine_drainage_master_technique",
+          "discipline": "mines_and_ores.mine_drainage",
+          "name": "Mine drainage master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.mine_drainage.perk_5",
+          "level": 5,
+          "name": "Mine drainage: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mine drainage output +2%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_10",
+          "level": 10,
+          "name": "Mine drainage: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mine drainage waste -5%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_15",
+          "level": 15,
+          "name": "Mine drainage: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine drainage quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_20",
+          "level": 20,
+          "name": "Mine drainage: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mine drainage care +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_25",
+          "level": 25,
+          "name": "Mine drainage: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mine drainage speed +3%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_30",
+          "level": 30,
+          "name": "Mine drainage: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine drainage output +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_35",
+          "level": 35,
+          "name": "Mine drainage: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mine drainage spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_40",
+          "level": 40,
+          "name": "Mine drainage: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine drainage quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_45",
+          "level": 45,
+          "name": "Mine drainage: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mine drainage speed +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_drainage.perk_50",
+          "level": 50,
+          "name": "Mine drainage: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine drainage output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mine drainage for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mine drainage (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mine drainage; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mine drainage task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mine drainage from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mine drainage, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.ventilation",
+      "domain": "mines_and_ores",
+      "name": "Ventilation",
+      "description": "Ventilation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.vein_reading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.ventilation.ventilation_basics",
+          "discipline": "mines_and_ores.ventilation",
+          "name": "Ventilation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ventilation.ventilation_seasonal_practice",
+          "discipline": "mines_and_ores.ventilation",
+          "name": "Ventilation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ventilation.ventilation_precision_work",
+          "discipline": "mines_and_ores.ventilation",
+          "name": "Ventilation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ventilation.ventilation_master_technique",
+          "discipline": "mines_and_ores.ventilation",
+          "name": "Ventilation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.ventilation.perk_5",
+          "level": 5,
+          "name": "Ventilation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ventilation output +2%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_10",
+          "level": 10,
+          "name": "Ventilation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ventilation waste -5%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_15",
+          "level": 15,
+          "name": "Ventilation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ventilation quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_20",
+          "level": 20,
+          "name": "Ventilation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ventilation care +5%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_25",
+          "level": 25,
+          "name": "Ventilation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ventilation speed +3%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_30",
+          "level": 30,
+          "name": "Ventilation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ventilation output +5%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_35",
+          "level": 35,
+          "name": "Ventilation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ventilation spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_40",
+          "level": 40,
+          "name": "Ventilation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ventilation quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_45",
+          "level": 45,
+          "name": "Ventilation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ventilation speed +5%"
+        },
+        {
+          "id": "mines_and_ores.ventilation.perk_50",
+          "level": 50,
+          "name": "Ventilation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ventilation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ventilation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ventilation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ventilation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ventilation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ventilation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ventilation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.vein_reading",
+      "domain": "mines_and_ores",
+      "name": "Vein reading",
+      "description": "Vein reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.shaft_sinking"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.vein_reading.vein_reading_basics",
+          "discipline": "mines_and_ores.vein_reading",
+          "name": "Vein reading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.vein_reading.vein_reading_seasonal_practice",
+          "discipline": "mines_and_ores.vein_reading",
+          "name": "Vein reading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.vein_reading.vein_reading_precision_work",
+          "discipline": "mines_and_ores.vein_reading",
+          "name": "Vein reading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.vein_reading.vein_reading_master_technique",
+          "discipline": "mines_and_ores.vein_reading",
+          "name": "Vein reading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.vein_reading.perk_5",
+          "level": 5,
+          "name": "Vein reading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Vein reading output +2%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_10",
+          "level": 10,
+          "name": "Vein reading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Vein reading waste -5%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_15",
+          "level": 15,
+          "name": "Vein reading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vein reading quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_20",
+          "level": 20,
+          "name": "Vein reading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Vein reading care +5%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_25",
+          "level": 25,
+          "name": "Vein reading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Vein reading speed +3%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_30",
+          "level": 30,
+          "name": "Vein reading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vein reading output +5%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_35",
+          "level": 35,
+          "name": "Vein reading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Vein reading spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_40",
+          "level": 40,
+          "name": "Vein reading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vein reading quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_45",
+          "level": 45,
+          "name": "Vein reading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Vein reading speed +5%"
+        },
+        {
+          "id": "mines_and_ores.vein_reading.perk_50",
+          "level": 50,
+          "name": "Vein reading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vein reading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise vein reading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful vein reading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of vein reading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a vein reading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn vein reading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of vein reading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.shaft_sinking",
+      "domain": "mines_and_ores",
+      "name": "Shaft sinking",
+      "description": "Shaft sinking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.ore_hauling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.shaft_sinking.shaft_sinking_basics",
+          "discipline": "mines_and_ores.shaft_sinking",
+          "name": "Shaft sinking basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.shaft_sinking_seasonal_practice",
+          "discipline": "mines_and_ores.shaft_sinking",
+          "name": "Shaft sinking seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.shaft_sinking_precision_work",
+          "discipline": "mines_and_ores.shaft_sinking",
+          "name": "Shaft sinking precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.shaft_sinking_master_technique",
+          "discipline": "mines_and_ores.shaft_sinking",
+          "name": "Shaft sinking master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_5",
+          "level": 5,
+          "name": "Shaft sinking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Shaft sinking output +2%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_10",
+          "level": 10,
+          "name": "Shaft sinking: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Shaft sinking waste -5%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_15",
+          "level": 15,
+          "name": "Shaft sinking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Shaft sinking quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_20",
+          "level": 20,
+          "name": "Shaft sinking: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Shaft sinking care +5%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_25",
+          "level": 25,
+          "name": "Shaft sinking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Shaft sinking speed +3%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_30",
+          "level": 30,
+          "name": "Shaft sinking: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Shaft sinking output +5%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_35",
+          "level": 35,
+          "name": "Shaft sinking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Shaft sinking spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_40",
+          "level": 40,
+          "name": "Shaft sinking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Shaft sinking quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_45",
+          "level": 45,
+          "name": "Shaft sinking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Shaft sinking speed +5%"
+        },
+        {
+          "id": "mines_and_ores.shaft_sinking.perk_50",
+          "level": 50,
+          "name": "Shaft sinking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Shaft sinking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise shaft sinking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful shaft sinking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of shaft sinking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a shaft sinking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn shaft sinking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of shaft sinking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.ore_hauling",
+      "domain": "mines_and_ores",
+      "name": "Ore hauling",
+      "description": "Ore hauling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.pick_maintenance"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.ore_hauling.ore_hauling_basics",
+          "discipline": "mines_and_ores.ore_hauling",
+          "name": "Ore hauling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.ore_hauling_seasonal_practice",
+          "discipline": "mines_and_ores.ore_hauling",
+          "name": "Ore hauling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.ore_hauling_precision_work",
+          "discipline": "mines_and_ores.ore_hauling",
+          "name": "Ore hauling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.ore_hauling_master_technique",
+          "discipline": "mines_and_ores.ore_hauling",
+          "name": "Ore hauling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.ore_hauling.perk_5",
+          "level": 5,
+          "name": "Ore hauling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ore hauling output +2%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_10",
+          "level": 10,
+          "name": "Ore hauling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ore hauling waste -5%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_15",
+          "level": 15,
+          "name": "Ore hauling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ore hauling quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_20",
+          "level": 20,
+          "name": "Ore hauling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ore hauling care +5%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_25",
+          "level": 25,
+          "name": "Ore hauling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ore hauling speed +3%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_30",
+          "level": 30,
+          "name": "Ore hauling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ore hauling output +5%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_35",
+          "level": 35,
+          "name": "Ore hauling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ore hauling spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_40",
+          "level": 40,
+          "name": "Ore hauling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ore hauling quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_45",
+          "level": 45,
+          "name": "Ore hauling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ore hauling speed +5%"
+        },
+        {
+          "id": "mines_and_ores.ore_hauling.perk_50",
+          "level": 50,
+          "name": "Ore hauling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ore hauling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ore hauling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ore hauling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ore hauling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ore hauling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ore hauling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ore hauling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.pick_maintenance",
+      "domain": "mines_and_ores",
+      "name": "Pick maintenance",
+      "description": "Pick maintenance: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.wash_dressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.pick_maintenance.pick_maintenance_basics",
+          "discipline": "mines_and_ores.pick_maintenance",
+          "name": "Pick maintenance basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.pick_maintenance_seasonal_practice",
+          "discipline": "mines_and_ores.pick_maintenance",
+          "name": "Pick maintenance seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.pick_maintenance_precision_work",
+          "discipline": "mines_and_ores.pick_maintenance",
+          "name": "Pick maintenance precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.pick_maintenance_master_technique",
+          "discipline": "mines_and_ores.pick_maintenance",
+          "name": "Pick maintenance master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_5",
+          "level": 5,
+          "name": "Pick maintenance: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pick maintenance output +2%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_10",
+          "level": 10,
+          "name": "Pick maintenance: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pick maintenance waste -5%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_15",
+          "level": 15,
+          "name": "Pick maintenance: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pick maintenance quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_20",
+          "level": 20,
+          "name": "Pick maintenance: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pick maintenance care +5%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_25",
+          "level": 25,
+          "name": "Pick maintenance: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pick maintenance speed +3%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_30",
+          "level": 30,
+          "name": "Pick maintenance: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pick maintenance output +5%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_35",
+          "level": 35,
+          "name": "Pick maintenance: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pick maintenance spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_40",
+          "level": 40,
+          "name": "Pick maintenance: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pick maintenance quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_45",
+          "level": 45,
+          "name": "Pick maintenance: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pick maintenance speed +5%"
+        },
+        {
+          "id": "mines_and_ores.pick_maintenance.perk_50",
+          "level": 50,
+          "name": "Pick maintenance: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pick maintenance output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pick maintenance for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pick maintenance (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pick maintenance; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pick maintenance task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pick maintenance from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pick maintenance, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.wash_dressing",
+      "domain": "mines_and_ores",
+      "name": "Wash dressing",
+      "description": "Wash dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.mine_surveying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.wash_dressing.wash_dressing_basics",
+          "discipline": "mines_and_ores.wash_dressing",
+          "name": "Wash dressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.wash_dressing_seasonal_practice",
+          "discipline": "mines_and_ores.wash_dressing",
+          "name": "Wash dressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.wash_dressing_precision_work",
+          "discipline": "mines_and_ores.wash_dressing",
+          "name": "Wash dressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.wash_dressing_master_technique",
+          "discipline": "mines_and_ores.wash_dressing",
+          "name": "Wash dressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.wash_dressing.perk_5",
+          "level": 5,
+          "name": "Wash dressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wash dressing output +2%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_10",
+          "level": 10,
+          "name": "Wash dressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wash dressing waste -5%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_15",
+          "level": 15,
+          "name": "Wash dressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wash dressing quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_20",
+          "level": 20,
+          "name": "Wash dressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wash dressing care +5%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_25",
+          "level": 25,
+          "name": "Wash dressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wash dressing speed +3%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_30",
+          "level": 30,
+          "name": "Wash dressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wash dressing output +5%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_35",
+          "level": 35,
+          "name": "Wash dressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wash dressing spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_40",
+          "level": 40,
+          "name": "Wash dressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wash dressing quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_45",
+          "level": 45,
+          "name": "Wash dressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wash dressing speed +5%"
+        },
+        {
+          "id": "mines_and_ores.wash_dressing.perk_50",
+          "level": 50,
+          "name": "Wash dressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wash dressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wash dressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wash dressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wash dressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wash dressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wash dressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wash dressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.mine_surveying",
+      "domain": "mines_and_ores",
+      "name": "Mine surveying",
+      "description": "Mine surveying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.hazard_watching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.mine_surveying.mine_surveying_basics",
+          "discipline": "mines_and_ores.mine_surveying",
+          "name": "Mine surveying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.mine_surveying_seasonal_practice",
+          "discipline": "mines_and_ores.mine_surveying",
+          "name": "Mine surveying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.mine_surveying_precision_work",
+          "discipline": "mines_and_ores.mine_surveying",
+          "name": "Mine surveying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.mine_surveying_master_technique",
+          "discipline": "mines_and_ores.mine_surveying",
+          "name": "Mine surveying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.mine_surveying.perk_5",
+          "level": 5,
+          "name": "Mine surveying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mine surveying output +2%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_10",
+          "level": 10,
+          "name": "Mine surveying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mine surveying waste -5%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_15",
+          "level": 15,
+          "name": "Mine surveying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine surveying quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_20",
+          "level": 20,
+          "name": "Mine surveying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mine surveying care +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_25",
+          "level": 25,
+          "name": "Mine surveying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mine surveying speed +3%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_30",
+          "level": 30,
+          "name": "Mine surveying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine surveying output +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_35",
+          "level": 35,
+          "name": "Mine surveying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mine surveying spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_40",
+          "level": 40,
+          "name": "Mine surveying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine surveying quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_45",
+          "level": 45,
+          "name": "Mine surveying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mine surveying speed +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_surveying.perk_50",
+          "level": 50,
+          "name": "Mine surveying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine surveying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mine surveying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mine surveying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mine surveying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mine surveying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mine surveying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mine surveying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.hazard_watching",
+      "domain": "mines_and_ores",
+      "name": "Hazard watching",
+      "description": "Hazard watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.mine_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.hazard_watching.hazard_watching_basics",
+          "discipline": "mines_and_ores.hazard_watching",
+          "name": "Hazard watching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.hazard_watching_seasonal_practice",
+          "discipline": "mines_and_ores.hazard_watching",
+          "name": "Hazard watching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.hazard_watching_precision_work",
+          "discipline": "mines_and_ores.hazard_watching",
+          "name": "Hazard watching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.hazard_watching_master_technique",
+          "discipline": "mines_and_ores.hazard_watching",
+          "name": "Hazard watching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.hazard_watching.perk_5",
+          "level": 5,
+          "name": "Hazard watching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hazard watching output +2%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_10",
+          "level": 10,
+          "name": "Hazard watching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hazard watching waste -5%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_15",
+          "level": 15,
+          "name": "Hazard watching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hazard watching quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_20",
+          "level": 20,
+          "name": "Hazard watching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hazard watching care +5%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_25",
+          "level": 25,
+          "name": "Hazard watching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hazard watching speed +3%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_30",
+          "level": 30,
+          "name": "Hazard watching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hazard watching output +5%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_35",
+          "level": 35,
+          "name": "Hazard watching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hazard watching spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_40",
+          "level": 40,
+          "name": "Hazard watching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hazard watching quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_45",
+          "level": 45,
+          "name": "Hazard watching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hazard watching speed +5%"
+        },
+        {
+          "id": "mines_and_ores.hazard_watching.perk_50",
+          "level": 50,
+          "name": "Hazard watching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hazard watching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hazard watching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hazard watching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hazard watching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hazard watching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hazard watching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hazard watching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "mines_and_ores.mine_planning",
+      "domain": "mines_and_ores",
+      "name": "Mine planning",
+      "description": "Mine planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "mines_and_ores.mining"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "mines_and_ores.mine_planning.mine_planning_basics",
+          "discipline": "mines_and_ores.mine_planning",
+          "name": "Mine planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_planning.mine_planning_seasonal_practice",
+          "discipline": "mines_and_ores.mine_planning",
+          "name": "Mine planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_planning.mine_planning_precision_work",
+          "discipline": "mines_and_ores.mine_planning",
+          "name": "Mine planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "mines_and_ores.mine_planning.mine_planning_master_technique",
+          "discipline": "mines_and_ores.mine_planning",
+          "name": "Mine planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "mines_and_ores.mine_planning.perk_5",
+          "level": 5,
+          "name": "Mine planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mine planning output +2%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_10",
+          "level": 10,
+          "name": "Mine planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mine planning waste -5%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_15",
+          "level": 15,
+          "name": "Mine planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine planning quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_20",
+          "level": 20,
+          "name": "Mine planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mine planning care +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_25",
+          "level": 25,
+          "name": "Mine planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mine planning speed +3%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_30",
+          "level": 30,
+          "name": "Mine planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine planning output +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_35",
+          "level": 35,
+          "name": "Mine planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mine planning spoilage -10%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_40",
+          "level": 40,
+          "name": "Mine planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mine planning quality roll +1"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_45",
+          "level": 45,
+          "name": "Mine planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mine planning speed +5%"
+        },
+        {
+          "id": "mines_and_ores.mine_planning.perk_50",
+          "level": 50,
+          "name": "Mine planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mine planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mine planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mine planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mine planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mine planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mine planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mine planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

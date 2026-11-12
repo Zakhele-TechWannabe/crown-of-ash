@@ -1,0 +1,110 @@
+{
+  "id": "geomancy",
+  "disciplines": [
+    {
+      "id": "geomancy.landform_reading",
+      "domain": "geomancy",
+      "name": "Landform reading",
+      "description": "Landform reading applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.water_courses",
+      "domain": "geomancy",
+      "name": "Water courses",
+      "description": "Water courses applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.mountain_veins",
+      "domain": "geomancy",
+      "name": "Mountain veins",
+      "description": "Mountain veins applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.compass_methods",
+      "domain": "geomancy",
+      "name": "Compass methods",
+      "description": "Compass methods applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.site_orientation",
+      "domain": "geomancy",
+      "name": "Site orientation",
+      "description": "Site orientation applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.wind_shelter",
+      "domain": "geomancy",
+      "name": "Wind shelter",
+      "description": "Wind shelter applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.soil_reading",
+      "domain": "geomancy",
+      "name": "Soil reading",
+      "description": "Soil reading applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.dwelling_siting",
+      "domain": "geomancy",
+      "name": "Dwelling siting",
+      "description": "Dwelling siting applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.tomb_siting",
+      "domain": "geomancy",
+      "name": "Tomb siting",
+      "description": "Tomb siting applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.garden_harmony",
+      "domain": "geomancy",
+      "name": "Garden harmony",
+      "description": "Garden harmony applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.town_alignments",
+      "domain": "geomancy",
+      "name": "Town alignments",
+      "description": "Town alignments applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.dragon_vein_records",
+      "domain": "geomancy",
+      "name": "Dragon vein records",
+      "description": "Dragon vein records applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.ritual_boundaries",
+      "domain": "geomancy",
+      "name": "Ritual boundaries",
+      "description": "Ritual boundaries applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.site_remediation",
+      "domain": "geomancy",
+      "name": "Site remediation",
+      "description": "Site remediation applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "geomancy.geomantic_teaching",
+      "domain": "geomancy",
+      "name": "Geomantic teaching",
+      "description": "Geomantic teaching applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

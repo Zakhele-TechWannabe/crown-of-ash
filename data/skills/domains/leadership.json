@@ -1,0 +1,4053 @@
+{
+  "id": "leadership",
+  "disciplines": [
+    {
+      "id": "leadership.leadership",
+      "domain": "leadership",
+      "name": "Leadership",
+      "description": "Leadership: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.crew_leading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.leadership.crew_foreman",
+          "discipline": "leadership.leadership",
+          "name": "Crew foreman",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.leadership.planning",
+          "discipline": "leadership.leadership",
+          "name": "Planning",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 11
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.leadership.village_elder",
+          "discipline": "leadership.leadership",
+          "name": "Village elder",
+          "unlock_level": 35,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.leadership.perk_5",
+          "level": 5,
+          "name": "Leadership: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leadership output +2%"
+        },
+        {
+          "id": "leadership.leadership.perk_10",
+          "level": 10,
+          "name": "Leadership: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leadership waste -5%"
+        },
+        {
+          "id": "leadership.leadership.perk_15",
+          "level": 15,
+          "name": "Leadership: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leadership quality roll +1"
+        },
+        {
+          "id": "leadership.leadership.perk_20",
+          "level": 20,
+          "name": "Leadership: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leadership care +5%"
+        },
+        {
+          "id": "leadership.leadership.perk_25",
+          "level": 25,
+          "name": "Leadership: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leadership speed +3%"
+        },
+        {
+          "id": "leadership.leadership.perk_30",
+          "level": 30,
+          "name": "Leadership: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leadership output +5%"
+        },
+        {
+          "id": "leadership.leadership.perk_35",
+          "level": 35,
+          "name": "Leadership: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leadership spoilage -10%"
+        },
+        {
+          "id": "leadership.leadership.perk_40",
+          "level": 40,
+          "name": "Leadership: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leadership quality roll +1"
+        },
+        {
+          "id": "leadership.leadership.perk_45",
+          "level": 45,
+          "name": "Leadership: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leadership speed +5%"
+        },
+        {
+          "id": "leadership.leadership.perk_50",
+          "level": 50,
+          "name": "Leadership: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leadership output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leadership for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leadership (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leadership; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leadership task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leadership from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leadership, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.crew_leading",
+      "domain": "leadership",
+      "name": "Crew leading",
+      "description": "Crew leading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.work_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.crew_leading.crew_leading_basics",
+          "discipline": "leadership.crew_leading",
+          "name": "Crew leading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.crew_leading.crew_leading_seasonal_practice",
+          "discipline": "leadership.crew_leading",
+          "name": "Crew leading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.crew_leading.crew_leading_precision_work",
+          "discipline": "leadership.crew_leading",
+          "name": "Crew leading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.crew_leading.crew_leading_master_technique",
+          "discipline": "leadership.crew_leading",
+          "name": "Crew leading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.crew_leading.perk_5",
+          "level": 5,
+          "name": "Crew leading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Crew leading output +2%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_10",
+          "level": 10,
+          "name": "Crew leading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Crew leading waste -5%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_15",
+          "level": 15,
+          "name": "Crew leading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Crew leading quality roll +1"
+        },
+        {
+          "id": "leadership.crew_leading.perk_20",
+          "level": 20,
+          "name": "Crew leading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Crew leading care +5%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_25",
+          "level": 25,
+          "name": "Crew leading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Crew leading speed +3%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_30",
+          "level": 30,
+          "name": "Crew leading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Crew leading output +5%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_35",
+          "level": 35,
+          "name": "Crew leading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Crew leading spoilage -10%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_40",
+          "level": 40,
+          "name": "Crew leading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Crew leading quality roll +1"
+        },
+        {
+          "id": "leadership.crew_leading.perk_45",
+          "level": 45,
+          "name": "Crew leading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Crew leading speed +5%"
+        },
+        {
+          "id": "leadership.crew_leading.perk_50",
+          "level": 50,
+          "name": "Crew leading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Crew leading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise crew leading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful crew leading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of crew leading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a crew leading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn crew leading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of crew leading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.work_planning",
+      "domain": "leadership",
+      "name": "Work planning",
+      "description": "Work planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.village_stewardship"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.work_planning.work_planning_basics",
+          "discipline": "leadership.work_planning",
+          "name": "Work planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.work_planning.work_planning_seasonal_practice",
+          "discipline": "leadership.work_planning",
+          "name": "Work planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.work_planning.work_planning_precision_work",
+          "discipline": "leadership.work_planning",
+          "name": "Work planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.work_planning.work_planning_master_technique",
+          "discipline": "leadership.work_planning",
+          "name": "Work planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.work_planning.perk_5",
+          "level": 5,
+          "name": "Work planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Work planning output +2%"
+        },
+        {
+          "id": "leadership.work_planning.perk_10",
+          "level": 10,
+          "name": "Work planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Work planning waste -5%"
+        },
+        {
+          "id": "leadership.work_planning.perk_15",
+          "level": 15,
+          "name": "Work planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Work planning quality roll +1"
+        },
+        {
+          "id": "leadership.work_planning.perk_20",
+          "level": 20,
+          "name": "Work planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Work planning care +5%"
+        },
+        {
+          "id": "leadership.work_planning.perk_25",
+          "level": 25,
+          "name": "Work planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Work planning speed +3%"
+        },
+        {
+          "id": "leadership.work_planning.perk_30",
+          "level": 30,
+          "name": "Work planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Work planning output +5%"
+        },
+        {
+          "id": "leadership.work_planning.perk_35",
+          "level": 35,
+          "name": "Work planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Work planning spoilage -10%"
+        },
+        {
+          "id": "leadership.work_planning.perk_40",
+          "level": 40,
+          "name": "Work planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Work planning quality roll +1"
+        },
+        {
+          "id": "leadership.work_planning.perk_45",
+          "level": 45,
+          "name": "Work planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Work planning speed +5%"
+        },
+        {
+          "id": "leadership.work_planning.perk_50",
+          "level": 50,
+          "name": "Work planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Work planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise work planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful work planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of work planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a work planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn work planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of work planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.village_stewardship",
+      "domain": "leadership",
+      "name": "Village stewardship",
+      "description": "Village stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.dispute_hearing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.village_stewardship.village_stewardship_basics",
+          "discipline": "leadership.village_stewardship",
+          "name": "Village stewardship basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.village_stewardship.village_stewardship_seasonal_practice",
+          "discipline": "leadership.village_stewardship",
+          "name": "Village stewardship seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.village_stewardship.village_stewardship_precision_work",
+          "discipline": "leadership.village_stewardship",
+          "name": "Village stewardship precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.village_stewardship.village_stewardship_master_technique",
+          "discipline": "leadership.village_stewardship",
+          "name": "Village stewardship master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.village_stewardship.perk_5",
+          "level": 5,
+          "name": "Village stewardship: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Village stewardship output +2%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_10",
+          "level": 10,
+          "name": "Village stewardship: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Village stewardship waste -5%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_15",
+          "level": 15,
+          "name": "Village stewardship: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Village stewardship quality roll +1"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_20",
+          "level": 20,
+          "name": "Village stewardship: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Village stewardship care +5%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_25",
+          "level": 25,
+          "name": "Village stewardship: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Village stewardship speed +3%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_30",
+          "level": 30,
+          "name": "Village stewardship: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Village stewardship output +5%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_35",
+          "level": 35,
+          "name": "Village stewardship: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Village stewardship spoilage -10%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_40",
+          "level": 40,
+          "name": "Village stewardship: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Village stewardship quality roll +1"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_45",
+          "level": 45,
+          "name": "Village stewardship: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Village stewardship speed +5%"
+        },
+        {
+          "id": "leadership.village_stewardship.perk_50",
+          "level": 50,
+          "name": "Village stewardship: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Village stewardship output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise village stewardship for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful village stewardship (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of village stewardship; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a village stewardship task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn village stewardship from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of village stewardship, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.dispute_hearing",
+      "domain": "leadership",
+      "name": "Dispute hearing",
+      "description": "Dispute hearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.emergency_coordination"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.dispute_hearing.dispute_hearing_basics",
+          "discipline": "leadership.dispute_hearing",
+          "name": "Dispute hearing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.dispute_hearing.dispute_hearing_seasonal_practice",
+          "discipline": "leadership.dispute_hearing",
+          "name": "Dispute hearing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.dispute_hearing.dispute_hearing_precision_work",
+          "discipline": "leadership.dispute_hearing",
+          "name": "Dispute hearing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.dispute_hearing.dispute_hearing_master_technique",
+          "discipline": "leadership.dispute_hearing",
+          "name": "Dispute hearing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.dispute_hearing.perk_5",
+          "level": 5,
+          "name": "Dispute hearing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Dispute hearing output +2%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_10",
+          "level": 10,
+          "name": "Dispute hearing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Dispute hearing waste -5%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_15",
+          "level": 15,
+          "name": "Dispute hearing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dispute hearing quality roll +1"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_20",
+          "level": 20,
+          "name": "Dispute hearing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Dispute hearing care +5%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_25",
+          "level": 25,
+          "name": "Dispute hearing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Dispute hearing speed +3%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_30",
+          "level": 30,
+          "name": "Dispute hearing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dispute hearing output +5%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_35",
+          "level": 35,
+          "name": "Dispute hearing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Dispute hearing spoilage -10%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_40",
+          "level": 40,
+          "name": "Dispute hearing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dispute hearing quality roll +1"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_45",
+          "level": 45,
+          "name": "Dispute hearing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Dispute hearing speed +5%"
+        },
+        {
+          "id": "leadership.dispute_hearing.perk_50",
+          "level": 50,
+          "name": "Dispute hearing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dispute hearing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise dispute hearing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful dispute hearing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of dispute hearing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a dispute hearing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn dispute hearing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of dispute hearing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.emergency_coordination",
+      "domain": "leadership",
+      "name": "Emergency coordination",
+      "description": "Emergency coordination: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.resource_allocation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.emergency_coordination.emergency_coordination_basics",
+          "discipline": "leadership.emergency_coordination",
+          "name": "Emergency coordination basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.emergency_coordination.emergency_coordination_seasonal_practice",
+          "discipline": "leadership.emergency_coordination",
+          "name": "Emergency coordination seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.emergency_coordination.emergency_coordination_precision_work",
+          "discipline": "leadership.emergency_coordination",
+          "name": "Emergency coordination precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.emergency_coordination.emergency_coordination_master_technique",
+          "discipline": "leadership.emergency_coordination",
+          "name": "Emergency coordination master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.emergency_coordination.perk_5",
+          "level": 5,
+          "name": "Emergency coordination: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Emergency coordination output +2%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_10",
+          "level": 10,
+          "name": "Emergency coordination: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Emergency coordination waste -5%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_15",
+          "level": 15,
+          "name": "Emergency coordination: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Emergency coordination quality roll +1"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_20",
+          "level": 20,
+          "name": "Emergency coordination: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Emergency coordination care +5%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_25",
+          "level": 25,
+          "name": "Emergency coordination: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Emergency coordination speed +3%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_30",
+          "level": 30,
+          "name": "Emergency coordination: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Emergency coordination output +5%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_35",
+          "level": 35,
+          "name": "Emergency coordination: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Emergency coordination spoilage -10%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_40",
+          "level": 40,
+          "name": "Emergency coordination: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Emergency coordination quality roll +1"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_45",
+          "level": 45,
+          "name": "Emergency coordination: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Emergency coordination speed +5%"
+        },
+        {
+          "id": "leadership.emergency_coordination.perk_50",
+          "level": 50,
+          "name": "Emergency coordination: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Emergency coordination output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise emergency coordination for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful emergency coordination (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of emergency coordination; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a emergency coordination task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn emergency coordination from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of emergency coordination, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.resource_allocation",
+      "domain": "leadership",
+      "name": "Resource allocation",
+      "description": "Resource allocation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.public_speaking"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.resource_allocation.resource_allocation_basics",
+          "discipline": "leadership.resource_allocation",
+          "name": "Resource allocation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.resource_allocation.resource_allocation_seasonal_practice",
+          "discipline": "leadership.resource_allocation",
+          "name": "Resource allocation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.resource_allocation.resource_allocation_precision_work",
+          "discipline": "leadership.resource_allocation",
+          "name": "Resource allocation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.resource_allocation.resource_allocation_master_technique",
+          "discipline": "leadership.resource_allocation",
+          "name": "Resource allocation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.resource_allocation.perk_5",
+          "level": 5,
+          "name": "Resource allocation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Resource allocation output +2%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_10",
+          "level": 10,
+          "name": "Resource allocation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Resource allocation waste -5%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_15",
+          "level": 15,
+          "name": "Resource allocation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Resource allocation quality roll +1"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_20",
+          "level": 20,
+          "name": "Resource allocation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Resource allocation care +5%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_25",
+          "level": 25,
+          "name": "Resource allocation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Resource allocation speed +3%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_30",
+          "level": 30,
+          "name": "Resource allocation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Resource allocation output +5%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_35",
+          "level": 35,
+          "name": "Resource allocation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Resource allocation spoilage -10%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_40",
+          "level": 40,
+          "name": "Resource allocation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Resource allocation quality roll +1"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_45",
+          "level": 45,
+          "name": "Resource allocation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Resource allocation speed +5%"
+        },
+        {
+          "id": "leadership.resource_allocation.perk_50",
+          "level": 50,
+          "name": "Resource allocation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Resource allocation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise resource allocation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful resource allocation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of resource allocation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a resource allocation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn resource allocation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of resource allocation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.public_speaking",
+      "domain": "leadership",
+      "name": "Public speaking",
+      "description": "Public speaking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.morale_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.public_speaking.public_speaking_basics",
+          "discipline": "leadership.public_speaking",
+          "name": "Public speaking basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.public_speaking.public_speaking_seasonal_practice",
+          "discipline": "leadership.public_speaking",
+          "name": "Public speaking seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.public_speaking.public_speaking_precision_work",
+          "discipline": "leadership.public_speaking",
+          "name": "Public speaking precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.public_speaking.public_speaking_master_technique",
+          "discipline": "leadership.public_speaking",
+          "name": "Public speaking master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.public_speaking.perk_5",
+          "level": 5,
+          "name": "Public speaking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Public speaking output +2%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_10",
+          "level": 10,
+          "name": "Public speaking: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Public speaking waste -5%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_15",
+          "level": 15,
+          "name": "Public speaking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Public speaking quality roll +1"
+        },
+        {
+          "id": "leadership.public_speaking.perk_20",
+          "level": 20,
+          "name": "Public speaking: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Public speaking care +5%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_25",
+          "level": 25,
+          "name": "Public speaking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Public speaking speed +3%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_30",
+          "level": 30,
+          "name": "Public speaking: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Public speaking output +5%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_35",
+          "level": 35,
+          "name": "Public speaking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Public speaking spoilage -10%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_40",
+          "level": 40,
+          "name": "Public speaking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Public speaking quality roll +1"
+        },
+        {
+          "id": "leadership.public_speaking.perk_45",
+          "level": 45,
+          "name": "Public speaking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Public speaking speed +5%"
+        },
+        {
+          "id": "leadership.public_speaking.perk_50",
+          "level": 50,
+          "name": "Public speaking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Public speaking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise public speaking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful public speaking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of public speaking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a public speaking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn public speaking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of public speaking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.morale_tending",
+      "domain": "leadership",
+      "name": "Morale tending",
+      "description": "Morale tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.mentor_matching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.morale_tending.morale_tending_basics",
+          "discipline": "leadership.morale_tending",
+          "name": "Morale tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.morale_tending.morale_tending_seasonal_practice",
+          "discipline": "leadership.morale_tending",
+          "name": "Morale tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.morale_tending.morale_tending_precision_work",
+          "discipline": "leadership.morale_tending",
+          "name": "Morale tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.morale_tending.morale_tending_master_technique",
+          "discipline": "leadership.morale_tending",
+          "name": "Morale tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.morale_tending.perk_5",
+          "level": 5,
+          "name": "Morale tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Morale tending output +2%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_10",
+          "level": 10,
+          "name": "Morale tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Morale tending waste -5%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_15",
+          "level": 15,
+          "name": "Morale tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Morale tending quality roll +1"
+        },
+        {
+          "id": "leadership.morale_tending.perk_20",
+          "level": 20,
+          "name": "Morale tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Morale tending care +5%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_25",
+          "level": 25,
+          "name": "Morale tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Morale tending speed +3%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_30",
+          "level": 30,
+          "name": "Morale tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Morale tending output +5%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_35",
+          "level": 35,
+          "name": "Morale tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Morale tending spoilage -10%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_40",
+          "level": 40,
+          "name": "Morale tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Morale tending quality roll +1"
+        },
+        {
+          "id": "leadership.morale_tending.perk_45",
+          "level": 45,
+          "name": "Morale tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Morale tending speed +5%"
+        },
+        {
+          "id": "leadership.morale_tending.perk_50",
+          "level": 50,
+          "name": "Morale tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Morale tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise morale tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful morale tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of morale tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a morale tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn morale tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of morale tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.mentor_matching",
+      "domain": "leadership",
+      "name": "Mentor matching",
+      "description": "Mentor matching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.council_practice"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.mentor_matching.mentor_matching_basics",
+          "discipline": "leadership.mentor_matching",
+          "name": "Mentor matching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.mentor_matching.mentor_matching_seasonal_practice",
+          "discipline": "leadership.mentor_matching",
+          "name": "Mentor matching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.mentor_matching.mentor_matching_precision_work",
+          "discipline": "leadership.mentor_matching",
+          "name": "Mentor matching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.mentor_matching.mentor_matching_master_technique",
+          "discipline": "leadership.mentor_matching",
+          "name": "Mentor matching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.mentor_matching.perk_5",
+          "level": 5,
+          "name": "Mentor matching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mentor matching output +2%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_10",
+          "level": 10,
+          "name": "Mentor matching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mentor matching waste -5%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_15",
+          "level": 15,
+          "name": "Mentor matching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mentor matching quality roll +1"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_20",
+          "level": 20,
+          "name": "Mentor matching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mentor matching care +5%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_25",
+          "level": 25,
+          "name": "Mentor matching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mentor matching speed +3%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_30",
+          "level": 30,
+          "name": "Mentor matching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mentor matching output +5%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_35",
+          "level": 35,
+          "name": "Mentor matching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mentor matching spoilage -10%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_40",
+          "level": 40,
+          "name": "Mentor matching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mentor matching quality roll +1"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_45",
+          "level": 45,
+          "name": "Mentor matching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mentor matching speed +5%"
+        },
+        {
+          "id": "leadership.mentor_matching.perk_50",
+          "level": 50,
+          "name": "Mentor matching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mentor matching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mentor matching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mentor matching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mentor matching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mentor matching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mentor matching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mentor matching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.council_practice",
+      "domain": "leadership",
+      "name": "Council practice",
+      "description": "Council practice: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.duty_rotation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.council_practice.council_practice_basics",
+          "discipline": "leadership.council_practice",
+          "name": "Council practice basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.council_practice.council_practice_seasonal_practice",
+          "discipline": "leadership.council_practice",
+          "name": "Council practice seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.council_practice.council_practice_precision_work",
+          "discipline": "leadership.council_practice",
+          "name": "Council practice precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.council_practice.council_practice_master_technique",
+          "discipline": "leadership.council_practice",
+          "name": "Council practice master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.council_practice.perk_5",
+          "level": 5,
+          "name": "Council practice: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Council practice output +2%"
+        },
+        {
+          "id": "leadership.council_practice.perk_10",
+          "level": 10,
+          "name": "Council practice: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Council practice waste -5%"
+        },
+        {
+          "id": "leadership.council_practice.perk_15",
+          "level": 15,
+          "name": "Council practice: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Council practice quality roll +1"
+        },
+        {
+          "id": "leadership.council_practice.perk_20",
+          "level": 20,
+          "name": "Council practice: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Council practice care +5%"
+        },
+        {
+          "id": "leadership.council_practice.perk_25",
+          "level": 25,
+          "name": "Council practice: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Council practice speed +3%"
+        },
+        {
+          "id": "leadership.council_practice.perk_30",
+          "level": 30,
+          "name": "Council practice: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Council practice output +5%"
+        },
+        {
+          "id": "leadership.council_practice.perk_35",
+          "level": 35,
+          "name": "Council practice: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Council practice spoilage -10%"
+        },
+        {
+          "id": "leadership.council_practice.perk_40",
+          "level": 40,
+          "name": "Council practice: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Council practice quality roll +1"
+        },
+        {
+          "id": "leadership.council_practice.perk_45",
+          "level": 45,
+          "name": "Council practice: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Council practice speed +5%"
+        },
+        {
+          "id": "leadership.council_practice.perk_50",
+          "level": 50,
+          "name": "Council practice: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Council practice output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise council practice for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful council practice (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of council practice; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a council practice task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn council practice from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of council practice, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.duty_rotation",
+      "domain": "leadership",
+      "name": "Duty rotation",
+      "description": "Duty rotation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.festival_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.duty_rotation.duty_rotation_basics",
+          "discipline": "leadership.duty_rotation",
+          "name": "Duty rotation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.duty_rotation.duty_rotation_seasonal_practice",
+          "discipline": "leadership.duty_rotation",
+          "name": "Duty rotation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.duty_rotation.duty_rotation_precision_work",
+          "discipline": "leadership.duty_rotation",
+          "name": "Duty rotation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.duty_rotation.duty_rotation_master_technique",
+          "discipline": "leadership.duty_rotation",
+          "name": "Duty rotation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.duty_rotation.perk_5",
+          "level": 5,
+          "name": "Duty rotation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Duty rotation output +2%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_10",
+          "level": 10,
+          "name": "Duty rotation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Duty rotation waste -5%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_15",
+          "level": 15,
+          "name": "Duty rotation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Duty rotation quality roll +1"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_20",
+          "level": 20,
+          "name": "Duty rotation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Duty rotation care +5%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_25",
+          "level": 25,
+          "name": "Duty rotation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Duty rotation speed +3%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_30",
+          "level": 30,
+          "name": "Duty rotation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Duty rotation output +5%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_35",
+          "level": 35,
+          "name": "Duty rotation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Duty rotation spoilage -10%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_40",
+          "level": 40,
+          "name": "Duty rotation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Duty rotation quality roll +1"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_45",
+          "level": 45,
+          "name": "Duty rotation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Duty rotation speed +5%"
+        },
+        {
+          "id": "leadership.duty_rotation.perk_50",
+          "level": 50,
+          "name": "Duty rotation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Duty rotation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise duty rotation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful duty rotation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of duty rotation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a duty rotation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn duty rotation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of duty rotation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.festival_planning",
+      "domain": "leadership",
+      "name": "Festival planning",
+      "description": "Festival planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.succession_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.festival_planning.festival_planning_basics",
+          "discipline": "leadership.festival_planning",
+          "name": "Festival planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.festival_planning.festival_planning_seasonal_practice",
+          "discipline": "leadership.festival_planning",
+          "name": "Festival planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.festival_planning.festival_planning_precision_work",
+          "discipline": "leadership.festival_planning",
+          "name": "Festival planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.festival_planning.festival_planning_master_technique",
+          "discipline": "leadership.festival_planning",
+          "name": "Festival planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.festival_planning.perk_5",
+          "level": 5,
+          "name": "Festival planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Festival planning output +2%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_10",
+          "level": 10,
+          "name": "Festival planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Festival planning waste -5%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_15",
+          "level": 15,
+          "name": "Festival planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Festival planning quality roll +1"
+        },
+        {
+          "id": "leadership.festival_planning.perk_20",
+          "level": 20,
+          "name": "Festival planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Festival planning care +5%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_25",
+          "level": 25,
+          "name": "Festival planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Festival planning speed +3%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_30",
+          "level": 30,
+          "name": "Festival planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Festival planning output +5%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_35",
+          "level": 35,
+          "name": "Festival planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Festival planning spoilage -10%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_40",
+          "level": 40,
+          "name": "Festival planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Festival planning quality roll +1"
+        },
+        {
+          "id": "leadership.festival_planning.perk_45",
+          "level": 45,
+          "name": "Festival planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Festival planning speed +5%"
+        },
+        {
+          "id": "leadership.festival_planning.perk_50",
+          "level": 50,
+          "name": "Festival planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Festival planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise festival planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful festival planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of festival planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a festival planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn festival planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of festival planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.succession_planning",
+      "domain": "leadership",
+      "name": "Succession planning",
+      "description": "Succession planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.ethical_judgement"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.succession_planning.succession_planning_basics",
+          "discipline": "leadership.succession_planning",
+          "name": "Succession planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.succession_planning.succession_planning_seasonal_practice",
+          "discipline": "leadership.succession_planning",
+          "name": "Succession planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.succession_planning.succession_planning_precision_work",
+          "discipline": "leadership.succession_planning",
+          "name": "Succession planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.succession_planning.succession_planning_master_technique",
+          "discipline": "leadership.succession_planning",
+          "name": "Succession planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.succession_planning.perk_5",
+          "level": 5,
+          "name": "Succession planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Succession planning output +2%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_10",
+          "level": 10,
+          "name": "Succession planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Succession planning waste -5%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_15",
+          "level": 15,
+          "name": "Succession planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Succession planning quality roll +1"
+        },
+        {
+          "id": "leadership.succession_planning.perk_20",
+          "level": 20,
+          "name": "Succession planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Succession planning care +5%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_25",
+          "level": 25,
+          "name": "Succession planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Succession planning speed +3%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_30",
+          "level": 30,
+          "name": "Succession planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Succession planning output +5%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_35",
+          "level": 35,
+          "name": "Succession planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Succession planning spoilage -10%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_40",
+          "level": 40,
+          "name": "Succession planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Succession planning quality roll +1"
+        },
+        {
+          "id": "leadership.succession_planning.perk_45",
+          "level": 45,
+          "name": "Succession planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Succession planning speed +5%"
+        },
+        {
+          "id": "leadership.succession_planning.perk_50",
+          "level": 50,
+          "name": "Succession planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Succession planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise succession planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful succession planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of succession planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a succession planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn succession planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of succession planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "leadership.ethical_judgement",
+      "domain": "leadership",
+      "name": "Ethical judgement",
+      "description": "Ethical judgement: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "leadership.leadership"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "leadership.ethical_judgement.ethical_judgement_basics",
+          "discipline": "leadership.ethical_judgement",
+          "name": "Ethical judgement basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.ethical_judgement.ethical_judgement_seasonal_practice",
+          "discipline": "leadership.ethical_judgement",
+          "name": "Ethical judgement seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.ethical_judgement.ethical_judgement_precision_work",
+          "discipline": "leadership.ethical_judgement",
+          "name": "Ethical judgement precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "leadership.ethical_judgement.ethical_judgement_master_technique",
+          "discipline": "leadership.ethical_judgement",
+          "name": "Ethical judgement master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "leadership.ethical_judgement.perk_5",
+          "level": 5,
+          "name": "Ethical judgement: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ethical judgement output +2%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_10",
+          "level": 10,
+          "name": "Ethical judgement: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ethical judgement waste -5%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_15",
+          "level": 15,
+          "name": "Ethical judgement: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ethical judgement quality roll +1"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_20",
+          "level": 20,
+          "name": "Ethical judgement: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ethical judgement care +5%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_25",
+          "level": 25,
+          "name": "Ethical judgement: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ethical judgement speed +3%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_30",
+          "level": 30,
+          "name": "Ethical judgement: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ethical judgement output +5%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_35",
+          "level": 35,
+          "name": "Ethical judgement: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ethical judgement spoilage -10%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_40",
+          "level": 40,
+          "name": "Ethical judgement: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ethical judgement quality roll +1"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_45",
+          "level": 45,
+          "name": "Ethical judgement: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ethical judgement speed +5%"
+        },
+        {
+          "id": "leadership.ethical_judgement.perk_50",
+          "level": 50,
+          "name": "Ethical judgement: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ethical judgement output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ethical judgement for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ethical judgement (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ethical judgement; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ethical judgement task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ethical judgement from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ethical judgement, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "glass_working",
+  "disciplines": [
+    {
+      "id": "glass_working.silica_sorting",
+      "domain": "glass_working",
+      "name": "Silica sorting",
+      "description": "Silica sorting applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.flux_mixing",
+      "domain": "glass_working",
+      "name": "Flux mixing",
+      "description": "Flux mixing applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.glass_melting",
+      "domain": "glass_working",
+      "name": "Glass melting",
+      "description": "Glass melting applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.glass_blowing",
+      "domain": "glass_working",
+      "name": "Glass blowing",
+      "description": "Glass blowing applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.mould_pressing",
+      "domain": "glass_working",
+      "name": "Mould pressing",
+      "description": "Mould pressing applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.bead_winding",
+      "domain": "glass_working",
+      "name": "Bead winding",
+      "description": "Bead winding applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.annealing",
+      "domain": "glass_working",
+      "name": "Annealing",
+      "description": "Annealing applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.glass_cutting",
+      "domain": "glass_working",
+      "name": "Glass cutting",
+      "description": "Glass cutting applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.lens_grinding",
+      "domain": "glass_working",
+      "name": "Lens grinding",
+      "description": "Lens grinding applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.glaze_colours",
+      "domain": "glass_working",
+      "name": "Glaze colours",
+      "description": "Glaze colours applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.vessel_finishing",
+      "domain": "glass_working",
+      "name": "Vessel finishing",
+      "description": "Vessel finishing applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.furnace_care",
+      "domain": "glass_working",
+      "name": "Furnace care",
+      "description": "Furnace care applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.glass_recycling",
+      "domain": "glass_working",
+      "name": "Glass recycling",
+      "description": "Glass recycling applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.window_panes",
+      "domain": "glass_working",
+      "name": "Window panes",
+      "description": "Window panes applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "glass_working.glass_commissions",
+      "domain": "glass_working",
+      "name": "Glass commissions",
+      "description": "Glass commissions applies glass working to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

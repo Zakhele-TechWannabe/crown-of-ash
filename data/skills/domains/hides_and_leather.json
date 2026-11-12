@@ -1,0 +1,4049 @@
+{
+  "id": "hides_and_leather",
+  "disciplines": [
+    {
+      "id": "hides_and_leather.leatherwork",
+      "domain": "hides_and_leather",
+      "name": "Leatherwork",
+      "description": "Leatherwork: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.hide_scraping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leatherwork.tanning",
+          "discipline": "hides_and_leather.leatherwork",
+          "name": "Tanning",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leatherwork.leathercraft",
+          "discipline": "hides_and_leather.leatherwork",
+          "name": "Leathercraft",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leatherwork.armour",
+          "discipline": "hides_and_leather.leatherwork",
+          "name": "Armour",
+          "unlock_level": 25,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leatherwork.perk_5",
+          "level": 5,
+          "name": "Leatherwork: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leatherwork output +2%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_10",
+          "level": 10,
+          "name": "Leatherwork: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leatherwork waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_15",
+          "level": 15,
+          "name": "Leatherwork: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leatherwork quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_20",
+          "level": 20,
+          "name": "Leatherwork: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leatherwork care +5%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_25",
+          "level": 25,
+          "name": "Leatherwork: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leatherwork speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_30",
+          "level": 30,
+          "name": "Leatherwork: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leatherwork output +5%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_35",
+          "level": 35,
+          "name": "Leatherwork: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leatherwork spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_40",
+          "level": 40,
+          "name": "Leatherwork: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leatherwork quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_45",
+          "level": 45,
+          "name": "Leatherwork: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leatherwork speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leatherwork.perk_50",
+          "level": 50,
+          "name": "Leatherwork: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leatherwork output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leatherwork for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leatherwork (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leatherwork; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leatherwork task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leatherwork from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leatherwork, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.hide_scraping",
+      "domain": "hides_and_leather",
+      "name": "Hide scraping",
+      "description": "Hide scraping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.bark_tanning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.hide_scraping.hide_scraping_basics",
+          "discipline": "hides_and_leather.hide_scraping",
+          "name": "Hide scraping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.hide_scraping_seasonal_practice",
+          "discipline": "hides_and_leather.hide_scraping",
+          "name": "Hide scraping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.hide_scraping_precision_work",
+          "discipline": "hides_and_leather.hide_scraping",
+          "name": "Hide scraping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.hide_scraping_master_technique",
+          "discipline": "hides_and_leather.hide_scraping",
+          "name": "Hide scraping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.hide_scraping.perk_5",
+          "level": 5,
+          "name": "Hide scraping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hide scraping output +2%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_10",
+          "level": 10,
+          "name": "Hide scraping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hide scraping waste -5%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_15",
+          "level": 15,
+          "name": "Hide scraping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hide scraping quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_20",
+          "level": 20,
+          "name": "Hide scraping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hide scraping care +5%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_25",
+          "level": 25,
+          "name": "Hide scraping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hide scraping speed +3%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_30",
+          "level": 30,
+          "name": "Hide scraping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hide scraping output +5%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_35",
+          "level": 35,
+          "name": "Hide scraping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hide scraping spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_40",
+          "level": 40,
+          "name": "Hide scraping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hide scraping quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_45",
+          "level": 45,
+          "name": "Hide scraping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hide scraping speed +5%"
+        },
+        {
+          "id": "hides_and_leather.hide_scraping.perk_50",
+          "level": 50,
+          "name": "Hide scraping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hide scraping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hide scraping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hide scraping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hide scraping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hide scraping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hide scraping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hide scraping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.bark_tanning",
+      "domain": "hides_and_leather",
+      "name": "Bark tanning",
+      "description": "Bark tanning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.alum_tawing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.bark_tanning.bark_tanning_basics",
+          "discipline": "hides_and_leather.bark_tanning",
+          "name": "Bark tanning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.bark_tanning_seasonal_practice",
+          "discipline": "hides_and_leather.bark_tanning",
+          "name": "Bark tanning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.bark_tanning_precision_work",
+          "discipline": "hides_and_leather.bark_tanning",
+          "name": "Bark tanning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.bark_tanning_master_technique",
+          "discipline": "hides_and_leather.bark_tanning",
+          "name": "Bark tanning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.bark_tanning.perk_5",
+          "level": 5,
+          "name": "Bark tanning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bark tanning output +2%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_10",
+          "level": 10,
+          "name": "Bark tanning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bark tanning waste -5%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_15",
+          "level": 15,
+          "name": "Bark tanning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bark tanning quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_20",
+          "level": 20,
+          "name": "Bark tanning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bark tanning care +5%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_25",
+          "level": 25,
+          "name": "Bark tanning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bark tanning speed +3%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_30",
+          "level": 30,
+          "name": "Bark tanning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bark tanning output +5%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_35",
+          "level": 35,
+          "name": "Bark tanning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bark tanning spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_40",
+          "level": 40,
+          "name": "Bark tanning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bark tanning quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_45",
+          "level": 45,
+          "name": "Bark tanning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bark tanning speed +5%"
+        },
+        {
+          "id": "hides_and_leather.bark_tanning.perk_50",
+          "level": 50,
+          "name": "Bark tanning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bark tanning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bark tanning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bark tanning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bark tanning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bark tanning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bark tanning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bark tanning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.alum_tawing",
+      "domain": "hides_and_leather",
+      "name": "Alum tawing",
+      "description": "Alum tawing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leather_softening"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.alum_tawing.alum_tawing_basics",
+          "discipline": "hides_and_leather.alum_tawing",
+          "name": "Alum tawing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.alum_tawing_seasonal_practice",
+          "discipline": "hides_and_leather.alum_tawing",
+          "name": "Alum tawing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.alum_tawing_precision_work",
+          "discipline": "hides_and_leather.alum_tawing",
+          "name": "Alum tawing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.alum_tawing_master_technique",
+          "discipline": "hides_and_leather.alum_tawing",
+          "name": "Alum tawing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.alum_tawing.perk_5",
+          "level": 5,
+          "name": "Alum tawing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Alum tawing output +2%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_10",
+          "level": 10,
+          "name": "Alum tawing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Alum tawing waste -5%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_15",
+          "level": 15,
+          "name": "Alum tawing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Alum tawing quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_20",
+          "level": 20,
+          "name": "Alum tawing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Alum tawing care +5%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_25",
+          "level": 25,
+          "name": "Alum tawing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Alum tawing speed +3%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_30",
+          "level": 30,
+          "name": "Alum tawing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Alum tawing output +5%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_35",
+          "level": 35,
+          "name": "Alum tawing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Alum tawing spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_40",
+          "level": 40,
+          "name": "Alum tawing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Alum tawing quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_45",
+          "level": 45,
+          "name": "Alum tawing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Alum tawing speed +5%"
+        },
+        {
+          "id": "hides_and_leather.alum_tawing.perk_50",
+          "level": 50,
+          "name": "Alum tawing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Alum tawing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise alum tawing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful alum tawing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of alum tawing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a alum tawing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn alum tawing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of alum tawing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.leather_softening",
+      "domain": "hides_and_leather",
+      "name": "Leather softening",
+      "description": "Leather softening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leather_cutting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leather_softening.leather_softening_basics",
+          "discipline": "hides_and_leather.leather_softening",
+          "name": "Leather softening basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_softening.leather_softening_seasonal_practice",
+          "discipline": "hides_and_leather.leather_softening",
+          "name": "Leather softening seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_softening.leather_softening_precision_work",
+          "discipline": "hides_and_leather.leather_softening",
+          "name": "Leather softening precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_softening.leather_softening_master_technique",
+          "discipline": "hides_and_leather.leather_softening",
+          "name": "Leather softening master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leather_softening.perk_5",
+          "level": 5,
+          "name": "Leather softening: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leather softening output +2%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_10",
+          "level": 10,
+          "name": "Leather softening: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leather softening waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_15",
+          "level": 15,
+          "name": "Leather softening: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather softening quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_20",
+          "level": 20,
+          "name": "Leather softening: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leather softening care +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_25",
+          "level": 25,
+          "name": "Leather softening: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leather softening speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_30",
+          "level": 30,
+          "name": "Leather softening: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather softening output +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_35",
+          "level": 35,
+          "name": "Leather softening: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leather softening spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_40",
+          "level": 40,
+          "name": "Leather softening: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather softening quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_45",
+          "level": 45,
+          "name": "Leather softening: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leather softening speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_softening.perk_50",
+          "level": 50,
+          "name": "Leather softening: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather softening output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leather softening for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leather softening (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leather softening; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leather softening task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leather softening from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leather softening, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.leather_cutting",
+      "domain": "hides_and_leather",
+      "name": "Leather cutting",
+      "description": "Leather cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.saddle_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leather_cutting.leather_cutting_basics",
+          "discipline": "hides_and_leather.leather_cutting",
+          "name": "Leather cutting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.leather_cutting_seasonal_practice",
+          "discipline": "hides_and_leather.leather_cutting",
+          "name": "Leather cutting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.leather_cutting_precision_work",
+          "discipline": "hides_and_leather.leather_cutting",
+          "name": "Leather cutting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.leather_cutting_master_technique",
+          "discipline": "hides_and_leather.leather_cutting",
+          "name": "Leather cutting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leather_cutting.perk_5",
+          "level": 5,
+          "name": "Leather cutting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leather cutting output +2%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_10",
+          "level": 10,
+          "name": "Leather cutting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leather cutting waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_15",
+          "level": 15,
+          "name": "Leather cutting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather cutting quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_20",
+          "level": 20,
+          "name": "Leather cutting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leather cutting care +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_25",
+          "level": 25,
+          "name": "Leather cutting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leather cutting speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_30",
+          "level": 30,
+          "name": "Leather cutting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather cutting output +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_35",
+          "level": 35,
+          "name": "Leather cutting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leather cutting spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_40",
+          "level": 40,
+          "name": "Leather cutting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather cutting quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_45",
+          "level": 45,
+          "name": "Leather cutting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leather cutting speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_cutting.perk_50",
+          "level": 50,
+          "name": "Leather cutting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather cutting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leather cutting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leather cutting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leather cutting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leather cutting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leather cutting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leather cutting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.saddle_making",
+      "domain": "hides_and_leather",
+      "name": "Saddle making",
+      "description": "Saddle making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.shoe_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.saddle_making.saddle_making_basics",
+          "discipline": "hides_and_leather.saddle_making",
+          "name": "Saddle making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.saddle_making.saddle_making_seasonal_practice",
+          "discipline": "hides_and_leather.saddle_making",
+          "name": "Saddle making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.saddle_making.saddle_making_precision_work",
+          "discipline": "hides_and_leather.saddle_making",
+          "name": "Saddle making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.saddle_making.saddle_making_master_technique",
+          "discipline": "hides_and_leather.saddle_making",
+          "name": "Saddle making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.saddle_making.perk_5",
+          "level": 5,
+          "name": "Saddle making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Saddle making output +2%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_10",
+          "level": 10,
+          "name": "Saddle making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Saddle making waste -5%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_15",
+          "level": 15,
+          "name": "Saddle making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Saddle making quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_20",
+          "level": 20,
+          "name": "Saddle making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Saddle making care +5%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_25",
+          "level": 25,
+          "name": "Saddle making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Saddle making speed +3%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_30",
+          "level": 30,
+          "name": "Saddle making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Saddle making output +5%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_35",
+          "level": 35,
+          "name": "Saddle making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Saddle making spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_40",
+          "level": 40,
+          "name": "Saddle making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Saddle making quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_45",
+          "level": 45,
+          "name": "Saddle making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Saddle making speed +5%"
+        },
+        {
+          "id": "hides_and_leather.saddle_making.perk_50",
+          "level": 50,
+          "name": "Saddle making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Saddle making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise saddle making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful saddle making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of saddle making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a saddle making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn saddle making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of saddle making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.shoe_making",
+      "domain": "hides_and_leather",
+      "name": "Shoe making",
+      "description": "Shoe making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leather_stitching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.shoe_making.shoe_making_basics",
+          "discipline": "hides_and_leather.shoe_making",
+          "name": "Shoe making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.shoe_making.shoe_making_seasonal_practice",
+          "discipline": "hides_and_leather.shoe_making",
+          "name": "Shoe making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.shoe_making.shoe_making_precision_work",
+          "discipline": "hides_and_leather.shoe_making",
+          "name": "Shoe making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.shoe_making.shoe_making_master_technique",
+          "discipline": "hides_and_leather.shoe_making",
+          "name": "Shoe making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.shoe_making.perk_5",
+          "level": 5,
+          "name": "Shoe making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Shoe making output +2%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_10",
+          "level": 10,
+          "name": "Shoe making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Shoe making waste -5%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_15",
+          "level": 15,
+          "name": "Shoe making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Shoe making quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_20",
+          "level": 20,
+          "name": "Shoe making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Shoe making care +5%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_25",
+          "level": 25,
+          "name": "Shoe making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Shoe making speed +3%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_30",
+          "level": 30,
+          "name": "Shoe making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Shoe making output +5%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_35",
+          "level": 35,
+          "name": "Shoe making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Shoe making spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_40",
+          "level": 40,
+          "name": "Shoe making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Shoe making quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_45",
+          "level": 45,
+          "name": "Shoe making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Shoe making speed +5%"
+        },
+        {
+          "id": "hides_and_leather.shoe_making.perk_50",
+          "level": 50,
+          "name": "Shoe making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Shoe making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise shoe making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful shoe making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of shoe making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a shoe making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn shoe making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of shoe making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.leather_stitching",
+      "domain": "hides_and_leather",
+      "name": "Leather stitching",
+      "description": "Leather stitching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leather_armour"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leather_stitching.leather_stitching_basics",
+          "discipline": "hides_and_leather.leather_stitching",
+          "name": "Leather stitching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.leather_stitching_seasonal_practice",
+          "discipline": "hides_and_leather.leather_stitching",
+          "name": "Leather stitching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.leather_stitching_precision_work",
+          "discipline": "hides_and_leather.leather_stitching",
+          "name": "Leather stitching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.leather_stitching_master_technique",
+          "discipline": "hides_and_leather.leather_stitching",
+          "name": "Leather stitching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leather_stitching.perk_5",
+          "level": 5,
+          "name": "Leather stitching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leather stitching output +2%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_10",
+          "level": 10,
+          "name": "Leather stitching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leather stitching waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_15",
+          "level": 15,
+          "name": "Leather stitching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather stitching quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_20",
+          "level": 20,
+          "name": "Leather stitching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leather stitching care +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_25",
+          "level": 25,
+          "name": "Leather stitching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leather stitching speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_30",
+          "level": 30,
+          "name": "Leather stitching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather stitching output +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_35",
+          "level": 35,
+          "name": "Leather stitching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leather stitching spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_40",
+          "level": 40,
+          "name": "Leather stitching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather stitching quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_45",
+          "level": 45,
+          "name": "Leather stitching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leather stitching speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_stitching.perk_50",
+          "level": 50,
+          "name": "Leather stitching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather stitching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leather stitching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leather stitching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leather stitching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leather stitching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leather stitching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leather stitching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.leather_armour",
+      "domain": "hides_and_leather",
+      "name": "Leather armour",
+      "description": "Leather armour: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.harness_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leather_armour.leather_armour_basics",
+          "discipline": "hides_and_leather.leather_armour",
+          "name": "Leather armour basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_armour.leather_armour_seasonal_practice",
+          "discipline": "hides_and_leather.leather_armour",
+          "name": "Leather armour seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_armour.leather_armour_precision_work",
+          "discipline": "hides_and_leather.leather_armour",
+          "name": "Leather armour precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_armour.leather_armour_master_technique",
+          "discipline": "hides_and_leather.leather_armour",
+          "name": "Leather armour master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leather_armour.perk_5",
+          "level": 5,
+          "name": "Leather armour: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leather armour output +2%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_10",
+          "level": 10,
+          "name": "Leather armour: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leather armour waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_15",
+          "level": 15,
+          "name": "Leather armour: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather armour quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_20",
+          "level": 20,
+          "name": "Leather armour: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leather armour care +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_25",
+          "level": 25,
+          "name": "Leather armour: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leather armour speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_30",
+          "level": 30,
+          "name": "Leather armour: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather armour output +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_35",
+          "level": 35,
+          "name": "Leather armour: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leather armour spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_40",
+          "level": 40,
+          "name": "Leather armour: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather armour quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_45",
+          "level": 45,
+          "name": "Leather armour: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leather armour speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_armour.perk_50",
+          "level": 50,
+          "name": "Leather armour: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather armour output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leather armour for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leather armour (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leather armour; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leather armour task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leather armour from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leather armour, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.harness_making",
+      "domain": "hides_and_leather",
+      "name": "Harness making",
+      "description": "Harness making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.hide_grading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.harness_making.harness_making_basics",
+          "discipline": "hides_and_leather.harness_making",
+          "name": "Harness making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.harness_making.harness_making_seasonal_practice",
+          "discipline": "hides_and_leather.harness_making",
+          "name": "Harness making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.harness_making.harness_making_precision_work",
+          "discipline": "hides_and_leather.harness_making",
+          "name": "Harness making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.harness_making.harness_making_master_technique",
+          "discipline": "hides_and_leather.harness_making",
+          "name": "Harness making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.harness_making.perk_5",
+          "level": 5,
+          "name": "Harness making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Harness making output +2%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_10",
+          "level": 10,
+          "name": "Harness making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Harness making waste -5%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_15",
+          "level": 15,
+          "name": "Harness making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Harness making quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_20",
+          "level": 20,
+          "name": "Harness making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Harness making care +5%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_25",
+          "level": 25,
+          "name": "Harness making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Harness making speed +3%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_30",
+          "level": 30,
+          "name": "Harness making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Harness making output +5%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_35",
+          "level": 35,
+          "name": "Harness making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Harness making spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_40",
+          "level": 40,
+          "name": "Harness making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Harness making quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_45",
+          "level": 45,
+          "name": "Harness making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Harness making speed +5%"
+        },
+        {
+          "id": "hides_and_leather.harness_making.perk_50",
+          "level": 50,
+          "name": "Harness making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Harness making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise harness making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful harness making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of harness making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a harness making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn harness making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of harness making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.hide_grading",
+      "domain": "hides_and_leather",
+      "name": "Hide grading",
+      "description": "Hide grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.fur_dressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.hide_grading.hide_grading_basics",
+          "discipline": "hides_and_leather.hide_grading",
+          "name": "Hide grading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.hide_grading.hide_grading_seasonal_practice",
+          "discipline": "hides_and_leather.hide_grading",
+          "name": "Hide grading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.hide_grading.hide_grading_precision_work",
+          "discipline": "hides_and_leather.hide_grading",
+          "name": "Hide grading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.hide_grading.hide_grading_master_technique",
+          "discipline": "hides_and_leather.hide_grading",
+          "name": "Hide grading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.hide_grading.perk_5",
+          "level": 5,
+          "name": "Hide grading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hide grading output +2%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_10",
+          "level": 10,
+          "name": "Hide grading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hide grading waste -5%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_15",
+          "level": 15,
+          "name": "Hide grading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hide grading quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_20",
+          "level": 20,
+          "name": "Hide grading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hide grading care +5%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_25",
+          "level": 25,
+          "name": "Hide grading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hide grading speed +3%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_30",
+          "level": 30,
+          "name": "Hide grading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hide grading output +5%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_35",
+          "level": 35,
+          "name": "Hide grading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hide grading spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_40",
+          "level": 40,
+          "name": "Hide grading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hide grading quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_45",
+          "level": 45,
+          "name": "Hide grading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hide grading speed +5%"
+        },
+        {
+          "id": "hides_and_leather.hide_grading.perk_50",
+          "level": 50,
+          "name": "Hide grading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hide grading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hide grading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hide grading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hide grading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hide grading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hide grading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hide grading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.fur_dressing",
+      "domain": "hides_and_leather",
+      "name": "Fur dressing",
+      "description": "Fur dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leather_dyeing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.fur_dressing.fur_dressing_basics",
+          "discipline": "hides_and_leather.fur_dressing",
+          "name": "Fur dressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.fur_dressing_seasonal_practice",
+          "discipline": "hides_and_leather.fur_dressing",
+          "name": "Fur dressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.fur_dressing_precision_work",
+          "discipline": "hides_and_leather.fur_dressing",
+          "name": "Fur dressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.fur_dressing_master_technique",
+          "discipline": "hides_and_leather.fur_dressing",
+          "name": "Fur dressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.fur_dressing.perk_5",
+          "level": 5,
+          "name": "Fur dressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fur dressing output +2%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_10",
+          "level": 10,
+          "name": "Fur dressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fur dressing waste -5%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_15",
+          "level": 15,
+          "name": "Fur dressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fur dressing quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_20",
+          "level": 20,
+          "name": "Fur dressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fur dressing care +5%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_25",
+          "level": 25,
+          "name": "Fur dressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fur dressing speed +3%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_30",
+          "level": 30,
+          "name": "Fur dressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fur dressing output +5%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_35",
+          "level": 35,
+          "name": "Fur dressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fur dressing spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_40",
+          "level": 40,
+          "name": "Fur dressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fur dressing quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_45",
+          "level": 45,
+          "name": "Fur dressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fur dressing speed +5%"
+        },
+        {
+          "id": "hides_and_leather.fur_dressing.perk_50",
+          "level": 50,
+          "name": "Fur dressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fur dressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fur dressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fur dressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fur dressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fur dressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fur dressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fur dressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.leather_dyeing",
+      "domain": "hides_and_leather",
+      "name": "Leather dyeing",
+      "description": "Leather dyeing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leather_repair"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leather_dyeing.leather_dyeing_basics",
+          "discipline": "hides_and_leather.leather_dyeing",
+          "name": "Leather dyeing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.leather_dyeing_seasonal_practice",
+          "discipline": "hides_and_leather.leather_dyeing",
+          "name": "Leather dyeing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.leather_dyeing_precision_work",
+          "discipline": "hides_and_leather.leather_dyeing",
+          "name": "Leather dyeing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.leather_dyeing_master_technique",
+          "discipline": "hides_and_leather.leather_dyeing",
+          "name": "Leather dyeing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_5",
+          "level": 5,
+          "name": "Leather dyeing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leather dyeing output +2%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_10",
+          "level": 10,
+          "name": "Leather dyeing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leather dyeing waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_15",
+          "level": 15,
+          "name": "Leather dyeing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather dyeing quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_20",
+          "level": 20,
+          "name": "Leather dyeing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leather dyeing care +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_25",
+          "level": 25,
+          "name": "Leather dyeing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leather dyeing speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_30",
+          "level": 30,
+          "name": "Leather dyeing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather dyeing output +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_35",
+          "level": 35,
+          "name": "Leather dyeing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leather dyeing spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_40",
+          "level": 40,
+          "name": "Leather dyeing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather dyeing quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_45",
+          "level": 45,
+          "name": "Leather dyeing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leather dyeing speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_dyeing.perk_50",
+          "level": 50,
+          "name": "Leather dyeing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather dyeing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leather dyeing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leather dyeing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leather dyeing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leather dyeing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leather dyeing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leather dyeing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "hides_and_leather.leather_repair",
+      "domain": "hides_and_leather",
+      "name": "Leather repair",
+      "description": "Leather repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "hides_and_leather.leatherwork"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "hides_and_leather.leather_repair.leather_repair_basics",
+          "discipline": "hides_and_leather.leather_repair",
+          "name": "Leather repair basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_repair.leather_repair_seasonal_practice",
+          "discipline": "hides_and_leather.leather_repair",
+          "name": "Leather repair seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_repair.leather_repair_precision_work",
+          "discipline": "hides_and_leather.leather_repair",
+          "name": "Leather repair precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "hides_and_leather.leather_repair.leather_repair_master_technique",
+          "discipline": "hides_and_leather.leather_repair",
+          "name": "Leather repair master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "hides_and_leather.leather_repair.perk_5",
+          "level": 5,
+          "name": "Leather repair: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Leather repair output +2%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_10",
+          "level": 10,
+          "name": "Leather repair: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Leather repair waste -5%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_15",
+          "level": 15,
+          "name": "Leather repair: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather repair quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_20",
+          "level": 20,
+          "name": "Leather repair: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Leather repair care +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_25",
+          "level": 25,
+          "name": "Leather repair: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Leather repair speed +3%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_30",
+          "level": 30,
+          "name": "Leather repair: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather repair output +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_35",
+          "level": 35,
+          "name": "Leather repair: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Leather repair spoilage -10%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_40",
+          "level": 40,
+          "name": "Leather repair: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Leather repair quality roll +1"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_45",
+          "level": 45,
+          "name": "Leather repair: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Leather repair speed +5%"
+        },
+        {
+          "id": "hides_and_leather.leather_repair.perk_50",
+          "level": 50,
+          "name": "Leather repair: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Leather repair output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise leather repair for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful leather repair (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of leather repair; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a leather repair task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn leather repair from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of leather repair, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

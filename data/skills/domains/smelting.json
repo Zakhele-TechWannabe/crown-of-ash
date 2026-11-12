@@ -1,0 +1,4062 @@
+{
+  "id": "smelting",
+  "disciplines": [
+    {
+      "id": "smelting.smelting",
+      "domain": "smelting",
+      "name": "Smelting",
+      "description": "Smelting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.bloomery_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.smelting.bloomery",
+          "discipline": "smelting.smelting",
+          "name": "Bloomery",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.smelting.ore_roasting",
+          "discipline": "smelting.smelting",
+          "name": "Ore roasting",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.smelting.flux_selection",
+          "discipline": "smelting.smelting",
+          "name": "Flux selection",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.smelting.crucible_steel",
+          "discipline": "smelting.smelting",
+          "name": "Crucible steel",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.smelting.perk_5",
+          "level": 5,
+          "name": "Smelting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Smelting output +2%"
+        },
+        {
+          "id": "smelting.smelting.perk_10",
+          "level": 10,
+          "name": "Smelting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Smelting waste -5%"
+        },
+        {
+          "id": "smelting.smelting.perk_15",
+          "level": 15,
+          "name": "Smelting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Smelting quality roll +1"
+        },
+        {
+          "id": "smelting.smelting.perk_20",
+          "level": 20,
+          "name": "Smelting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Smelting care +5%"
+        },
+        {
+          "id": "smelting.smelting.perk_25",
+          "level": 25,
+          "name": "Smelting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Smelting speed +3%"
+        },
+        {
+          "id": "smelting.smelting.perk_30",
+          "level": 30,
+          "name": "Smelting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Smelting output +5%"
+        },
+        {
+          "id": "smelting.smelting.perk_35",
+          "level": 35,
+          "name": "Smelting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Smelting spoilage -10%"
+        },
+        {
+          "id": "smelting.smelting.perk_40",
+          "level": 40,
+          "name": "Smelting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Smelting quality roll +1"
+        },
+        {
+          "id": "smelting.smelting.perk_45",
+          "level": 45,
+          "name": "Smelting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Smelting speed +5%"
+        },
+        {
+          "id": "smelting.smelting.perk_50",
+          "level": 50,
+          "name": "Smelting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Smelting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise smelting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful smelting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of smelting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a smelting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn smelting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of smelting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.bloomery_tending",
+      "domain": "smelting",
+      "name": "Bloomery tending",
+      "description": "Bloomery tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.ore_roasting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.bloomery_tending.bloomery_tending_basics",
+          "discipline": "smelting.bloomery_tending",
+          "name": "Bloomery tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bloomery_tending.bloomery_tending_seasonal_practice",
+          "discipline": "smelting.bloomery_tending",
+          "name": "Bloomery tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bloomery_tending.bloomery_tending_precision_work",
+          "discipline": "smelting.bloomery_tending",
+          "name": "Bloomery tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bloomery_tending.bloomery_tending_master_technique",
+          "discipline": "smelting.bloomery_tending",
+          "name": "Bloomery tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.bloomery_tending.perk_5",
+          "level": 5,
+          "name": "Bloomery tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bloomery tending output +2%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_10",
+          "level": 10,
+          "name": "Bloomery tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bloomery tending waste -5%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_15",
+          "level": 15,
+          "name": "Bloomery tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bloomery tending quality roll +1"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_20",
+          "level": 20,
+          "name": "Bloomery tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bloomery tending care +5%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_25",
+          "level": 25,
+          "name": "Bloomery tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bloomery tending speed +3%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_30",
+          "level": 30,
+          "name": "Bloomery tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bloomery tending output +5%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_35",
+          "level": 35,
+          "name": "Bloomery tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bloomery tending spoilage -10%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_40",
+          "level": 40,
+          "name": "Bloomery tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bloomery tending quality roll +1"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_45",
+          "level": 45,
+          "name": "Bloomery tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bloomery tending speed +5%"
+        },
+        {
+          "id": "smelting.bloomery_tending.perk_50",
+          "level": 50,
+          "name": "Bloomery tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bloomery tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bloomery tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bloomery tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bloomery tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bloomery tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bloomery tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bloomery tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.ore_roasting",
+      "domain": "smelting",
+      "name": "Ore roasting",
+      "description": "Ore roasting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.charge_mixing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.ore_roasting.ore_roasting_basics",
+          "discipline": "smelting.ore_roasting",
+          "name": "Ore roasting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.ore_roasting.ore_roasting_seasonal_practice",
+          "discipline": "smelting.ore_roasting",
+          "name": "Ore roasting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.ore_roasting.ore_roasting_precision_work",
+          "discipline": "smelting.ore_roasting",
+          "name": "Ore roasting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.ore_roasting.ore_roasting_master_technique",
+          "discipline": "smelting.ore_roasting",
+          "name": "Ore roasting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.ore_roasting.perk_5",
+          "level": 5,
+          "name": "Ore roasting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ore roasting output +2%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_10",
+          "level": 10,
+          "name": "Ore roasting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ore roasting waste -5%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_15",
+          "level": 15,
+          "name": "Ore roasting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ore roasting quality roll +1"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_20",
+          "level": 20,
+          "name": "Ore roasting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ore roasting care +5%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_25",
+          "level": 25,
+          "name": "Ore roasting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ore roasting speed +3%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_30",
+          "level": 30,
+          "name": "Ore roasting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ore roasting output +5%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_35",
+          "level": 35,
+          "name": "Ore roasting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ore roasting spoilage -10%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_40",
+          "level": 40,
+          "name": "Ore roasting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ore roasting quality roll +1"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_45",
+          "level": 45,
+          "name": "Ore roasting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ore roasting speed +5%"
+        },
+        {
+          "id": "smelting.ore_roasting.perk_50",
+          "level": 50,
+          "name": "Ore roasting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ore roasting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ore roasting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ore roasting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ore roasting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ore roasting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ore roasting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ore roasting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.charge_mixing",
+      "domain": "smelting",
+      "name": "Charge mixing",
+      "description": "Charge mixing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.bellows_working"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.charge_mixing.charge_mixing_basics",
+          "discipline": "smelting.charge_mixing",
+          "name": "Charge mixing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.charge_mixing.charge_mixing_seasonal_practice",
+          "discipline": "smelting.charge_mixing",
+          "name": "Charge mixing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.charge_mixing.charge_mixing_precision_work",
+          "discipline": "smelting.charge_mixing",
+          "name": "Charge mixing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.charge_mixing.charge_mixing_master_technique",
+          "discipline": "smelting.charge_mixing",
+          "name": "Charge mixing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.charge_mixing.perk_5",
+          "level": 5,
+          "name": "Charge mixing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Charge mixing output +2%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_10",
+          "level": 10,
+          "name": "Charge mixing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Charge mixing waste -5%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_15",
+          "level": 15,
+          "name": "Charge mixing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Charge mixing quality roll +1"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_20",
+          "level": 20,
+          "name": "Charge mixing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Charge mixing care +5%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_25",
+          "level": 25,
+          "name": "Charge mixing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Charge mixing speed +3%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_30",
+          "level": 30,
+          "name": "Charge mixing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Charge mixing output +5%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_35",
+          "level": 35,
+          "name": "Charge mixing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Charge mixing spoilage -10%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_40",
+          "level": 40,
+          "name": "Charge mixing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Charge mixing quality roll +1"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_45",
+          "level": 45,
+          "name": "Charge mixing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Charge mixing speed +5%"
+        },
+        {
+          "id": "smelting.charge_mixing.perk_50",
+          "level": 50,
+          "name": "Charge mixing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Charge mixing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise charge mixing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful charge mixing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of charge mixing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a charge mixing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn charge mixing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of charge mixing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.bellows_working",
+      "domain": "smelting",
+      "name": "Bellows working",
+      "description": "Bellows working: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.slag_reading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.bellows_working.bellows_working_basics",
+          "discipline": "smelting.bellows_working",
+          "name": "Bellows working basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bellows_working.bellows_working_seasonal_practice",
+          "discipline": "smelting.bellows_working",
+          "name": "Bellows working seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bellows_working.bellows_working_precision_work",
+          "discipline": "smelting.bellows_working",
+          "name": "Bellows working precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bellows_working.bellows_working_master_technique",
+          "discipline": "smelting.bellows_working",
+          "name": "Bellows working master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.bellows_working.perk_5",
+          "level": 5,
+          "name": "Bellows working: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bellows working output +2%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_10",
+          "level": 10,
+          "name": "Bellows working: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bellows working waste -5%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_15",
+          "level": 15,
+          "name": "Bellows working: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bellows working quality roll +1"
+        },
+        {
+          "id": "smelting.bellows_working.perk_20",
+          "level": 20,
+          "name": "Bellows working: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bellows working care +5%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_25",
+          "level": 25,
+          "name": "Bellows working: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bellows working speed +3%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_30",
+          "level": 30,
+          "name": "Bellows working: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bellows working output +5%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_35",
+          "level": 35,
+          "name": "Bellows working: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bellows working spoilage -10%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_40",
+          "level": 40,
+          "name": "Bellows working: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bellows working quality roll +1"
+        },
+        {
+          "id": "smelting.bellows_working.perk_45",
+          "level": 45,
+          "name": "Bellows working: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bellows working speed +5%"
+        },
+        {
+          "id": "smelting.bellows_working.perk_50",
+          "level": 50,
+          "name": "Bellows working: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bellows working output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bellows working for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bellows working (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bellows working; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bellows working task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bellows working from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bellows working, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.slag_reading",
+      "domain": "smelting",
+      "name": "Slag reading",
+      "description": "Slag reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.bloom_consolidation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.slag_reading.slag_reading_basics",
+          "discipline": "smelting.slag_reading",
+          "name": "Slag reading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.slag_reading.slag_reading_seasonal_practice",
+          "discipline": "smelting.slag_reading",
+          "name": "Slag reading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.slag_reading.slag_reading_precision_work",
+          "discipline": "smelting.slag_reading",
+          "name": "Slag reading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.slag_reading.slag_reading_master_technique",
+          "discipline": "smelting.slag_reading",
+          "name": "Slag reading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.slag_reading.perk_5",
+          "level": 5,
+          "name": "Slag reading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Slag reading output +2%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_10",
+          "level": 10,
+          "name": "Slag reading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Slag reading waste -5%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_15",
+          "level": 15,
+          "name": "Slag reading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Slag reading quality roll +1"
+        },
+        {
+          "id": "smelting.slag_reading.perk_20",
+          "level": 20,
+          "name": "Slag reading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Slag reading care +5%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_25",
+          "level": 25,
+          "name": "Slag reading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Slag reading speed +3%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_30",
+          "level": 30,
+          "name": "Slag reading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Slag reading output +5%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_35",
+          "level": 35,
+          "name": "Slag reading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Slag reading spoilage -10%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_40",
+          "level": 40,
+          "name": "Slag reading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Slag reading quality roll +1"
+        },
+        {
+          "id": "smelting.slag_reading.perk_45",
+          "level": 45,
+          "name": "Slag reading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Slag reading speed +5%"
+        },
+        {
+          "id": "smelting.slag_reading.perk_50",
+          "level": 50,
+          "name": "Slag reading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Slag reading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise slag reading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful slag reading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of slag reading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a slag reading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn slag reading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of slag reading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.bloom_consolidation",
+      "domain": "smelting",
+      "name": "Bloom consolidation",
+      "description": "Bloom consolidation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.copper_smelting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.bloom_consolidation.bloom_consolidation_basics",
+          "discipline": "smelting.bloom_consolidation",
+          "name": "Bloom consolidation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bloom_consolidation.bloom_consolidation_seasonal_practice",
+          "discipline": "smelting.bloom_consolidation",
+          "name": "Bloom consolidation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bloom_consolidation.bloom_consolidation_precision_work",
+          "discipline": "smelting.bloom_consolidation",
+          "name": "Bloom consolidation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bloom_consolidation.bloom_consolidation_master_technique",
+          "discipline": "smelting.bloom_consolidation",
+          "name": "Bloom consolidation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.bloom_consolidation.perk_5",
+          "level": 5,
+          "name": "Bloom consolidation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bloom consolidation output +2%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_10",
+          "level": 10,
+          "name": "Bloom consolidation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bloom consolidation waste -5%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_15",
+          "level": 15,
+          "name": "Bloom consolidation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bloom consolidation quality roll +1"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_20",
+          "level": 20,
+          "name": "Bloom consolidation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bloom consolidation care +5%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_25",
+          "level": 25,
+          "name": "Bloom consolidation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bloom consolidation speed +3%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_30",
+          "level": 30,
+          "name": "Bloom consolidation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bloom consolidation output +5%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_35",
+          "level": 35,
+          "name": "Bloom consolidation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bloom consolidation spoilage -10%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_40",
+          "level": 40,
+          "name": "Bloom consolidation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bloom consolidation quality roll +1"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_45",
+          "level": 45,
+          "name": "Bloom consolidation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bloom consolidation speed +5%"
+        },
+        {
+          "id": "smelting.bloom_consolidation.perk_50",
+          "level": 50,
+          "name": "Bloom consolidation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bloom consolidation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bloom consolidation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bloom consolidation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bloom consolidation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bloom consolidation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bloom consolidation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bloom consolidation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.copper_smelting",
+      "domain": "smelting",
+      "name": "Copper smelting",
+      "description": "Copper smelting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.tin_smelting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.copper_smelting.copper_smelting_basics",
+          "discipline": "smelting.copper_smelting",
+          "name": "Copper smelting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.copper_smelting.copper_smelting_seasonal_practice",
+          "discipline": "smelting.copper_smelting",
+          "name": "Copper smelting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.copper_smelting.copper_smelting_precision_work",
+          "discipline": "smelting.copper_smelting",
+          "name": "Copper smelting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.copper_smelting.copper_smelting_master_technique",
+          "discipline": "smelting.copper_smelting",
+          "name": "Copper smelting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.copper_smelting.perk_5",
+          "level": 5,
+          "name": "Copper smelting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Copper smelting output +2%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_10",
+          "level": 10,
+          "name": "Copper smelting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Copper smelting waste -5%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_15",
+          "level": 15,
+          "name": "Copper smelting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Copper smelting quality roll +1"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_20",
+          "level": 20,
+          "name": "Copper smelting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Copper smelting care +5%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_25",
+          "level": 25,
+          "name": "Copper smelting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Copper smelting speed +3%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_30",
+          "level": 30,
+          "name": "Copper smelting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Copper smelting output +5%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_35",
+          "level": 35,
+          "name": "Copper smelting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Copper smelting spoilage -10%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_40",
+          "level": 40,
+          "name": "Copper smelting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Copper smelting quality roll +1"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_45",
+          "level": 45,
+          "name": "Copper smelting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Copper smelting speed +5%"
+        },
+        {
+          "id": "smelting.copper_smelting.perk_50",
+          "level": 50,
+          "name": "Copper smelting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Copper smelting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise copper smelting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful copper smelting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of copper smelting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a copper smelting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn copper smelting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of copper smelting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.tin_smelting",
+      "domain": "smelting",
+      "name": "Tin smelting",
+      "description": "Tin smelting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.bronze_alloying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.tin_smelting.tin_smelting_basics",
+          "discipline": "smelting.tin_smelting",
+          "name": "Tin smelting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.tin_smelting.tin_smelting_seasonal_practice",
+          "discipline": "smelting.tin_smelting",
+          "name": "Tin smelting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.tin_smelting.tin_smelting_precision_work",
+          "discipline": "smelting.tin_smelting",
+          "name": "Tin smelting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.tin_smelting.tin_smelting_master_technique",
+          "discipline": "smelting.tin_smelting",
+          "name": "Tin smelting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.tin_smelting.perk_5",
+          "level": 5,
+          "name": "Tin smelting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tin smelting output +2%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_10",
+          "level": 10,
+          "name": "Tin smelting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tin smelting waste -5%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_15",
+          "level": 15,
+          "name": "Tin smelting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tin smelting quality roll +1"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_20",
+          "level": 20,
+          "name": "Tin smelting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tin smelting care +5%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_25",
+          "level": 25,
+          "name": "Tin smelting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tin smelting speed +3%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_30",
+          "level": 30,
+          "name": "Tin smelting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tin smelting output +5%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_35",
+          "level": 35,
+          "name": "Tin smelting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tin smelting spoilage -10%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_40",
+          "level": 40,
+          "name": "Tin smelting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tin smelting quality roll +1"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_45",
+          "level": 45,
+          "name": "Tin smelting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tin smelting speed +5%"
+        },
+        {
+          "id": "smelting.tin_smelting.perk_50",
+          "level": 50,
+          "name": "Tin smelting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tin smelting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tin smelting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tin smelting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tin smelting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tin smelting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tin smelting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tin smelting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.bronze_alloying",
+      "domain": "smelting",
+      "name": "Bronze alloying",
+      "description": "Bronze alloying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.crucible_work"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.bronze_alloying.bronze_alloying_basics",
+          "discipline": "smelting.bronze_alloying",
+          "name": "Bronze alloying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bronze_alloying.bronze_alloying_seasonal_practice",
+          "discipline": "smelting.bronze_alloying",
+          "name": "Bronze alloying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bronze_alloying.bronze_alloying_precision_work",
+          "discipline": "smelting.bronze_alloying",
+          "name": "Bronze alloying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.bronze_alloying.bronze_alloying_master_technique",
+          "discipline": "smelting.bronze_alloying",
+          "name": "Bronze alloying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.bronze_alloying.perk_5",
+          "level": 5,
+          "name": "Bronze alloying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bronze alloying output +2%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_10",
+          "level": 10,
+          "name": "Bronze alloying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bronze alloying waste -5%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_15",
+          "level": 15,
+          "name": "Bronze alloying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bronze alloying quality roll +1"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_20",
+          "level": 20,
+          "name": "Bronze alloying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bronze alloying care +5%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_25",
+          "level": 25,
+          "name": "Bronze alloying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bronze alloying speed +3%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_30",
+          "level": 30,
+          "name": "Bronze alloying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bronze alloying output +5%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_35",
+          "level": 35,
+          "name": "Bronze alloying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bronze alloying spoilage -10%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_40",
+          "level": 40,
+          "name": "Bronze alloying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bronze alloying quality roll +1"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_45",
+          "level": 45,
+          "name": "Bronze alloying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bronze alloying speed +5%"
+        },
+        {
+          "id": "smelting.bronze_alloying.perk_50",
+          "level": 50,
+          "name": "Bronze alloying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bronze alloying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bronze alloying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bronze alloying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bronze alloying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bronze alloying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bronze alloying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bronze alloying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.crucible_work",
+      "domain": "smelting",
+      "name": "Crucible work",
+      "description": "Crucible work: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.furnace_lining"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.crucible_work.crucible_work_basics",
+          "discipline": "smelting.crucible_work",
+          "name": "Crucible work basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.crucible_work.crucible_work_seasonal_practice",
+          "discipline": "smelting.crucible_work",
+          "name": "Crucible work seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.crucible_work.crucible_work_precision_work",
+          "discipline": "smelting.crucible_work",
+          "name": "Crucible work precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.crucible_work.crucible_work_master_technique",
+          "discipline": "smelting.crucible_work",
+          "name": "Crucible work master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.crucible_work.perk_5",
+          "level": 5,
+          "name": "Crucible work: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Crucible work output +2%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_10",
+          "level": 10,
+          "name": "Crucible work: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Crucible work waste -5%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_15",
+          "level": 15,
+          "name": "Crucible work: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Crucible work quality roll +1"
+        },
+        {
+          "id": "smelting.crucible_work.perk_20",
+          "level": 20,
+          "name": "Crucible work: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Crucible work care +5%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_25",
+          "level": 25,
+          "name": "Crucible work: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Crucible work speed +3%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_30",
+          "level": 30,
+          "name": "Crucible work: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Crucible work output +5%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_35",
+          "level": 35,
+          "name": "Crucible work: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Crucible work spoilage -10%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_40",
+          "level": 40,
+          "name": "Crucible work: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Crucible work quality roll +1"
+        },
+        {
+          "id": "smelting.crucible_work.perk_45",
+          "level": 45,
+          "name": "Crucible work: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Crucible work speed +5%"
+        },
+        {
+          "id": "smelting.crucible_work.perk_50",
+          "level": 50,
+          "name": "Crucible work: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Crucible work output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise crucible work for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful crucible work (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of crucible work; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a crucible work task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn crucible work from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of crucible work, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.furnace_lining",
+      "domain": "smelting",
+      "name": "Furnace lining",
+      "description": "Furnace lining: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.flux_selection"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.furnace_lining.furnace_lining_basics",
+          "discipline": "smelting.furnace_lining",
+          "name": "Furnace lining basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.furnace_lining.furnace_lining_seasonal_practice",
+          "discipline": "smelting.furnace_lining",
+          "name": "Furnace lining seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.furnace_lining.furnace_lining_precision_work",
+          "discipline": "smelting.furnace_lining",
+          "name": "Furnace lining precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.furnace_lining.furnace_lining_master_technique",
+          "discipline": "smelting.furnace_lining",
+          "name": "Furnace lining master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.furnace_lining.perk_5",
+          "level": 5,
+          "name": "Furnace lining: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Furnace lining output +2%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_10",
+          "level": 10,
+          "name": "Furnace lining: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Furnace lining waste -5%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_15",
+          "level": 15,
+          "name": "Furnace lining: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Furnace lining quality roll +1"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_20",
+          "level": 20,
+          "name": "Furnace lining: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Furnace lining care +5%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_25",
+          "level": 25,
+          "name": "Furnace lining: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Furnace lining speed +3%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_30",
+          "level": 30,
+          "name": "Furnace lining: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Furnace lining output +5%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_35",
+          "level": 35,
+          "name": "Furnace lining: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Furnace lining spoilage -10%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_40",
+          "level": 40,
+          "name": "Furnace lining: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Furnace lining quality roll +1"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_45",
+          "level": 45,
+          "name": "Furnace lining: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Furnace lining speed +5%"
+        },
+        {
+          "id": "smelting.furnace_lining.perk_50",
+          "level": 50,
+          "name": "Furnace lining: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Furnace lining output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise furnace lining for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful furnace lining (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of furnace lining; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a furnace lining task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn furnace lining from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of furnace lining, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.flux_selection",
+      "domain": "smelting",
+      "name": "Flux selection",
+      "description": "Flux selection: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.heat_judging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.flux_selection.flux_selection_basics",
+          "discipline": "smelting.flux_selection",
+          "name": "Flux selection basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.flux_selection.flux_selection_seasonal_practice",
+          "discipline": "smelting.flux_selection",
+          "name": "Flux selection seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.flux_selection.flux_selection_precision_work",
+          "discipline": "smelting.flux_selection",
+          "name": "Flux selection precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.flux_selection.flux_selection_master_technique",
+          "discipline": "smelting.flux_selection",
+          "name": "Flux selection master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.flux_selection.perk_5",
+          "level": 5,
+          "name": "Flux selection: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Flux selection output +2%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_10",
+          "level": 10,
+          "name": "Flux selection: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Flux selection waste -5%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_15",
+          "level": 15,
+          "name": "Flux selection: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Flux selection quality roll +1"
+        },
+        {
+          "id": "smelting.flux_selection.perk_20",
+          "level": 20,
+          "name": "Flux selection: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Flux selection care +5%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_25",
+          "level": 25,
+          "name": "Flux selection: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Flux selection speed +3%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_30",
+          "level": 30,
+          "name": "Flux selection: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Flux selection output +5%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_35",
+          "level": 35,
+          "name": "Flux selection: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Flux selection spoilage -10%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_40",
+          "level": 40,
+          "name": "Flux selection: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Flux selection quality roll +1"
+        },
+        {
+          "id": "smelting.flux_selection.perk_45",
+          "level": 45,
+          "name": "Flux selection: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Flux selection speed +5%"
+        },
+        {
+          "id": "smelting.flux_selection.perk_50",
+          "level": 50,
+          "name": "Flux selection: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Flux selection output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise flux selection for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful flux selection (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of flux selection; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a flux selection task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn flux selection from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of flux selection, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.heat_judging",
+      "domain": "smelting",
+      "name": "Heat judging",
+      "description": "Heat judging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.metal_assaying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.heat_judging.heat_judging_basics",
+          "discipline": "smelting.heat_judging",
+          "name": "Heat judging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.heat_judging.heat_judging_seasonal_practice",
+          "discipline": "smelting.heat_judging",
+          "name": "Heat judging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.heat_judging.heat_judging_precision_work",
+          "discipline": "smelting.heat_judging",
+          "name": "Heat judging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.heat_judging.heat_judging_master_technique",
+          "discipline": "smelting.heat_judging",
+          "name": "Heat judging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.heat_judging.perk_5",
+          "level": 5,
+          "name": "Heat judging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Heat judging output +2%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_10",
+          "level": 10,
+          "name": "Heat judging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Heat judging waste -5%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_15",
+          "level": 15,
+          "name": "Heat judging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Heat judging quality roll +1"
+        },
+        {
+          "id": "smelting.heat_judging.perk_20",
+          "level": 20,
+          "name": "Heat judging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Heat judging care +5%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_25",
+          "level": 25,
+          "name": "Heat judging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Heat judging speed +3%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_30",
+          "level": 30,
+          "name": "Heat judging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Heat judging output +5%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_35",
+          "level": 35,
+          "name": "Heat judging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Heat judging spoilage -10%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_40",
+          "level": 40,
+          "name": "Heat judging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Heat judging quality roll +1"
+        },
+        {
+          "id": "smelting.heat_judging.perk_45",
+          "level": 45,
+          "name": "Heat judging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Heat judging speed +5%"
+        },
+        {
+          "id": "smelting.heat_judging.perk_50",
+          "level": 50,
+          "name": "Heat judging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Heat judging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise heat judging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful heat judging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of heat judging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a heat judging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn heat judging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of heat judging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smelting.metal_assaying",
+      "domain": "smelting",
+      "name": "Metal assaying",
+      "description": "Metal assaying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smelting.smelting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smelting.metal_assaying.metal_assaying_basics",
+          "discipline": "smelting.metal_assaying",
+          "name": "Metal assaying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.metal_assaying.metal_assaying_seasonal_practice",
+          "discipline": "smelting.metal_assaying",
+          "name": "Metal assaying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.metal_assaying.metal_assaying_precision_work",
+          "discipline": "smelting.metal_assaying",
+          "name": "Metal assaying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smelting.metal_assaying.metal_assaying_master_technique",
+          "discipline": "smelting.metal_assaying",
+          "name": "Metal assaying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smelting.metal_assaying.perk_5",
+          "level": 5,
+          "name": "Metal assaying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Metal assaying output +2%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_10",
+          "level": 10,
+          "name": "Metal assaying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Metal assaying waste -5%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_15",
+          "level": 15,
+          "name": "Metal assaying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Metal assaying quality roll +1"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_20",
+          "level": 20,
+          "name": "Metal assaying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Metal assaying care +5%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_25",
+          "level": 25,
+          "name": "Metal assaying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Metal assaying speed +3%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_30",
+          "level": 30,
+          "name": "Metal assaying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Metal assaying output +5%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_35",
+          "level": 35,
+          "name": "Metal assaying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Metal assaying spoilage -10%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_40",
+          "level": 40,
+          "name": "Metal assaying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Metal assaying quality roll +1"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_45",
+          "level": 45,
+          "name": "Metal assaying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Metal assaying speed +5%"
+        },
+        {
+          "id": "smelting.metal_assaying.perk_50",
+          "level": 50,
+          "name": "Metal assaying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Metal assaying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise metal assaying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful metal assaying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of metal assaying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a metal assaying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn metal assaying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of metal assaying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

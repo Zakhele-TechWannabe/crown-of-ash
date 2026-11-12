@@ -1,0 +1,110 @@
+{
+  "id": "earthworks",
+  "disciplines": [
+    {
+      "id": "earthworks.ground_clearing",
+      "domain": "earthworks",
+      "name": "Ground clearing",
+      "description": "Ground clearing applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.excavation",
+      "domain": "earthworks",
+      "name": "Excavation",
+      "description": "Excavation applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.fill_grading",
+      "domain": "earthworks",
+      "name": "Fill grading",
+      "description": "Fill grading applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.rammed_earth",
+      "domain": "earthworks",
+      "name": "Rammed earth",
+      "description": "Rammed earth applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.embankments",
+      "domain": "earthworks",
+      "name": "Embankments",
+      "description": "Embankments applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.ditch_cutting",
+      "domain": "earthworks",
+      "name": "Ditch cutting",
+      "description": "Ditch cutting applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.slope_terracing",
+      "domain": "earthworks",
+      "name": "Slope terracing",
+      "description": "Slope terracing applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.compaction",
+      "domain": "earthworks",
+      "name": "Compaction",
+      "description": "Compaction applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.earth_dams",
+      "domain": "earthworks",
+      "name": "Earth dams",
+      "description": "Earth dams applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.foundation_drainage",
+      "domain": "earthworks",
+      "name": "Foundation drainage",
+      "description": "Foundation drainage applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.retaining_banks",
+      "domain": "earthworks",
+      "name": "Retaining banks",
+      "description": "Retaining banks applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.settlement_watching",
+      "domain": "earthworks",
+      "name": "Settlement watching",
+      "description": "Settlement watching applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.shoring",
+      "domain": "earthworks",
+      "name": "Shoring",
+      "description": "Shoring applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.earthwork_repair",
+      "domain": "earthworks",
+      "name": "Earthwork repair",
+      "description": "Earthwork repair applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "earthworks.earthwork_surveys",
+      "domain": "earthworks",
+      "name": "Earthwork surveys",
+      "description": "Earthwork surveys applies earthworks to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "dao_contemplation",
+  "disciplines": [
+    {
+      "id": "dao_contemplation.dao_contemplation",
+      "domain": "dao_contemplation",
+      "name": "Dao contemplation",
+      "description": "Dao contemplation applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.scripture_reflection",
+      "domain": "dao_contemplation",
+      "name": "Scripture reflection",
+      "description": "Scripture reflection applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.stillness_practice",
+      "domain": "dao_contemplation",
+      "name": "Stillness practice",
+      "description": "Stillness practice applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.nature_contemplation",
+      "domain": "dao_contemplation",
+      "name": "Nature contemplation",
+      "description": "Nature contemplation applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.life_reflection",
+      "domain": "dao_contemplation",
+      "name": "Life reflection",
+      "description": "Life reflection applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.element_insights",
+      "domain": "dao_contemplation",
+      "name": "Element insights",
+      "description": "Element insights applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.sword_intent",
+      "domain": "dao_contemplation",
+      "name": "Sword intent",
+      "description": "Sword intent applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.craft_intent",
+      "domain": "dao_contemplation",
+      "name": "Craft intent",
+      "description": "Craft intent applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.karmic_reflection",
+      "domain": "dao_contemplation",
+      "name": "Karmic reflection",
+      "description": "Karmic reflection applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.tribulation_insights",
+      "domain": "dao_contemplation",
+      "name": "Tribulation insights",
+      "description": "Tribulation insights applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.dao_debates",
+      "domain": "dao_contemplation",
+      "name": "Dao debates",
+      "description": "Dao debates applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.legacy_study",
+      "domain": "dao_contemplation",
+      "name": "Legacy study",
+      "description": "Legacy study applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.heart_questioning",
+      "domain": "dao_contemplation",
+      "name": "Heart questioning",
+      "description": "Heart questioning applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.heavenly_principles",
+      "domain": "dao_contemplation",
+      "name": "Heavenly principles",
+      "description": "Heavenly principles applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "dao_contemplation.dao_teaching",
+      "domain": "dao_contemplation",
+      "name": "Dao teaching",
+      "description": "Dao teaching applies dao contemplation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

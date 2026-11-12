@@ -1,0 +1,110 @@
+{
+  "id": "jewellery",
+  "disciplines": [
+    {
+      "id": "jewellery.wire_drawing",
+      "domain": "jewellery",
+      "name": "Wire drawing",
+      "description": "Wire drawing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.chain_making",
+      "domain": "jewellery",
+      "name": "Chain making",
+      "description": "Chain making applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.ring_forming",
+      "domain": "jewellery",
+      "name": "Ring forming",
+      "description": "Ring forming applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.soldering",
+      "domain": "jewellery",
+      "name": "Soldering",
+      "description": "Soldering applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.filigree",
+      "domain": "jewellery",
+      "name": "Filigree",
+      "description": "Filigree applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.bead_setting",
+      "domain": "jewellery",
+      "name": "Bead setting",
+      "description": "Bead setting applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.gem_settings",
+      "domain": "jewellery",
+      "name": "Gem settings",
+      "description": "Gem settings applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.gold_beating",
+      "domain": "jewellery",
+      "name": "Gold beating",
+      "description": "Gold beating applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.silver_chasing",
+      "domain": "jewellery",
+      "name": "Silver chasing",
+      "description": "Silver chasing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.enamelling",
+      "domain": "jewellery",
+      "name": "Enamelling",
+      "description": "Enamelling applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.clasp_making",
+      "domain": "jewellery",
+      "name": "Clasp making",
+      "description": "Clasp making applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.polishing",
+      "domain": "jewellery",
+      "name": "Polishing",
+      "description": "Polishing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.jewellery_repair",
+      "domain": "jewellery",
+      "name": "Jewellery repair",
+      "description": "Jewellery repair applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.precious_weighing",
+      "domain": "jewellery",
+      "name": "Precious weighing",
+      "description": "Precious weighing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "jewellery.commission_design",
+      "domain": "jewellery",
+      "name": "Commission design",
+      "description": "Commission design applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

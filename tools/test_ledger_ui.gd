@@ -169,10 +169,18 @@ func run() -> void:
 	await settle(ledger)
 	assert(ledger.current == "food", "Remember last tab")
 	ledger.open_tab("people")
-	var person: TreeItem = ledger.tree.get_root().get_first_child()
-	person.select(0)
+	var browser: VBoxContainer = ledger.people_browser
+	assert(browser.group_mode == "Place")
+	browser.path.assign(["Servants' Village", "District 1", "Household 1"])
+	browser.redraw()
+	assert(browser.virtual_list.ids.size() == 3)
+	browser.virtual_list.person_selected.emit(0)
+	assert(browser.person == 0 and ledger.visible)
+	var follow: Button = browser.get_child(4)
+	assert(follow.text == "Follow")
+	follow.pressed.emit()
 	await settle(ledger)
-	assert(world.life.followed >= 0 and not ledger.visible)
+	assert(world.life.followed == 0 and not ledger.visible)
 	for path: String in ["food/vegetables/greens", "food/fruit", "food/meat", "food/fish", "food/pantry"]:
 		ledger.open_tab(path)
 		await process_frame
@@ -208,8 +216,24 @@ func run() -> void:
 						ancestor = entry.parent
 						break
 			paths.append("/".join(ancestry))
+		for people_path: String in ["people/place", "people/work", "people/life", "people/status", "people/list", "people/person", "people/skills", "people/skills/land", "people/skills/grain", "people/skills/farming", "people/skills/cultivation"]: paths.append(people_path)
 		for path: String in paths:
 			ledger.open_tab(path)
+			if path.begins_with("people/"):
+				ledger.open_tab("people")
+				browser = ledger.people_browser
+				if path == "people/work": browser.group_mode = "Work"
+				if path == "people/life": browser.group_mode = "Life stage"
+				if path == "people/status": browser.group_mode = "Status"
+				if path == "people/list": browser.path.assign(["Servants' Village", "District 1", "Household 1"])
+				if path == "people/person": browser.person = 0
+				if path.begins_with("people/skills"):
+					browser.catalogue_mode = true
+					if path == "people/skills/land": browser.catalogue_path.assign(["land"])
+					if path == "people/skills/grain": browser.catalogue_path.assign(["land", "grain_farming"])
+					if path == "people/skills/farming": browser.catalogue_path.assign(["land", "grain_farming", "grain_farming.farming"])
+					if path == "people/skills/cultivation": browser.catalogue_path.assign(["cultivation"])
+				browser.redraw()
 			await settle(ledger)
 			check_text(world.ground_view.hud)
 			assert(ledger.size.x <= resolution.x / 2.0 + 1, "Drawer must remain half width: %s %s %s min %s" % [resolution, path, ledger.size, ledger.get_combined_minimum_size()])

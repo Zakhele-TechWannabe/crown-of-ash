@@ -1,0 +1,4049 @@
+{
+  "id": "clay_and_kilns",
+  "disciplines": [
+    {
+      "id": "clay_and_kilns.claywork",
+      "domain": "clay_and_kilns",
+      "name": "Claywork",
+      "description": "Claywork: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.clay_digging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.claywork.pottery",
+          "discipline": "clay_and_kilns.claywork",
+          "name": "Pottery",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.claywork.brick_and_tile_firing",
+          "discipline": "clay_and_kilns.claywork",
+          "name": "Brick and tile firing",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.claywork.kiln_mastery",
+          "discipline": "clay_and_kilns.claywork",
+          "name": "Kiln mastery",
+          "unlock_level": 25,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.claywork.perk_5",
+          "level": 5,
+          "name": "Claywork: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Claywork output +2%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_10",
+          "level": 10,
+          "name": "Claywork: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Claywork waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_15",
+          "level": 15,
+          "name": "Claywork: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Claywork quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_20",
+          "level": 20,
+          "name": "Claywork: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Claywork care +5%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_25",
+          "level": 25,
+          "name": "Claywork: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Claywork speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_30",
+          "level": 30,
+          "name": "Claywork: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Claywork output +5%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_35",
+          "level": 35,
+          "name": "Claywork: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Claywork spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_40",
+          "level": 40,
+          "name": "Claywork: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Claywork quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_45",
+          "level": 45,
+          "name": "Claywork: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Claywork speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.claywork.perk_50",
+          "level": 50,
+          "name": "Claywork: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Claywork output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise claywork for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful claywork (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of claywork; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a claywork task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn claywork from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of claywork, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.clay_digging",
+      "domain": "clay_and_kilns",
+      "name": "Clay digging",
+      "description": "Clay digging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.clay_levigation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.clay_digging.clay_digging_basics",
+          "discipline": "clay_and_kilns.clay_digging",
+          "name": "Clay digging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.clay_digging_seasonal_practice",
+          "discipline": "clay_and_kilns.clay_digging",
+          "name": "Clay digging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.clay_digging_precision_work",
+          "discipline": "clay_and_kilns.clay_digging",
+          "name": "Clay digging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.clay_digging_master_technique",
+          "discipline": "clay_and_kilns.clay_digging",
+          "name": "Clay digging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.clay_digging.perk_5",
+          "level": 5,
+          "name": "Clay digging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Clay digging output +2%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_10",
+          "level": 10,
+          "name": "Clay digging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Clay digging waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_15",
+          "level": 15,
+          "name": "Clay digging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clay digging quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_20",
+          "level": 20,
+          "name": "Clay digging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Clay digging care +5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_25",
+          "level": 25,
+          "name": "Clay digging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Clay digging speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_30",
+          "level": 30,
+          "name": "Clay digging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clay digging output +5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_35",
+          "level": 35,
+          "name": "Clay digging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Clay digging spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_40",
+          "level": 40,
+          "name": "Clay digging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clay digging quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_45",
+          "level": 45,
+          "name": "Clay digging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Clay digging speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_digging.perk_50",
+          "level": 50,
+          "name": "Clay digging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clay digging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise clay digging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful clay digging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of clay digging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a clay digging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn clay digging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of clay digging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.clay_levigation",
+      "domain": "clay_and_kilns",
+      "name": "Clay levigation",
+      "description": "Clay levigation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.wheel_throwing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.clay_levigation.clay_levigation_basics",
+          "discipline": "clay_and_kilns.clay_levigation",
+          "name": "Clay levigation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.clay_levigation_seasonal_practice",
+          "discipline": "clay_and_kilns.clay_levigation",
+          "name": "Clay levigation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.clay_levigation_precision_work",
+          "discipline": "clay_and_kilns.clay_levigation",
+          "name": "Clay levigation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.clay_levigation_master_technique",
+          "discipline": "clay_and_kilns.clay_levigation",
+          "name": "Clay levigation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_5",
+          "level": 5,
+          "name": "Clay levigation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Clay levigation output +2%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_10",
+          "level": 10,
+          "name": "Clay levigation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Clay levigation waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_15",
+          "level": 15,
+          "name": "Clay levigation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clay levigation quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_20",
+          "level": 20,
+          "name": "Clay levigation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Clay levigation care +5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_25",
+          "level": 25,
+          "name": "Clay levigation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Clay levigation speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_30",
+          "level": 30,
+          "name": "Clay levigation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clay levigation output +5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_35",
+          "level": 35,
+          "name": "Clay levigation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Clay levigation spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_40",
+          "level": 40,
+          "name": "Clay levigation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clay levigation quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_45",
+          "level": 45,
+          "name": "Clay levigation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Clay levigation speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.clay_levigation.perk_50",
+          "level": 50,
+          "name": "Clay levigation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clay levigation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise clay levigation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful clay levigation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of clay levigation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a clay levigation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn clay levigation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of clay levigation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.wheel_throwing",
+      "domain": "clay_and_kilns",
+      "name": "Wheel throwing",
+      "description": "Wheel throwing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.coil_building"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.wheel_throwing.wheel_throwing_basics",
+          "discipline": "clay_and_kilns.wheel_throwing",
+          "name": "Wheel throwing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.wheel_throwing_seasonal_practice",
+          "discipline": "clay_and_kilns.wheel_throwing",
+          "name": "Wheel throwing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.wheel_throwing_precision_work",
+          "discipline": "clay_and_kilns.wheel_throwing",
+          "name": "Wheel throwing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.wheel_throwing_master_technique",
+          "discipline": "clay_and_kilns.wheel_throwing",
+          "name": "Wheel throwing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_5",
+          "level": 5,
+          "name": "Wheel throwing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wheel throwing output +2%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_10",
+          "level": 10,
+          "name": "Wheel throwing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wheel throwing waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_15",
+          "level": 15,
+          "name": "Wheel throwing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wheel throwing quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_20",
+          "level": 20,
+          "name": "Wheel throwing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wheel throwing care +5%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_25",
+          "level": 25,
+          "name": "Wheel throwing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wheel throwing speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_30",
+          "level": 30,
+          "name": "Wheel throwing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wheel throwing output +5%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_35",
+          "level": 35,
+          "name": "Wheel throwing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wheel throwing spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_40",
+          "level": 40,
+          "name": "Wheel throwing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wheel throwing quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_45",
+          "level": 45,
+          "name": "Wheel throwing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wheel throwing speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.wheel_throwing.perk_50",
+          "level": 50,
+          "name": "Wheel throwing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wheel throwing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wheel throwing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wheel throwing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wheel throwing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wheel throwing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wheel throwing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wheel throwing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.coil_building",
+      "domain": "clay_and_kilns",
+      "name": "Coil building",
+      "description": "Coil building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.brick_moulding"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.coil_building.coil_building_basics",
+          "discipline": "clay_and_kilns.coil_building",
+          "name": "Coil building basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.coil_building.coil_building_seasonal_practice",
+          "discipline": "clay_and_kilns.coil_building",
+          "name": "Coil building seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.coil_building.coil_building_precision_work",
+          "discipline": "clay_and_kilns.coil_building",
+          "name": "Coil building precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.coil_building.coil_building_master_technique",
+          "discipline": "clay_and_kilns.coil_building",
+          "name": "Coil building master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.coil_building.perk_5",
+          "level": 5,
+          "name": "Coil building: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Coil building output +2%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_10",
+          "level": 10,
+          "name": "Coil building: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Coil building waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_15",
+          "level": 15,
+          "name": "Coil building: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Coil building quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_20",
+          "level": 20,
+          "name": "Coil building: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Coil building care +5%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_25",
+          "level": 25,
+          "name": "Coil building: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Coil building speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_30",
+          "level": 30,
+          "name": "Coil building: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Coil building output +5%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_35",
+          "level": 35,
+          "name": "Coil building: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Coil building spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_40",
+          "level": 40,
+          "name": "Coil building: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Coil building quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_45",
+          "level": 45,
+          "name": "Coil building: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Coil building speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.coil_building.perk_50",
+          "level": 50,
+          "name": "Coil building: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Coil building output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise coil building for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful coil building (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of coil building; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a coil building task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn coil building from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of coil building, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.brick_moulding",
+      "domain": "clay_and_kilns",
+      "name": "Brick moulding",
+      "description": "Brick moulding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.tile_shaping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.brick_moulding.brick_moulding_basics",
+          "discipline": "clay_and_kilns.brick_moulding",
+          "name": "Brick moulding basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.brick_moulding_seasonal_practice",
+          "discipline": "clay_and_kilns.brick_moulding",
+          "name": "Brick moulding seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.brick_moulding_precision_work",
+          "discipline": "clay_and_kilns.brick_moulding",
+          "name": "Brick moulding precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.brick_moulding_master_technique",
+          "discipline": "clay_and_kilns.brick_moulding",
+          "name": "Brick moulding master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_5",
+          "level": 5,
+          "name": "Brick moulding: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Brick moulding output +2%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_10",
+          "level": 10,
+          "name": "Brick moulding: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Brick moulding waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_15",
+          "level": 15,
+          "name": "Brick moulding: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Brick moulding quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_20",
+          "level": 20,
+          "name": "Brick moulding: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Brick moulding care +5%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_25",
+          "level": 25,
+          "name": "Brick moulding: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Brick moulding speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_30",
+          "level": 30,
+          "name": "Brick moulding: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Brick moulding output +5%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_35",
+          "level": 35,
+          "name": "Brick moulding: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Brick moulding spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_40",
+          "level": 40,
+          "name": "Brick moulding: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Brick moulding quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_45",
+          "level": 45,
+          "name": "Brick moulding: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Brick moulding speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.brick_moulding.perk_50",
+          "level": 50,
+          "name": "Brick moulding: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Brick moulding output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise brick moulding for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful brick moulding (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of brick moulding; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a brick moulding task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn brick moulding from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of brick moulding, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.tile_shaping",
+      "domain": "clay_and_kilns",
+      "name": "Tile shaping",
+      "description": "Tile shaping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.kiln_firing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.tile_shaping.tile_shaping_basics",
+          "discipline": "clay_and_kilns.tile_shaping",
+          "name": "Tile shaping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.tile_shaping_seasonal_practice",
+          "discipline": "clay_and_kilns.tile_shaping",
+          "name": "Tile shaping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.tile_shaping_precision_work",
+          "discipline": "clay_and_kilns.tile_shaping",
+          "name": "Tile shaping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.tile_shaping_master_technique",
+          "discipline": "clay_and_kilns.tile_shaping",
+          "name": "Tile shaping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_5",
+          "level": 5,
+          "name": "Tile shaping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tile shaping output +2%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_10",
+          "level": 10,
+          "name": "Tile shaping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tile shaping waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_15",
+          "level": 15,
+          "name": "Tile shaping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tile shaping quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_20",
+          "level": 20,
+          "name": "Tile shaping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tile shaping care +5%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_25",
+          "level": 25,
+          "name": "Tile shaping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tile shaping speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_30",
+          "level": 30,
+          "name": "Tile shaping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tile shaping output +5%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_35",
+          "level": 35,
+          "name": "Tile shaping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tile shaping spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_40",
+          "level": 40,
+          "name": "Tile shaping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tile shaping quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_45",
+          "level": 45,
+          "name": "Tile shaping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tile shaping speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.tile_shaping.perk_50",
+          "level": 50,
+          "name": "Tile shaping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tile shaping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tile shaping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tile shaping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tile shaping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tile shaping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tile shaping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tile shaping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.kiln_firing",
+      "domain": "clay_and_kilns",
+      "name": "Kiln firing",
+      "description": "Kiln firing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.glaze_mixing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.kiln_firing.kiln_firing_basics",
+          "discipline": "clay_and_kilns.kiln_firing",
+          "name": "Kiln firing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.kiln_firing_seasonal_practice",
+          "discipline": "clay_and_kilns.kiln_firing",
+          "name": "Kiln firing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.kiln_firing_precision_work",
+          "discipline": "clay_and_kilns.kiln_firing",
+          "name": "Kiln firing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.kiln_firing_master_technique",
+          "discipline": "clay_and_kilns.kiln_firing",
+          "name": "Kiln firing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_5",
+          "level": 5,
+          "name": "Kiln firing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Kiln firing output +2%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_10",
+          "level": 10,
+          "name": "Kiln firing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Kiln firing waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_15",
+          "level": 15,
+          "name": "Kiln firing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kiln firing quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_20",
+          "level": 20,
+          "name": "Kiln firing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Kiln firing care +5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_25",
+          "level": 25,
+          "name": "Kiln firing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Kiln firing speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_30",
+          "level": 30,
+          "name": "Kiln firing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kiln firing output +5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_35",
+          "level": 35,
+          "name": "Kiln firing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Kiln firing spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_40",
+          "level": 40,
+          "name": "Kiln firing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kiln firing quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_45",
+          "level": 45,
+          "name": "Kiln firing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Kiln firing speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_firing.perk_50",
+          "level": 50,
+          "name": "Kiln firing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kiln firing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise kiln firing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful kiln firing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of kiln firing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a kiln firing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn kiln firing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of kiln firing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.glaze_mixing",
+      "domain": "clay_and_kilns",
+      "name": "Glaze mixing",
+      "description": "Glaze mixing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.sagger_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.glaze_mixing.glaze_mixing_basics",
+          "discipline": "clay_and_kilns.glaze_mixing",
+          "name": "Glaze mixing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.glaze_mixing_seasonal_practice",
+          "discipline": "clay_and_kilns.glaze_mixing",
+          "name": "Glaze mixing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.glaze_mixing_precision_work",
+          "discipline": "clay_and_kilns.glaze_mixing",
+          "name": "Glaze mixing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.glaze_mixing_master_technique",
+          "discipline": "clay_and_kilns.glaze_mixing",
+          "name": "Glaze mixing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_5",
+          "level": 5,
+          "name": "Glaze mixing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Glaze mixing output +2%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_10",
+          "level": 10,
+          "name": "Glaze mixing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Glaze mixing waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_15",
+          "level": 15,
+          "name": "Glaze mixing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Glaze mixing quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_20",
+          "level": 20,
+          "name": "Glaze mixing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Glaze mixing care +5%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_25",
+          "level": 25,
+          "name": "Glaze mixing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Glaze mixing speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_30",
+          "level": 30,
+          "name": "Glaze mixing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Glaze mixing output +5%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_35",
+          "level": 35,
+          "name": "Glaze mixing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Glaze mixing spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_40",
+          "level": 40,
+          "name": "Glaze mixing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Glaze mixing quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_45",
+          "level": 45,
+          "name": "Glaze mixing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Glaze mixing speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.glaze_mixing.perk_50",
+          "level": 50,
+          "name": "Glaze mixing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Glaze mixing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise glaze mixing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful glaze mixing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of glaze mixing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a glaze mixing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn glaze mixing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of glaze mixing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.sagger_making",
+      "domain": "clay_and_kilns",
+      "name": "Sagger making",
+      "description": "Sagger making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.kiln_building"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.sagger_making.sagger_making_basics",
+          "discipline": "clay_and_kilns.sagger_making",
+          "name": "Sagger making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.sagger_making_seasonal_practice",
+          "discipline": "clay_and_kilns.sagger_making",
+          "name": "Sagger making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.sagger_making_precision_work",
+          "discipline": "clay_and_kilns.sagger_making",
+          "name": "Sagger making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.sagger_making_master_technique",
+          "discipline": "clay_and_kilns.sagger_making",
+          "name": "Sagger making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.sagger_making.perk_5",
+          "level": 5,
+          "name": "Sagger making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Sagger making output +2%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_10",
+          "level": 10,
+          "name": "Sagger making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Sagger making waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_15",
+          "level": 15,
+          "name": "Sagger making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Sagger making quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_20",
+          "level": 20,
+          "name": "Sagger making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Sagger making care +5%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_25",
+          "level": 25,
+          "name": "Sagger making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Sagger making speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_30",
+          "level": 30,
+          "name": "Sagger making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Sagger making output +5%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_35",
+          "level": 35,
+          "name": "Sagger making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Sagger making spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_40",
+          "level": 40,
+          "name": "Sagger making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Sagger making quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_45",
+          "level": 45,
+          "name": "Sagger making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Sagger making speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.sagger_making.perk_50",
+          "level": 50,
+          "name": "Sagger making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Sagger making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise sagger making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful sagger making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of sagger making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a sagger making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn sagger making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of sagger making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.kiln_building",
+      "domain": "clay_and_kilns",
+      "name": "Kiln building",
+      "description": "Kiln building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.fuel_scheduling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.kiln_building.kiln_building_basics",
+          "discipline": "clay_and_kilns.kiln_building",
+          "name": "Kiln building basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.kiln_building_seasonal_practice",
+          "discipline": "clay_and_kilns.kiln_building",
+          "name": "Kiln building seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.kiln_building_precision_work",
+          "discipline": "clay_and_kilns.kiln_building",
+          "name": "Kiln building precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.kiln_building_master_technique",
+          "discipline": "clay_and_kilns.kiln_building",
+          "name": "Kiln building master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.kiln_building.perk_5",
+          "level": 5,
+          "name": "Kiln building: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Kiln building output +2%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_10",
+          "level": 10,
+          "name": "Kiln building: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Kiln building waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_15",
+          "level": 15,
+          "name": "Kiln building: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kiln building quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_20",
+          "level": 20,
+          "name": "Kiln building: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Kiln building care +5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_25",
+          "level": 25,
+          "name": "Kiln building: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Kiln building speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_30",
+          "level": 30,
+          "name": "Kiln building: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kiln building output +5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_35",
+          "level": 35,
+          "name": "Kiln building: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Kiln building spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_40",
+          "level": 40,
+          "name": "Kiln building: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kiln building quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_45",
+          "level": 45,
+          "name": "Kiln building: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Kiln building speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.kiln_building.perk_50",
+          "level": 50,
+          "name": "Kiln building: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kiln building output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise kiln building for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful kiln building (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of kiln building; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a kiln building task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn kiln building from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of kiln building, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.fuel_scheduling",
+      "domain": "clay_and_kilns",
+      "name": "Fuel scheduling",
+      "description": "Fuel scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.pottery_decoration"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.fuel_scheduling.fuel_scheduling_basics",
+          "discipline": "clay_and_kilns.fuel_scheduling",
+          "name": "Fuel scheduling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.fuel_scheduling_seasonal_practice",
+          "discipline": "clay_and_kilns.fuel_scheduling",
+          "name": "Fuel scheduling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.fuel_scheduling_precision_work",
+          "discipline": "clay_and_kilns.fuel_scheduling",
+          "name": "Fuel scheduling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.fuel_scheduling_master_technique",
+          "discipline": "clay_and_kilns.fuel_scheduling",
+          "name": "Fuel scheduling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_5",
+          "level": 5,
+          "name": "Fuel scheduling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fuel scheduling output +2%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_10",
+          "level": 10,
+          "name": "Fuel scheduling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fuel scheduling waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_15",
+          "level": 15,
+          "name": "Fuel scheduling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fuel scheduling quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_20",
+          "level": 20,
+          "name": "Fuel scheduling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fuel scheduling care +5%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_25",
+          "level": 25,
+          "name": "Fuel scheduling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fuel scheduling speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_30",
+          "level": 30,
+          "name": "Fuel scheduling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fuel scheduling output +5%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_35",
+          "level": 35,
+          "name": "Fuel scheduling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fuel scheduling spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_40",
+          "level": 40,
+          "name": "Fuel scheduling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fuel scheduling quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_45",
+          "level": 45,
+          "name": "Fuel scheduling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fuel scheduling speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.fuel_scheduling.perk_50",
+          "level": 50,
+          "name": "Fuel scheduling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fuel scheduling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fuel scheduling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fuel scheduling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fuel scheduling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fuel scheduling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fuel scheduling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fuel scheduling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.pottery_decoration",
+      "domain": "clay_and_kilns",
+      "name": "Pottery decoration",
+      "description": "Pottery decoration: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.ceramic_repair"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.pottery_decoration.pottery_decoration_basics",
+          "discipline": "clay_and_kilns.pottery_decoration",
+          "name": "Pottery decoration basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.pottery_decoration_seasonal_practice",
+          "discipline": "clay_and_kilns.pottery_decoration",
+          "name": "Pottery decoration seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.pottery_decoration_precision_work",
+          "discipline": "clay_and_kilns.pottery_decoration",
+          "name": "Pottery decoration precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.pottery_decoration_master_technique",
+          "discipline": "clay_and_kilns.pottery_decoration",
+          "name": "Pottery decoration master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_5",
+          "level": 5,
+          "name": "Pottery decoration: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pottery decoration output +2%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_10",
+          "level": 10,
+          "name": "Pottery decoration: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pottery decoration waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_15",
+          "level": 15,
+          "name": "Pottery decoration: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pottery decoration quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_20",
+          "level": 20,
+          "name": "Pottery decoration: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pottery decoration care +5%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_25",
+          "level": 25,
+          "name": "Pottery decoration: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pottery decoration speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_30",
+          "level": 30,
+          "name": "Pottery decoration: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pottery decoration output +5%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_35",
+          "level": 35,
+          "name": "Pottery decoration: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pottery decoration spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_40",
+          "level": 40,
+          "name": "Pottery decoration: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pottery decoration quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_45",
+          "level": 45,
+          "name": "Pottery decoration: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pottery decoration speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.pottery_decoration.perk_50",
+          "level": 50,
+          "name": "Pottery decoration: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pottery decoration output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pottery decoration for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pottery decoration (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pottery decoration; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pottery decoration task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pottery decoration from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pottery decoration, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.ceramic_repair",
+      "domain": "clay_and_kilns",
+      "name": "Ceramic repair",
+      "description": "Ceramic repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.refractory_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.ceramic_repair.ceramic_repair_basics",
+          "discipline": "clay_and_kilns.ceramic_repair",
+          "name": "Ceramic repair basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.ceramic_repair_seasonal_practice",
+          "discipline": "clay_and_kilns.ceramic_repair",
+          "name": "Ceramic repair seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.ceramic_repair_precision_work",
+          "discipline": "clay_and_kilns.ceramic_repair",
+          "name": "Ceramic repair precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.ceramic_repair_master_technique",
+          "discipline": "clay_and_kilns.ceramic_repair",
+          "name": "Ceramic repair master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_5",
+          "level": 5,
+          "name": "Ceramic repair: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ceramic repair output +2%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_10",
+          "level": 10,
+          "name": "Ceramic repair: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ceramic repair waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_15",
+          "level": 15,
+          "name": "Ceramic repair: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ceramic repair quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_20",
+          "level": 20,
+          "name": "Ceramic repair: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ceramic repair care +5%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_25",
+          "level": 25,
+          "name": "Ceramic repair: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ceramic repair speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_30",
+          "level": 30,
+          "name": "Ceramic repair: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ceramic repair output +5%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_35",
+          "level": 35,
+          "name": "Ceramic repair: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ceramic repair spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_40",
+          "level": 40,
+          "name": "Ceramic repair: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ceramic repair quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_45",
+          "level": 45,
+          "name": "Ceramic repair: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ceramic repair speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.ceramic_repair.perk_50",
+          "level": 50,
+          "name": "Ceramic repair: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ceramic repair output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ceramic repair for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ceramic repair (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ceramic repair; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ceramic repair task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ceramic repair from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ceramic repair, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "clay_and_kilns.refractory_making",
+      "domain": "clay_and_kilns",
+      "name": "Refractory making",
+      "description": "Refractory making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "clay_and_kilns.claywork"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "clay_and_kilns.refractory_making.refractory_making_basics",
+          "discipline": "clay_and_kilns.refractory_making",
+          "name": "Refractory making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.refractory_making_seasonal_practice",
+          "discipline": "clay_and_kilns.refractory_making",
+          "name": "Refractory making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.refractory_making_precision_work",
+          "discipline": "clay_and_kilns.refractory_making",
+          "name": "Refractory making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.refractory_making_master_technique",
+          "discipline": "clay_and_kilns.refractory_making",
+          "name": "Refractory making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "clay_and_kilns.refractory_making.perk_5",
+          "level": 5,
+          "name": "Refractory making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Refractory making output +2%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_10",
+          "level": 10,
+          "name": "Refractory making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Refractory making waste -5%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_15",
+          "level": 15,
+          "name": "Refractory making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Refractory making quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_20",
+          "level": 20,
+          "name": "Refractory making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Refractory making care +5%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_25",
+          "level": 25,
+          "name": "Refractory making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Refractory making speed +3%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_30",
+          "level": 30,
+          "name": "Refractory making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Refractory making output +5%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_35",
+          "level": 35,
+          "name": "Refractory making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Refractory making spoilage -10%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_40",
+          "level": 40,
+          "name": "Refractory making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Refractory making quality roll +1"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_45",
+          "level": 45,
+          "name": "Refractory making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Refractory making speed +5%"
+        },
+        {
+          "id": "clay_and_kilns.refractory_making.perk_50",
+          "level": 50,
+          "name": "Refractory making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Refractory making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise refractory making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful refractory making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of refractory making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a refractory making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn refractory making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of refractory making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

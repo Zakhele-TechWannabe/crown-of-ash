@@ -1,0 +1,110 @@
+{
+  "id": "weather_lore",
+  "disciplines": [
+    {
+      "id": "weather_lore.cloud_reading",
+      "domain": "weather_lore",
+      "name": "Cloud reading",
+      "description": "Cloud reading applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.wind_reading",
+      "domain": "weather_lore",
+      "name": "Wind reading",
+      "description": "Wind reading applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.rain_prediction",
+      "domain": "weather_lore",
+      "name": "Rain prediction",
+      "description": "Rain prediction applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.frost_watching",
+      "domain": "weather_lore",
+      "name": "Frost watching",
+      "description": "Frost watching applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.storm_signs",
+      "domain": "weather_lore",
+      "name": "Storm signs",
+      "description": "Storm signs applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.flood_forecasting",
+      "domain": "weather_lore",
+      "name": "Flood forecasting",
+      "description": "Flood forecasting applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.drought_signs",
+      "domain": "weather_lore",
+      "name": "Drought signs",
+      "description": "Drought signs applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.season_calendars",
+      "domain": "weather_lore",
+      "name": "Season calendars",
+      "description": "Season calendars applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.monsoon_watching",
+      "domain": "weather_lore",
+      "name": "Monsoon watching",
+      "description": "Monsoon watching applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.snow_prediction",
+      "domain": "weather_lore",
+      "name": "Snow prediction",
+      "description": "Snow prediction applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.animal_omens",
+      "domain": "weather_lore",
+      "name": "Animal omens",
+      "description": "Animal omens applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.weather_records",
+      "domain": "weather_lore",
+      "name": "Weather records",
+      "description": "Weather records applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.harvest_forecasts",
+      "domain": "weather_lore",
+      "name": "Harvest forecasts",
+      "description": "Harvest forecasts applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.mountain_microclimates",
+      "domain": "weather_lore",
+      "name": "Mountain microclimates",
+      "description": "Mountain microclimates applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weather_lore.sky_observation",
+      "domain": "weather_lore",
+      "name": "Sky observation",
+      "description": "Sky observation applies weather lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

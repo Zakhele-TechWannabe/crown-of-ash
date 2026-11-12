@@ -1,0 +1,110 @@
+{
+  "id": "shipbuilding",
+  "disciplines": [
+    {
+      "id": "shipbuilding.hull_lofting",
+      "domain": "shipbuilding",
+      "name": "Hull lofting",
+      "description": "Hull lofting applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.keel_laying",
+      "domain": "shipbuilding",
+      "name": "Keel laying",
+      "description": "Keel laying applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.frame_raising",
+      "domain": "shipbuilding",
+      "name": "Frame raising",
+      "description": "Frame raising applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.planking",
+      "domain": "shipbuilding",
+      "name": "Planking",
+      "description": "Planking applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.caulking",
+      "domain": "shipbuilding",
+      "name": "Caulking",
+      "description": "Caulking applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.mast_stepping",
+      "domain": "shipbuilding",
+      "name": "Mast stepping",
+      "description": "Mast stepping applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.sail_making",
+      "domain": "shipbuilding",
+      "name": "Sail making",
+      "description": "Sail making applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.rigging",
+      "domain": "shipbuilding",
+      "name": "Rigging",
+      "description": "Rigging applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.rudder_fitting",
+      "domain": "shipbuilding",
+      "name": "Rudder fitting",
+      "description": "Rudder fitting applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.deck_building",
+      "domain": "shipbuilding",
+      "name": "Deck building",
+      "description": "Deck building applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.hull_fairing",
+      "domain": "shipbuilding",
+      "name": "Hull fairing",
+      "description": "Hull fairing applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.launching",
+      "domain": "shipbuilding",
+      "name": "Launching",
+      "description": "Launching applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.dry_docking",
+      "domain": "shipbuilding",
+      "name": "Dry docking",
+      "description": "Dry docking applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.ship_repair",
+      "domain": "shipbuilding",
+      "name": "Ship repair",
+      "description": "Ship repair applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "shipbuilding.vessel_design",
+      "domain": "shipbuilding",
+      "name": "Vessel design",
+      "description": "Vessel design applies shipbuilding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

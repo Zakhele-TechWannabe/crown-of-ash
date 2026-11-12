@@ -1,0 +1,4075 @@
+{
+  "id": "gardens",
+  "disciplines": [
+    {
+      "id": "gardens.gardening",
+      "domain": "gardens",
+      "name": "Gardening",
+      "description": "Gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.seedbed_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.gardening.greens",
+          "discipline": "gardens.gardening",
+          "name": "Greens",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gardening.roots_and_tubers",
+          "discipline": "gardens.gardening",
+          "name": "Roots and tubers",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gardening.gourds_and_melons",
+          "discipline": "gardens.gardening",
+          "name": "Gourds and melons",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gardening.herb_beds",
+          "discipline": "gardens.gardening",
+          "name": "Herb beds",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gardening.composting",
+          "discipline": "gardens.gardening",
+          "name": "Composting",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.gardening.perk_5",
+          "level": 5,
+          "name": "Gardening: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Gardening output +2%"
+        },
+        {
+          "id": "gardens.gardening.perk_10",
+          "level": 10,
+          "name": "Gardening: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Gardening waste -5%"
+        },
+        {
+          "id": "gardens.gardening.perk_15",
+          "level": 15,
+          "name": "Gardening: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Gardening quality roll +1"
+        },
+        {
+          "id": "gardens.gardening.perk_20",
+          "level": 20,
+          "name": "Gardening: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Gardening care +5%"
+        },
+        {
+          "id": "gardens.gardening.perk_25",
+          "level": 25,
+          "name": "Gardening: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Gardening speed +3%"
+        },
+        {
+          "id": "gardens.gardening.perk_30",
+          "level": 30,
+          "name": "Gardening: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Gardening output +5%"
+        },
+        {
+          "id": "gardens.gardening.perk_35",
+          "level": 35,
+          "name": "Gardening: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Gardening spoilage -10%"
+        },
+        {
+          "id": "gardens.gardening.perk_40",
+          "level": 40,
+          "name": "Gardening: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Gardening quality roll +1"
+        },
+        {
+          "id": "gardens.gardening.perk_45",
+          "level": 45,
+          "name": "Gardening: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Gardening speed +5%"
+        },
+        {
+          "id": "gardens.gardening.perk_50",
+          "level": 50,
+          "name": "Gardening: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Gardening output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise gardening for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful gardening (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of gardening; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a gardening task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn gardening from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of gardening, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.seedbed_tending",
+      "domain": "gardens",
+      "name": "Seedbed tending",
+      "description": "Seedbed tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.root_cultivation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.seedbed_tending.seedbed_tending_basics",
+          "discipline": "gardens.seedbed_tending",
+          "name": "Seedbed tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.seedbed_tending.seedbed_tending_seasonal_practice",
+          "discipline": "gardens.seedbed_tending",
+          "name": "Seedbed tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.seedbed_tending.seedbed_tending_precision_work",
+          "discipline": "gardens.seedbed_tending",
+          "name": "Seedbed tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.seedbed_tending.seedbed_tending_master_technique",
+          "discipline": "gardens.seedbed_tending",
+          "name": "Seedbed tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.seedbed_tending.perk_5",
+          "level": 5,
+          "name": "Seedbed tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Seedbed tending output +2%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_10",
+          "level": 10,
+          "name": "Seedbed tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Seedbed tending waste -5%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_15",
+          "level": 15,
+          "name": "Seedbed tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seedbed tending quality roll +1"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_20",
+          "level": 20,
+          "name": "Seedbed tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Seedbed tending care +5%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_25",
+          "level": 25,
+          "name": "Seedbed tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Seedbed tending speed +3%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_30",
+          "level": 30,
+          "name": "Seedbed tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seedbed tending output +5%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_35",
+          "level": 35,
+          "name": "Seedbed tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Seedbed tending spoilage -10%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_40",
+          "level": 40,
+          "name": "Seedbed tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seedbed tending quality roll +1"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_45",
+          "level": 45,
+          "name": "Seedbed tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Seedbed tending speed +5%"
+        },
+        {
+          "id": "gardens.seedbed_tending.perk_50",
+          "level": 50,
+          "name": "Seedbed tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seedbed tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise seedbed tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful seedbed tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of seedbed tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a seedbed tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn seedbed tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of seedbed tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.root_cultivation",
+      "domain": "gardens",
+      "name": "Root cultivation",
+      "description": "Root cultivation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.gourd_training"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.root_cultivation.root_cultivation_basics",
+          "discipline": "gardens.root_cultivation",
+          "name": "Root cultivation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.root_cultivation.root_cultivation_seasonal_practice",
+          "discipline": "gardens.root_cultivation",
+          "name": "Root cultivation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.root_cultivation.root_cultivation_precision_work",
+          "discipline": "gardens.root_cultivation",
+          "name": "Root cultivation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.root_cultivation.root_cultivation_master_technique",
+          "discipline": "gardens.root_cultivation",
+          "name": "Root cultivation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.root_cultivation.perk_5",
+          "level": 5,
+          "name": "Root cultivation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Root cultivation output +2%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_10",
+          "level": 10,
+          "name": "Root cultivation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Root cultivation waste -5%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_15",
+          "level": 15,
+          "name": "Root cultivation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Root cultivation quality roll +1"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_20",
+          "level": 20,
+          "name": "Root cultivation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Root cultivation care +5%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_25",
+          "level": 25,
+          "name": "Root cultivation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Root cultivation speed +3%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_30",
+          "level": 30,
+          "name": "Root cultivation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Root cultivation output +5%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_35",
+          "level": 35,
+          "name": "Root cultivation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Root cultivation spoilage -10%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_40",
+          "level": 40,
+          "name": "Root cultivation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Root cultivation quality roll +1"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_45",
+          "level": 45,
+          "name": "Root cultivation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Root cultivation speed +5%"
+        },
+        {
+          "id": "gardens.root_cultivation.perk_50",
+          "level": 50,
+          "name": "Root cultivation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Root cultivation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise root cultivation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful root cultivation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of root cultivation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a root cultivation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn root cultivation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of root cultivation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.gourd_training",
+      "domain": "gardens",
+      "name": "Gourd training",
+      "description": "Gourd training: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.herb_gardening"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.gourd_training.gourd_training_basics",
+          "discipline": "gardens.gourd_training",
+          "name": "Gourd training basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gourd_training.gourd_training_seasonal_practice",
+          "discipline": "gardens.gourd_training",
+          "name": "Gourd training seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gourd_training.gourd_training_precision_work",
+          "discipline": "gardens.gourd_training",
+          "name": "Gourd training precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.gourd_training.gourd_training_master_technique",
+          "discipline": "gardens.gourd_training",
+          "name": "Gourd training master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.gourd_training.perk_5",
+          "level": 5,
+          "name": "Gourd training: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Gourd training output +2%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_10",
+          "level": 10,
+          "name": "Gourd training: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Gourd training waste -5%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_15",
+          "level": 15,
+          "name": "Gourd training: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Gourd training quality roll +1"
+        },
+        {
+          "id": "gardens.gourd_training.perk_20",
+          "level": 20,
+          "name": "Gourd training: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Gourd training care +5%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_25",
+          "level": 25,
+          "name": "Gourd training: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Gourd training speed +3%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_30",
+          "level": 30,
+          "name": "Gourd training: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Gourd training output +5%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_35",
+          "level": 35,
+          "name": "Gourd training: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Gourd training spoilage -10%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_40",
+          "level": 40,
+          "name": "Gourd training: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Gourd training quality roll +1"
+        },
+        {
+          "id": "gardens.gourd_training.perk_45",
+          "level": 45,
+          "name": "Gourd training: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Gourd training speed +5%"
+        },
+        {
+          "id": "gardens.gourd_training.perk_50",
+          "level": 50,
+          "name": "Gourd training: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Gourd training output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise gourd training for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful gourd training (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of gourd training; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a gourd training task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn gourd training from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of gourd training, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.herb_gardening",
+      "domain": "gardens",
+      "name": "Herb gardening",
+      "description": "Herb gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.compost_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.herb_gardening.herb_gardening_basics",
+          "discipline": "gardens.herb_gardening",
+          "name": "Herb gardening basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.herb_gardening.herb_gardening_seasonal_practice",
+          "discipline": "gardens.herb_gardening",
+          "name": "Herb gardening seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.herb_gardening.herb_gardening_precision_work",
+          "discipline": "gardens.herb_gardening",
+          "name": "Herb gardening precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.herb_gardening.herb_gardening_master_technique",
+          "discipline": "gardens.herb_gardening",
+          "name": "Herb gardening master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.herb_gardening.perk_5",
+          "level": 5,
+          "name": "Herb gardening: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Herb gardening output +2%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_10",
+          "level": 10,
+          "name": "Herb gardening: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Herb gardening waste -5%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_15",
+          "level": 15,
+          "name": "Herb gardening: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herb gardening quality roll +1"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_20",
+          "level": 20,
+          "name": "Herb gardening: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Herb gardening care +5%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_25",
+          "level": 25,
+          "name": "Herb gardening: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Herb gardening speed +3%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_30",
+          "level": 30,
+          "name": "Herb gardening: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herb gardening output +5%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_35",
+          "level": 35,
+          "name": "Herb gardening: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Herb gardening spoilage -10%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_40",
+          "level": 40,
+          "name": "Herb gardening: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herb gardening quality roll +1"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_45",
+          "level": 45,
+          "name": "Herb gardening: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Herb gardening speed +5%"
+        },
+        {
+          "id": "gardens.herb_gardening.perk_50",
+          "level": 50,
+          "name": "Herb gardening: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herb gardening output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise herb gardening for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful herb gardening (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of herb gardening; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a herb gardening task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn herb gardening from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of herb gardening, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.compost_making",
+      "domain": "gardens",
+      "name": "Compost making",
+      "description": "Compost making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.market_gardening"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.compost_making.compost_making_basics",
+          "discipline": "gardens.compost_making",
+          "name": "Compost making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.compost_making.compost_making_seasonal_practice",
+          "discipline": "gardens.compost_making",
+          "name": "Compost making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.compost_making.compost_making_precision_work",
+          "discipline": "gardens.compost_making",
+          "name": "Compost making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.compost_making.compost_making_master_technique",
+          "discipline": "gardens.compost_making",
+          "name": "Compost making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.compost_making.perk_5",
+          "level": 5,
+          "name": "Compost making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Compost making output +2%"
+        },
+        {
+          "id": "gardens.compost_making.perk_10",
+          "level": 10,
+          "name": "Compost making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Compost making waste -5%"
+        },
+        {
+          "id": "gardens.compost_making.perk_15",
+          "level": 15,
+          "name": "Compost making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Compost making quality roll +1"
+        },
+        {
+          "id": "gardens.compost_making.perk_20",
+          "level": 20,
+          "name": "Compost making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Compost making care +5%"
+        },
+        {
+          "id": "gardens.compost_making.perk_25",
+          "level": 25,
+          "name": "Compost making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Compost making speed +3%"
+        },
+        {
+          "id": "gardens.compost_making.perk_30",
+          "level": 30,
+          "name": "Compost making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Compost making output +5%"
+        },
+        {
+          "id": "gardens.compost_making.perk_35",
+          "level": 35,
+          "name": "Compost making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Compost making spoilage -10%"
+        },
+        {
+          "id": "gardens.compost_making.perk_40",
+          "level": 40,
+          "name": "Compost making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Compost making quality roll +1"
+        },
+        {
+          "id": "gardens.compost_making.perk_45",
+          "level": 45,
+          "name": "Compost making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Compost making speed +5%"
+        },
+        {
+          "id": "gardens.compost_making.perk_50",
+          "level": 50,
+          "name": "Compost making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Compost making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise compost making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful compost making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of compost making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a compost making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn compost making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of compost making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.market_gardening",
+      "domain": "gardens",
+      "name": "Market gardening",
+      "description": "Market gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.winter_beds"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.market_gardening.market_gardening_basics",
+          "discipline": "gardens.market_gardening",
+          "name": "Market gardening basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.market_gardening.market_gardening_seasonal_practice",
+          "discipline": "gardens.market_gardening",
+          "name": "Market gardening seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.market_gardening.market_gardening_precision_work",
+          "discipline": "gardens.market_gardening",
+          "name": "Market gardening precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.market_gardening.market_gardening_master_technique",
+          "discipline": "gardens.market_gardening",
+          "name": "Market gardening master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.market_gardening.perk_5",
+          "level": 5,
+          "name": "Market gardening: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Market gardening output +2%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_10",
+          "level": 10,
+          "name": "Market gardening: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Market gardening waste -5%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_15",
+          "level": 15,
+          "name": "Market gardening: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Market gardening quality roll +1"
+        },
+        {
+          "id": "gardens.market_gardening.perk_20",
+          "level": 20,
+          "name": "Market gardening: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Market gardening care +5%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_25",
+          "level": 25,
+          "name": "Market gardening: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Market gardening speed +3%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_30",
+          "level": 30,
+          "name": "Market gardening: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Market gardening output +5%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_35",
+          "level": 35,
+          "name": "Market gardening: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Market gardening spoilage -10%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_40",
+          "level": 40,
+          "name": "Market gardening: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Market gardening quality roll +1"
+        },
+        {
+          "id": "gardens.market_gardening.perk_45",
+          "level": 45,
+          "name": "Market gardening: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Market gardening speed +5%"
+        },
+        {
+          "id": "gardens.market_gardening.perk_50",
+          "level": 50,
+          "name": "Market gardening: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Market gardening output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise market gardening for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful market gardening (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of market gardening; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a market gardening task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn market gardening from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of market gardening, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.winter_beds",
+      "domain": "gardens",
+      "name": "Winter beds",
+      "description": "Winter beds: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.garden_irrigation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.winter_beds.winter_beds_basics",
+          "discipline": "gardens.winter_beds",
+          "name": "Winter beds basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.winter_beds.winter_beds_seasonal_practice",
+          "discipline": "gardens.winter_beds",
+          "name": "Winter beds seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.winter_beds.winter_beds_precision_work",
+          "discipline": "gardens.winter_beds",
+          "name": "Winter beds precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.winter_beds.winter_beds_master_technique",
+          "discipline": "gardens.winter_beds",
+          "name": "Winter beds master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.winter_beds.perk_5",
+          "level": 5,
+          "name": "Winter beds: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Winter beds output +2%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_10",
+          "level": 10,
+          "name": "Winter beds: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Winter beds waste -5%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_15",
+          "level": 15,
+          "name": "Winter beds: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Winter beds quality roll +1"
+        },
+        {
+          "id": "gardens.winter_beds.perk_20",
+          "level": 20,
+          "name": "Winter beds: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Winter beds care +5%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_25",
+          "level": 25,
+          "name": "Winter beds: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Winter beds speed +3%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_30",
+          "level": 30,
+          "name": "Winter beds: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Winter beds output +5%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_35",
+          "level": 35,
+          "name": "Winter beds: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Winter beds spoilage -10%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_40",
+          "level": 40,
+          "name": "Winter beds: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Winter beds quality roll +1"
+        },
+        {
+          "id": "gardens.winter_beds.perk_45",
+          "level": 45,
+          "name": "Winter beds: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Winter beds speed +5%"
+        },
+        {
+          "id": "gardens.winter_beds.perk_50",
+          "level": 50,
+          "name": "Winter beds: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Winter beds output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise winter beds for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful winter beds (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of winter beds; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a winter beds task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn winter beds from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of winter beds, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.garden_irrigation",
+      "domain": "gardens",
+      "name": "Garden irrigation",
+      "description": "Garden irrigation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.insect_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.garden_irrigation.garden_irrigation_basics",
+          "discipline": "gardens.garden_irrigation",
+          "name": "Garden irrigation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.garden_irrigation.garden_irrigation_seasonal_practice",
+          "discipline": "gardens.garden_irrigation",
+          "name": "Garden irrigation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.garden_irrigation.garden_irrigation_precision_work",
+          "discipline": "gardens.garden_irrigation",
+          "name": "Garden irrigation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.garden_irrigation.garden_irrigation_master_technique",
+          "discipline": "gardens.garden_irrigation",
+          "name": "Garden irrigation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.garden_irrigation.perk_5",
+          "level": 5,
+          "name": "Garden irrigation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Garden irrigation output +2%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_10",
+          "level": 10,
+          "name": "Garden irrigation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Garden irrigation waste -5%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_15",
+          "level": 15,
+          "name": "Garden irrigation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Garden irrigation quality roll +1"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_20",
+          "level": 20,
+          "name": "Garden irrigation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Garden irrigation care +5%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_25",
+          "level": 25,
+          "name": "Garden irrigation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Garden irrigation speed +3%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_30",
+          "level": 30,
+          "name": "Garden irrigation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Garden irrigation output +5%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_35",
+          "level": 35,
+          "name": "Garden irrigation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Garden irrigation spoilage -10%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_40",
+          "level": 40,
+          "name": "Garden irrigation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Garden irrigation quality roll +1"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_45",
+          "level": 45,
+          "name": "Garden irrigation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Garden irrigation speed +5%"
+        },
+        {
+          "id": "gardens.garden_irrigation.perk_50",
+          "level": 50,
+          "name": "Garden irrigation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Garden irrigation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise garden irrigation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful garden irrigation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of garden irrigation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a garden irrigation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn garden irrigation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of garden irrigation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.insect_tending",
+      "domain": "gardens",
+      "name": "Insect tending",
+      "description": "Insect tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.mulching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.insect_tending.insect_tending_basics",
+          "discipline": "gardens.insect_tending",
+          "name": "Insect tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.insect_tending.insect_tending_seasonal_practice",
+          "discipline": "gardens.insect_tending",
+          "name": "Insect tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.insect_tending.insect_tending_precision_work",
+          "discipline": "gardens.insect_tending",
+          "name": "Insect tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.insect_tending.insect_tending_master_technique",
+          "discipline": "gardens.insect_tending",
+          "name": "Insect tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.insect_tending.perk_5",
+          "level": 5,
+          "name": "Insect tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Insect tending output +2%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_10",
+          "level": 10,
+          "name": "Insect tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Insect tending waste -5%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_15",
+          "level": 15,
+          "name": "Insect tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Insect tending quality roll +1"
+        },
+        {
+          "id": "gardens.insect_tending.perk_20",
+          "level": 20,
+          "name": "Insect tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Insect tending care +5%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_25",
+          "level": 25,
+          "name": "Insect tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Insect tending speed +3%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_30",
+          "level": 30,
+          "name": "Insect tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Insect tending output +5%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_35",
+          "level": 35,
+          "name": "Insect tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Insect tending spoilage -10%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_40",
+          "level": 40,
+          "name": "Insect tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Insect tending quality roll +1"
+        },
+        {
+          "id": "gardens.insect_tending.perk_45",
+          "level": 45,
+          "name": "Insect tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Insect tending speed +5%"
+        },
+        {
+          "id": "gardens.insect_tending.perk_50",
+          "level": 50,
+          "name": "Insect tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Insect tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise insect tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful insect tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of insect tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a insect tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn insect tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of insect tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.mulching",
+      "domain": "gardens",
+      "name": "Mulching",
+      "description": "Mulching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.kitchen_plots"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.mulching.mulching_basics",
+          "discipline": "gardens.mulching",
+          "name": "Mulching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.mulching.mulching_seasonal_practice",
+          "discipline": "gardens.mulching",
+          "name": "Mulching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.mulching.mulching_precision_work",
+          "discipline": "gardens.mulching",
+          "name": "Mulching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.mulching.mulching_master_technique",
+          "discipline": "gardens.mulching",
+          "name": "Mulching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.mulching.perk_5",
+          "level": 5,
+          "name": "Mulching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mulching output +2%"
+        },
+        {
+          "id": "gardens.mulching.perk_10",
+          "level": 10,
+          "name": "Mulching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mulching waste -5%"
+        },
+        {
+          "id": "gardens.mulching.perk_15",
+          "level": 15,
+          "name": "Mulching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mulching quality roll +1"
+        },
+        {
+          "id": "gardens.mulching.perk_20",
+          "level": 20,
+          "name": "Mulching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mulching care +5%"
+        },
+        {
+          "id": "gardens.mulching.perk_25",
+          "level": 25,
+          "name": "Mulching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mulching speed +3%"
+        },
+        {
+          "id": "gardens.mulching.perk_30",
+          "level": 30,
+          "name": "Mulching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mulching output +5%"
+        },
+        {
+          "id": "gardens.mulching.perk_35",
+          "level": 35,
+          "name": "Mulching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mulching spoilage -10%"
+        },
+        {
+          "id": "gardens.mulching.perk_40",
+          "level": 40,
+          "name": "Mulching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mulching quality roll +1"
+        },
+        {
+          "id": "gardens.mulching.perk_45",
+          "level": 45,
+          "name": "Mulching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mulching speed +5%"
+        },
+        {
+          "id": "gardens.mulching.perk_50",
+          "level": 50,
+          "name": "Mulching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mulching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mulching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mulching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mulching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mulching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mulching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mulching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.kitchen_plots",
+      "domain": "gardens",
+      "name": "Kitchen plots",
+      "description": "Kitchen plots: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.vegetable_seed_saving"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.kitchen_plots.kitchen_plots_basics",
+          "discipline": "gardens.kitchen_plots",
+          "name": "Kitchen plots basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.kitchen_plots.kitchen_plots_seasonal_practice",
+          "discipline": "gardens.kitchen_plots",
+          "name": "Kitchen plots seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.kitchen_plots.kitchen_plots_precision_work",
+          "discipline": "gardens.kitchen_plots",
+          "name": "Kitchen plots precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.kitchen_plots.kitchen_plots_master_technique",
+          "discipline": "gardens.kitchen_plots",
+          "name": "Kitchen plots master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.kitchen_plots.perk_5",
+          "level": 5,
+          "name": "Kitchen plots: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Kitchen plots output +2%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_10",
+          "level": 10,
+          "name": "Kitchen plots: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Kitchen plots waste -5%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_15",
+          "level": 15,
+          "name": "Kitchen plots: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kitchen plots quality roll +1"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_20",
+          "level": 20,
+          "name": "Kitchen plots: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Kitchen plots care +5%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_25",
+          "level": 25,
+          "name": "Kitchen plots: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Kitchen plots speed +3%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_30",
+          "level": 30,
+          "name": "Kitchen plots: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kitchen plots output +5%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_35",
+          "level": 35,
+          "name": "Kitchen plots: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Kitchen plots spoilage -10%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_40",
+          "level": 40,
+          "name": "Kitchen plots: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kitchen plots quality roll +1"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_45",
+          "level": 45,
+          "name": "Kitchen plots: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Kitchen plots speed +5%"
+        },
+        {
+          "id": "gardens.kitchen_plots.perk_50",
+          "level": 50,
+          "name": "Kitchen plots: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kitchen plots output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise kitchen plots for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful kitchen plots (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of kitchen plots; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a kitchen plots task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn kitchen plots from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of kitchen plots, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.vegetable_seed_saving",
+      "domain": "gardens",
+      "name": "Vegetable seed saving",
+      "description": "Vegetable seed saving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.raised_beds"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.vegetable_seed_saving.vegetable_seed_saving_basics",
+          "discipline": "gardens.vegetable_seed_saving",
+          "name": "Vegetable seed saving basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.vegetable_seed_saving_seasonal_practice",
+          "discipline": "gardens.vegetable_seed_saving",
+          "name": "Vegetable seed saving seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.vegetable_seed_saving_precision_work",
+          "discipline": "gardens.vegetable_seed_saving",
+          "name": "Vegetable seed saving precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.vegetable_seed_saving_master_technique",
+          "discipline": "gardens.vegetable_seed_saving",
+          "name": "Vegetable seed saving master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.vegetable_seed_saving.perk_5",
+          "level": 5,
+          "name": "Vegetable seed saving: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Vegetable seed saving output +2%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_10",
+          "level": 10,
+          "name": "Vegetable seed saving: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Vegetable seed saving waste -5%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_15",
+          "level": 15,
+          "name": "Vegetable seed saving: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vegetable seed saving quality roll +1"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_20",
+          "level": 20,
+          "name": "Vegetable seed saving: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Vegetable seed saving care +5%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_25",
+          "level": 25,
+          "name": "Vegetable seed saving: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Vegetable seed saving speed +3%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_30",
+          "level": 30,
+          "name": "Vegetable seed saving: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vegetable seed saving output +5%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_35",
+          "level": 35,
+          "name": "Vegetable seed saving: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Vegetable seed saving spoilage -10%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_40",
+          "level": 40,
+          "name": "Vegetable seed saving: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vegetable seed saving quality roll +1"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_45",
+          "level": 45,
+          "name": "Vegetable seed saving: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Vegetable seed saving speed +5%"
+        },
+        {
+          "id": "gardens.vegetable_seed_saving.perk_50",
+          "level": 50,
+          "name": "Vegetable seed saving: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vegetable seed saving output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise vegetable seed saving for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful vegetable seed saving (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of vegetable seed saving; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a vegetable seed saving task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn vegetable seed saving from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of vegetable seed saving, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.raised_beds",
+      "domain": "gardens",
+      "name": "Raised beds",
+      "description": "Raised beds: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.garden_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.raised_beds.raised_beds_basics",
+          "discipline": "gardens.raised_beds",
+          "name": "Raised beds basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.raised_beds.raised_beds_seasonal_practice",
+          "discipline": "gardens.raised_beds",
+          "name": "Raised beds seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.raised_beds.raised_beds_precision_work",
+          "discipline": "gardens.raised_beds",
+          "name": "Raised beds precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.raised_beds.raised_beds_master_technique",
+          "discipline": "gardens.raised_beds",
+          "name": "Raised beds master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.raised_beds.perk_5",
+          "level": 5,
+          "name": "Raised beds: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Raised beds output +2%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_10",
+          "level": 10,
+          "name": "Raised beds: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Raised beds waste -5%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_15",
+          "level": 15,
+          "name": "Raised beds: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Raised beds quality roll +1"
+        },
+        {
+          "id": "gardens.raised_beds.perk_20",
+          "level": 20,
+          "name": "Raised beds: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Raised beds care +5%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_25",
+          "level": 25,
+          "name": "Raised beds: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Raised beds speed +3%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_30",
+          "level": 30,
+          "name": "Raised beds: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Raised beds output +5%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_35",
+          "level": 35,
+          "name": "Raised beds: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Raised beds spoilage -10%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_40",
+          "level": 40,
+          "name": "Raised beds: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Raised beds quality roll +1"
+        },
+        {
+          "id": "gardens.raised_beds.perk_45",
+          "level": 45,
+          "name": "Raised beds: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Raised beds speed +5%"
+        },
+        {
+          "id": "gardens.raised_beds.perk_50",
+          "level": 50,
+          "name": "Raised beds: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Raised beds output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise raised beds for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful raised beds (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of raised beds; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a raised beds task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn raised beds from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of raised beds, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "gardens.garden_planning",
+      "domain": "gardens",
+      "name": "Garden planning",
+      "description": "Garden planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "gardens.gardening"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "gardens.garden_planning.garden_planning_basics",
+          "discipline": "gardens.garden_planning",
+          "name": "Garden planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.garden_planning.garden_planning_seasonal_practice",
+          "discipline": "gardens.garden_planning",
+          "name": "Garden planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.garden_planning.garden_planning_precision_work",
+          "discipline": "gardens.garden_planning",
+          "name": "Garden planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "gardens.garden_planning.garden_planning_master_technique",
+          "discipline": "gardens.garden_planning",
+          "name": "Garden planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "gardens.garden_planning.perk_5",
+          "level": 5,
+          "name": "Garden planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Garden planning output +2%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_10",
+          "level": 10,
+          "name": "Garden planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Garden planning waste -5%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_15",
+          "level": 15,
+          "name": "Garden planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Garden planning quality roll +1"
+        },
+        {
+          "id": "gardens.garden_planning.perk_20",
+          "level": 20,
+          "name": "Garden planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Garden planning care +5%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_25",
+          "level": 25,
+          "name": "Garden planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Garden planning speed +3%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_30",
+          "level": 30,
+          "name": "Garden planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Garden planning output +5%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_35",
+          "level": 35,
+          "name": "Garden planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Garden planning spoilage -10%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_40",
+          "level": 40,
+          "name": "Garden planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Garden planning quality roll +1"
+        },
+        {
+          "id": "gardens.garden_planning.perk_45",
+          "level": 45,
+          "name": "Garden planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Garden planning speed +5%"
+        },
+        {
+          "id": "gardens.garden_planning.perk_50",
+          "level": 50,
+          "name": "Garden planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Garden planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise garden planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful garden planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of garden planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a garden planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn garden planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of garden planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

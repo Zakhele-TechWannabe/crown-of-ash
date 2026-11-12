@@ -1,0 +1,110 @@
+{
+  "id": "bathing_and_sanitation",
+  "disciplines": [
+    {
+      "id": "bathing_and_sanitation.bathhouse_tending",
+      "domain": "bathing_and_sanitation",
+      "name": "Bathhouse tending",
+      "description": "Bathhouse tending applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.water_heating",
+      "domain": "bathing_and_sanitation",
+      "name": "Water heating",
+      "description": "Water heating applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.soap_making",
+      "domain": "bathing_and_sanitation",
+      "name": "Soap making",
+      "description": "Soap making applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.drain_cleaning",
+      "domain": "bathing_and_sanitation",
+      "name": "Drain cleaning",
+      "description": "Drain cleaning applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.latrine_care",
+      "domain": "bathing_and_sanitation",
+      "name": "Latrine care",
+      "description": "Latrine care applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.linen_washing",
+      "domain": "bathing_and_sanitation",
+      "name": "Linen washing",
+      "description": "Linen washing applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.delousing",
+      "domain": "bathing_and_sanitation",
+      "name": "Delousing",
+      "description": "Delousing applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.well_protection",
+      "domain": "bathing_and_sanitation",
+      "name": "Well protection",
+      "description": "Well protection applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.waste_sorting",
+      "domain": "bathing_and_sanitation",
+      "name": "Waste sorting",
+      "description": "Waste sorting applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.ash_sanitation",
+      "domain": "bathing_and_sanitation",
+      "name": "Ash sanitation",
+      "description": "Ash sanitation applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.street_drainage",
+      "domain": "bathing_and_sanitation",
+      "name": "Street drainage",
+      "description": "Street drainage applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.bathing_assistance",
+      "domain": "bathing_and_sanitation",
+      "name": "Bathing assistance",
+      "description": "Bathing assistance applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.infection_control",
+      "domain": "bathing_and_sanitation",
+      "name": "Infection control",
+      "description": "Infection control applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.sanitation_inspection",
+      "domain": "bathing_and_sanitation",
+      "name": "Sanitation inspection",
+      "description": "Sanitation inspection applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "bathing_and_sanitation.public_hygiene_teaching",
+      "domain": "bathing_and_sanitation",
+      "name": "Public hygiene teaching",
+      "description": "Public hygiene teaching applies bathing and sanitation to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

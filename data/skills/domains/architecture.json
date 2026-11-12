@@ -1,0 +1,110 @@
+{
+  "id": "architecture",
+  "disciplines": [
+    {
+      "id": "architecture.site_reading",
+      "domain": "architecture",
+      "name": "Site reading",
+      "description": "Site reading applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.ground_plans",
+      "domain": "architecture",
+      "name": "Ground plans",
+      "description": "Ground plans applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.elevation_drawing",
+      "domain": "architecture",
+      "name": "Elevation drawing",
+      "description": "Elevation drawing applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.structural_proportion",
+      "domain": "architecture",
+      "name": "Structural proportion",
+      "description": "Structural proportion applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.timber_halls",
+      "domain": "architecture",
+      "name": "Timber halls",
+      "description": "Timber halls applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.courtyard_design",
+      "domain": "architecture",
+      "name": "Courtyard design",
+      "description": "Courtyard design applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.ventilation_design",
+      "domain": "architecture",
+      "name": "Ventilation design",
+      "description": "Ventilation design applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.roof_geometry",
+      "domain": "architecture",
+      "name": "Roof geometry",
+      "description": "Roof geometry applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.temple_layout",
+      "domain": "architecture",
+      "name": "Temple layout",
+      "description": "Temple layout applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.granary_design",
+      "domain": "architecture",
+      "name": "Granary design",
+      "description": "Granary design applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.household_layouts",
+      "domain": "architecture",
+      "name": "Household layouts",
+      "description": "Household layouts applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.fire_separation",
+      "domain": "architecture",
+      "name": "Fire separation",
+      "description": "Fire separation applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.model_building",
+      "domain": "architecture",
+      "name": "Model building",
+      "description": "Model building applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.building_estimates",
+      "domain": "architecture",
+      "name": "Building estimates",
+      "description": "Building estimates applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "architecture.master_planning",
+      "domain": "architecture",
+      "name": "Master planning",
+      "description": "Master planning applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "beast_taming",
+  "disciplines": [
+    {
+      "id": "beast_taming.beast_taming",
+      "domain": "beast_taming",
+      "name": "Beast taming",
+      "description": "Beast taming applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.spirit_beast_feeding",
+      "domain": "beast_taming",
+      "name": "Spirit beast feeding",
+      "description": "Spirit beast feeding applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.beast_communication",
+      "domain": "beast_taming",
+      "name": "Beast communication",
+      "description": "Beast communication applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.bond_rituals",
+      "domain": "beast_taming",
+      "name": "Bond rituals",
+      "description": "Bond rituals applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.beast_healing",
+      "domain": "beast_taming",
+      "name": "Beast healing",
+      "description": "Beast healing applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.beast_training",
+      "domain": "beast_taming",
+      "name": "Beast training",
+      "description": "Beast training applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.beast_breeding",
+      "domain": "beast_taming",
+      "name": "Beast breeding",
+      "description": "Beast breeding applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.habitat_arrays",
+      "domain": "beast_taming",
+      "name": "Habitat arrays",
+      "description": "Habitat arrays applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.mounted_beasts",
+      "domain": "beast_taming",
+      "name": "Mounted beasts",
+      "description": "Mounted beasts applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.scout_beasts",
+      "domain": "beast_taming",
+      "name": "Scout beasts",
+      "description": "Scout beasts applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.guardian_beasts",
+      "domain": "beast_taming",
+      "name": "Guardian beasts",
+      "description": "Guardian beasts applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.beast_evolution",
+      "domain": "beast_taming",
+      "name": "Beast evolution",
+      "description": "Beast evolution applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.bond_recovery",
+      "domain": "beast_taming",
+      "name": "Bond recovery",
+      "description": "Bond recovery applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.beast_lineage_records",
+      "domain": "beast_taming",
+      "name": "Beast lineage records",
+      "description": "Beast lineage records applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_taming.tamer_instruction",
+      "domain": "beast_taming",
+      "name": "Tamer instruction",
+      "description": "Tamer instruction applies beast taming to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

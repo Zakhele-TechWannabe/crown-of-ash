@@ -1,0 +1,110 @@
+{
+  "id": "riding",
+  "disciplines": [
+    {
+      "id": "riding.mounting",
+      "domain": "riding",
+      "name": "Mounting",
+      "description": "Mounting applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.seat_balance",
+      "domain": "riding",
+      "name": "Seat balance",
+      "description": "Seat balance applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.rein_handling",
+      "domain": "riding",
+      "name": "Rein handling",
+      "description": "Rein handling applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.gait_control",
+      "domain": "riding",
+      "name": "Gait control",
+      "description": "Gait control applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.trail_riding",
+      "domain": "riding",
+      "name": "Trail riding",
+      "description": "Trail riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.river_fording",
+      "domain": "riding",
+      "name": "River fording",
+      "description": "River fording applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.pack_riding",
+      "domain": "riding",
+      "name": "Pack riding",
+      "description": "Pack riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.mounted_archery",
+      "domain": "riding",
+      "name": "Mounted archery",
+      "description": "Mounted archery applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.mounted_spear",
+      "domain": "riding",
+      "name": "Mounted spear",
+      "description": "Mounted spear applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.horse_calming",
+      "domain": "riding",
+      "name": "Horse calming",
+      "description": "Horse calming applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.horse_care",
+      "domain": "riding",
+      "name": "Horse care",
+      "description": "Horse care applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.endurance_riding",
+      "domain": "riding",
+      "name": "Endurance riding",
+      "description": "Endurance riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.formation_riding",
+      "domain": "riding",
+      "name": "Formation riding",
+      "description": "Formation riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.saddle_fitting",
+      "domain": "riding",
+      "name": "Saddle fitting",
+      "description": "Saddle fitting applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "riding.riding_instruction",
+      "domain": "riding",
+      "name": "Riding instruction",
+      "description": "Riding instruction applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

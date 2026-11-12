@@ -1,0 +1,110 @@
+{
+  "id": "soil_stewardship",
+  "disciplines": [
+    {
+      "id": "soil_stewardship.soil_reading",
+      "domain": "soil_stewardship",
+      "name": "Soil reading",
+      "description": "Soil reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.composting",
+      "domain": "soil_stewardship",
+      "name": "Composting",
+      "description": "Composting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.green_manures",
+      "domain": "soil_stewardship",
+      "name": "Green manures",
+      "description": "Green manures: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.crop_rotation",
+      "domain": "soil_stewardship",
+      "name": "Crop rotation",
+      "description": "Crop rotation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.erosion_control",
+      "domain": "soil_stewardship",
+      "name": "Erosion control",
+      "description": "Erosion control: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.terrace_repair",
+      "domain": "soil_stewardship",
+      "name": "Terrace repair",
+      "description": "Terrace repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.salinity_care",
+      "domain": "soil_stewardship",
+      "name": "Salinity care",
+      "description": "Salinity care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.worm_tending",
+      "domain": "soil_stewardship",
+      "name": "Worm tending",
+      "description": "Worm tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.mulching",
+      "domain": "soil_stewardship",
+      "name": "Mulching",
+      "description": "Mulching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.ash_spreading",
+      "domain": "soil_stewardship",
+      "name": "Ash spreading",
+      "description": "Ash spreading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.silt_capture",
+      "domain": "soil_stewardship",
+      "name": "Silt capture",
+      "description": "Silt capture: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.soil_sampling",
+      "domain": "soil_stewardship",
+      "name": "Soil sampling",
+      "description": "Soil sampling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.cover_crops",
+      "domain": "soil_stewardship",
+      "name": "Cover crops",
+      "description": "Cover crops: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.fallow_tending",
+      "domain": "soil_stewardship",
+      "name": "Fallow tending",
+      "description": "Fallow tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "soil_stewardship.land_restoration",
+      "domain": "soil_stewardship",
+      "name": "Land restoration",
+      "description": "Land restoration: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    }
+  ]
+}

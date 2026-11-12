@@ -1,0 +1,110 @@
+{
+  "id": "fortification",
+  "disciplines": [
+    {
+      "id": "fortification.wall_siting",
+      "domain": "fortification",
+      "name": "Wall siting",
+      "description": "Wall siting applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.rampart_raising",
+      "domain": "fortification",
+      "name": "Rampart raising",
+      "description": "Rampart raising applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.gatehouses",
+      "domain": "fortification",
+      "name": "Gatehouses",
+      "description": "Gatehouses applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.watchtowers",
+      "domain": "fortification",
+      "name": "Watchtowers",
+      "description": "Watchtowers applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.moat_digging",
+      "domain": "fortification",
+      "name": "Moat digging",
+      "description": "Moat digging applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.palisades",
+      "domain": "fortification",
+      "name": "Palisades",
+      "description": "Palisades applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.battlements",
+      "domain": "fortification",
+      "name": "Battlements",
+      "description": "Battlements applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.defensive_roads",
+      "domain": "fortification",
+      "name": "Defensive roads",
+      "description": "Defensive roads applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.siege_shelters",
+      "domain": "fortification",
+      "name": "Siege shelters",
+      "description": "Siege shelters applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.supply_vaults",
+      "domain": "fortification",
+      "name": "Supply vaults",
+      "description": "Supply vaults applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.fire_defence",
+      "domain": "fortification",
+      "name": "Fire defence",
+      "description": "Fire defence applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.wall_inspection",
+      "domain": "fortification",
+      "name": "Wall inspection",
+      "description": "Wall inspection applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.breach_repair",
+      "domain": "fortification",
+      "name": "Breach repair",
+      "description": "Breach repair applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.defence_layout",
+      "domain": "fortification",
+      "name": "Defence layout",
+      "description": "Defence layout applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "fortification.fortress_stewardship",
+      "domain": "fortification",
+      "name": "Fortress stewardship",
+      "description": "Fortress stewardship applies fortification to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "millwrighting",
+  "disciplines": [
+    {
+      "id": "millwrighting.mill_siting",
+      "domain": "millwrighting",
+      "name": "Mill siting",
+      "description": "Mill siting applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.wheel_building",
+      "domain": "millwrighting",
+      "name": "Wheel building",
+      "description": "Wheel building applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.millstones",
+      "domain": "millwrighting",
+      "name": "Millstones",
+      "description": "Millstones applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.gearing",
+      "domain": "millwrighting",
+      "name": "Gearing",
+      "description": "Gearing applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.shaft_alignment",
+      "domain": "millwrighting",
+      "name": "Shaft alignment",
+      "description": "Shaft alignment applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.water_races",
+      "domain": "millwrighting",
+      "name": "Water races",
+      "description": "Water races applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.grain_hoppers",
+      "domain": "millwrighting",
+      "name": "Grain hoppers",
+      "description": "Grain hoppers applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.flour_sieves",
+      "domain": "millwrighting",
+      "name": "Flour sieves",
+      "description": "Flour sieves applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.wind_vanes",
+      "domain": "millwrighting",
+      "name": "Wind vanes",
+      "description": "Wind vanes applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.mill_balancing",
+      "domain": "millwrighting",
+      "name": "Mill balancing",
+      "description": "Mill balancing applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.bearing_care",
+      "domain": "millwrighting",
+      "name": "Bearing care",
+      "description": "Bearing care applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.power_transmission",
+      "domain": "millwrighting",
+      "name": "Power transmission",
+      "description": "Power transmission applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.mill_repair",
+      "domain": "millwrighting",
+      "name": "Mill repair",
+      "description": "Mill repair applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.mill_safety",
+      "domain": "millwrighting",
+      "name": "Mill safety",
+      "description": "Mill safety applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "millwrighting.mill_design",
+      "domain": "millwrighting",
+      "name": "Mill design",
+      "description": "Mill design applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

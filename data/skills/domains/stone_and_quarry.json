@@ -1,0 +1,4053 @@
+{
+  "id": "stone_and_quarry",
+  "disciplines": [
+    {
+      "id": "stone_and_quarry.quarrying",
+      "domain": "stone_and_quarry",
+      "name": "Quarrying",
+      "description": "Quarrying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.stone_splitting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.quarrying.stonecutting",
+          "discipline": "stone_and_quarry.quarrying",
+          "name": "Stonecutting",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 11
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarrying.masonry",
+          "discipline": "stone_and_quarry.quarrying",
+          "name": "Masonry",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarrying.sculpting",
+          "discipline": "stone_and_quarry.quarrying",
+          "name": "Sculpting",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 13
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.quarrying.perk_5",
+          "level": 5,
+          "name": "Quarrying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Quarrying output +2%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_10",
+          "level": 10,
+          "name": "Quarrying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Quarrying waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_15",
+          "level": 15,
+          "name": "Quarrying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Quarrying quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_20",
+          "level": 20,
+          "name": "Quarrying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Quarrying care +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_25",
+          "level": 25,
+          "name": "Quarrying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Quarrying speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_30",
+          "level": 30,
+          "name": "Quarrying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Quarrying output +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_35",
+          "level": 35,
+          "name": "Quarrying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Quarrying spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_40",
+          "level": 40,
+          "name": "Quarrying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Quarrying quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_45",
+          "level": 45,
+          "name": "Quarrying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Quarrying speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarrying.perk_50",
+          "level": 50,
+          "name": "Quarrying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Quarrying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise quarrying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful quarrying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of quarrying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a quarrying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn quarrying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of quarrying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.stone_splitting",
+      "domain": "stone_and_quarry",
+      "name": "Stone splitting",
+      "description": "Stone splitting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.block_dressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.stone_splitting.stone_splitting_basics",
+          "discipline": "stone_and_quarry.stone_splitting",
+          "name": "Stone splitting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.stone_splitting_seasonal_practice",
+          "discipline": "stone_and_quarry.stone_splitting",
+          "name": "Stone splitting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.stone_splitting_precision_work",
+          "discipline": "stone_and_quarry.stone_splitting",
+          "name": "Stone splitting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.stone_splitting_master_technique",
+          "discipline": "stone_and_quarry.stone_splitting",
+          "name": "Stone splitting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_5",
+          "level": 5,
+          "name": "Stone splitting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Stone splitting output +2%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_10",
+          "level": 10,
+          "name": "Stone splitting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Stone splitting waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_15",
+          "level": 15,
+          "name": "Stone splitting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone splitting quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_20",
+          "level": 20,
+          "name": "Stone splitting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Stone splitting care +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_25",
+          "level": 25,
+          "name": "Stone splitting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Stone splitting speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_30",
+          "level": 30,
+          "name": "Stone splitting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone splitting output +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_35",
+          "level": 35,
+          "name": "Stone splitting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Stone splitting spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_40",
+          "level": 40,
+          "name": "Stone splitting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone splitting quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_45",
+          "level": 45,
+          "name": "Stone splitting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Stone splitting speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_splitting.perk_50",
+          "level": 50,
+          "name": "Stone splitting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone splitting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise stone splitting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful stone splitting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of stone splitting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a stone splitting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn stone splitting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of stone splitting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.block_dressing",
+      "domain": "stone_and_quarry",
+      "name": "Block dressing",
+      "description": "Block dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.rubble_sorting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.block_dressing.block_dressing_basics",
+          "discipline": "stone_and_quarry.block_dressing",
+          "name": "Block dressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.block_dressing_seasonal_practice",
+          "discipline": "stone_and_quarry.block_dressing",
+          "name": "Block dressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.block_dressing_precision_work",
+          "discipline": "stone_and_quarry.block_dressing",
+          "name": "Block dressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.block_dressing_master_technique",
+          "discipline": "stone_and_quarry.block_dressing",
+          "name": "Block dressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.block_dressing.perk_5",
+          "level": 5,
+          "name": "Block dressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Block dressing output +2%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_10",
+          "level": 10,
+          "name": "Block dressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Block dressing waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_15",
+          "level": 15,
+          "name": "Block dressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Block dressing quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_20",
+          "level": 20,
+          "name": "Block dressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Block dressing care +5%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_25",
+          "level": 25,
+          "name": "Block dressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Block dressing speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_30",
+          "level": 30,
+          "name": "Block dressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Block dressing output +5%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_35",
+          "level": 35,
+          "name": "Block dressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Block dressing spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_40",
+          "level": 40,
+          "name": "Block dressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Block dressing quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_45",
+          "level": 45,
+          "name": "Block dressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Block dressing speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.block_dressing.perk_50",
+          "level": 50,
+          "name": "Block dressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Block dressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise block dressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful block dressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of block dressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a block dressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn block dressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of block dressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.rubble_sorting",
+      "domain": "stone_and_quarry",
+      "name": "Rubble sorting",
+      "description": "Rubble sorting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.lime_burning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.rubble_sorting.rubble_sorting_basics",
+          "discipline": "stone_and_quarry.rubble_sorting",
+          "name": "Rubble sorting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.rubble_sorting_seasonal_practice",
+          "discipline": "stone_and_quarry.rubble_sorting",
+          "name": "Rubble sorting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.rubble_sorting_precision_work",
+          "discipline": "stone_and_quarry.rubble_sorting",
+          "name": "Rubble sorting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.rubble_sorting_master_technique",
+          "discipline": "stone_and_quarry.rubble_sorting",
+          "name": "Rubble sorting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_5",
+          "level": 5,
+          "name": "Rubble sorting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Rubble sorting output +2%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_10",
+          "level": 10,
+          "name": "Rubble sorting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Rubble sorting waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_15",
+          "level": 15,
+          "name": "Rubble sorting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rubble sorting quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_20",
+          "level": 20,
+          "name": "Rubble sorting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Rubble sorting care +5%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_25",
+          "level": 25,
+          "name": "Rubble sorting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Rubble sorting speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_30",
+          "level": 30,
+          "name": "Rubble sorting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rubble sorting output +5%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_35",
+          "level": 35,
+          "name": "Rubble sorting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Rubble sorting spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_40",
+          "level": 40,
+          "name": "Rubble sorting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rubble sorting quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_45",
+          "level": 45,
+          "name": "Rubble sorting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Rubble sorting speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.rubble_sorting.perk_50",
+          "level": 50,
+          "name": "Rubble sorting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rubble sorting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise rubble sorting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful rubble sorting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of rubble sorting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a rubble sorting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn rubble sorting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of rubble sorting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.lime_burning",
+      "domain": "stone_and_quarry",
+      "name": "Lime burning",
+      "description": "Lime burning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.flagstone_cutting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.lime_burning.lime_burning_basics",
+          "discipline": "stone_and_quarry.lime_burning",
+          "name": "Lime burning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.lime_burning_seasonal_practice",
+          "discipline": "stone_and_quarry.lime_burning",
+          "name": "Lime burning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.lime_burning_precision_work",
+          "discipline": "stone_and_quarry.lime_burning",
+          "name": "Lime burning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.lime_burning_master_technique",
+          "discipline": "stone_and_quarry.lime_burning",
+          "name": "Lime burning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.lime_burning.perk_5",
+          "level": 5,
+          "name": "Lime burning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Lime burning output +2%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_10",
+          "level": 10,
+          "name": "Lime burning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Lime burning waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_15",
+          "level": 15,
+          "name": "Lime burning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lime burning quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_20",
+          "level": 20,
+          "name": "Lime burning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Lime burning care +5%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_25",
+          "level": 25,
+          "name": "Lime burning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Lime burning speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_30",
+          "level": 30,
+          "name": "Lime burning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lime burning output +5%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_35",
+          "level": 35,
+          "name": "Lime burning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Lime burning spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_40",
+          "level": 40,
+          "name": "Lime burning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lime burning quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_45",
+          "level": 45,
+          "name": "Lime burning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Lime burning speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.lime_burning.perk_50",
+          "level": 50,
+          "name": "Lime burning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lime burning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise lime burning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful lime burning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of lime burning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a lime burning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn lime burning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of lime burning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.flagstone_cutting",
+      "domain": "stone_and_quarry",
+      "name": "Flagstone cutting",
+      "description": "Flagstone cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.grindstone_shaping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.flagstone_cutting.flagstone_cutting_basics",
+          "discipline": "stone_and_quarry.flagstone_cutting",
+          "name": "Flagstone cutting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.flagstone_cutting_seasonal_practice",
+          "discipline": "stone_and_quarry.flagstone_cutting",
+          "name": "Flagstone cutting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.flagstone_cutting_precision_work",
+          "discipline": "stone_and_quarry.flagstone_cutting",
+          "name": "Flagstone cutting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.flagstone_cutting_master_technique",
+          "discipline": "stone_and_quarry.flagstone_cutting",
+          "name": "Flagstone cutting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_5",
+          "level": 5,
+          "name": "Flagstone cutting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Flagstone cutting output +2%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_10",
+          "level": 10,
+          "name": "Flagstone cutting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Flagstone cutting waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_15",
+          "level": 15,
+          "name": "Flagstone cutting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Flagstone cutting quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_20",
+          "level": 20,
+          "name": "Flagstone cutting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Flagstone cutting care +5%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_25",
+          "level": 25,
+          "name": "Flagstone cutting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Flagstone cutting speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_30",
+          "level": 30,
+          "name": "Flagstone cutting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Flagstone cutting output +5%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_35",
+          "level": 35,
+          "name": "Flagstone cutting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Flagstone cutting spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_40",
+          "level": 40,
+          "name": "Flagstone cutting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Flagstone cutting quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_45",
+          "level": 45,
+          "name": "Flagstone cutting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Flagstone cutting speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.flagstone_cutting.perk_50",
+          "level": 50,
+          "name": "Flagstone cutting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Flagstone cutting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise flagstone cutting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful flagstone cutting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of flagstone cutting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a flagstone cutting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn flagstone cutting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of flagstone cutting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.grindstone_shaping",
+      "domain": "stone_and_quarry",
+      "name": "Grindstone shaping",
+      "description": "Grindstone shaping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.stone_carving"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.grindstone_shaping.grindstone_shaping_basics",
+          "discipline": "stone_and_quarry.grindstone_shaping",
+          "name": "Grindstone shaping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.grindstone_shaping_seasonal_practice",
+          "discipline": "stone_and_quarry.grindstone_shaping",
+          "name": "Grindstone shaping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.grindstone_shaping_precision_work",
+          "discipline": "stone_and_quarry.grindstone_shaping",
+          "name": "Grindstone shaping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.grindstone_shaping_master_technique",
+          "discipline": "stone_and_quarry.grindstone_shaping",
+          "name": "Grindstone shaping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_5",
+          "level": 5,
+          "name": "Grindstone shaping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Grindstone shaping output +2%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_10",
+          "level": 10,
+          "name": "Grindstone shaping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Grindstone shaping waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_15",
+          "level": 15,
+          "name": "Grindstone shaping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grindstone shaping quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_20",
+          "level": 20,
+          "name": "Grindstone shaping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Grindstone shaping care +5%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_25",
+          "level": 25,
+          "name": "Grindstone shaping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Grindstone shaping speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_30",
+          "level": 30,
+          "name": "Grindstone shaping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grindstone shaping output +5%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_35",
+          "level": 35,
+          "name": "Grindstone shaping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Grindstone shaping spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_40",
+          "level": 40,
+          "name": "Grindstone shaping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grindstone shaping quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_45",
+          "level": 45,
+          "name": "Grindstone shaping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Grindstone shaping speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.grindstone_shaping.perk_50",
+          "level": 50,
+          "name": "Grindstone shaping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grindstone shaping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise grindstone shaping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful grindstone shaping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of grindstone shaping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a grindstone shaping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn grindstone shaping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of grindstone shaping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.stone_carving",
+      "domain": "stone_and_quarry",
+      "name": "Stone carving",
+      "description": "Stone carving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.slate_working"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.stone_carving.stone_carving_basics",
+          "discipline": "stone_and_quarry.stone_carving",
+          "name": "Stone carving basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.stone_carving_seasonal_practice",
+          "discipline": "stone_and_quarry.stone_carving",
+          "name": "Stone carving seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.stone_carving_precision_work",
+          "discipline": "stone_and_quarry.stone_carving",
+          "name": "Stone carving precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.stone_carving_master_technique",
+          "discipline": "stone_and_quarry.stone_carving",
+          "name": "Stone carving master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.stone_carving.perk_5",
+          "level": 5,
+          "name": "Stone carving: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Stone carving output +2%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_10",
+          "level": 10,
+          "name": "Stone carving: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Stone carving waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_15",
+          "level": 15,
+          "name": "Stone carving: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone carving quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_20",
+          "level": 20,
+          "name": "Stone carving: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Stone carving care +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_25",
+          "level": 25,
+          "name": "Stone carving: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Stone carving speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_30",
+          "level": 30,
+          "name": "Stone carving: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone carving output +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_35",
+          "level": 35,
+          "name": "Stone carving: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Stone carving spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_40",
+          "level": 40,
+          "name": "Stone carving: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone carving quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_45",
+          "level": 45,
+          "name": "Stone carving: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Stone carving speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_carving.perk_50",
+          "level": 50,
+          "name": "Stone carving: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone carving output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise stone carving for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful stone carving (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of stone carving; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a stone carving task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn stone carving from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of stone carving, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.slate_working",
+      "domain": "stone_and_quarry",
+      "name": "Slate working",
+      "description": "Slate working: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.quarry_drainage"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.slate_working.slate_working_basics",
+          "discipline": "stone_and_quarry.slate_working",
+          "name": "Slate working basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.slate_working.slate_working_seasonal_practice",
+          "discipline": "stone_and_quarry.slate_working",
+          "name": "Slate working seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.slate_working.slate_working_precision_work",
+          "discipline": "stone_and_quarry.slate_working",
+          "name": "Slate working precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.slate_working.slate_working_master_technique",
+          "discipline": "stone_and_quarry.slate_working",
+          "name": "Slate working master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.slate_working.perk_5",
+          "level": 5,
+          "name": "Slate working: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Slate working output +2%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_10",
+          "level": 10,
+          "name": "Slate working: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Slate working waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_15",
+          "level": 15,
+          "name": "Slate working: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Slate working quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_20",
+          "level": 20,
+          "name": "Slate working: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Slate working care +5%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_25",
+          "level": 25,
+          "name": "Slate working: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Slate working speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_30",
+          "level": 30,
+          "name": "Slate working: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Slate working output +5%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_35",
+          "level": 35,
+          "name": "Slate working: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Slate working spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_40",
+          "level": 40,
+          "name": "Slate working: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Slate working quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_45",
+          "level": 45,
+          "name": "Slate working: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Slate working speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.slate_working.perk_50",
+          "level": 50,
+          "name": "Slate working: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Slate working output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise slate working for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful slate working (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of slate working; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a slate working task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn slate working from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of slate working, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.quarry_drainage",
+      "domain": "stone_and_quarry",
+      "name": "Quarry drainage",
+      "description": "Quarry drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.stone_hauling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.quarry_drainage.quarry_drainage_basics",
+          "discipline": "stone_and_quarry.quarry_drainage",
+          "name": "Quarry drainage basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.quarry_drainage_seasonal_practice",
+          "discipline": "stone_and_quarry.quarry_drainage",
+          "name": "Quarry drainage seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.quarry_drainage_precision_work",
+          "discipline": "stone_and_quarry.quarry_drainage",
+          "name": "Quarry drainage precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.quarry_drainage_master_technique",
+          "discipline": "stone_and_quarry.quarry_drainage",
+          "name": "Quarry drainage master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_5",
+          "level": 5,
+          "name": "Quarry drainage: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Quarry drainage output +2%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_10",
+          "level": 10,
+          "name": "Quarry drainage: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Quarry drainage waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_15",
+          "level": 15,
+          "name": "Quarry drainage: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Quarry drainage quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_20",
+          "level": 20,
+          "name": "Quarry drainage: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Quarry drainage care +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_25",
+          "level": 25,
+          "name": "Quarry drainage: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Quarry drainage speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_30",
+          "level": 30,
+          "name": "Quarry drainage: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Quarry drainage output +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_35",
+          "level": 35,
+          "name": "Quarry drainage: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Quarry drainage spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_40",
+          "level": 40,
+          "name": "Quarry drainage: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Quarry drainage quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_45",
+          "level": 45,
+          "name": "Quarry drainage: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Quarry drainage speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_drainage.perk_50",
+          "level": 50,
+          "name": "Quarry drainage: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Quarry drainage output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise quarry drainage for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful quarry drainage (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of quarry drainage; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a quarry drainage task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn quarry drainage from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of quarry drainage, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.stone_hauling",
+      "domain": "stone_and_quarry",
+      "name": "Stone hauling",
+      "description": "Stone hauling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.rock_assessment"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.stone_hauling.stone_hauling_basics",
+          "discipline": "stone_and_quarry.stone_hauling",
+          "name": "Stone hauling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.stone_hauling_seasonal_practice",
+          "discipline": "stone_and_quarry.stone_hauling",
+          "name": "Stone hauling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.stone_hauling_precision_work",
+          "discipline": "stone_and_quarry.stone_hauling",
+          "name": "Stone hauling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.stone_hauling_master_technique",
+          "discipline": "stone_and_quarry.stone_hauling",
+          "name": "Stone hauling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_5",
+          "level": 5,
+          "name": "Stone hauling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Stone hauling output +2%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_10",
+          "level": 10,
+          "name": "Stone hauling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Stone hauling waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_15",
+          "level": 15,
+          "name": "Stone hauling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone hauling quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_20",
+          "level": 20,
+          "name": "Stone hauling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Stone hauling care +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_25",
+          "level": 25,
+          "name": "Stone hauling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Stone hauling speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_30",
+          "level": 30,
+          "name": "Stone hauling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone hauling output +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_35",
+          "level": 35,
+          "name": "Stone hauling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Stone hauling spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_40",
+          "level": 40,
+          "name": "Stone hauling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone hauling quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_45",
+          "level": 45,
+          "name": "Stone hauling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Stone hauling speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_hauling.perk_50",
+          "level": 50,
+          "name": "Stone hauling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone hauling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise stone hauling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful stone hauling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of stone hauling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a stone hauling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn stone hauling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of stone hauling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.rock_assessment",
+      "domain": "stone_and_quarry",
+      "name": "Rock assessment",
+      "description": "Rock assessment: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.wedge_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.rock_assessment.rock_assessment_basics",
+          "discipline": "stone_and_quarry.rock_assessment",
+          "name": "Rock assessment basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.rock_assessment_seasonal_practice",
+          "discipline": "stone_and_quarry.rock_assessment",
+          "name": "Rock assessment seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.rock_assessment_precision_work",
+          "discipline": "stone_and_quarry.rock_assessment",
+          "name": "Rock assessment precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.rock_assessment_master_technique",
+          "discipline": "stone_and_quarry.rock_assessment",
+          "name": "Rock assessment master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_5",
+          "level": 5,
+          "name": "Rock assessment: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Rock assessment output +2%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_10",
+          "level": 10,
+          "name": "Rock assessment: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Rock assessment waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_15",
+          "level": 15,
+          "name": "Rock assessment: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rock assessment quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_20",
+          "level": 20,
+          "name": "Rock assessment: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Rock assessment care +5%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_25",
+          "level": 25,
+          "name": "Rock assessment: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Rock assessment speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_30",
+          "level": 30,
+          "name": "Rock assessment: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rock assessment output +5%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_35",
+          "level": 35,
+          "name": "Rock assessment: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Rock assessment spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_40",
+          "level": 40,
+          "name": "Rock assessment: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rock assessment quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_45",
+          "level": 45,
+          "name": "Rock assessment: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Rock assessment speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.rock_assessment.perk_50",
+          "level": 50,
+          "name": "Rock assessment: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rock assessment output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise rock assessment for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful rock assessment (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of rock assessment; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a rock assessment task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn rock assessment from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of rock assessment, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.wedge_making",
+      "domain": "stone_and_quarry",
+      "name": "Wedge making",
+      "description": "Wedge making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.quarry_shoring"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.wedge_making.wedge_making_basics",
+          "discipline": "stone_and_quarry.wedge_making",
+          "name": "Wedge making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.wedge_making_seasonal_practice",
+          "discipline": "stone_and_quarry.wedge_making",
+          "name": "Wedge making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.wedge_making_precision_work",
+          "discipline": "stone_and_quarry.wedge_making",
+          "name": "Wedge making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.wedge_making_master_technique",
+          "discipline": "stone_and_quarry.wedge_making",
+          "name": "Wedge making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.wedge_making.perk_5",
+          "level": 5,
+          "name": "Wedge making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wedge making output +2%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_10",
+          "level": 10,
+          "name": "Wedge making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wedge making waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_15",
+          "level": 15,
+          "name": "Wedge making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wedge making quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_20",
+          "level": 20,
+          "name": "Wedge making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wedge making care +5%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_25",
+          "level": 25,
+          "name": "Wedge making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wedge making speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_30",
+          "level": 30,
+          "name": "Wedge making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wedge making output +5%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_35",
+          "level": 35,
+          "name": "Wedge making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wedge making spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_40",
+          "level": 40,
+          "name": "Wedge making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wedge making quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_45",
+          "level": 45,
+          "name": "Wedge making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wedge making speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.wedge_making.perk_50",
+          "level": 50,
+          "name": "Wedge making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wedge making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wedge making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wedge making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wedge making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wedge making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wedge making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wedge making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.quarry_shoring",
+      "domain": "stone_and_quarry",
+      "name": "Quarry shoring",
+      "description": "Quarry shoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.stone_finishing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.quarry_shoring.quarry_shoring_basics",
+          "discipline": "stone_and_quarry.quarry_shoring",
+          "name": "Quarry shoring basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.quarry_shoring_seasonal_practice",
+          "discipline": "stone_and_quarry.quarry_shoring",
+          "name": "Quarry shoring seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.quarry_shoring_precision_work",
+          "discipline": "stone_and_quarry.quarry_shoring",
+          "name": "Quarry shoring precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.quarry_shoring_master_technique",
+          "discipline": "stone_and_quarry.quarry_shoring",
+          "name": "Quarry shoring master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_5",
+          "level": 5,
+          "name": "Quarry shoring: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Quarry shoring output +2%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_10",
+          "level": 10,
+          "name": "Quarry shoring: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Quarry shoring waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_15",
+          "level": 15,
+          "name": "Quarry shoring: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Quarry shoring quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_20",
+          "level": 20,
+          "name": "Quarry shoring: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Quarry shoring care +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_25",
+          "level": 25,
+          "name": "Quarry shoring: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Quarry shoring speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_30",
+          "level": 30,
+          "name": "Quarry shoring: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Quarry shoring output +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_35",
+          "level": 35,
+          "name": "Quarry shoring: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Quarry shoring spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_40",
+          "level": 40,
+          "name": "Quarry shoring: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Quarry shoring quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_45",
+          "level": 45,
+          "name": "Quarry shoring: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Quarry shoring speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.quarry_shoring.perk_50",
+          "level": 50,
+          "name": "Quarry shoring: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Quarry shoring output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise quarry shoring for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful quarry shoring (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of quarry shoring; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a quarry shoring task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn quarry shoring from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of quarry shoring, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "stone_and_quarry.stone_finishing",
+      "domain": "stone_and_quarry",
+      "name": "Stone finishing",
+      "description": "Stone finishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "stone_and_quarry.quarrying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "stone_and_quarry.stone_finishing.stone_finishing_basics",
+          "discipline": "stone_and_quarry.stone_finishing",
+          "name": "Stone finishing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.stone_finishing_seasonal_practice",
+          "discipline": "stone_and_quarry.stone_finishing",
+          "name": "Stone finishing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.stone_finishing_precision_work",
+          "discipline": "stone_and_quarry.stone_finishing",
+          "name": "Stone finishing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.stone_finishing_master_technique",
+          "discipline": "stone_and_quarry.stone_finishing",
+          "name": "Stone finishing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_5",
+          "level": 5,
+          "name": "Stone finishing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Stone finishing output +2%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_10",
+          "level": 10,
+          "name": "Stone finishing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Stone finishing waste -5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_15",
+          "level": 15,
+          "name": "Stone finishing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone finishing quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_20",
+          "level": 20,
+          "name": "Stone finishing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Stone finishing care +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_25",
+          "level": 25,
+          "name": "Stone finishing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Stone finishing speed +3%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_30",
+          "level": 30,
+          "name": "Stone finishing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone finishing output +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_35",
+          "level": 35,
+          "name": "Stone finishing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Stone finishing spoilage -10%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_40",
+          "level": 40,
+          "name": "Stone finishing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stone finishing quality roll +1"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_45",
+          "level": 45,
+          "name": "Stone finishing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Stone finishing speed +5%"
+        },
+        {
+          "id": "stone_and_quarry.stone_finishing.perk_50",
+          "level": 50,
+          "name": "Stone finishing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stone finishing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise stone finishing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful stone finishing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of stone finishing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a stone finishing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn stone finishing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of stone finishing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

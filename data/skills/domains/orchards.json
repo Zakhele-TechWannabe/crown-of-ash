@@ -1,0 +1,4051 @@
+{
+  "id": "orchards",
+  "disciplines": [
+    {
+      "id": "orchards.orcharding",
+      "domain": "orchards",
+      "name": "Orcharding",
+      "description": "Orcharding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.fruit_pruning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.orcharding.fruit_trees",
+          "discipline": "orchards.orcharding",
+          "name": "Fruit trees",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.orcharding.grafting",
+          "discipline": "orchards.orcharding",
+          "name": "Grafting",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 11
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.orcharding.beekeeping",
+          "discipline": "orchards.orcharding",
+          "name": "Beekeeping",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.orcharding.perk_5",
+          "level": 5,
+          "name": "Orcharding: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Orcharding output +2%"
+        },
+        {
+          "id": "orchards.orcharding.perk_10",
+          "level": 10,
+          "name": "Orcharding: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Orcharding waste -5%"
+        },
+        {
+          "id": "orchards.orcharding.perk_15",
+          "level": 15,
+          "name": "Orcharding: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Orcharding quality roll +1"
+        },
+        {
+          "id": "orchards.orcharding.perk_20",
+          "level": 20,
+          "name": "Orcharding: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Orcharding care +5%"
+        },
+        {
+          "id": "orchards.orcharding.perk_25",
+          "level": 25,
+          "name": "Orcharding: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Orcharding speed +3%"
+        },
+        {
+          "id": "orchards.orcharding.perk_30",
+          "level": 30,
+          "name": "Orcharding: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Orcharding output +5%"
+        },
+        {
+          "id": "orchards.orcharding.perk_35",
+          "level": 35,
+          "name": "Orcharding: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Orcharding spoilage -10%"
+        },
+        {
+          "id": "orchards.orcharding.perk_40",
+          "level": 40,
+          "name": "Orcharding: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Orcharding quality roll +1"
+        },
+        {
+          "id": "orchards.orcharding.perk_45",
+          "level": 45,
+          "name": "Orcharding: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Orcharding speed +5%"
+        },
+        {
+          "id": "orchards.orcharding.perk_50",
+          "level": 50,
+          "name": "Orcharding: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Orcharding output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise orcharding for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful orcharding (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of orcharding; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a orcharding task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn orcharding from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of orcharding, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.fruit_pruning",
+      "domain": "orchards",
+      "name": "Fruit pruning",
+      "description": "Fruit pruning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.graft_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.fruit_pruning.fruit_pruning_basics",
+          "discipline": "orchards.fruit_pruning",
+          "name": "Fruit pruning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_pruning.fruit_pruning_seasonal_practice",
+          "discipline": "orchards.fruit_pruning",
+          "name": "Fruit pruning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_pruning.fruit_pruning_precision_work",
+          "discipline": "orchards.fruit_pruning",
+          "name": "Fruit pruning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_pruning.fruit_pruning_master_technique",
+          "discipline": "orchards.fruit_pruning",
+          "name": "Fruit pruning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.fruit_pruning.perk_5",
+          "level": 5,
+          "name": "Fruit pruning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fruit pruning output +2%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_10",
+          "level": 10,
+          "name": "Fruit pruning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fruit pruning waste -5%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_15",
+          "level": 15,
+          "name": "Fruit pruning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fruit pruning quality roll +1"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_20",
+          "level": 20,
+          "name": "Fruit pruning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fruit pruning care +5%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_25",
+          "level": 25,
+          "name": "Fruit pruning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fruit pruning speed +3%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_30",
+          "level": 30,
+          "name": "Fruit pruning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fruit pruning output +5%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_35",
+          "level": 35,
+          "name": "Fruit pruning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fruit pruning spoilage -10%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_40",
+          "level": 40,
+          "name": "Fruit pruning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fruit pruning quality roll +1"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_45",
+          "level": 45,
+          "name": "Fruit pruning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fruit pruning speed +5%"
+        },
+        {
+          "id": "orchards.fruit_pruning.perk_50",
+          "level": 50,
+          "name": "Fruit pruning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fruit pruning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fruit pruning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fruit pruning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fruit pruning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fruit pruning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fruit pruning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fruit pruning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.graft_tending",
+      "domain": "orchards",
+      "name": "Graft tending",
+      "description": "Graft tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.bee_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.graft_tending.graft_tending_basics",
+          "discipline": "orchards.graft_tending",
+          "name": "Graft tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.graft_tending.graft_tending_seasonal_practice",
+          "discipline": "orchards.graft_tending",
+          "name": "Graft tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.graft_tending.graft_tending_precision_work",
+          "discipline": "orchards.graft_tending",
+          "name": "Graft tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.graft_tending.graft_tending_master_technique",
+          "discipline": "orchards.graft_tending",
+          "name": "Graft tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.graft_tending.perk_5",
+          "level": 5,
+          "name": "Graft tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Graft tending output +2%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_10",
+          "level": 10,
+          "name": "Graft tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Graft tending waste -5%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_15",
+          "level": 15,
+          "name": "Graft tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Graft tending quality roll +1"
+        },
+        {
+          "id": "orchards.graft_tending.perk_20",
+          "level": 20,
+          "name": "Graft tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Graft tending care +5%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_25",
+          "level": 25,
+          "name": "Graft tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Graft tending speed +3%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_30",
+          "level": 30,
+          "name": "Graft tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Graft tending output +5%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_35",
+          "level": 35,
+          "name": "Graft tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Graft tending spoilage -10%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_40",
+          "level": 40,
+          "name": "Graft tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Graft tending quality roll +1"
+        },
+        {
+          "id": "orchards.graft_tending.perk_45",
+          "level": 45,
+          "name": "Graft tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Graft tending speed +5%"
+        },
+        {
+          "id": "orchards.graft_tending.perk_50",
+          "level": 50,
+          "name": "Graft tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Graft tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise graft tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful graft tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of graft tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a graft tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn graft tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of graft tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.bee_tending",
+      "domain": "orchards",
+      "name": "Bee tending",
+      "description": "Bee tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.pomology"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.bee_tending.bee_tending_basics",
+          "discipline": "orchards.bee_tending",
+          "name": "Bee tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.bee_tending.bee_tending_seasonal_practice",
+          "discipline": "orchards.bee_tending",
+          "name": "Bee tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.bee_tending.bee_tending_precision_work",
+          "discipline": "orchards.bee_tending",
+          "name": "Bee tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.bee_tending.bee_tending_master_technique",
+          "discipline": "orchards.bee_tending",
+          "name": "Bee tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.bee_tending.perk_5",
+          "level": 5,
+          "name": "Bee tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bee tending output +2%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_10",
+          "level": 10,
+          "name": "Bee tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bee tending waste -5%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_15",
+          "level": 15,
+          "name": "Bee tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bee tending quality roll +1"
+        },
+        {
+          "id": "orchards.bee_tending.perk_20",
+          "level": 20,
+          "name": "Bee tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bee tending care +5%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_25",
+          "level": 25,
+          "name": "Bee tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bee tending speed +3%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_30",
+          "level": 30,
+          "name": "Bee tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bee tending output +5%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_35",
+          "level": 35,
+          "name": "Bee tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bee tending spoilage -10%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_40",
+          "level": 40,
+          "name": "Bee tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bee tending quality roll +1"
+        },
+        {
+          "id": "orchards.bee_tending.perk_45",
+          "level": 45,
+          "name": "Bee tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bee tending speed +5%"
+        },
+        {
+          "id": "orchards.bee_tending.perk_50",
+          "level": 50,
+          "name": "Bee tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bee tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bee tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bee tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bee tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bee tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bee tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bee tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.pomology",
+      "domain": "orchards",
+      "name": "Pomology",
+      "description": "Pomology: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.nut_growing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.pomology.pomology_basics",
+          "discipline": "orchards.pomology",
+          "name": "Pomology basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.pomology.pomology_seasonal_practice",
+          "discipline": "orchards.pomology",
+          "name": "Pomology seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.pomology.pomology_precision_work",
+          "discipline": "orchards.pomology",
+          "name": "Pomology precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.pomology.pomology_master_technique",
+          "discipline": "orchards.pomology",
+          "name": "Pomology master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.pomology.perk_5",
+          "level": 5,
+          "name": "Pomology: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pomology output +2%"
+        },
+        {
+          "id": "orchards.pomology.perk_10",
+          "level": 10,
+          "name": "Pomology: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pomology waste -5%"
+        },
+        {
+          "id": "orchards.pomology.perk_15",
+          "level": 15,
+          "name": "Pomology: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pomology quality roll +1"
+        },
+        {
+          "id": "orchards.pomology.perk_20",
+          "level": 20,
+          "name": "Pomology: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pomology care +5%"
+        },
+        {
+          "id": "orchards.pomology.perk_25",
+          "level": 25,
+          "name": "Pomology: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pomology speed +3%"
+        },
+        {
+          "id": "orchards.pomology.perk_30",
+          "level": 30,
+          "name": "Pomology: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pomology output +5%"
+        },
+        {
+          "id": "orchards.pomology.perk_35",
+          "level": 35,
+          "name": "Pomology: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pomology spoilage -10%"
+        },
+        {
+          "id": "orchards.pomology.perk_40",
+          "level": 40,
+          "name": "Pomology: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pomology quality roll +1"
+        },
+        {
+          "id": "orchards.pomology.perk_45",
+          "level": 45,
+          "name": "Pomology: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pomology speed +5%"
+        },
+        {
+          "id": "orchards.pomology.perk_50",
+          "level": 50,
+          "name": "Pomology: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pomology output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pomology for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pomology (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pomology; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pomology task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pomology from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pomology, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.nut_growing",
+      "domain": "orchards",
+      "name": "Nut growing",
+      "description": "Nut growing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.citrus_care"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.nut_growing.nut_growing_basics",
+          "discipline": "orchards.nut_growing",
+          "name": "Nut growing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.nut_growing.nut_growing_seasonal_practice",
+          "discipline": "orchards.nut_growing",
+          "name": "Nut growing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.nut_growing.nut_growing_precision_work",
+          "discipline": "orchards.nut_growing",
+          "name": "Nut growing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.nut_growing.nut_growing_master_technique",
+          "discipline": "orchards.nut_growing",
+          "name": "Nut growing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.nut_growing.perk_5",
+          "level": 5,
+          "name": "Nut growing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Nut growing output +2%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_10",
+          "level": 10,
+          "name": "Nut growing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Nut growing waste -5%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_15",
+          "level": 15,
+          "name": "Nut growing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nut growing quality roll +1"
+        },
+        {
+          "id": "orchards.nut_growing.perk_20",
+          "level": 20,
+          "name": "Nut growing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Nut growing care +5%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_25",
+          "level": 25,
+          "name": "Nut growing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Nut growing speed +3%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_30",
+          "level": 30,
+          "name": "Nut growing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nut growing output +5%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_35",
+          "level": 35,
+          "name": "Nut growing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Nut growing spoilage -10%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_40",
+          "level": 40,
+          "name": "Nut growing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nut growing quality roll +1"
+        },
+        {
+          "id": "orchards.nut_growing.perk_45",
+          "level": 45,
+          "name": "Nut growing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Nut growing speed +5%"
+        },
+        {
+          "id": "orchards.nut_growing.perk_50",
+          "level": 50,
+          "name": "Nut growing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nut growing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise nut growing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful nut growing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of nut growing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a nut growing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn nut growing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of nut growing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.citrus_care",
+      "domain": "orchards",
+      "name": "Citrus care",
+      "description": "Citrus care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.pear_cultivation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.citrus_care.citrus_care_basics",
+          "discipline": "orchards.citrus_care",
+          "name": "Citrus care basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.citrus_care.citrus_care_seasonal_practice",
+          "discipline": "orchards.citrus_care",
+          "name": "Citrus care seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.citrus_care.citrus_care_precision_work",
+          "discipline": "orchards.citrus_care",
+          "name": "Citrus care precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.citrus_care.citrus_care_master_technique",
+          "discipline": "orchards.citrus_care",
+          "name": "Citrus care master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.citrus_care.perk_5",
+          "level": 5,
+          "name": "Citrus care: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Citrus care output +2%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_10",
+          "level": 10,
+          "name": "Citrus care: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Citrus care waste -5%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_15",
+          "level": 15,
+          "name": "Citrus care: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Citrus care quality roll +1"
+        },
+        {
+          "id": "orchards.citrus_care.perk_20",
+          "level": 20,
+          "name": "Citrus care: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Citrus care care +5%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_25",
+          "level": 25,
+          "name": "Citrus care: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Citrus care speed +3%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_30",
+          "level": 30,
+          "name": "Citrus care: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Citrus care output +5%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_35",
+          "level": 35,
+          "name": "Citrus care: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Citrus care spoilage -10%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_40",
+          "level": 40,
+          "name": "Citrus care: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Citrus care quality roll +1"
+        },
+        {
+          "id": "orchards.citrus_care.perk_45",
+          "level": 45,
+          "name": "Citrus care: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Citrus care speed +5%"
+        },
+        {
+          "id": "orchards.citrus_care.perk_50",
+          "level": 50,
+          "name": "Citrus care: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Citrus care output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise citrus care for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful citrus care (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of citrus care; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a citrus care task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn citrus care from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of citrus care, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.pear_cultivation",
+      "domain": "orchards",
+      "name": "Pear cultivation",
+      "description": "Pear cultivation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.plum_cultivation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.pear_cultivation.pear_cultivation_basics",
+          "discipline": "orchards.pear_cultivation",
+          "name": "Pear cultivation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.pear_cultivation.pear_cultivation_seasonal_practice",
+          "discipline": "orchards.pear_cultivation",
+          "name": "Pear cultivation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.pear_cultivation.pear_cultivation_precision_work",
+          "discipline": "orchards.pear_cultivation",
+          "name": "Pear cultivation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.pear_cultivation.pear_cultivation_master_technique",
+          "discipline": "orchards.pear_cultivation",
+          "name": "Pear cultivation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.pear_cultivation.perk_5",
+          "level": 5,
+          "name": "Pear cultivation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pear cultivation output +2%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_10",
+          "level": 10,
+          "name": "Pear cultivation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pear cultivation waste -5%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_15",
+          "level": 15,
+          "name": "Pear cultivation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pear cultivation quality roll +1"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_20",
+          "level": 20,
+          "name": "Pear cultivation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pear cultivation care +5%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_25",
+          "level": 25,
+          "name": "Pear cultivation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pear cultivation speed +3%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_30",
+          "level": 30,
+          "name": "Pear cultivation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pear cultivation output +5%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_35",
+          "level": 35,
+          "name": "Pear cultivation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pear cultivation spoilage -10%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_40",
+          "level": 40,
+          "name": "Pear cultivation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pear cultivation quality roll +1"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_45",
+          "level": 45,
+          "name": "Pear cultivation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pear cultivation speed +5%"
+        },
+        {
+          "id": "orchards.pear_cultivation.perk_50",
+          "level": 50,
+          "name": "Pear cultivation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pear cultivation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pear cultivation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pear cultivation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pear cultivation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pear cultivation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pear cultivation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pear cultivation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.plum_cultivation",
+      "domain": "orchards",
+      "name": "Plum cultivation",
+      "description": "Plum cultivation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.mulberry_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.plum_cultivation.plum_cultivation_basics",
+          "discipline": "orchards.plum_cultivation",
+          "name": "Plum cultivation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.plum_cultivation.plum_cultivation_seasonal_practice",
+          "discipline": "orchards.plum_cultivation",
+          "name": "Plum cultivation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.plum_cultivation.plum_cultivation_precision_work",
+          "discipline": "orchards.plum_cultivation",
+          "name": "Plum cultivation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.plum_cultivation.plum_cultivation_master_technique",
+          "discipline": "orchards.plum_cultivation",
+          "name": "Plum cultivation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.plum_cultivation.perk_5",
+          "level": 5,
+          "name": "Plum cultivation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Plum cultivation output +2%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_10",
+          "level": 10,
+          "name": "Plum cultivation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Plum cultivation waste -5%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_15",
+          "level": 15,
+          "name": "Plum cultivation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Plum cultivation quality roll +1"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_20",
+          "level": 20,
+          "name": "Plum cultivation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Plum cultivation care +5%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_25",
+          "level": 25,
+          "name": "Plum cultivation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Plum cultivation speed +3%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_30",
+          "level": 30,
+          "name": "Plum cultivation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Plum cultivation output +5%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_35",
+          "level": 35,
+          "name": "Plum cultivation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Plum cultivation spoilage -10%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_40",
+          "level": 40,
+          "name": "Plum cultivation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Plum cultivation quality roll +1"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_45",
+          "level": 45,
+          "name": "Plum cultivation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Plum cultivation speed +5%"
+        },
+        {
+          "id": "orchards.plum_cultivation.perk_50",
+          "level": 50,
+          "name": "Plum cultivation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Plum cultivation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise plum cultivation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful plum cultivation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of plum cultivation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a plum cultivation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn plum cultivation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of plum cultivation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.mulberry_tending",
+      "domain": "orchards",
+      "name": "Mulberry tending",
+      "description": "Mulberry tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.tree_nursery"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.mulberry_tending.mulberry_tending_basics",
+          "discipline": "orchards.mulberry_tending",
+          "name": "Mulberry tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.mulberry_tending.mulberry_tending_seasonal_practice",
+          "discipline": "orchards.mulberry_tending",
+          "name": "Mulberry tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.mulberry_tending.mulberry_tending_precision_work",
+          "discipline": "orchards.mulberry_tending",
+          "name": "Mulberry tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.mulberry_tending.mulberry_tending_master_technique",
+          "discipline": "orchards.mulberry_tending",
+          "name": "Mulberry tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.mulberry_tending.perk_5",
+          "level": 5,
+          "name": "Mulberry tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mulberry tending output +2%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_10",
+          "level": 10,
+          "name": "Mulberry tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mulberry tending waste -5%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_15",
+          "level": 15,
+          "name": "Mulberry tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mulberry tending quality roll +1"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_20",
+          "level": 20,
+          "name": "Mulberry tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mulberry tending care +5%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_25",
+          "level": 25,
+          "name": "Mulberry tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mulberry tending speed +3%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_30",
+          "level": 30,
+          "name": "Mulberry tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mulberry tending output +5%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_35",
+          "level": 35,
+          "name": "Mulberry tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mulberry tending spoilage -10%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_40",
+          "level": 40,
+          "name": "Mulberry tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mulberry tending quality roll +1"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_45",
+          "level": 45,
+          "name": "Mulberry tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mulberry tending speed +5%"
+        },
+        {
+          "id": "orchards.mulberry_tending.perk_50",
+          "level": 50,
+          "name": "Mulberry tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mulberry tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mulberry tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mulberry tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mulberry tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mulberry tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mulberry tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mulberry tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.tree_nursery",
+      "domain": "orchards",
+      "name": "Tree nursery",
+      "description": "Tree nursery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.fruit_thinning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.tree_nursery.tree_nursery_basics",
+          "discipline": "orchards.tree_nursery",
+          "name": "Tree nursery basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.tree_nursery.tree_nursery_seasonal_practice",
+          "discipline": "orchards.tree_nursery",
+          "name": "Tree nursery seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.tree_nursery.tree_nursery_precision_work",
+          "discipline": "orchards.tree_nursery",
+          "name": "Tree nursery precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.tree_nursery.tree_nursery_master_technique",
+          "discipline": "orchards.tree_nursery",
+          "name": "Tree nursery master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.tree_nursery.perk_5",
+          "level": 5,
+          "name": "Tree nursery: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tree nursery output +2%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_10",
+          "level": 10,
+          "name": "Tree nursery: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tree nursery waste -5%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_15",
+          "level": 15,
+          "name": "Tree nursery: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tree nursery quality roll +1"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_20",
+          "level": 20,
+          "name": "Tree nursery: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tree nursery care +5%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_25",
+          "level": 25,
+          "name": "Tree nursery: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tree nursery speed +3%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_30",
+          "level": 30,
+          "name": "Tree nursery: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tree nursery output +5%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_35",
+          "level": 35,
+          "name": "Tree nursery: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tree nursery spoilage -10%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_40",
+          "level": 40,
+          "name": "Tree nursery: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tree nursery quality roll +1"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_45",
+          "level": 45,
+          "name": "Tree nursery: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tree nursery speed +5%"
+        },
+        {
+          "id": "orchards.tree_nursery.perk_50",
+          "level": 50,
+          "name": "Tree nursery: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tree nursery output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tree nursery for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tree nursery (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tree nursery; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tree nursery task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tree nursery from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tree nursery, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.fruit_thinning",
+      "domain": "orchards",
+      "name": "Fruit thinning",
+      "description": "Fruit thinning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.orchard_drainage"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.fruit_thinning.fruit_thinning_basics",
+          "discipline": "orchards.fruit_thinning",
+          "name": "Fruit thinning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_thinning.fruit_thinning_seasonal_practice",
+          "discipline": "orchards.fruit_thinning",
+          "name": "Fruit thinning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_thinning.fruit_thinning_precision_work",
+          "discipline": "orchards.fruit_thinning",
+          "name": "Fruit thinning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_thinning.fruit_thinning_master_technique",
+          "discipline": "orchards.fruit_thinning",
+          "name": "Fruit thinning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.fruit_thinning.perk_5",
+          "level": 5,
+          "name": "Fruit thinning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fruit thinning output +2%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_10",
+          "level": 10,
+          "name": "Fruit thinning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fruit thinning waste -5%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_15",
+          "level": 15,
+          "name": "Fruit thinning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fruit thinning quality roll +1"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_20",
+          "level": 20,
+          "name": "Fruit thinning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fruit thinning care +5%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_25",
+          "level": 25,
+          "name": "Fruit thinning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fruit thinning speed +3%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_30",
+          "level": 30,
+          "name": "Fruit thinning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fruit thinning output +5%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_35",
+          "level": 35,
+          "name": "Fruit thinning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fruit thinning spoilage -10%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_40",
+          "level": 40,
+          "name": "Fruit thinning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fruit thinning quality roll +1"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_45",
+          "level": 45,
+          "name": "Fruit thinning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fruit thinning speed +5%"
+        },
+        {
+          "id": "orchards.fruit_thinning.perk_50",
+          "level": 50,
+          "name": "Fruit thinning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fruit thinning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fruit thinning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fruit thinning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fruit thinning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fruit thinning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fruit thinning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fruit thinning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.orchard_drainage",
+      "domain": "orchards",
+      "name": "Orchard drainage",
+      "description": "Orchard drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.fruit_drying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.orchard_drainage.orchard_drainage_basics",
+          "discipline": "orchards.orchard_drainage",
+          "name": "Orchard drainage basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.orchard_drainage.orchard_drainage_seasonal_practice",
+          "discipline": "orchards.orchard_drainage",
+          "name": "Orchard drainage seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.orchard_drainage.orchard_drainage_precision_work",
+          "discipline": "orchards.orchard_drainage",
+          "name": "Orchard drainage precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.orchard_drainage.orchard_drainage_master_technique",
+          "discipline": "orchards.orchard_drainage",
+          "name": "Orchard drainage master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.orchard_drainage.perk_5",
+          "level": 5,
+          "name": "Orchard drainage: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Orchard drainage output +2%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_10",
+          "level": 10,
+          "name": "Orchard drainage: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Orchard drainage waste -5%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_15",
+          "level": 15,
+          "name": "Orchard drainage: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Orchard drainage quality roll +1"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_20",
+          "level": 20,
+          "name": "Orchard drainage: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Orchard drainage care +5%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_25",
+          "level": 25,
+          "name": "Orchard drainage: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Orchard drainage speed +3%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_30",
+          "level": 30,
+          "name": "Orchard drainage: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Orchard drainage output +5%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_35",
+          "level": 35,
+          "name": "Orchard drainage: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Orchard drainage spoilage -10%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_40",
+          "level": 40,
+          "name": "Orchard drainage: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Orchard drainage quality roll +1"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_45",
+          "level": 45,
+          "name": "Orchard drainage: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Orchard drainage speed +5%"
+        },
+        {
+          "id": "orchards.orchard_drainage.perk_50",
+          "level": 50,
+          "name": "Orchard drainage: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Orchard drainage output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise orchard drainage for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful orchard drainage (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of orchard drainage; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a orchard drainage task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn orchard drainage from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of orchard drainage, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.fruit_drying",
+      "domain": "orchards",
+      "name": "Fruit drying",
+      "description": "Fruit drying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.windbreak_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.fruit_drying.fruit_drying_basics",
+          "discipline": "orchards.fruit_drying",
+          "name": "Fruit drying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_drying.fruit_drying_seasonal_practice",
+          "discipline": "orchards.fruit_drying",
+          "name": "Fruit drying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_drying.fruit_drying_precision_work",
+          "discipline": "orchards.fruit_drying",
+          "name": "Fruit drying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.fruit_drying.fruit_drying_master_technique",
+          "discipline": "orchards.fruit_drying",
+          "name": "Fruit drying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.fruit_drying.perk_5",
+          "level": 5,
+          "name": "Fruit drying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fruit drying output +2%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_10",
+          "level": 10,
+          "name": "Fruit drying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fruit drying waste -5%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_15",
+          "level": 15,
+          "name": "Fruit drying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fruit drying quality roll +1"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_20",
+          "level": 20,
+          "name": "Fruit drying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fruit drying care +5%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_25",
+          "level": 25,
+          "name": "Fruit drying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fruit drying speed +3%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_30",
+          "level": 30,
+          "name": "Fruit drying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fruit drying output +5%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_35",
+          "level": 35,
+          "name": "Fruit drying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fruit drying spoilage -10%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_40",
+          "level": 40,
+          "name": "Fruit drying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fruit drying quality roll +1"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_45",
+          "level": 45,
+          "name": "Fruit drying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fruit drying speed +5%"
+        },
+        {
+          "id": "orchards.fruit_drying.perk_50",
+          "level": 50,
+          "name": "Fruit drying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fruit drying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fruit drying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fruit drying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fruit drying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fruit drying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fruit drying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fruit drying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "orchards.windbreak_tending",
+      "domain": "orchards",
+      "name": "Windbreak tending",
+      "description": "Windbreak tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "orchards.orcharding"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "orchards.windbreak_tending.windbreak_tending_basics",
+          "discipline": "orchards.windbreak_tending",
+          "name": "Windbreak tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.windbreak_tending.windbreak_tending_seasonal_practice",
+          "discipline": "orchards.windbreak_tending",
+          "name": "Windbreak tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.windbreak_tending.windbreak_tending_precision_work",
+          "discipline": "orchards.windbreak_tending",
+          "name": "Windbreak tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "orchards.windbreak_tending.windbreak_tending_master_technique",
+          "discipline": "orchards.windbreak_tending",
+          "name": "Windbreak tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "orchards.windbreak_tending.perk_5",
+          "level": 5,
+          "name": "Windbreak tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Windbreak tending output +2%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_10",
+          "level": 10,
+          "name": "Windbreak tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Windbreak tending waste -5%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_15",
+          "level": 15,
+          "name": "Windbreak tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Windbreak tending quality roll +1"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_20",
+          "level": 20,
+          "name": "Windbreak tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Windbreak tending care +5%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_25",
+          "level": 25,
+          "name": "Windbreak tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Windbreak tending speed +3%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_30",
+          "level": 30,
+          "name": "Windbreak tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Windbreak tending output +5%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_35",
+          "level": 35,
+          "name": "Windbreak tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Windbreak tending spoilage -10%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_40",
+          "level": 40,
+          "name": "Windbreak tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Windbreak tending quality roll +1"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_45",
+          "level": 45,
+          "name": "Windbreak tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Windbreak tending speed +5%"
+        },
+        {
+          "id": "orchards.windbreak_tending.perk_50",
+          "level": 50,
+          "name": "Windbreak tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Windbreak tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise windbreak tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful windbreak tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of windbreak tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a windbreak tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn windbreak tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of windbreak tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

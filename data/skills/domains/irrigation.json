@@ -1,0 +1,110 @@
+{
+  "id": "irrigation",
+  "disciplines": [
+    {
+      "id": "irrigation.canal_cutting",
+      "domain": "irrigation",
+      "name": "Canal cutting",
+      "description": "Canal cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.sluice_tending",
+      "domain": "irrigation",
+      "name": "Sluice tending",
+      "description": "Sluice tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.water_sharing",
+      "domain": "irrigation",
+      "name": "Water sharing",
+      "description": "Water sharing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.paddy_levelling",
+      "domain": "irrigation",
+      "name": "Paddy levelling",
+      "description": "Paddy levelling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.ditch_clearing",
+      "domain": "irrigation",
+      "name": "Ditch clearing",
+      "description": "Ditch clearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.reservoir_care",
+      "domain": "irrigation",
+      "name": "Reservoir care",
+      "description": "Reservoir care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.flood_watching",
+      "domain": "irrigation",
+      "name": "Flood watching",
+      "description": "Flood watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.drainage",
+      "domain": "irrigation",
+      "name": "Drainage",
+      "description": "Drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.water_lifting",
+      "domain": "irrigation",
+      "name": "Water lifting",
+      "description": "Water lifting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.channel_lining",
+      "domain": "irrigation",
+      "name": "Channel lining",
+      "description": "Channel lining: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.weir_building",
+      "domain": "irrigation",
+      "name": "Weir building",
+      "description": "Weir building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.water_measuring",
+      "domain": "irrigation",
+      "name": "Water measuring",
+      "description": "Water measuring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.seasonal_scheduling",
+      "domain": "irrigation",
+      "name": "Seasonal scheduling",
+      "description": "Seasonal scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.leak_finding",
+      "domain": "irrigation",
+      "name": "Leak finding",
+      "description": "Leak finding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "irrigation.irrigation_planning",
+      "domain": "irrigation",
+      "name": "Irrigation planning",
+      "description": "Irrigation planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    }
+  ]
+}

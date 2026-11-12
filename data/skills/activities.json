@@ -1,0 +1,116 @@
+{
+  "fields": {
+    "discipline": "grain_farming.farming",
+    "specialisation": "grain_farming.farming.paddy_rice",
+    "difficulty": 13,
+    "hours": 4
+  },
+  "garden": {
+    "discipline": "gardens.gardening",
+    "specialisation": "gardens.gardening.greens",
+    "difficulty": 11,
+    "hours": 4
+  },
+  "orchard": {
+    "discipline": "orchards.orcharding",
+    "specialisation": "orchards.orcharding.fruit_trees",
+    "difficulty": 14,
+    "hours": 4
+  },
+  "herd": {
+    "discipline": "husbandry.husbandry",
+    "specialisation": "husbandry.husbandry.pigs",
+    "difficulty": 12,
+    "hours": 4
+  },
+  "fishery": {
+    "discipline": "waters_and_fishing.fishing",
+    "specialisation": "waters_and_fishing.fishing.pond_keeping",
+    "difficulty": 15,
+    "hours": 4
+  },
+  "hunt": {
+    "discipline": "game_and_hunting.hunting",
+    "specialisation": "game_and_hunting.hunting.trapping",
+    "difficulty": 17,
+    "hours": 4
+  },
+  "logs": {
+    "discipline": "wild_harvest.foraging",
+    "specialisation": "wild_harvest.foraging.mushrooms",
+    "difficulty": 10,
+    "hours": 4
+  },
+  "kitchen": {
+    "discipline": "kitchen.cooking",
+    "specialisation": "kitchen.cooking.preserving",
+    "difficulty": 13,
+    "hours": 4
+  },
+  "woodcutting": {
+    "discipline": "forestry_and_woodcutting.woodcutting",
+    "specialisation": "forestry_and_woodcutting.woodcutting.felling",
+    "difficulty": 16,
+    "hours": 4
+  },
+  "quarry": {
+    "discipline": "stone_and_quarry.quarrying",
+    "specialisation": "stone_and_quarry.quarrying.stonecutting",
+    "difficulty": 16,
+    "hours": 4
+  },
+  "clay": {
+    "discipline": "clay_and_kilns.claywork",
+    "specialisation": "clay_and_kilns.claywork.pottery",
+    "difficulty": 10,
+    "hours": 4
+  },
+  "kiln": {
+    "discipline": "clay_and_kilns.claywork",
+    "specialisation": "clay_and_kilns.claywork.brick_and_tile_firing",
+    "difficulty": 14,
+    "hours": 4
+  },
+  "mine": {
+    "discipline": "mines_and_ores.mining",
+    "specialisation": "mines_and_ores.mining.ore_sorting",
+    "difficulty": 17,
+    "hours": 4
+  },
+  "smith": {
+    "discipline": "smithing_and_metalwork.smithing",
+    "specialisation": "smithing_and_metalwork.smithing.toolmaking",
+    "difficulty": 18,
+    "hours": 4
+  },
+  "bloomery": {
+    "discipline": "smelting.smelting",
+    "specialisation": "smelting.smelting.bloomery",
+    "difficulty": 16,
+    "hours": 4
+  },
+  "hemp": {
+    "discipline": "cloth_and_thread.textiles",
+    "specialisation": "cloth_and_thread.textiles.spinning",
+    "difficulty": 10,
+    "hours": 4
+  },
+  "weaver": {
+    "discipline": "cloth_and_thread.textiles",
+    "specialisation": "cloth_and_thread.textiles.weaving",
+    "difficulty": 15,
+    "hours": 4
+  },
+  "tanner": {
+    "discipline": "hides_and_leather.leatherwork",
+    "specialisation": "hides_and_leather.leatherwork.tanning",
+    "difficulty": 14,
+    "hours": 4
+  },
+  "chores": {
+    "discipline": "housekeeping.housekeeping",
+    "specialisation": "housekeeping.housekeeping.housekeeping_basics",
+    "difficulty": 5,
+    "hours": 4
+  }
+}

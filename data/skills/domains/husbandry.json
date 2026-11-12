@@ -1,0 +1,4077 @@
+{
+  "id": "husbandry",
+  "disciplines": [
+    {
+      "id": "husbandry.husbandry",
+      "domain": "husbandry",
+      "name": "Husbandry",
+      "description": "Husbandry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.swine_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.husbandry.pigs",
+          "discipline": "husbandry.husbandry",
+          "name": "Pigs",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.husbandry.poultry",
+          "discipline": "husbandry.husbandry",
+          "name": "Poultry",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.husbandry.draft_animals",
+          "discipline": "husbandry.husbandry",
+          "name": "Draft animals",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.husbandry.breeding",
+          "discipline": "husbandry.husbandry",
+          "name": "Breeding",
+          "unlock_level": 25,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.husbandry.spirit_beasts",
+          "discipline": "husbandry.husbandry",
+          "name": "Spirit beasts",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.husbandry.perk_5",
+          "level": 5,
+          "name": "Husbandry: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Husbandry output +2%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_10",
+          "level": 10,
+          "name": "Husbandry: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Husbandry waste -5%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_15",
+          "level": 15,
+          "name": "Husbandry: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Husbandry quality roll +1"
+        },
+        {
+          "id": "husbandry.husbandry.perk_20",
+          "level": 20,
+          "name": "Husbandry: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Husbandry care +5%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_25",
+          "level": 25,
+          "name": "Husbandry: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Husbandry speed +3%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_30",
+          "level": 30,
+          "name": "Husbandry: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Husbandry output +5%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_35",
+          "level": 35,
+          "name": "Husbandry: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Husbandry spoilage -10%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_40",
+          "level": 40,
+          "name": "Husbandry: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Husbandry quality roll +1"
+        },
+        {
+          "id": "husbandry.husbandry.perk_45",
+          "level": 45,
+          "name": "Husbandry: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Husbandry speed +5%"
+        },
+        {
+          "id": "husbandry.husbandry.perk_50",
+          "level": 50,
+          "name": "Husbandry: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Husbandry output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise husbandry for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful husbandry (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of husbandry; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a husbandry task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn husbandry from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of husbandry, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.swine_keeping",
+      "domain": "husbandry",
+      "name": "Swine keeping",
+      "description": "Swine keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.poultry_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.swine_keeping.swine_keeping_basics",
+          "discipline": "husbandry.swine_keeping",
+          "name": "Swine keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.swine_keeping.swine_keeping_seasonal_practice",
+          "discipline": "husbandry.swine_keeping",
+          "name": "Swine keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.swine_keeping.swine_keeping_precision_work",
+          "discipline": "husbandry.swine_keeping",
+          "name": "Swine keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.swine_keeping.swine_keeping_master_technique",
+          "discipline": "husbandry.swine_keeping",
+          "name": "Swine keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.swine_keeping.perk_5",
+          "level": 5,
+          "name": "Swine keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Swine keeping output +2%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_10",
+          "level": 10,
+          "name": "Swine keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Swine keeping waste -5%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_15",
+          "level": 15,
+          "name": "Swine keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Swine keeping quality roll +1"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_20",
+          "level": 20,
+          "name": "Swine keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Swine keeping care +5%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_25",
+          "level": 25,
+          "name": "Swine keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Swine keeping speed +3%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_30",
+          "level": 30,
+          "name": "Swine keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Swine keeping output +5%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_35",
+          "level": 35,
+          "name": "Swine keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Swine keeping spoilage -10%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_40",
+          "level": 40,
+          "name": "Swine keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Swine keeping quality roll +1"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_45",
+          "level": 45,
+          "name": "Swine keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Swine keeping speed +5%"
+        },
+        {
+          "id": "husbandry.swine_keeping.perk_50",
+          "level": 50,
+          "name": "Swine keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Swine keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise swine keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful swine keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of swine keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a swine keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn swine keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of swine keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.poultry_keeping",
+      "domain": "husbandry",
+      "name": "Poultry keeping",
+      "description": "Poultry keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.duck_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.poultry_keeping.poultry_keeping_basics",
+          "discipline": "husbandry.poultry_keeping",
+          "name": "Poultry keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.poultry_keeping.poultry_keeping_seasonal_practice",
+          "discipline": "husbandry.poultry_keeping",
+          "name": "Poultry keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.poultry_keeping.poultry_keeping_precision_work",
+          "discipline": "husbandry.poultry_keeping",
+          "name": "Poultry keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.poultry_keeping.poultry_keeping_master_technique",
+          "discipline": "husbandry.poultry_keeping",
+          "name": "Poultry keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.poultry_keeping.perk_5",
+          "level": 5,
+          "name": "Poultry keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Poultry keeping output +2%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_10",
+          "level": 10,
+          "name": "Poultry keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Poultry keeping waste -5%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_15",
+          "level": 15,
+          "name": "Poultry keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Poultry keeping quality roll +1"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_20",
+          "level": 20,
+          "name": "Poultry keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Poultry keeping care +5%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_25",
+          "level": 25,
+          "name": "Poultry keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Poultry keeping speed +3%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_30",
+          "level": 30,
+          "name": "Poultry keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Poultry keeping output +5%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_35",
+          "level": 35,
+          "name": "Poultry keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Poultry keeping spoilage -10%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_40",
+          "level": 40,
+          "name": "Poultry keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Poultry keeping quality roll +1"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_45",
+          "level": 45,
+          "name": "Poultry keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Poultry keeping speed +5%"
+        },
+        {
+          "id": "husbandry.poultry_keeping.perk_50",
+          "level": 50,
+          "name": "Poultry keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Poultry keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise poultry keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful poultry keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of poultry keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a poultry keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn poultry keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of poultry keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.duck_tending",
+      "domain": "husbandry",
+      "name": "Duck tending",
+      "description": "Duck tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.ox_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.duck_tending.duck_tending_basics",
+          "discipline": "husbandry.duck_tending",
+          "name": "Duck tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.duck_tending.duck_tending_seasonal_practice",
+          "discipline": "husbandry.duck_tending",
+          "name": "Duck tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.duck_tending.duck_tending_precision_work",
+          "discipline": "husbandry.duck_tending",
+          "name": "Duck tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.duck_tending.duck_tending_master_technique",
+          "discipline": "husbandry.duck_tending",
+          "name": "Duck tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.duck_tending.perk_5",
+          "level": 5,
+          "name": "Duck tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Duck tending output +2%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_10",
+          "level": 10,
+          "name": "Duck tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Duck tending waste -5%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_15",
+          "level": 15,
+          "name": "Duck tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Duck tending quality roll +1"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_20",
+          "level": 20,
+          "name": "Duck tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Duck tending care +5%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_25",
+          "level": 25,
+          "name": "Duck tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Duck tending speed +3%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_30",
+          "level": 30,
+          "name": "Duck tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Duck tending output +5%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_35",
+          "level": 35,
+          "name": "Duck tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Duck tending spoilage -10%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_40",
+          "level": 40,
+          "name": "Duck tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Duck tending quality roll +1"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_45",
+          "level": 45,
+          "name": "Duck tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Duck tending speed +5%"
+        },
+        {
+          "id": "husbandry.duck_tending.perk_50",
+          "level": 50,
+          "name": "Duck tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Duck tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise duck tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful duck tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of duck tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a duck tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn duck tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of duck tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.ox_tending",
+      "domain": "husbandry",
+      "name": "Ox tending",
+      "description": "Ox tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.goat_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.ox_tending.ox_tending_basics",
+          "discipline": "husbandry.ox_tending",
+          "name": "Ox tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.ox_tending.ox_tending_seasonal_practice",
+          "discipline": "husbandry.ox_tending",
+          "name": "Ox tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.ox_tending.ox_tending_precision_work",
+          "discipline": "husbandry.ox_tending",
+          "name": "Ox tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.ox_tending.ox_tending_master_technique",
+          "discipline": "husbandry.ox_tending",
+          "name": "Ox tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.ox_tending.perk_5",
+          "level": 5,
+          "name": "Ox tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Ox tending output +2%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_10",
+          "level": 10,
+          "name": "Ox tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Ox tending waste -5%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_15",
+          "level": 15,
+          "name": "Ox tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ox tending quality roll +1"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_20",
+          "level": 20,
+          "name": "Ox tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Ox tending care +5%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_25",
+          "level": 25,
+          "name": "Ox tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Ox tending speed +3%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_30",
+          "level": 30,
+          "name": "Ox tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ox tending output +5%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_35",
+          "level": 35,
+          "name": "Ox tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Ox tending spoilage -10%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_40",
+          "level": 40,
+          "name": "Ox tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Ox tending quality roll +1"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_45",
+          "level": 45,
+          "name": "Ox tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Ox tending speed +5%"
+        },
+        {
+          "id": "husbandry.ox_tending.perk_50",
+          "level": 50,
+          "name": "Ox tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Ox tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise ox tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful ox tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of ox tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a ox tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn ox tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of ox tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.goat_tending",
+      "domain": "husbandry",
+      "name": "Goat tending",
+      "description": "Goat tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.fodder_cutting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.goat_tending.goat_tending_basics",
+          "discipline": "husbandry.goat_tending",
+          "name": "Goat tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.goat_tending.goat_tending_seasonal_practice",
+          "discipline": "husbandry.goat_tending",
+          "name": "Goat tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.goat_tending.goat_tending_precision_work",
+          "discipline": "husbandry.goat_tending",
+          "name": "Goat tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.goat_tending.goat_tending_master_technique",
+          "discipline": "husbandry.goat_tending",
+          "name": "Goat tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.goat_tending.perk_5",
+          "level": 5,
+          "name": "Goat tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Goat tending output +2%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_10",
+          "level": 10,
+          "name": "Goat tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Goat tending waste -5%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_15",
+          "level": 15,
+          "name": "Goat tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Goat tending quality roll +1"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_20",
+          "level": 20,
+          "name": "Goat tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Goat tending care +5%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_25",
+          "level": 25,
+          "name": "Goat tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Goat tending speed +3%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_30",
+          "level": 30,
+          "name": "Goat tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Goat tending output +5%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_35",
+          "level": 35,
+          "name": "Goat tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Goat tending spoilage -10%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_40",
+          "level": 40,
+          "name": "Goat tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Goat tending quality roll +1"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_45",
+          "level": 45,
+          "name": "Goat tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Goat tending speed +5%"
+        },
+        {
+          "id": "husbandry.goat_tending.perk_50",
+          "level": 50,
+          "name": "Goat tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Goat tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise goat tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful goat tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of goat tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a goat tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn goat tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of goat tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.fodder_cutting",
+      "domain": "husbandry",
+      "name": "Fodder cutting",
+      "description": "Fodder cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.pasture_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.fodder_cutting.fodder_cutting_basics",
+          "discipline": "husbandry.fodder_cutting",
+          "name": "Fodder cutting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.fodder_cutting.fodder_cutting_seasonal_practice",
+          "discipline": "husbandry.fodder_cutting",
+          "name": "Fodder cutting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.fodder_cutting.fodder_cutting_precision_work",
+          "discipline": "husbandry.fodder_cutting",
+          "name": "Fodder cutting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.fodder_cutting.fodder_cutting_master_technique",
+          "discipline": "husbandry.fodder_cutting",
+          "name": "Fodder cutting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.fodder_cutting.perk_5",
+          "level": 5,
+          "name": "Fodder cutting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fodder cutting output +2%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_10",
+          "level": 10,
+          "name": "Fodder cutting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fodder cutting waste -5%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_15",
+          "level": 15,
+          "name": "Fodder cutting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fodder cutting quality roll +1"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_20",
+          "level": 20,
+          "name": "Fodder cutting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fodder cutting care +5%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_25",
+          "level": 25,
+          "name": "Fodder cutting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fodder cutting speed +3%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_30",
+          "level": 30,
+          "name": "Fodder cutting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fodder cutting output +5%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_35",
+          "level": 35,
+          "name": "Fodder cutting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fodder cutting spoilage -10%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_40",
+          "level": 40,
+          "name": "Fodder cutting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fodder cutting quality roll +1"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_45",
+          "level": 45,
+          "name": "Fodder cutting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fodder cutting speed +5%"
+        },
+        {
+          "id": "husbandry.fodder_cutting.perk_50",
+          "level": 50,
+          "name": "Fodder cutting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fodder cutting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fodder cutting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fodder cutting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fodder cutting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fodder cutting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fodder cutting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fodder cutting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.pasture_tending",
+      "domain": "husbandry",
+      "name": "Pasture tending",
+      "description": "Pasture tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.animal_birthing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.pasture_tending.pasture_tending_basics",
+          "discipline": "husbandry.pasture_tending",
+          "name": "Pasture tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.pasture_tending.pasture_tending_seasonal_practice",
+          "discipline": "husbandry.pasture_tending",
+          "name": "Pasture tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.pasture_tending.pasture_tending_precision_work",
+          "discipline": "husbandry.pasture_tending",
+          "name": "Pasture tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.pasture_tending.pasture_tending_master_technique",
+          "discipline": "husbandry.pasture_tending",
+          "name": "Pasture tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.pasture_tending.perk_5",
+          "level": 5,
+          "name": "Pasture tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pasture tending output +2%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_10",
+          "level": 10,
+          "name": "Pasture tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pasture tending waste -5%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_15",
+          "level": 15,
+          "name": "Pasture tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pasture tending quality roll +1"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_20",
+          "level": 20,
+          "name": "Pasture tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pasture tending care +5%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_25",
+          "level": 25,
+          "name": "Pasture tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pasture tending speed +3%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_30",
+          "level": 30,
+          "name": "Pasture tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pasture tending output +5%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_35",
+          "level": 35,
+          "name": "Pasture tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pasture tending spoilage -10%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_40",
+          "level": 40,
+          "name": "Pasture tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pasture tending quality roll +1"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_45",
+          "level": 45,
+          "name": "Pasture tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pasture tending speed +5%"
+        },
+        {
+          "id": "husbandry.pasture_tending.perk_50",
+          "level": 50,
+          "name": "Pasture tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pasture tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pasture tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pasture tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pasture tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pasture tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pasture tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pasture tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.animal_birthing",
+      "domain": "husbandry",
+      "name": "Animal birthing",
+      "description": "Animal birthing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.livestock_selection"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.animal_birthing.animal_birthing_basics",
+          "discipline": "husbandry.animal_birthing",
+          "name": "Animal birthing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.animal_birthing.animal_birthing_seasonal_practice",
+          "discipline": "husbandry.animal_birthing",
+          "name": "Animal birthing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.animal_birthing.animal_birthing_precision_work",
+          "discipline": "husbandry.animal_birthing",
+          "name": "Animal birthing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.animal_birthing.animal_birthing_master_technique",
+          "discipline": "husbandry.animal_birthing",
+          "name": "Animal birthing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.animal_birthing.perk_5",
+          "level": 5,
+          "name": "Animal birthing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Animal birthing output +2%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_10",
+          "level": 10,
+          "name": "Animal birthing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Animal birthing waste -5%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_15",
+          "level": 15,
+          "name": "Animal birthing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Animal birthing quality roll +1"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_20",
+          "level": 20,
+          "name": "Animal birthing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Animal birthing care +5%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_25",
+          "level": 25,
+          "name": "Animal birthing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Animal birthing speed +3%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_30",
+          "level": 30,
+          "name": "Animal birthing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Animal birthing output +5%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_35",
+          "level": 35,
+          "name": "Animal birthing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Animal birthing spoilage -10%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_40",
+          "level": 40,
+          "name": "Animal birthing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Animal birthing quality roll +1"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_45",
+          "level": 45,
+          "name": "Animal birthing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Animal birthing speed +5%"
+        },
+        {
+          "id": "husbandry.animal_birthing.perk_50",
+          "level": 50,
+          "name": "Animal birthing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Animal birthing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise animal birthing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful animal birthing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of animal birthing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a animal birthing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn animal birthing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of animal birthing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.livestock_selection",
+      "domain": "husbandry",
+      "name": "Livestock selection",
+      "description": "Livestock selection: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.stable_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.livestock_selection.livestock_selection_basics",
+          "discipline": "husbandry.livestock_selection",
+          "name": "Livestock selection basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.livestock_selection.livestock_selection_seasonal_practice",
+          "discipline": "husbandry.livestock_selection",
+          "name": "Livestock selection seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.livestock_selection.livestock_selection_precision_work",
+          "discipline": "husbandry.livestock_selection",
+          "name": "Livestock selection precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.livestock_selection.livestock_selection_master_technique",
+          "discipline": "husbandry.livestock_selection",
+          "name": "Livestock selection master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.livestock_selection.perk_5",
+          "level": 5,
+          "name": "Livestock selection: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Livestock selection output +2%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_10",
+          "level": 10,
+          "name": "Livestock selection: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Livestock selection waste -5%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_15",
+          "level": 15,
+          "name": "Livestock selection: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Livestock selection quality roll +1"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_20",
+          "level": 20,
+          "name": "Livestock selection: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Livestock selection care +5%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_25",
+          "level": 25,
+          "name": "Livestock selection: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Livestock selection speed +3%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_30",
+          "level": 30,
+          "name": "Livestock selection: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Livestock selection output +5%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_35",
+          "level": 35,
+          "name": "Livestock selection: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Livestock selection spoilage -10%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_40",
+          "level": 40,
+          "name": "Livestock selection: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Livestock selection quality roll +1"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_45",
+          "level": 45,
+          "name": "Livestock selection: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Livestock selection speed +5%"
+        },
+        {
+          "id": "husbandry.livestock_selection.perk_50",
+          "level": 50,
+          "name": "Livestock selection: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Livestock selection output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise livestock selection for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful livestock selection (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of livestock selection; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a livestock selection task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn livestock selection from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of livestock selection, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.stable_tending",
+      "domain": "husbandry",
+      "name": "Stable tending",
+      "description": "Stable tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.animal_handling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.stable_tending.stable_tending_basics",
+          "discipline": "husbandry.stable_tending",
+          "name": "Stable tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.stable_tending.stable_tending_seasonal_practice",
+          "discipline": "husbandry.stable_tending",
+          "name": "Stable tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.stable_tending.stable_tending_precision_work",
+          "discipline": "husbandry.stable_tending",
+          "name": "Stable tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.stable_tending.stable_tending_master_technique",
+          "discipline": "husbandry.stable_tending",
+          "name": "Stable tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.stable_tending.perk_5",
+          "level": 5,
+          "name": "Stable tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Stable tending output +2%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_10",
+          "level": 10,
+          "name": "Stable tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Stable tending waste -5%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_15",
+          "level": 15,
+          "name": "Stable tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stable tending quality roll +1"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_20",
+          "level": 20,
+          "name": "Stable tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Stable tending care +5%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_25",
+          "level": 25,
+          "name": "Stable tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Stable tending speed +3%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_30",
+          "level": 30,
+          "name": "Stable tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stable tending output +5%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_35",
+          "level": 35,
+          "name": "Stable tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Stable tending spoilage -10%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_40",
+          "level": 40,
+          "name": "Stable tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Stable tending quality roll +1"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_45",
+          "level": 45,
+          "name": "Stable tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Stable tending speed +5%"
+        },
+        {
+          "id": "husbandry.stable_tending.perk_50",
+          "level": 50,
+          "name": "Stable tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Stable tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise stable tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful stable tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of stable tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a stable tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn stable tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of stable tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.animal_handling",
+      "domain": "husbandry",
+      "name": "Animal handling",
+      "description": "Animal handling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.manure_management"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.animal_handling.animal_handling_basics",
+          "discipline": "husbandry.animal_handling",
+          "name": "Animal handling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.animal_handling.animal_handling_seasonal_practice",
+          "discipline": "husbandry.animal_handling",
+          "name": "Animal handling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.animal_handling.animal_handling_precision_work",
+          "discipline": "husbandry.animal_handling",
+          "name": "Animal handling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.animal_handling.animal_handling_master_technique",
+          "discipline": "husbandry.animal_handling",
+          "name": "Animal handling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.animal_handling.perk_5",
+          "level": 5,
+          "name": "Animal handling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Animal handling output +2%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_10",
+          "level": 10,
+          "name": "Animal handling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Animal handling waste -5%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_15",
+          "level": 15,
+          "name": "Animal handling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Animal handling quality roll +1"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_20",
+          "level": 20,
+          "name": "Animal handling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Animal handling care +5%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_25",
+          "level": 25,
+          "name": "Animal handling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Animal handling speed +3%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_30",
+          "level": 30,
+          "name": "Animal handling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Animal handling output +5%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_35",
+          "level": 35,
+          "name": "Animal handling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Animal handling spoilage -10%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_40",
+          "level": 40,
+          "name": "Animal handling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Animal handling quality roll +1"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_45",
+          "level": 45,
+          "name": "Animal handling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Animal handling speed +5%"
+        },
+        {
+          "id": "husbandry.animal_handling.perk_50",
+          "level": 50,
+          "name": "Animal handling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Animal handling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise animal handling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful animal handling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of animal handling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a animal handling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn animal handling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of animal handling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.manure_management",
+      "domain": "husbandry",
+      "name": "Manure management",
+      "description": "Manure management: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.herd_health"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.manure_management.manure_management_basics",
+          "discipline": "husbandry.manure_management",
+          "name": "Manure management basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.manure_management.manure_management_seasonal_practice",
+          "discipline": "husbandry.manure_management",
+          "name": "Manure management seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.manure_management.manure_management_precision_work",
+          "discipline": "husbandry.manure_management",
+          "name": "Manure management precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.manure_management.manure_management_master_technique",
+          "discipline": "husbandry.manure_management",
+          "name": "Manure management master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.manure_management.perk_5",
+          "level": 5,
+          "name": "Manure management: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Manure management output +2%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_10",
+          "level": 10,
+          "name": "Manure management: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Manure management waste -5%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_15",
+          "level": 15,
+          "name": "Manure management: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Manure management quality roll +1"
+        },
+        {
+          "id": "husbandry.manure_management.perk_20",
+          "level": 20,
+          "name": "Manure management: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Manure management care +5%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_25",
+          "level": 25,
+          "name": "Manure management: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Manure management speed +3%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_30",
+          "level": 30,
+          "name": "Manure management: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Manure management output +5%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_35",
+          "level": 35,
+          "name": "Manure management: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Manure management spoilage -10%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_40",
+          "level": 40,
+          "name": "Manure management: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Manure management quality roll +1"
+        },
+        {
+          "id": "husbandry.manure_management.perk_45",
+          "level": 45,
+          "name": "Manure management: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Manure management speed +5%"
+        },
+        {
+          "id": "husbandry.manure_management.perk_50",
+          "level": 50,
+          "name": "Manure management: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Manure management output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise manure management for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful manure management (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of manure management; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a manure management task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn manure management from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of manure management, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.herd_health",
+      "domain": "husbandry",
+      "name": "Herd health",
+      "description": "Herd health: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.seasonal_herding"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.herd_health.herd_health_basics",
+          "discipline": "husbandry.herd_health",
+          "name": "Herd health basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.herd_health.herd_health_seasonal_practice",
+          "discipline": "husbandry.herd_health",
+          "name": "Herd health seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.herd_health.herd_health_precision_work",
+          "discipline": "husbandry.herd_health",
+          "name": "Herd health precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.herd_health.herd_health_master_technique",
+          "discipline": "husbandry.herd_health",
+          "name": "Herd health master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.herd_health.perk_5",
+          "level": 5,
+          "name": "Herd health: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Herd health output +2%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_10",
+          "level": 10,
+          "name": "Herd health: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Herd health waste -5%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_15",
+          "level": 15,
+          "name": "Herd health: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herd health quality roll +1"
+        },
+        {
+          "id": "husbandry.herd_health.perk_20",
+          "level": 20,
+          "name": "Herd health: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Herd health care +5%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_25",
+          "level": 25,
+          "name": "Herd health: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Herd health speed +3%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_30",
+          "level": 30,
+          "name": "Herd health: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herd health output +5%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_35",
+          "level": 35,
+          "name": "Herd health: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Herd health spoilage -10%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_40",
+          "level": 40,
+          "name": "Herd health: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herd health quality roll +1"
+        },
+        {
+          "id": "husbandry.herd_health.perk_45",
+          "level": 45,
+          "name": "Herd health: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Herd health speed +5%"
+        },
+        {
+          "id": "husbandry.herd_health.perk_50",
+          "level": 50,
+          "name": "Herd health: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herd health output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise herd health for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful herd health (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of herd health; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a herd health task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn herd health from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of herd health, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "husbandry.seasonal_herding",
+      "domain": "husbandry",
+      "name": "Seasonal herding",
+      "description": "Seasonal herding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "endurance",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "husbandry.husbandry"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "husbandry.seasonal_herding.seasonal_herding_basics",
+          "discipline": "husbandry.seasonal_herding",
+          "name": "Seasonal herding basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "endurance": 8
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.seasonal_herding.seasonal_herding_seasonal_practice",
+          "discipline": "husbandry.seasonal_herding",
+          "name": "Seasonal herding seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "endurance": 10
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.seasonal_herding.seasonal_herding_precision_work",
+          "discipline": "husbandry.seasonal_herding",
+          "name": "Seasonal herding precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "endurance": 12
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "husbandry.seasonal_herding.seasonal_herding_master_technique",
+          "discipline": "husbandry.seasonal_herding",
+          "name": "Seasonal herding master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "endurance": 14
+          },
+          "key_attributes": [
+            "endurance",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "husbandry.seasonal_herding.perk_5",
+          "level": 5,
+          "name": "Seasonal herding: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Seasonal herding output +2%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_10",
+          "level": 10,
+          "name": "Seasonal herding: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Seasonal herding waste -5%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_15",
+          "level": 15,
+          "name": "Seasonal herding: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seasonal herding quality roll +1"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_20",
+          "level": 20,
+          "name": "Seasonal herding: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Seasonal herding care +5%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_25",
+          "level": 25,
+          "name": "Seasonal herding: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Seasonal herding speed +3%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_30",
+          "level": 30,
+          "name": "Seasonal herding: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seasonal herding output +5%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_35",
+          "level": 35,
+          "name": "Seasonal herding: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Seasonal herding spoilage -10%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_40",
+          "level": 40,
+          "name": "Seasonal herding: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seasonal herding quality roll +1"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_45",
+          "level": 45,
+          "name": "Seasonal herding: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Seasonal herding speed +5%"
+        },
+        {
+          "id": "husbandry.seasonal_herding.perk_50",
+          "level": 50,
+          "name": "Seasonal herding: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seasonal herding output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise seasonal herding for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful seasonal herding (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of seasonal herding; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a seasonal herding task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn seasonal herding from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of seasonal herding, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

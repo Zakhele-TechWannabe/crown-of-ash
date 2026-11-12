@@ -1,0 +1,110 @@
+{
+  "id": "military_drill",
+  "disciplines": [
+    {
+      "id": "military_drill.marching",
+      "domain": "military_drill",
+      "name": "Marching",
+      "description": "Marching applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.ranks_and_files",
+      "domain": "military_drill",
+      "name": "Ranks and files",
+      "description": "Ranks and files applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.shield_walls",
+      "domain": "military_drill",
+      "name": "Shield walls",
+      "description": "Shield walls applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.spear_ranks",
+      "domain": "military_drill",
+      "name": "Spear ranks",
+      "description": "Spear ranks applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.archery_ranks",
+      "domain": "military_drill",
+      "name": "Archery ranks",
+      "description": "Archery ranks applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.drum_signals",
+      "domain": "military_drill",
+      "name": "Drum signals",
+      "description": "Drum signals applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.flag_signals",
+      "domain": "military_drill",
+      "name": "Flag signals",
+      "description": "Flag signals applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.camp_raising",
+      "domain": "military_drill",
+      "name": "Camp raising",
+      "description": "Camp raising applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.equipment_checks",
+      "domain": "military_drill",
+      "name": "Equipment checks",
+      "description": "Equipment checks applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.muster_records",
+      "domain": "military_drill",
+      "name": "Muster records",
+      "description": "Muster records applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.unit_turns",
+      "domain": "military_drill",
+      "name": "Unit turns",
+      "description": "Unit turns applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.charge_drills",
+      "domain": "military_drill",
+      "name": "Charge drills",
+      "description": "Charge drills applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.order_relays",
+      "domain": "military_drill",
+      "name": "Order relays",
+      "description": "Order relays applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.discipline",
+      "domain": "military_drill",
+      "name": "Discipline",
+      "description": "Discipline applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "military_drill.drill_instruction",
+      "domain": "military_drill",
+      "name": "Drill instruction",
+      "description": "Drill instruction applies military drill to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

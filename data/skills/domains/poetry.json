@@ -1,0 +1,110 @@
+{
+  "id": "poetry",
+  "disciplines": [
+    {
+      "id": "poetry.rhyme",
+      "domain": "poetry",
+      "name": "Rhyme",
+      "description": "Rhyme applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.tonal_patterns",
+      "domain": "poetry",
+      "name": "Tonal patterns",
+      "description": "Tonal patterns applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.classical_forms",
+      "domain": "poetry",
+      "name": "Classical forms",
+      "description": "Classical forms applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.landscape_verse",
+      "domain": "poetry",
+      "name": "Landscape verse",
+      "description": "Landscape verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.pastoral_verse",
+      "domain": "poetry",
+      "name": "Pastoral verse",
+      "description": "Pastoral verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.narrative_verse",
+      "domain": "poetry",
+      "name": "Narrative verse",
+      "description": "Narrative verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.court_verse",
+      "domain": "poetry",
+      "name": "Court verse",
+      "description": "Court verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.song_lyrics",
+      "domain": "poetry",
+      "name": "Song lyrics",
+      "description": "Song lyrics applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.couplets",
+      "domain": "poetry",
+      "name": "Couplets",
+      "description": "Couplets applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.allusion",
+      "domain": "poetry",
+      "name": "Allusion",
+      "description": "Allusion applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.recitation",
+      "domain": "poetry",
+      "name": "Recitation",
+      "description": "Recitation applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.poetic_criticism",
+      "domain": "poetry",
+      "name": "Poetic criticism",
+      "description": "Poetic criticism applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.verse_editing",
+      "domain": "poetry",
+      "name": "Verse editing",
+      "description": "Verse editing applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.anthology_making",
+      "domain": "poetry",
+      "name": "Anthology making",
+      "description": "Anthology making applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "poetry.poetry_teaching",
+      "domain": "poetry",
+      "name": "Poetry teaching",
+      "description": "Poetry teaching applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

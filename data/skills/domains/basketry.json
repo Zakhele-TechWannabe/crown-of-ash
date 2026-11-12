@@ -1,0 +1,110 @@
+{
+  "id": "basketry",
+  "disciplines": [
+    {
+      "id": "basketry.reed_cutting",
+      "domain": "basketry",
+      "name": "Reed cutting",
+      "description": "Reed cutting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.willow_soaking",
+      "domain": "basketry",
+      "name": "Willow soaking",
+      "description": "Willow soaking applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.splitting_strips",
+      "domain": "basketry",
+      "name": "Splitting strips",
+      "description": "Splitting strips applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.base_weaving",
+      "domain": "basketry",
+      "name": "Base weaving",
+      "description": "Base weaving applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.stake_setting",
+      "domain": "basketry",
+      "name": "Stake setting",
+      "description": "Stake setting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.rim_binding",
+      "domain": "basketry",
+      "name": "Rim binding",
+      "description": "Rim binding applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.lid_fitting",
+      "domain": "basketry",
+      "name": "Lid fitting",
+      "description": "Lid fitting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.pack_baskets",
+      "domain": "basketry",
+      "name": "Pack baskets",
+      "description": "Pack baskets applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.fish_creels",
+      "domain": "basketry",
+      "name": "Fish creels",
+      "description": "Fish creels applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.grain_baskets",
+      "domain": "basketry",
+      "name": "Grain baskets",
+      "description": "Grain baskets applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.wicker_repair",
+      "domain": "basketry",
+      "name": "Wicker repair",
+      "description": "Wicker repair applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.bamboo_plaiting",
+      "domain": "basketry",
+      "name": "Bamboo plaiting",
+      "description": "Bamboo plaiting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.pattern_weaving",
+      "domain": "basketry",
+      "name": "Pattern weaving",
+      "description": "Pattern weaving applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.waterproof_lining",
+      "domain": "basketry",
+      "name": "Waterproof lining",
+      "description": "Waterproof lining applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "basketry.basket_grading",
+      "domain": "basketry",
+      "name": "Basket grading",
+      "description": "Basket grading applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

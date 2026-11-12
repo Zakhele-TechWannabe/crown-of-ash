@@ -1,0 +1,4079 @@
+{
+  "id": "game_and_hunting",
+  "disciplines": [
+    {
+      "id": "game_and_hunting.hunting",
+      "domain": "game_and_hunting",
+      "name": "Hunting",
+      "description": "Hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.game_dressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.hunting.tracking",
+          "discipline": "game_and_hunting.hunting",
+          "name": "Tracking",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting.archery",
+          "discipline": "game_and_hunting.hunting",
+          "name": "Archery",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting.trapping",
+          "discipline": "game_and_hunting.hunting",
+          "name": "Trapping",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting.butchery",
+          "discipline": "game_and_hunting.hunting",
+          "name": "Butchery",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting.demon_beast_hunting",
+          "discipline": "game_and_hunting.hunting",
+          "name": "Demon-beast hunting",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.hunting.perk_5",
+          "level": 5,
+          "name": "Hunting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hunting output +2%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_10",
+          "level": 10,
+          "name": "Hunting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hunting waste -5%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_15",
+          "level": 15,
+          "name": "Hunting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_20",
+          "level": 20,
+          "name": "Hunting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hunting care +5%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_25",
+          "level": 25,
+          "name": "Hunting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hunting speed +3%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_30",
+          "level": 30,
+          "name": "Hunting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hunting output +5%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_35",
+          "level": 35,
+          "name": "Hunting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hunting spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_40",
+          "level": 40,
+          "name": "Hunting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_45",
+          "level": 45,
+          "name": "Hunting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hunting speed +5%"
+        },
+        {
+          "id": "game_and_hunting.hunting.perk_50",
+          "level": 50,
+          "name": "Hunting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hunting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hunting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hunting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hunting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hunting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hunting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hunting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.trail_reading",
+      "domain": "game_and_hunting",
+      "name": "Trail reading",
+      "description": "Trail reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.bow_hunting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.trail_reading.trail_reading_basics",
+          "discipline": "game_and_hunting.trail_reading",
+          "name": "Trail reading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.trail_reading.trail_reading_seasonal_practice",
+          "discipline": "game_and_hunting.trail_reading",
+          "name": "Trail reading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.trail_reading.trail_reading_precision_work",
+          "discipline": "game_and_hunting.trail_reading",
+          "name": "Trail reading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.trail_reading.trail_reading_master_technique",
+          "discipline": "game_and_hunting.trail_reading",
+          "name": "Trail reading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.trail_reading.perk_5",
+          "level": 5,
+          "name": "Trail reading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Trail reading output +2%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_10",
+          "level": 10,
+          "name": "Trail reading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Trail reading waste -5%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_15",
+          "level": 15,
+          "name": "Trail reading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Trail reading quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_20",
+          "level": 20,
+          "name": "Trail reading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Trail reading care +5%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_25",
+          "level": 25,
+          "name": "Trail reading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Trail reading speed +3%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_30",
+          "level": 30,
+          "name": "Trail reading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Trail reading output +5%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_35",
+          "level": 35,
+          "name": "Trail reading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Trail reading spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_40",
+          "level": 40,
+          "name": "Trail reading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Trail reading quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_45",
+          "level": 45,
+          "name": "Trail reading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Trail reading speed +5%"
+        },
+        {
+          "id": "game_and_hunting.trail_reading.perk_50",
+          "level": 50,
+          "name": "Trail reading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Trail reading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise trail reading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful trail reading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of trail reading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a trail reading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn trail reading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of trail reading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.bow_hunting",
+      "domain": "game_and_hunting",
+      "name": "Bow hunting",
+      "description": "Bow hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.snare_setting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.bow_hunting.bow_hunting_basics",
+          "discipline": "game_and_hunting.bow_hunting",
+          "name": "Bow hunting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.bow_hunting_seasonal_practice",
+          "discipline": "game_and_hunting.bow_hunting",
+          "name": "Bow hunting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.bow_hunting_precision_work",
+          "discipline": "game_and_hunting.bow_hunting",
+          "name": "Bow hunting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.bow_hunting_master_technique",
+          "discipline": "game_and_hunting.bow_hunting",
+          "name": "Bow hunting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.bow_hunting.perk_5",
+          "level": 5,
+          "name": "Bow hunting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bow hunting output +2%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_10",
+          "level": 10,
+          "name": "Bow hunting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bow hunting waste -5%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_15",
+          "level": 15,
+          "name": "Bow hunting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bow hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_20",
+          "level": 20,
+          "name": "Bow hunting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bow hunting care +5%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_25",
+          "level": 25,
+          "name": "Bow hunting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bow hunting speed +3%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_30",
+          "level": 30,
+          "name": "Bow hunting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bow hunting output +5%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_35",
+          "level": 35,
+          "name": "Bow hunting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bow hunting spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_40",
+          "level": 40,
+          "name": "Bow hunting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bow hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_45",
+          "level": 45,
+          "name": "Bow hunting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bow hunting speed +5%"
+        },
+        {
+          "id": "game_and_hunting.bow_hunting.perk_50",
+          "level": 50,
+          "name": "Bow hunting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bow hunting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bow hunting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bow hunting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bow hunting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bow hunting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bow hunting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bow hunting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.snare_setting",
+      "domain": "game_and_hunting",
+      "name": "Snare setting",
+      "description": "Snare setting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.game_dressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.snare_setting.snare_setting_basics",
+          "discipline": "game_and_hunting.snare_setting",
+          "name": "Snare setting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.snare_setting.snare_setting_seasonal_practice",
+          "discipline": "game_and_hunting.snare_setting",
+          "name": "Snare setting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.snare_setting.snare_setting_precision_work",
+          "discipline": "game_and_hunting.snare_setting",
+          "name": "Snare setting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.snare_setting.snare_setting_master_technique",
+          "discipline": "game_and_hunting.snare_setting",
+          "name": "Snare setting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.snare_setting.perk_5",
+          "level": 5,
+          "name": "Snare setting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Snare setting output +2%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_10",
+          "level": 10,
+          "name": "Snare setting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Snare setting waste -5%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_15",
+          "level": 15,
+          "name": "Snare setting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Snare setting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_20",
+          "level": 20,
+          "name": "Snare setting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Snare setting care +5%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_25",
+          "level": 25,
+          "name": "Snare setting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Snare setting speed +3%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_30",
+          "level": 30,
+          "name": "Snare setting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Snare setting output +5%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_35",
+          "level": 35,
+          "name": "Snare setting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Snare setting spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_40",
+          "level": 40,
+          "name": "Snare setting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Snare setting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_45",
+          "level": 45,
+          "name": "Snare setting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Snare setting speed +5%"
+        },
+        {
+          "id": "game_and_hunting.snare_setting.perk_50",
+          "level": 50,
+          "name": "Snare setting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Snare setting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise snare setting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful snare setting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of snare setting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a snare setting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn snare setting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of snare setting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.game_dressing",
+      "domain": "game_and_hunting",
+      "name": "Game dressing",
+      "description": "Game dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.hide_field_care"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.game_dressing.game_dressing_basics",
+          "discipline": "game_and_hunting.game_dressing",
+          "name": "Game dressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.game_dressing.game_dressing_seasonal_practice",
+          "discipline": "game_and_hunting.game_dressing",
+          "name": "Game dressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.game_dressing.game_dressing_precision_work",
+          "discipline": "game_and_hunting.game_dressing",
+          "name": "Game dressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.game_dressing.game_dressing_master_technique",
+          "discipline": "game_and_hunting.game_dressing",
+          "name": "Game dressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.game_dressing.perk_5",
+          "level": 5,
+          "name": "Game dressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Game dressing output +2%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_10",
+          "level": 10,
+          "name": "Game dressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Game dressing waste -5%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_15",
+          "level": 15,
+          "name": "Game dressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Game dressing quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_20",
+          "level": 20,
+          "name": "Game dressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Game dressing care +5%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_25",
+          "level": 25,
+          "name": "Game dressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Game dressing speed +3%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_30",
+          "level": 30,
+          "name": "Game dressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Game dressing output +5%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_35",
+          "level": 35,
+          "name": "Game dressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Game dressing spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_40",
+          "level": 40,
+          "name": "Game dressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Game dressing quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_45",
+          "level": 45,
+          "name": "Game dressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Game dressing speed +5%"
+        },
+        {
+          "id": "game_and_hunting.game_dressing.perk_50",
+          "level": 50,
+          "name": "Game dressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Game dressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise game dressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful game dressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of game dressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a game dressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn game dressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of game dressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.hide_field_care",
+      "domain": "game_and_hunting",
+      "name": "Hide field care",
+      "description": "Hide field care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.boar_hunting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.hide_field_care.hide_field_care_basics",
+          "discipline": "game_and_hunting.hide_field_care",
+          "name": "Hide field care basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.hide_field_care_seasonal_practice",
+          "discipline": "game_and_hunting.hide_field_care",
+          "name": "Hide field care seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.hide_field_care_precision_work",
+          "discipline": "game_and_hunting.hide_field_care",
+          "name": "Hide field care precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.hide_field_care_master_technique",
+          "discipline": "game_and_hunting.hide_field_care",
+          "name": "Hide field care master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.hide_field_care.perk_5",
+          "level": 5,
+          "name": "Hide field care: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hide field care output +2%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_10",
+          "level": 10,
+          "name": "Hide field care: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hide field care waste -5%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_15",
+          "level": 15,
+          "name": "Hide field care: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hide field care quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_20",
+          "level": 20,
+          "name": "Hide field care: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hide field care care +5%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_25",
+          "level": 25,
+          "name": "Hide field care: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hide field care speed +3%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_30",
+          "level": 30,
+          "name": "Hide field care: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hide field care output +5%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_35",
+          "level": 35,
+          "name": "Hide field care: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hide field care spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_40",
+          "level": 40,
+          "name": "Hide field care: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hide field care quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_45",
+          "level": 45,
+          "name": "Hide field care: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hide field care speed +5%"
+        },
+        {
+          "id": "game_and_hunting.hide_field_care.perk_50",
+          "level": 50,
+          "name": "Hide field care: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hide field care output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hide field care for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hide field care (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hide field care; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hide field care task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hide field care from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hide field care, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.boar_hunting",
+      "domain": "game_and_hunting",
+      "name": "Boar hunting",
+      "description": "Boar hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.deer_stalking"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.boar_hunting.boar_hunting_basics",
+          "discipline": "game_and_hunting.boar_hunting",
+          "name": "Boar hunting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.boar_hunting_seasonal_practice",
+          "discipline": "game_and_hunting.boar_hunting",
+          "name": "Boar hunting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.boar_hunting_precision_work",
+          "discipline": "game_and_hunting.boar_hunting",
+          "name": "Boar hunting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.boar_hunting_master_technique",
+          "discipline": "game_and_hunting.boar_hunting",
+          "name": "Boar hunting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.boar_hunting.perk_5",
+          "level": 5,
+          "name": "Boar hunting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Boar hunting output +2%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_10",
+          "level": 10,
+          "name": "Boar hunting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Boar hunting waste -5%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_15",
+          "level": 15,
+          "name": "Boar hunting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Boar hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_20",
+          "level": 20,
+          "name": "Boar hunting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Boar hunting care +5%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_25",
+          "level": 25,
+          "name": "Boar hunting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Boar hunting speed +3%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_30",
+          "level": 30,
+          "name": "Boar hunting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Boar hunting output +5%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_35",
+          "level": 35,
+          "name": "Boar hunting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Boar hunting spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_40",
+          "level": 40,
+          "name": "Boar hunting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Boar hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_45",
+          "level": 45,
+          "name": "Boar hunting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Boar hunting speed +5%"
+        },
+        {
+          "id": "game_and_hunting.boar_hunting.perk_50",
+          "level": 50,
+          "name": "Boar hunting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Boar hunting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise boar hunting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful boar hunting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of boar hunting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a boar hunting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn boar hunting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of boar hunting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.deer_stalking",
+      "domain": "game_and_hunting",
+      "name": "Deer stalking",
+      "description": "Deer stalking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.bird_hunting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.deer_stalking.deer_stalking_basics",
+          "discipline": "game_and_hunting.deer_stalking",
+          "name": "Deer stalking basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.deer_stalking_seasonal_practice",
+          "discipline": "game_and_hunting.deer_stalking",
+          "name": "Deer stalking seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.deer_stalking_precision_work",
+          "discipline": "game_and_hunting.deer_stalking",
+          "name": "Deer stalking precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.deer_stalking_master_technique",
+          "discipline": "game_and_hunting.deer_stalking",
+          "name": "Deer stalking master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.deer_stalking.perk_5",
+          "level": 5,
+          "name": "Deer stalking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Deer stalking output +2%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_10",
+          "level": 10,
+          "name": "Deer stalking: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Deer stalking waste -5%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_15",
+          "level": 15,
+          "name": "Deer stalking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Deer stalking quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_20",
+          "level": 20,
+          "name": "Deer stalking: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Deer stalking care +5%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_25",
+          "level": 25,
+          "name": "Deer stalking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Deer stalking speed +3%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_30",
+          "level": 30,
+          "name": "Deer stalking: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Deer stalking output +5%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_35",
+          "level": 35,
+          "name": "Deer stalking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Deer stalking spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_40",
+          "level": 40,
+          "name": "Deer stalking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Deer stalking quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_45",
+          "level": 45,
+          "name": "Deer stalking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Deer stalking speed +5%"
+        },
+        {
+          "id": "game_and_hunting.deer_stalking.perk_50",
+          "level": 50,
+          "name": "Deer stalking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Deer stalking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise deer stalking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful deer stalking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of deer stalking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a deer stalking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn deer stalking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of deer stalking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.bird_hunting",
+      "domain": "game_and_hunting",
+      "name": "Bird hunting",
+      "description": "Bird hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.hunting_dogs"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.bird_hunting.bird_hunting_basics",
+          "discipline": "game_and_hunting.bird_hunting",
+          "name": "Bird hunting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.bird_hunting_seasonal_practice",
+          "discipline": "game_and_hunting.bird_hunting",
+          "name": "Bird hunting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.bird_hunting_precision_work",
+          "discipline": "game_and_hunting.bird_hunting",
+          "name": "Bird hunting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.bird_hunting_master_technique",
+          "discipline": "game_and_hunting.bird_hunting",
+          "name": "Bird hunting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.bird_hunting.perk_5",
+          "level": 5,
+          "name": "Bird hunting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bird hunting output +2%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_10",
+          "level": 10,
+          "name": "Bird hunting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bird hunting waste -5%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_15",
+          "level": 15,
+          "name": "Bird hunting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bird hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_20",
+          "level": 20,
+          "name": "Bird hunting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bird hunting care +5%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_25",
+          "level": 25,
+          "name": "Bird hunting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bird hunting speed +3%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_30",
+          "level": 30,
+          "name": "Bird hunting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bird hunting output +5%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_35",
+          "level": 35,
+          "name": "Bird hunting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bird hunting spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_40",
+          "level": 40,
+          "name": "Bird hunting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bird hunting quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_45",
+          "level": 45,
+          "name": "Bird hunting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bird hunting speed +5%"
+        },
+        {
+          "id": "game_and_hunting.bird_hunting.perk_50",
+          "level": 50,
+          "name": "Bird hunting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bird hunting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bird hunting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bird hunting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bird hunting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bird hunting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bird hunting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bird hunting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.hunting_dogs",
+      "domain": "game_and_hunting",
+      "name": "Hunting dogs",
+      "description": "Hunting dogs: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.game_conservation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.hunting_dogs.hunting_dogs_basics",
+          "discipline": "game_and_hunting.hunting_dogs",
+          "name": "Hunting dogs basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.hunting_dogs_seasonal_practice",
+          "discipline": "game_and_hunting.hunting_dogs",
+          "name": "Hunting dogs seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.hunting_dogs_precision_work",
+          "discipline": "game_and_hunting.hunting_dogs",
+          "name": "Hunting dogs precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.hunting_dogs_master_technique",
+          "discipline": "game_and_hunting.hunting_dogs",
+          "name": "Hunting dogs master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_5",
+          "level": 5,
+          "name": "Hunting dogs: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hunting dogs output +2%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_10",
+          "level": 10,
+          "name": "Hunting dogs: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hunting dogs waste -5%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_15",
+          "level": 15,
+          "name": "Hunting dogs: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hunting dogs quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_20",
+          "level": 20,
+          "name": "Hunting dogs: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hunting dogs care +5%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_25",
+          "level": 25,
+          "name": "Hunting dogs: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hunting dogs speed +3%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_30",
+          "level": 30,
+          "name": "Hunting dogs: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hunting dogs output +5%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_35",
+          "level": 35,
+          "name": "Hunting dogs: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hunting dogs spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_40",
+          "level": 40,
+          "name": "Hunting dogs: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hunting dogs quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_45",
+          "level": 45,
+          "name": "Hunting dogs: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hunting dogs speed +5%"
+        },
+        {
+          "id": "game_and_hunting.hunting_dogs.perk_50",
+          "level": 50,
+          "name": "Hunting dogs: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hunting dogs output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hunting dogs for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hunting dogs (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hunting dogs; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hunting dogs task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hunting dogs from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hunting dogs, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.game_conservation",
+      "domain": "game_and_hunting",
+      "name": "Game conservation",
+      "description": "Game conservation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.mountain_ambush"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.game_conservation.game_conservation_basics",
+          "discipline": "game_and_hunting.game_conservation",
+          "name": "Game conservation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.game_conservation.game_conservation_seasonal_practice",
+          "discipline": "game_and_hunting.game_conservation",
+          "name": "Game conservation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.game_conservation.game_conservation_precision_work",
+          "discipline": "game_and_hunting.game_conservation",
+          "name": "Game conservation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.game_conservation.game_conservation_master_technique",
+          "discipline": "game_and_hunting.game_conservation",
+          "name": "Game conservation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.game_conservation.perk_5",
+          "level": 5,
+          "name": "Game conservation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Game conservation output +2%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_10",
+          "level": 10,
+          "name": "Game conservation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Game conservation waste -5%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_15",
+          "level": 15,
+          "name": "Game conservation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Game conservation quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_20",
+          "level": 20,
+          "name": "Game conservation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Game conservation care +5%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_25",
+          "level": 25,
+          "name": "Game conservation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Game conservation speed +3%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_30",
+          "level": 30,
+          "name": "Game conservation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Game conservation output +5%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_35",
+          "level": 35,
+          "name": "Game conservation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Game conservation spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_40",
+          "level": 40,
+          "name": "Game conservation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Game conservation quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_45",
+          "level": 45,
+          "name": "Game conservation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Game conservation speed +5%"
+        },
+        {
+          "id": "game_and_hunting.game_conservation.perk_50",
+          "level": 50,
+          "name": "Game conservation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Game conservation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise game conservation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful game conservation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of game conservation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a game conservation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn game conservation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of game conservation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.mountain_ambush",
+      "domain": "game_and_hunting",
+      "name": "Mountain ambush",
+      "description": "Mountain ambush: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.lodge_provisioning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.mountain_ambush.mountain_ambush_basics",
+          "discipline": "game_and_hunting.mountain_ambush",
+          "name": "Mountain ambush basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.mountain_ambush_seasonal_practice",
+          "discipline": "game_and_hunting.mountain_ambush",
+          "name": "Mountain ambush seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.mountain_ambush_precision_work",
+          "discipline": "game_and_hunting.mountain_ambush",
+          "name": "Mountain ambush precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.mountain_ambush_master_technique",
+          "discipline": "game_and_hunting.mountain_ambush",
+          "name": "Mountain ambush master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_5",
+          "level": 5,
+          "name": "Mountain ambush: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mountain ambush output +2%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_10",
+          "level": 10,
+          "name": "Mountain ambush: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mountain ambush waste -5%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_15",
+          "level": 15,
+          "name": "Mountain ambush: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mountain ambush quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_20",
+          "level": 20,
+          "name": "Mountain ambush: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mountain ambush care +5%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_25",
+          "level": 25,
+          "name": "Mountain ambush: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mountain ambush speed +3%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_30",
+          "level": 30,
+          "name": "Mountain ambush: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mountain ambush output +5%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_35",
+          "level": 35,
+          "name": "Mountain ambush: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mountain ambush spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_40",
+          "level": 40,
+          "name": "Mountain ambush: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mountain ambush quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_45",
+          "level": 45,
+          "name": "Mountain ambush: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mountain ambush speed +5%"
+        },
+        {
+          "id": "game_and_hunting.mountain_ambush.perk_50",
+          "level": 50,
+          "name": "Mountain ambush: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mountain ambush output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mountain ambush for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mountain ambush (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mountain ambush; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mountain ambush task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mountain ambush from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mountain ambush, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.lodge_provisioning",
+      "domain": "game_and_hunting",
+      "name": "Lodge provisioning",
+      "description": "Lodge provisioning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.scent_masking"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.lodge_provisioning.lodge_provisioning_basics",
+          "discipline": "game_and_hunting.lodge_provisioning",
+          "name": "Lodge provisioning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.lodge_provisioning_seasonal_practice",
+          "discipline": "game_and_hunting.lodge_provisioning",
+          "name": "Lodge provisioning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.lodge_provisioning_precision_work",
+          "discipline": "game_and_hunting.lodge_provisioning",
+          "name": "Lodge provisioning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.lodge_provisioning_master_technique",
+          "discipline": "game_and_hunting.lodge_provisioning",
+          "name": "Lodge provisioning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_5",
+          "level": 5,
+          "name": "Lodge provisioning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Lodge provisioning output +2%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_10",
+          "level": 10,
+          "name": "Lodge provisioning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Lodge provisioning waste -5%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_15",
+          "level": 15,
+          "name": "Lodge provisioning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lodge provisioning quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_20",
+          "level": 20,
+          "name": "Lodge provisioning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Lodge provisioning care +5%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_25",
+          "level": 25,
+          "name": "Lodge provisioning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Lodge provisioning speed +3%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_30",
+          "level": 30,
+          "name": "Lodge provisioning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lodge provisioning output +5%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_35",
+          "level": 35,
+          "name": "Lodge provisioning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Lodge provisioning spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_40",
+          "level": 40,
+          "name": "Lodge provisioning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lodge provisioning quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_45",
+          "level": 45,
+          "name": "Lodge provisioning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Lodge provisioning speed +5%"
+        },
+        {
+          "id": "game_and_hunting.lodge_provisioning.perk_50",
+          "level": 50,
+          "name": "Lodge provisioning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lodge provisioning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise lodge provisioning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful lodge provisioning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of lodge provisioning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a lodge provisioning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn lodge provisioning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of lodge provisioning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.scent_masking",
+      "domain": "game_and_hunting",
+      "name": "Scent masking",
+      "description": "Scent masking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.hunt_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.scent_masking.scent_masking_basics",
+          "discipline": "game_and_hunting.scent_masking",
+          "name": "Scent masking basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.scent_masking.scent_masking_seasonal_practice",
+          "discipline": "game_and_hunting.scent_masking",
+          "name": "Scent masking seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.scent_masking.scent_masking_precision_work",
+          "discipline": "game_and_hunting.scent_masking",
+          "name": "Scent masking precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.scent_masking.scent_masking_master_technique",
+          "discipline": "game_and_hunting.scent_masking",
+          "name": "Scent masking master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.scent_masking.perk_5",
+          "level": 5,
+          "name": "Scent masking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Scent masking output +2%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_10",
+          "level": 10,
+          "name": "Scent masking: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Scent masking waste -5%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_15",
+          "level": 15,
+          "name": "Scent masking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Scent masking quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_20",
+          "level": 20,
+          "name": "Scent masking: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Scent masking care +5%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_25",
+          "level": 25,
+          "name": "Scent masking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Scent masking speed +3%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_30",
+          "level": 30,
+          "name": "Scent masking: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Scent masking output +5%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_35",
+          "level": 35,
+          "name": "Scent masking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Scent masking spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_40",
+          "level": 40,
+          "name": "Scent masking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Scent masking quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_45",
+          "level": 45,
+          "name": "Scent masking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Scent masking speed +5%"
+        },
+        {
+          "id": "game_and_hunting.scent_masking.perk_50",
+          "level": 50,
+          "name": "Scent masking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Scent masking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise scent masking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful scent masking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of scent masking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a scent masking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn scent masking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of scent masking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "game_and_hunting.hunt_planning",
+      "domain": "game_and_hunting",
+      "name": "Hunt planning",
+      "description": "Hunt planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "perception",
+        "agility"
+      ],
+      "related_disciplines": [
+        "game_and_hunting.hunting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "game_and_hunting.hunt_planning.hunt_planning_basics",
+          "discipline": "game_and_hunting.hunt_planning",
+          "name": "Hunt planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "perception": 8
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.hunt_planning_seasonal_practice",
+          "discipline": "game_and_hunting.hunt_planning",
+          "name": "Hunt planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "perception": 10
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.hunt_planning_precision_work",
+          "discipline": "game_and_hunting.hunt_planning",
+          "name": "Hunt planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.hunt_planning_master_technique",
+          "discipline": "game_and_hunting.hunt_planning",
+          "name": "Hunt planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "perception": 14
+          },
+          "key_attributes": [
+            "perception",
+            "agility"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "game_and_hunting.hunt_planning.perk_5",
+          "level": 5,
+          "name": "Hunt planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hunt planning output +2%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_10",
+          "level": 10,
+          "name": "Hunt planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hunt planning waste -5%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_15",
+          "level": 15,
+          "name": "Hunt planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hunt planning quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_20",
+          "level": 20,
+          "name": "Hunt planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hunt planning care +5%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_25",
+          "level": 25,
+          "name": "Hunt planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hunt planning speed +3%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_30",
+          "level": 30,
+          "name": "Hunt planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hunt planning output +5%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_35",
+          "level": 35,
+          "name": "Hunt planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hunt planning spoilage -10%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_40",
+          "level": 40,
+          "name": "Hunt planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hunt planning quality roll +1"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_45",
+          "level": 45,
+          "name": "Hunt planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hunt planning speed +5%"
+        },
+        {
+          "id": "game_and_hunting.hunt_planning.perk_50",
+          "level": 50,
+          "name": "Hunt planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hunt planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hunt planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hunt planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hunt planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hunt planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hunt planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hunt planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "beast_lore",
+  "disciplines": [
+    {
+      "id": "beast_lore.species_recognition",
+      "domain": "beast_lore",
+      "name": "Species recognition",
+      "description": "Species recognition applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.tracks_and_spoor",
+      "domain": "beast_lore",
+      "name": "Tracks and spoor",
+      "description": "Tracks and spoor applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.feeding_habits",
+      "domain": "beast_lore",
+      "name": "Feeding habits",
+      "description": "Feeding habits applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.migration_reading",
+      "domain": "beast_lore",
+      "name": "Migration reading",
+      "description": "Migration reading applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.nesting_behaviour",
+      "domain": "beast_lore",
+      "name": "Nesting behaviour",
+      "description": "Nesting behaviour applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.predator_avoidance",
+      "domain": "beast_lore",
+      "name": "Predator avoidance",
+      "description": "Predator avoidance applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.animal_calls",
+      "domain": "beast_lore",
+      "name": "Animal calls",
+      "description": "Animal calls applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.wounded_beasts",
+      "domain": "beast_lore",
+      "name": "Wounded beasts",
+      "description": "Wounded beasts applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.herd_behaviour",
+      "domain": "beast_lore",
+      "name": "Herd behaviour",
+      "description": "Herd behaviour applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.venomous_creatures",
+      "domain": "beast_lore",
+      "name": "Venomous creatures",
+      "description": "Venomous creatures applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.beast_territories",
+      "domain": "beast_lore",
+      "name": "Beast territories",
+      "description": "Beast territories applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.seasonal_cycles",
+      "domain": "beast_lore",
+      "name": "Seasonal cycles",
+      "description": "Seasonal cycles applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.habitat_care",
+      "domain": "beast_lore",
+      "name": "Habitat care",
+      "description": "Habitat care applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.bestiary_records",
+      "domain": "beast_lore",
+      "name": "Bestiary records",
+      "description": "Bestiary records applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "beast_lore.spirit_beast_signs",
+      "domain": "beast_lore",
+      "name": "Spirit-beast signs",
+      "description": "Spirit-beast signs applies beast lore to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

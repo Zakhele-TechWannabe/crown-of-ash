@@ -1,0 +1,110 @@
+{
+  "id": "household_accounts",
+  "disciplines": [
+    {
+      "id": "household_accounts.expense_records",
+      "domain": "household_accounts",
+      "name": "Expense records",
+      "description": "Expense records applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.grain_budgets",
+      "domain": "household_accounts",
+      "name": "Grain budgets",
+      "description": "Grain budgets applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.cloth_budgets",
+      "domain": "household_accounts",
+      "name": "Cloth budgets",
+      "description": "Cloth budgets applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.debt_records",
+      "domain": "household_accounts",
+      "name": "Debt records",
+      "description": "Debt records applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.inheritance_records",
+      "domain": "household_accounts",
+      "name": "Inheritance records",
+      "description": "Inheritance records applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.dowry_accounts",
+      "domain": "household_accounts",
+      "name": "Dowry accounts",
+      "description": "Dowry accounts applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.seasonal_purchases",
+      "domain": "household_accounts",
+      "name": "Seasonal purchases",
+      "description": "Seasonal purchases applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.household_inventories",
+      "domain": "household_accounts",
+      "name": "Household inventories",
+      "description": "Household inventories applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.price_comparisons",
+      "domain": "household_accounts",
+      "name": "Price comparisons",
+      "description": "Price comparisons applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.savings_plans",
+      "domain": "household_accounts",
+      "name": "Savings plans",
+      "description": "Savings plans applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.tax_preparation",
+      "domain": "household_accounts",
+      "name": "Tax preparation",
+      "description": "Tax preparation applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.shared_expenses",
+      "domain": "household_accounts",
+      "name": "Shared expenses",
+      "description": "Shared expenses applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.contract_reading",
+      "domain": "household_accounts",
+      "name": "Contract reading",
+      "description": "Contract reading applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.receipt_keeping",
+      "domain": "household_accounts",
+      "name": "Receipt keeping",
+      "description": "Receipt keeping applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "household_accounts.household_audits",
+      "domain": "household_accounts",
+      "name": "Household audits",
+      "description": "Household audits applies household accounts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

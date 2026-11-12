@@ -1,0 +1,110 @@
+{
+  "id": "body_tempering",
+  "disciplines": [
+    {
+      "id": "body_tempering.skin_conditioning",
+      "domain": "body_tempering",
+      "name": "Skin conditioning",
+      "description": "Skin conditioning applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.tendon_training",
+      "domain": "body_tempering",
+      "name": "Tendon training",
+      "description": "Tendon training applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.bone_conditioning",
+      "domain": "body_tempering",
+      "name": "Bone conditioning",
+      "description": "Bone conditioning applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.muscle_conditioning",
+      "domain": "body_tempering",
+      "name": "Muscle conditioning",
+      "description": "Muscle conditioning applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.endurance_drills",
+      "domain": "body_tempering",
+      "name": "Endurance drills",
+      "description": "Endurance drills applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.balance_drills",
+      "domain": "body_tempering",
+      "name": "Balance drills",
+      "description": "Balance drills applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.breath_control",
+      "domain": "body_tempering",
+      "name": "Breath control",
+      "description": "Breath control applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.cold_training",
+      "domain": "body_tempering",
+      "name": "Cold training",
+      "description": "Cold training applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.heat_training",
+      "domain": "body_tempering",
+      "name": "Heat training",
+      "description": "Heat training applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.impact_conditioning",
+      "domain": "body_tempering",
+      "name": "Impact conditioning",
+      "description": "Impact conditioning applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.recovery_practice",
+      "domain": "body_tempering",
+      "name": "Recovery practice",
+      "description": "Recovery practice applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.medicinal_baths",
+      "domain": "body_tempering",
+      "name": "Medicinal baths",
+      "description": "Medicinal baths applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.qi_assisted_tempering",
+      "domain": "body_tempering",
+      "name": "Qi assisted tempering",
+      "description": "Qi assisted tempering applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.iron_body_forms",
+      "domain": "body_tempering",
+      "name": "Iron body forms",
+      "description": "Iron body forms applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "body_tempering.tempering_instruction",
+      "domain": "body_tempering",
+      "name": "Tempering instruction",
+      "description": "Tempering instruction applies body tempering to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

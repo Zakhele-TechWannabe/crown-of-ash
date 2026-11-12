@@ -1,0 +1,110 @@
+{
+  "id": "river_travel",
+  "disciplines": [
+    {
+      "id": "river_travel.punting",
+      "domain": "river_travel",
+      "name": "Punting",
+      "description": "Punting applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.sculling",
+      "domain": "river_travel",
+      "name": "Sculling",
+      "description": "Sculling applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.sail_trimming",
+      "domain": "river_travel",
+      "name": "Sail trimming",
+      "description": "Sail trimming applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.current_reading",
+      "domain": "river_travel",
+      "name": "Current reading",
+      "description": "Current reading applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.shoal_finding",
+      "domain": "river_travel",
+      "name": "Shoal finding",
+      "description": "Shoal finding applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.ferry_handling",
+      "domain": "river_travel",
+      "name": "Ferry handling",
+      "description": "Ferry handling applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.raft_binding",
+      "domain": "river_travel",
+      "name": "Raft binding",
+      "description": "Raft binding applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.towpath_hauling",
+      "domain": "river_travel",
+      "name": "Towpath hauling",
+      "description": "Towpath hauling applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.river_knots",
+      "domain": "river_travel",
+      "name": "River knots",
+      "description": "River knots applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.landing_craft",
+      "domain": "river_travel",
+      "name": "Landing craft",
+      "description": "Landing craft applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.cargo_balancing",
+      "domain": "river_travel",
+      "name": "Cargo balancing",
+      "description": "Cargo balancing applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.storm_shelter",
+      "domain": "river_travel",
+      "name": "Storm shelter",
+      "description": "Storm shelter applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.waterway_charts",
+      "domain": "river_travel",
+      "name": "Waterway charts",
+      "description": "Waterway charts applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.portage",
+      "domain": "river_travel",
+      "name": "Portage",
+      "description": "Portage applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "river_travel.river_pilotage",
+      "domain": "river_travel",
+      "name": "River pilotage",
+      "description": "River pilotage applies river travel to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "mechanisms",
+  "disciplines": [
+    {
+      "id": "mechanisms.gear_carving",
+      "domain": "mechanisms",
+      "name": "Gear carving",
+      "description": "Gear carving applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.axle_fitting",
+      "domain": "mechanisms",
+      "name": "Axle fitting",
+      "description": "Axle fitting applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.bearing_making",
+      "domain": "mechanisms",
+      "name": "Bearing making",
+      "description": "Bearing making applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.counterweights",
+      "domain": "mechanisms",
+      "name": "Counterweights",
+      "description": "Counterweights applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.pulley_systems",
+      "domain": "mechanisms",
+      "name": "Pulley systems",
+      "description": "Pulley systems applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.spring_winding",
+      "domain": "mechanisms",
+      "name": "Spring winding",
+      "description": "Spring winding applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.lock_mechanisms",
+      "domain": "mechanisms",
+      "name": "Lock mechanisms",
+      "description": "Lock mechanisms applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.clock_escapements",
+      "domain": "mechanisms",
+      "name": "Clock escapements",
+      "description": "Clock escapements applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.water_clocks",
+      "domain": "mechanisms",
+      "name": "Water clocks",
+      "description": "Water clocks applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.automata",
+      "domain": "mechanisms",
+      "name": "Automata",
+      "description": "Automata applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.measuring_devices",
+      "domain": "mechanisms",
+      "name": "Measuring devices",
+      "description": "Measuring devices applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.fine_drilling",
+      "domain": "mechanisms",
+      "name": "Fine drilling",
+      "description": "Fine drilling applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.friction_testing",
+      "domain": "mechanisms",
+      "name": "Friction testing",
+      "description": "Friction testing applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.mechanism_repair",
+      "domain": "mechanisms",
+      "name": "Mechanism repair",
+      "description": "Mechanism repair applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "mechanisms.mechanical_design",
+      "domain": "mechanisms",
+      "name": "Mechanical design",
+      "description": "Mechanical design applies mechanisms to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

@@ -1,0 +1,4077 @@
+{
+  "id": "cloth_and_thread",
+  "disciplines": [
+    {
+      "id": "cloth_and_thread.textiles",
+      "domain": "cloth_and_thread",
+      "name": "Textiles",
+      "description": "Textiles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.hemp_retting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.textiles.spinning",
+          "discipline": "cloth_and_thread.textiles",
+          "name": "Spinning",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.textiles.weaving",
+          "discipline": "cloth_and_thread.textiles",
+          "name": "Weaving",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.textiles.dyeing",
+          "discipline": "cloth_and_thread.textiles",
+          "name": "Dyeing",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.textiles.tailoring",
+          "discipline": "cloth_and_thread.textiles",
+          "name": "Tailoring",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 11
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.textiles.spirit_silk",
+          "discipline": "cloth_and_thread.textiles",
+          "name": "Spirit silk",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.textiles.perk_5",
+          "level": 5,
+          "name": "Textiles: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Textiles output +2%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_10",
+          "level": 10,
+          "name": "Textiles: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Textiles waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_15",
+          "level": 15,
+          "name": "Textiles: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Textiles quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_20",
+          "level": 20,
+          "name": "Textiles: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Textiles care +5%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_25",
+          "level": 25,
+          "name": "Textiles: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Textiles speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_30",
+          "level": 30,
+          "name": "Textiles: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Textiles output +5%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_35",
+          "level": 35,
+          "name": "Textiles: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Textiles spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_40",
+          "level": 40,
+          "name": "Textiles: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Textiles quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_45",
+          "level": 45,
+          "name": "Textiles: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Textiles speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.textiles.perk_50",
+          "level": 50,
+          "name": "Textiles: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Textiles output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise textiles for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful textiles (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of textiles; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a textiles task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn textiles from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of textiles, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.hemp_retting",
+      "domain": "cloth_and_thread",
+      "name": "Hemp retting",
+      "description": "Hemp retting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.fibre_combing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.hemp_retting.hemp_retting_basics",
+          "discipline": "cloth_and_thread.hemp_retting",
+          "name": "Hemp retting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.hemp_retting_seasonal_practice",
+          "discipline": "cloth_and_thread.hemp_retting",
+          "name": "Hemp retting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.hemp_retting_precision_work",
+          "discipline": "cloth_and_thread.hemp_retting",
+          "name": "Hemp retting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.hemp_retting_master_technique",
+          "discipline": "cloth_and_thread.hemp_retting",
+          "name": "Hemp retting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_5",
+          "level": 5,
+          "name": "Hemp retting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hemp retting output +2%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_10",
+          "level": 10,
+          "name": "Hemp retting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hemp retting waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_15",
+          "level": 15,
+          "name": "Hemp retting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hemp retting quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_20",
+          "level": 20,
+          "name": "Hemp retting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hemp retting care +5%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_25",
+          "level": 25,
+          "name": "Hemp retting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hemp retting speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_30",
+          "level": 30,
+          "name": "Hemp retting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hemp retting output +5%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_35",
+          "level": 35,
+          "name": "Hemp retting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hemp retting spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_40",
+          "level": 40,
+          "name": "Hemp retting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hemp retting quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_45",
+          "level": 45,
+          "name": "Hemp retting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hemp retting speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.hemp_retting.perk_50",
+          "level": 50,
+          "name": "Hemp retting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hemp retting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hemp retting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hemp retting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hemp retting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hemp retting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hemp retting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hemp retting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.fibre_combing",
+      "domain": "cloth_and_thread",
+      "name": "Fibre combing",
+      "description": "Fibre combing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.spinning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.fibre_combing.fibre_combing_basics",
+          "discipline": "cloth_and_thread.fibre_combing",
+          "name": "Fibre combing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.fibre_combing_seasonal_practice",
+          "discipline": "cloth_and_thread.fibre_combing",
+          "name": "Fibre combing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.fibre_combing_precision_work",
+          "discipline": "cloth_and_thread.fibre_combing",
+          "name": "Fibre combing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.fibre_combing_master_technique",
+          "discipline": "cloth_and_thread.fibre_combing",
+          "name": "Fibre combing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_5",
+          "level": 5,
+          "name": "Fibre combing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fibre combing output +2%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_10",
+          "level": 10,
+          "name": "Fibre combing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fibre combing waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_15",
+          "level": 15,
+          "name": "Fibre combing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fibre combing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_20",
+          "level": 20,
+          "name": "Fibre combing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fibre combing care +5%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_25",
+          "level": 25,
+          "name": "Fibre combing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fibre combing speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_30",
+          "level": 30,
+          "name": "Fibre combing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fibre combing output +5%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_35",
+          "level": 35,
+          "name": "Fibre combing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fibre combing spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_40",
+          "level": 40,
+          "name": "Fibre combing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fibre combing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_45",
+          "level": 45,
+          "name": "Fibre combing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fibre combing speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.fibre_combing.perk_50",
+          "level": 50,
+          "name": "Fibre combing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fibre combing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fibre combing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fibre combing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fibre combing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fibre combing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fibre combing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fibre combing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.spinning",
+      "domain": "cloth_and_thread",
+      "name": "Spinning",
+      "description": "Spinning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.loom_dressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.spinning.spinning_basics",
+          "discipline": "cloth_and_thread.spinning",
+          "name": "Spinning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.spinning.spinning_seasonal_practice",
+          "discipline": "cloth_and_thread.spinning",
+          "name": "Spinning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.spinning.spinning_precision_work",
+          "discipline": "cloth_and_thread.spinning",
+          "name": "Spinning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.spinning.spinning_master_technique",
+          "discipline": "cloth_and_thread.spinning",
+          "name": "Spinning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.spinning.perk_5",
+          "level": 5,
+          "name": "Spinning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Spinning output +2%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_10",
+          "level": 10,
+          "name": "Spinning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Spinning waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_15",
+          "level": 15,
+          "name": "Spinning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Spinning quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_20",
+          "level": 20,
+          "name": "Spinning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Spinning care +5%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_25",
+          "level": 25,
+          "name": "Spinning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Spinning speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_30",
+          "level": 30,
+          "name": "Spinning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Spinning output +5%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_35",
+          "level": 35,
+          "name": "Spinning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Spinning spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_40",
+          "level": 40,
+          "name": "Spinning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Spinning quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_45",
+          "level": 45,
+          "name": "Spinning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Spinning speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.spinning.perk_50",
+          "level": 50,
+          "name": "Spinning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Spinning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise spinning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful spinning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of spinning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a spinning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn spinning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of spinning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.loom_dressing",
+      "domain": "cloth_and_thread",
+      "name": "Loom dressing",
+      "description": "Loom dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.weaving"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.loom_dressing.loom_dressing_basics",
+          "discipline": "cloth_and_thread.loom_dressing",
+          "name": "Loom dressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.loom_dressing_seasonal_practice",
+          "discipline": "cloth_and_thread.loom_dressing",
+          "name": "Loom dressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.loom_dressing_precision_work",
+          "discipline": "cloth_and_thread.loom_dressing",
+          "name": "Loom dressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.loom_dressing_master_technique",
+          "discipline": "cloth_and_thread.loom_dressing",
+          "name": "Loom dressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_5",
+          "level": 5,
+          "name": "Loom dressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Loom dressing output +2%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_10",
+          "level": 10,
+          "name": "Loom dressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Loom dressing waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_15",
+          "level": 15,
+          "name": "Loom dressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Loom dressing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_20",
+          "level": 20,
+          "name": "Loom dressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Loom dressing care +5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_25",
+          "level": 25,
+          "name": "Loom dressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Loom dressing speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_30",
+          "level": 30,
+          "name": "Loom dressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Loom dressing output +5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_35",
+          "level": 35,
+          "name": "Loom dressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Loom dressing spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_40",
+          "level": 40,
+          "name": "Loom dressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Loom dressing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_45",
+          "level": 45,
+          "name": "Loom dressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Loom dressing speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_dressing.perk_50",
+          "level": 50,
+          "name": "Loom dressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Loom dressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise loom dressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful loom dressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of loom dressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a loom dressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn loom dressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of loom dressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.weaving",
+      "domain": "cloth_and_thread",
+      "name": "Weaving",
+      "description": "Weaving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.dyeing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.weaving.weaving_basics",
+          "discipline": "cloth_and_thread.weaving",
+          "name": "Weaving basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.weaving.weaving_seasonal_practice",
+          "discipline": "cloth_and_thread.weaving",
+          "name": "Weaving seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.weaving.weaving_precision_work",
+          "discipline": "cloth_and_thread.weaving",
+          "name": "Weaving precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.weaving.weaving_master_technique",
+          "discipline": "cloth_and_thread.weaving",
+          "name": "Weaving master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.weaving.perk_5",
+          "level": 5,
+          "name": "Weaving: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Weaving output +2%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_10",
+          "level": 10,
+          "name": "Weaving: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Weaving waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_15",
+          "level": 15,
+          "name": "Weaving: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Weaving quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_20",
+          "level": 20,
+          "name": "Weaving: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Weaving care +5%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_25",
+          "level": 25,
+          "name": "Weaving: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Weaving speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_30",
+          "level": 30,
+          "name": "Weaving: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Weaving output +5%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_35",
+          "level": 35,
+          "name": "Weaving: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Weaving spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_40",
+          "level": 40,
+          "name": "Weaving: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Weaving quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_45",
+          "level": 45,
+          "name": "Weaving: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Weaving speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.weaving.perk_50",
+          "level": 50,
+          "name": "Weaving: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Weaving output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise weaving for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful weaving (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of weaving; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a weaving task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn weaving from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of weaving, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.dyeing",
+      "domain": "cloth_and_thread",
+      "name": "Dyeing",
+      "description": "Dyeing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.tailoring"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.dyeing.dyeing_basics",
+          "discipline": "cloth_and_thread.dyeing",
+          "name": "Dyeing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.dyeing.dyeing_seasonal_practice",
+          "discipline": "cloth_and_thread.dyeing",
+          "name": "Dyeing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.dyeing.dyeing_precision_work",
+          "discipline": "cloth_and_thread.dyeing",
+          "name": "Dyeing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.dyeing.dyeing_master_technique",
+          "discipline": "cloth_and_thread.dyeing",
+          "name": "Dyeing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.dyeing.perk_5",
+          "level": 5,
+          "name": "Dyeing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Dyeing output +2%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_10",
+          "level": 10,
+          "name": "Dyeing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Dyeing waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_15",
+          "level": 15,
+          "name": "Dyeing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dyeing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_20",
+          "level": 20,
+          "name": "Dyeing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Dyeing care +5%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_25",
+          "level": 25,
+          "name": "Dyeing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Dyeing speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_30",
+          "level": 30,
+          "name": "Dyeing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dyeing output +5%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_35",
+          "level": 35,
+          "name": "Dyeing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Dyeing spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_40",
+          "level": 40,
+          "name": "Dyeing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dyeing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_45",
+          "level": 45,
+          "name": "Dyeing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Dyeing speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.dyeing.perk_50",
+          "level": 50,
+          "name": "Dyeing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dyeing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise dyeing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful dyeing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of dyeing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a dyeing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn dyeing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of dyeing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.tailoring",
+      "domain": "cloth_and_thread",
+      "name": "Tailoring",
+      "description": "Tailoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.embroidery"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.tailoring.tailoring_basics",
+          "discipline": "cloth_and_thread.tailoring",
+          "name": "Tailoring basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.tailoring.tailoring_seasonal_practice",
+          "discipline": "cloth_and_thread.tailoring",
+          "name": "Tailoring seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.tailoring.tailoring_precision_work",
+          "discipline": "cloth_and_thread.tailoring",
+          "name": "Tailoring precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.tailoring.tailoring_master_technique",
+          "discipline": "cloth_and_thread.tailoring",
+          "name": "Tailoring master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.tailoring.perk_5",
+          "level": 5,
+          "name": "Tailoring: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tailoring output +2%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_10",
+          "level": 10,
+          "name": "Tailoring: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tailoring waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_15",
+          "level": 15,
+          "name": "Tailoring: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tailoring quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_20",
+          "level": 20,
+          "name": "Tailoring: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tailoring care +5%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_25",
+          "level": 25,
+          "name": "Tailoring: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tailoring speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_30",
+          "level": 30,
+          "name": "Tailoring: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tailoring output +5%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_35",
+          "level": 35,
+          "name": "Tailoring: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tailoring spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_40",
+          "level": 40,
+          "name": "Tailoring: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tailoring quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_45",
+          "level": 45,
+          "name": "Tailoring: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tailoring speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.tailoring.perk_50",
+          "level": 50,
+          "name": "Tailoring: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tailoring output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tailoring for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tailoring (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tailoring; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tailoring task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tailoring from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tailoring, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.embroidery",
+      "domain": "cloth_and_thread",
+      "name": "Embroidery",
+      "description": "Embroidery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.rope_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.embroidery.embroidery_basics",
+          "discipline": "cloth_and_thread.embroidery",
+          "name": "Embroidery basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.embroidery.embroidery_seasonal_practice",
+          "discipline": "cloth_and_thread.embroidery",
+          "name": "Embroidery seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.embroidery.embroidery_precision_work",
+          "discipline": "cloth_and_thread.embroidery",
+          "name": "Embroidery precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.embroidery.embroidery_master_technique",
+          "discipline": "cloth_and_thread.embroidery",
+          "name": "Embroidery master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.embroidery.perk_5",
+          "level": 5,
+          "name": "Embroidery: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Embroidery output +2%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_10",
+          "level": 10,
+          "name": "Embroidery: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Embroidery waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_15",
+          "level": 15,
+          "name": "Embroidery: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Embroidery quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_20",
+          "level": 20,
+          "name": "Embroidery: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Embroidery care +5%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_25",
+          "level": 25,
+          "name": "Embroidery: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Embroidery speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_30",
+          "level": 30,
+          "name": "Embroidery: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Embroidery output +5%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_35",
+          "level": 35,
+          "name": "Embroidery: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Embroidery spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_40",
+          "level": 40,
+          "name": "Embroidery: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Embroidery quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_45",
+          "level": 45,
+          "name": "Embroidery: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Embroidery speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.embroidery.perk_50",
+          "level": 50,
+          "name": "Embroidery: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Embroidery output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise embroidery for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful embroidery (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of embroidery; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a embroidery task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn embroidery from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of embroidery, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.rope_making",
+      "domain": "cloth_and_thread",
+      "name": "Rope making",
+      "description": "Rope making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.felt_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.rope_making.rope_making_basics",
+          "discipline": "cloth_and_thread.rope_making",
+          "name": "Rope making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.rope_making.rope_making_seasonal_practice",
+          "discipline": "cloth_and_thread.rope_making",
+          "name": "Rope making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.rope_making.rope_making_precision_work",
+          "discipline": "cloth_and_thread.rope_making",
+          "name": "Rope making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.rope_making.rope_making_master_technique",
+          "discipline": "cloth_and_thread.rope_making",
+          "name": "Rope making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.rope_making.perk_5",
+          "level": 5,
+          "name": "Rope making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Rope making output +2%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_10",
+          "level": 10,
+          "name": "Rope making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Rope making waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_15",
+          "level": 15,
+          "name": "Rope making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rope making quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_20",
+          "level": 20,
+          "name": "Rope making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Rope making care +5%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_25",
+          "level": 25,
+          "name": "Rope making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Rope making speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_30",
+          "level": 30,
+          "name": "Rope making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rope making output +5%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_35",
+          "level": 35,
+          "name": "Rope making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Rope making spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_40",
+          "level": 40,
+          "name": "Rope making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rope making quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_45",
+          "level": 45,
+          "name": "Rope making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Rope making speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.rope_making.perk_50",
+          "level": 50,
+          "name": "Rope making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rope making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise rope making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful rope making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of rope making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a rope making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn rope making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of rope making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.felt_making",
+      "domain": "cloth_and_thread",
+      "name": "Felt making",
+      "description": "Felt making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.cloth_finishing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.felt_making.felt_making_basics",
+          "discipline": "cloth_and_thread.felt_making",
+          "name": "Felt making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.felt_making.felt_making_seasonal_practice",
+          "discipline": "cloth_and_thread.felt_making",
+          "name": "Felt making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.felt_making.felt_making_precision_work",
+          "discipline": "cloth_and_thread.felt_making",
+          "name": "Felt making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.felt_making.felt_making_master_technique",
+          "discipline": "cloth_and_thread.felt_making",
+          "name": "Felt making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.felt_making.perk_5",
+          "level": 5,
+          "name": "Felt making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Felt making output +2%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_10",
+          "level": 10,
+          "name": "Felt making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Felt making waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_15",
+          "level": 15,
+          "name": "Felt making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Felt making quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_20",
+          "level": 20,
+          "name": "Felt making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Felt making care +5%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_25",
+          "level": 25,
+          "name": "Felt making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Felt making speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_30",
+          "level": 30,
+          "name": "Felt making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Felt making output +5%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_35",
+          "level": 35,
+          "name": "Felt making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Felt making spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_40",
+          "level": 40,
+          "name": "Felt making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Felt making quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_45",
+          "level": 45,
+          "name": "Felt making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Felt making speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.felt_making.perk_50",
+          "level": 50,
+          "name": "Felt making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Felt making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise felt making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful felt making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of felt making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a felt making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn felt making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of felt making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.cloth_finishing",
+      "domain": "cloth_and_thread",
+      "name": "Cloth finishing",
+      "description": "Cloth finishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.pattern_cutting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.cloth_finishing.cloth_finishing_basics",
+          "discipline": "cloth_and_thread.cloth_finishing",
+          "name": "Cloth finishing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.cloth_finishing_seasonal_practice",
+          "discipline": "cloth_and_thread.cloth_finishing",
+          "name": "Cloth finishing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.cloth_finishing_precision_work",
+          "discipline": "cloth_and_thread.cloth_finishing",
+          "name": "Cloth finishing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.cloth_finishing_master_technique",
+          "discipline": "cloth_and_thread.cloth_finishing",
+          "name": "Cloth finishing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_5",
+          "level": 5,
+          "name": "Cloth finishing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Cloth finishing output +2%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_10",
+          "level": 10,
+          "name": "Cloth finishing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Cloth finishing waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_15",
+          "level": 15,
+          "name": "Cloth finishing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cloth finishing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_20",
+          "level": 20,
+          "name": "Cloth finishing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Cloth finishing care +5%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_25",
+          "level": 25,
+          "name": "Cloth finishing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Cloth finishing speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_30",
+          "level": 30,
+          "name": "Cloth finishing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cloth finishing output +5%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_35",
+          "level": 35,
+          "name": "Cloth finishing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Cloth finishing spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_40",
+          "level": 40,
+          "name": "Cloth finishing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cloth finishing quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_45",
+          "level": 45,
+          "name": "Cloth finishing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Cloth finishing speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.cloth_finishing.perk_50",
+          "level": 50,
+          "name": "Cloth finishing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cloth finishing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise cloth finishing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful cloth finishing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of cloth finishing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a cloth finishing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn cloth finishing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of cloth finishing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.pattern_cutting",
+      "domain": "cloth_and_thread",
+      "name": "Pattern cutting",
+      "description": "Pattern cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.clothing_repair"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.pattern_cutting.pattern_cutting_basics",
+          "discipline": "cloth_and_thread.pattern_cutting",
+          "name": "Pattern cutting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.pattern_cutting_seasonal_practice",
+          "discipline": "cloth_and_thread.pattern_cutting",
+          "name": "Pattern cutting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.pattern_cutting_precision_work",
+          "discipline": "cloth_and_thread.pattern_cutting",
+          "name": "Pattern cutting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.pattern_cutting_master_technique",
+          "discipline": "cloth_and_thread.pattern_cutting",
+          "name": "Pattern cutting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_5",
+          "level": 5,
+          "name": "Pattern cutting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pattern cutting output +2%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_10",
+          "level": 10,
+          "name": "Pattern cutting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pattern cutting waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_15",
+          "level": 15,
+          "name": "Pattern cutting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pattern cutting quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_20",
+          "level": 20,
+          "name": "Pattern cutting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pattern cutting care +5%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_25",
+          "level": 25,
+          "name": "Pattern cutting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pattern cutting speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_30",
+          "level": 30,
+          "name": "Pattern cutting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pattern cutting output +5%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_35",
+          "level": 35,
+          "name": "Pattern cutting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pattern cutting spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_40",
+          "level": 40,
+          "name": "Pattern cutting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pattern cutting quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_45",
+          "level": 45,
+          "name": "Pattern cutting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pattern cutting speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.pattern_cutting.perk_50",
+          "level": 50,
+          "name": "Pattern cutting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pattern cutting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pattern cutting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pattern cutting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pattern cutting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pattern cutting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pattern cutting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pattern cutting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.clothing_repair",
+      "domain": "cloth_and_thread",
+      "name": "Clothing repair",
+      "description": "Clothing repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.loom_maintenance"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.clothing_repair.clothing_repair_basics",
+          "discipline": "cloth_and_thread.clothing_repair",
+          "name": "Clothing repair basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.clothing_repair_seasonal_practice",
+          "discipline": "cloth_and_thread.clothing_repair",
+          "name": "Clothing repair seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.clothing_repair_precision_work",
+          "discipline": "cloth_and_thread.clothing_repair",
+          "name": "Clothing repair precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.clothing_repair_master_technique",
+          "discipline": "cloth_and_thread.clothing_repair",
+          "name": "Clothing repair master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_5",
+          "level": 5,
+          "name": "Clothing repair: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Clothing repair output +2%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_10",
+          "level": 10,
+          "name": "Clothing repair: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Clothing repair waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_15",
+          "level": 15,
+          "name": "Clothing repair: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clothing repair quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_20",
+          "level": 20,
+          "name": "Clothing repair: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Clothing repair care +5%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_25",
+          "level": 25,
+          "name": "Clothing repair: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Clothing repair speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_30",
+          "level": 30,
+          "name": "Clothing repair: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clothing repair output +5%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_35",
+          "level": 35,
+          "name": "Clothing repair: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Clothing repair spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_40",
+          "level": 40,
+          "name": "Clothing repair: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clothing repair quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_45",
+          "level": 45,
+          "name": "Clothing repair: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Clothing repair speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.clothing_repair.perk_50",
+          "level": 50,
+          "name": "Clothing repair: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clothing repair output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise clothing repair for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful clothing repair (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of clothing repair; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a clothing repair task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn clothing repair from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of clothing repair, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "cloth_and_thread.loom_maintenance",
+      "domain": "cloth_and_thread",
+      "name": "Loom maintenance",
+      "description": "Loom maintenance: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "cloth_and_thread.textiles"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "cloth_and_thread.loom_maintenance.loom_maintenance_basics",
+          "discipline": "cloth_and_thread.loom_maintenance",
+          "name": "Loom maintenance basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.loom_maintenance_seasonal_practice",
+          "discipline": "cloth_and_thread.loom_maintenance",
+          "name": "Loom maintenance seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.loom_maintenance_precision_work",
+          "discipline": "cloth_and_thread.loom_maintenance",
+          "name": "Loom maintenance precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.loom_maintenance_master_technique",
+          "discipline": "cloth_and_thread.loom_maintenance",
+          "name": "Loom maintenance master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_5",
+          "level": 5,
+          "name": "Loom maintenance: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Loom maintenance output +2%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_10",
+          "level": 10,
+          "name": "Loom maintenance: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Loom maintenance waste -5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_15",
+          "level": 15,
+          "name": "Loom maintenance: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Loom maintenance quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_20",
+          "level": 20,
+          "name": "Loom maintenance: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Loom maintenance care +5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_25",
+          "level": 25,
+          "name": "Loom maintenance: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Loom maintenance speed +3%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_30",
+          "level": 30,
+          "name": "Loom maintenance: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Loom maintenance output +5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_35",
+          "level": 35,
+          "name": "Loom maintenance: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Loom maintenance spoilage -10%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_40",
+          "level": 40,
+          "name": "Loom maintenance: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Loom maintenance quality roll +1"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_45",
+          "level": 45,
+          "name": "Loom maintenance: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Loom maintenance speed +5%"
+        },
+        {
+          "id": "cloth_and_thread.loom_maintenance.perk_50",
+          "level": 50,
+          "name": "Loom maintenance: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Loom maintenance output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise loom maintenance for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful loom maintenance (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of loom maintenance; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a loom maintenance task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn loom maintenance from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of loom maintenance, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "diplomacy",
+  "disciplines": [
+    {
+      "id": "diplomacy.formal_greetings",
+      "domain": "diplomacy",
+      "name": "Formal greetings",
+      "description": "Formal greetings applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.envoy_etiquette",
+      "domain": "diplomacy",
+      "name": "Envoy etiquette",
+      "description": "Envoy etiquette applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.gift_selection",
+      "domain": "diplomacy",
+      "name": "Gift selection",
+      "description": "Gift selection applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.treaty_drafting",
+      "domain": "diplomacy",
+      "name": "Treaty drafting",
+      "description": "Treaty drafting applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.negotiation",
+      "domain": "diplomacy",
+      "name": "Negotiation",
+      "description": "Negotiation applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.translation",
+      "domain": "diplomacy",
+      "name": "Translation",
+      "description": "Translation applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.border_talks",
+      "domain": "diplomacy",
+      "name": "Border talks",
+      "description": "Border talks applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.marriage_alliances",
+      "domain": "diplomacy",
+      "name": "Marriage alliances",
+      "description": "Marriage alliances applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.tribute_protocol",
+      "domain": "diplomacy",
+      "name": "Tribute protocol",
+      "description": "Tribute protocol applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.hostage_mediation",
+      "domain": "diplomacy",
+      "name": "Hostage mediation",
+      "description": "Hostage mediation applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.truce_making",
+      "domain": "diplomacy",
+      "name": "Truce making",
+      "description": "Truce making applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.cultural_reading",
+      "domain": "diplomacy",
+      "name": "Cultural reading",
+      "description": "Cultural reading applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.audience_planning",
+      "domain": "diplomacy",
+      "name": "Audience planning",
+      "description": "Audience planning applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.diplomatic_records",
+      "domain": "diplomacy",
+      "name": "Diplomatic records",
+      "description": "Diplomatic records applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "diplomacy.embassy_stewardship",
+      "domain": "diplomacy",
+      "name": "Embassy stewardship",
+      "description": "Embassy stewardship applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

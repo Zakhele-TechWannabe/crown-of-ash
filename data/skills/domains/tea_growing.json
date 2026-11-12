@@ -1,0 +1,110 @@
+{
+  "id": "tea_growing",
+  "disciplines": [
+    {
+      "id": "tea_growing.tea_nursery",
+      "domain": "tea_growing",
+      "name": "Tea nursery",
+      "description": "Tea nursery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.tea_pruning",
+      "domain": "tea_growing",
+      "name": "Tea pruning",
+      "description": "Tea pruning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.leaf_picking",
+      "domain": "tea_growing",
+      "name": "Leaf picking",
+      "description": "Leaf picking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.withering",
+      "domain": "tea_growing",
+      "name": "Withering",
+      "description": "Withering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.pan_firing",
+      "domain": "tea_growing",
+      "name": "Pan firing",
+      "description": "Pan firing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.rolling_leaves",
+      "domain": "tea_growing",
+      "name": "Rolling leaves",
+      "description": "Rolling leaves: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.oxidation",
+      "domain": "tea_growing",
+      "name": "Oxidation",
+      "description": "Oxidation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.tea_drying",
+      "domain": "tea_growing",
+      "name": "Tea drying",
+      "description": "Tea drying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.cake_pressing",
+      "domain": "tea_growing",
+      "name": "Cake pressing",
+      "description": "Cake pressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.tea_grading",
+      "domain": "tea_growing",
+      "name": "Tea grading",
+      "description": "Tea grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.slope_tending",
+      "domain": "tea_growing",
+      "name": "Slope tending",
+      "description": "Slope tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.shade_trees",
+      "domain": "tea_growing",
+      "name": "Shade trees",
+      "description": "Shade trees: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.tea_storage",
+      "domain": "tea_growing",
+      "name": "Tea storage",
+      "description": "Tea storage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.spring_harvest",
+      "domain": "tea_growing",
+      "name": "Spring harvest",
+      "description": "Spring harvest: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    },
+    {
+      "id": "tea_growing.tea_estate_planning",
+      "domain": "tea_growing",
+      "name": "Tea estate planning",
+      "description": "Tea estate planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": false
+    }
+  ]
+}

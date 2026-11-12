@@ -1,0 +1,329 @@
+[
+  {
+    "id": "diligent",
+    "name": "Diligent",
+    "xp_multiplier": 1.2,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "lazy",
+    "name": "Lazy",
+    "xp_multiplier": 0.75,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "green_thumb",
+    "name": "Green thumb",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "grain_farming",
+    "domain_xp": {
+      "grain_farming": 1.3,
+      "gardens": 1.3
+    },
+    "care_bonus": 0.1
+  },
+  {
+    "id": "strong_back",
+    "name": "Strong back",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.03,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "night_owl",
+    "name": "Night owl",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "astronomy"
+  },
+  {
+    "id": "patient",
+    "name": "Patient",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.03,
+    "preferred_domain": ""
+  },
+  {
+    "id": "hot_tempered",
+    "name": "Hot-tempered",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": -0.03,
+    "preferred_domain": ""
+  },
+  {
+    "id": "curious",
+    "name": "Curious",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": "",
+    "new_skill_xp_multiplier": 1.1
+  },
+  {
+    "id": "clumsy",
+    "name": "Clumsy",
+    "xp_multiplier": 1.0,
+    "output_bonus": -0.05,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "born_teacher",
+    "name": "Born teacher",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "teaching",
+    "teacher_bonus": 0.8
+  },
+  {
+    "id": "stubborn",
+    "name": "Stubborn",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": -0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "animal_friend",
+    "name": "Animal friend",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "husbandry"
+  },
+  {
+    "id": "keen_eye",
+    "name": "Keen eye",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "iron_stomach",
+    "name": "Iron stomach",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "frail",
+    "name": "Frail",
+    "xp_multiplier": 1.0,
+    "output_bonus": -0.05,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "long_lived",
+    "name": "Long-lived",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "early_riser",
+    "name": "Early riser",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "grain_farming"
+  },
+  {
+    "id": "steady_hands",
+    "name": "Steady hands",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.03,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "sociable",
+    "name": "Sociable",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "commerce"
+  },
+  {
+    "id": "shy",
+    "name": "Shy",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "letters"
+  },
+  {
+    "id": "frugal",
+    "name": "Frugal",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "generous",
+    "name": "Generous",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "brave",
+    "name": "Brave",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "game_and_hunting"
+  },
+  {
+    "id": "cautious",
+    "name": "Cautious",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "housekeeping"
+  },
+  {
+    "id": "methodical",
+    "name": "Methodical",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "impulsive",
+    "name": "Impulsive",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": -0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "resilient",
+    "name": "Resilient",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.02,
+    "preferred_domain": ""
+  },
+  {
+    "id": "melancholic",
+    "name": "Melancholic",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": -0.03,
+    "preferred_domain": ""
+  },
+  {
+    "id": "cheerful",
+    "name": "Cheerful",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.03,
+    "preferred_domain": ""
+  },
+  {
+    "id": "quick_learner",
+    "name": "Quick learner",
+    "xp_multiplier": 1.15,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "slow_learner",
+    "name": "Slow learner",
+    "xp_multiplier": 0.85,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  },
+  {
+    "id": "river_wise",
+    "name": "River wise",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "waters_and_fishing"
+  },
+  {
+    "id": "forest_kin",
+    "name": "Forest kin",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "forestry_and_woodcutting"
+  },
+  {
+    "id": "stone_listener",
+    "name": "Stone listener",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "mines_and_ores"
+  },
+  {
+    "id": "hearth_heart",
+    "name": "Hearth heart",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "kitchen"
+  },
+  {
+    "id": "honest",
+    "name": "Honest",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "commerce"
+  },
+  {
+    "id": "ambitious",
+    "name": "Ambitious",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "leadership"
+  },
+  {
+    "id": "contented",
+    "name": "Contented",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.03,
+    "preferred_domain": ""
+  },
+  {
+    "id": "restless",
+    "name": "Restless",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "frontier_scouting"
+  },
+  {
+    "id": "meticulous",
+    "name": "Meticulous",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.03,
+    "mood_bonus": 0.0,
+    "preferred_domain": ""
+  }
+]

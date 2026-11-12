@@ -1,0 +1,110 @@
+{
+  "id": "artifact_refining",
+  "disciplines": [
+    {
+      "id": "artifact_refining.artifact_refining",
+      "domain": "artifact_refining",
+      "name": "Artifact refining",
+      "description": "Artifact refining applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.spiritual_metals",
+      "domain": "artifact_refining",
+      "name": "Spiritual metals",
+      "description": "Spiritual metals applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.spirit_forging",
+      "domain": "artifact_refining",
+      "name": "Spirit forging",
+      "description": "Spirit forging applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.rune_inlay",
+      "domain": "artifact_refining",
+      "name": "Rune inlay",
+      "description": "Rune inlay applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.artifact_binding",
+      "domain": "artifact_refining",
+      "name": "Artifact binding",
+      "description": "Artifact binding applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.qi_channels",
+      "domain": "artifact_refining",
+      "name": "Qi channels",
+      "description": "Qi channels applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.core_setting",
+      "domain": "artifact_refining",
+      "name": "Core setting",
+      "description": "Core setting applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.artifact_awakening",
+      "domain": "artifact_refining",
+      "name": "Artifact awakening",
+      "description": "Artifact awakening applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.weapon_spirits",
+      "domain": "artifact_refining",
+      "name": "Weapon spirits",
+      "description": "Weapon spirits applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.artifact_repair",
+      "domain": "artifact_refining",
+      "name": "Artifact repair",
+      "description": "Artifact repair applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.refining_flames",
+      "domain": "artifact_refining",
+      "name": "Refining flames",
+      "description": "Refining flames applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.material_harmonisation",
+      "domain": "artifact_refining",
+      "name": "Material harmonisation",
+      "description": "Material harmonisation applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.artifact_grading",
+      "domain": "artifact_refining",
+      "name": "Artifact grading",
+      "description": "Artifact grading applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.legacy_restoration",
+      "domain": "artifact_refining",
+      "name": "Legacy restoration",
+      "description": "Legacy restoration applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "artifact_refining.artifact_design",
+      "domain": "artifact_refining",
+      "name": "Artifact design",
+      "description": "Artifact design applies artifact refining to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "weapons",
+  "disciplines": [
+    {
+      "id": "weapons.staff",
+      "domain": "weapons",
+      "name": "Staff",
+      "description": "Staff applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.spear",
+      "domain": "weapons",
+      "name": "Spear",
+      "description": "Spear applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.blade",
+      "domain": "weapons",
+      "name": "Blade",
+      "description": "Blade applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.straight_sword",
+      "domain": "weapons",
+      "name": "Straight sword",
+      "description": "Straight sword applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.axe",
+      "domain": "weapons",
+      "name": "Axe",
+      "description": "Axe applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.hammer",
+      "domain": "weapons",
+      "name": "Hammer",
+      "description": "Hammer applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.shield",
+      "domain": "weapons",
+      "name": "Shield",
+      "description": "Shield applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.polearm",
+      "domain": "weapons",
+      "name": "Polearm",
+      "description": "Polearm applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.twin_weapons",
+      "domain": "weapons",
+      "name": "Twin weapons",
+      "description": "Twin weapons applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.chain_weapons",
+      "domain": "weapons",
+      "name": "Chain weapons",
+      "description": "Chain weapons applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.weapon_care",
+      "domain": "weapons",
+      "name": "Weapon care",
+      "description": "Weapon care applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.distance_control",
+      "domain": "weapons",
+      "name": "Distance control",
+      "description": "Distance control applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.weapon_sparring",
+      "domain": "weapons",
+      "name": "Weapon sparring",
+      "description": "Weapon sparring applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.weapon_forms",
+      "domain": "weapons",
+      "name": "Weapon forms",
+      "description": "Weapon forms applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "weapons.weapons_instruction",
+      "domain": "weapons",
+      "name": "Weapons instruction",
+      "description": "Weapons instruction applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

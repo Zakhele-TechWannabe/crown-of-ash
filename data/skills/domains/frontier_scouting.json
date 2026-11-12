@@ -1,0 +1,110 @@
+{
+  "id": "frontier_scouting",
+  "disciplines": [
+    {
+      "id": "frontier_scouting.route_scouting",
+      "domain": "frontier_scouting",
+      "name": "Route scouting",
+      "description": "Route scouting applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.camp_concealment",
+      "domain": "frontier_scouting",
+      "name": "Camp concealment",
+      "description": "Camp concealment applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.distant_observation",
+      "domain": "frontier_scouting",
+      "name": "Distant observation",
+      "description": "Distant observation applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.threat_reports",
+      "domain": "frontier_scouting",
+      "name": "Threat reports",
+      "description": "Threat reports applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.map_sketching",
+      "domain": "frontier_scouting",
+      "name": "Map sketching",
+      "description": "Map sketching applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.border_markers",
+      "domain": "frontier_scouting",
+      "name": "Border markers",
+      "description": "Border markers applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.signal_codes",
+      "domain": "frontier_scouting",
+      "name": "Signal codes",
+      "description": "Signal codes applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.patrol_routes",
+      "domain": "frontier_scouting",
+      "name": "Patrol routes",
+      "description": "Patrol routes applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.listening_posts",
+      "domain": "frontier_scouting",
+      "name": "Listening posts",
+      "description": "Listening posts applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.escape_trails",
+      "domain": "frontier_scouting",
+      "name": "Escape trails",
+      "description": "Escape trails applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.supply_finding",
+      "domain": "frontier_scouting",
+      "name": "Supply finding",
+      "description": "Supply finding applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.settlement_contact",
+      "domain": "frontier_scouting",
+      "name": "Settlement contact",
+      "description": "Settlement contact applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.terrain_memory",
+      "domain": "frontier_scouting",
+      "name": "Terrain memory",
+      "description": "Terrain memory applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.ambush_detection",
+      "domain": "frontier_scouting",
+      "name": "Ambush detection",
+      "description": "Ambush detection applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "frontier_scouting.scout_mentoring",
+      "domain": "frontier_scouting",
+      "name": "Scout mentoring",
+      "description": "Scout mentoring applies frontier scouting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

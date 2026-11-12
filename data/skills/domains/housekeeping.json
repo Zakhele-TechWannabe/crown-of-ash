@@ -1,0 +1,4070 @@
+{
+  "id": "housekeeping",
+  "disciplines": [
+    {
+      "id": "housekeeping.housekeeping",
+      "domain": "housekeeping",
+      "name": "Housekeeping",
+      "description": "Housekeeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.sweeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.housekeeping.housekeeping_basics",
+          "discipline": "housekeeping.housekeeping",
+          "name": "Housekeeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.housekeeping.housekeeping_seasonal_practice",
+          "discipline": "housekeeping.housekeeping",
+          "name": "Housekeeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.housekeeping.housekeeping_precision_work",
+          "discipline": "housekeeping.housekeeping",
+          "name": "Housekeeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.housekeeping.housekeeping_master_technique",
+          "discipline": "housekeeping.housekeeping",
+          "name": "Housekeeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.housekeeping.perk_5",
+          "level": 5,
+          "name": "Housekeeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Housekeeping output +2%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_10",
+          "level": 10,
+          "name": "Housekeeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Housekeeping waste -5%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_15",
+          "level": 15,
+          "name": "Housekeeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Housekeeping quality roll +1"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_20",
+          "level": 20,
+          "name": "Housekeeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Housekeeping care +5%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_25",
+          "level": 25,
+          "name": "Housekeeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Housekeeping speed +3%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_30",
+          "level": 30,
+          "name": "Housekeeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Housekeeping output +5%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_35",
+          "level": 35,
+          "name": "Housekeeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Housekeeping spoilage -10%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_40",
+          "level": 40,
+          "name": "Housekeeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Housekeeping quality roll +1"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_45",
+          "level": 45,
+          "name": "Housekeeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Housekeeping speed +5%"
+        },
+        {
+          "id": "housekeeping.housekeeping.perk_50",
+          "level": 50,
+          "name": "Housekeeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Housekeeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise housekeeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful housekeeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of housekeeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a housekeeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn housekeeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of housekeeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.sweeping",
+      "domain": "housekeeping",
+      "name": "Sweeping",
+      "description": "Sweeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.laundry"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.sweeping.sweeping_basics",
+          "discipline": "housekeeping.sweeping",
+          "name": "Sweeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.sweeping.sweeping_seasonal_practice",
+          "discipline": "housekeeping.sweeping",
+          "name": "Sweeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.sweeping.sweeping_precision_work",
+          "discipline": "housekeeping.sweeping",
+          "name": "Sweeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.sweeping.sweeping_master_technique",
+          "discipline": "housekeeping.sweeping",
+          "name": "Sweeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.sweeping.perk_5",
+          "level": 5,
+          "name": "Sweeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Sweeping output +2%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_10",
+          "level": 10,
+          "name": "Sweeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Sweeping waste -5%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_15",
+          "level": 15,
+          "name": "Sweeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Sweeping quality roll +1"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_20",
+          "level": 20,
+          "name": "Sweeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Sweeping care +5%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_25",
+          "level": 25,
+          "name": "Sweeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Sweeping speed +3%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_30",
+          "level": 30,
+          "name": "Sweeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Sweeping output +5%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_35",
+          "level": 35,
+          "name": "Sweeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Sweeping spoilage -10%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_40",
+          "level": 40,
+          "name": "Sweeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Sweeping quality roll +1"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_45",
+          "level": 45,
+          "name": "Sweeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Sweeping speed +5%"
+        },
+        {
+          "id": "housekeeping.sweeping.perk_50",
+          "level": 50,
+          "name": "Sweeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Sweeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise sweeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful sweeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of sweeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a sweeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn sweeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of sweeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.laundry",
+      "domain": "housekeeping",
+      "name": "Laundry",
+      "description": "Laundry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.bedding_care"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.laundry.laundry_basics",
+          "discipline": "housekeeping.laundry",
+          "name": "Laundry basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.laundry.laundry_seasonal_practice",
+          "discipline": "housekeeping.laundry",
+          "name": "Laundry seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.laundry.laundry_precision_work",
+          "discipline": "housekeeping.laundry",
+          "name": "Laundry precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.laundry.laundry_master_technique",
+          "discipline": "housekeeping.laundry",
+          "name": "Laundry master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.laundry.perk_5",
+          "level": 5,
+          "name": "Laundry: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Laundry output +2%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_10",
+          "level": 10,
+          "name": "Laundry: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Laundry waste -5%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_15",
+          "level": 15,
+          "name": "Laundry: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Laundry quality roll +1"
+        },
+        {
+          "id": "housekeeping.laundry.perk_20",
+          "level": 20,
+          "name": "Laundry: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Laundry care +5%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_25",
+          "level": 25,
+          "name": "Laundry: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Laundry speed +3%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_30",
+          "level": 30,
+          "name": "Laundry: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Laundry output +5%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_35",
+          "level": 35,
+          "name": "Laundry: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Laundry spoilage -10%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_40",
+          "level": 40,
+          "name": "Laundry: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Laundry quality roll +1"
+        },
+        {
+          "id": "housekeeping.laundry.perk_45",
+          "level": 45,
+          "name": "Laundry: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Laundry speed +5%"
+        },
+        {
+          "id": "housekeeping.laundry.perk_50",
+          "level": 50,
+          "name": "Laundry: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Laundry output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise laundry for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful laundry (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of laundry; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a laundry task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn laundry from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of laundry, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.bedding_care",
+      "domain": "housekeeping",
+      "name": "Bedding care",
+      "description": "Bedding care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.water_carrying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.bedding_care.bedding_care_basics",
+          "discipline": "housekeeping.bedding_care",
+          "name": "Bedding care basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.bedding_care.bedding_care_seasonal_practice",
+          "discipline": "housekeeping.bedding_care",
+          "name": "Bedding care seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.bedding_care.bedding_care_precision_work",
+          "discipline": "housekeeping.bedding_care",
+          "name": "Bedding care precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.bedding_care.bedding_care_master_technique",
+          "discipline": "housekeeping.bedding_care",
+          "name": "Bedding care master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.bedding_care.perk_5",
+          "level": 5,
+          "name": "Bedding care: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bedding care output +2%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_10",
+          "level": 10,
+          "name": "Bedding care: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bedding care waste -5%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_15",
+          "level": 15,
+          "name": "Bedding care: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bedding care quality roll +1"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_20",
+          "level": 20,
+          "name": "Bedding care: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bedding care care +5%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_25",
+          "level": 25,
+          "name": "Bedding care: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bedding care speed +3%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_30",
+          "level": 30,
+          "name": "Bedding care: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bedding care output +5%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_35",
+          "level": 35,
+          "name": "Bedding care: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bedding care spoilage -10%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_40",
+          "level": 40,
+          "name": "Bedding care: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bedding care quality roll +1"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_45",
+          "level": 45,
+          "name": "Bedding care: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bedding care speed +5%"
+        },
+        {
+          "id": "housekeeping.bedding_care.perk_50",
+          "level": 50,
+          "name": "Bedding care: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bedding care output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bedding care for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bedding care (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bedding care; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bedding care task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bedding care from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bedding care, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.water_carrying",
+      "domain": "housekeeping",
+      "name": "Water carrying",
+      "description": "Water carrying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.hearth_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.water_carrying.water_carrying_basics",
+          "discipline": "housekeeping.water_carrying",
+          "name": "Water carrying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.water_carrying.water_carrying_seasonal_practice",
+          "discipline": "housekeeping.water_carrying",
+          "name": "Water carrying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.water_carrying.water_carrying_precision_work",
+          "discipline": "housekeeping.water_carrying",
+          "name": "Water carrying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.water_carrying.water_carrying_master_technique",
+          "discipline": "housekeeping.water_carrying",
+          "name": "Water carrying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.water_carrying.perk_5",
+          "level": 5,
+          "name": "Water carrying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Water carrying output +2%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_10",
+          "level": 10,
+          "name": "Water carrying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Water carrying waste -5%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_15",
+          "level": 15,
+          "name": "Water carrying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Water carrying quality roll +1"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_20",
+          "level": 20,
+          "name": "Water carrying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Water carrying care +5%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_25",
+          "level": 25,
+          "name": "Water carrying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Water carrying speed +3%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_30",
+          "level": 30,
+          "name": "Water carrying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Water carrying output +5%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_35",
+          "level": 35,
+          "name": "Water carrying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Water carrying spoilage -10%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_40",
+          "level": 40,
+          "name": "Water carrying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Water carrying quality roll +1"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_45",
+          "level": 45,
+          "name": "Water carrying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Water carrying speed +5%"
+        },
+        {
+          "id": "housekeeping.water_carrying.perk_50",
+          "level": 50,
+          "name": "Water carrying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Water carrying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise water carrying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful water carrying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of water carrying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a water carrying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn water carrying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of water carrying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.hearth_tending",
+      "domain": "housekeeping",
+      "name": "Hearth tending",
+      "description": "Hearth tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.pantry_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.hearth_tending.hearth_tending_basics",
+          "discipline": "housekeeping.hearth_tending",
+          "name": "Hearth tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.hearth_tending.hearth_tending_seasonal_practice",
+          "discipline": "housekeeping.hearth_tending",
+          "name": "Hearth tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.hearth_tending.hearth_tending_precision_work",
+          "discipline": "housekeeping.hearth_tending",
+          "name": "Hearth tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.hearth_tending.hearth_tending_master_technique",
+          "discipline": "housekeeping.hearth_tending",
+          "name": "Hearth tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.hearth_tending.perk_5",
+          "level": 5,
+          "name": "Hearth tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hearth tending output +2%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_10",
+          "level": 10,
+          "name": "Hearth tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hearth tending waste -5%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_15",
+          "level": 15,
+          "name": "Hearth tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hearth tending quality roll +1"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_20",
+          "level": 20,
+          "name": "Hearth tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hearth tending care +5%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_25",
+          "level": 25,
+          "name": "Hearth tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hearth tending speed +3%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_30",
+          "level": 30,
+          "name": "Hearth tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hearth tending output +5%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_35",
+          "level": 35,
+          "name": "Hearth tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hearth tending spoilage -10%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_40",
+          "level": 40,
+          "name": "Hearth tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hearth tending quality roll +1"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_45",
+          "level": 45,
+          "name": "Hearth tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hearth tending speed +5%"
+        },
+        {
+          "id": "housekeeping.hearth_tending.perk_50",
+          "level": 50,
+          "name": "Hearth tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hearth tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hearth tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hearth tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hearth tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hearth tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hearth tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hearth tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.pantry_keeping",
+      "domain": "housekeeping",
+      "name": "Pantry keeping",
+      "description": "Pantry keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.house_repair"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.pantry_keeping.pantry_keeping_basics",
+          "discipline": "housekeeping.pantry_keeping",
+          "name": "Pantry keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.pantry_keeping.pantry_keeping_seasonal_practice",
+          "discipline": "housekeeping.pantry_keeping",
+          "name": "Pantry keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.pantry_keeping.pantry_keeping_precision_work",
+          "discipline": "housekeeping.pantry_keeping",
+          "name": "Pantry keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.pantry_keeping.pantry_keeping_master_technique",
+          "discipline": "housekeeping.pantry_keeping",
+          "name": "Pantry keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.pantry_keeping.perk_5",
+          "level": 5,
+          "name": "Pantry keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pantry keeping output +2%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_10",
+          "level": 10,
+          "name": "Pantry keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pantry keeping waste -5%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_15",
+          "level": 15,
+          "name": "Pantry keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pantry keeping quality roll +1"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_20",
+          "level": 20,
+          "name": "Pantry keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pantry keeping care +5%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_25",
+          "level": 25,
+          "name": "Pantry keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pantry keeping speed +3%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_30",
+          "level": 30,
+          "name": "Pantry keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pantry keeping output +5%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_35",
+          "level": 35,
+          "name": "Pantry keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pantry keeping spoilage -10%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_40",
+          "level": 40,
+          "name": "Pantry keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pantry keeping quality roll +1"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_45",
+          "level": 45,
+          "name": "Pantry keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pantry keeping speed +5%"
+        },
+        {
+          "id": "housekeeping.pantry_keeping.perk_50",
+          "level": 50,
+          "name": "Pantry keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pantry keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pantry keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pantry keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pantry keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pantry keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pantry keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pantry keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.house_repair",
+      "domain": "housekeeping",
+      "name": "House repair",
+      "description": "House repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.vermin_control"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.house_repair.house_repair_basics",
+          "discipline": "housekeeping.house_repair",
+          "name": "House repair basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.house_repair.house_repair_seasonal_practice",
+          "discipline": "housekeeping.house_repair",
+          "name": "House repair seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.house_repair.house_repair_precision_work",
+          "discipline": "housekeeping.house_repair",
+          "name": "House repair precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.house_repair.house_repair_master_technique",
+          "discipline": "housekeeping.house_repair",
+          "name": "House repair master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.house_repair.perk_5",
+          "level": 5,
+          "name": "House repair: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "House repair output +2%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_10",
+          "level": 10,
+          "name": "House repair: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "House repair waste -5%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_15",
+          "level": 15,
+          "name": "House repair: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "House repair quality roll +1"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_20",
+          "level": 20,
+          "name": "House repair: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "House repair care +5%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_25",
+          "level": 25,
+          "name": "House repair: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "House repair speed +3%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_30",
+          "level": 30,
+          "name": "House repair: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "House repair output +5%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_35",
+          "level": 35,
+          "name": "House repair: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "House repair spoilage -10%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_40",
+          "level": 40,
+          "name": "House repair: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "House repair quality roll +1"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_45",
+          "level": 45,
+          "name": "House repair: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "House repair speed +5%"
+        },
+        {
+          "id": "housekeeping.house_repair.perk_50",
+          "level": 50,
+          "name": "House repair: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "House repair output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise house repair for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful house repair (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of house repair; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a house repair task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn house repair from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of house repair, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.vermin_control",
+      "domain": "housekeeping",
+      "name": "Vermin control",
+      "description": "Vermin control: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.waste_composting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.vermin_control.vermin_control_basics",
+          "discipline": "housekeeping.vermin_control",
+          "name": "Vermin control basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.vermin_control.vermin_control_seasonal_practice",
+          "discipline": "housekeeping.vermin_control",
+          "name": "Vermin control seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.vermin_control.vermin_control_precision_work",
+          "discipline": "housekeeping.vermin_control",
+          "name": "Vermin control precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.vermin_control.vermin_control_master_technique",
+          "discipline": "housekeeping.vermin_control",
+          "name": "Vermin control master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.vermin_control.perk_5",
+          "level": 5,
+          "name": "Vermin control: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Vermin control output +2%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_10",
+          "level": 10,
+          "name": "Vermin control: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Vermin control waste -5%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_15",
+          "level": 15,
+          "name": "Vermin control: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vermin control quality roll +1"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_20",
+          "level": 20,
+          "name": "Vermin control: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Vermin control care +5%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_25",
+          "level": 25,
+          "name": "Vermin control: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Vermin control speed +3%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_30",
+          "level": 30,
+          "name": "Vermin control: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vermin control output +5%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_35",
+          "level": 35,
+          "name": "Vermin control: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Vermin control spoilage -10%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_40",
+          "level": 40,
+          "name": "Vermin control: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vermin control quality roll +1"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_45",
+          "level": 45,
+          "name": "Vermin control: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Vermin control speed +5%"
+        },
+        {
+          "id": "housekeeping.vermin_control.perk_50",
+          "level": 50,
+          "name": "Vermin control: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vermin control output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise vermin control for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful vermin control (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of vermin control; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a vermin control task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn vermin control from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of vermin control, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.waste_composting",
+      "domain": "housekeeping",
+      "name": "Waste composting",
+      "description": "Waste composting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.clothes_mending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.waste_composting.waste_composting_basics",
+          "discipline": "housekeeping.waste_composting",
+          "name": "Waste composting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.waste_composting.waste_composting_seasonal_practice",
+          "discipline": "housekeeping.waste_composting",
+          "name": "Waste composting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.waste_composting.waste_composting_precision_work",
+          "discipline": "housekeeping.waste_composting",
+          "name": "Waste composting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.waste_composting.waste_composting_master_technique",
+          "discipline": "housekeeping.waste_composting",
+          "name": "Waste composting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.waste_composting.perk_5",
+          "level": 5,
+          "name": "Waste composting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Waste composting output +2%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_10",
+          "level": 10,
+          "name": "Waste composting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Waste composting waste -5%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_15",
+          "level": 15,
+          "name": "Waste composting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Waste composting quality roll +1"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_20",
+          "level": 20,
+          "name": "Waste composting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Waste composting care +5%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_25",
+          "level": 25,
+          "name": "Waste composting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Waste composting speed +3%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_30",
+          "level": 30,
+          "name": "Waste composting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Waste composting output +5%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_35",
+          "level": 35,
+          "name": "Waste composting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Waste composting spoilage -10%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_40",
+          "level": 40,
+          "name": "Waste composting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Waste composting quality roll +1"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_45",
+          "level": 45,
+          "name": "Waste composting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Waste composting speed +5%"
+        },
+        {
+          "id": "housekeeping.waste_composting.perk_50",
+          "level": 50,
+          "name": "Waste composting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Waste composting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise waste composting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful waste composting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of waste composting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a waste composting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn waste composting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of waste composting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.clothes_mending",
+      "domain": "housekeeping",
+      "name": "Clothes mending",
+      "description": "Clothes mending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.shrine_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.clothes_mending.clothes_mending_basics",
+          "discipline": "housekeeping.clothes_mending",
+          "name": "Clothes mending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.clothes_mending.clothes_mending_seasonal_practice",
+          "discipline": "housekeeping.clothes_mending",
+          "name": "Clothes mending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.clothes_mending.clothes_mending_precision_work",
+          "discipline": "housekeeping.clothes_mending",
+          "name": "Clothes mending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.clothes_mending.clothes_mending_master_technique",
+          "discipline": "housekeeping.clothes_mending",
+          "name": "Clothes mending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.clothes_mending.perk_5",
+          "level": 5,
+          "name": "Clothes mending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Clothes mending output +2%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_10",
+          "level": 10,
+          "name": "Clothes mending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Clothes mending waste -5%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_15",
+          "level": 15,
+          "name": "Clothes mending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clothes mending quality roll +1"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_20",
+          "level": 20,
+          "name": "Clothes mending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Clothes mending care +5%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_25",
+          "level": 25,
+          "name": "Clothes mending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Clothes mending speed +3%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_30",
+          "level": 30,
+          "name": "Clothes mending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clothes mending output +5%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_35",
+          "level": 35,
+          "name": "Clothes mending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Clothes mending spoilage -10%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_40",
+          "level": 40,
+          "name": "Clothes mending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Clothes mending quality roll +1"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_45",
+          "level": 45,
+          "name": "Clothes mending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Clothes mending speed +5%"
+        },
+        {
+          "id": "housekeeping.clothes_mending.perk_50",
+          "level": 50,
+          "name": "Clothes mending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Clothes mending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise clothes mending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful clothes mending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of clothes mending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a clothes mending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn clothes mending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of clothes mending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.shrine_tending",
+      "domain": "housekeeping",
+      "name": "Shrine tending",
+      "description": "Shrine tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.seasonal_cleaning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.shrine_tending.shrine_tending_basics",
+          "discipline": "housekeeping.shrine_tending",
+          "name": "Shrine tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.shrine_tending.shrine_tending_seasonal_practice",
+          "discipline": "housekeeping.shrine_tending",
+          "name": "Shrine tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.shrine_tending.shrine_tending_precision_work",
+          "discipline": "housekeeping.shrine_tending",
+          "name": "Shrine tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.shrine_tending.shrine_tending_master_technique",
+          "discipline": "housekeeping.shrine_tending",
+          "name": "Shrine tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.shrine_tending.perk_5",
+          "level": 5,
+          "name": "Shrine tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Shrine tending output +2%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_10",
+          "level": 10,
+          "name": "Shrine tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Shrine tending waste -5%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_15",
+          "level": 15,
+          "name": "Shrine tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Shrine tending quality roll +1"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_20",
+          "level": 20,
+          "name": "Shrine tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Shrine tending care +5%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_25",
+          "level": 25,
+          "name": "Shrine tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Shrine tending speed +3%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_30",
+          "level": 30,
+          "name": "Shrine tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Shrine tending output +5%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_35",
+          "level": 35,
+          "name": "Shrine tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Shrine tending spoilage -10%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_40",
+          "level": 40,
+          "name": "Shrine tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Shrine tending quality roll +1"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_45",
+          "level": 45,
+          "name": "Shrine tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Shrine tending speed +5%"
+        },
+        {
+          "id": "housekeeping.shrine_tending.perk_50",
+          "level": 50,
+          "name": "Shrine tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Shrine tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise shrine tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful shrine tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of shrine tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a shrine tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn shrine tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of shrine tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.seasonal_cleaning",
+      "domain": "housekeeping",
+      "name": "Seasonal cleaning",
+      "description": "Seasonal cleaning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.guest_preparation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.seasonal_cleaning.seasonal_cleaning_basics",
+          "discipline": "housekeeping.seasonal_cleaning",
+          "name": "Seasonal cleaning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.seasonal_cleaning_seasonal_practice",
+          "discipline": "housekeeping.seasonal_cleaning",
+          "name": "Seasonal cleaning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.seasonal_cleaning_precision_work",
+          "discipline": "housekeeping.seasonal_cleaning",
+          "name": "Seasonal cleaning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.seasonal_cleaning_master_technique",
+          "discipline": "housekeeping.seasonal_cleaning",
+          "name": "Seasonal cleaning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_5",
+          "level": 5,
+          "name": "Seasonal cleaning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Seasonal cleaning output +2%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_10",
+          "level": 10,
+          "name": "Seasonal cleaning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Seasonal cleaning waste -5%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_15",
+          "level": 15,
+          "name": "Seasonal cleaning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seasonal cleaning quality roll +1"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_20",
+          "level": 20,
+          "name": "Seasonal cleaning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Seasonal cleaning care +5%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_25",
+          "level": 25,
+          "name": "Seasonal cleaning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Seasonal cleaning speed +3%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_30",
+          "level": 30,
+          "name": "Seasonal cleaning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seasonal cleaning output +5%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_35",
+          "level": 35,
+          "name": "Seasonal cleaning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Seasonal cleaning spoilage -10%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_40",
+          "level": 40,
+          "name": "Seasonal cleaning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Seasonal cleaning quality roll +1"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_45",
+          "level": 45,
+          "name": "Seasonal cleaning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Seasonal cleaning speed +5%"
+        },
+        {
+          "id": "housekeeping.seasonal_cleaning.perk_50",
+          "level": 50,
+          "name": "Seasonal cleaning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Seasonal cleaning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise seasonal cleaning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful seasonal cleaning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of seasonal cleaning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a seasonal cleaning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn seasonal cleaning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of seasonal cleaning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.guest_preparation",
+      "domain": "housekeeping",
+      "name": "Guest preparation",
+      "description": "Guest preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.household_scheduling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.guest_preparation.guest_preparation_basics",
+          "discipline": "housekeeping.guest_preparation",
+          "name": "Guest preparation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.guest_preparation.guest_preparation_seasonal_practice",
+          "discipline": "housekeeping.guest_preparation",
+          "name": "Guest preparation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.guest_preparation.guest_preparation_precision_work",
+          "discipline": "housekeeping.guest_preparation",
+          "name": "Guest preparation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.guest_preparation.guest_preparation_master_technique",
+          "discipline": "housekeeping.guest_preparation",
+          "name": "Guest preparation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.guest_preparation.perk_5",
+          "level": 5,
+          "name": "Guest preparation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Guest preparation output +2%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_10",
+          "level": 10,
+          "name": "Guest preparation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Guest preparation waste -5%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_15",
+          "level": 15,
+          "name": "Guest preparation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Guest preparation quality roll +1"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_20",
+          "level": 20,
+          "name": "Guest preparation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Guest preparation care +5%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_25",
+          "level": 25,
+          "name": "Guest preparation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Guest preparation speed +3%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_30",
+          "level": 30,
+          "name": "Guest preparation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Guest preparation output +5%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_35",
+          "level": 35,
+          "name": "Guest preparation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Guest preparation spoilage -10%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_40",
+          "level": 40,
+          "name": "Guest preparation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Guest preparation quality roll +1"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_45",
+          "level": 45,
+          "name": "Guest preparation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Guest preparation speed +5%"
+        },
+        {
+          "id": "housekeeping.guest_preparation.perk_50",
+          "level": 50,
+          "name": "Guest preparation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Guest preparation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise guest preparation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful guest preparation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of guest preparation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a guest preparation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn guest preparation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of guest preparation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "housekeeping.household_scheduling",
+      "domain": "housekeeping",
+      "name": "Household scheduling",
+      "description": "Household scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "housekeeping.housekeeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "housekeeping.household_scheduling.household_scheduling_basics",
+          "discipline": "housekeeping.household_scheduling",
+          "name": "Household scheduling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.household_scheduling.household_scheduling_seasonal_practice",
+          "discipline": "housekeeping.household_scheduling",
+          "name": "Household scheduling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.household_scheduling.household_scheduling_precision_work",
+          "discipline": "housekeeping.household_scheduling",
+          "name": "Household scheduling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "housekeeping.household_scheduling.household_scheduling_master_technique",
+          "discipline": "housekeeping.household_scheduling",
+          "name": "Household scheduling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "housekeeping.household_scheduling.perk_5",
+          "level": 5,
+          "name": "Household scheduling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Household scheduling output +2%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_10",
+          "level": 10,
+          "name": "Household scheduling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Household scheduling waste -5%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_15",
+          "level": 15,
+          "name": "Household scheduling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Household scheduling quality roll +1"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_20",
+          "level": 20,
+          "name": "Household scheduling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Household scheduling care +5%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_25",
+          "level": 25,
+          "name": "Household scheduling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Household scheduling speed +3%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_30",
+          "level": 30,
+          "name": "Household scheduling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Household scheduling output +5%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_35",
+          "level": 35,
+          "name": "Household scheduling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Household scheduling spoilage -10%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_40",
+          "level": 40,
+          "name": "Household scheduling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Household scheduling quality roll +1"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_45",
+          "level": 45,
+          "name": "Household scheduling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Household scheduling speed +5%"
+        },
+        {
+          "id": "housekeeping.household_scheduling.perk_50",
+          "level": 50,
+          "name": "Household scheduling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Household scheduling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise household scheduling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful household scheduling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of household scheduling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a household scheduling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn household scheduling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of household scheduling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

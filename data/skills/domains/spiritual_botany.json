@@ -1,0 +1,110 @@
+{
+  "id": "spiritual_botany",
+  "disciplines": [
+    {
+      "id": "spiritual_botany.spirit_seed_care",
+      "domain": "spiritual_botany",
+      "name": "Spirit seed care",
+      "description": "Spirit seed care applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.spirit_soil",
+      "domain": "spiritual_botany",
+      "name": "Spirit soil",
+      "description": "Spirit soil applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.qi_irrigation",
+      "domain": "spiritual_botany",
+      "name": "Qi irrigation",
+      "description": "Qi irrigation applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.element_gardens",
+      "domain": "spiritual_botany",
+      "name": "Element gardens",
+      "description": "Element gardens applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.herb_transplants",
+      "domain": "spiritual_botany",
+      "name": "Herb transplants",
+      "description": "Herb transplants applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.spirit_grafting",
+      "domain": "spiritual_botany",
+      "name": "Spirit grafting",
+      "description": "Spirit grafting applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.herb_maturation",
+      "domain": "spiritual_botany",
+      "name": "Herb maturation",
+      "description": "Herb maturation applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.spirit_pests",
+      "domain": "spiritual_botany",
+      "name": "Spirit pests",
+      "description": "Spirit pests applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.medicinal_harvesting",
+      "domain": "spiritual_botany",
+      "name": "Medicinal harvesting",
+      "description": "Medicinal harvesting applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.root_nurturing",
+      "domain": "spiritual_botany",
+      "name": "Root nurturing",
+      "description": "Root nurturing applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.garden_arrays",
+      "domain": "spiritual_botany",
+      "name": "Garden arrays",
+      "description": "Garden arrays applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.spirit_orchards",
+      "domain": "spiritual_botany",
+      "name": "Spirit orchards",
+      "description": "Spirit orchards applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.rare_seed_storage",
+      "domain": "spiritual_botany",
+      "name": "Rare seed storage",
+      "description": "Rare seed storage applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.herb_lineages",
+      "domain": "spiritual_botany",
+      "name": "Herb lineages",
+      "description": "Herb lineages applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "spiritual_botany.botanical_research",
+      "domain": "spiritual_botany",
+      "name": "Botanical research",
+      "description": "Botanical research applies spiritual botany to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

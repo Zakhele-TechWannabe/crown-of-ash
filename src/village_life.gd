@@ -5,6 +5,10 @@ var world: Node2D
 var sect: RefCounted
 var grid := AStarGrid2D.new()
 var people: Array[Dictionary] = []
+var population := preload("res://src/population.gd").new()
+const WALKER_LIMIT := 100
+var nearby_views: Dictionary = {}
+var view_cell := Vector2i(-999999, -999999)
 var routes: Dictionary = {}
 var minutes := 300.0
 var economy := preload("res://src/grain_economy.gd").new()
@@ -112,6 +116,8 @@ func setup(map: Node2D) -> void:
 		people[n].job = str(assignment.job)
 	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
 	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
+	population.seed_residents(people)
+	economy.population = population
 	economy.setup(sect.data, people, int(world.data.get("seed", sect.data.seed)))
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--day="):
@@ -231,6 +237,10 @@ func _process(dt: float) -> void:
 	minutes += elapsed * 2.4
 	var was_crisis: bool = economy.crisis
 	economy.advance_to(minutes)
+	if population.size() > 1000:
+		if population.pending_day < 0 and population.day < int(minutes / 1440):
+			population.begin_day(population.day + 1)
+		population.process_batch(256)
 	if economy.pause_on_crisis and economy.crisis and not was_crisis:
 		paused = true
 	var schedule_tick := int(minutes / 720.0) if speed >= 64 else int(minutes)
@@ -253,6 +263,7 @@ func _process(dt: float) -> void:
 		p.hidden = p.activity == "sleeping at home" and Vector2(p.pos).distance_squared_to(Vector2(p.home)) < 0.01
 	visible = world.on_ground
 	if visible:
+		_refresh_population_views()
 		queue_redraw()
 
 
@@ -277,11 +288,16 @@ func _draw() -> void:
 					draw_circle(at, 4, Color(0.3, 0.95, 0.85, 0.18 + 0.08 * sin(minutes + x + y)))
 	_draw_food_places(area)
 	_draw_material_places(area)
+	draw_order = people.duplicate()
+	for p: Dictionary in nearby_views.values(): draw_order.append(p)
 	draw_order.sort_custom(_feet_before)
+	var drawn := 0
 	for p: Dictionary in draw_order:
 		var at := point(p)
 		if p.hidden or not area.has_point(at):
 			continue
+		if drawn >= WALKER_LIMIT: break
+		drawn += 1
 		var size := Vector2.ONE * (22.4 if p.kind == 8 else 32.0)
 		var phase := minutes * 5 + int(p.age)
 		at.y -= absf(sin(phase)) * 1.5
@@ -332,7 +348,11 @@ func _headless_sim() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--years="):
 			years = maxi(1, int(arg.trim_prefix("--years=")))
+	print("SKILLS Start: %s" % population.tier_distribution())
+	var starting_levels := population.best_level.duplicate()
 	for y in years:
+		var before_insights := population.total_insights
+		var before_levels := population.notable_levels
 		economy.advance_to((y * 365 + 199) * 1440.0)
 		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry", "wood", "earth", "metal", "fibre", "other_materials"]:
 			print("DAY200 Year %d %s: %.2f %s" % [y + 1, group, economy.quantity(group) * 2, "jin / pieces" if group in ["wood", "earth", "metal", "fibre", "other_materials"] else "jin"])
@@ -340,6 +360,10 @@ func _headless_sim() -> void:
 			if economy.goods[id].grade == "mortal":
 				print("DAY200 Year %d %s: %.2f %s" % [y + 1, id, float(economy.stocks[id]) * 2, economy.goods[id].unit])
 		economy.advance_to((y + 1) * 365 * 1440.0)
+		print("SKILLS Year %d: %s | insights %d | notable level-ups %d" % [y + 1, population.tier_distribution(), population.total_insights - before_insights, population.notable_levels - before_levels])
+		print("SKILL_ENTRIES Year %d: %s" % [y + 1, population.skill_tier_distribution()])
+	for person in population.size():
+		print("GROWTH %s age %d best %s %d growth +%d skills %s" % [population.names[person], population.age(person), population.catalogue.title(population.best_level[person]), population.best_level[person], population.best_level[person] - starting_levels[person], population.sparse_skills(person)])
 	for summary: String in economy.summaries:
 		print(summary)
 	for entry: String in economy.chronicle:
@@ -548,3 +572,16 @@ func _draw_material_pit(at: Vector2, colour: Color) -> void:
 	draw_set_transform(at, 0, Vector2(2, 1))
 	draw_circle(Vector2.ZERO, 25, colour)
 	draw_set_transform(Vector2.ZERO)
+
+func _refresh_population_views() -> void:
+	var camera: Camera2D = world.ground_view.cam
+	var cell := Vector2i(camera.position / (32.0 * 32.0))
+	if cell == view_cell: return
+	view_cell = cell
+	nearby_views.clear()
+	var extent := get_viewport_rect().size / camera.zoom / 32.0
+	var area := Rect2(camera.position / 32.0 - extent / 2.0, extent).grow(16)
+	for person: int in population.nearby(area, WALKER_LIMIT):
+		if person < people.size(): continue
+		if nearby_views.size() + people.size() >= WALKER_LIMIT: break
+		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Color("a6a078"), "carrying": false}

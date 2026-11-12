@@ -1,0 +1,4077 @@
+{
+  "id": "smithing_and_metalwork",
+  "disciplines": [
+    {
+      "id": "smithing_and_metalwork.smithing",
+      "domain": "smithing_and_metalwork",
+      "name": "Smithing",
+      "description": "Smithing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.blacksmithing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.smithing.bloomery",
+          "discipline": "smithing_and_metalwork.smithing",
+          "name": "Bloomery",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.blacksmithing",
+          "discipline": "smithing_and_metalwork.smithing",
+          "name": "Blacksmithing",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.toolmaking",
+          "discipline": "smithing_and_metalwork.smithing",
+          "name": "Toolmaking",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.weaponsmithing",
+          "discipline": "smithing_and_metalwork.smithing",
+          "name": "Weaponsmithing",
+          "unlock_level": 25,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.artifact_refining",
+          "discipline": "smithing_and_metalwork.smithing",
+          "name": "Artifact refining",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.smithing.perk_5",
+          "level": 5,
+          "name": "Smithing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Smithing output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_10",
+          "level": 10,
+          "name": "Steady hammer",
+          "effect": "waste",
+          "value": -0.1,
+          "description": "waste -0.1"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_15",
+          "level": 15,
+          "name": "Smithing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Smithing quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_20",
+          "level": 20,
+          "name": "Fine edge",
+          "effect": "quality",
+          "value": 1,
+          "description": "quality +1"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_25",
+          "level": 25,
+          "name": "Smithing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Smithing speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_30",
+          "level": 30,
+          "name": "Heart of the forge",
+          "effect": "masterwork",
+          "value": 1,
+          "description": "masterwork +1"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_35",
+          "level": 35,
+          "name": "Smithing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Smithing spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_40",
+          "level": 40,
+          "name": "Smithing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Smithing quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_45",
+          "level": 45,
+          "name": "Smithing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Smithing speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.smithing.perk_50",
+          "level": 50,
+          "name": "Smithing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Smithing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise smithing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful smithing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of smithing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a smithing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn smithing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of smithing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.blacksmithing",
+      "domain": "smithing_and_metalwork",
+      "name": "Blacksmithing",
+      "description": "Blacksmithing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.tool_forging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.blacksmithing.blacksmithing_basics",
+          "discipline": "smithing_and_metalwork.blacksmithing",
+          "name": "Blacksmithing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.blacksmithing_seasonal_practice",
+          "discipline": "smithing_and_metalwork.blacksmithing",
+          "name": "Blacksmithing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.blacksmithing_precision_work",
+          "discipline": "smithing_and_metalwork.blacksmithing",
+          "name": "Blacksmithing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.blacksmithing_master_technique",
+          "discipline": "smithing_and_metalwork.blacksmithing",
+          "name": "Blacksmithing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_5",
+          "level": 5,
+          "name": "Blacksmithing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Blacksmithing output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_10",
+          "level": 10,
+          "name": "Blacksmithing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Blacksmithing waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_15",
+          "level": 15,
+          "name": "Blacksmithing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Blacksmithing quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_20",
+          "level": 20,
+          "name": "Blacksmithing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Blacksmithing care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_25",
+          "level": 25,
+          "name": "Blacksmithing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Blacksmithing speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_30",
+          "level": 30,
+          "name": "Blacksmithing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Blacksmithing output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_35",
+          "level": 35,
+          "name": "Blacksmithing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Blacksmithing spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_40",
+          "level": 40,
+          "name": "Blacksmithing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Blacksmithing quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_45",
+          "level": 45,
+          "name": "Blacksmithing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Blacksmithing speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blacksmithing.perk_50",
+          "level": 50,
+          "name": "Blacksmithing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Blacksmithing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise blacksmithing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful blacksmithing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of blacksmithing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a blacksmithing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn blacksmithing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of blacksmithing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.tool_forging",
+      "domain": "smithing_and_metalwork",
+      "name": "Tool forging",
+      "description": "Tool forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.blade_forging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.tool_forging.tool_forging_basics",
+          "discipline": "smithing_and_metalwork.tool_forging",
+          "name": "Tool forging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.tool_forging_seasonal_practice",
+          "discipline": "smithing_and_metalwork.tool_forging",
+          "name": "Tool forging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.tool_forging_precision_work",
+          "discipline": "smithing_and_metalwork.tool_forging",
+          "name": "Tool forging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.tool_forging_master_technique",
+          "discipline": "smithing_and_metalwork.tool_forging",
+          "name": "Tool forging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_5",
+          "level": 5,
+          "name": "Tool forging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tool forging output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_10",
+          "level": 10,
+          "name": "Tool forging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tool forging waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_15",
+          "level": 15,
+          "name": "Tool forging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tool forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_20",
+          "level": 20,
+          "name": "Tool forging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tool forging care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_25",
+          "level": 25,
+          "name": "Tool forging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tool forging speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_30",
+          "level": 30,
+          "name": "Tool forging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tool forging output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_35",
+          "level": 35,
+          "name": "Tool forging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tool forging spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_40",
+          "level": 40,
+          "name": "Tool forging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tool forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_45",
+          "level": 45,
+          "name": "Tool forging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tool forging speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.tool_forging.perk_50",
+          "level": 50,
+          "name": "Tool forging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tool forging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tool forging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tool forging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tool forging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tool forging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tool forging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tool forging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.blade_forging",
+      "domain": "smithing_and_metalwork",
+      "name": "Blade forging",
+      "description": "Blade forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.nail_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.blade_forging.blade_forging_basics",
+          "discipline": "smithing_and_metalwork.blade_forging",
+          "name": "Blade forging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.blade_forging_seasonal_practice",
+          "discipline": "smithing_and_metalwork.blade_forging",
+          "name": "Blade forging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.blade_forging_precision_work",
+          "discipline": "smithing_and_metalwork.blade_forging",
+          "name": "Blade forging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.blade_forging_master_technique",
+          "discipline": "smithing_and_metalwork.blade_forging",
+          "name": "Blade forging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_5",
+          "level": 5,
+          "name": "Blade forging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Blade forging output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_10",
+          "level": 10,
+          "name": "Blade forging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Blade forging waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_15",
+          "level": 15,
+          "name": "Blade forging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Blade forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_20",
+          "level": 20,
+          "name": "Blade forging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Blade forging care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_25",
+          "level": 25,
+          "name": "Blade forging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Blade forging speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_30",
+          "level": 30,
+          "name": "Blade forging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Blade forging output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_35",
+          "level": 35,
+          "name": "Blade forging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Blade forging spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_40",
+          "level": 40,
+          "name": "Blade forging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Blade forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_45",
+          "level": 45,
+          "name": "Blade forging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Blade forging speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.blade_forging.perk_50",
+          "level": 50,
+          "name": "Blade forging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Blade forging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise blade forging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful blade forging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of blade forging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a blade forging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn blade forging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of blade forging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.nail_making",
+      "domain": "smithing_and_metalwork",
+      "name": "Nail making",
+      "description": "Nail making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.rivet_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.nail_making.nail_making_basics",
+          "discipline": "smithing_and_metalwork.nail_making",
+          "name": "Nail making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.nail_making_seasonal_practice",
+          "discipline": "smithing_and_metalwork.nail_making",
+          "name": "Nail making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.nail_making_precision_work",
+          "discipline": "smithing_and_metalwork.nail_making",
+          "name": "Nail making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.nail_making_master_technique",
+          "discipline": "smithing_and_metalwork.nail_making",
+          "name": "Nail making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_5",
+          "level": 5,
+          "name": "Nail making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Nail making output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_10",
+          "level": 10,
+          "name": "Nail making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Nail making waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_15",
+          "level": 15,
+          "name": "Nail making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nail making quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_20",
+          "level": 20,
+          "name": "Nail making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Nail making care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_25",
+          "level": 25,
+          "name": "Nail making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Nail making speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_30",
+          "level": 30,
+          "name": "Nail making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nail making output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_35",
+          "level": 35,
+          "name": "Nail making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Nail making spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_40",
+          "level": 40,
+          "name": "Nail making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Nail making quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_45",
+          "level": 45,
+          "name": "Nail making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Nail making speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.nail_making.perk_50",
+          "level": 50,
+          "name": "Nail making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Nail making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise nail making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful nail making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of nail making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a nail making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn nail making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of nail making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.rivet_making",
+      "domain": "smithing_and_metalwork",
+      "name": "Rivet making",
+      "description": "Rivet making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.heat_treatment"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.rivet_making.rivet_making_basics",
+          "discipline": "smithing_and_metalwork.rivet_making",
+          "name": "Rivet making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.rivet_making_seasonal_practice",
+          "discipline": "smithing_and_metalwork.rivet_making",
+          "name": "Rivet making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.rivet_making_precision_work",
+          "discipline": "smithing_and_metalwork.rivet_making",
+          "name": "Rivet making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.rivet_making_master_technique",
+          "discipline": "smithing_and_metalwork.rivet_making",
+          "name": "Rivet making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_5",
+          "level": 5,
+          "name": "Rivet making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Rivet making output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_10",
+          "level": 10,
+          "name": "Rivet making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Rivet making waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_15",
+          "level": 15,
+          "name": "Rivet making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rivet making quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_20",
+          "level": 20,
+          "name": "Rivet making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Rivet making care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_25",
+          "level": 25,
+          "name": "Rivet making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Rivet making speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_30",
+          "level": 30,
+          "name": "Rivet making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rivet making output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_35",
+          "level": 35,
+          "name": "Rivet making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Rivet making spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_40",
+          "level": 40,
+          "name": "Rivet making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rivet making quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_45",
+          "level": 45,
+          "name": "Rivet making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Rivet making speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.rivet_making.perk_50",
+          "level": 50,
+          "name": "Rivet making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rivet making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise rivet making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful rivet making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of rivet making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a rivet making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn rivet making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of rivet making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.heat_treatment",
+      "domain": "smithing_and_metalwork",
+      "name": "Heat treatment",
+      "description": "Heat treatment: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.hammer_welding"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.heat_treatment.heat_treatment_basics",
+          "discipline": "smithing_and_metalwork.heat_treatment",
+          "name": "Heat treatment basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.heat_treatment_seasonal_practice",
+          "discipline": "smithing_and_metalwork.heat_treatment",
+          "name": "Heat treatment seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.heat_treatment_precision_work",
+          "discipline": "smithing_and_metalwork.heat_treatment",
+          "name": "Heat treatment precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.heat_treatment_master_technique",
+          "discipline": "smithing_and_metalwork.heat_treatment",
+          "name": "Heat treatment master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_5",
+          "level": 5,
+          "name": "Heat treatment: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Heat treatment output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_10",
+          "level": 10,
+          "name": "Heat treatment: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Heat treatment waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_15",
+          "level": 15,
+          "name": "Heat treatment: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Heat treatment quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_20",
+          "level": 20,
+          "name": "Heat treatment: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Heat treatment care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_25",
+          "level": 25,
+          "name": "Heat treatment: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Heat treatment speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_30",
+          "level": 30,
+          "name": "Heat treatment: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Heat treatment output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_35",
+          "level": 35,
+          "name": "Heat treatment: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Heat treatment spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_40",
+          "level": 40,
+          "name": "Heat treatment: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Heat treatment quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_45",
+          "level": 45,
+          "name": "Heat treatment: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Heat treatment speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.heat_treatment.perk_50",
+          "level": 50,
+          "name": "Heat treatment: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Heat treatment output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise heat treatment for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful heat treatment (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of heat treatment; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a heat treatment task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn heat treatment from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of heat treatment, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.hammer_welding",
+      "domain": "smithing_and_metalwork",
+      "name": "Hammer welding",
+      "description": "Hammer welding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.edge_grinding"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.hammer_welding.hammer_welding_basics",
+          "discipline": "smithing_and_metalwork.hammer_welding",
+          "name": "Hammer welding basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.hammer_welding_seasonal_practice",
+          "discipline": "smithing_and_metalwork.hammer_welding",
+          "name": "Hammer welding seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.hammer_welding_precision_work",
+          "discipline": "smithing_and_metalwork.hammer_welding",
+          "name": "Hammer welding precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.hammer_welding_master_technique",
+          "discipline": "smithing_and_metalwork.hammer_welding",
+          "name": "Hammer welding master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_5",
+          "level": 5,
+          "name": "Hammer welding: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Hammer welding output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_10",
+          "level": 10,
+          "name": "Hammer welding: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Hammer welding waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_15",
+          "level": 15,
+          "name": "Hammer welding: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hammer welding quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_20",
+          "level": 20,
+          "name": "Hammer welding: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Hammer welding care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_25",
+          "level": 25,
+          "name": "Hammer welding: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Hammer welding speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_30",
+          "level": 30,
+          "name": "Hammer welding: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hammer welding output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_35",
+          "level": 35,
+          "name": "Hammer welding: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Hammer welding spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_40",
+          "level": 40,
+          "name": "Hammer welding: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Hammer welding quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_45",
+          "level": 45,
+          "name": "Hammer welding: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Hammer welding speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.hammer_welding.perk_50",
+          "level": 50,
+          "name": "Hammer welding: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Hammer welding output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise hammer welding for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful hammer welding (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of hammer welding; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a hammer welding task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn hammer welding from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of hammer welding, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.edge_grinding",
+      "domain": "smithing_and_metalwork",
+      "name": "Edge grinding",
+      "description": "Edge grinding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.armour_forging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.edge_grinding.edge_grinding_basics",
+          "discipline": "smithing_and_metalwork.edge_grinding",
+          "name": "Edge grinding basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.edge_grinding_seasonal_practice",
+          "discipline": "smithing_and_metalwork.edge_grinding",
+          "name": "Edge grinding seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.edge_grinding_precision_work",
+          "discipline": "smithing_and_metalwork.edge_grinding",
+          "name": "Edge grinding precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.edge_grinding_master_technique",
+          "discipline": "smithing_and_metalwork.edge_grinding",
+          "name": "Edge grinding master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_5",
+          "level": 5,
+          "name": "Edge grinding: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Edge grinding output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_10",
+          "level": 10,
+          "name": "Edge grinding: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Edge grinding waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_15",
+          "level": 15,
+          "name": "Edge grinding: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Edge grinding quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_20",
+          "level": 20,
+          "name": "Edge grinding: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Edge grinding care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_25",
+          "level": 25,
+          "name": "Edge grinding: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Edge grinding speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_30",
+          "level": 30,
+          "name": "Edge grinding: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Edge grinding output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_35",
+          "level": 35,
+          "name": "Edge grinding: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Edge grinding spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_40",
+          "level": 40,
+          "name": "Edge grinding: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Edge grinding quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_45",
+          "level": 45,
+          "name": "Edge grinding: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Edge grinding speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.edge_grinding.perk_50",
+          "level": 50,
+          "name": "Edge grinding: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Edge grinding output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise edge grinding for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful edge grinding (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of edge grinding; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a edge grinding task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn edge grinding from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of edge grinding, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.armour_forging",
+      "domain": "smithing_and_metalwork",
+      "name": "Armour forging",
+      "description": "Armour forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.lock_forging"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.armour_forging.armour_forging_basics",
+          "discipline": "smithing_and_metalwork.armour_forging",
+          "name": "Armour forging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.armour_forging_seasonal_practice",
+          "discipline": "smithing_and_metalwork.armour_forging",
+          "name": "Armour forging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.armour_forging_precision_work",
+          "discipline": "smithing_and_metalwork.armour_forging",
+          "name": "Armour forging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.armour_forging_master_technique",
+          "discipline": "smithing_and_metalwork.armour_forging",
+          "name": "Armour forging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_5",
+          "level": 5,
+          "name": "Armour forging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Armour forging output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_10",
+          "level": 10,
+          "name": "Armour forging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Armour forging waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_15",
+          "level": 15,
+          "name": "Armour forging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Armour forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_20",
+          "level": 20,
+          "name": "Armour forging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Armour forging care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_25",
+          "level": 25,
+          "name": "Armour forging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Armour forging speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_30",
+          "level": 30,
+          "name": "Armour forging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Armour forging output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_35",
+          "level": 35,
+          "name": "Armour forging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Armour forging spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_40",
+          "level": 40,
+          "name": "Armour forging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Armour forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_45",
+          "level": 45,
+          "name": "Armour forging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Armour forging speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.armour_forging.perk_50",
+          "level": 50,
+          "name": "Armour forging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Armour forging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise armour forging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful armour forging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of armour forging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a armour forging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn armour forging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of armour forging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.lock_forging",
+      "domain": "smithing_and_metalwork",
+      "name": "Lock forging",
+      "description": "Lock forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.farm_tool_repair"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.lock_forging.lock_forging_basics",
+          "discipline": "smithing_and_metalwork.lock_forging",
+          "name": "Lock forging basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.lock_forging_seasonal_practice",
+          "discipline": "smithing_and_metalwork.lock_forging",
+          "name": "Lock forging seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.lock_forging_precision_work",
+          "discipline": "smithing_and_metalwork.lock_forging",
+          "name": "Lock forging precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.lock_forging_master_technique",
+          "discipline": "smithing_and_metalwork.lock_forging",
+          "name": "Lock forging master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_5",
+          "level": 5,
+          "name": "Lock forging: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Lock forging output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_10",
+          "level": 10,
+          "name": "Lock forging: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Lock forging waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_15",
+          "level": 15,
+          "name": "Lock forging: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lock forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_20",
+          "level": 20,
+          "name": "Lock forging: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Lock forging care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_25",
+          "level": 25,
+          "name": "Lock forging: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Lock forging speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_30",
+          "level": 30,
+          "name": "Lock forging: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lock forging output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_35",
+          "level": 35,
+          "name": "Lock forging: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Lock forging spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_40",
+          "level": 40,
+          "name": "Lock forging: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lock forging quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_45",
+          "level": 45,
+          "name": "Lock forging: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Lock forging speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.lock_forging.perk_50",
+          "level": 50,
+          "name": "Lock forging: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lock forging output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise lock forging for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful lock forging (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of lock forging; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a lock forging task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn lock forging from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of lock forging, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.farm_tool_repair",
+      "domain": "smithing_and_metalwork",
+      "name": "Farm tool repair",
+      "description": "Farm tool repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.forge_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.farm_tool_repair_basics",
+          "discipline": "smithing_and_metalwork.farm_tool_repair",
+          "name": "Farm tool repair basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.farm_tool_repair_seasonal_practice",
+          "discipline": "smithing_and_metalwork.farm_tool_repair",
+          "name": "Farm tool repair seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.farm_tool_repair_precision_work",
+          "discipline": "smithing_and_metalwork.farm_tool_repair",
+          "name": "Farm tool repair precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.farm_tool_repair_master_technique",
+          "discipline": "smithing_and_metalwork.farm_tool_repair",
+          "name": "Farm tool repair master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_5",
+          "level": 5,
+          "name": "Farm tool repair: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Farm tool repair output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_10",
+          "level": 10,
+          "name": "Farm tool repair: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Farm tool repair waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_15",
+          "level": 15,
+          "name": "Farm tool repair: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Farm tool repair quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_20",
+          "level": 20,
+          "name": "Farm tool repair: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Farm tool repair care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_25",
+          "level": 25,
+          "name": "Farm tool repair: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Farm tool repair speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_30",
+          "level": 30,
+          "name": "Farm tool repair: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Farm tool repair output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_35",
+          "level": 35,
+          "name": "Farm tool repair: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Farm tool repair spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_40",
+          "level": 40,
+          "name": "Farm tool repair: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Farm tool repair quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_45",
+          "level": 45,
+          "name": "Farm tool repair: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Farm tool repair speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.farm_tool_repair.perk_50",
+          "level": 50,
+          "name": "Farm tool repair: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Farm tool repair output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise farm tool repair for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful farm tool repair (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of farm tool repair; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a farm tool repair task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn farm tool repair from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of farm tool repair, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.forge_tending",
+      "domain": "smithing_and_metalwork",
+      "name": "Forge tending",
+      "description": "Forge tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.metal_engraving"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.forge_tending.forge_tending_basics",
+          "discipline": "smithing_and_metalwork.forge_tending",
+          "name": "Forge tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.forge_tending_seasonal_practice",
+          "discipline": "smithing_and_metalwork.forge_tending",
+          "name": "Forge tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.forge_tending_precision_work",
+          "discipline": "smithing_and_metalwork.forge_tending",
+          "name": "Forge tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.forge_tending_master_technique",
+          "discipline": "smithing_and_metalwork.forge_tending",
+          "name": "Forge tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_5",
+          "level": 5,
+          "name": "Forge tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Forge tending output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_10",
+          "level": 10,
+          "name": "Forge tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Forge tending waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_15",
+          "level": 15,
+          "name": "Forge tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Forge tending quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_20",
+          "level": 20,
+          "name": "Forge tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Forge tending care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_25",
+          "level": 25,
+          "name": "Forge tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Forge tending speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_30",
+          "level": 30,
+          "name": "Forge tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Forge tending output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_35",
+          "level": 35,
+          "name": "Forge tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Forge tending spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_40",
+          "level": 40,
+          "name": "Forge tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Forge tending quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_45",
+          "level": 45,
+          "name": "Forge tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Forge tending speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.forge_tending.perk_50",
+          "level": 50,
+          "name": "Forge tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Forge tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise forge tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful forge tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of forge tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a forge tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn forge tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of forge tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.metal_engraving",
+      "domain": "smithing_and_metalwork",
+      "name": "Metal engraving",
+      "description": "Metal engraving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.masterwork_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.metal_engraving.metal_engraving_basics",
+          "discipline": "smithing_and_metalwork.metal_engraving",
+          "name": "Metal engraving basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.metal_engraving_seasonal_practice",
+          "discipline": "smithing_and_metalwork.metal_engraving",
+          "name": "Metal engraving seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.metal_engraving_precision_work",
+          "discipline": "smithing_and_metalwork.metal_engraving",
+          "name": "Metal engraving precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.metal_engraving_master_technique",
+          "discipline": "smithing_and_metalwork.metal_engraving",
+          "name": "Metal engraving master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_5",
+          "level": 5,
+          "name": "Metal engraving: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Metal engraving output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_10",
+          "level": 10,
+          "name": "Metal engraving: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Metal engraving waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_15",
+          "level": 15,
+          "name": "Metal engraving: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Metal engraving quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_20",
+          "level": 20,
+          "name": "Metal engraving: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Metal engraving care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_25",
+          "level": 25,
+          "name": "Metal engraving: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Metal engraving speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_30",
+          "level": 30,
+          "name": "Metal engraving: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Metal engraving output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_35",
+          "level": 35,
+          "name": "Metal engraving: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Metal engraving spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_40",
+          "level": 40,
+          "name": "Metal engraving: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Metal engraving quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_45",
+          "level": 45,
+          "name": "Metal engraving: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Metal engraving speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.metal_engraving.perk_50",
+          "level": 50,
+          "name": "Metal engraving: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Metal engraving output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise metal engraving for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful metal engraving (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of metal engraving; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a metal engraving task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn metal engraving from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of metal engraving, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "smithing_and_metalwork.masterwork_planning",
+      "domain": "smithing_and_metalwork",
+      "name": "Masterwork planning",
+      "description": "Masterwork planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "strength",
+        "endurance"
+      ],
+      "related_disciplines": [
+        "smithing_and_metalwork.smithing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.masterwork_planning_basics",
+          "discipline": "smithing_and_metalwork.masterwork_planning",
+          "name": "Masterwork planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "strength": 8
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.masterwork_planning_seasonal_practice",
+          "discipline": "smithing_and_metalwork.masterwork_planning",
+          "name": "Masterwork planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "strength": 10
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.masterwork_planning_precision_work",
+          "discipline": "smithing_and_metalwork.masterwork_planning",
+          "name": "Masterwork planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "strength": 12
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.masterwork_planning_master_technique",
+          "discipline": "smithing_and_metalwork.masterwork_planning",
+          "name": "Masterwork planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "strength": 14
+          },
+          "key_attributes": [
+            "strength",
+            "endurance"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_5",
+          "level": 5,
+          "name": "Masterwork planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Masterwork planning output +2%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_10",
+          "level": 10,
+          "name": "Masterwork planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Masterwork planning waste -5%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_15",
+          "level": 15,
+          "name": "Masterwork planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Masterwork planning quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_20",
+          "level": 20,
+          "name": "Masterwork planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Masterwork planning care +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_25",
+          "level": 25,
+          "name": "Masterwork planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Masterwork planning speed +3%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_30",
+          "level": 30,
+          "name": "Masterwork planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Masterwork planning output +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_35",
+          "level": 35,
+          "name": "Masterwork planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Masterwork planning spoilage -10%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_40",
+          "level": 40,
+          "name": "Masterwork planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Masterwork planning quality roll +1"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_45",
+          "level": 45,
+          "name": "Masterwork planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Masterwork planning speed +5%"
+        },
+        {
+          "id": "smithing_and_metalwork.masterwork_planning.perk_50",
+          "level": 50,
+          "name": "Masterwork planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Masterwork planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise masterwork planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful masterwork planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of masterwork planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a masterwork planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn masterwork planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of masterwork planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

@@ -50,7 +50,7 @@ func edible_quantity(id: String) -> float:
 func good_forecast(id: String) -> float:
 	var total := 0.0
 	for good: String in descendants(id):
-		total += float(areas[good]) * float(goods[good].yield_rations_per_mu) * clampf(care() if work > 0 or day > 1 else 1.0, 0.3, 1.1) * weather
+		total += float(areas[good]) * float(goods[good].yield_rations_per_mu) * clampf(care() if work > 0 or day > 1 else 1.0, 0.3, 2.5 if population != null else 1.1) * weather
 	return total
 
 func node_flow(id: String, key: String) -> Array:
@@ -68,6 +68,8 @@ func record_good(id: String, key: String, value: float) -> void:
 var field_area := 0
 var seed_value := 718
 var people: Array[Dictionary] = []
+var population: RefCounted
+var skill_event_cursor := 0
 var order: Array[int] = []
 var chronicle: Array[String] = []
 var summaries: Array[String] = []
@@ -306,6 +308,12 @@ func _thresholds() -> void:
 		crisis = false
 
 func _finish_day() -> void:
+	if population != null:
+		population.sync_walkers(people)
+		if population.size() <= 1000: population.tick_day((year - 1) * 365 + day)
+		while skill_event_cursor < population.events.size():
+			note(population.events[skill_event_cursor].text)
+			skill_event_cursor += 1
 	_food_production()
 	_material_production()
 	var labor := 0.0
@@ -315,7 +323,7 @@ func _finish_day() -> void:
 			var hunger := int(p.hunger)
 			if int(p.kind) == 0:
 				# Starving farmers still put in half a day; at harvest the food is right in front of them.
-				labor += maxf(EFFECT[hunger], 0.5) if autumn else (EFFECT[hunger] if hunger < 3 else EFFECT[hunger] * 0.5)
+				labor += (maxf(EFFECT[hunger], 0.5) if autumn else (EFFECT[hunger] if hunger < 3 else EFFECT[hunger] * 0.5)) * _skill_output(p, "fields")
 			elif autumn and hunger >= 2 and int(p.kind) != 8:
 				# Hungry villagers of any trade join the harvest.
 				labor += 0.5
@@ -435,16 +443,18 @@ func _food_production() -> void:
 	if no_farmers:
 		return
 	var workers: Dictionary = {}
+	var raw_workers: Dictionary = {}
 	for p: Dictionary in people:
 		var facility := str(p.get("food_work", ""))
-		workers[facility] = float(workers.get(facility, 0.0)) + EFFECT[int(p.hunger)]
+		raw_workers[facility] = float(raw_workers.get(facility, 0.0)) + EFFECT[int(p.hunger)]
+		workers[facility] = float(workers.get(facility, 0.0)) + EFFECT[int(p.hunger)] * _skill_output(p, facility)
 	for id: String in goods:
 		var g: Dictionary = goods[id]
 		if "food" not in g.category_path or not g.has("facility") or SEASONS[season()] not in g.seasons:
 			continue
-		var staffing := minf(1.0, float(workers.get(g.facility, 0.0)))
+		var staffing := float(workers.get(g.facility, 0.0)) / maxf(1.0, float(raw_workers.get(g.facility, 0.0)))
 		if g.facility == "apiary":
-			staffing = minf(1.0, float(workers.get("orchard", 0.0)))
+			staffing = float(workers.get("orchard", 0.0)) / maxf(1.0, float(raw_workers.get("orchard", 0.0)))
 		var batch := float(g.daily_yield) * staffing
 		if id in ["pork", "venison", "wild_boar"] and season() == 2:
 			batch *= 2.0
@@ -452,11 +462,12 @@ func _food_production() -> void:
 			_add_food(id, batch)
 	if float(workers.get("kitchen", 0.0)) <= 0:
 		return
-	_recipe("tofu", {"soybeans": 0.6}, 0.35)
-	_recipe("soy_sauce", {"soybeans": 0.8, "salt": 0.05}, 0.025)
-	_recipe("vinegar", {"common_rice": 1.0}, 0.02)
-	_recipe("rice_wine", {"common_rice": 1.0}, 0.025)
-	_recipe("cooking_oil", {"soybeans": 2.0}, 0.02)
+	var kitchen_efficiency: float = float(workers.kitchen) / maxf(1.0, float(raw_workers.kitchen))
+	_recipe("tofu", {"soybeans": 0.6}, 0.35 * kitchen_efficiency)
+	_recipe("soy_sauce", {"soybeans": 0.8, "salt": 0.05}, 0.025 * kitchen_efficiency)
+	_recipe("vinegar", {"common_rice": 1.0}, 0.02 * kitchen_efficiency)
+	_recipe("rice_wine", {"common_rice": 1.0}, 0.025 * kitchen_efficiency)
+	_recipe("cooking_oil", {"soybeans": 2.0}, 0.02 * kitchen_efficiency)
 	# Keep generous fresh reserves; the kitchen dries, salts and pickles the excess.
 	for id: String in goods:
 		var group: String = goods[id].category_path[1]
@@ -468,7 +479,7 @@ func _food_production() -> void:
 			"fish": output = "salted_fish"
 		if not output.is_empty():
 			var surplus := maxf(0.0, float(stocks[id]) - 65.0)
-			_recipe(output, {id: 1.25}, surplus * 0.06)
+			_recipe(output, {id: 1.25}, surplus * 0.06 * kitchen_efficiency)
 	if day == 92:
 		note("First peaches ripen in the village orchard")
 	elif day == 183:
@@ -479,16 +490,19 @@ func _food_production() -> void:
 # Materials share the ledger's half-unit storage convention; UI converts to jin/pieces.
 func _material_production() -> void:
 	var staffing: Dictionary = {}
+	var raw_workers: Dictionary = {}
 	for person: Dictionary in people:
 		var trade := str(person.get("material_work", ""))
-		staffing[trade] = float(staffing.get(trade, 0.0)) + EFFECT[int(person.hunger)]
+		raw_workers[trade] = float(raw_workers.get(trade, 0.0)) + EFFECT[int(person.hunger)]
+		staffing[trade] = float(staffing.get(trade, 0.0)) + EFFECT[int(person.hunger)] * _skill_output(person, trade)
 		if person.get("food_work", "") == "hunt":
-			staffing["hunt"] = EFFECT[int(person.hunger)]
+			raw_workers["hunt"] = EFFECT[int(person.hunger)]
+			staffing["hunt"] = EFFECT[int(person.hunger)] * _skill_output(person, "hunt")
 	for id: String in goods:
 		var g: Dictionary = goods[id]
 		if "materials" not in g.category_path or g.get("trade_only", false) or g.grade != "mortal" or SEASONS[season()] not in g.seasons:
 			continue
-		var hands := minf(1.0, float(staffing.get(g.facility, 0.0)))
+		var hands := float(staffing.get(g.facility, 0.0)) / maxf(1.0, float(raw_workers.get(g.facility, 0.0)))
 		if hands <= 0:
 			continue
 		if g.has("recipe"):
@@ -505,3 +519,9 @@ func _material_production() -> void:
 		if node_flow("iron_ingots", "harvested")[3] > 0: note("First iron smelted in the bloomery")
 	if day == 273 and float(stocks.firewood) >= 130:
 		note("Winter woodpile ready; cooking and heating fuel sheltered")
+
+func _skill_output(person: Dictionary, duty: String) -> float:
+	if population == null or not person.has("id") or not population.catalogue.activities.has(duty): return 1.0
+	var output: float = population.output(int(person.id), duty)
+	if duty in ["fields", "garden"] and population.has_trait(int(person.id), "green_thumb"): output *= 1.1
+	return output

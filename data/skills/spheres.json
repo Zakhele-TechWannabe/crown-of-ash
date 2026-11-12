@@ -1,0 +1,62 @@
+[
+  {
+    "id": "land",
+    "name": "Land",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "wilds",
+    "name": "Wilds",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "earth_and_metal",
+    "name": "Earth and metal",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "craft",
+    "name": "Craft",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "household",
+    "name": "Household",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "building_and_works",
+    "name": "Building and works",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "society",
+    "name": "Society",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "arts_and_learning",
+    "name": "Arts and learning",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "martial",
+    "name": "Martial",
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "cultivation",
+    "name": "Cultivation",
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  }
+]

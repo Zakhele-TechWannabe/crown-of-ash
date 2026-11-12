@@ -1,0 +1,4062 @@
+{
+  "id": "woodworking",
+  "disciplines": [
+    {
+      "id": "woodworking.carpentry",
+      "domain": "woodworking",
+      "name": "Carpentry",
+      "description": "Carpentry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.timber_seasoning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.carpentry.joinery",
+          "discipline": "woodworking.carpentry",
+          "name": "Joinery",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.carpentry.cartwright",
+          "discipline": "woodworking.carpentry",
+          "name": "Cartwright",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.carpentry.house_building",
+          "discipline": "woodworking.carpentry",
+          "name": "House building",
+          "unlock_level": 20,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.carpentry.shipwright",
+          "discipline": "woodworking.carpentry",
+          "name": "Shipwright",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.carpentry.perk_5",
+          "level": 5,
+          "name": "Carpentry: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Carpentry output +2%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_10",
+          "level": 10,
+          "name": "Carpentry: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Carpentry waste -5%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_15",
+          "level": 15,
+          "name": "Carpentry: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Carpentry quality roll +1"
+        },
+        {
+          "id": "woodworking.carpentry.perk_20",
+          "level": 20,
+          "name": "Carpentry: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Carpentry care +5%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_25",
+          "level": 25,
+          "name": "Carpentry: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Carpentry speed +3%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_30",
+          "level": 30,
+          "name": "Carpentry: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Carpentry output +5%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_35",
+          "level": 35,
+          "name": "Carpentry: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Carpentry spoilage -10%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_40",
+          "level": 40,
+          "name": "Carpentry: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Carpentry quality roll +1"
+        },
+        {
+          "id": "woodworking.carpentry.perk_45",
+          "level": 45,
+          "name": "Carpentry: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Carpentry speed +5%"
+        },
+        {
+          "id": "woodworking.carpentry.perk_50",
+          "level": 50,
+          "name": "Carpentry: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Carpentry output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise carpentry for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful carpentry (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of carpentry; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a carpentry task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn carpentry from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of carpentry, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.timber_seasoning",
+      "domain": "woodworking",
+      "name": "Timber seasoning",
+      "description": "Timber seasoning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.joinery"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.timber_seasoning.timber_seasoning_basics",
+          "discipline": "woodworking.timber_seasoning",
+          "name": "Timber seasoning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.timber_seasoning.timber_seasoning_seasonal_practice",
+          "discipline": "woodworking.timber_seasoning",
+          "name": "Timber seasoning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.timber_seasoning.timber_seasoning_precision_work",
+          "discipline": "woodworking.timber_seasoning",
+          "name": "Timber seasoning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.timber_seasoning.timber_seasoning_master_technique",
+          "discipline": "woodworking.timber_seasoning",
+          "name": "Timber seasoning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.timber_seasoning.perk_5",
+          "level": 5,
+          "name": "Timber seasoning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Timber seasoning output +2%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_10",
+          "level": 10,
+          "name": "Timber seasoning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Timber seasoning waste -5%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_15",
+          "level": 15,
+          "name": "Timber seasoning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Timber seasoning quality roll +1"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_20",
+          "level": 20,
+          "name": "Timber seasoning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Timber seasoning care +5%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_25",
+          "level": 25,
+          "name": "Timber seasoning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Timber seasoning speed +3%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_30",
+          "level": 30,
+          "name": "Timber seasoning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Timber seasoning output +5%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_35",
+          "level": 35,
+          "name": "Timber seasoning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Timber seasoning spoilage -10%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_40",
+          "level": 40,
+          "name": "Timber seasoning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Timber seasoning quality roll +1"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_45",
+          "level": 45,
+          "name": "Timber seasoning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Timber seasoning speed +5%"
+        },
+        {
+          "id": "woodworking.timber_seasoning.perk_50",
+          "level": 50,
+          "name": "Timber seasoning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Timber seasoning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise timber seasoning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful timber seasoning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of timber seasoning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a timber seasoning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn timber seasoning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of timber seasoning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.joinery",
+      "domain": "woodworking",
+      "name": "Joinery",
+      "description": "Joinery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.cart_building"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.joinery.joinery_basics",
+          "discipline": "woodworking.joinery",
+          "name": "Joinery basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.joinery.joinery_seasonal_practice",
+          "discipline": "woodworking.joinery",
+          "name": "Joinery seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.joinery.joinery_precision_work",
+          "discipline": "woodworking.joinery",
+          "name": "Joinery precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.joinery.joinery_master_technique",
+          "discipline": "woodworking.joinery",
+          "name": "Joinery master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.joinery.perk_5",
+          "level": 5,
+          "name": "Joinery: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Joinery output +2%"
+        },
+        {
+          "id": "woodworking.joinery.perk_10",
+          "level": 10,
+          "name": "Joinery: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Joinery waste -5%"
+        },
+        {
+          "id": "woodworking.joinery.perk_15",
+          "level": 15,
+          "name": "Joinery: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Joinery quality roll +1"
+        },
+        {
+          "id": "woodworking.joinery.perk_20",
+          "level": 20,
+          "name": "Joinery: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Joinery care +5%"
+        },
+        {
+          "id": "woodworking.joinery.perk_25",
+          "level": 25,
+          "name": "Joinery: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Joinery speed +3%"
+        },
+        {
+          "id": "woodworking.joinery.perk_30",
+          "level": 30,
+          "name": "Joinery: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Joinery output +5%"
+        },
+        {
+          "id": "woodworking.joinery.perk_35",
+          "level": 35,
+          "name": "Joinery: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Joinery spoilage -10%"
+        },
+        {
+          "id": "woodworking.joinery.perk_40",
+          "level": 40,
+          "name": "Joinery: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Joinery quality roll +1"
+        },
+        {
+          "id": "woodworking.joinery.perk_45",
+          "level": 45,
+          "name": "Joinery: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Joinery speed +5%"
+        },
+        {
+          "id": "woodworking.joinery.perk_50",
+          "level": 50,
+          "name": "Joinery: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Joinery output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise joinery for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful joinery (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of joinery; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a joinery task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn joinery from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of joinery, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.cart_building",
+      "domain": "woodworking",
+      "name": "Cart building",
+      "description": "Cart building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.house_framing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.cart_building.cart_building_basics",
+          "discipline": "woodworking.cart_building",
+          "name": "Cart building basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.cart_building.cart_building_seasonal_practice",
+          "discipline": "woodworking.cart_building",
+          "name": "Cart building seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.cart_building.cart_building_precision_work",
+          "discipline": "woodworking.cart_building",
+          "name": "Cart building precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.cart_building.cart_building_master_technique",
+          "discipline": "woodworking.cart_building",
+          "name": "Cart building master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.cart_building.perk_5",
+          "level": 5,
+          "name": "Cart building: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Cart building output +2%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_10",
+          "level": 10,
+          "name": "Cart building: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Cart building waste -5%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_15",
+          "level": 15,
+          "name": "Cart building: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cart building quality roll +1"
+        },
+        {
+          "id": "woodworking.cart_building.perk_20",
+          "level": 20,
+          "name": "Cart building: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Cart building care +5%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_25",
+          "level": 25,
+          "name": "Cart building: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Cart building speed +3%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_30",
+          "level": 30,
+          "name": "Cart building: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cart building output +5%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_35",
+          "level": 35,
+          "name": "Cart building: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Cart building spoilage -10%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_40",
+          "level": 40,
+          "name": "Cart building: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cart building quality roll +1"
+        },
+        {
+          "id": "woodworking.cart_building.perk_45",
+          "level": 45,
+          "name": "Cart building: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Cart building speed +5%"
+        },
+        {
+          "id": "woodworking.cart_building.perk_50",
+          "level": 50,
+          "name": "Cart building: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cart building output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise cart building for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful cart building (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of cart building; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a cart building task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn cart building from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of cart building, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.house_framing",
+      "domain": "woodworking",
+      "name": "House framing",
+      "description": "House framing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.boat_joinery"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.house_framing.house_framing_basics",
+          "discipline": "woodworking.house_framing",
+          "name": "House framing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.house_framing.house_framing_seasonal_practice",
+          "discipline": "woodworking.house_framing",
+          "name": "House framing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.house_framing.house_framing_precision_work",
+          "discipline": "woodworking.house_framing",
+          "name": "House framing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.house_framing.house_framing_master_technique",
+          "discipline": "woodworking.house_framing",
+          "name": "House framing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.house_framing.perk_5",
+          "level": 5,
+          "name": "House framing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "House framing output +2%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_10",
+          "level": 10,
+          "name": "House framing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "House framing waste -5%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_15",
+          "level": 15,
+          "name": "House framing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "House framing quality roll +1"
+        },
+        {
+          "id": "woodworking.house_framing.perk_20",
+          "level": 20,
+          "name": "House framing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "House framing care +5%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_25",
+          "level": 25,
+          "name": "House framing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "House framing speed +3%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_30",
+          "level": 30,
+          "name": "House framing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "House framing output +5%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_35",
+          "level": 35,
+          "name": "House framing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "House framing spoilage -10%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_40",
+          "level": 40,
+          "name": "House framing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "House framing quality roll +1"
+        },
+        {
+          "id": "woodworking.house_framing.perk_45",
+          "level": 45,
+          "name": "House framing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "House framing speed +5%"
+        },
+        {
+          "id": "woodworking.house_framing.perk_50",
+          "level": 50,
+          "name": "House framing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "House framing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise house framing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful house framing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of house framing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a house framing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn house framing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of house framing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.boat_joinery",
+      "domain": "woodworking",
+      "name": "Boat joinery",
+      "description": "Boat joinery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.wood_carving"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.boat_joinery.boat_joinery_basics",
+          "discipline": "woodworking.boat_joinery",
+          "name": "Boat joinery basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.boat_joinery.boat_joinery_seasonal_practice",
+          "discipline": "woodworking.boat_joinery",
+          "name": "Boat joinery seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.boat_joinery.boat_joinery_precision_work",
+          "discipline": "woodworking.boat_joinery",
+          "name": "Boat joinery precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.boat_joinery.boat_joinery_master_technique",
+          "discipline": "woodworking.boat_joinery",
+          "name": "Boat joinery master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.boat_joinery.perk_5",
+          "level": 5,
+          "name": "Boat joinery: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Boat joinery output +2%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_10",
+          "level": 10,
+          "name": "Boat joinery: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Boat joinery waste -5%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_15",
+          "level": 15,
+          "name": "Boat joinery: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Boat joinery quality roll +1"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_20",
+          "level": 20,
+          "name": "Boat joinery: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Boat joinery care +5%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_25",
+          "level": 25,
+          "name": "Boat joinery: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Boat joinery speed +3%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_30",
+          "level": 30,
+          "name": "Boat joinery: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Boat joinery output +5%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_35",
+          "level": 35,
+          "name": "Boat joinery: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Boat joinery spoilage -10%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_40",
+          "level": 40,
+          "name": "Boat joinery: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Boat joinery quality roll +1"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_45",
+          "level": 45,
+          "name": "Boat joinery: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Boat joinery speed +5%"
+        },
+        {
+          "id": "woodworking.boat_joinery.perk_50",
+          "level": 50,
+          "name": "Boat joinery: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Boat joinery output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise boat joinery for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful boat joinery (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of boat joinery; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a boat joinery task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn boat joinery from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of boat joinery, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.wood_carving",
+      "domain": "woodworking",
+      "name": "Wood carving",
+      "description": "Wood carving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.cooperage"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.wood_carving.wood_carving_basics",
+          "discipline": "woodworking.wood_carving",
+          "name": "Wood carving basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wood_carving.wood_carving_seasonal_practice",
+          "discipline": "woodworking.wood_carving",
+          "name": "Wood carving seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wood_carving.wood_carving_precision_work",
+          "discipline": "woodworking.wood_carving",
+          "name": "Wood carving precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wood_carving.wood_carving_master_technique",
+          "discipline": "woodworking.wood_carving",
+          "name": "Wood carving master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.wood_carving.perk_5",
+          "level": 5,
+          "name": "Wood carving: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wood carving output +2%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_10",
+          "level": 10,
+          "name": "Wood carving: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wood carving waste -5%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_15",
+          "level": 15,
+          "name": "Wood carving: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wood carving quality roll +1"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_20",
+          "level": 20,
+          "name": "Wood carving: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wood carving care +5%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_25",
+          "level": 25,
+          "name": "Wood carving: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wood carving speed +3%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_30",
+          "level": 30,
+          "name": "Wood carving: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wood carving output +5%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_35",
+          "level": 35,
+          "name": "Wood carving: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wood carving spoilage -10%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_40",
+          "level": 40,
+          "name": "Wood carving: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wood carving quality roll +1"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_45",
+          "level": 45,
+          "name": "Wood carving: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wood carving speed +5%"
+        },
+        {
+          "id": "woodworking.wood_carving.perk_50",
+          "level": 50,
+          "name": "Wood carving: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wood carving output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wood carving for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wood carving (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wood carving; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wood carving task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wood carving from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wood carving, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.cooperage",
+      "domain": "woodworking",
+      "name": "Cooperage",
+      "description": "Cooperage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.furniture_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.cooperage.cooperage_basics",
+          "discipline": "woodworking.cooperage",
+          "name": "Cooperage basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.cooperage.cooperage_seasonal_practice",
+          "discipline": "woodworking.cooperage",
+          "name": "Cooperage seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.cooperage.cooperage_precision_work",
+          "discipline": "woodworking.cooperage",
+          "name": "Cooperage precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.cooperage.cooperage_master_technique",
+          "discipline": "woodworking.cooperage",
+          "name": "Cooperage master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.cooperage.perk_5",
+          "level": 5,
+          "name": "Cooperage: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Cooperage output +2%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_10",
+          "level": 10,
+          "name": "Cooperage: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Cooperage waste -5%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_15",
+          "level": 15,
+          "name": "Cooperage: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cooperage quality roll +1"
+        },
+        {
+          "id": "woodworking.cooperage.perk_20",
+          "level": 20,
+          "name": "Cooperage: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Cooperage care +5%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_25",
+          "level": 25,
+          "name": "Cooperage: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Cooperage speed +3%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_30",
+          "level": 30,
+          "name": "Cooperage: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cooperage output +5%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_35",
+          "level": 35,
+          "name": "Cooperage: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Cooperage spoilage -10%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_40",
+          "level": 40,
+          "name": "Cooperage: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cooperage quality roll +1"
+        },
+        {
+          "id": "woodworking.cooperage.perk_45",
+          "level": 45,
+          "name": "Cooperage: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Cooperage speed +5%"
+        },
+        {
+          "id": "woodworking.cooperage.perk_50",
+          "level": 50,
+          "name": "Cooperage: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cooperage output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise cooperage for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful cooperage (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of cooperage; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a cooperage task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn cooperage from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of cooperage, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.furniture_making",
+      "domain": "woodworking",
+      "name": "Furniture making",
+      "description": "Furniture making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.tool_handles"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.furniture_making.furniture_making_basics",
+          "discipline": "woodworking.furniture_making",
+          "name": "Furniture making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.furniture_making.furniture_making_seasonal_practice",
+          "discipline": "woodworking.furniture_making",
+          "name": "Furniture making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.furniture_making.furniture_making_precision_work",
+          "discipline": "woodworking.furniture_making",
+          "name": "Furniture making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.furniture_making.furniture_making_master_technique",
+          "discipline": "woodworking.furniture_making",
+          "name": "Furniture making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.furniture_making.perk_5",
+          "level": 5,
+          "name": "Furniture making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Furniture making output +2%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_10",
+          "level": 10,
+          "name": "Furniture making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Furniture making waste -5%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_15",
+          "level": 15,
+          "name": "Furniture making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Furniture making quality roll +1"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_20",
+          "level": 20,
+          "name": "Furniture making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Furniture making care +5%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_25",
+          "level": 25,
+          "name": "Furniture making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Furniture making speed +3%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_30",
+          "level": 30,
+          "name": "Furniture making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Furniture making output +5%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_35",
+          "level": 35,
+          "name": "Furniture making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Furniture making spoilage -10%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_40",
+          "level": 40,
+          "name": "Furniture making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Furniture making quality roll +1"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_45",
+          "level": 45,
+          "name": "Furniture making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Furniture making speed +5%"
+        },
+        {
+          "id": "woodworking.furniture_making.perk_50",
+          "level": 50,
+          "name": "Furniture making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Furniture making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise furniture making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful furniture making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of furniture making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a furniture making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn furniture making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of furniture making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.tool_handles",
+      "domain": "woodworking",
+      "name": "Tool handles",
+      "description": "Tool handles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.wheel_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.tool_handles.tool_handles_basics",
+          "discipline": "woodworking.tool_handles",
+          "name": "Tool handles basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.tool_handles.tool_handles_seasonal_practice",
+          "discipline": "woodworking.tool_handles",
+          "name": "Tool handles seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.tool_handles.tool_handles_precision_work",
+          "discipline": "woodworking.tool_handles",
+          "name": "Tool handles precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.tool_handles.tool_handles_master_technique",
+          "discipline": "woodworking.tool_handles",
+          "name": "Tool handles master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.tool_handles.perk_5",
+          "level": 5,
+          "name": "Tool handles: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tool handles output +2%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_10",
+          "level": 10,
+          "name": "Tool handles: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tool handles waste -5%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_15",
+          "level": 15,
+          "name": "Tool handles: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tool handles quality roll +1"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_20",
+          "level": 20,
+          "name": "Tool handles: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tool handles care +5%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_25",
+          "level": 25,
+          "name": "Tool handles: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tool handles speed +3%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_30",
+          "level": 30,
+          "name": "Tool handles: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tool handles output +5%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_35",
+          "level": 35,
+          "name": "Tool handles: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tool handles spoilage -10%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_40",
+          "level": 40,
+          "name": "Tool handles: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tool handles quality roll +1"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_45",
+          "level": 45,
+          "name": "Tool handles: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tool handles speed +5%"
+        },
+        {
+          "id": "woodworking.tool_handles.perk_50",
+          "level": 50,
+          "name": "Tool handles: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tool handles output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tool handles for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tool handles (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tool handles; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tool handles task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tool handles from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tool handles, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.wheel_making",
+      "domain": "woodworking",
+      "name": "Wheel making",
+      "description": "Wheel making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.roof_framing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.wheel_making.wheel_making_basics",
+          "discipline": "woodworking.wheel_making",
+          "name": "Wheel making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wheel_making.wheel_making_seasonal_practice",
+          "discipline": "woodworking.wheel_making",
+          "name": "Wheel making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wheel_making.wheel_making_precision_work",
+          "discipline": "woodworking.wheel_making",
+          "name": "Wheel making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wheel_making.wheel_making_master_technique",
+          "discipline": "woodworking.wheel_making",
+          "name": "Wheel making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.wheel_making.perk_5",
+          "level": 5,
+          "name": "Wheel making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wheel making output +2%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_10",
+          "level": 10,
+          "name": "Wheel making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wheel making waste -5%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_15",
+          "level": 15,
+          "name": "Wheel making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wheel making quality roll +1"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_20",
+          "level": 20,
+          "name": "Wheel making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wheel making care +5%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_25",
+          "level": 25,
+          "name": "Wheel making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wheel making speed +3%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_30",
+          "level": 30,
+          "name": "Wheel making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wheel making output +5%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_35",
+          "level": 35,
+          "name": "Wheel making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wheel making spoilage -10%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_40",
+          "level": 40,
+          "name": "Wheel making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wheel making quality roll +1"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_45",
+          "level": 45,
+          "name": "Wheel making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wheel making speed +5%"
+        },
+        {
+          "id": "woodworking.wheel_making.perk_50",
+          "level": 50,
+          "name": "Wheel making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wheel making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wheel making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wheel making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wheel making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wheel making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wheel making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wheel making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.roof_framing",
+      "domain": "woodworking",
+      "name": "Roof framing",
+      "description": "Roof framing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.bamboo_joinery"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.roof_framing.roof_framing_basics",
+          "discipline": "woodworking.roof_framing",
+          "name": "Roof framing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.roof_framing.roof_framing_seasonal_practice",
+          "discipline": "woodworking.roof_framing",
+          "name": "Roof framing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.roof_framing.roof_framing_precision_work",
+          "discipline": "woodworking.roof_framing",
+          "name": "Roof framing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.roof_framing.roof_framing_master_technique",
+          "discipline": "woodworking.roof_framing",
+          "name": "Roof framing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.roof_framing.perk_5",
+          "level": 5,
+          "name": "Roof framing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Roof framing output +2%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_10",
+          "level": 10,
+          "name": "Roof framing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Roof framing waste -5%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_15",
+          "level": 15,
+          "name": "Roof framing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Roof framing quality roll +1"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_20",
+          "level": 20,
+          "name": "Roof framing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Roof framing care +5%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_25",
+          "level": 25,
+          "name": "Roof framing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Roof framing speed +3%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_30",
+          "level": 30,
+          "name": "Roof framing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Roof framing output +5%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_35",
+          "level": 35,
+          "name": "Roof framing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Roof framing spoilage -10%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_40",
+          "level": 40,
+          "name": "Roof framing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Roof framing quality roll +1"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_45",
+          "level": 45,
+          "name": "Roof framing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Roof framing speed +5%"
+        },
+        {
+          "id": "woodworking.roof_framing.perk_50",
+          "level": 50,
+          "name": "Roof framing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Roof framing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise roof framing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful roof framing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of roof framing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a roof framing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn roof framing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of roof framing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.bamboo_joinery",
+      "domain": "woodworking",
+      "name": "Bamboo joinery",
+      "description": "Bamboo joinery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.wood_finishing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.bamboo_joinery.bamboo_joinery_basics",
+          "discipline": "woodworking.bamboo_joinery",
+          "name": "Bamboo joinery basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.bamboo_joinery.bamboo_joinery_seasonal_practice",
+          "discipline": "woodworking.bamboo_joinery",
+          "name": "Bamboo joinery seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.bamboo_joinery.bamboo_joinery_precision_work",
+          "discipline": "woodworking.bamboo_joinery",
+          "name": "Bamboo joinery precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.bamboo_joinery.bamboo_joinery_master_technique",
+          "discipline": "woodworking.bamboo_joinery",
+          "name": "Bamboo joinery master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.bamboo_joinery.perk_5",
+          "level": 5,
+          "name": "Bamboo joinery: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bamboo joinery output +2%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_10",
+          "level": 10,
+          "name": "Bamboo joinery: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bamboo joinery waste -5%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_15",
+          "level": 15,
+          "name": "Bamboo joinery: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bamboo joinery quality roll +1"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_20",
+          "level": 20,
+          "name": "Bamboo joinery: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bamboo joinery care +5%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_25",
+          "level": 25,
+          "name": "Bamboo joinery: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bamboo joinery speed +3%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_30",
+          "level": 30,
+          "name": "Bamboo joinery: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bamboo joinery output +5%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_35",
+          "level": 35,
+          "name": "Bamboo joinery: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bamboo joinery spoilage -10%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_40",
+          "level": 40,
+          "name": "Bamboo joinery: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bamboo joinery quality roll +1"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_45",
+          "level": 45,
+          "name": "Bamboo joinery: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bamboo joinery speed +5%"
+        },
+        {
+          "id": "woodworking.bamboo_joinery.perk_50",
+          "level": 50,
+          "name": "Bamboo joinery: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bamboo joinery output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bamboo joinery for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bamboo joinery (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bamboo joinery; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bamboo joinery task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bamboo joinery from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bamboo joinery, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.wood_finishing",
+      "domain": "woodworking",
+      "name": "Wood finishing",
+      "description": "Wood finishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.carpentry_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.wood_finishing.wood_finishing_basics",
+          "discipline": "woodworking.wood_finishing",
+          "name": "Wood finishing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wood_finishing.wood_finishing_seasonal_practice",
+          "discipline": "woodworking.wood_finishing",
+          "name": "Wood finishing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wood_finishing.wood_finishing_precision_work",
+          "discipline": "woodworking.wood_finishing",
+          "name": "Wood finishing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.wood_finishing.wood_finishing_master_technique",
+          "discipline": "woodworking.wood_finishing",
+          "name": "Wood finishing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.wood_finishing.perk_5",
+          "level": 5,
+          "name": "Wood finishing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wood finishing output +2%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_10",
+          "level": 10,
+          "name": "Wood finishing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wood finishing waste -5%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_15",
+          "level": 15,
+          "name": "Wood finishing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wood finishing quality roll +1"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_20",
+          "level": 20,
+          "name": "Wood finishing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wood finishing care +5%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_25",
+          "level": 25,
+          "name": "Wood finishing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wood finishing speed +3%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_30",
+          "level": 30,
+          "name": "Wood finishing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wood finishing output +5%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_35",
+          "level": 35,
+          "name": "Wood finishing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wood finishing spoilage -10%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_40",
+          "level": 40,
+          "name": "Wood finishing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wood finishing quality roll +1"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_45",
+          "level": 45,
+          "name": "Wood finishing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wood finishing speed +5%"
+        },
+        {
+          "id": "woodworking.wood_finishing.perk_50",
+          "level": 50,
+          "name": "Wood finishing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wood finishing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wood finishing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wood finishing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wood finishing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wood finishing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wood finishing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wood finishing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "woodworking.carpentry_planning",
+      "domain": "woodworking",
+      "name": "Carpentry planning",
+      "description": "Carpentry planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "perception"
+      ],
+      "related_disciplines": [
+        "woodworking.carpentry"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "woodworking.carpentry_planning.carpentry_planning_basics",
+          "discipline": "woodworking.carpentry_planning",
+          "name": "Carpentry planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.carpentry_planning.carpentry_planning_seasonal_practice",
+          "discipline": "woodworking.carpentry_planning",
+          "name": "Carpentry planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.carpentry_planning.carpentry_planning_precision_work",
+          "discipline": "woodworking.carpentry_planning",
+          "name": "Carpentry planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "woodworking.carpentry_planning.carpentry_planning_master_technique",
+          "discipline": "woodworking.carpentry_planning",
+          "name": "Carpentry planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "perception"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "woodworking.carpentry_planning.perk_5",
+          "level": 5,
+          "name": "Carpentry planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Carpentry planning output +2%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_10",
+          "level": 10,
+          "name": "Carpentry planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Carpentry planning waste -5%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_15",
+          "level": 15,
+          "name": "Carpentry planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Carpentry planning quality roll +1"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_20",
+          "level": 20,
+          "name": "Carpentry planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Carpentry planning care +5%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_25",
+          "level": 25,
+          "name": "Carpentry planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Carpentry planning speed +3%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_30",
+          "level": 30,
+          "name": "Carpentry planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Carpentry planning output +5%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_35",
+          "level": 35,
+          "name": "Carpentry planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Carpentry planning spoilage -10%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_40",
+          "level": 40,
+          "name": "Carpentry planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Carpentry planning quality roll +1"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_45",
+          "level": 45,
+          "name": "Carpentry planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Carpentry planning speed +5%"
+        },
+        {
+          "id": "woodworking.carpentry_planning.perk_50",
+          "level": 50,
+          "name": "Carpentry planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Carpentry planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise carpentry planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful carpentry planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of carpentry planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a carpentry planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn carpentry planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of carpentry planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

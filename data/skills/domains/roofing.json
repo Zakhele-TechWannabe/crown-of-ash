@@ -1,0 +1,110 @@
+{
+  "id": "roofing",
+  "disciplines": [
+    {
+      "id": "roofing.thatch_gathering",
+      "domain": "roofing",
+      "name": "Thatch gathering",
+      "description": "Thatch gathering applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.thatch_binding",
+      "domain": "roofing",
+      "name": "Thatch binding",
+      "description": "Thatch binding applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.rafter_setting",
+      "domain": "roofing",
+      "name": "Rafter setting",
+      "description": "Rafter setting applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.lath_fitting",
+      "domain": "roofing",
+      "name": "Lath fitting",
+      "description": "Lath fitting applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.tile_laying",
+      "domain": "roofing",
+      "name": "Tile laying",
+      "description": "Tile laying applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.ridge_sealing",
+      "domain": "roofing",
+      "name": "Ridge sealing",
+      "description": "Ridge sealing applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.eaves_finishing",
+      "domain": "roofing",
+      "name": "Eaves finishing",
+      "description": "Eaves finishing applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.gutter_fitting",
+      "domain": "roofing",
+      "name": "Gutter fitting",
+      "description": "Gutter fitting applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.roof_drainage",
+      "domain": "roofing",
+      "name": "Roof drainage",
+      "description": "Roof drainage applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.snow_loading",
+      "domain": "roofing",
+      "name": "Snow loading",
+      "description": "Snow loading applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.fireproofing",
+      "domain": "roofing",
+      "name": "Fireproofing",
+      "description": "Fireproofing applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.leak_tracing",
+      "domain": "roofing",
+      "name": "Leak tracing",
+      "description": "Leak tracing applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.roof_repair",
+      "domain": "roofing",
+      "name": "Roof repair",
+      "description": "Roof repair applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.roof_inspection",
+      "domain": "roofing",
+      "name": "Roof inspection",
+      "description": "Roof inspection applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "roofing.roof_crew_leading",
+      "domain": "roofing",
+      "name": "Roof crew leading",
+      "description": "Roof crew leading applies roofing to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

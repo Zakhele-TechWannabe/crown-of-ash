@@ -1,0 +1,110 @@
+{
+  "id": "wilderness_medicine",
+  "disciplines": [
+    {
+      "id": "wilderness_medicine.field_dressings",
+      "domain": "wilderness_medicine",
+      "name": "Field dressings",
+      "description": "Field dressings applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.wild_remedies",
+      "domain": "wilderness_medicine",
+      "name": "Wild remedies",
+      "description": "Wild remedies applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.splint_making",
+      "domain": "wilderness_medicine",
+      "name": "Splint making",
+      "description": "Splint making applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.snakebite_care",
+      "domain": "wilderness_medicine",
+      "name": "Snakebite care",
+      "description": "Snakebite care applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.exposure_care",
+      "domain": "wilderness_medicine",
+      "name": "Exposure care",
+      "description": "Exposure care applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.water_purification",
+      "domain": "wilderness_medicine",
+      "name": "Water purification",
+      "description": "Water purification applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.fever_shelters",
+      "domain": "wilderness_medicine",
+      "name": "Fever shelters",
+      "description": "Fever shelters applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.wound_cleaning",
+      "domain": "wilderness_medicine",
+      "name": "Wound cleaning",
+      "description": "Wound cleaning applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.camp_nursing",
+      "domain": "wilderness_medicine",
+      "name": "Camp nursing",
+      "description": "Camp nursing applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.plant_toxins",
+      "domain": "wilderness_medicine",
+      "name": "Plant toxins",
+      "description": "Plant toxins applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.stretcher_making",
+      "domain": "wilderness_medicine",
+      "name": "Stretcher making",
+      "description": "Stretcher making applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.rescue_triage",
+      "domain": "wilderness_medicine",
+      "name": "Rescue triage",
+      "description": "Rescue triage applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.altitude_sickness",
+      "domain": "wilderness_medicine",
+      "name": "Altitude sickness",
+      "description": "Altitude sickness applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.medicinal_identification",
+      "domain": "wilderness_medicine",
+      "name": "Medicinal identification",
+      "description": "Medicinal identification applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wilderness_medicine.expedition_infirmary",
+      "domain": "wilderness_medicine",
+      "name": "Expedition infirmary",
+      "description": "Expedition infirmary applies wilderness medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

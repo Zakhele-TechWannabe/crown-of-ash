@@ -43,6 +43,8 @@ func run() -> void:
 			claimed[tile] = true
 	var residents: Array[Dictionary] = map.life.people.duplicate(true)
 	var jump := preload("res://src/grain_economy.gd").new()
+	jump.population = preload("res://src/population.gd").new()
+	jump.population.seed_residents(residents)
 	jump.setup(map.life.sect.data, residents, 718)
 	for d in 1095:
 		e.advance_to((d + 1) * 1440.0)
@@ -62,6 +64,7 @@ func run() -> void:
 				print("MATERIAL DAY200 Y%d %s %.2f" % [d / 365 + 1, group, e.quantity(group) * 2])
 	jump.advance_to(1095 * 1440.0)
 	assert(e.stocks == jump.stocks and e.flows == jump.flows and e.chronicle == jump.chronicle)
+	assert(e.population.skill_level == jump.population.skill_level and e.population.skill_xp == jump.population.skill_xp and e.population.attributes == jump.population.attributes, "Daily stepping and time jumps preserve population growth")
 	for id: String in e.descendants("materials"):
 		assert(is_equal_approx(float(e.goods[id].starting_rations) + e.node_flow(id,"harvested")[3] - e.node_flow(id,"processed")[3], float(e.stocks[id])))
 	for id: String in e.descendants("materials"):

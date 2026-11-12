@@ -1,0 +1,110 @@
+{
+  "id": "surveying",
+  "disciplines": [
+    {
+      "id": "surveying.chain_measuring",
+      "domain": "surveying",
+      "name": "Chain measuring",
+      "description": "Chain measuring applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.sight_lines",
+      "domain": "surveying",
+      "name": "Sight lines",
+      "description": "Sight lines applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.levelling",
+      "domain": "surveying",
+      "name": "Levelling",
+      "description": "Levelling applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.boundary_surveys",
+      "domain": "surveying",
+      "name": "Boundary surveys",
+      "description": "Boundary surveys applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.compass_reading",
+      "domain": "surveying",
+      "name": "Compass reading",
+      "description": "Compass reading applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.slope_measuring",
+      "domain": "surveying",
+      "name": "Slope measuring",
+      "description": "Slope measuring applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.water_levels",
+      "domain": "surveying",
+      "name": "Water levels",
+      "description": "Water levels applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.map_scales",
+      "domain": "surveying",
+      "name": "Map scales",
+      "description": "Map scales applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.land_registers",
+      "domain": "surveying",
+      "name": "Land registers",
+      "description": "Land registers applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.quarry_surveys",
+      "domain": "surveying",
+      "name": "Quarry surveys",
+      "description": "Quarry surveys applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.road_surveys",
+      "domain": "surveying",
+      "name": "Road surveys",
+      "description": "Road surveys applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.triangulation",
+      "domain": "surveying",
+      "name": "Triangulation",
+      "description": "Triangulation applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.survey_stakes",
+      "domain": "surveying",
+      "name": "Survey stakes",
+      "description": "Survey stakes applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.instrument_care",
+      "domain": "surveying",
+      "name": "Instrument care",
+      "description": "Instrument care applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "surveying.survey_arbitration",
+      "domain": "surveying",
+      "name": "Survey arbitration",
+      "description": "Survey arbitration applies surveying to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

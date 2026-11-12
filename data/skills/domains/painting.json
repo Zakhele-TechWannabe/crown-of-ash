@@ -1,0 +1,110 @@
+{
+  "id": "painting",
+  "disciplines": [
+    {
+      "id": "painting.brush_lines",
+      "domain": "painting",
+      "name": "Brush lines",
+      "description": "Brush lines applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.ink_washes",
+      "domain": "painting",
+      "name": "Ink washes",
+      "description": "Ink washes applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.colour_grinding",
+      "domain": "painting",
+      "name": "Colour grinding",
+      "description": "Colour grinding applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.landscape_painting",
+      "domain": "painting",
+      "name": "Landscape painting",
+      "description": "Landscape painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.bird_painting",
+      "domain": "painting",
+      "name": "Bird painting",
+      "description": "Bird painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.flower_painting",
+      "domain": "painting",
+      "name": "Flower painting",
+      "description": "Flower painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.portraiture",
+      "domain": "painting",
+      "name": "Portraiture",
+      "description": "Portraiture applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.figure_painting",
+      "domain": "painting",
+      "name": "Figure painting",
+      "description": "Figure painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.perspective",
+      "domain": "painting",
+      "name": "Perspective",
+      "description": "Perspective applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.scroll_composition",
+      "domain": "painting",
+      "name": "Scroll composition",
+      "description": "Scroll composition applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.paper_preparation",
+      "domain": "painting",
+      "name": "Paper preparation",
+      "description": "Paper preparation applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.silk_painting",
+      "domain": "painting",
+      "name": "Silk painting",
+      "description": "Silk painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.painting_criticism",
+      "domain": "painting",
+      "name": "Painting criticism",
+      "description": "Painting criticism applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.restoration",
+      "domain": "painting",
+      "name": "Restoration",
+      "description": "Restoration applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "painting.studio_teaching",
+      "domain": "painting",
+      "name": "Studio teaching",
+      "description": "Studio teaching applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

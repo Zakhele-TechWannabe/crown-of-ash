@@ -1,0 +1,110 @@
+{
+  "id": "elder_care",
+  "disciplines": [
+    {
+      "id": "elder_care.daily_assistance",
+      "domain": "elder_care",
+      "name": "Daily assistance",
+      "description": "Daily assistance applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.mobility_support",
+      "domain": "elder_care",
+      "name": "Mobility support",
+      "description": "Mobility support applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.elder_nutrition",
+      "domain": "elder_care",
+      "name": "Elder nutrition",
+      "description": "Elder nutrition applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.memory_care",
+      "domain": "elder_care",
+      "name": "Memory care",
+      "description": "Memory care applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.companionship",
+      "domain": "elder_care",
+      "name": "Companionship",
+      "description": "Companionship applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.medicine_schedules",
+      "domain": "elder_care",
+      "name": "Medicine schedules",
+      "description": "Medicine schedules applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.comfort_nursing",
+      "domain": "elder_care",
+      "name": "Comfort nursing",
+      "description": "Comfort nursing applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.fall_prevention",
+      "domain": "elder_care",
+      "name": "Fall prevention",
+      "description": "Fall prevention applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.joint_exercises",
+      "domain": "elder_care",
+      "name": "Joint exercises",
+      "description": "Joint exercises applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.bedding_care",
+      "domain": "elder_care",
+      "name": "Bedding care",
+      "description": "Bedding care applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.family_counsel",
+      "domain": "elder_care",
+      "name": "Family counsel",
+      "description": "Family counsel applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.respite_care",
+      "domain": "elder_care",
+      "name": "Respite care",
+      "description": "Respite care applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.end_of_life_care",
+      "domain": "elder_care",
+      "name": "End of life care",
+      "description": "End of life care applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.elder_stories",
+      "domain": "elder_care",
+      "name": "Elder stories",
+      "description": "Elder stories applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "elder_care.care_coordination",
+      "domain": "elder_care",
+      "name": "Care coordination",
+      "description": "Care coordination applies elder care to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

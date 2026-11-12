@@ -1,0 +1,110 @@
+{
+  "id": "wrestling",
+  "disciplines": [
+    {
+      "id": "wrestling.grip_fighting",
+      "domain": "wrestling",
+      "name": "Grip fighting",
+      "description": "Grip fighting applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.stance_control",
+      "domain": "wrestling",
+      "name": "Stance control",
+      "description": "Stance control applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.leg_trips",
+      "domain": "wrestling",
+      "name": "Leg trips",
+      "description": "Leg trips applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.hip_throws",
+      "domain": "wrestling",
+      "name": "Hip throws",
+      "description": "Hip throws applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.shoulder_throws",
+      "domain": "wrestling",
+      "name": "Shoulder throws",
+      "description": "Shoulder throws applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.body_locks",
+      "domain": "wrestling",
+      "name": "Body locks",
+      "description": "Body locks applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.ground_control",
+      "domain": "wrestling",
+      "name": "Ground control",
+      "description": "Ground control applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.pin_escapes",
+      "domain": "wrestling",
+      "name": "Pin escapes",
+      "description": "Pin escapes applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.fall_breaking",
+      "domain": "wrestling",
+      "name": "Fall breaking",
+      "description": "Fall breaking applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.strength_drills",
+      "domain": "wrestling",
+      "name": "Strength drills",
+      "description": "Strength drills applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.balance_drills",
+      "domain": "wrestling",
+      "name": "Balance drills",
+      "description": "Balance drills applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.match_strategy",
+      "domain": "wrestling",
+      "name": "Match strategy",
+      "description": "Match strategy applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.refereeing",
+      "domain": "wrestling",
+      "name": "Refereeing",
+      "description": "Refereeing applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.wrestling_customs",
+      "domain": "wrestling",
+      "name": "Wrestling customs",
+      "description": "Wrestling customs applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "wrestling.wrestling_instruction",
+      "domain": "wrestling",
+      "name": "Wrestling instruction",
+      "description": "Wrestling instruction applies wrestling to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

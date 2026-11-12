@@ -1,0 +1,4055 @@
+{
+  "id": "commerce",
+  "disciplines": [
+    {
+      "id": "commerce.trade",
+      "domain": "commerce",
+      "name": "Trade",
+      "description": "Trade: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.haggling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.trade.haggling",
+          "discipline": "commerce.trade",
+          "name": "Haggling",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.trade.bookkeeping",
+          "discipline": "commerce.trade",
+          "name": "Bookkeeping",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.trade.appraisal",
+          "discipline": "commerce.trade",
+          "name": "Appraisal",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "perception": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.trade.perk_5",
+          "level": 5,
+          "name": "Trade: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Trade output +2%"
+        },
+        {
+          "id": "commerce.trade.perk_10",
+          "level": 10,
+          "name": "Trade: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Trade waste -5%"
+        },
+        {
+          "id": "commerce.trade.perk_15",
+          "level": 15,
+          "name": "Trade: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Trade quality roll +1"
+        },
+        {
+          "id": "commerce.trade.perk_20",
+          "level": 20,
+          "name": "Trade: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Trade care +5%"
+        },
+        {
+          "id": "commerce.trade.perk_25",
+          "level": 25,
+          "name": "Trade: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Trade speed +3%"
+        },
+        {
+          "id": "commerce.trade.perk_30",
+          "level": 30,
+          "name": "Trade: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Trade output +5%"
+        },
+        {
+          "id": "commerce.trade.perk_35",
+          "level": 35,
+          "name": "Trade: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Trade spoilage -10%"
+        },
+        {
+          "id": "commerce.trade.perk_40",
+          "level": 40,
+          "name": "Trade: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Trade quality roll +1"
+        },
+        {
+          "id": "commerce.trade.perk_45",
+          "level": 45,
+          "name": "Trade: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Trade speed +5%"
+        },
+        {
+          "id": "commerce.trade.perk_50",
+          "level": 50,
+          "name": "Trade: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Trade output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise trade for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful trade (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of trade; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a trade task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn trade from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of trade, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.haggling",
+      "domain": "commerce",
+      "name": "Haggling",
+      "description": "Haggling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.bookkeeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.haggling.haggling_basics",
+          "discipline": "commerce.haggling",
+          "name": "Haggling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.haggling.haggling_seasonal_practice",
+          "discipline": "commerce.haggling",
+          "name": "Haggling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.haggling.haggling_precision_work",
+          "discipline": "commerce.haggling",
+          "name": "Haggling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.haggling.haggling_master_technique",
+          "discipline": "commerce.haggling",
+          "name": "Haggling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.haggling.perk_5",
+          "level": 5,
+          "name": "Haggling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Haggling output +2%"
+        },
+        {
+          "id": "commerce.haggling.perk_10",
+          "level": 10,
+          "name": "Haggling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Haggling waste -5%"
+        },
+        {
+          "id": "commerce.haggling.perk_15",
+          "level": 15,
+          "name": "Haggling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Haggling quality roll +1"
+        },
+        {
+          "id": "commerce.haggling.perk_20",
+          "level": 20,
+          "name": "Haggling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Haggling care +5%"
+        },
+        {
+          "id": "commerce.haggling.perk_25",
+          "level": 25,
+          "name": "Haggling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Haggling speed +3%"
+        },
+        {
+          "id": "commerce.haggling.perk_30",
+          "level": 30,
+          "name": "Haggling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Haggling output +5%"
+        },
+        {
+          "id": "commerce.haggling.perk_35",
+          "level": 35,
+          "name": "Haggling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Haggling spoilage -10%"
+        },
+        {
+          "id": "commerce.haggling.perk_40",
+          "level": 40,
+          "name": "Haggling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Haggling quality roll +1"
+        },
+        {
+          "id": "commerce.haggling.perk_45",
+          "level": 45,
+          "name": "Haggling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Haggling speed +5%"
+        },
+        {
+          "id": "commerce.haggling.perk_50",
+          "level": 50,
+          "name": "Haggling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Haggling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise haggling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful haggling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of haggling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a haggling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn haggling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of haggling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.bookkeeping",
+      "domain": "commerce",
+      "name": "Bookkeeping",
+      "description": "Bookkeeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.appraisal"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.bookkeeping.bookkeeping_basics",
+          "discipline": "commerce.bookkeeping",
+          "name": "Bookkeeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.bookkeeping.bookkeeping_seasonal_practice",
+          "discipline": "commerce.bookkeeping",
+          "name": "Bookkeeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.bookkeeping.bookkeeping_precision_work",
+          "discipline": "commerce.bookkeeping",
+          "name": "Bookkeeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.bookkeeping.bookkeeping_master_technique",
+          "discipline": "commerce.bookkeeping",
+          "name": "Bookkeeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.bookkeeping.perk_5",
+          "level": 5,
+          "name": "Bookkeeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bookkeeping output +2%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_10",
+          "level": 10,
+          "name": "Bookkeeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bookkeeping waste -5%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_15",
+          "level": 15,
+          "name": "Bookkeeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bookkeeping quality roll +1"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_20",
+          "level": 20,
+          "name": "Bookkeeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bookkeeping care +5%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_25",
+          "level": 25,
+          "name": "Bookkeeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bookkeeping speed +3%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_30",
+          "level": 30,
+          "name": "Bookkeeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bookkeeping output +5%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_35",
+          "level": 35,
+          "name": "Bookkeeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bookkeeping spoilage -10%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_40",
+          "level": 40,
+          "name": "Bookkeeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bookkeeping quality roll +1"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_45",
+          "level": 45,
+          "name": "Bookkeeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bookkeeping speed +5%"
+        },
+        {
+          "id": "commerce.bookkeeping.perk_50",
+          "level": 50,
+          "name": "Bookkeeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bookkeeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bookkeeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bookkeeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bookkeeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bookkeeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bookkeeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bookkeeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.appraisal",
+      "domain": "commerce",
+      "name": "Appraisal",
+      "description": "Appraisal: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.market_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.appraisal.appraisal_basics",
+          "discipline": "commerce.appraisal",
+          "name": "Appraisal basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.appraisal.appraisal_seasonal_practice",
+          "discipline": "commerce.appraisal",
+          "name": "Appraisal seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.appraisal.appraisal_precision_work",
+          "discipline": "commerce.appraisal",
+          "name": "Appraisal precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.appraisal.appraisal_master_technique",
+          "discipline": "commerce.appraisal",
+          "name": "Appraisal master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.appraisal.perk_5",
+          "level": 5,
+          "name": "Appraisal: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Appraisal output +2%"
+        },
+        {
+          "id": "commerce.appraisal.perk_10",
+          "level": 10,
+          "name": "Appraisal: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Appraisal waste -5%"
+        },
+        {
+          "id": "commerce.appraisal.perk_15",
+          "level": 15,
+          "name": "Appraisal: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Appraisal quality roll +1"
+        },
+        {
+          "id": "commerce.appraisal.perk_20",
+          "level": 20,
+          "name": "Appraisal: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Appraisal care +5%"
+        },
+        {
+          "id": "commerce.appraisal.perk_25",
+          "level": 25,
+          "name": "Appraisal: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Appraisal speed +3%"
+        },
+        {
+          "id": "commerce.appraisal.perk_30",
+          "level": 30,
+          "name": "Appraisal: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Appraisal output +5%"
+        },
+        {
+          "id": "commerce.appraisal.perk_35",
+          "level": 35,
+          "name": "Appraisal: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Appraisal spoilage -10%"
+        },
+        {
+          "id": "commerce.appraisal.perk_40",
+          "level": 40,
+          "name": "Appraisal: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Appraisal quality roll +1"
+        },
+        {
+          "id": "commerce.appraisal.perk_45",
+          "level": 45,
+          "name": "Appraisal: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Appraisal speed +5%"
+        },
+        {
+          "id": "commerce.appraisal.perk_50",
+          "level": 50,
+          "name": "Appraisal: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Appraisal output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise appraisal for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful appraisal (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of appraisal; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a appraisal task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn appraisal from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of appraisal, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.market_tending",
+      "domain": "commerce",
+      "name": "Market tending",
+      "description": "Market tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.caravan_provisioning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.market_tending.market_tending_basics",
+          "discipline": "commerce.market_tending",
+          "name": "Market tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.market_tending.market_tending_seasonal_practice",
+          "discipline": "commerce.market_tending",
+          "name": "Market tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.market_tending.market_tending_precision_work",
+          "discipline": "commerce.market_tending",
+          "name": "Market tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.market_tending.market_tending_master_technique",
+          "discipline": "commerce.market_tending",
+          "name": "Market tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.market_tending.perk_5",
+          "level": 5,
+          "name": "Market tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Market tending output +2%"
+        },
+        {
+          "id": "commerce.market_tending.perk_10",
+          "level": 10,
+          "name": "Market tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Market tending waste -5%"
+        },
+        {
+          "id": "commerce.market_tending.perk_15",
+          "level": 15,
+          "name": "Market tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Market tending quality roll +1"
+        },
+        {
+          "id": "commerce.market_tending.perk_20",
+          "level": 20,
+          "name": "Market tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Market tending care +5%"
+        },
+        {
+          "id": "commerce.market_tending.perk_25",
+          "level": 25,
+          "name": "Market tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Market tending speed +3%"
+        },
+        {
+          "id": "commerce.market_tending.perk_30",
+          "level": 30,
+          "name": "Market tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Market tending output +5%"
+        },
+        {
+          "id": "commerce.market_tending.perk_35",
+          "level": 35,
+          "name": "Market tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Market tending spoilage -10%"
+        },
+        {
+          "id": "commerce.market_tending.perk_40",
+          "level": 40,
+          "name": "Market tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Market tending quality roll +1"
+        },
+        {
+          "id": "commerce.market_tending.perk_45",
+          "level": 45,
+          "name": "Market tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Market tending speed +5%"
+        },
+        {
+          "id": "commerce.market_tending.perk_50",
+          "level": 50,
+          "name": "Market tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Market tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise market tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful market tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of market tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a market tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn market tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of market tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.caravan_provisioning",
+      "domain": "commerce",
+      "name": "Caravan provisioning",
+      "description": "Caravan provisioning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.contract_drafting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.caravan_provisioning.caravan_provisioning_basics",
+          "discipline": "commerce.caravan_provisioning",
+          "name": "Caravan provisioning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.caravan_provisioning.caravan_provisioning_seasonal_practice",
+          "discipline": "commerce.caravan_provisioning",
+          "name": "Caravan provisioning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.caravan_provisioning.caravan_provisioning_precision_work",
+          "discipline": "commerce.caravan_provisioning",
+          "name": "Caravan provisioning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.caravan_provisioning.caravan_provisioning_master_technique",
+          "discipline": "commerce.caravan_provisioning",
+          "name": "Caravan provisioning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.caravan_provisioning.perk_5",
+          "level": 5,
+          "name": "Caravan provisioning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Caravan provisioning output +2%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_10",
+          "level": 10,
+          "name": "Caravan provisioning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Caravan provisioning waste -5%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_15",
+          "level": 15,
+          "name": "Caravan provisioning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Caravan provisioning quality roll +1"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_20",
+          "level": 20,
+          "name": "Caravan provisioning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Caravan provisioning care +5%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_25",
+          "level": 25,
+          "name": "Caravan provisioning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Caravan provisioning speed +3%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_30",
+          "level": 30,
+          "name": "Caravan provisioning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Caravan provisioning output +5%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_35",
+          "level": 35,
+          "name": "Caravan provisioning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Caravan provisioning spoilage -10%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_40",
+          "level": 40,
+          "name": "Caravan provisioning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Caravan provisioning quality roll +1"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_45",
+          "level": 45,
+          "name": "Caravan provisioning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Caravan provisioning speed +5%"
+        },
+        {
+          "id": "commerce.caravan_provisioning.perk_50",
+          "level": 50,
+          "name": "Caravan provisioning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Caravan provisioning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise caravan provisioning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful caravan provisioning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of caravan provisioning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a caravan provisioning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn caravan provisioning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of caravan provisioning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.contract_drafting",
+      "domain": "commerce",
+      "name": "Contract drafting",
+      "description": "Contract drafting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.weights_and_measures"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.contract_drafting.contract_drafting_basics",
+          "discipline": "commerce.contract_drafting",
+          "name": "Contract drafting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.contract_drafting.contract_drafting_seasonal_practice",
+          "discipline": "commerce.contract_drafting",
+          "name": "Contract drafting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.contract_drafting.contract_drafting_precision_work",
+          "discipline": "commerce.contract_drafting",
+          "name": "Contract drafting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.contract_drafting.contract_drafting_master_technique",
+          "discipline": "commerce.contract_drafting",
+          "name": "Contract drafting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.contract_drafting.perk_5",
+          "level": 5,
+          "name": "Contract drafting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Contract drafting output +2%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_10",
+          "level": 10,
+          "name": "Contract drafting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Contract drafting waste -5%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_15",
+          "level": 15,
+          "name": "Contract drafting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Contract drafting quality roll +1"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_20",
+          "level": 20,
+          "name": "Contract drafting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Contract drafting care +5%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_25",
+          "level": 25,
+          "name": "Contract drafting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Contract drafting speed +3%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_30",
+          "level": 30,
+          "name": "Contract drafting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Contract drafting output +5%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_35",
+          "level": 35,
+          "name": "Contract drafting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Contract drafting spoilage -10%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_40",
+          "level": 40,
+          "name": "Contract drafting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Contract drafting quality roll +1"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_45",
+          "level": 45,
+          "name": "Contract drafting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Contract drafting speed +5%"
+        },
+        {
+          "id": "commerce.contract_drafting.perk_50",
+          "level": 50,
+          "name": "Contract drafting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Contract drafting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise contract drafting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful contract drafting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of contract drafting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a contract drafting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn contract drafting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of contract drafting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.weights_and_measures",
+      "domain": "commerce",
+      "name": "Weights and measures",
+      "description": "Weights and measures: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.commodity_grading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.weights_and_measures.weights_and_measures_basics",
+          "discipline": "commerce.weights_and_measures",
+          "name": "Weights and measures basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.weights_and_measures.weights_and_measures_seasonal_practice",
+          "discipline": "commerce.weights_and_measures",
+          "name": "Weights and measures seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.weights_and_measures.weights_and_measures_precision_work",
+          "discipline": "commerce.weights_and_measures",
+          "name": "Weights and measures precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.weights_and_measures.weights_and_measures_master_technique",
+          "discipline": "commerce.weights_and_measures",
+          "name": "Weights and measures master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.weights_and_measures.perk_5",
+          "level": 5,
+          "name": "Weights and measures: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Weights and measures output +2%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_10",
+          "level": 10,
+          "name": "Weights and measures: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Weights and measures waste -5%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_15",
+          "level": 15,
+          "name": "Weights and measures: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Weights and measures quality roll +1"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_20",
+          "level": 20,
+          "name": "Weights and measures: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Weights and measures care +5%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_25",
+          "level": 25,
+          "name": "Weights and measures: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Weights and measures speed +3%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_30",
+          "level": 30,
+          "name": "Weights and measures: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Weights and measures output +5%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_35",
+          "level": 35,
+          "name": "Weights and measures: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Weights and measures spoilage -10%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_40",
+          "level": 40,
+          "name": "Weights and measures: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Weights and measures quality roll +1"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_45",
+          "level": 45,
+          "name": "Weights and measures: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Weights and measures speed +5%"
+        },
+        {
+          "id": "commerce.weights_and_measures.perk_50",
+          "level": 50,
+          "name": "Weights and measures: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Weights and measures output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise weights and measures for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful weights and measures (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of weights and measures; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a weights and measures task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn weights and measures from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of weights and measures, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.commodity_grading",
+      "domain": "commerce",
+      "name": "Commodity grading",
+      "description": "Commodity grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.credit_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.commodity_grading.commodity_grading_basics",
+          "discipline": "commerce.commodity_grading",
+          "name": "Commodity grading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.commodity_grading.commodity_grading_seasonal_practice",
+          "discipline": "commerce.commodity_grading",
+          "name": "Commodity grading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.commodity_grading.commodity_grading_precision_work",
+          "discipline": "commerce.commodity_grading",
+          "name": "Commodity grading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.commodity_grading.commodity_grading_master_technique",
+          "discipline": "commerce.commodity_grading",
+          "name": "Commodity grading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.commodity_grading.perk_5",
+          "level": 5,
+          "name": "Commodity grading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Commodity grading output +2%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_10",
+          "level": 10,
+          "name": "Commodity grading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Commodity grading waste -5%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_15",
+          "level": 15,
+          "name": "Commodity grading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Commodity grading quality roll +1"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_20",
+          "level": 20,
+          "name": "Commodity grading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Commodity grading care +5%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_25",
+          "level": 25,
+          "name": "Commodity grading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Commodity grading speed +3%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_30",
+          "level": 30,
+          "name": "Commodity grading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Commodity grading output +5%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_35",
+          "level": 35,
+          "name": "Commodity grading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Commodity grading spoilage -10%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_40",
+          "level": 40,
+          "name": "Commodity grading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Commodity grading quality roll +1"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_45",
+          "level": 45,
+          "name": "Commodity grading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Commodity grading speed +5%"
+        },
+        {
+          "id": "commerce.commodity_grading.perk_50",
+          "level": 50,
+          "name": "Commodity grading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Commodity grading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise commodity grading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful commodity grading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of commodity grading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a commodity grading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn commodity grading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of commodity grading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.credit_keeping",
+      "domain": "commerce",
+      "name": "Credit keeping",
+      "description": "Credit keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.storefront_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.credit_keeping.credit_keeping_basics",
+          "discipline": "commerce.credit_keeping",
+          "name": "Credit keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.credit_keeping.credit_keeping_seasonal_practice",
+          "discipline": "commerce.credit_keeping",
+          "name": "Credit keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.credit_keeping.credit_keeping_precision_work",
+          "discipline": "commerce.credit_keeping",
+          "name": "Credit keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.credit_keeping.credit_keeping_master_technique",
+          "discipline": "commerce.credit_keeping",
+          "name": "Credit keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.credit_keeping.perk_5",
+          "level": 5,
+          "name": "Credit keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Credit keeping output +2%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_10",
+          "level": 10,
+          "name": "Credit keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Credit keeping waste -5%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_15",
+          "level": 15,
+          "name": "Credit keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Credit keeping quality roll +1"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_20",
+          "level": 20,
+          "name": "Credit keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Credit keeping care +5%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_25",
+          "level": 25,
+          "name": "Credit keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Credit keeping speed +3%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_30",
+          "level": 30,
+          "name": "Credit keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Credit keeping output +5%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_35",
+          "level": 35,
+          "name": "Credit keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Credit keeping spoilage -10%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_40",
+          "level": 40,
+          "name": "Credit keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Credit keeping quality roll +1"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_45",
+          "level": 45,
+          "name": "Credit keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Credit keeping speed +5%"
+        },
+        {
+          "id": "commerce.credit_keeping.perk_50",
+          "level": 50,
+          "name": "Credit keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Credit keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise credit keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful credit keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of credit keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a credit keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn credit keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of credit keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.storefront_keeping",
+      "domain": "commerce",
+      "name": "Storefront keeping",
+      "description": "Storefront keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.trade_route_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.storefront_keeping.storefront_keeping_basics",
+          "discipline": "commerce.storefront_keeping",
+          "name": "Storefront keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.storefront_keeping.storefront_keeping_seasonal_practice",
+          "discipline": "commerce.storefront_keeping",
+          "name": "Storefront keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.storefront_keeping.storefront_keeping_precision_work",
+          "discipline": "commerce.storefront_keeping",
+          "name": "Storefront keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.storefront_keeping.storefront_keeping_master_technique",
+          "discipline": "commerce.storefront_keeping",
+          "name": "Storefront keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.storefront_keeping.perk_5",
+          "level": 5,
+          "name": "Storefront keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Storefront keeping output +2%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_10",
+          "level": 10,
+          "name": "Storefront keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Storefront keeping waste -5%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_15",
+          "level": 15,
+          "name": "Storefront keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Storefront keeping quality roll +1"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_20",
+          "level": 20,
+          "name": "Storefront keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Storefront keeping care +5%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_25",
+          "level": 25,
+          "name": "Storefront keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Storefront keeping speed +3%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_30",
+          "level": 30,
+          "name": "Storefront keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Storefront keeping output +5%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_35",
+          "level": 35,
+          "name": "Storefront keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Storefront keeping spoilage -10%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_40",
+          "level": 40,
+          "name": "Storefront keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Storefront keeping quality roll +1"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_45",
+          "level": 45,
+          "name": "Storefront keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Storefront keeping speed +5%"
+        },
+        {
+          "id": "commerce.storefront_keeping.perk_50",
+          "level": 50,
+          "name": "Storefront keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Storefront keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise storefront keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful storefront keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of storefront keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a storefront keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn storefront keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of storefront keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.trade_route_planning",
+      "domain": "commerce",
+      "name": "Trade route planning",
+      "description": "Trade route planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.bargain_mediation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.trade_route_planning.trade_route_planning_basics",
+          "discipline": "commerce.trade_route_planning",
+          "name": "Trade route planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.trade_route_planning.trade_route_planning_seasonal_practice",
+          "discipline": "commerce.trade_route_planning",
+          "name": "Trade route planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.trade_route_planning.trade_route_planning_precision_work",
+          "discipline": "commerce.trade_route_planning",
+          "name": "Trade route planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.trade_route_planning.trade_route_planning_master_technique",
+          "discipline": "commerce.trade_route_planning",
+          "name": "Trade route planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.trade_route_planning.perk_5",
+          "level": 5,
+          "name": "Trade route planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Trade route planning output +2%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_10",
+          "level": 10,
+          "name": "Trade route planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Trade route planning waste -5%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_15",
+          "level": 15,
+          "name": "Trade route planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Trade route planning quality roll +1"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_20",
+          "level": 20,
+          "name": "Trade route planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Trade route planning care +5%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_25",
+          "level": 25,
+          "name": "Trade route planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Trade route planning speed +3%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_30",
+          "level": 30,
+          "name": "Trade route planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Trade route planning output +5%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_35",
+          "level": 35,
+          "name": "Trade route planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Trade route planning spoilage -10%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_40",
+          "level": 40,
+          "name": "Trade route planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Trade route planning quality roll +1"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_45",
+          "level": 45,
+          "name": "Trade route planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Trade route planning speed +5%"
+        },
+        {
+          "id": "commerce.trade_route_planning.perk_50",
+          "level": 50,
+          "name": "Trade route planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Trade route planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise trade route planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful trade route planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of trade route planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a trade route planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn trade route planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of trade route planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.bargain_mediation",
+      "domain": "commerce",
+      "name": "Bargain mediation",
+      "description": "Bargain mediation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.inventory_control"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.bargain_mediation.bargain_mediation_basics",
+          "discipline": "commerce.bargain_mediation",
+          "name": "Bargain mediation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.bargain_mediation.bargain_mediation_seasonal_practice",
+          "discipline": "commerce.bargain_mediation",
+          "name": "Bargain mediation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.bargain_mediation.bargain_mediation_precision_work",
+          "discipline": "commerce.bargain_mediation",
+          "name": "Bargain mediation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.bargain_mediation.bargain_mediation_master_technique",
+          "discipline": "commerce.bargain_mediation",
+          "name": "Bargain mediation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.bargain_mediation.perk_5",
+          "level": 5,
+          "name": "Bargain mediation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bargain mediation output +2%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_10",
+          "level": 10,
+          "name": "Bargain mediation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bargain mediation waste -5%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_15",
+          "level": 15,
+          "name": "Bargain mediation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bargain mediation quality roll +1"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_20",
+          "level": 20,
+          "name": "Bargain mediation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bargain mediation care +5%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_25",
+          "level": 25,
+          "name": "Bargain mediation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bargain mediation speed +3%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_30",
+          "level": 30,
+          "name": "Bargain mediation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bargain mediation output +5%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_35",
+          "level": 35,
+          "name": "Bargain mediation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bargain mediation spoilage -10%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_40",
+          "level": 40,
+          "name": "Bargain mediation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bargain mediation quality roll +1"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_45",
+          "level": 45,
+          "name": "Bargain mediation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bargain mediation speed +5%"
+        },
+        {
+          "id": "commerce.bargain_mediation.perk_50",
+          "level": 50,
+          "name": "Bargain mediation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bargain mediation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bargain mediation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bargain mediation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bargain mediation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bargain mediation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bargain mediation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bargain mediation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.inventory_control",
+      "domain": "commerce",
+      "name": "Inventory control",
+      "description": "Inventory control: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.merchant_stewardship"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.inventory_control.inventory_control_basics",
+          "discipline": "commerce.inventory_control",
+          "name": "Inventory control basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.inventory_control.inventory_control_seasonal_practice",
+          "discipline": "commerce.inventory_control",
+          "name": "Inventory control seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.inventory_control.inventory_control_precision_work",
+          "discipline": "commerce.inventory_control",
+          "name": "Inventory control precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.inventory_control.inventory_control_master_technique",
+          "discipline": "commerce.inventory_control",
+          "name": "Inventory control master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.inventory_control.perk_5",
+          "level": 5,
+          "name": "Inventory control: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Inventory control output +2%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_10",
+          "level": 10,
+          "name": "Inventory control: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Inventory control waste -5%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_15",
+          "level": 15,
+          "name": "Inventory control: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Inventory control quality roll +1"
+        },
+        {
+          "id": "commerce.inventory_control.perk_20",
+          "level": 20,
+          "name": "Inventory control: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Inventory control care +5%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_25",
+          "level": 25,
+          "name": "Inventory control: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Inventory control speed +3%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_30",
+          "level": 30,
+          "name": "Inventory control: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Inventory control output +5%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_35",
+          "level": 35,
+          "name": "Inventory control: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Inventory control spoilage -10%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_40",
+          "level": 40,
+          "name": "Inventory control: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Inventory control quality roll +1"
+        },
+        {
+          "id": "commerce.inventory_control.perk_45",
+          "level": 45,
+          "name": "Inventory control: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Inventory control speed +5%"
+        },
+        {
+          "id": "commerce.inventory_control.perk_50",
+          "level": 50,
+          "name": "Inventory control: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Inventory control output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise inventory control for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful inventory control (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of inventory control; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a inventory control task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn inventory control from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of inventory control, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "commerce.merchant_stewardship",
+      "domain": "commerce",
+      "name": "Merchant stewardship",
+      "description": "Merchant stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "charisma",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "commerce.trade"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "commerce.merchant_stewardship.merchant_stewardship_basics",
+          "discipline": "commerce.merchant_stewardship",
+          "name": "Merchant stewardship basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "charisma": 8
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.merchant_stewardship.merchant_stewardship_seasonal_practice",
+          "discipline": "commerce.merchant_stewardship",
+          "name": "Merchant stewardship seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "charisma": 10
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.merchant_stewardship.merchant_stewardship_precision_work",
+          "discipline": "commerce.merchant_stewardship",
+          "name": "Merchant stewardship precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "charisma": 12
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "commerce.merchant_stewardship.merchant_stewardship_master_technique",
+          "discipline": "commerce.merchant_stewardship",
+          "name": "Merchant stewardship master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "charisma": 14
+          },
+          "key_attributes": [
+            "charisma",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "commerce.merchant_stewardship.perk_5",
+          "level": 5,
+          "name": "Merchant stewardship: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Merchant stewardship output +2%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_10",
+          "level": 10,
+          "name": "Merchant stewardship: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Merchant stewardship waste -5%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_15",
+          "level": 15,
+          "name": "Merchant stewardship: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Merchant stewardship quality roll +1"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_20",
+          "level": 20,
+          "name": "Merchant stewardship: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Merchant stewardship care +5%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_25",
+          "level": 25,
+          "name": "Merchant stewardship: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Merchant stewardship speed +3%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_30",
+          "level": 30,
+          "name": "Merchant stewardship: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Merchant stewardship output +5%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_35",
+          "level": 35,
+          "name": "Merchant stewardship: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Merchant stewardship spoilage -10%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_40",
+          "level": 40,
+          "name": "Merchant stewardship: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Merchant stewardship quality roll +1"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_45",
+          "level": 45,
+          "name": "Merchant stewardship: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Merchant stewardship speed +5%"
+        },
+        {
+          "id": "commerce.merchant_stewardship.perk_50",
+          "level": 50,
+          "name": "Merchant stewardship: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Merchant stewardship output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise merchant stewardship for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful merchant stewardship (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of merchant stewardship; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a merchant stewardship task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn merchant stewardship from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of merchant stewardship, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

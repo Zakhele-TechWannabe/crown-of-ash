@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "grain_farming",
+    "sphere": "land",
+    "name": "Grain farming",
+    "description": "Grain farming sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "gardens",
+    "sphere": "land",
+    "name": "Gardens",
+    "description": "Gardens sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "orchards",
+    "sphere": "land",
+    "name": "Orchards",
+    "description": "Orchards sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "husbandry",
+    "sphere": "land",
+    "name": "Husbandry",
+    "description": "Husbandry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "irrigation",
+    "sphere": "land",
+    "name": "Irrigation",
+    "description": "Irrigation sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "forestry_and_woodcutting",
+    "sphere": "land",
+    "name": "Forestry and woodcutting",
+    "description": "Forestry and woodcutting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "soil_stewardship",
+    "sphere": "land",
+    "name": "Soil stewardship",
+    "description": "Soil stewardship sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "sericulture",
+    "sphere": "land",
+    "name": "Sericulture",
+    "description": "Sericulture sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "tea_growing",
+    "sphere": "land",
+    "name": "Tea growing",
+    "description": "Tea growing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "estate_management",
+    "sphere": "land",
+    "name": "Estate management",
+    "description": "Estate management sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "endurance",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "game_and_hunting",
+    "sphere": "wilds",
+    "name": "Game and hunting",
+    "description": "Game and hunting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "waters_and_fishing",
+    "sphere": "wilds",
+    "name": "Waters and fishing",
+    "description": "Waters and fishing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "wild_harvest",
+    "sphere": "wilds",
+    "name": "Wild harvest",
+    "description": "Wild harvest sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "beast_lore",
+    "sphere": "wilds",
+    "name": "Beast lore",
+    "description": "Beast lore sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "survival",
+    "sphere": "wilds",
+    "name": "Survival",
+    "description": "Survival sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "mountain_travel",
+    "sphere": "wilds",
+    "name": "Mountain travel",
+    "description": "Mountain travel sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "river_travel",
+    "sphere": "wilds",
+    "name": "River travel",
+    "description": "River travel sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "weather_lore",
+    "sphere": "wilds",
+    "name": "Weather lore",
+    "description": "Weather lore sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "wilderness_medicine",
+    "sphere": "wilds",
+    "name": "Wilderness medicine",
+    "description": "Wilderness medicine sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "frontier_scouting",
+    "sphere": "wilds",
+    "name": "Frontier scouting",
+    "description": "Frontier scouting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "perception",
+      "agility"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "stone_and_quarry",
+    "sphere": "earth_and_metal",
+    "name": "Stone and quarry",
+    "description": "Stone and quarry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "mines_and_ores",
+    "sphere": "earth_and_metal",
+    "name": "Mines and ores",
+    "description": "Mines and ores sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "clay_and_kilns",
+    "sphere": "earth_and_metal",
+    "name": "Clay and kilns",
+    "description": "Clay and kilns sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "smelting",
+    "sphere": "earth_and_metal",
+    "name": "Smelting",
+    "description": "Smelting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "smithing_and_metalwork",
+    "sphere": "earth_and_metal",
+    "name": "Smithing and metalwork",
+    "description": "Smithing and metalwork sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "salt_working",
+    "sphere": "earth_and_metal",
+    "name": "Salt working",
+    "description": "Salt working sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "gem_cutting",
+    "sphere": "earth_and_metal",
+    "name": "Gem cutting",
+    "description": "Gem cutting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "coal_and_charcoal",
+    "sphere": "earth_and_metal",
+    "name": "Coal and charcoal",
+    "description": "Coal and charcoal sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "metal_casting",
+    "sphere": "earth_and_metal",
+    "name": "Metal casting",
+    "description": "Metal casting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "surveying",
+    "sphere": "earth_and_metal",
+    "name": "Surveying",
+    "description": "Surveying sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "endurance"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "woodworking",
+    "sphere": "craft",
+    "name": "Woodworking",
+    "description": "Woodworking sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "cloth_and_thread",
+    "sphere": "craft",
+    "name": "Cloth and thread",
+    "description": "Cloth and thread sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "hides_and_leather",
+    "sphere": "craft",
+    "name": "Hides and leather",
+    "description": "Hides and leather sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "paper_and_ink",
+    "sphere": "craft",
+    "name": "Paper and ink",
+    "description": "Paper and ink sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "lacquer",
+    "sphere": "craft",
+    "name": "Lacquer",
+    "description": "Lacquer sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "basketry",
+    "sphere": "craft",
+    "name": "Basketry",
+    "description": "Basketry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "jewellery",
+    "sphere": "craft",
+    "name": "Jewellery",
+    "description": "Jewellery sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "glass_working",
+    "sphere": "craft",
+    "name": "Glass working",
+    "description": "Glass working sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "instrument_making",
+    "sphere": "craft",
+    "name": "Instrument making",
+    "description": "Instrument making sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "mechanisms",
+    "sphere": "craft",
+    "name": "Mechanisms",
+    "description": "Mechanisms sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "perception"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "kitchen",
+    "sphere": "household",
+    "name": "Kitchen",
+    "description": "Kitchen sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "brewing",
+    "sphere": "household",
+    "name": "Brewing",
+    "description": "Brewing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "healing",
+    "sphere": "household",
+    "name": "Healing",
+    "description": "Healing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "housekeeping",
+    "sphere": "household",
+    "name": "Housekeeping",
+    "description": "Housekeeping sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "child_rearing",
+    "sphere": "household",
+    "name": "Child rearing",
+    "description": "Child rearing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "elder_care",
+    "sphere": "household",
+    "name": "Elder care",
+    "description": "Elder care sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "bathing_and_sanitation",
+    "sphere": "household",
+    "name": "Bathing and sanitation",
+    "description": "Bathing and sanitation sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "hospitality",
+    "sphere": "household",
+    "name": "Hospitality",
+    "description": "Hospitality sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "household_accounts",
+    "sphere": "household",
+    "name": "Household accounts",
+    "description": "Household accounts sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "funerary_care",
+    "sphere": "household",
+    "name": "Funerary care",
+    "description": "Funerary care sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "dexterity",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "masonry",
+    "sphere": "building_and_works",
+    "name": "Masonry",
+    "description": "Masonry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "roads_and_bridges",
+    "sphere": "building_and_works",
+    "name": "Roads and bridges",
+    "description": "Roads and bridges sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "water_works",
+    "sphere": "building_and_works",
+    "name": "Water works",
+    "description": "Water works sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "shipbuilding",
+    "sphere": "building_and_works",
+    "name": "Shipbuilding",
+    "description": "Shipbuilding sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "architecture",
+    "sphere": "building_and_works",
+    "name": "Architecture",
+    "description": "Architecture sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "roofing",
+    "sphere": "building_and_works",
+    "name": "Roofing",
+    "description": "Roofing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "earthworks",
+    "sphere": "building_and_works",
+    "name": "Earthworks",
+    "description": "Earthworks sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "fortification",
+    "sphere": "building_and_works",
+    "name": "Fortification",
+    "description": "Fortification sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "millwrighting",
+    "sphere": "building_and_works",
+    "name": "Millwrighting",
+    "description": "Millwrighting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "public_maintenance",
+    "sphere": "building_and_works",
+    "name": "Public maintenance",
+    "description": "Public maintenance sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "strength",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "teaching",
+    "sphere": "society",
+    "name": "Teaching",
+    "description": "Teaching sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "leadership",
+    "sphere": "society",
+    "name": "Leadership",
+    "description": "Leadership sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "commerce",
+    "sphere": "society",
+    "name": "Commerce",
+    "description": "Commerce sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "law",
+    "sphere": "society",
+    "name": "Law",
+    "description": "Law sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "diplomacy",
+    "sphere": "society",
+    "name": "Diplomacy",
+    "description": "Diplomacy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "espionage",
+    "sphere": "society",
+    "name": "Espionage",
+    "description": "Espionage sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "ritual_and_ceremony",
+    "sphere": "society",
+    "name": "Ritual and ceremony",
+    "description": "Ritual and ceremony sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "administration",
+    "sphere": "society",
+    "name": "Administration",
+    "description": "Administration sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "mediation",
+    "sphere": "society",
+    "name": "Mediation",
+    "description": "Mediation sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "logistics",
+    "sphere": "society",
+    "name": "Logistics",
+    "description": "Logistics sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "charisma",
+      "intellect"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "letters",
+    "sphere": "arts_and_learning",
+    "name": "Letters",
+    "description": "Letters sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "calligraphy",
+    "sphere": "arts_and_learning",
+    "name": "Calligraphy",
+    "description": "Calligraphy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "music",
+    "sphere": "arts_and_learning",
+    "name": "Music",
+    "description": "Music sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "painting",
+    "sphere": "arts_and_learning",
+    "name": "Painting",
+    "description": "Painting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "astronomy",
+    "sphere": "arts_and_learning",
+    "name": "Astronomy",
+    "description": "Astronomy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "geomancy",
+    "sphere": "arts_and_learning",
+    "name": "Geomancy",
+    "description": "Geomancy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "history",
+    "sphere": "arts_and_learning",
+    "name": "History",
+    "description": "History sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "mathematics",
+    "sphere": "arts_and_learning",
+    "name": "Mathematics",
+    "description": "Mathematics sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "poetry",
+    "sphere": "arts_and_learning",
+    "name": "Poetry",
+    "description": "Poetry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "natural_philosophy",
+    "sphere": "arts_and_learning",
+    "name": "Natural philosophy",
+    "description": "Natural philosophy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "intellect",
+      "willpower"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "unarmed_arts",
+    "sphere": "martial",
+    "name": "Unarmed arts",
+    "description": "Unarmed arts sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "weapons",
+    "sphere": "martial",
+    "name": "Weapons",
+    "description": "Weapons sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "archery",
+    "sphere": "martial",
+    "name": "Archery",
+    "description": "Archery sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "riding",
+    "sphere": "martial",
+    "name": "Riding",
+    "description": "Riding sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "tactics",
+    "sphere": "martial",
+    "name": "Tactics",
+    "description": "Tactics sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "body_tempering",
+    "sphere": "martial",
+    "name": "Body tempering",
+    "description": "Body tempering sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "guard_duty",
+    "sphere": "martial",
+    "name": "Guard duty",
+    "description": "Guard duty sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "wrestling",
+    "sphere": "martial",
+    "name": "Wrestling",
+    "description": "Wrestling sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "military_drill",
+    "sphere": "martial",
+    "name": "Military drill",
+    "description": "Military drill sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "battlefield_medicine",
+    "sphere": "martial",
+    "name": "Battlefield medicine",
+    "description": "Battlefield medicine sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "key_attributes": [
+      "agility",
+      "strength"
+    ],
+    "locked": false,
+    "condition": ""
+  },
+  {
+    "id": "qi_arts",
+    "sphere": "cultivation",
+    "name": "Qi arts",
+    "description": "Qi arts studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "alchemy",
+    "sphere": "cultivation",
+    "name": "Alchemy",
+    "description": "Alchemy studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "artifact_refining",
+    "sphere": "cultivation",
+    "name": "Artifact refining",
+    "description": "Artifact refining studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "formations",
+    "sphere": "cultivation",
+    "name": "Formations",
+    "description": "Formations studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "talismans",
+    "sphere": "cultivation",
+    "name": "Talismans",
+    "description": "Talismans studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "beast_taming",
+    "sphere": "cultivation",
+    "name": "Beast taming",
+    "description": "Beast taming studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "soul_arts",
+    "sphere": "cultivation",
+    "name": "Soul arts",
+    "description": "Soul arts studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "spiritual_botany",
+    "sphere": "cultivation",
+    "name": "Spiritual botany",
+    "description": "Spiritual botany studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "divination",
+    "sphere": "cultivation",
+    "name": "Divination",
+    "description": "Divination studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  },
+  {
+    "id": "dao_contemplation",
+    "sphere": "cultivation",
+    "name": "Dao contemplation",
+    "description": "Dao contemplation studies the hidden currents of heaven and earth under sect instruction.",
+    "key_attributes": [
+      "willpower",
+      "intellect"
+    ],
+    "locked": true,
+    "condition": "Spirit root and sect entry"
+  }
+]

@@ -1,0 +1,110 @@
+{
+  "id": "unarmed_arts",
+  "disciplines": [
+    {
+      "id": "unarmed_arts.fist_and_palm",
+      "domain": "unarmed_arts",
+      "name": "Fist and palm",
+      "description": "Fist and palm applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.stance_work",
+      "domain": "unarmed_arts",
+      "name": "Stance work",
+      "description": "Stance work applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.footwork",
+      "domain": "unarmed_arts",
+      "name": "Footwork",
+      "description": "Footwork applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.breathing_drills",
+      "domain": "unarmed_arts",
+      "name": "Breathing drills",
+      "description": "Breathing drills applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.blocking",
+      "domain": "unarmed_arts",
+      "name": "Blocking",
+      "description": "Blocking applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.open_hand_strikes",
+      "domain": "unarmed_arts",
+      "name": "Open hand strikes",
+      "description": "Open hand strikes applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.elbow_strikes",
+      "domain": "unarmed_arts",
+      "name": "Elbow strikes",
+      "description": "Elbow strikes applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.knee_strikes",
+      "domain": "unarmed_arts",
+      "name": "Knee strikes",
+      "description": "Knee strikes applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.grapple_escapes",
+      "domain": "unarmed_arts",
+      "name": "Grapple escapes",
+      "description": "Grapple escapes applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.joint_control",
+      "domain": "unarmed_arts",
+      "name": "Joint control",
+      "description": "Joint control applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.balance_breaking",
+      "domain": "unarmed_arts",
+      "name": "Balance breaking",
+      "description": "Balance breaking applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.sparring",
+      "domain": "unarmed_arts",
+      "name": "Sparring",
+      "description": "Sparring applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.forms",
+      "domain": "unarmed_arts",
+      "name": "Forms",
+      "description": "Forms applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.internal_awareness",
+      "domain": "unarmed_arts",
+      "name": "Internal awareness",
+      "description": "Internal awareness applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "unarmed_arts.unarmed_instruction",
+      "domain": "unarmed_arts",
+      "name": "Unarmed instruction",
+      "description": "Unarmed instruction applies unarmed arts to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

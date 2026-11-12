@@ -1,0 +1,4070 @@
+{
+  "id": "brewing",
+  "disciplines": [
+    {
+      "id": "brewing.brewing",
+      "domain": "brewing",
+      "name": "Brewing",
+      "description": "Brewing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.starter_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.brewing.brewing_basics",
+          "discipline": "brewing.brewing",
+          "name": "Brewing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.brewing.brewing_seasonal_practice",
+          "discipline": "brewing.brewing",
+          "name": "Brewing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.brewing.brewing_precision_work",
+          "discipline": "brewing.brewing",
+          "name": "Brewing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.brewing.brewing_master_technique",
+          "discipline": "brewing.brewing",
+          "name": "Brewing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.brewing.perk_5",
+          "level": 5,
+          "name": "Brewing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Brewing output +2%"
+        },
+        {
+          "id": "brewing.brewing.perk_10",
+          "level": 10,
+          "name": "Brewing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Brewing waste -5%"
+        },
+        {
+          "id": "brewing.brewing.perk_15",
+          "level": 15,
+          "name": "Brewing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Brewing quality roll +1"
+        },
+        {
+          "id": "brewing.brewing.perk_20",
+          "level": 20,
+          "name": "Brewing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Brewing care +5%"
+        },
+        {
+          "id": "brewing.brewing.perk_25",
+          "level": 25,
+          "name": "Brewing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Brewing speed +3%"
+        },
+        {
+          "id": "brewing.brewing.perk_30",
+          "level": 30,
+          "name": "Brewing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Brewing output +5%"
+        },
+        {
+          "id": "brewing.brewing.perk_35",
+          "level": 35,
+          "name": "Brewing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Brewing spoilage -10%"
+        },
+        {
+          "id": "brewing.brewing.perk_40",
+          "level": 40,
+          "name": "Brewing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Brewing quality roll +1"
+        },
+        {
+          "id": "brewing.brewing.perk_45",
+          "level": 45,
+          "name": "Brewing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Brewing speed +5%"
+        },
+        {
+          "id": "brewing.brewing.perk_50",
+          "level": 50,
+          "name": "Brewing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Brewing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise brewing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful brewing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of brewing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a brewing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn brewing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of brewing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.starter_tending",
+      "domain": "brewing",
+      "name": "Starter tending",
+      "description": "Starter tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.rice_fermentation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.starter_tending.starter_tending_basics",
+          "discipline": "brewing.starter_tending",
+          "name": "Starter tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.starter_tending.starter_tending_seasonal_practice",
+          "discipline": "brewing.starter_tending",
+          "name": "Starter tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.starter_tending.starter_tending_precision_work",
+          "discipline": "brewing.starter_tending",
+          "name": "Starter tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.starter_tending.starter_tending_master_technique",
+          "discipline": "brewing.starter_tending",
+          "name": "Starter tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.starter_tending.perk_5",
+          "level": 5,
+          "name": "Starter tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Starter tending output +2%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_10",
+          "level": 10,
+          "name": "Starter tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Starter tending waste -5%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_15",
+          "level": 15,
+          "name": "Starter tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Starter tending quality roll +1"
+        },
+        {
+          "id": "brewing.starter_tending.perk_20",
+          "level": 20,
+          "name": "Starter tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Starter tending care +5%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_25",
+          "level": 25,
+          "name": "Starter tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Starter tending speed +3%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_30",
+          "level": 30,
+          "name": "Starter tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Starter tending output +5%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_35",
+          "level": 35,
+          "name": "Starter tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Starter tending spoilage -10%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_40",
+          "level": 40,
+          "name": "Starter tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Starter tending quality roll +1"
+        },
+        {
+          "id": "brewing.starter_tending.perk_45",
+          "level": 45,
+          "name": "Starter tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Starter tending speed +5%"
+        },
+        {
+          "id": "brewing.starter_tending.perk_50",
+          "level": 50,
+          "name": "Starter tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Starter tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise starter tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful starter tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of starter tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a starter tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn starter tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of starter tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.rice_fermentation",
+      "domain": "brewing",
+      "name": "Rice fermentation",
+      "description": "Rice fermentation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.grain_malting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.rice_fermentation.rice_fermentation_basics",
+          "discipline": "brewing.rice_fermentation",
+          "name": "Rice fermentation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.rice_fermentation.rice_fermentation_seasonal_practice",
+          "discipline": "brewing.rice_fermentation",
+          "name": "Rice fermentation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.rice_fermentation.rice_fermentation_precision_work",
+          "discipline": "brewing.rice_fermentation",
+          "name": "Rice fermentation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.rice_fermentation.rice_fermentation_master_technique",
+          "discipline": "brewing.rice_fermentation",
+          "name": "Rice fermentation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.rice_fermentation.perk_5",
+          "level": 5,
+          "name": "Rice fermentation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Rice fermentation output +2%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_10",
+          "level": 10,
+          "name": "Rice fermentation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Rice fermentation waste -5%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_15",
+          "level": 15,
+          "name": "Rice fermentation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rice fermentation quality roll +1"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_20",
+          "level": 20,
+          "name": "Rice fermentation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Rice fermentation care +5%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_25",
+          "level": 25,
+          "name": "Rice fermentation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Rice fermentation speed +3%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_30",
+          "level": 30,
+          "name": "Rice fermentation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rice fermentation output +5%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_35",
+          "level": 35,
+          "name": "Rice fermentation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Rice fermentation spoilage -10%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_40",
+          "level": 40,
+          "name": "Rice fermentation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Rice fermentation quality roll +1"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_45",
+          "level": 45,
+          "name": "Rice fermentation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Rice fermentation speed +5%"
+        },
+        {
+          "id": "brewing.rice_fermentation.perk_50",
+          "level": 50,
+          "name": "Rice fermentation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Rice fermentation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise rice fermentation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful rice fermentation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of rice fermentation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a rice fermentation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn rice fermentation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of rice fermentation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.grain_malting",
+      "domain": "brewing",
+      "name": "Grain malting",
+      "description": "Grain malting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.mash_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.grain_malting.grain_malting_basics",
+          "discipline": "brewing.grain_malting",
+          "name": "Grain malting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.grain_malting.grain_malting_seasonal_practice",
+          "discipline": "brewing.grain_malting",
+          "name": "Grain malting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.grain_malting.grain_malting_precision_work",
+          "discipline": "brewing.grain_malting",
+          "name": "Grain malting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.grain_malting.grain_malting_master_technique",
+          "discipline": "brewing.grain_malting",
+          "name": "Grain malting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.grain_malting.perk_5",
+          "level": 5,
+          "name": "Grain malting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Grain malting output +2%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_10",
+          "level": 10,
+          "name": "Grain malting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Grain malting waste -5%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_15",
+          "level": 15,
+          "name": "Grain malting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grain malting quality roll +1"
+        },
+        {
+          "id": "brewing.grain_malting.perk_20",
+          "level": 20,
+          "name": "Grain malting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Grain malting care +5%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_25",
+          "level": 25,
+          "name": "Grain malting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Grain malting speed +3%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_30",
+          "level": 30,
+          "name": "Grain malting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grain malting output +5%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_35",
+          "level": 35,
+          "name": "Grain malting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Grain malting spoilage -10%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_40",
+          "level": 40,
+          "name": "Grain malting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Grain malting quality roll +1"
+        },
+        {
+          "id": "brewing.grain_malting.perk_45",
+          "level": 45,
+          "name": "Grain malting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Grain malting speed +5%"
+        },
+        {
+          "id": "brewing.grain_malting.perk_50",
+          "level": 50,
+          "name": "Grain malting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Grain malting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise grain malting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful grain malting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of grain malting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a grain malting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn grain malting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of grain malting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.mash_tending",
+      "domain": "brewing",
+      "name": "Mash tending",
+      "description": "Mash tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.wine_pressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.mash_tending.mash_tending_basics",
+          "discipline": "brewing.mash_tending",
+          "name": "Mash tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.mash_tending.mash_tending_seasonal_practice",
+          "discipline": "brewing.mash_tending",
+          "name": "Mash tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.mash_tending.mash_tending_precision_work",
+          "discipline": "brewing.mash_tending",
+          "name": "Mash tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.mash_tending.mash_tending_master_technique",
+          "discipline": "brewing.mash_tending",
+          "name": "Mash tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.mash_tending.perk_5",
+          "level": 5,
+          "name": "Mash tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Mash tending output +2%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_10",
+          "level": 10,
+          "name": "Mash tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Mash tending waste -5%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_15",
+          "level": 15,
+          "name": "Mash tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mash tending quality roll +1"
+        },
+        {
+          "id": "brewing.mash_tending.perk_20",
+          "level": 20,
+          "name": "Mash tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Mash tending care +5%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_25",
+          "level": 25,
+          "name": "Mash tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Mash tending speed +3%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_30",
+          "level": 30,
+          "name": "Mash tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mash tending output +5%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_35",
+          "level": 35,
+          "name": "Mash tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Mash tending spoilage -10%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_40",
+          "level": 40,
+          "name": "Mash tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Mash tending quality roll +1"
+        },
+        {
+          "id": "brewing.mash_tending.perk_45",
+          "level": 45,
+          "name": "Mash tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Mash tending speed +5%"
+        },
+        {
+          "id": "brewing.mash_tending.perk_50",
+          "level": 50,
+          "name": "Mash tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Mash tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise mash tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful mash tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of mash tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a mash tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn mash tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of mash tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.wine_pressing",
+      "domain": "brewing",
+      "name": "Wine pressing",
+      "description": "Wine pressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.vinegar_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.wine_pressing.wine_pressing_basics",
+          "discipline": "brewing.wine_pressing",
+          "name": "Wine pressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.wine_pressing.wine_pressing_seasonal_practice",
+          "discipline": "brewing.wine_pressing",
+          "name": "Wine pressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.wine_pressing.wine_pressing_precision_work",
+          "discipline": "brewing.wine_pressing",
+          "name": "Wine pressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.wine_pressing.wine_pressing_master_technique",
+          "discipline": "brewing.wine_pressing",
+          "name": "Wine pressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.wine_pressing.perk_5",
+          "level": 5,
+          "name": "Wine pressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wine pressing output +2%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_10",
+          "level": 10,
+          "name": "Wine pressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wine pressing waste -5%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_15",
+          "level": 15,
+          "name": "Wine pressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wine pressing quality roll +1"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_20",
+          "level": 20,
+          "name": "Wine pressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wine pressing care +5%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_25",
+          "level": 25,
+          "name": "Wine pressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wine pressing speed +3%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_30",
+          "level": 30,
+          "name": "Wine pressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wine pressing output +5%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_35",
+          "level": 35,
+          "name": "Wine pressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wine pressing spoilage -10%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_40",
+          "level": 40,
+          "name": "Wine pressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wine pressing quality roll +1"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_45",
+          "level": 45,
+          "name": "Wine pressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wine pressing speed +5%"
+        },
+        {
+          "id": "brewing.wine_pressing.perk_50",
+          "level": 50,
+          "name": "Wine pressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wine pressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wine pressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wine pressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wine pressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wine pressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wine pressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wine pressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.vinegar_tending",
+      "domain": "brewing",
+      "name": "Vinegar tending",
+      "description": "Vinegar tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.jar_sealing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.vinegar_tending.vinegar_tending_basics",
+          "discipline": "brewing.vinegar_tending",
+          "name": "Vinegar tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.vinegar_tending.vinegar_tending_seasonal_practice",
+          "discipline": "brewing.vinegar_tending",
+          "name": "Vinegar tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.vinegar_tending.vinegar_tending_precision_work",
+          "discipline": "brewing.vinegar_tending",
+          "name": "Vinegar tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.vinegar_tending.vinegar_tending_master_technique",
+          "discipline": "brewing.vinegar_tending",
+          "name": "Vinegar tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.vinegar_tending.perk_5",
+          "level": 5,
+          "name": "Vinegar tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Vinegar tending output +2%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_10",
+          "level": 10,
+          "name": "Vinegar tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Vinegar tending waste -5%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_15",
+          "level": 15,
+          "name": "Vinegar tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vinegar tending quality roll +1"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_20",
+          "level": 20,
+          "name": "Vinegar tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Vinegar tending care +5%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_25",
+          "level": 25,
+          "name": "Vinegar tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Vinegar tending speed +3%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_30",
+          "level": 30,
+          "name": "Vinegar tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vinegar tending output +5%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_35",
+          "level": 35,
+          "name": "Vinegar tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Vinegar tending spoilage -10%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_40",
+          "level": 40,
+          "name": "Vinegar tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vinegar tending quality roll +1"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_45",
+          "level": 45,
+          "name": "Vinegar tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Vinegar tending speed +5%"
+        },
+        {
+          "id": "brewing.vinegar_tending.perk_50",
+          "level": 50,
+          "name": "Vinegar tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vinegar tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise vinegar tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful vinegar tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of vinegar tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a vinegar tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn vinegar tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of vinegar tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.jar_sealing",
+      "domain": "brewing",
+      "name": "Jar sealing",
+      "description": "Jar sealing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.cellar_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.jar_sealing.jar_sealing_basics",
+          "discipline": "brewing.jar_sealing",
+          "name": "Jar sealing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.jar_sealing.jar_sealing_seasonal_practice",
+          "discipline": "brewing.jar_sealing",
+          "name": "Jar sealing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.jar_sealing.jar_sealing_precision_work",
+          "discipline": "brewing.jar_sealing",
+          "name": "Jar sealing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.jar_sealing.jar_sealing_master_technique",
+          "discipline": "brewing.jar_sealing",
+          "name": "Jar sealing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.jar_sealing.perk_5",
+          "level": 5,
+          "name": "Jar sealing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Jar sealing output +2%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_10",
+          "level": 10,
+          "name": "Jar sealing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Jar sealing waste -5%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_15",
+          "level": 15,
+          "name": "Jar sealing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Jar sealing quality roll +1"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_20",
+          "level": 20,
+          "name": "Jar sealing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Jar sealing care +5%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_25",
+          "level": 25,
+          "name": "Jar sealing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Jar sealing speed +3%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_30",
+          "level": 30,
+          "name": "Jar sealing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Jar sealing output +5%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_35",
+          "level": 35,
+          "name": "Jar sealing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Jar sealing spoilage -10%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_40",
+          "level": 40,
+          "name": "Jar sealing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Jar sealing quality roll +1"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_45",
+          "level": 45,
+          "name": "Jar sealing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Jar sealing speed +5%"
+        },
+        {
+          "id": "brewing.jar_sealing.perk_50",
+          "level": 50,
+          "name": "Jar sealing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Jar sealing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise jar sealing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful jar sealing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of jar sealing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a jar sealing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn jar sealing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of jar sealing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.cellar_keeping",
+      "domain": "brewing",
+      "name": "Cellar keeping",
+      "description": "Cellar keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.water_selection"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.cellar_keeping.cellar_keeping_basics",
+          "discipline": "brewing.cellar_keeping",
+          "name": "Cellar keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.cellar_keeping.cellar_keeping_seasonal_practice",
+          "discipline": "brewing.cellar_keeping",
+          "name": "Cellar keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.cellar_keeping.cellar_keeping_precision_work",
+          "discipline": "brewing.cellar_keeping",
+          "name": "Cellar keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.cellar_keeping.cellar_keeping_master_technique",
+          "discipline": "brewing.cellar_keeping",
+          "name": "Cellar keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.cellar_keeping.perk_5",
+          "level": 5,
+          "name": "Cellar keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Cellar keeping output +2%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_10",
+          "level": 10,
+          "name": "Cellar keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Cellar keeping waste -5%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_15",
+          "level": 15,
+          "name": "Cellar keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cellar keeping quality roll +1"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_20",
+          "level": 20,
+          "name": "Cellar keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Cellar keeping care +5%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_25",
+          "level": 25,
+          "name": "Cellar keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Cellar keeping speed +3%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_30",
+          "level": 30,
+          "name": "Cellar keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cellar keeping output +5%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_35",
+          "level": 35,
+          "name": "Cellar keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Cellar keeping spoilage -10%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_40",
+          "level": 40,
+          "name": "Cellar keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cellar keeping quality roll +1"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_45",
+          "level": 45,
+          "name": "Cellar keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Cellar keeping speed +5%"
+        },
+        {
+          "id": "brewing.cellar_keeping.perk_50",
+          "level": 50,
+          "name": "Cellar keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cellar keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise cellar keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful cellar keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of cellar keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a cellar keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn cellar keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of cellar keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.water_selection",
+      "domain": "brewing",
+      "name": "Water selection",
+      "description": "Water selection: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.brew_tasting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.water_selection.water_selection_basics",
+          "discipline": "brewing.water_selection",
+          "name": "Water selection basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.water_selection.water_selection_seasonal_practice",
+          "discipline": "brewing.water_selection",
+          "name": "Water selection seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.water_selection.water_selection_precision_work",
+          "discipline": "brewing.water_selection",
+          "name": "Water selection precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.water_selection.water_selection_master_technique",
+          "discipline": "brewing.water_selection",
+          "name": "Water selection master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.water_selection.perk_5",
+          "level": 5,
+          "name": "Water selection: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Water selection output +2%"
+        },
+        {
+          "id": "brewing.water_selection.perk_10",
+          "level": 10,
+          "name": "Water selection: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Water selection waste -5%"
+        },
+        {
+          "id": "brewing.water_selection.perk_15",
+          "level": 15,
+          "name": "Water selection: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Water selection quality roll +1"
+        },
+        {
+          "id": "brewing.water_selection.perk_20",
+          "level": 20,
+          "name": "Water selection: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Water selection care +5%"
+        },
+        {
+          "id": "brewing.water_selection.perk_25",
+          "level": 25,
+          "name": "Water selection: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Water selection speed +3%"
+        },
+        {
+          "id": "brewing.water_selection.perk_30",
+          "level": 30,
+          "name": "Water selection: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Water selection output +5%"
+        },
+        {
+          "id": "brewing.water_selection.perk_35",
+          "level": 35,
+          "name": "Water selection: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Water selection spoilage -10%"
+        },
+        {
+          "id": "brewing.water_selection.perk_40",
+          "level": 40,
+          "name": "Water selection: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Water selection quality roll +1"
+        },
+        {
+          "id": "brewing.water_selection.perk_45",
+          "level": 45,
+          "name": "Water selection: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Water selection speed +5%"
+        },
+        {
+          "id": "brewing.water_selection.perk_50",
+          "level": 50,
+          "name": "Water selection: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Water selection output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise water selection for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful water selection (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of water selection; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a water selection task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn water selection from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of water selection, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.brew_tasting",
+      "domain": "brewing",
+      "name": "Brew tasting",
+      "description": "Brew tasting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.lees_reuse"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.brew_tasting.brew_tasting_basics",
+          "discipline": "brewing.brew_tasting",
+          "name": "Brew tasting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.brew_tasting.brew_tasting_seasonal_practice",
+          "discipline": "brewing.brew_tasting",
+          "name": "Brew tasting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.brew_tasting.brew_tasting_precision_work",
+          "discipline": "brewing.brew_tasting",
+          "name": "Brew tasting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.brew_tasting.brew_tasting_master_technique",
+          "discipline": "brewing.brew_tasting",
+          "name": "Brew tasting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.brew_tasting.perk_5",
+          "level": 5,
+          "name": "Brew tasting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Brew tasting output +2%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_10",
+          "level": 10,
+          "name": "Brew tasting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Brew tasting waste -5%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_15",
+          "level": 15,
+          "name": "Brew tasting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Brew tasting quality roll +1"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_20",
+          "level": 20,
+          "name": "Brew tasting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Brew tasting care +5%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_25",
+          "level": 25,
+          "name": "Brew tasting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Brew tasting speed +3%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_30",
+          "level": 30,
+          "name": "Brew tasting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Brew tasting output +5%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_35",
+          "level": 35,
+          "name": "Brew tasting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Brew tasting spoilage -10%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_40",
+          "level": 40,
+          "name": "Brew tasting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Brew tasting quality roll +1"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_45",
+          "level": 45,
+          "name": "Brew tasting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Brew tasting speed +5%"
+        },
+        {
+          "id": "brewing.brew_tasting.perk_50",
+          "level": 50,
+          "name": "Brew tasting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Brew tasting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise brew tasting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful brew tasting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of brew tasting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a brew tasting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn brew tasting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of brew tasting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.lees_reuse",
+      "domain": "brewing",
+      "name": "Lees reuse",
+      "description": "Lees reuse: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.herbal_infusions"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.lees_reuse.lees_reuse_basics",
+          "discipline": "brewing.lees_reuse",
+          "name": "Lees reuse basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.lees_reuse.lees_reuse_seasonal_practice",
+          "discipline": "brewing.lees_reuse",
+          "name": "Lees reuse seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.lees_reuse.lees_reuse_precision_work",
+          "discipline": "brewing.lees_reuse",
+          "name": "Lees reuse precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.lees_reuse.lees_reuse_master_technique",
+          "discipline": "brewing.lees_reuse",
+          "name": "Lees reuse master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.lees_reuse.perk_5",
+          "level": 5,
+          "name": "Lees reuse: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Lees reuse output +2%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_10",
+          "level": 10,
+          "name": "Lees reuse: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Lees reuse waste -5%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_15",
+          "level": 15,
+          "name": "Lees reuse: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lees reuse quality roll +1"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_20",
+          "level": 20,
+          "name": "Lees reuse: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Lees reuse care +5%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_25",
+          "level": 25,
+          "name": "Lees reuse: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Lees reuse speed +3%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_30",
+          "level": 30,
+          "name": "Lees reuse: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lees reuse output +5%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_35",
+          "level": 35,
+          "name": "Lees reuse: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Lees reuse spoilage -10%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_40",
+          "level": 40,
+          "name": "Lees reuse: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Lees reuse quality roll +1"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_45",
+          "level": 45,
+          "name": "Lees reuse: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Lees reuse speed +5%"
+        },
+        {
+          "id": "brewing.lees_reuse.perk_50",
+          "level": 50,
+          "name": "Lees reuse: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Lees reuse output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise lees reuse for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful lees reuse (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of lees reuse; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a lees reuse task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn lees reuse from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of lees reuse, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.herbal_infusions",
+      "domain": "brewing",
+      "name": "Herbal infusions",
+      "description": "Herbal infusions: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.tea_preparation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.herbal_infusions.herbal_infusions_basics",
+          "discipline": "brewing.herbal_infusions",
+          "name": "Herbal infusions basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.herbal_infusions.herbal_infusions_seasonal_practice",
+          "discipline": "brewing.herbal_infusions",
+          "name": "Herbal infusions seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.herbal_infusions.herbal_infusions_precision_work",
+          "discipline": "brewing.herbal_infusions",
+          "name": "Herbal infusions precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.herbal_infusions.herbal_infusions_master_technique",
+          "discipline": "brewing.herbal_infusions",
+          "name": "Herbal infusions master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.herbal_infusions.perk_5",
+          "level": 5,
+          "name": "Herbal infusions: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Herbal infusions output +2%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_10",
+          "level": 10,
+          "name": "Herbal infusions: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Herbal infusions waste -5%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_15",
+          "level": 15,
+          "name": "Herbal infusions: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herbal infusions quality roll +1"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_20",
+          "level": 20,
+          "name": "Herbal infusions: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Herbal infusions care +5%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_25",
+          "level": 25,
+          "name": "Herbal infusions: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Herbal infusions speed +3%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_30",
+          "level": 30,
+          "name": "Herbal infusions: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herbal infusions output +5%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_35",
+          "level": 35,
+          "name": "Herbal infusions: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Herbal infusions spoilage -10%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_40",
+          "level": 40,
+          "name": "Herbal infusions: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herbal infusions quality roll +1"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_45",
+          "level": 45,
+          "name": "Herbal infusions: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Herbal infusions speed +5%"
+        },
+        {
+          "id": "brewing.herbal_infusions.perk_50",
+          "level": 50,
+          "name": "Herbal infusions: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herbal infusions output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise herbal infusions for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful herbal infusions (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of herbal infusions; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a herbal infusions task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn herbal infusions from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of herbal infusions, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.tea_preparation",
+      "domain": "brewing",
+      "name": "Tea preparation",
+      "description": "Tea preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.festival_brewing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.tea_preparation.tea_preparation_basics",
+          "discipline": "brewing.tea_preparation",
+          "name": "Tea preparation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.tea_preparation.tea_preparation_seasonal_practice",
+          "discipline": "brewing.tea_preparation",
+          "name": "Tea preparation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.tea_preparation.tea_preparation_precision_work",
+          "discipline": "brewing.tea_preparation",
+          "name": "Tea preparation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.tea_preparation.tea_preparation_master_technique",
+          "discipline": "brewing.tea_preparation",
+          "name": "Tea preparation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.tea_preparation.perk_5",
+          "level": 5,
+          "name": "Tea preparation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Tea preparation output +2%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_10",
+          "level": 10,
+          "name": "Tea preparation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Tea preparation waste -5%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_15",
+          "level": 15,
+          "name": "Tea preparation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tea preparation quality roll +1"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_20",
+          "level": 20,
+          "name": "Tea preparation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Tea preparation care +5%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_25",
+          "level": 25,
+          "name": "Tea preparation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Tea preparation speed +3%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_30",
+          "level": 30,
+          "name": "Tea preparation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tea preparation output +5%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_35",
+          "level": 35,
+          "name": "Tea preparation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Tea preparation spoilage -10%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_40",
+          "level": 40,
+          "name": "Tea preparation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Tea preparation quality roll +1"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_45",
+          "level": 45,
+          "name": "Tea preparation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Tea preparation speed +5%"
+        },
+        {
+          "id": "brewing.tea_preparation.perk_50",
+          "level": 50,
+          "name": "Tea preparation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Tea preparation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise tea preparation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful tea preparation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of tea preparation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a tea preparation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn tea preparation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of tea preparation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "brewing.festival_brewing",
+      "domain": "brewing",
+      "name": "Festival brewing",
+      "description": "Festival brewing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "brewing.brewing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "brewing.festival_brewing.festival_brewing_basics",
+          "discipline": "brewing.festival_brewing",
+          "name": "Festival brewing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.festival_brewing.festival_brewing_seasonal_practice",
+          "discipline": "brewing.festival_brewing",
+          "name": "Festival brewing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.festival_brewing.festival_brewing_precision_work",
+          "discipline": "brewing.festival_brewing",
+          "name": "Festival brewing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "brewing.festival_brewing.festival_brewing_master_technique",
+          "discipline": "brewing.festival_brewing",
+          "name": "Festival brewing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "brewing.festival_brewing.perk_5",
+          "level": 5,
+          "name": "Festival brewing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Festival brewing output +2%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_10",
+          "level": 10,
+          "name": "Festival brewing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Festival brewing waste -5%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_15",
+          "level": 15,
+          "name": "Festival brewing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Festival brewing quality roll +1"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_20",
+          "level": 20,
+          "name": "Festival brewing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Festival brewing care +5%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_25",
+          "level": 25,
+          "name": "Festival brewing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Festival brewing speed +3%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_30",
+          "level": 30,
+          "name": "Festival brewing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Festival brewing output +5%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_35",
+          "level": 35,
+          "name": "Festival brewing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Festival brewing spoilage -10%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_40",
+          "level": 40,
+          "name": "Festival brewing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Festival brewing quality roll +1"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_45",
+          "level": 45,
+          "name": "Festival brewing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Festival brewing speed +5%"
+        },
+        {
+          "id": "brewing.festival_brewing.perk_50",
+          "level": 50,
+          "name": "Festival brewing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Festival brewing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise festival brewing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful festival brewing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of festival brewing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a festival brewing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn festival brewing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of festival brewing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

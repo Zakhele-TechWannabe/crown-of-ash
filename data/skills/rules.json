@@ -1,0 +1,50 @@
+{
+  "attributes": [
+    "strength",
+    "endurance",
+    "agility",
+    "dexterity",
+    "perception",
+    "intellect",
+    "willpower",
+    "charisma"
+  ],
+  "xp_base": 100,
+  "xp_growth": 1.18,
+  "base_xp_hour": 2.5,
+  "discipline_spillover": 0.4,
+  "related_spillover": 0.05,
+  "mortal_ceiling": 35,
+  "titles": [
+    "Untrained",
+    "Novice",
+    "Apprentice",
+    "Journeyman",
+    "Skilled",
+    "Adept",
+    "Expert",
+    "Master",
+    "Grandmaster",
+    "Sage",
+    "Peerless"
+  ],
+  "root_types": [
+    "metal",
+    "wood",
+    "water",
+    "fire",
+    "earth",
+    "wind",
+    "lightning",
+    "ice",
+    "light",
+    "dark"
+  ],
+  "root_grades": [
+    "Trash",
+    "Inferior",
+    "Middle",
+    "Superior",
+    "Heavenly"
+  ]
+}

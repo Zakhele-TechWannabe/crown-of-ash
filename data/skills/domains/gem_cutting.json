@@ -1,0 +1,110 @@
+{
+  "id": "gem_cutting",
+  "disciplines": [
+    {
+      "id": "gem_cutting.gem_recognition",
+      "domain": "gem_cutting",
+      "name": "Gem recognition",
+      "description": "Gem recognition applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.rough_grading",
+      "domain": "gem_cutting",
+      "name": "Rough grading",
+      "description": "Rough grading applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.cleaving",
+      "domain": "gem_cutting",
+      "name": "Cleaving",
+      "description": "Cleaving applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.saw_cutting",
+      "domain": "gem_cutting",
+      "name": "Saw cutting",
+      "description": "Saw cutting applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.cabochon_shaping",
+      "domain": "gem_cutting",
+      "name": "Cabochon shaping",
+      "description": "Cabochon shaping applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.facet_grinding",
+      "domain": "gem_cutting",
+      "name": "Facet grinding",
+      "description": "Facet grinding applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.polishing",
+      "domain": "gem_cutting",
+      "name": "Polishing",
+      "description": "Polishing applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.jade_carving",
+      "domain": "gem_cutting",
+      "name": "Jade carving",
+      "description": "Jade carving applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.bead_drilling",
+      "domain": "gem_cutting",
+      "name": "Bead drilling",
+      "description": "Bead drilling applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.stone_mounting",
+      "domain": "gem_cutting",
+      "name": "Stone mounting",
+      "description": "Stone mounting applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.flaw_reading",
+      "domain": "gem_cutting",
+      "name": "Flaw reading",
+      "description": "Flaw reading applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.abrasive_making",
+      "domain": "gem_cutting",
+      "name": "Abrasive making",
+      "description": "Abrasive making applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.gem_appraisal",
+      "domain": "gem_cutting",
+      "name": "Gem appraisal",
+      "description": "Gem appraisal applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.cutting_tool_care",
+      "domain": "gem_cutting",
+      "name": "Cutting tool care",
+      "description": "Cutting tool care applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "gem_cutting.gem_commission_planning",
+      "domain": "gem_cutting",
+      "name": "Gem commission planning",
+      "description": "Gem commission planning applies gem cutting to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}

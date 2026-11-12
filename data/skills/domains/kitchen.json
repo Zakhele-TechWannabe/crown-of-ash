@@ -1,0 +1,4075 @@
+{
+  "id": "kitchen",
+  "disciplines": [
+    {
+      "id": "kitchen.cooking",
+      "domain": "kitchen",
+      "name": "Cooking",
+      "description": "Cooking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.medicine"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.cooking.staples",
+          "discipline": "kitchen.cooking",
+          "name": "Staples",
+          "unlock_level": 5,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.cooking.preserving",
+          "discipline": "kitchen.cooking",
+          "name": "Preserving",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.cooking.brewing",
+          "discipline": "kitchen.cooking",
+          "name": "Brewing",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.cooking.banquet_cooking",
+          "discipline": "kitchen.cooking",
+          "name": "Banquet cooking",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.cooking.spirit_cuisine",
+          "discipline": "kitchen.cooking",
+          "name": "Spirit cuisine",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.cooking.perk_5",
+          "level": 5,
+          "name": "Cooking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Cooking output +2%"
+        },
+        {
+          "id": "kitchen.cooking.perk_10",
+          "level": 10,
+          "name": "Stretch the pot",
+          "effect": "food_used",
+          "value": -0.1,
+          "description": "food_used -0.1"
+        },
+        {
+          "id": "kitchen.cooking.perk_15",
+          "level": 15,
+          "name": "Cooking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cooking quality roll +1"
+        },
+        {
+          "id": "kitchen.cooking.perk_20",
+          "level": 20,
+          "name": "Pickle master",
+          "effect": "spoilage",
+          "value": -0.5,
+          "description": "spoilage -0.5"
+        },
+        {
+          "id": "kitchen.cooking.perk_25",
+          "level": 25,
+          "name": "Cooking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Cooking speed +3%"
+        },
+        {
+          "id": "kitchen.cooking.perk_30",
+          "level": 30,
+          "name": "Feast maker",
+          "effect": "village_mood",
+          "value": 0.1,
+          "description": "village_mood +0.1"
+        },
+        {
+          "id": "kitchen.cooking.perk_35",
+          "level": 35,
+          "name": "Cooking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Cooking spoilage -10%"
+        },
+        {
+          "id": "kitchen.cooking.perk_40",
+          "level": 40,
+          "name": "Cooking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Cooking quality roll +1"
+        },
+        {
+          "id": "kitchen.cooking.perk_45",
+          "level": 45,
+          "name": "Cooking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Cooking speed +5%"
+        },
+        {
+          "id": "kitchen.cooking.perk_50",
+          "level": 50,
+          "name": "Cooking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Cooking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise cooking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful cooking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of cooking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a cooking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn cooking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of cooking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.staple_cooking",
+      "domain": "kitchen",
+      "name": "Staple cooking",
+      "description": "Staple cooking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.vegetable_preparation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.staple_cooking.staple_cooking_basics",
+          "discipline": "kitchen.staple_cooking",
+          "name": "Staple cooking basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.staple_cooking.staple_cooking_seasonal_practice",
+          "discipline": "kitchen.staple_cooking",
+          "name": "Staple cooking seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.staple_cooking.staple_cooking_precision_work",
+          "discipline": "kitchen.staple_cooking",
+          "name": "Staple cooking precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.staple_cooking.staple_cooking_master_technique",
+          "discipline": "kitchen.staple_cooking",
+          "name": "Staple cooking master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.staple_cooking.perk_5",
+          "level": 5,
+          "name": "Staple cooking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Staple cooking output +2%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_10",
+          "level": 10,
+          "name": "Staple cooking: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Staple cooking waste -5%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_15",
+          "level": 15,
+          "name": "Staple cooking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Staple cooking quality roll +1"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_20",
+          "level": 20,
+          "name": "Staple cooking: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Staple cooking care +5%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_25",
+          "level": 25,
+          "name": "Staple cooking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Staple cooking speed +3%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_30",
+          "level": 30,
+          "name": "Staple cooking: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Staple cooking output +5%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_35",
+          "level": 35,
+          "name": "Staple cooking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Staple cooking spoilage -10%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_40",
+          "level": 40,
+          "name": "Staple cooking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Staple cooking quality roll +1"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_45",
+          "level": 45,
+          "name": "Staple cooking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Staple cooking speed +5%"
+        },
+        {
+          "id": "kitchen.staple_cooking.perk_50",
+          "level": 50,
+          "name": "Staple cooking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Staple cooking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise staple cooking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful staple cooking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of staple cooking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a staple cooking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn staple cooking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of staple cooking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.vegetable_preparation",
+      "domain": "kitchen",
+      "name": "Vegetable preparation",
+      "description": "Vegetable preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.meat_preparation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.vegetable_preparation.vegetable_preparation_basics",
+          "discipline": "kitchen.vegetable_preparation",
+          "name": "Vegetable preparation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.vegetable_preparation.vegetable_preparation_seasonal_practice",
+          "discipline": "kitchen.vegetable_preparation",
+          "name": "Vegetable preparation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.vegetable_preparation.vegetable_preparation_precision_work",
+          "discipline": "kitchen.vegetable_preparation",
+          "name": "Vegetable preparation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.vegetable_preparation.vegetable_preparation_master_technique",
+          "discipline": "kitchen.vegetable_preparation",
+          "name": "Vegetable preparation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.vegetable_preparation.perk_5",
+          "level": 5,
+          "name": "Vegetable preparation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Vegetable preparation output +2%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_10",
+          "level": 10,
+          "name": "Vegetable preparation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Vegetable preparation waste -5%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_15",
+          "level": 15,
+          "name": "Vegetable preparation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vegetable preparation quality roll +1"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_20",
+          "level": 20,
+          "name": "Vegetable preparation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Vegetable preparation care +5%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_25",
+          "level": 25,
+          "name": "Vegetable preparation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Vegetable preparation speed +3%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_30",
+          "level": 30,
+          "name": "Vegetable preparation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vegetable preparation output +5%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_35",
+          "level": 35,
+          "name": "Vegetable preparation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Vegetable preparation spoilage -10%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_40",
+          "level": 40,
+          "name": "Vegetable preparation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Vegetable preparation quality roll +1"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_45",
+          "level": 45,
+          "name": "Vegetable preparation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Vegetable preparation speed +5%"
+        },
+        {
+          "id": "kitchen.vegetable_preparation.perk_50",
+          "level": 50,
+          "name": "Vegetable preparation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Vegetable preparation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise vegetable preparation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful vegetable preparation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of vegetable preparation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a vegetable preparation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn vegetable preparation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of vegetable preparation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.meat_preparation",
+      "domain": "kitchen",
+      "name": "Meat preparation",
+      "description": "Meat preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.fish_preparation"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.meat_preparation.meat_preparation_basics",
+          "discipline": "kitchen.meat_preparation",
+          "name": "Meat preparation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.meat_preparation.meat_preparation_seasonal_practice",
+          "discipline": "kitchen.meat_preparation",
+          "name": "Meat preparation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.meat_preparation.meat_preparation_precision_work",
+          "discipline": "kitchen.meat_preparation",
+          "name": "Meat preparation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.meat_preparation.meat_preparation_master_technique",
+          "discipline": "kitchen.meat_preparation",
+          "name": "Meat preparation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.meat_preparation.perk_5",
+          "level": 5,
+          "name": "Meat preparation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Meat preparation output +2%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_10",
+          "level": 10,
+          "name": "Meat preparation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Meat preparation waste -5%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_15",
+          "level": 15,
+          "name": "Meat preparation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Meat preparation quality roll +1"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_20",
+          "level": 20,
+          "name": "Meat preparation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Meat preparation care +5%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_25",
+          "level": 25,
+          "name": "Meat preparation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Meat preparation speed +3%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_30",
+          "level": 30,
+          "name": "Meat preparation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Meat preparation output +5%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_35",
+          "level": 35,
+          "name": "Meat preparation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Meat preparation spoilage -10%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_40",
+          "level": 40,
+          "name": "Meat preparation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Meat preparation quality roll +1"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_45",
+          "level": 45,
+          "name": "Meat preparation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Meat preparation speed +5%"
+        },
+        {
+          "id": "kitchen.meat_preparation.perk_50",
+          "level": 50,
+          "name": "Meat preparation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Meat preparation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise meat preparation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful meat preparation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of meat preparation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a meat preparation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn meat preparation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of meat preparation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.fish_preparation",
+      "domain": "kitchen",
+      "name": "Fish preparation",
+      "description": "Fish preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.preserving"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.fish_preparation.fish_preparation_basics",
+          "discipline": "kitchen.fish_preparation",
+          "name": "Fish preparation basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.fish_preparation.fish_preparation_seasonal_practice",
+          "discipline": "kitchen.fish_preparation",
+          "name": "Fish preparation seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.fish_preparation.fish_preparation_precision_work",
+          "discipline": "kitchen.fish_preparation",
+          "name": "Fish preparation precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.fish_preparation.fish_preparation_master_technique",
+          "discipline": "kitchen.fish_preparation",
+          "name": "Fish preparation master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.fish_preparation.perk_5",
+          "level": 5,
+          "name": "Fish preparation: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fish preparation output +2%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_10",
+          "level": 10,
+          "name": "Fish preparation: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fish preparation waste -5%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_15",
+          "level": 15,
+          "name": "Fish preparation: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fish preparation quality roll +1"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_20",
+          "level": 20,
+          "name": "Fish preparation: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fish preparation care +5%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_25",
+          "level": 25,
+          "name": "Fish preparation: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fish preparation speed +3%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_30",
+          "level": 30,
+          "name": "Fish preparation: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fish preparation output +5%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_35",
+          "level": 35,
+          "name": "Fish preparation: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fish preparation spoilage -10%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_40",
+          "level": 40,
+          "name": "Fish preparation: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fish preparation quality roll +1"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_45",
+          "level": 45,
+          "name": "Fish preparation: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fish preparation speed +5%"
+        },
+        {
+          "id": "kitchen.fish_preparation.perk_50",
+          "level": 50,
+          "name": "Fish preparation: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fish preparation output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fish preparation for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fish preparation (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fish preparation; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fish preparation task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fish preparation from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fish preparation, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.preserving",
+      "domain": "kitchen",
+      "name": "Preserving",
+      "description": "Preserving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.pickling"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.preserving.preserving_basics",
+          "discipline": "kitchen.preserving",
+          "name": "Preserving basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.preserving.preserving_seasonal_practice",
+          "discipline": "kitchen.preserving",
+          "name": "Preserving seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.preserving.preserving_precision_work",
+          "discipline": "kitchen.preserving",
+          "name": "Preserving precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.preserving.preserving_master_technique",
+          "discipline": "kitchen.preserving",
+          "name": "Preserving master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.preserving.perk_5",
+          "level": 5,
+          "name": "Preserving: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Preserving output +2%"
+        },
+        {
+          "id": "kitchen.preserving.perk_10",
+          "level": 10,
+          "name": "Preserving: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Preserving waste -5%"
+        },
+        {
+          "id": "kitchen.preserving.perk_15",
+          "level": 15,
+          "name": "Preserving: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Preserving quality roll +1"
+        },
+        {
+          "id": "kitchen.preserving.perk_20",
+          "level": 20,
+          "name": "Preserving: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Preserving care +5%"
+        },
+        {
+          "id": "kitchen.preserving.perk_25",
+          "level": 25,
+          "name": "Preserving: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Preserving speed +3%"
+        },
+        {
+          "id": "kitchen.preserving.perk_30",
+          "level": 30,
+          "name": "Preserving: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Preserving output +5%"
+        },
+        {
+          "id": "kitchen.preserving.perk_35",
+          "level": 35,
+          "name": "Preserving: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Preserving spoilage -10%"
+        },
+        {
+          "id": "kitchen.preserving.perk_40",
+          "level": 40,
+          "name": "Preserving: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Preserving quality roll +1"
+        },
+        {
+          "id": "kitchen.preserving.perk_45",
+          "level": 45,
+          "name": "Preserving: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Preserving speed +5%"
+        },
+        {
+          "id": "kitchen.preserving.perk_50",
+          "level": 50,
+          "name": "Preserving: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Preserving output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise preserving for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful preserving (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of preserving; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a preserving task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn preserving from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of preserving, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.pickling",
+      "domain": "kitchen",
+      "name": "Pickling",
+      "description": "Pickling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.drying_provisions"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.pickling.pickling_basics",
+          "discipline": "kitchen.pickling",
+          "name": "Pickling basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.pickling.pickling_seasonal_practice",
+          "discipline": "kitchen.pickling",
+          "name": "Pickling seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.pickling.pickling_precision_work",
+          "discipline": "kitchen.pickling",
+          "name": "Pickling precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.pickling.pickling_master_technique",
+          "discipline": "kitchen.pickling",
+          "name": "Pickling master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.pickling.perk_5",
+          "level": 5,
+          "name": "Pickling: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pickling output +2%"
+        },
+        {
+          "id": "kitchen.pickling.perk_10",
+          "level": 10,
+          "name": "Pickling: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pickling waste -5%"
+        },
+        {
+          "id": "kitchen.pickling.perk_15",
+          "level": 15,
+          "name": "Pickling: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pickling quality roll +1"
+        },
+        {
+          "id": "kitchen.pickling.perk_20",
+          "level": 20,
+          "name": "Pickling: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pickling care +5%"
+        },
+        {
+          "id": "kitchen.pickling.perk_25",
+          "level": 25,
+          "name": "Pickling: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pickling speed +3%"
+        },
+        {
+          "id": "kitchen.pickling.perk_30",
+          "level": 30,
+          "name": "Pickling: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pickling output +5%"
+        },
+        {
+          "id": "kitchen.pickling.perk_35",
+          "level": 35,
+          "name": "Pickling: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pickling spoilage -10%"
+        },
+        {
+          "id": "kitchen.pickling.perk_40",
+          "level": 40,
+          "name": "Pickling: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pickling quality roll +1"
+        },
+        {
+          "id": "kitchen.pickling.perk_45",
+          "level": 45,
+          "name": "Pickling: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pickling speed +5%"
+        },
+        {
+          "id": "kitchen.pickling.perk_50",
+          "level": 50,
+          "name": "Pickling: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pickling output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pickling for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pickling (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pickling; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pickling task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pickling from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pickling, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.drying_provisions",
+      "domain": "kitchen",
+      "name": "Drying provisions",
+      "description": "Drying provisions: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.sauce_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.drying_provisions.drying_provisions_basics",
+          "discipline": "kitchen.drying_provisions",
+          "name": "Drying provisions basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.drying_provisions.drying_provisions_seasonal_practice",
+          "discipline": "kitchen.drying_provisions",
+          "name": "Drying provisions seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.drying_provisions.drying_provisions_precision_work",
+          "discipline": "kitchen.drying_provisions",
+          "name": "Drying provisions precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.drying_provisions.drying_provisions_master_technique",
+          "discipline": "kitchen.drying_provisions",
+          "name": "Drying provisions master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.drying_provisions.perk_5",
+          "level": 5,
+          "name": "Drying provisions: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Drying provisions output +2%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_10",
+          "level": 10,
+          "name": "Drying provisions: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Drying provisions waste -5%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_15",
+          "level": 15,
+          "name": "Drying provisions: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Drying provisions quality roll +1"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_20",
+          "level": 20,
+          "name": "Drying provisions: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Drying provisions care +5%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_25",
+          "level": 25,
+          "name": "Drying provisions: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Drying provisions speed +3%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_30",
+          "level": 30,
+          "name": "Drying provisions: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Drying provisions output +5%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_35",
+          "level": 35,
+          "name": "Drying provisions: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Drying provisions spoilage -10%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_40",
+          "level": 40,
+          "name": "Drying provisions: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Drying provisions quality roll +1"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_45",
+          "level": 45,
+          "name": "Drying provisions: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Drying provisions speed +5%"
+        },
+        {
+          "id": "kitchen.drying_provisions.perk_50",
+          "level": 50,
+          "name": "Drying provisions: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Drying provisions output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise drying provisions for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful drying provisions (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of drying provisions; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a drying provisions task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn drying provisions from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of drying provisions, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.sauce_making",
+      "domain": "kitchen",
+      "name": "Sauce making",
+      "description": "Sauce making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.oil_pressing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.sauce_making.sauce_making_basics",
+          "discipline": "kitchen.sauce_making",
+          "name": "Sauce making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.sauce_making.sauce_making_seasonal_practice",
+          "discipline": "kitchen.sauce_making",
+          "name": "Sauce making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.sauce_making.sauce_making_precision_work",
+          "discipline": "kitchen.sauce_making",
+          "name": "Sauce making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.sauce_making.sauce_making_master_technique",
+          "discipline": "kitchen.sauce_making",
+          "name": "Sauce making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.sauce_making.perk_5",
+          "level": 5,
+          "name": "Sauce making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Sauce making output +2%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_10",
+          "level": 10,
+          "name": "Sauce making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Sauce making waste -5%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_15",
+          "level": 15,
+          "name": "Sauce making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Sauce making quality roll +1"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_20",
+          "level": 20,
+          "name": "Sauce making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Sauce making care +5%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_25",
+          "level": 25,
+          "name": "Sauce making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Sauce making speed +3%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_30",
+          "level": 30,
+          "name": "Sauce making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Sauce making output +5%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_35",
+          "level": 35,
+          "name": "Sauce making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Sauce making spoilage -10%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_40",
+          "level": 40,
+          "name": "Sauce making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Sauce making quality roll +1"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_45",
+          "level": 45,
+          "name": "Sauce making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Sauce making speed +5%"
+        },
+        {
+          "id": "kitchen.sauce_making.perk_50",
+          "level": 50,
+          "name": "Sauce making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Sauce making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise sauce making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful sauce making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of sauce making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a sauce making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn sauce making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of sauce making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.oil_pressing",
+      "domain": "kitchen",
+      "name": "Oil pressing",
+      "description": "Oil pressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.banquet_cooking"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.oil_pressing.oil_pressing_basics",
+          "discipline": "kitchen.oil_pressing",
+          "name": "Oil pressing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.oil_pressing.oil_pressing_seasonal_practice",
+          "discipline": "kitchen.oil_pressing",
+          "name": "Oil pressing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.oil_pressing.oil_pressing_precision_work",
+          "discipline": "kitchen.oil_pressing",
+          "name": "Oil pressing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.oil_pressing.oil_pressing_master_technique",
+          "discipline": "kitchen.oil_pressing",
+          "name": "Oil pressing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.oil_pressing.perk_5",
+          "level": 5,
+          "name": "Oil pressing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Oil pressing output +2%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_10",
+          "level": 10,
+          "name": "Oil pressing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Oil pressing waste -5%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_15",
+          "level": 15,
+          "name": "Oil pressing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Oil pressing quality roll +1"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_20",
+          "level": 20,
+          "name": "Oil pressing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Oil pressing care +5%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_25",
+          "level": 25,
+          "name": "Oil pressing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Oil pressing speed +3%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_30",
+          "level": 30,
+          "name": "Oil pressing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Oil pressing output +5%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_35",
+          "level": 35,
+          "name": "Oil pressing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Oil pressing spoilage -10%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_40",
+          "level": 40,
+          "name": "Oil pressing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Oil pressing quality roll +1"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_45",
+          "level": 45,
+          "name": "Oil pressing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Oil pressing speed +5%"
+        },
+        {
+          "id": "kitchen.oil_pressing.perk_50",
+          "level": 50,
+          "name": "Oil pressing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Oil pressing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise oil pressing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful oil pressing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of oil pressing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a oil pressing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn oil pressing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of oil pressing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.banquet_cooking",
+      "domain": "kitchen",
+      "name": "Banquet cooking",
+      "description": "Banquet cooking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.kitchen_safety"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.banquet_cooking.banquet_cooking_basics",
+          "discipline": "kitchen.banquet_cooking",
+          "name": "Banquet cooking basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.banquet_cooking.banquet_cooking_seasonal_practice",
+          "discipline": "kitchen.banquet_cooking",
+          "name": "Banquet cooking seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.banquet_cooking.banquet_cooking_precision_work",
+          "discipline": "kitchen.banquet_cooking",
+          "name": "Banquet cooking precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.banquet_cooking.banquet_cooking_master_technique",
+          "discipline": "kitchen.banquet_cooking",
+          "name": "Banquet cooking master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.banquet_cooking.perk_5",
+          "level": 5,
+          "name": "Banquet cooking: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Banquet cooking output +2%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_10",
+          "level": 10,
+          "name": "Banquet cooking: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Banquet cooking waste -5%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_15",
+          "level": 15,
+          "name": "Banquet cooking: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Banquet cooking quality roll +1"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_20",
+          "level": 20,
+          "name": "Banquet cooking: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Banquet cooking care +5%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_25",
+          "level": 25,
+          "name": "Banquet cooking: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Banquet cooking speed +3%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_30",
+          "level": 30,
+          "name": "Banquet cooking: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Banquet cooking output +5%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_35",
+          "level": 35,
+          "name": "Banquet cooking: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Banquet cooking spoilage -10%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_40",
+          "level": 40,
+          "name": "Banquet cooking: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Banquet cooking quality roll +1"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_45",
+          "level": 45,
+          "name": "Banquet cooking: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Banquet cooking speed +5%"
+        },
+        {
+          "id": "kitchen.banquet_cooking.perk_50",
+          "level": 50,
+          "name": "Banquet cooking: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Banquet cooking output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise banquet cooking for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful banquet cooking (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of banquet cooking; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a banquet cooking task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn banquet cooking from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of banquet cooking, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.kitchen_safety",
+      "domain": "kitchen",
+      "name": "Kitchen safety",
+      "description": "Kitchen safety: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.fuel_economy"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.kitchen_safety.kitchen_safety_basics",
+          "discipline": "kitchen.kitchen_safety",
+          "name": "Kitchen safety basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.kitchen_safety.kitchen_safety_seasonal_practice",
+          "discipline": "kitchen.kitchen_safety",
+          "name": "Kitchen safety seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.kitchen_safety.kitchen_safety_precision_work",
+          "discipline": "kitchen.kitchen_safety",
+          "name": "Kitchen safety precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.kitchen_safety.kitchen_safety_master_technique",
+          "discipline": "kitchen.kitchen_safety",
+          "name": "Kitchen safety master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.kitchen_safety.perk_5",
+          "level": 5,
+          "name": "Kitchen safety: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Kitchen safety output +2%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_10",
+          "level": 10,
+          "name": "Kitchen safety: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Kitchen safety waste -5%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_15",
+          "level": 15,
+          "name": "Kitchen safety: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kitchen safety quality roll +1"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_20",
+          "level": 20,
+          "name": "Kitchen safety: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Kitchen safety care +5%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_25",
+          "level": 25,
+          "name": "Kitchen safety: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Kitchen safety speed +3%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_30",
+          "level": 30,
+          "name": "Kitchen safety: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kitchen safety output +5%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_35",
+          "level": 35,
+          "name": "Kitchen safety: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Kitchen safety spoilage -10%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_40",
+          "level": 40,
+          "name": "Kitchen safety: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kitchen safety quality roll +1"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_45",
+          "level": 45,
+          "name": "Kitchen safety: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Kitchen safety speed +5%"
+        },
+        {
+          "id": "kitchen.kitchen_safety.perk_50",
+          "level": 50,
+          "name": "Kitchen safety: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kitchen safety output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise kitchen safety for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful kitchen safety (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of kitchen safety; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a kitchen safety task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn kitchen safety from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of kitchen safety, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.fuel_economy",
+      "domain": "kitchen",
+      "name": "Fuel economy",
+      "description": "Fuel economy: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.meal_planning"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.fuel_economy.fuel_economy_basics",
+          "discipline": "kitchen.fuel_economy",
+          "name": "Fuel economy basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.fuel_economy.fuel_economy_seasonal_practice",
+          "discipline": "kitchen.fuel_economy",
+          "name": "Fuel economy seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.fuel_economy.fuel_economy_precision_work",
+          "discipline": "kitchen.fuel_economy",
+          "name": "Fuel economy precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.fuel_economy.fuel_economy_master_technique",
+          "discipline": "kitchen.fuel_economy",
+          "name": "Fuel economy master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.fuel_economy.perk_5",
+          "level": 5,
+          "name": "Fuel economy: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fuel economy output +2%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_10",
+          "level": 10,
+          "name": "Fuel economy: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fuel economy waste -5%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_15",
+          "level": 15,
+          "name": "Fuel economy: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fuel economy quality roll +1"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_20",
+          "level": 20,
+          "name": "Fuel economy: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fuel economy care +5%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_25",
+          "level": 25,
+          "name": "Fuel economy: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fuel economy speed +3%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_30",
+          "level": 30,
+          "name": "Fuel economy: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fuel economy output +5%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_35",
+          "level": 35,
+          "name": "Fuel economy: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fuel economy spoilage -10%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_40",
+          "level": 40,
+          "name": "Fuel economy: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fuel economy quality roll +1"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_45",
+          "level": 45,
+          "name": "Fuel economy: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fuel economy speed +5%"
+        },
+        {
+          "id": "kitchen.fuel_economy.perk_50",
+          "level": 50,
+          "name": "Fuel economy: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fuel economy output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fuel economy for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fuel economy (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fuel economy; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fuel economy task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fuel economy from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fuel economy, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.meal_planning",
+      "domain": "kitchen",
+      "name": "Meal planning",
+      "description": "Meal planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.kitchen_stewardship"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.meal_planning.meal_planning_basics",
+          "discipline": "kitchen.meal_planning",
+          "name": "Meal planning basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.meal_planning.meal_planning_seasonal_practice",
+          "discipline": "kitchen.meal_planning",
+          "name": "Meal planning seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.meal_planning.meal_planning_precision_work",
+          "discipline": "kitchen.meal_planning",
+          "name": "Meal planning precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.meal_planning.meal_planning_master_technique",
+          "discipline": "kitchen.meal_planning",
+          "name": "Meal planning master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.meal_planning.perk_5",
+          "level": 5,
+          "name": "Meal planning: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Meal planning output +2%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_10",
+          "level": 10,
+          "name": "Meal planning: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Meal planning waste -5%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_15",
+          "level": 15,
+          "name": "Meal planning: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Meal planning quality roll +1"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_20",
+          "level": 20,
+          "name": "Meal planning: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Meal planning care +5%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_25",
+          "level": 25,
+          "name": "Meal planning: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Meal planning speed +3%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_30",
+          "level": 30,
+          "name": "Meal planning: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Meal planning output +5%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_35",
+          "level": 35,
+          "name": "Meal planning: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Meal planning spoilage -10%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_40",
+          "level": 40,
+          "name": "Meal planning: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Meal planning quality roll +1"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_45",
+          "level": 45,
+          "name": "Meal planning: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Meal planning speed +5%"
+        },
+        {
+          "id": "kitchen.meal_planning.perk_50",
+          "level": 50,
+          "name": "Meal planning: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Meal planning output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise meal planning for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful meal planning (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of meal planning; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a meal planning task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn meal planning from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of meal planning, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "kitchen.kitchen_stewardship",
+      "domain": "kitchen",
+      "name": "Kitchen stewardship",
+      "description": "Kitchen stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "kitchen.cooking"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "kitchen.kitchen_stewardship.kitchen_stewardship_basics",
+          "discipline": "kitchen.kitchen_stewardship",
+          "name": "Kitchen stewardship basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.kitchen_stewardship_seasonal_practice",
+          "discipline": "kitchen.kitchen_stewardship",
+          "name": "Kitchen stewardship seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.kitchen_stewardship_precision_work",
+          "discipline": "kitchen.kitchen_stewardship",
+          "name": "Kitchen stewardship precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.kitchen_stewardship_master_technique",
+          "discipline": "kitchen.kitchen_stewardship",
+          "name": "Kitchen stewardship master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "kitchen.kitchen_stewardship.perk_5",
+          "level": 5,
+          "name": "Kitchen stewardship: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Kitchen stewardship output +2%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_10",
+          "level": 10,
+          "name": "Kitchen stewardship: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Kitchen stewardship waste -5%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_15",
+          "level": 15,
+          "name": "Kitchen stewardship: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kitchen stewardship quality roll +1"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_20",
+          "level": 20,
+          "name": "Kitchen stewardship: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Kitchen stewardship care +5%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_25",
+          "level": 25,
+          "name": "Kitchen stewardship: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Kitchen stewardship speed +3%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_30",
+          "level": 30,
+          "name": "Kitchen stewardship: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kitchen stewardship output +5%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_35",
+          "level": 35,
+          "name": "Kitchen stewardship: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Kitchen stewardship spoilage -10%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_40",
+          "level": 40,
+          "name": "Kitchen stewardship: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Kitchen stewardship quality roll +1"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_45",
+          "level": 45,
+          "name": "Kitchen stewardship: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Kitchen stewardship speed +5%"
+        },
+        {
+          "id": "kitchen.kitchen_stewardship.perk_50",
+          "level": 50,
+          "name": "Kitchen stewardship: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Kitchen stewardship output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise kitchen stewardship for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful kitchen stewardship (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of kitchen stewardship; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a kitchen stewardship task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn kitchen stewardship from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of kitchen stewardship, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

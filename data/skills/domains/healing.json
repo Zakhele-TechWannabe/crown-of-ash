@@ -1,0 +1,4079 @@
+{
+  "id": "healing",
+  "disciplines": [
+    {
+      "id": "healing.medicine",
+      "domain": "healing",
+      "name": "Medicine",
+      "description": "Medicine: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.herbal_remedies"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.medicine.herbal_remedies",
+          "discipline": "healing.medicine",
+          "name": "Herbal remedies",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "intellect": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine.bonesetting",
+          "discipline": "healing.medicine",
+          "name": "Bonesetting",
+          "unlock_level": 10,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine.midwifery",
+          "discipline": "healing.medicine",
+          "name": "Midwifery",
+          "unlock_level": 15,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine.acupuncture",
+          "discipline": "healing.medicine",
+          "name": "Acupuncture",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 13
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine.alchemy",
+          "discipline": "healing.medicine",
+          "name": "Alchemy",
+          "unlock_level": 30,
+          "attribute_requirements": {},
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": true,
+          "condition": "Spirit root or sect teaching"
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.medicine.perk_5",
+          "level": 5,
+          "name": "Medicine: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Medicine output +2%"
+        },
+        {
+          "id": "healing.medicine.perk_10",
+          "level": 10,
+          "name": "Medicine: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Medicine waste -5%"
+        },
+        {
+          "id": "healing.medicine.perk_15",
+          "level": 15,
+          "name": "Medicine: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medicine quality roll +1"
+        },
+        {
+          "id": "healing.medicine.perk_20",
+          "level": 20,
+          "name": "Medicine: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Medicine care +5%"
+        },
+        {
+          "id": "healing.medicine.perk_25",
+          "level": 25,
+          "name": "Medicine: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Medicine speed +3%"
+        },
+        {
+          "id": "healing.medicine.perk_30",
+          "level": 30,
+          "name": "Medicine: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medicine output +5%"
+        },
+        {
+          "id": "healing.medicine.perk_35",
+          "level": 35,
+          "name": "Medicine: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Medicine spoilage -10%"
+        },
+        {
+          "id": "healing.medicine.perk_40",
+          "level": 40,
+          "name": "Medicine: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medicine quality roll +1"
+        },
+        {
+          "id": "healing.medicine.perk_45",
+          "level": 45,
+          "name": "Medicine: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Medicine speed +5%"
+        },
+        {
+          "id": "healing.medicine.perk_50",
+          "level": 50,
+          "name": "Medicine: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medicine output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise medicine for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful medicine (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of medicine; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a medicine task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn medicine from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of medicine, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.herbal_remedies",
+      "domain": "healing",
+      "name": "Herbal remedies",
+      "description": "Herbal remedies: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.bonesetting"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.herbal_remedies.herbal_remedies_basics",
+          "discipline": "healing.herbal_remedies",
+          "name": "Herbal remedies basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.herbal_remedies.herbal_remedies_seasonal_practice",
+          "discipline": "healing.herbal_remedies",
+          "name": "Herbal remedies seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.herbal_remedies.herbal_remedies_precision_work",
+          "discipline": "healing.herbal_remedies",
+          "name": "Herbal remedies precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.herbal_remedies.herbal_remedies_master_technique",
+          "discipline": "healing.herbal_remedies",
+          "name": "Herbal remedies master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.herbal_remedies.perk_5",
+          "level": 5,
+          "name": "Herbal remedies: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Herbal remedies output +2%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_10",
+          "level": 10,
+          "name": "Herbal remedies: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Herbal remedies waste -5%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_15",
+          "level": 15,
+          "name": "Herbal remedies: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herbal remedies quality roll +1"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_20",
+          "level": 20,
+          "name": "Herbal remedies: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Herbal remedies care +5%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_25",
+          "level": 25,
+          "name": "Herbal remedies: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Herbal remedies speed +3%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_30",
+          "level": 30,
+          "name": "Herbal remedies: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herbal remedies output +5%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_35",
+          "level": 35,
+          "name": "Herbal remedies: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Herbal remedies spoilage -10%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_40",
+          "level": 40,
+          "name": "Herbal remedies: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Herbal remedies quality roll +1"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_45",
+          "level": 45,
+          "name": "Herbal remedies: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Herbal remedies speed +5%"
+        },
+        {
+          "id": "healing.herbal_remedies.perk_50",
+          "level": 50,
+          "name": "Herbal remedies: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Herbal remedies output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise herbal remedies for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful herbal remedies (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of herbal remedies; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a herbal remedies task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn herbal remedies from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of herbal remedies, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.bonesetting",
+      "domain": "healing",
+      "name": "Bonesetting",
+      "description": "Bonesetting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.midwifery"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.bonesetting.bonesetting_basics",
+          "discipline": "healing.bonesetting",
+          "name": "Bonesetting basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.bonesetting.bonesetting_seasonal_practice",
+          "discipline": "healing.bonesetting",
+          "name": "Bonesetting seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.bonesetting.bonesetting_precision_work",
+          "discipline": "healing.bonesetting",
+          "name": "Bonesetting precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.bonesetting.bonesetting_master_technique",
+          "discipline": "healing.bonesetting",
+          "name": "Bonesetting master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.bonesetting.perk_5",
+          "level": 5,
+          "name": "Bonesetting: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Bonesetting output +2%"
+        },
+        {
+          "id": "healing.bonesetting.perk_10",
+          "level": 10,
+          "name": "Bonesetting: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Bonesetting waste -5%"
+        },
+        {
+          "id": "healing.bonesetting.perk_15",
+          "level": 15,
+          "name": "Bonesetting: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bonesetting quality roll +1"
+        },
+        {
+          "id": "healing.bonesetting.perk_20",
+          "level": 20,
+          "name": "Bonesetting: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Bonesetting care +5%"
+        },
+        {
+          "id": "healing.bonesetting.perk_25",
+          "level": 25,
+          "name": "Bonesetting: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Bonesetting speed +3%"
+        },
+        {
+          "id": "healing.bonesetting.perk_30",
+          "level": 30,
+          "name": "Bonesetting: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bonesetting output +5%"
+        },
+        {
+          "id": "healing.bonesetting.perk_35",
+          "level": 35,
+          "name": "Bonesetting: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Bonesetting spoilage -10%"
+        },
+        {
+          "id": "healing.bonesetting.perk_40",
+          "level": 40,
+          "name": "Bonesetting: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Bonesetting quality roll +1"
+        },
+        {
+          "id": "healing.bonesetting.perk_45",
+          "level": 45,
+          "name": "Bonesetting: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Bonesetting speed +5%"
+        },
+        {
+          "id": "healing.bonesetting.perk_50",
+          "level": 50,
+          "name": "Bonesetting: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Bonesetting output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise bonesetting for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful bonesetting (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of bonesetting; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a bonesetting task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn bonesetting from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of bonesetting, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.midwifery",
+      "domain": "healing",
+      "name": "Midwifery",
+      "description": "Midwifery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.acupuncture"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.midwifery.midwifery_basics",
+          "discipline": "healing.midwifery",
+          "name": "Midwifery basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.midwifery.midwifery_seasonal_practice",
+          "discipline": "healing.midwifery",
+          "name": "Midwifery seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.midwifery.midwifery_precision_work",
+          "discipline": "healing.midwifery",
+          "name": "Midwifery precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.midwifery.midwifery_master_technique",
+          "discipline": "healing.midwifery",
+          "name": "Midwifery master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.midwifery.perk_5",
+          "level": 5,
+          "name": "Midwifery: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Midwifery output +2%"
+        },
+        {
+          "id": "healing.midwifery.perk_10",
+          "level": 10,
+          "name": "Midwifery: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Midwifery waste -5%"
+        },
+        {
+          "id": "healing.midwifery.perk_15",
+          "level": 15,
+          "name": "Midwifery: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Midwifery quality roll +1"
+        },
+        {
+          "id": "healing.midwifery.perk_20",
+          "level": 20,
+          "name": "Midwifery: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Midwifery care +5%"
+        },
+        {
+          "id": "healing.midwifery.perk_25",
+          "level": 25,
+          "name": "Midwifery: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Midwifery speed +3%"
+        },
+        {
+          "id": "healing.midwifery.perk_30",
+          "level": 30,
+          "name": "Midwifery: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Midwifery output +5%"
+        },
+        {
+          "id": "healing.midwifery.perk_35",
+          "level": 35,
+          "name": "Midwifery: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Midwifery spoilage -10%"
+        },
+        {
+          "id": "healing.midwifery.perk_40",
+          "level": 40,
+          "name": "Midwifery: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Midwifery quality roll +1"
+        },
+        {
+          "id": "healing.midwifery.perk_45",
+          "level": 45,
+          "name": "Midwifery: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Midwifery speed +5%"
+        },
+        {
+          "id": "healing.midwifery.perk_50",
+          "level": 50,
+          "name": "Midwifery: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Midwifery output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise midwifery for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful midwifery (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of midwifery; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a midwifery task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn midwifery from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of midwifery, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.acupuncture",
+      "domain": "healing",
+      "name": "Acupuncture",
+      "description": "Acupuncture: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.wound_tending"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.acupuncture.acupuncture_basics",
+          "discipline": "healing.acupuncture",
+          "name": "Acupuncture basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.acupuncture.acupuncture_seasonal_practice",
+          "discipline": "healing.acupuncture",
+          "name": "Acupuncture seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.acupuncture.acupuncture_precision_work",
+          "discipline": "healing.acupuncture",
+          "name": "Acupuncture precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.acupuncture.acupuncture_master_technique",
+          "discipline": "healing.acupuncture",
+          "name": "Acupuncture master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.acupuncture.perk_5",
+          "level": 5,
+          "name": "Acupuncture: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Acupuncture output +2%"
+        },
+        {
+          "id": "healing.acupuncture.perk_10",
+          "level": 10,
+          "name": "Acupuncture: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Acupuncture waste -5%"
+        },
+        {
+          "id": "healing.acupuncture.perk_15",
+          "level": 15,
+          "name": "Acupuncture: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Acupuncture quality roll +1"
+        },
+        {
+          "id": "healing.acupuncture.perk_20",
+          "level": 20,
+          "name": "Acupuncture: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Acupuncture care +5%"
+        },
+        {
+          "id": "healing.acupuncture.perk_25",
+          "level": 25,
+          "name": "Acupuncture: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Acupuncture speed +3%"
+        },
+        {
+          "id": "healing.acupuncture.perk_30",
+          "level": 30,
+          "name": "Acupuncture: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Acupuncture output +5%"
+        },
+        {
+          "id": "healing.acupuncture.perk_35",
+          "level": 35,
+          "name": "Acupuncture: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Acupuncture spoilage -10%"
+        },
+        {
+          "id": "healing.acupuncture.perk_40",
+          "level": 40,
+          "name": "Acupuncture: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Acupuncture quality roll +1"
+        },
+        {
+          "id": "healing.acupuncture.perk_45",
+          "level": 45,
+          "name": "Acupuncture: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Acupuncture speed +5%"
+        },
+        {
+          "id": "healing.acupuncture.perk_50",
+          "level": 50,
+          "name": "Acupuncture: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Acupuncture output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise acupuncture for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful acupuncture (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of acupuncture; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a acupuncture task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn acupuncture from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of acupuncture, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.wound_tending",
+      "domain": "healing",
+      "name": "Wound tending",
+      "description": "Wound tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.pulse_reading"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.wound_tending.wound_tending_basics",
+          "discipline": "healing.wound_tending",
+          "name": "Wound tending basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.wound_tending.wound_tending_seasonal_practice",
+          "discipline": "healing.wound_tending",
+          "name": "Wound tending seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.wound_tending.wound_tending_precision_work",
+          "discipline": "healing.wound_tending",
+          "name": "Wound tending precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.wound_tending.wound_tending_master_technique",
+          "discipline": "healing.wound_tending",
+          "name": "Wound tending master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.wound_tending.perk_5",
+          "level": 5,
+          "name": "Wound tending: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Wound tending output +2%"
+        },
+        {
+          "id": "healing.wound_tending.perk_10",
+          "level": 10,
+          "name": "Wound tending: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Wound tending waste -5%"
+        },
+        {
+          "id": "healing.wound_tending.perk_15",
+          "level": 15,
+          "name": "Wound tending: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wound tending quality roll +1"
+        },
+        {
+          "id": "healing.wound_tending.perk_20",
+          "level": 20,
+          "name": "Wound tending: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Wound tending care +5%"
+        },
+        {
+          "id": "healing.wound_tending.perk_25",
+          "level": 25,
+          "name": "Wound tending: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Wound tending speed +3%"
+        },
+        {
+          "id": "healing.wound_tending.perk_30",
+          "level": 30,
+          "name": "Wound tending: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wound tending output +5%"
+        },
+        {
+          "id": "healing.wound_tending.perk_35",
+          "level": 35,
+          "name": "Wound tending: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Wound tending spoilage -10%"
+        },
+        {
+          "id": "healing.wound_tending.perk_40",
+          "level": 40,
+          "name": "Wound tending: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Wound tending quality roll +1"
+        },
+        {
+          "id": "healing.wound_tending.perk_45",
+          "level": 45,
+          "name": "Wound tending: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Wound tending speed +5%"
+        },
+        {
+          "id": "healing.wound_tending.perk_50",
+          "level": 50,
+          "name": "Wound tending: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Wound tending output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise wound tending for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful wound tending (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of wound tending; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a wound tending task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn wound tending from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of wound tending, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.pulse_reading",
+      "domain": "healing",
+      "name": "Pulse reading",
+      "description": "Pulse reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.fever_care"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.pulse_reading.pulse_reading_basics",
+          "discipline": "healing.pulse_reading",
+          "name": "Pulse reading basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.pulse_reading.pulse_reading_seasonal_practice",
+          "discipline": "healing.pulse_reading",
+          "name": "Pulse reading seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.pulse_reading.pulse_reading_precision_work",
+          "discipline": "healing.pulse_reading",
+          "name": "Pulse reading precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.pulse_reading.pulse_reading_master_technique",
+          "discipline": "healing.pulse_reading",
+          "name": "Pulse reading master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.pulse_reading.perk_5",
+          "level": 5,
+          "name": "Pulse reading: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Pulse reading output +2%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_10",
+          "level": 10,
+          "name": "Pulse reading: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Pulse reading waste -5%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_15",
+          "level": 15,
+          "name": "Pulse reading: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pulse reading quality roll +1"
+        },
+        {
+          "id": "healing.pulse_reading.perk_20",
+          "level": 20,
+          "name": "Pulse reading: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Pulse reading care +5%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_25",
+          "level": 25,
+          "name": "Pulse reading: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Pulse reading speed +3%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_30",
+          "level": 30,
+          "name": "Pulse reading: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pulse reading output +5%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_35",
+          "level": 35,
+          "name": "Pulse reading: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Pulse reading spoilage -10%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_40",
+          "level": 40,
+          "name": "Pulse reading: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Pulse reading quality roll +1"
+        },
+        {
+          "id": "healing.pulse_reading.perk_45",
+          "level": 45,
+          "name": "Pulse reading: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Pulse reading speed +5%"
+        },
+        {
+          "id": "healing.pulse_reading.perk_50",
+          "level": 50,
+          "name": "Pulse reading: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Pulse reading output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise pulse reading for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful pulse reading (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of pulse reading; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a pulse reading task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn pulse reading from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of pulse reading, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.fever_care",
+      "domain": "healing",
+      "name": "Fever care",
+      "description": "Fever care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.poultice_making"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.fever_care.fever_care_basics",
+          "discipline": "healing.fever_care",
+          "name": "Fever care basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.fever_care.fever_care_seasonal_practice",
+          "discipline": "healing.fever_care",
+          "name": "Fever care seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.fever_care.fever_care_precision_work",
+          "discipline": "healing.fever_care",
+          "name": "Fever care precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.fever_care.fever_care_master_technique",
+          "discipline": "healing.fever_care",
+          "name": "Fever care master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.fever_care.perk_5",
+          "level": 5,
+          "name": "Fever care: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Fever care output +2%"
+        },
+        {
+          "id": "healing.fever_care.perk_10",
+          "level": 10,
+          "name": "Fever care: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Fever care waste -5%"
+        },
+        {
+          "id": "healing.fever_care.perk_15",
+          "level": 15,
+          "name": "Fever care: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fever care quality roll +1"
+        },
+        {
+          "id": "healing.fever_care.perk_20",
+          "level": 20,
+          "name": "Fever care: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Fever care care +5%"
+        },
+        {
+          "id": "healing.fever_care.perk_25",
+          "level": 25,
+          "name": "Fever care: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Fever care speed +3%"
+        },
+        {
+          "id": "healing.fever_care.perk_30",
+          "level": 30,
+          "name": "Fever care: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fever care output +5%"
+        },
+        {
+          "id": "healing.fever_care.perk_35",
+          "level": 35,
+          "name": "Fever care: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Fever care spoilage -10%"
+        },
+        {
+          "id": "healing.fever_care.perk_40",
+          "level": 40,
+          "name": "Fever care: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Fever care quality roll +1"
+        },
+        {
+          "id": "healing.fever_care.perk_45",
+          "level": 45,
+          "name": "Fever care: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Fever care speed +5%"
+        },
+        {
+          "id": "healing.fever_care.perk_50",
+          "level": 50,
+          "name": "Fever care: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Fever care output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise fever care for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful fever care (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of fever care; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a fever care task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn fever care from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of fever care, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.poultice_making",
+      "domain": "healing",
+      "name": "Poultice making",
+      "description": "Poultice making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.medicine_drying"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.poultice_making.poultice_making_basics",
+          "discipline": "healing.poultice_making",
+          "name": "Poultice making basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.poultice_making.poultice_making_seasonal_practice",
+          "discipline": "healing.poultice_making",
+          "name": "Poultice making seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.poultice_making.poultice_making_precision_work",
+          "discipline": "healing.poultice_making",
+          "name": "Poultice making precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.poultice_making.poultice_making_master_technique",
+          "discipline": "healing.poultice_making",
+          "name": "Poultice making master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.poultice_making.perk_5",
+          "level": 5,
+          "name": "Poultice making: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Poultice making output +2%"
+        },
+        {
+          "id": "healing.poultice_making.perk_10",
+          "level": 10,
+          "name": "Poultice making: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Poultice making waste -5%"
+        },
+        {
+          "id": "healing.poultice_making.perk_15",
+          "level": 15,
+          "name": "Poultice making: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Poultice making quality roll +1"
+        },
+        {
+          "id": "healing.poultice_making.perk_20",
+          "level": 20,
+          "name": "Poultice making: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Poultice making care +5%"
+        },
+        {
+          "id": "healing.poultice_making.perk_25",
+          "level": 25,
+          "name": "Poultice making: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Poultice making speed +3%"
+        },
+        {
+          "id": "healing.poultice_making.perk_30",
+          "level": 30,
+          "name": "Poultice making: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Poultice making output +5%"
+        },
+        {
+          "id": "healing.poultice_making.perk_35",
+          "level": 35,
+          "name": "Poultice making: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Poultice making spoilage -10%"
+        },
+        {
+          "id": "healing.poultice_making.perk_40",
+          "level": 40,
+          "name": "Poultice making: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Poultice making quality roll +1"
+        },
+        {
+          "id": "healing.poultice_making.perk_45",
+          "level": 45,
+          "name": "Poultice making: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Poultice making speed +5%"
+        },
+        {
+          "id": "healing.poultice_making.perk_50",
+          "level": 50,
+          "name": "Poultice making: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Poultice making output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise poultice making for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful poultice making (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of poultice making; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a poultice making task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn poultice making from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of poultice making, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.medicine_drying",
+      "domain": "healing",
+      "name": "Medicine drying",
+      "description": "Medicine drying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.dispensary_keeping"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.medicine_drying.medicine_drying_basics",
+          "discipline": "healing.medicine_drying",
+          "name": "Medicine drying basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine_drying.medicine_drying_seasonal_practice",
+          "discipline": "healing.medicine_drying",
+          "name": "Medicine drying seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine_drying.medicine_drying_precision_work",
+          "discipline": "healing.medicine_drying",
+          "name": "Medicine drying precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medicine_drying.medicine_drying_master_technique",
+          "discipline": "healing.medicine_drying",
+          "name": "Medicine drying master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.medicine_drying.perk_5",
+          "level": 5,
+          "name": "Medicine drying: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Medicine drying output +2%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_10",
+          "level": 10,
+          "name": "Medicine drying: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Medicine drying waste -5%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_15",
+          "level": 15,
+          "name": "Medicine drying: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medicine drying quality roll +1"
+        },
+        {
+          "id": "healing.medicine_drying.perk_20",
+          "level": 20,
+          "name": "Medicine drying: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Medicine drying care +5%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_25",
+          "level": 25,
+          "name": "Medicine drying: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Medicine drying speed +3%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_30",
+          "level": 30,
+          "name": "Medicine drying: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medicine drying output +5%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_35",
+          "level": 35,
+          "name": "Medicine drying: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Medicine drying spoilage -10%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_40",
+          "level": 40,
+          "name": "Medicine drying: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medicine drying quality roll +1"
+        },
+        {
+          "id": "healing.medicine_drying.perk_45",
+          "level": 45,
+          "name": "Medicine drying: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Medicine drying speed +5%"
+        },
+        {
+          "id": "healing.medicine_drying.perk_50",
+          "level": 50,
+          "name": "Medicine drying: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medicine drying output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise medicine drying for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful medicine drying (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of medicine drying; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a medicine drying task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn medicine drying from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of medicine drying, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.dispensary_keeping",
+      "domain": "healing",
+      "name": "Dispensary keeping",
+      "description": "Dispensary keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.dietary_care"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.dispensary_keeping.dispensary_keeping_basics",
+          "discipline": "healing.dispensary_keeping",
+          "name": "Dispensary keeping basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.dispensary_keeping.dispensary_keeping_seasonal_practice",
+          "discipline": "healing.dispensary_keeping",
+          "name": "Dispensary keeping seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.dispensary_keeping.dispensary_keeping_precision_work",
+          "discipline": "healing.dispensary_keeping",
+          "name": "Dispensary keeping precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.dispensary_keeping.dispensary_keeping_master_technique",
+          "discipline": "healing.dispensary_keeping",
+          "name": "Dispensary keeping master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.dispensary_keeping.perk_5",
+          "level": 5,
+          "name": "Dispensary keeping: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Dispensary keeping output +2%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_10",
+          "level": 10,
+          "name": "Dispensary keeping: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Dispensary keeping waste -5%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_15",
+          "level": 15,
+          "name": "Dispensary keeping: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dispensary keeping quality roll +1"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_20",
+          "level": 20,
+          "name": "Dispensary keeping: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Dispensary keeping care +5%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_25",
+          "level": 25,
+          "name": "Dispensary keeping: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Dispensary keeping speed +3%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_30",
+          "level": 30,
+          "name": "Dispensary keeping: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dispensary keeping output +5%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_35",
+          "level": 35,
+          "name": "Dispensary keeping: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Dispensary keeping spoilage -10%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_40",
+          "level": 40,
+          "name": "Dispensary keeping: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dispensary keeping quality roll +1"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_45",
+          "level": 45,
+          "name": "Dispensary keeping: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Dispensary keeping speed +5%"
+        },
+        {
+          "id": "healing.dispensary_keeping.perk_50",
+          "level": 50,
+          "name": "Dispensary keeping: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dispensary keeping output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise dispensary keeping for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful dispensary keeping (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of dispensary keeping; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a dispensary keeping task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn dispensary keeping from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of dispensary keeping, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.dietary_care",
+      "domain": "healing",
+      "name": "Dietary care",
+      "description": "Dietary care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.toxin_recognition"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.dietary_care.dietary_care_basics",
+          "discipline": "healing.dietary_care",
+          "name": "Dietary care basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.dietary_care.dietary_care_seasonal_practice",
+          "discipline": "healing.dietary_care",
+          "name": "Dietary care seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.dietary_care.dietary_care_precision_work",
+          "discipline": "healing.dietary_care",
+          "name": "Dietary care precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.dietary_care.dietary_care_master_technique",
+          "discipline": "healing.dietary_care",
+          "name": "Dietary care master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.dietary_care.perk_5",
+          "level": 5,
+          "name": "Dietary care: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Dietary care output +2%"
+        },
+        {
+          "id": "healing.dietary_care.perk_10",
+          "level": 10,
+          "name": "Dietary care: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Dietary care waste -5%"
+        },
+        {
+          "id": "healing.dietary_care.perk_15",
+          "level": 15,
+          "name": "Dietary care: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dietary care quality roll +1"
+        },
+        {
+          "id": "healing.dietary_care.perk_20",
+          "level": 20,
+          "name": "Dietary care: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Dietary care care +5%"
+        },
+        {
+          "id": "healing.dietary_care.perk_25",
+          "level": 25,
+          "name": "Dietary care: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Dietary care speed +3%"
+        },
+        {
+          "id": "healing.dietary_care.perk_30",
+          "level": 30,
+          "name": "Dietary care: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dietary care output +5%"
+        },
+        {
+          "id": "healing.dietary_care.perk_35",
+          "level": 35,
+          "name": "Dietary care: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Dietary care spoilage -10%"
+        },
+        {
+          "id": "healing.dietary_care.perk_40",
+          "level": 40,
+          "name": "Dietary care: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Dietary care quality roll +1"
+        },
+        {
+          "id": "healing.dietary_care.perk_45",
+          "level": 45,
+          "name": "Dietary care: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Dietary care speed +5%"
+        },
+        {
+          "id": "healing.dietary_care.perk_50",
+          "level": 50,
+          "name": "Dietary care: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Dietary care output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise dietary care for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful dietary care (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of dietary care; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a dietary care task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn dietary care from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of dietary care, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.toxin_recognition",
+      "domain": "healing",
+      "name": "Toxin recognition",
+      "description": "Toxin recognition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.recovery_nursing"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.toxin_recognition.toxin_recognition_basics",
+          "discipline": "healing.toxin_recognition",
+          "name": "Toxin recognition basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.toxin_recognition.toxin_recognition_seasonal_practice",
+          "discipline": "healing.toxin_recognition",
+          "name": "Toxin recognition seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.toxin_recognition.toxin_recognition_precision_work",
+          "discipline": "healing.toxin_recognition",
+          "name": "Toxin recognition precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.toxin_recognition.toxin_recognition_master_technique",
+          "discipline": "healing.toxin_recognition",
+          "name": "Toxin recognition master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.toxin_recognition.perk_5",
+          "level": 5,
+          "name": "Toxin recognition: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Toxin recognition output +2%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_10",
+          "level": 10,
+          "name": "Toxin recognition: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Toxin recognition waste -5%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_15",
+          "level": 15,
+          "name": "Toxin recognition: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Toxin recognition quality roll +1"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_20",
+          "level": 20,
+          "name": "Toxin recognition: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Toxin recognition care +5%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_25",
+          "level": 25,
+          "name": "Toxin recognition: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Toxin recognition speed +3%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_30",
+          "level": 30,
+          "name": "Toxin recognition: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Toxin recognition output +5%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_35",
+          "level": 35,
+          "name": "Toxin recognition: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Toxin recognition spoilage -10%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_40",
+          "level": 40,
+          "name": "Toxin recognition: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Toxin recognition quality roll +1"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_45",
+          "level": 45,
+          "name": "Toxin recognition: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Toxin recognition speed +5%"
+        },
+        {
+          "id": "healing.toxin_recognition.perk_50",
+          "level": 50,
+          "name": "Toxin recognition: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Toxin recognition output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise toxin recognition for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful toxin recognition (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of toxin recognition; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a toxin recognition task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn toxin recognition from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of toxin recognition, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.recovery_nursing",
+      "domain": "healing",
+      "name": "Recovery nursing",
+      "description": "Recovery nursing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.medical_teaching"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.recovery_nursing.recovery_nursing_basics",
+          "discipline": "healing.recovery_nursing",
+          "name": "Recovery nursing basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.recovery_nursing.recovery_nursing_seasonal_practice",
+          "discipline": "healing.recovery_nursing",
+          "name": "Recovery nursing seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.recovery_nursing.recovery_nursing_precision_work",
+          "discipline": "healing.recovery_nursing",
+          "name": "Recovery nursing precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.recovery_nursing.recovery_nursing_master_technique",
+          "discipline": "healing.recovery_nursing",
+          "name": "Recovery nursing master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.recovery_nursing.perk_5",
+          "level": 5,
+          "name": "Recovery nursing: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Recovery nursing output +2%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_10",
+          "level": 10,
+          "name": "Recovery nursing: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Recovery nursing waste -5%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_15",
+          "level": 15,
+          "name": "Recovery nursing: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Recovery nursing quality roll +1"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_20",
+          "level": 20,
+          "name": "Recovery nursing: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Recovery nursing care +5%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_25",
+          "level": 25,
+          "name": "Recovery nursing: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Recovery nursing speed +3%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_30",
+          "level": 30,
+          "name": "Recovery nursing: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Recovery nursing output +5%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_35",
+          "level": 35,
+          "name": "Recovery nursing: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Recovery nursing spoilage -10%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_40",
+          "level": 40,
+          "name": "Recovery nursing: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Recovery nursing quality roll +1"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_45",
+          "level": 45,
+          "name": "Recovery nursing: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Recovery nursing speed +5%"
+        },
+        {
+          "id": "healing.recovery_nursing.perk_50",
+          "level": 50,
+          "name": "Recovery nursing: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Recovery nursing output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise recovery nursing for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful recovery nursing (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of recovery nursing; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a recovery nursing task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn recovery nursing from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of recovery nursing, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    },
+    {
+      "id": "healing.medical_teaching",
+      "domain": "healing",
+      "name": "Medical teaching",
+      "description": "Medical teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "detailed": true,
+      "key_attributes": [
+        "dexterity",
+        "intellect"
+      ],
+      "related_disciplines": [
+        "healing.medicine"
+      ],
+      "task_bands": [
+        {
+          "min_level": 0,
+          "max_level": 5,
+          "difficulty": 2,
+          "name": "Assisted household work"
+        },
+        {
+          "min_level": 6,
+          "max_level": 11,
+          "difficulty": 8,
+          "name": "Routine village work"
+        },
+        {
+          "min_level": 12,
+          "max_level": 17,
+          "difficulty": 14,
+          "name": "Independent skilled work"
+        },
+        {
+          "min_level": 18,
+          "max_level": 23,
+          "difficulty": 20,
+          "name": "Difficult seasonal work"
+        },
+        {
+          "min_level": 24,
+          "max_level": 29,
+          "difficulty": 26,
+          "name": "District commission"
+        },
+        {
+          "min_level": 30,
+          "max_level": 35,
+          "difficulty": 32,
+          "name": "Lifetime masterwork"
+        },
+        {
+          "min_level": 36,
+          "max_level": 41,
+          "difficulty": 38,
+          "name": "Spirit-resource work"
+        },
+        {
+          "min_level": 42,
+          "max_level": 47,
+          "difficulty": 44,
+          "name": "Sect legacy"
+        },
+        {
+          "min_level": 48,
+          "max_level": 53,
+          "difficulty": 50,
+          "name": "Dao-defining work"
+        }
+      ],
+      "specialisations": [
+        {
+          "id": "healing.medical_teaching.medical_teaching_basics",
+          "discipline": "healing.medical_teaching",
+          "name": "Medical teaching basics",
+          "unlock_level": 5,
+          "attribute_requirements": {
+            "dexterity": 8
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medical_teaching.medical_teaching_seasonal_practice",
+          "discipline": "healing.medical_teaching",
+          "name": "Medical teaching seasonal practice",
+          "unlock_level": 10,
+          "attribute_requirements": {
+            "dexterity": 10
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medical_teaching.medical_teaching_precision_work",
+          "discipline": "healing.medical_teaching",
+          "name": "Medical teaching precision work",
+          "unlock_level": 20,
+          "attribute_requirements": {
+            "dexterity": 12
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        },
+        {
+          "id": "healing.medical_teaching.medical_teaching_master_technique",
+          "discipline": "healing.medical_teaching",
+          "name": "Medical teaching master technique",
+          "unlock_level": 30,
+          "attribute_requirements": {
+            "dexterity": 14
+          },
+          "key_attributes": [
+            "dexterity",
+            "intellect"
+          ],
+          "locked": false,
+          "condition": ""
+        }
+      ],
+      "perks": [
+        {
+          "id": "healing.medical_teaching.perk_5",
+          "level": 5,
+          "name": "Medical teaching: Sure hands",
+          "effect": "output",
+          "value": 0.02,
+          "description": "Medical teaching output +2%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_10",
+          "level": 10,
+          "name": "Medical teaching: Seasoned judgement",
+          "effect": "waste",
+          "value": -0.05,
+          "description": "Medical teaching waste -5%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_15",
+          "level": 15,
+          "name": "Medical teaching: Careful rhythm",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medical teaching quality roll +1"
+        },
+        {
+          "id": "healing.medical_teaching.perk_20",
+          "level": 20,
+          "name": "Medical teaching: Unerring care",
+          "effect": "care",
+          "value": 0.05,
+          "description": "Medical teaching care +5%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_25",
+          "level": 25,
+          "name": "Medical teaching: Trusted hand",
+          "effect": "speed",
+          "value": 0.03,
+          "description": "Medical teaching speed +3%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_30",
+          "level": 30,
+          "name": "Medical teaching: Lifetime craft",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medical teaching output +5%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_35",
+          "level": 35,
+          "name": "Medical teaching: Lasting work",
+          "effect": "spoilage",
+          "value": -0.1,
+          "description": "Medical teaching spoilage -10%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_40",
+          "level": 40,
+          "name": "Medical teaching: Spirit precision",
+          "effect": "quality",
+          "value": 1,
+          "description": "Medical teaching quality roll +1"
+        },
+        {
+          "id": "healing.medical_teaching.perk_45",
+          "level": 45,
+          "name": "Medical teaching: Sage method",
+          "effect": "speed",
+          "value": 0.05,
+          "description": "Medical teaching speed +5%"
+        },
+        {
+          "id": "healing.medical_teaching.perk_50",
+          "level": 50,
+          "name": "Medical teaching: Peerless practice",
+          "effect": "output",
+          "value": 0.05,
+          "description": "Medical teaching output +5%"
+        }
+      ],
+      "gates": [
+        {
+          "level": 5,
+          "practice_days": 30,
+          "description": "Practise medical teaching for 30 days."
+        },
+        {
+          "level": 10,
+          "practice_days": 365,
+          "season_cycle": true,
+          "care": 0.7,
+          "description": "Complete a seasonal cycle with at least 91 days of careful medical teaching (care ≥70%)."
+        },
+        {
+          "level": 15,
+          "practice_days": 1095,
+          "key_attribute": 12,
+          "description": "Three years of medical teaching; key attribute ≥12."
+        },
+        {
+          "level": 20,
+          "milestone_output": 1.2,
+          "description": "Complete a medical teaching task yielding at least 120% of its base."
+        },
+        {
+          "level": 25,
+          "teacher_level": 30,
+          "or_insight": true,
+          "description": "Learn medical teaching from a level-30 teacher, or gain an insight."
+        },
+        {
+          "level": 30,
+          "practice_days": 3650,
+          "key_attribute": 14,
+          "insight": true,
+          "description": "Ten years of medical teaching, an insight and key attribute ≥14."
+        },
+        {
+          "level": 35,
+          "qi": true,
+          "description": "Qi from cultivation or sustained spirit resources."
+        },
+        {
+          "level": 40,
+          "insight": true,
+          "life_work": true,
+          "realm": 2,
+          "description": "An insight, a life-defining work and cultivation realm 2 (future)."
+        },
+        {
+          "level": 45,
+          "insight": true,
+          "life_work": true,
+          "realm": 3,
+          "description": "An insight, a life-defining work and cultivation realm 3 (future)."
+        }
+      ]
+    }
+  ]
+}

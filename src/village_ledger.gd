@@ -26,6 +26,7 @@ var current := "overview"
 var content: VBoxContainer
 var timer := 0.0
 var people_filter := "All"
+var people_browser: VBoxContainer
 var sort_column := 0
 var sort_reverse := false
 var year_filter := 0
@@ -369,22 +370,7 @@ func refresh() -> void:
 		content.remove_child(child)
 		child.queue_free()
 	section(content, TABS[current])
-	if current == "people":
-		var filters := HBoxContainer.new()
-		content.add_child(filters)
-		button(filters, "All", func() -> void: people_filter = "All"; refresh_values())
-		button(filters, "Hungry", func() -> void: people_filter = "Hungry"; refresh_values())
-		var choices := OptionButton.new()
-		var jobs: Array[String] = ["All", "Hungry"]
-		for p: Dictionary in life.people:
-			if not p.job in jobs:
-				jobs.append(p.job)
-		for job: String in jobs:
-			choices.add_item(job)
-		choices.select(maxi(0, jobs.find(people_filter)))
-		filters.add_child(choices)
-		choices.item_selected.connect(func(i: int) -> void: people_filter = jobs[i]; refresh_values())
-	elif current == "chronicle":
+	if current == "chronicle":
 		var years := OptionButton.new()
 		years.add_item("All years", 0)
 		for y in range(1, life.economy.year + 1):
@@ -395,6 +381,7 @@ func refresh() -> void:
 	refresh_values()
 
 func refresh_values() -> void:
+	if current == "people" and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
 	# Keep filter controls and scroll position stable while replacing only data.
 	for child: Node in content.get_children():
 		if child.has_meta("data"):
@@ -712,33 +699,19 @@ func quantity_text(e: RefCounted, id: String, yesterday: bool = false) -> String
 	return " · ".join(parts)
 
 func _people(parent: Node) -> void:
-	var residents: Array[Dictionary] = []
-	for p: Dictionary in life.people:
-		if people_filter == "Hungry" and int(p.hunger) == 0:
-			continue
-		if people_filter not in ["All", "Hungry"] and people_filter != p.job:
-			continue
-		residents.append(p)
-	var keys := ["name", "job", "mood", "activity"]
-	residents.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		return a[keys[sort_column]] > b[keys[sort_column]] if sort_reverse else a[keys[sort_column]] < b[keys[sort_column]])
-	var rows: Array = []
-	for p: Dictionary in residents:
-		rows.append([p.name, p.job, life.economy.HUNGER[int(p.hunger)] if int(p.hunger) > 0 else str(p.get("mood", "content")), life.activity_text(p)])
-	tree = table(parent, ["Name", "Job", "Fare", "Activity"], rows, 620)
-	for i in residents.size():
-		var item := tree.get_root().get_child(i)
-		item.set_metadata(0, life.people.find(residents[i]))
-		item.set_tooltip_text(0, "%d · %s · Cottage %d · Rice today %.1f jin" % [residents[i].age, residents[i].sex, int(residents[i].home_cottage) / 8 + 1, float(residents[i].rice_today) * 2])
-		item.set_custom_color(2, Color("a23522") if int(residents[i].hunger) > 0 else Color("49612e"))
-	tree.column_title_clicked.connect(func(col: int, _mouse: int) -> void:
-		sort_reverse = not sort_reverse if sort_column == col else false
-		sort_column = col
-		refresh_values())
-	tree.item_selected.connect(func() -> void:
-		life.followed = int(tree.get_selected().get_metadata(0))
-		close())
-	label(parent, "Click a villager to follow them. Click column headings to sort.")
+	people_browser = preload("res://src/people_browser.gd").new()
+	parent.add_child(people_browser)
+	people_browser.setup(self)
+	for arg: String in OS.get_cmdline_user_args():
+		if arg.begins_with("--people-path="):
+			people_browser.path.assign(arg.trim_prefix("--people-path=").split("/", false))
+			people_browser.redraw()
+		if arg.begins_with("--person="):
+			people_browser.person = clampi(int(arg.trim_prefix("--person=")), 0, life.population.size() - 1)
+			people_browser.redraw()
+		if arg == "--skills":
+			people_browser.catalogue_mode = true
+			people_browser.redraw()
 
 func section(parent: Node, title: String) -> void:
 	label(parent, title, true)
@@ -783,6 +756,11 @@ func work_status(record: Dictionary) -> String:
 	return "idle" if record.people.is_empty() or record.goods.is_empty() else ("working" if record.active else "off-season")
 
 func _overview(parent: Node, e: RefCounted) -> void:
+	section(parent, "People")
+	var counts: Dictionary = life.population.domain_statistics()
+	for id: String in counts:
+		var summary: Dictionary = counts[id]
+		label(parent, "%s · %d people · average %.1f · %d Expert+" % [life.population.catalogue.domains[id].name, summary.count, summary.total / maxf(1, summary.count), summary.experts])
 	section(parent, "Village")
 	var children := 0
 	var filled := 0

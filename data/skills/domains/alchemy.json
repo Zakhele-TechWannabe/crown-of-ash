@@ -1,0 +1,110 @@
+{
+  "id": "alchemy",
+  "disciplines": [
+    {
+      "id": "alchemy.alchemy",
+      "domain": "alchemy",
+      "name": "Alchemy",
+      "description": "Alchemy applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.herb_identification",
+      "domain": "alchemy",
+      "name": "Herb identification",
+      "description": "Herb identification applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.ingredient_purification",
+      "domain": "alchemy",
+      "name": "Ingredient purification",
+      "description": "Ingredient purification applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.cauldron_tending",
+      "domain": "alchemy",
+      "name": "Cauldron tending",
+      "description": "Cauldron tending applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.flame_control",
+      "domain": "alchemy",
+      "name": "Flame control",
+      "description": "Flame control applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.medicinal_extraction",
+      "domain": "alchemy",
+      "name": "Medicinal extraction",
+      "description": "Medicinal extraction applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.pill_condensation",
+      "domain": "alchemy",
+      "name": "Pill condensation",
+      "description": "Pill condensation applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.pill_grading",
+      "domain": "alchemy",
+      "name": "Pill grading",
+      "description": "Pill grading applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.toxin_refining",
+      "domain": "alchemy",
+      "name": "Toxin refining",
+      "description": "Toxin refining applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.elixir_brewing",
+      "domain": "alchemy",
+      "name": "Elixir brewing",
+      "description": "Elixir brewing applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.pill_inscriptions",
+      "domain": "alchemy",
+      "name": "Pill inscriptions",
+      "description": "Pill inscriptions applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.formula_study",
+      "domain": "alchemy",
+      "name": "Formula study",
+      "description": "Formula study applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.spirit_herb_storage",
+      "domain": "alchemy",
+      "name": "Spirit herb storage",
+      "description": "Spirit herb storage applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.cauldron_repair",
+      "domain": "alchemy",
+      "name": "Cauldron repair",
+      "description": "Cauldron repair applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    },
+    {
+      "id": "alchemy.alchemical_research",
+      "domain": "alchemy",
+      "name": "Alchemical research",
+      "description": "Alchemical research applies alchemy to the needs and traditions of mountain villages and their sect patrons.",
+      "detailed": false
+    }
+  ]
+}
