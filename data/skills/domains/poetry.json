@@ -5,105 +5,105 @@
       "id": "poetry.rhyme",
       "domain": "poetry",
       "name": "Rhyme",
-      "description": "Rhyme applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose words sharing deliberate ending sounds.",
       "detailed": false
     },
     {
       "id": "poetry.tonal_patterns",
       "domain": "poetry",
       "name": "Tonal patterns",
-      "description": "Tonal patterns applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange tonal contrasts within measured lines.",
       "detailed": false
     },
     {
       "id": "poetry.classical_forms",
       "domain": "poetry",
       "name": "Classical forms",
-      "description": "Classical forms applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compose verse following inherited structural forms.",
       "detailed": false
     },
     {
       "id": "poetry.landscape_verse",
       "domain": "poetry",
       "name": "Landscape verse",
-      "description": "Landscape verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Evoke mountains and waterways through compressed language.",
       "detailed": false
     },
     {
       "id": "poetry.pastoral_verse",
       "domain": "poetry",
       "name": "Pastoral verse",
-      "description": "Pastoral verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write of farming, villages and rural seasons.",
       "detailed": false
     },
     {
       "id": "poetry.narrative_verse",
       "domain": "poetry",
       "name": "Narrative verse",
-      "description": "Narrative verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Tell a sustained story through verse.",
       "detailed": false
     },
     {
       "id": "poetry.court_verse",
       "domain": "poetry",
       "name": "Court verse",
-      "description": "Court verse applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compose formal poems for powerful patrons.",
       "detailed": false
     },
     {
       "id": "poetry.song_lyrics",
       "domain": "poetry",
       "name": "Song lyrics",
-      "description": "Song lyrics applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write singable words for musical settings.",
       "detailed": false
     },
     {
       "id": "poetry.couplets",
       "domain": "poetry",
       "name": "Couplets",
-      "description": "Couplets applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Balance paired lines through sound and meaning.",
       "detailed": false
     },
     {
       "id": "poetry.allusion",
       "domain": "poetry",
       "name": "Allusion",
-      "description": "Allusion applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Invoke remembered stories through indirect references.",
       "detailed": false
     },
     {
       "id": "poetry.recitation",
       "domain": "poetry",
       "name": "Recitation",
-      "description": "Recitation applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Speak verse with clear cadence and feeling.",
       "detailed": false
     },
     {
       "id": "poetry.poetic_criticism",
       "domain": "poetry",
       "name": "Poetic criticism",
-      "description": "Poetic criticism applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Judge poetic choices through informed reading.",
       "detailed": false
     },
     {
       "id": "poetry.verse_editing",
       "domain": "poetry",
       "name": "Verse editing",
-      "description": "Verse editing applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Revise verses for precision and rhythm.",
       "detailed": false
     },
     {
       "id": "poetry.anthology_making",
       "domain": "poetry",
       "name": "Anthology making",
-      "description": "Anthology making applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Gather poems into a coherent collection.",
       "detailed": false
     },
     {
       "id": "poetry.poetry_teaching",
       "domain": "poetry",
       "name": "Poetry teaching",
-      "description": "Poetry teaching applies poetry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Help learners develop an attentive poetic voice.",
       "detailed": false
     }
   ]

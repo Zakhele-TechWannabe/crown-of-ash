@@ -5,105 +5,105 @@
       "id": "talismans.talismans",
       "domain": "talismans",
       "name": "Talismans",
-      "description": "Talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make written charms carrying stored spiritual instructions.",
       "detailed": false
     },
     {
       "id": "talismans.spirit_paper",
       "domain": "talismans",
       "name": "Spirit paper",
-      "description": "Spirit paper applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare sheets capable of holding charged strokes.",
       "detailed": false
     },
     {
       "id": "talismans.cinnabar_inks",
       "domain": "talismans",
       "name": "Cinnabar inks",
-      "description": "Cinnabar inks applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Blend cinnabar pigments for spiritual calligraphy.",
       "detailed": false
     },
     {
       "id": "talismans.talisman_strokes",
       "domain": "talismans",
       "name": "Talisman strokes",
-      "description": "Talisman strokes applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write precise marks governing a charm's effect.",
       "detailed": false
     },
     {
       "id": "talismans.qi_infusion",
       "domain": "talismans",
       "name": "Qi infusion",
-      "description": "Qi infusion applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Charge completed script with controlled personal qi.",
       "detailed": false
     },
     {
       "id": "talismans.fire_talismans",
       "domain": "talismans",
       "name": "Fire talismans",
-      "description": "Fire talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Store a controlled release of flame in script.",
       "detailed": false
     },
     {
       "id": "talismans.water_talismans",
       "domain": "talismans",
       "name": "Water talismans",
-      "description": "Water talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write charms directing water-related spiritual effects.",
       "detailed": false
     },
     {
       "id": "talismans.warding_talismans",
       "domain": "talismans",
       "name": "Warding talismans",
-      "description": "Warding talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare portable scripts that resist harmful influences.",
       "detailed": false
     },
     {
       "id": "talismans.message_talismans",
       "domain": "talismans",
       "name": "Message talismans",
-      "description": "Message talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Encode short messages for spiritual transmission.",
       "detailed": false
     },
     {
       "id": "talismans.sealing_talismans",
       "domain": "talismans",
       "name": "Sealing talismans",
-      "description": "Sealing talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write charms restricting a target's movement or qi.",
       "detailed": false
     },
     {
       "id": "talismans.movement_talismans",
       "domain": "talismans",
       "name": "Movement talismans",
-      "description": "Movement talismans applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare scripts aiding brief bursts of movement.",
       "detailed": false
     },
     {
       "id": "talismans.talisman_activation",
       "domain": "talismans",
       "name": "Talisman activation",
-      "description": "Talisman activation applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Release a charm's stored effect deliberately.",
       "detailed": false
     },
     {
       "id": "talismans.talisman_arrays",
       "domain": "talismans",
       "name": "Talisman arrays",
-      "description": "Talisman arrays applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Link several written charms into coordinated effects.",
       "detailed": false
     },
     {
       "id": "talismans.script_research",
       "domain": "talismans",
       "name": "Script research",
-      "description": "Script research applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Study how ancient spiritual characters behave.",
       "detailed": false
     },
     {
       "id": "talismans.talisman_teaching",
       "domain": "talismans",
       "name": "Talisman teaching",
-      "description": "Talisman teaching applies talismans to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach disciplined preparation of reliable written charms.",
       "detailed": false
     }
   ]

@@ -5,105 +5,105 @@
       "id": "riding.mounting",
       "domain": "riding",
       "name": "Mounting",
-      "description": "Mounting applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Get onto a mount without startling it.",
       "detailed": false
     },
     {
       "id": "riding.seat_balance",
       "domain": "riding",
       "name": "Seat balance",
-      "description": "Seat balance applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain centred posture as a horse moves.",
       "detailed": false
     },
     {
       "id": "riding.rein_handling",
       "domain": "riding",
       "name": "Rein handling",
-      "description": "Rein handling applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Guide a horse through measured rein pressure.",
       "detailed": false
     },
     {
       "id": "riding.gait_control",
       "domain": "riding",
       "name": "Gait control",
-      "description": "Gait control applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Control transitions between different riding speeds.",
       "detailed": false
     },
     {
       "id": "riding.trail_riding",
       "domain": "riding",
       "name": "Trail riding",
-      "description": "Trail riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Ride over narrow or uneven country paths.",
       "detailed": false
     },
     {
       "id": "riding.river_fording",
       "domain": "riding",
       "name": "River fording",
-      "description": "River fording applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Take mounted animals through shallow rivers.",
       "detailed": false
     },
     {
       "id": "riding.pack_riding",
       "domain": "riding",
       "name": "Pack riding",
-      "description": "Pack riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage mounted travel with loaded baggage.",
       "detailed": false
     },
     {
       "id": "riding.mounted_archery",
       "domain": "riding",
       "name": "Mounted archery",
-      "description": "Mounted archery applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Aim a bow from a riding position.",
       "detailed": false
     },
     {
       "id": "riding.mounted_spear",
       "domain": "riding",
       "name": "Mounted spear",
-      "description": "Mounted spear applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Control a spear while remaining mounted.",
       "detailed": false
     },
     {
       "id": "riding.horse_calming",
       "domain": "riding",
       "name": "Horse calming",
-      "description": "Horse calming applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Settle a frightened or overstimulated horse.",
       "detailed": false
     },
     {
       "id": "riding.horse_care",
       "domain": "riding",
       "name": "Horse care",
-      "description": "Horse care applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Feed, groom and inspect working horses.",
       "detailed": false
     },
     {
       "id": "riding.endurance_riding",
       "domain": "riding",
       "name": "Endurance riding",
-      "description": "Endurance riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage a mount's effort over long journeys.",
       "detailed": false
     },
     {
       "id": "riding.formation_riding",
       "domain": "riding",
       "name": "Formation riding",
-      "description": "Formation riding applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep riders aligned while moving together.",
       "detailed": false
     },
     {
       "id": "riding.saddle_fitting",
       "domain": "riding",
       "name": "Saddle fitting",
-      "description": "Saddle fitting applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fit tack without causing sores or strain.",
       "detailed": false
     },
     {
       "id": "riding.riding_instruction",
       "domain": "riding",
       "name": "Riding instruction",
-      "description": "Riding instruction applies riding to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach secure handling of trained riding animals.",
       "detailed": false
     }
   ]

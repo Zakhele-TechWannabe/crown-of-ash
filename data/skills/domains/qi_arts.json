@@ -5,105 +5,105 @@
       "id": "qi_arts.qi_sensing",
       "domain": "qi_arts",
       "name": "Qi sensing",
-      "description": "Qi sensing applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Notice faint spiritual energy after root awakening.",
       "detailed": false
     },
     {
       "id": "qi_arts.meditation",
       "domain": "qi_arts",
       "name": "Meditation",
-      "description": "Meditation applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Still attention while slowly gathering ambient qi.",
       "detailed": false
     },
     {
       "id": "qi_arts.breath_circulation",
       "domain": "qi_arts",
       "name": "Breath circulation",
-      "description": "Breath circulation applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Guide breath alongside learned circulation patterns.",
       "detailed": false
     },
     {
       "id": "qi_arts.meridian_opening",
       "domain": "qi_arts",
       "name": "Meridian opening",
-      "description": "Meridian opening applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Open internal pathways through careful spiritual practice.",
       "detailed": false
     },
     {
       "id": "qi_arts.dantian_cultivation",
       "domain": "qi_arts",
       "name": "Dantian cultivation",
-      "description": "Dantian cultivation applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Accumulate stable energy within the lower dantian.",
       "detailed": false
     },
     {
       "id": "qi_arts.element_attunement",
       "domain": "qi_arts",
       "name": "Element attunement",
-      "description": "Element attunement applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Attune cultivated qi to an innate element.",
       "detailed": false
     },
     {
       "id": "qi_arts.qi_condensation",
       "domain": "qi_arts",
       "name": "Qi condensation",
-      "description": "Qi condensation applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compress gathered energy into a first enduring layer.",
       "detailed": false
     },
     {
       "id": "qi_arts.qi_control",
       "domain": "qi_arts",
       "name": "Qi control",
-      "description": "Qi control applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Move spiritual energy with deliberate precision.",
       "detailed": false
     },
     {
       "id": "qi_arts.aura_concealment",
       "domain": "qi_arts",
       "name": "Aura concealment",
-      "description": "Aura concealment applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Suppress signs of one's cultivated presence.",
       "detailed": false
     },
     {
       "id": "qi_arts.qi_projection",
       "domain": "qi_arts",
       "name": "Qi projection",
-      "description": "Qi projection applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Send directed qi beyond the physical body.",
       "detailed": false
     },
     {
       "id": "qi_arts.spirit_pressure",
       "domain": "qi_arts",
       "name": "Spirit pressure",
-      "description": "Spirit pressure applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Express spiritual strength as a palpable presence.",
       "detailed": false
     },
     {
       "id": "qi_arts.realm_foundations",
       "domain": "qi_arts",
       "name": "Realm foundations",
-      "description": "Realm foundations applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build stable groundwork before major realm advances.",
       "detailed": false
     },
     {
       "id": "qi_arts.tribulation_preparation",
       "domain": "qi_arts",
       "name": "Tribulation preparation",
-      "description": "Tribulation preparation applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare body and mind for heavenly trials.",
       "detailed": false
     },
     {
       "id": "qi_arts.qi_recovery",
       "domain": "qi_arts",
       "name": "Qi recovery",
-      "description": "Qi recovery applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore spent spiritual reserves through deliberate practice.",
       "detailed": false
     },
     {
       "id": "qi_arts.cultivation_instruction",
       "domain": "qi_arts",
       "name": "Cultivation instruction",
-      "description": "Cultivation instruction applies qi arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach rooted pupils a proven cultivation method.",
       "detailed": false
     }
   ]

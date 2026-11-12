@@ -3,12 +3,25 @@ extends RefCounted
 ## Sparse skill maps use linked packed pools (30 bytes/touched skill), never a dictionary/person.
 const Catalogue = preload("res://src/skill_catalogue.gd")
 const Modifiers = preload("res://src/skill_modifiers.gd")
+const TOOL_RATES := [0.8, 1.0, 1.15, 1.3]
+var base_xp_hour := 2.5
+var green_thumb_mask := 0
+var daily_has_modifiers := false
+var async_factions := false
+var society: RefCounted
+var learning_rates := PackedFloat32Array()
+var level_rates := PackedFloat32Array()
+var practice_floors := PackedInt32Array()
+var tick_days := 1
 var catalogue := Catalogue.new()
 var modifiers := Modifiers.new()
 var names: Array[String] = []
 var sex := PackedByteArray()
 var birth_day := PackedInt32Array()
 var household := PackedInt32Array()
+var household_names: Dictionary = {}
+var household_names_day := -1
+var household_names_size := -1
 var locations := PackedVector2Array()
 var spatial_cells: Dictionary = {}
 var settlement := PackedInt32Array()
@@ -34,6 +47,7 @@ var recently_levelled := PackedInt32Array()
 var insights := PackedInt32Array()
 var last_insight_day := PackedInt32Array()
 var stuck := PackedByteArray()
+var last_rust_check := PackedInt32Array()
 # Pool: next, catalogue index, level, banked XP, days practised, gate flags, last practice.
 var skill_next := PackedInt32Array()
 var skill_id := PackedInt32Array()
@@ -70,7 +84,14 @@ var cached_domains: Dictionary = {}
 var cached_skills: Dictionary = {}
 
 func _init() -> void:
+	society = preload("res://src/society.gd").new(self)
+	learning_rates = PackedFloat32Array(catalogue.rules.learning_rates)
+	for level in 51:
+		level_rates.append(learning_rate(level))
+		practice_floors.append(practice_floor(level))
 	for t in catalogue.traits.size(): trait_indices[catalogue.traits[t].id] = t
+	base_xp_hour = float(catalogue.rules.base_xp_hour)
+	green_thumb_mask = 1 << int(trait_indices.green_thumb)
 	rng.seed = 718
 	modifiers.instant_handler = _instant_modifier
 
@@ -96,6 +117,7 @@ func add_person(name_text: String, age: int, job_index: int, home: int = 0) -> i
 	sex.append(person % 2)
 	birth_day.append(day - age * 365 - rng.randi_range(0, 364))
 	household.append(home)
+	society.household_serial = maxi(society.household_serial, home)
 	locations.append(Vector2.ZERO)
 	settlement.append(0)
 	district.append(home / 20)
@@ -108,11 +130,17 @@ func add_person(name_text: String, age: int, job_index: int, home: int = 0) -> i
 	comprehension.append(rng.randf_range(0.5, 2.0))
 	var root := 0
 	if rng.randf() < .03:
-		for element in rng.randi_range(1, 5): root |= 1 << rng.randi_range(0, 9)
+		var roll := rng.randf()
+		var count := 1 if roll < .01 else (2 if roll < .10 else (3 if roll < .40 else (4 if roll < .75 else 5)))
+		var elements: Array[int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+		for element in count:
+			var choice := rng.randi_range(0, elements.size() - 1)
+			root |= 1 << elements[choice]
+			elements.remove_at(choice)
 	spirit_root.append(root)
 	root_purity.append(rng.randi_range(1, 100) if root else 0)
-	root_grade.append(mini(4, int(root_purity[-1]) / 20))
-	constitution.append(rng.randi_range(1, 2) if rng.randf() < .005 else 0)
+	root_grade.append(mini(4, 5 - _bit_count(root) + (1 if root & 992 else 0)) if root else 0)
+	constitution.append(rng.randi_range(1, 5) if rng.randf() < .0002 else 0)
 	luck.append(rng.randf_range(.8, 1.2))
 	var bits: int = 0
 	for roll in rng.randi_range(1, 3): bits |= 1 << rng.randi_range(0, catalogue.traits.size() - 1)
@@ -140,6 +168,8 @@ func add_person(name_text: String, age: int, job_index: int, home: int = 0) -> i
 	insights.append(0)
 	last_insight_day.append(-10000)
 	stuck.append(0)
+	last_rust_check.append(day)
+	society.add_person()
 	return person
 
 func touch(person: int, id: String, level: int = 0, practised: int = 0) -> int:
@@ -216,6 +246,8 @@ func seed_residents(walkers: Array[Dictionary]) -> void:
 		touch(child, task.specialisation, 2)
 		prepare_person(child)
 
+	society.seed()
+
 func prepare_person(person: int) -> void:
 	person_versions[person] = job_versions[job[person]]
 	var slot := person * 6
@@ -232,8 +264,9 @@ func sync_walkers(walkers: Array[Dictionary]) -> void:
 		hunger[person] = int(p.hunger)
 		mood[person] = clampf(float(p.contentment) + mood_traits[person], 0, 1)
 		p.age = age(person)
-		if int(p.kind) == 8 and age(person) >= 18 and parent_id[person] >= 0:
-			var parent_person := parent_id[person]
+		var known_parent: int = parent_id[person] if parent_id[person] >= 0 else society.father[person]
+		if int(p.kind) == 8 and age(person) >= 18 and known_parent >= 0:
+			var parent_person := known_parent
 			job[person] = job[parent_person]
 			prepare_person(person)
 			p.job = jobs[job[person]]
@@ -247,6 +280,7 @@ func sync_walkers(walkers: Array[Dictionary]) -> void:
 
 func begin_day(next_day: int) -> bool:
 	if pending_day >= 0 or next_day <= day: return false
+	daily_has_modifiers = not modifiers.active.is_empty()
 	_update_calendar(next_day)
 	pending_day = next_day
 	cursor = 0
@@ -256,6 +290,11 @@ func begin_day(next_day: int) -> bool:
 
 func process_batch(max_people: int = 256) -> bool:
 	if pending_day < 0: return true
+	if society.social_pending:
+		if not society.process_tick(max_people): return false
+		pending_day = -1
+		modifiers.expire(day)
+		return true
 	if teacher_cursor < size():
 		var teacher_stop := mini(size(), teacher_cursor + max_people)
 		while teacher_cursor < teacher_stop:
@@ -277,24 +316,34 @@ func process_batch(max_people: int = 256) -> bool:
 		cursor += 1
 	if cursor == size():
 		day = pending_day
+		society.begin_tick(day)
+		if society.social_pending: return false
 		pending_day = -1
 		modifiers.expire(day)
 		return true
 	return false
+
+func tick_span(next_day: int) -> void:
+	tick_days = maxi(1, next_day - day)
+	tick_day(next_day)
+	tick_days = 1
 
 func tick_day(next_day: int) -> void:
 	if not begin_day(next_day): return
 	while not process_batch(1024): pass
 
 func has_trait(person: int, id: String) -> bool:
-	return (traits[person] & (1 << int(trait_indices.get(id, 0)))) != 0
+	return trait_indices.has(id) and (traits[person] & (1 << int(trait_indices[id]))) != 0
 
 func _tick_person(person: int) -> void:
+	if not society.alive[person]: return
 	stuck[person] = 0
 	var years := age(person, pending_day)
 	var age_factor := 1.6 if years < 12 else (1.4 if years < 18 else (1.0 if years <= 35 else (.8 if years <= 50 else (.55 if years <= 65 else .35))))
 	var food_factor := 0.0 if hunger[person] >= 4 else (.6 if hunger[person] > 0 else (1.1 if mood[person] >= .45 and mood[person] < .78 else (1.0 if mood[person] >= .78 else .9)))
 	if person_versions[person] != job_versions[job[person]]: prepare_person(person)
+	var span_multiplier := tick_days * (1.1 if society.rivalry[person] else 1.0)
+	var learning: float = base_xp_hour * comprehension[person] * age_factor * food_factor * xp_traits[person] * TOOL_RATES[tool_quality[person]] * span_multiplier
 	var task_slot := person * 6
 	for task: Dictionary in prepared_tasks[job[person]]:
 		if years < 12 and task.discipline != "housekeeping.housekeeping":
@@ -317,8 +366,8 @@ func _tick_person(person: int) -> void:
 		var difficulty := .1 if gap < -5 else (.5 if gap > 5 else 1.0)
 		var teacher: Array = teacher_levels[settlement[person] * 16777216 + district[person] * 4096 + int(task.discipline_index)]
 		var teacher_factor := (1.8 if teacher[1] else 1.5) if int(teacher[0]) >= int(skill_level[e]) + 5 else 1.0
-		var xp: float = float(catalogue.rules.base_xp_hour) * float(task.hours) * attr / 10.0 * comprehension[person] * age_factor * food_factor * teacher_factor * difficulty * xp_traits[person] * [0.8, 1.0, 1.15, 1.3][tool_quality[person]]
-		if has_trait(person, "green_thumb") and catalogue.domain_for(task.discipline) in ["grain_farming", "gardens"]: xp *= 1.3
+		var xp: float = learning * float(task.hours) * attr / 10.0 * teacher_factor * difficulty
+		if traits[person] & green_thumb_mask and catalogue.domain_for(task.discipline) in ["grain_farming", "gardens"]: xp *= 1.3
 		# A rare failed attempt still teaches half of the usual XP.
 		if (person * 17 + pending_day) % 97 == 0: xp *= .5
 		if unlocked: _gain(person, e, xp, attr, int(teacher[0]))
@@ -329,26 +378,35 @@ func _tick_person(person: int) -> void:
 			var index := person * 8 + trained_attribute
 			var current_attribute := attributes[index]
 			var cap := float(potential[index])
-			var growth := .0008 * maxf(0.0, 1.0 - current_attribute / cap) * food_factor
+			var growth := tick_days * .0008 * maxf(0.0, 1.0 - current_attribute / cap) * food_factor
 			if constitution[person] == 1 and trained_attribute < 4: growth *= 1.2
 			if constitution[person] == 2 and trained_attribute >= 4: growth *= 1.15
-			if modifiers.active.has(person): growth *= modifiers.value(person, "attribute:" + str(catalogue.rules.attributes[trained_attribute]), "attribute_multiplier", pending_day)
+			if daily_has_modifiers and modifiers.active.has(person): growth *= modifiers.value(person, "attribute:" + str(catalogue.rules.attributes[trained_attribute]), "attribute_multiplier", pending_day)
 			attributes[index] = minf(cap, current_attribute + growth)
-	if years < 12 and parent_id[person] >= 0:
-		var parent_person := parent_id[person]
-		for parent_duty: String in schedules[job[parent_person]]:
-			var parent_task: Dictionary = catalogue.activities[parent_duty]
-			_gain(person, touch(person, parent_task.discipline), float(catalogue.rules.base_xp_hour) * float(parent_task.hours) * .2, 10.0, best_level[parent_person], maxi(0, best_level[parent_person] - 1))
+	if years < 12:
+		var known_parent: int = parent_id[person] if parent_id[person] >= 0 else society.father[person]
+		if known_parent >= 0:
+			var parent_person := known_parent
+			for parent_duty: String in schedules[job[parent_person]]:
+				var parent_task: Dictionary = catalogue.activities[parent_duty]
+				_gain(person, touch(person, parent_task.discipline), base_xp_hour * float(parent_task.hours) * .2 * tick_days, 10.0, best_level[parent_person], maxi(0, best_level[parent_person] - 1))
 	# Attribute ageing is daily, independent of work. Rust consumes banked XP only;
 	# levels never cross a title floor and skills never lose their acquired title.
 	if years > 50:
-		for a in (8 if years > 65 else 4): attributes[person * 8 + a] = maxf(1.0, attributes[person * 8 + a] - .0002)
+		for a in (8 if years > 65 else 4): attributes[person * 8 + a] = maxf(1.0, attributes[person * 8 + a] - .0002 * tick_days)
+	# Unused skills fade on a monthly cadence, amortising long sparse lists.
+	var rust_days := pending_day - last_rust_check[person]
+	if rust_days < 30: return
+	last_rust_check[person] = pending_day
+	_rust_person(person, rust_days)
+
+func _rust_person(person: int, rust_days: int) -> void:
 	var entry := head[person]
 	while entry >= 0:
 		var level := int(skill_level[entry])
 		if level > 15 and pending_day - skill_last[entry] > 30 and (level % 5 != 1 or skill_xp[entry] > 0):
 			var floor_level: int = (level - 1) / 5 * 5 + 1
-			var remaining := skill_xp[entry] - catalogue.thresholds[skill_level[entry]] * .0001
+			var remaining := skill_xp[entry] - catalogue.thresholds[skill_level[entry]] * .0001 * mini(rust_days, pending_day - skill_last[entry] - 30)
 			if remaining < 0 and skill_level[entry] > floor_level:
 				skill_level[entry] -= 1
 				remaining += catalogue.thresholds[skill_level[entry]]
@@ -364,23 +422,28 @@ func _gain(person: int, entry: int, xp: float, attr: float, teacher: int, learni
 		_event(person, "first", "first practice of " + str(catalogue.nodes[skill_id[entry]].name))
 	var first_today := skill_last[entry] != pending_day
 	if first_today:
-		skill_days[entry] += 1
-		if hunger[person] == 0 and mood[person] >= .45: skill_care[entry] += 1
+		skill_days[entry] += tick_days
+		if hunger[person] == 0 and mood[person] >= .45: skill_care[entry] += tick_days
 		skill_last[entry] = pending_day
-	if modifiers.active.has(person):
+	if daily_has_modifiers and modifiers.active.has(person):
 		var target := catalogue.ids[skill_id[entry]]
 		xp *= modifiers.value(person, target, "xp_multiplier", pending_day)
 		if first_today: xp += modifiers.value(person, target, "flat_xp", pending_day, 0)
+	# Stretch later tiers without making the first seasons an endless grind.
+	xp *= level_rates[skill_level[entry]]
 	skill_xp[entry] += xp
 	var level := int(skill_level[entry])
 	if learning_ceiling < 50 and level >= learning_ceiling:
 		skill_xp[entry] = minf(skill_xp[entry], catalogue.thresholds[level])
 	while level < learning_ceiling and skill_xp[entry] >= catalogue.thresholds[level]:
 		var id := catalogue.ids[skill_id[entry]]
+		if skill_days[entry] < practice_floors[level + 1]:
+			skill_xp[entry] = minf(skill_xp[entry], catalogue.thresholds[level] * 2)
+			break
 		if level > 0 and level % 5 == 0 and not _gate(person, entry, attr, teacher):
 			stuck[person] = 1
 			# One daily insight roll while stuck, cached by gate flags.
-			if first_today and (skill_gate[entry] & 1) == 0 and rng.randf() < .0002 * comprehension[person] * attributes[person * 8 + 6] / 10.0 * luck[person]:
+			if first_today and (skill_gate[entry] & 1) == 0 and rng.randf() < 1.0 - pow(1.0 - .0002 * comprehension[person] * attributes[person * 8 + 6] / 10.0 * luck[person], tick_days):
 				skill_gate[entry] |= 1
 				insights[person] += 1
 				last_insight_day[person] = pending_day
@@ -410,8 +473,9 @@ func _gate(person: int, entry: int, attr: float, teacher: int) -> bool:
 	if gate.has("milestone_output") and output_for(person, entry) * (1.15 if attr >= 12 else 1.0) < float(gate.milestone_output): return false
 	if gate.get("or_insight", false) and teacher < int(gate.teacher_level) and (skill_gate[entry] & 1) == 0: return false
 	if gate.get("insight", false) and (skill_gate[entry] & 1) == 0: return false
-	if gate.get("qi", false): return modifiers.value(person, id, "qi", pending_day, 0) > 0
-	if gate.has("realm"): return false # Realm definitions are deliberately deferred in the design.
+	if gate.get("qi", false): return society.realm[person] >= 2 or modifiers.value(person, id, "qi", pending_day, 0) > 0
+	if gate.has("realm"):
+		return society.realm[person] >= (3 if skill_level[entry] == 40 else 4)
 	return true
 
 func output_for(person: int, entry: int) -> float:
@@ -435,6 +499,7 @@ func _event(person: int, kind: String, message: String) -> void:
 	if retain_events and events.size() < 8192: events.append({"day": maxi(day, pending_day), "person": person, "kind": kind, "text": names[person] + " " + message})
 
 func _instant_modifier(person: int, effect: Dictionary) -> void:
+	daily_has_modifiers = not modifiers.active.is_empty()
 	match str(effect.effect):
 		"potential_raise", "attribute_gain":
 			var a: int = catalogue.rules.attributes.find(str(effect.target).trim_prefix("attribute:"))
@@ -551,9 +616,13 @@ func add_child(name_text: String, mother: int, father: int) -> int:
 		attributes[child * 8 + a] = clampf((attributes[mother * 8 + a] + attributes[father * 8 + a]) * .2 + rng.randf_range(-1, 1), 1, potential[child * 8 + a])
 	var inherited := spirit_root[mother] | spirit_root[father]
 	if inherited != 0 and rng.randf() < .4:
+		while _bit_count(inherited) > 5:
+			var bit := 1 << rng.randi_range(0, 9)
+			inherited &= ~bit
 		spirit_root[child] = inherited
 		root_purity[child] = rng.randi_range(10, 100)
-		root_grade[child] = mini(4, int(root_purity[child]) / 20)
+		root_grade[child] = mini(4, 5 - _bit_count(inherited) + (1 if inherited & 992 else 0))
+	society.inherit(child, mother, father)
 	set_location(child, locations[mother])
 	return child
 
@@ -574,3 +643,55 @@ func _update_calendar(next_day: int) -> void:
 		var tasks: Array = []
 		for duty: String in duties: tasks.append(catalogue.activities[duty])
 		prepared_tasks[j] = tasks
+
+func learning_rate(level: int) -> float:
+	var band := 0 if level < 11 else (1 if level < 16 else (2 if level < 21 else (3 if level < 26 else 4)))
+	return learning_rates[band]
+
+func practice_floor(level: int) -> int:
+	var floor_days := 0
+	for boundary: String in catalogue.rules.practice_years:
+		if level >= int(boundary): floor_days = maxi(floor_days, int(catalogue.rules.practice_years[boundary]) * 365)
+	return floor_days
+
+func level(person: int, id: String) -> int:
+	var index: int = catalogue.indices.get(id, -1)
+	var e := head[person]
+	while e >= 0:
+		if skill_id[e] == index: return skill_level[e]
+		e = skill_next[e]
+	return 0
+
+func household_name(person: int) -> String:
+	if household_names_day != day or household_names_size != size():
+		household_names.clear()
+		var heads: Dictionary = {}
+		var surname_counts: Dictionary = {}
+		for p in size():
+			if heads.has(household[p]): continue
+			heads[household[p]] = p
+			var surname := names[p].get_slice(" ", 0)
+			surname_counts[surname] = int(surname_counts.get(surname, 0)) + 1
+		for home: int in heads:
+			var p: int = heads[home]
+			var surname := names[p].get_slice(" ", 0)
+			household_names[home] = (names[p] if int(surname_counts[surname]) > 1 else surname) + " household"
+		household_names_day = day
+		household_names_size = size()
+	return str(household_names.get(household[person], names[person] + " household"))
+
+func district_name(person: int) -> String:
+	return ["Lower Lane", "Mill Row", "Orchard Rise", "Spring Lane", "East Crofts"][district[person] % 5]
+
+func _bit_count(bits: int) -> int:
+	var count := 0
+	while bits:
+		count += bits & 1
+		bits >>= 1
+	return count
+
+func shared_work(a: int, b: int) -> bool:
+	if job[a] == job[b]: return true
+	for duty: String in schedules[job[a]]:
+		if duty in schedules[job[b]]: return true
+	return false

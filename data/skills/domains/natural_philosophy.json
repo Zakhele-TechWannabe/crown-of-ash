@@ -5,105 +5,105 @@
       "id": "natural_philosophy.plant_observation",
       "domain": "natural_philosophy",
       "name": "Plant observation",
-      "description": "Plant observation applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record how plants grow and reproduce.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.animal_observation",
       "domain": "natural_philosophy",
       "name": "Animal observation",
-      "description": "Animal observation applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe animal form and everyday behaviour.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.mineral_study",
       "domain": "natural_philosophy",
       "name": "Mineral study",
-      "description": "Mineral study applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare the properties of rocks and minerals.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.water_study",
       "domain": "natural_philosophy",
       "name": "Water study",
-      "description": "Water study applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Examine how water flows and changes.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.heat_study",
       "domain": "natural_philosophy",
       "name": "Heat study",
-      "description": "Heat study applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Investigate heating, cooling and the spread of warmth.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.light_study",
       "domain": "natural_philosophy",
       "name": "Light study",
-      "description": "Light study applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Study shadows, reflections and transmitted light.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.sound_study",
       "domain": "natural_philosophy",
       "name": "Sound study",
-      "description": "Sound study applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Examine vibration and the travel of sound.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.mechanical_inquiry",
       "domain": "natural_philosophy",
       "name": "Mechanical inquiry",
-      "description": "Mechanical inquiry applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Explore the causes of useful mechanical motion.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.field_journals",
       "domain": "natural_philosophy",
       "name": "Field journals",
-      "description": "Field journals applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep systematic written observations from fieldwork.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.specimen_keeping",
       "domain": "natural_philosophy",
       "name": "Specimen keeping",
-      "description": "Specimen keeping applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Preserve labelled examples for later comparison.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.experimental_methods",
       "domain": "natural_philosophy",
       "name": "Experimental methods",
-      "description": "Experimental methods applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Design trials whose outcomes others can check.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.comparative_anatomy",
       "domain": "natural_philosophy",
       "name": "Comparative anatomy",
-      "description": "Comparative anatomy applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare bodily structures across different creatures.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.seasonal_ecology",
       "domain": "natural_philosophy",
       "name": "Seasonal ecology",
-      "description": "Seasonal ecology applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Relate living communities to seasonal changes.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.theory_writing",
       "domain": "natural_philosophy",
       "name": "Theory writing",
-      "description": "Theory writing applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Explain observations through testable general claims.",
       "detailed": false
     },
     {
       "id": "natural_philosophy.scholarly_debate",
       "domain": "natural_philosophy",
       "name": "Scholarly debate",
-      "description": "Scholarly debate applies natural philosophy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Defend and revise ideas through scholarly argument.",
       "detailed": false
     }
   ]

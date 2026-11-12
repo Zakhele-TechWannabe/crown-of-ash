@@ -5,105 +5,105 @@
       "id": "paper_and_ink.bark_stripping",
       "domain": "paper_and_ink",
       "name": "Bark stripping",
-      "description": "Bark stripping applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Strip useful inner bark for papermaking.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.pulp_soaking",
       "domain": "paper_and_ink",
       "name": "Pulp soaking",
-      "description": "Pulp soaking applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Soften raw fibres in soaking vats.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.fibre_beating",
       "domain": "paper_and_ink",
       "name": "Fibre beating",
-      "description": "Fibre beating applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Beat wet fibres into workable pulp.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.sheet_forming",
       "domain": "paper_and_ink",
       "name": "Sheet forming",
-      "description": "Sheet forming applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lift thin pulp layers onto screens.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.paper_pressing",
       "domain": "paper_and_ink",
       "name": "Paper pressing",
-      "description": "Paper pressing applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Press excess water from fresh sheets.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.paper_drying",
       "domain": "paper_and_ink",
       "name": "Paper drying",
-      "description": "Paper drying applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Dry paper evenly without tearing it.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.sizing",
       "domain": "paper_and_ink",
       "name": "Sizing",
-      "description": "Sizing applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coat paper to control ink absorption.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.paper_polishing",
       "domain": "paper_and_ink",
       "name": "Paper polishing",
-      "description": "Paper polishing applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Smooth sheets for fine brushwork.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.soot_collecting",
       "domain": "paper_and_ink",
       "name": "Soot collecting",
-      "description": "Soot collecting applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Collect clean carbon from controlled smoky flames.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.ink_binding",
       "domain": "paper_and_ink",
       "name": "Ink binding",
-      "description": "Ink binding applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Bind soot into durable ink sticks.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.inkstone_care",
       "domain": "paper_and_ink",
       "name": "Inkstone care",
-      "description": "Inkstone care applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain the stone used for preparing ink.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.ink_grinding",
       "domain": "paper_and_ink",
       "name": "Ink grinding",
-      "description": "Ink grinding applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Grind solid ink with suitable water.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.book_binding",
       "domain": "paper_and_ink",
       "name": "Book binding",
-      "description": "Book binding applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sew folded leaves into usable books.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.paper_grading",
       "domain": "paper_and_ink",
       "name": "Paper grading",
-      "description": "Paper grading applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sort sheets by strength and surface quality.",
       "detailed": false
     },
     {
       "id": "paper_and_ink.archive_papers",
       "domain": "paper_and_ink",
       "name": "Archive papers",
-      "description": "Archive papers applies paper and ink to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make durable paper for long-kept records.",
       "detailed": false
     }
   ]

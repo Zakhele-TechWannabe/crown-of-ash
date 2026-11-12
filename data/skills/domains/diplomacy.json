@@ -5,105 +5,105 @@
       "id": "diplomacy.formal_greetings",
       "domain": "diplomacy",
       "name": "Formal greetings",
-      "description": "Formal greetings applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Open meetings with culturally appropriate courtesies.",
       "detailed": false
     },
     {
       "id": "diplomacy.envoy_etiquette",
       "domain": "diplomacy",
       "name": "Envoy etiquette",
-      "description": "Envoy etiquette applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe the duties expected of messengers.",
       "detailed": false
     },
     {
       "id": "diplomacy.gift_selection",
       "domain": "diplomacy",
       "name": "Gift selection",
-      "description": "Gift selection applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose gifts conveying suitable respect and intent.",
       "detailed": false
     },
     {
       "id": "diplomacy.treaty_drafting",
       "domain": "diplomacy",
       "name": "Treaty drafting",
-      "description": "Treaty drafting applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write agreements between organised groups.",
       "detailed": false
     },
     {
       "id": "diplomacy.negotiation",
       "domain": "diplomacy",
       "name": "Negotiation",
-      "description": "Negotiation applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Seek terms acceptable to opposing interests.",
       "detailed": false
     },
     {
       "id": "diplomacy.translation",
       "domain": "diplomacy",
       "name": "Translation",
-      "description": "Translation applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Convey meaning accurately between spoken languages.",
       "detailed": false
     },
     {
       "id": "diplomacy.border_talks",
       "domain": "diplomacy",
       "name": "Border talks",
-      "description": "Border talks applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Discuss contested frontiers without needless escalation.",
       "detailed": false
     },
     {
       "id": "diplomacy.marriage_alliances",
       "domain": "diplomacy",
       "name": "Marriage alliances",
-      "description": "Marriage alliances applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange family unions carrying political obligations.",
       "detailed": false
     },
     {
       "id": "diplomacy.tribute_protocol",
       "domain": "diplomacy",
       "name": "Tribute protocol",
-      "description": "Tribute protocol applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Handle formal offerings between unequal powers.",
       "detailed": false
     },
     {
       "id": "diplomacy.hostage_mediation",
       "domain": "diplomacy",
       "name": "Hostage mediation",
-      "description": "Hostage mediation applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Secure releases through negotiated guarantees.",
       "detailed": false
     },
     {
       "id": "diplomacy.truce_making",
       "domain": "diplomacy",
       "name": "Truce making",
-      "description": "Truce making applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange temporary suspensions of open disputes.",
       "detailed": false
     },
     {
       "id": "diplomacy.cultural_reading",
       "domain": "diplomacy",
       "name": "Cultural reading",
-      "description": "Cultural reading applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret unfamiliar manners before judging intent.",
       "detailed": false
     },
     {
       "id": "diplomacy.audience_planning",
       "domain": "diplomacy",
       "name": "Audience planning",
-      "description": "Audience planning applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan meetings with powerful faction leaders.",
       "detailed": false
     },
     {
       "id": "diplomacy.diplomatic_records",
       "domain": "diplomacy",
       "name": "Diplomatic records",
-      "description": "Diplomatic records applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Preserve promises and exchanges between factions.",
       "detailed": false
     },
     {
       "id": "diplomacy.embassy_stewardship",
       "domain": "diplomacy",
       "name": "Embassy stewardship",
-      "description": "Embassy stewardship applies diplomacy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage a continuing presence among another faction.",
       "detailed": false
     }
   ]

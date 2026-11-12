@@ -5,7 +5,7 @@
       "id": "smelting.smelting",
       "domain": "smelting",
       "name": "Smelting",
-      "description": "Smelting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Reduce metal ores using controlled furnace heat.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -268,7 +268,7 @@
       "id": "smelting.bloomery_tending",
       "domain": "smelting",
       "name": "Bloomery tending",
-      "description": "Bloomery tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain a bloomery through an iron smelt.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -539,7 +539,7 @@
       "id": "smelting.ore_roasting",
       "domain": "smelting",
       "name": "Ore roasting",
-      "description": "Ore roasting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Heat ore to remove moisture and sulphur.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -810,7 +810,7 @@
       "id": "smelting.charge_mixing",
       "domain": "smelting",
       "name": "Charge mixing",
-      "description": "Charge mixing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Balance ore, charcoal and flux charges.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1081,7 +1081,7 @@
       "id": "smelting.bellows_working",
       "domain": "smelting",
       "name": "Bellows working",
-      "description": "Bellows working: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Supply furnace air with steady bellows work.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1352,7 +1352,7 @@
       "id": "smelting.slag_reading",
       "domain": "smelting",
       "name": "Slag reading",
-      "description": "Slag reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Judge furnace conditions from changing slag.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1623,7 +1623,7 @@
       "id": "smelting.bloom_consolidation",
       "domain": "smelting",
       "name": "Bloom consolidation",
-      "description": "Bloom consolidation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Hammer spongy iron blooms into solid metal.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1894,7 +1894,7 @@
       "id": "smelting.copper_smelting",
       "domain": "smelting",
       "name": "Copper smelting",
-      "description": "Copper smelting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Extract copper from prepared mineral ores.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2165,7 +2165,7 @@
       "id": "smelting.tin_smelting",
       "domain": "smelting",
       "name": "Tin smelting",
-      "description": "Tin smelting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Reduce tin ore into usable metal.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2436,7 +2436,7 @@
       "id": "smelting.bronze_alloying",
       "domain": "smelting",
       "name": "Bronze alloying",
-      "description": "Bronze alloying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Combine copper and tin into bronze.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2707,7 +2707,7 @@
       "id": "smelting.crucible_work",
       "domain": "smelting",
       "name": "Crucible work",
-      "description": "Crucible work: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Melt small batches inside refractory vessels.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2978,7 +2978,7 @@
       "id": "smelting.furnace_lining",
       "domain": "smelting",
       "name": "Furnace lining",
-      "description": "Furnace lining: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Repair heat-resistant linings inside furnaces.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3249,7 +3249,7 @@
       "id": "smelting.flux_selection",
       "domain": "smelting",
       "name": "Flux selection",
-      "description": "Flux selection: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Choose additives that help impurities separate.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3520,7 +3520,7 @@
       "id": "smelting.heat_judging",
       "domain": "smelting",
       "name": "Heat judging",
-      "description": "Heat judging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Estimate furnace temperature from colour and behaviour.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3791,7 +3791,7 @@
       "id": "smelting.metal_assaying",
       "domain": "smelting",
       "name": "Metal assaying",
-      "description": "Metal assaying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Test metal content in ore samples.",
       "detailed": true,
       "key_attributes": [
         "strength",

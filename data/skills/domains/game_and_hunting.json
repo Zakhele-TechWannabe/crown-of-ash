@@ -5,7 +5,7 @@
       "id": "game_and_hunting.hunting",
       "domain": "game_and_hunting",
       "name": "Hunting",
-      "description": "Hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Find and take game for village food.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -285,7 +285,7 @@
       "id": "game_and_hunting.trail_reading",
       "domain": "game_and_hunting",
       "name": "Trail reading",
-      "description": "Trail reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Interpret fresh tracks along animal paths.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -556,7 +556,7 @@
       "id": "game_and_hunting.bow_hunting",
       "domain": "game_and_hunting",
       "name": "Bow hunting",
-      "description": "Bow hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Shoot game with a hunting bow.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -827,7 +827,7 @@
       "id": "game_and_hunting.snare_setting",
       "domain": "game_and_hunting",
       "name": "Snare setting",
-      "description": "Snare setting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Place snares along frequented game trails.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1098,7 +1098,7 @@
       "id": "game_and_hunting.game_dressing",
       "domain": "game_and_hunting",
       "name": "Game dressing",
-      "description": "Game dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Clean carcasses before meat deteriorates.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1369,7 +1369,7 @@
       "id": "game_and_hunting.hide_field_care",
       "domain": "game_and_hunting",
       "name": "Hide field care",
-      "description": "Hide field care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Protect freshly removed hides from spoilage.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1640,7 +1640,7 @@
       "id": "game_and_hunting.boar_hunting",
       "domain": "game_and_hunting",
       "name": "Boar hunting",
-      "description": "Boar hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Hunt dangerous boars with coordinated teams.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1911,7 +1911,7 @@
       "id": "game_and_hunting.deer_stalking",
       "domain": "game_and_hunting",
       "name": "Deer stalking",
-      "description": "Deer stalking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Approach wary deer without alarming them.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2182,7 +2182,7 @@
       "id": "game_and_hunting.bird_hunting",
       "domain": "game_and_hunting",
       "name": "Bird hunting",
-      "description": "Bird hunting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Take wild birds using suitable methods.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2453,7 +2453,7 @@
       "id": "game_and_hunting.hunting_dogs",
       "domain": "game_and_hunting",
       "name": "Hunting dogs",
-      "description": "Hunting dogs: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Train dogs to locate and retrieve game.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2724,7 +2724,7 @@
       "id": "game_and_hunting.game_conservation",
       "domain": "game_and_hunting",
       "name": "Game conservation",
-      "description": "Game conservation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Limit hunting pressure during breeding seasons.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2995,7 +2995,7 @@
       "id": "game_and_hunting.mountain_ambush",
       "domain": "game_and_hunting",
       "name": "Mountain ambush",
-      "description": "Mountain ambush: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Wait concealed above predictable mountain routes.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3266,7 +3266,7 @@
       "id": "game_and_hunting.lodge_provisioning",
       "domain": "game_and_hunting",
       "name": "Lodge provisioning",
-      "description": "Lodge provisioning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Stock hunting lodges for extended trips.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3537,7 +3537,7 @@
       "id": "game_and_hunting.scent_masking",
       "domain": "game_and_hunting",
       "name": "Scent masking",
-      "description": "Scent masking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Reduce human smells before approaching prey.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3808,7 +3808,7 @@
       "id": "game_and_hunting.hunt_planning",
       "domain": "game_and_hunting",
       "name": "Hunt planning",
-      "description": "Hunt planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Choose routes, equipment and hunting partners.",
       "detailed": true,
       "key_attributes": [
         "perception",

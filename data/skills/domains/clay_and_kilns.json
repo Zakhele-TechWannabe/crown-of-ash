@@ -5,7 +5,7 @@
       "id": "clay_and_kilns.claywork",
       "domain": "clay_and_kilns",
       "name": "Claywork",
-      "description": "Claywork: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare and fire clay into useful vessels.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -255,7 +255,7 @@
       "id": "clay_and_kilns.clay_digging",
       "domain": "clay_and_kilns",
       "name": "Clay digging",
-      "description": "Clay digging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Dig clay from suitable local deposits.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -526,7 +526,7 @@
       "id": "clay_and_kilns.clay_levigation",
       "domain": "clay_and_kilns",
       "name": "Clay levigation",
-      "description": "Clay levigation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Wash fine clay particles from coarse grit.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -797,7 +797,7 @@
       "id": "clay_and_kilns.wheel_throwing",
       "domain": "clay_and_kilns",
       "name": "Wheel throwing",
-      "description": "Wheel throwing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Form symmetrical vessels on a turning wheel.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1068,7 +1068,7 @@
       "id": "clay_and_kilns.coil_building",
       "domain": "clay_and_kilns",
       "name": "Coil building",
-      "description": "Coil building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build pots from joined clay coils.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1339,7 +1339,7 @@
       "id": "clay_and_kilns.brick_moulding",
       "domain": "clay_and_kilns",
       "name": "Brick moulding",
-      "description": "Brick moulding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Press wet clay into consistent brick shapes.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1610,7 +1610,7 @@
       "id": "clay_and_kilns.tile_shaping",
       "domain": "clay_and_kilns",
       "name": "Tile shaping",
-      "description": "Tile shaping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Shape curved pieces for tiled roofs.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1881,7 +1881,7 @@
       "id": "clay_and_kilns.kiln_firing",
       "domain": "clay_and_kilns",
       "name": "Kiln firing",
-      "description": "Kiln firing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Control firing heat through a kiln cycle.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2152,7 +2152,7 @@
       "id": "clay_and_kilns.glaze_mixing",
       "domain": "clay_and_kilns",
       "name": "Glaze mixing",
-      "description": "Glaze mixing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Blend minerals into fired ceramic coatings.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2423,7 +2423,7 @@
       "id": "clay_and_kilns.sagger_making",
       "domain": "clay_and_kilns",
       "name": "Sagger making",
-      "description": "Sagger making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make protective containers for delicate kiln wares.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2694,7 +2694,7 @@
       "id": "clay_and_kilns.kiln_building",
       "domain": "clay_and_kilns",
       "name": "Kiln building",
-      "description": "Kiln building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Construct chambers that retain firing heat.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2965,7 +2965,7 @@
       "id": "clay_and_kilns.fuel_scheduling",
       "domain": "clay_and_kilns",
       "name": "Fuel scheduling",
-      "description": "Fuel scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Plan fuel supply for uninterrupted firing.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3236,7 +3236,7 @@
       "id": "clay_and_kilns.pottery_decoration",
       "domain": "clay_and_kilns",
       "name": "Pottery decoration",
-      "description": "Pottery decoration: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Decorate ceramic surfaces before final firing.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3507,7 +3507,7 @@
       "id": "clay_and_kilns.ceramic_repair",
       "domain": "clay_and_kilns",
       "name": "Ceramic repair",
-      "description": "Ceramic repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Mend cracked pottery for continued household use.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3778,7 +3778,7 @@
       "id": "clay_and_kilns.refractory_making",
       "domain": "clay_and_kilns",
       "name": "Refractory making",
-      "description": "Refractory making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare clay bodies that resist furnace heat.",
       "detailed": true,
       "key_attributes": [
         "strength",

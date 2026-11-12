@@ -5,105 +5,105 @@
       "id": "architecture.site_reading",
       "domain": "architecture",
       "name": "Site reading",
-      "description": "Site reading applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Assess terrain before choosing building locations.",
       "detailed": false
     },
     {
       "id": "architecture.ground_plans",
       "domain": "architecture",
       "name": "Ground plans",
-      "description": "Ground plans applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lay out rooms and circulation on plans.",
       "detailed": false
     },
     {
       "id": "architecture.elevation_drawing",
       "domain": "architecture",
       "name": "Elevation drawing",
-      "description": "Elevation drawing applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Draw exterior views of proposed buildings.",
       "detailed": false
     },
     {
       "id": "architecture.structural_proportion",
       "domain": "architecture",
       "name": "Structural proportion",
-      "description": "Structural proportion applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Balance building dimensions with structural requirements.",
       "detailed": false
     },
     {
       "id": "architecture.timber_halls",
       "domain": "architecture",
       "name": "Timber halls",
-      "description": "Timber halls applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Design halls supported by joined timber frames.",
       "detailed": false
     },
     {
       "id": "architecture.courtyard_design",
       "domain": "architecture",
       "name": "Courtyard design",
-      "description": "Courtyard design applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange rooms around shared open courts.",
       "detailed": false
     },
     {
       "id": "architecture.ventilation_design",
       "domain": "architecture",
       "name": "Ventilation design",
-      "description": "Ventilation design applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan openings for useful natural airflow.",
       "detailed": false
     },
     {
       "id": "architecture.roof_geometry",
       "domain": "architecture",
       "name": "Roof geometry",
-      "description": "Roof geometry applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Calculate roof shapes and supporting geometry.",
       "detailed": false
     },
     {
       "id": "architecture.temple_layout",
       "domain": "architecture",
       "name": "Temple layout",
-      "description": "Temple layout applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lay out sacred buildings around ritual uses.",
       "detailed": false
     },
     {
       "id": "architecture.granary_design",
       "domain": "architecture",
       "name": "Granary design",
-      "description": "Granary design applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Design stores protecting grain from damp and pests.",
       "detailed": false
     },
     {
       "id": "architecture.household_layouts",
       "domain": "architecture",
       "name": "Household layouts",
-      "description": "Household layouts applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange domestic rooms around family routines.",
       "detailed": false
     },
     {
       "id": "architecture.fire_separation",
       "domain": "architecture",
       "name": "Fire separation",
-      "description": "Fire separation applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Separate buildings to slow spreading fires.",
       "detailed": false
     },
     {
       "id": "architecture.model_building",
       "domain": "architecture",
       "name": "Model building",
-      "description": "Model building applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build small physical models of proposed works.",
       "detailed": false
     },
     {
       "id": "architecture.building_estimates",
       "domain": "architecture",
       "name": "Building estimates",
-      "description": "Building estimates applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Estimate labour and materials before construction.",
       "detailed": false
     },
     {
       "id": "architecture.master_planning",
       "domain": "architecture",
       "name": "Master planning",
-      "description": "Master planning applies architecture to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate several buildings within a shared site.",
       "detailed": false
     }
   ]

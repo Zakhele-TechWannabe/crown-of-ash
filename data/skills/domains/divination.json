@@ -5,105 +5,105 @@
       "id": "divination.omen_reading",
       "domain": "divination",
       "name": "Omen reading",
-      "description": "Omen reading applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare unusual events with established interpretive traditions.",
       "detailed": false
     },
     {
       "id": "divination.stalk_casting",
       "domain": "divination",
       "name": "Stalk casting",
-      "description": "Stalk casting applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange stalks according to a formal casting method.",
       "detailed": false
     },
     {
       "id": "divination.coin_casting",
       "domain": "divination",
       "name": "Coin casting",
-      "description": "Coin casting applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Read patterns produced by cast coins.",
       "detailed": false
     },
     {
       "id": "divination.astrological_charts",
       "domain": "divination",
       "name": "Astrological charts",
-      "description": "Astrological charts applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret celestial positions within a divinatory framework.",
       "detailed": false
     },
     {
       "id": "divination.dream_interpretation",
       "domain": "divination",
       "name": "Dream interpretation",
-      "description": "Dream interpretation applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Examine dreams for personal or spiritual significance.",
       "detailed": false
     },
     {
       "id": "divination.fate_threads",
       "domain": "divination",
       "name": "Fate threads",
-      "description": "Fate threads applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sense possible links between entwined destinies.",
       "detailed": false
     },
     {
       "id": "divination.auspicious_dates",
       "domain": "divination",
       "name": "Auspicious dates",
-      "description": "Auspicious dates applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose favourable dates through traditional calculations.",
       "detailed": false
     },
     {
       "id": "divination.spirit_lots",
       "domain": "divination",
       "name": "Spirit lots",
-      "description": "Spirit lots applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Consult marked lots before a shrine.",
       "detailed": false
     },
     {
       "id": "divination.hexagram_study",
       "domain": "divination",
       "name": "Hexagram study",
-      "description": "Hexagram study applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Study the meanings assigned to six-line figures.",
       "detailed": false
     },
     {
       "id": "divination.prophecy_records",
       "domain": "divination",
       "name": "Prophecy records",
-      "description": "Prophecy records applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record predictions alongside their eventual outcomes.",
       "detailed": false
     },
     {
       "id": "divination.karmic_signs",
       "domain": "divination",
       "name": "Karmic signs",
-      "description": "Karmic signs applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recognise signs of unresolved karmic obligations.",
       "detailed": false
     },
     {
       "id": "divination.scrying",
       "domain": "divination",
       "name": "Scrying",
-      "description": "Scrying applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Seek distant impressions through prepared spiritual media.",
       "detailed": false
     },
     {
       "id": "divination.divination_tools",
       "domain": "divination",
       "name": "Divination tools",
-      "description": "Divination tools applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare implements used to focus divinatory attention.",
       "detailed": false
     },
     {
       "id": "divination.heavenly_backlash",
       "domain": "divination",
       "name": "Heavenly backlash",
-      "description": "Heavenly backlash applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recognise harm caused by forcing forbidden foresight.",
       "detailed": false
     },
     {
       "id": "divination.divinatory_commentary",
       "domain": "divination",
       "name": "Divinatory commentary",
-      "description": "Divinatory commentary applies divination to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Critique predictions and their claimed interpretation.",
       "detailed": false
     }
   ]

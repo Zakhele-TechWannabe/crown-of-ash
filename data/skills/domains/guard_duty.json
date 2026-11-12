@@ -5,105 +5,105 @@
       "id": "guard_duty.patrolling",
       "domain": "guard_duty",
       "name": "Patrolling",
-      "description": "Patrolling applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Move regularly through assigned protected areas.",
       "detailed": false
     },
     {
       "id": "guard_duty.gate_inspection",
       "domain": "guard_duty",
       "name": "Gate inspection",
-      "description": "Gate inspection applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Check arrivals and goods at settlement gates.",
       "detailed": false
     },
     {
       "id": "guard_duty.watch_rotations",
       "domain": "guard_duty",
       "name": "Watch rotations",
-      "description": "Watch rotations applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange reliable coverage across successive watches.",
       "detailed": false
     },
     {
       "id": "guard_duty.alarm_signals",
       "domain": "guard_duty",
       "name": "Alarm signals",
-      "description": "Alarm signals applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Raise clear warnings when danger appears.",
       "detailed": false
     },
     {
       "id": "guard_duty.crowd_handling",
       "domain": "guard_duty",
       "name": "Crowd handling",
-      "description": "Crowd handling applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Guide gathered people without causing panic.",
       "detailed": false
     },
     {
       "id": "guard_duty.escort_duty",
       "domain": "guard_duty",
       "name": "Escort duty",
-      "description": "Escort duty applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Protect travellers or valuables along a route.",
       "detailed": false
     },
     {
       "id": "guard_duty.night_vigilance",
       "domain": "guard_duty",
       "name": "Night vigilance",
-      "description": "Night vigilance applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remain attentive during long dark watches.",
       "detailed": false
     },
     {
       "id": "guard_duty.threat_recognition",
       "domain": "guard_duty",
       "name": "Threat recognition",
-      "description": "Threat recognition applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Distinguish suspicious activity from ordinary village life.",
       "detailed": false
     },
     {
       "id": "guard_duty.prisoner_escort",
       "domain": "guard_duty",
       "name": "Prisoner escort",
-      "description": "Prisoner escort applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Move detained people with restraint and care.",
       "detailed": false
     },
     {
       "id": "guard_duty.fire_response",
       "domain": "guard_duty",
       "name": "Fire response",
-      "description": "Fire response applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Respond quickly to fires threatening occupied buildings.",
       "detailed": false
     },
     {
       "id": "guard_duty.checkpoint_records",
       "domain": "guard_duty",
       "name": "Checkpoint records",
-      "description": "Checkpoint records applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record movements through controlled entry points.",
       "detailed": false
     },
     {
       "id": "guard_duty.weapons_readiness",
       "domain": "guard_duty",
       "name": "Weapons readiness",
-      "description": "Weapons readiness applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep defensive equipment ready for urgent use.",
       "detailed": false
     },
     {
       "id": "guard_duty.emergency_mustering",
       "domain": "guard_duty",
       "name": "Emergency mustering",
-      "description": "Emergency mustering applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Assemble available guards during an emergency.",
       "detailed": false
     },
     {
       "id": "guard_duty.guard_etiquette",
       "domain": "guard_duty",
       "name": "Guard etiquette",
-      "description": "Guard etiquette applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Treat residents respectfully while enforcing boundaries.",
       "detailed": false
     },
     {
       "id": "guard_duty.watch_command",
       "domain": "guard_duty",
       "name": "Watch command",
-      "description": "Watch command applies guard duty to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate the settlement's organised watch.",
       "detailed": false
     }
   ]

@@ -5,105 +5,105 @@
       "id": "survival.shelter_building",
       "domain": "survival",
       "name": "Shelter building",
-      "description": "Shelter building applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make weatherproof shelters from available materials.",
       "detailed": false
     },
     {
       "id": "survival.fire_making",
       "domain": "survival",
       "name": "Fire making",
-      "description": "Fire making applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Start reliable fires with limited tools.",
       "detailed": false
     },
     {
       "id": "survival.water_finding",
       "domain": "survival",
       "name": "Water finding",
-      "description": "Water finding applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Locate drinkable water in unfamiliar country.",
       "detailed": false
     },
     {
       "id": "survival.food_rationing",
       "domain": "survival",
       "name": "Food rationing",
-      "description": "Food rationing applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Stretch provisions without exhausting travellers.",
       "detailed": false
     },
     {
       "id": "survival.cold_survival",
       "domain": "survival",
       "name": "Cold survival",
-      "description": "Cold survival applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Protect a camp against mountain cold.",
       "detailed": false
     },
     {
       "id": "survival.heat_survival",
       "domain": "survival",
       "name": "Heat survival",
-      "description": "Heat survival applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Avoid dehydration and overheating on journeys.",
       "detailed": false
     },
     {
       "id": "survival.flood_escape",
       "domain": "survival",
       "name": "Flood escape",
-      "description": "Flood escape applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Escape rising water before routes vanish.",
       "detailed": false
     },
     {
       "id": "survival.mountain_rescue",
       "domain": "survival",
       "name": "Mountain rescue",
-      "description": "Mountain rescue applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recover stranded travellers from difficult slopes.",
       "detailed": false
     },
     {
       "id": "survival.signal_fires",
       "domain": "survival",
       "name": "Signal fires",
-      "description": "Signal fires applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build visible fires carrying agreed messages.",
       "detailed": false
     },
     {
       "id": "survival.camp_sanitation",
       "domain": "survival",
       "name": "Camp sanitation",
-      "description": "Camp sanitation applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Separate drinking water from camp waste.",
       "detailed": false
     },
     {
       "id": "survival.wilderness_knots",
       "domain": "survival",
       "name": "Wilderness knots",
-      "description": "Wilderness knots applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Tie secure knots for wilderness tasks.",
       "detailed": false
     },
     {
       "id": "survival.emergency_tools",
       "domain": "survival",
       "name": "Emergency tools",
-      "description": "Emergency tools applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fashion needed implements from found materials.",
       "detailed": false
     },
     {
       "id": "survival.route_memory",
       "domain": "survival",
       "name": "Route memory",
-      "description": "Route memory applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remember landmarks along unfamiliar routes.",
       "detailed": false
     },
     {
       "id": "survival.night_navigation",
       "domain": "survival",
       "name": "Night navigation",
-      "description": "Night navigation applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Navigate after sunset using stars and terrain.",
       "detailed": false
     },
     {
       "id": "survival.expedition_planning",
       "domain": "survival",
       "name": "Expedition planning",
-      "description": "Expedition planning applies survival to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare supplies and contingencies for expeditions.",
       "detailed": false
     }
   ]

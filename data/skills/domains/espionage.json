@@ -5,105 +5,105 @@
       "id": "espionage.cover_identities",
       "domain": "espionage",
       "name": "Cover identities",
-      "description": "Cover identities applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain plausible personal histories for covert work.",
       "detailed": false
     },
     {
       "id": "espionage.disguise",
       "domain": "espionage",
       "name": "Disguise",
-      "description": "Disguise applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Alter appearance to avoid easy recognition.",
       "detailed": false
     },
     {
       "id": "espionage.quiet_observation",
       "domain": "espionage",
       "name": "Quiet observation",
-      "description": "Quiet observation applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe people without drawing their attention.",
       "detailed": false
     },
     {
       "id": "espionage.rumour_gathering",
       "domain": "espionage",
       "name": "Rumour gathering",
-      "description": "Rumour gathering applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Collect circulating stories for later comparison.",
       "detailed": false
     },
     {
       "id": "espionage.cipher_writing",
       "domain": "espionage",
       "name": "Cipher writing",
-      "description": "Cipher writing applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Encode messages against casual interception.",
       "detailed": false
     },
     {
       "id": "espionage.dead_drops",
       "domain": "espionage",
       "name": "Dead drops",
-      "description": "Dead drops applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Exchange hidden messages without direct meetings.",
       "detailed": false
     },
     {
       "id": "espionage.covert_travel",
       "domain": "espionage",
       "name": "Covert travel",
-      "description": "Covert travel applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Move secretly through watched areas.",
       "detailed": false
     },
     {
       "id": "espionage.document_reading",
       "domain": "espionage",
       "name": "Document reading",
-      "description": "Document reading applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Extract useful details from intercepted records.",
       "detailed": false
     },
     {
       "id": "espionage.agent_handling",
       "domain": "espionage",
       "name": "Agent handling",
-      "description": "Agent handling applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Guide informants while protecting their identities.",
       "detailed": false
     },
     {
       "id": "espionage.counter_surveillance",
       "domain": "espionage",
       "name": "Counter surveillance",
-      "description": "Counter surveillance applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Detect attempts to follow or watch agents.",
       "detailed": false
     },
     {
       "id": "espionage.infiltration",
       "domain": "espionage",
       "name": "Infiltration",
-      "description": "Infiltration applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Enter guarded organisations under believable pretences.",
       "detailed": false
     },
     {
       "id": "espionage.source_appraisal",
       "domain": "espionage",
       "name": "Source appraisal",
-      "description": "Source appraisal applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Judge whether a source is reliable.",
       "detailed": false
     },
     {
       "id": "espionage.secret_signals",
       "domain": "espionage",
       "name": "Secret signals",
-      "description": "Secret signals applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use concealed signs to convey instructions.",
       "detailed": false
     },
     {
       "id": "espionage.report_analysis",
       "domain": "espionage",
       "name": "Report analysis",
-      "description": "Report analysis applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare scattered reports for meaningful patterns.",
       "detailed": false
     },
     {
       "id": "espionage.network_stewardship",
       "domain": "espionage",
       "name": "Network stewardship",
-      "description": "Network stewardship applies espionage to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain contacts without exposing the whole network.",
       "detailed": false
     }
   ]

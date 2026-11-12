@@ -5,105 +5,105 @@
       "id": "jewellery.wire_drawing",
       "domain": "jewellery",
       "name": "Wire drawing",
-      "description": "Wire drawing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Pull metal through dies into fine wire.",
       "detailed": false
     },
     {
       "id": "jewellery.chain_making",
       "domain": "jewellery",
       "name": "Chain making",
-      "description": "Chain making applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Join small links into flexible chains.",
       "detailed": false
     },
     {
       "id": "jewellery.ring_forming",
       "domain": "jewellery",
       "name": "Ring forming",
-      "description": "Ring forming applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Shape metal bands to fit fingers.",
       "detailed": false
     },
     {
       "id": "jewellery.soldering",
       "domain": "jewellery",
       "name": "Soldering",
-      "description": "Soldering applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Join delicate metal parts with fusible alloy.",
       "detailed": false
     },
     {
       "id": "jewellery.filigree",
       "domain": "jewellery",
       "name": "Filigree",
-      "description": "Filigree applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build open decorative patterns from fine wires.",
       "detailed": false
     },
     {
       "id": "jewellery.bead_setting",
       "domain": "jewellery",
       "name": "Bead setting",
-      "description": "Bead setting applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Secure beads within wearable ornaments.",
       "detailed": false
     },
     {
       "id": "jewellery.gem_settings",
       "domain": "jewellery",
       "name": "Gem settings",
-      "description": "Gem settings applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make mounts protecting valuable cut stones.",
       "detailed": false
     },
     {
       "id": "jewellery.gold_beating",
       "domain": "jewellery",
       "name": "Gold beating",
-      "description": "Gold beating applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Hammer gold into extremely thin leaf.",
       "detailed": false
     },
     {
       "id": "jewellery.silver_chasing",
       "domain": "jewellery",
       "name": "Silver chasing",
-      "description": "Silver chasing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Raise decorative patterns on silver surfaces.",
       "detailed": false
     },
     {
       "id": "jewellery.enamelling",
       "domain": "jewellery",
       "name": "Enamelling",
-      "description": "Enamelling applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fuse coloured glass coatings onto metal.",
       "detailed": false
     },
     {
       "id": "jewellery.clasp_making",
       "domain": "jewellery",
       "name": "Clasp making",
-      "description": "Clasp making applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build secure fastenings for necklaces and bracelets.",
       "detailed": false
     },
     {
       "id": "jewellery.polishing",
       "domain": "jewellery",
       "name": "Polishing",
-      "description": "Polishing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Finish ornaments with bright, smooth surfaces.",
       "detailed": false
     },
     {
       "id": "jewellery.jewellery_repair",
       "domain": "jewellery",
       "name": "Jewellery repair",
-      "description": "Jewellery repair applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore worn settings and broken ornaments.",
       "detailed": false
     },
     {
       "id": "jewellery.precious_weighing",
       "domain": "jewellery",
       "name": "Precious weighing",
-      "description": "Precious weighing applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Measure precious metals with sensitive balances.",
       "detailed": false
     },
     {
       "id": "jewellery.commission_design",
       "domain": "jewellery",
       "name": "Commission design",
-      "description": "Commission design applies jewellery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Draw ornaments suited to their intended wearer.",
       "detailed": false
     }
   ]

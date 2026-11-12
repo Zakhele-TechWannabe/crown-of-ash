@@ -5,7 +5,7 @@
       "id": "gardens.gardening",
       "domain": "gardens",
       "name": "Gardening",
-      "description": "Gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise vegetables close to household kitchens.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -281,7 +281,7 @@
       "id": "gardens.seedbed_tending",
       "domain": "gardens",
       "name": "Seedbed tending",
-      "description": "Seedbed tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Nurse vegetable seedlings before planting out.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -552,7 +552,7 @@
       "id": "gardens.root_cultivation",
       "domain": "gardens",
       "name": "Root cultivation",
-      "description": "Root cultivation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Grow edible tubers in loose soil.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -823,7 +823,7 @@
       "id": "gardens.gourd_training",
       "domain": "gardens",
       "name": "Gourd training",
-      "description": "Gourd training: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Support climbing gourds on trellises.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1094,7 +1094,7 @@
       "id": "gardens.herb_gardening",
       "domain": "gardens",
       "name": "Herb gardening",
-      "description": "Herb gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cultivate useful herbs in sheltered beds.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1365,7 +1365,7 @@
       "id": "gardens.compost_making",
       "domain": "gardens",
       "name": "Compost making",
-      "description": "Compost making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Turn plant scraps into fertile humus.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1636,7 +1636,7 @@
       "id": "gardens.market_gardening",
       "domain": "gardens",
       "name": "Market gardening",
-      "description": "Market gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Grow fresh produce for market stalls.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1907,7 +1907,7 @@
       "id": "gardens.winter_beds",
       "domain": "gardens",
       "name": "Winter beds",
-      "description": "Winter beds: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Protect cold-season vegetables beneath straw.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2178,7 +2178,7 @@
       "id": "gardens.garden_irrigation",
       "domain": "gardens",
       "name": "Garden irrigation",
-      "description": "Garden irrigation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Distribute water among thirsty garden rows.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2449,7 +2449,7 @@
       "id": "gardens.insect_tending",
       "domain": "gardens",
       "name": "Insect tending",
-      "description": "Insect tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Manage helpful insects and garden pests.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2720,7 +2720,7 @@
       "id": "gardens.mulching",
       "domain": "gardens",
       "name": "Mulching",
-      "description": "Mulching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cover bare earth against moisture loss.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2991,7 +2991,7 @@
       "id": "gardens.kitchen_plots",
       "domain": "gardens",
       "name": "Kitchen plots",
-      "description": "Kitchen plots: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain small plots for daily meals.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3262,7 +3262,7 @@
       "id": "gardens.vegetable_seed_saving",
       "domain": "gardens",
       "name": "Vegetable seed saving",
-      "description": "Vegetable seed saving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Collect viable seed from mature vegetables.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3533,7 +3533,7 @@
       "id": "gardens.raised_beds",
       "domain": "gardens",
       "name": "Raised beds",
-      "description": "Raised beds: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build elevated beds above waterlogged ground.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3804,7 +3804,7 @@
       "id": "gardens.garden_planning",
       "domain": "gardens",
       "name": "Garden planning",
-      "description": "Garden planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Arrange beds around seasons and access.",
       "detailed": true,
       "key_attributes": [
         "endurance",

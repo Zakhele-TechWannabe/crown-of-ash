@@ -5,7 +5,7 @@
       "id": "kitchen.cooking",
       "domain": "kitchen",
       "name": "Cooking",
-      "description": "Cooking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare filling meals from village ingredients.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -281,7 +281,7 @@
       "id": "kitchen.staple_cooking",
       "domain": "kitchen",
       "name": "Staple cooking",
-      "description": "Staple cooking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cook rice, millet and other daily staples.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -552,7 +552,7 @@
       "id": "kitchen.vegetable_preparation",
       "domain": "kitchen",
       "name": "Vegetable preparation",
-      "description": "Vegetable preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Clean and cut vegetables for varied dishes.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -823,7 +823,7 @@
       "id": "kitchen.meat_preparation",
       "domain": "kitchen",
       "name": "Meat preparation",
-      "description": "Meat preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare animal meat with controlled cooking.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1094,7 +1094,7 @@
       "id": "kitchen.fish_preparation",
       "domain": "kitchen",
       "name": "Fish preparation",
-      "description": "Fish preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cook fish while preserving delicate flesh.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1365,7 +1365,7 @@
       "id": "kitchen.preserving",
       "domain": "kitchen",
       "name": "Preserving",
-      "description": "Preserving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep food edible beyond its fresh season.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1636,7 +1636,7 @@
       "id": "kitchen.pickling",
       "domain": "kitchen",
       "name": "Pickling",
-      "description": "Pickling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Ferment or brine vegetables in clean jars.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1907,7 +1907,7 @@
       "id": "kitchen.drying_provisions",
       "domain": "kitchen",
       "name": "Drying provisions",
-      "description": "Drying provisions: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Remove moisture from provisions for storage.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2178,7 +2178,7 @@
       "id": "kitchen.sauce_making",
       "domain": "kitchen",
       "name": "Sauce making",
-      "description": "Sauce making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare savoury condiments from fermented ingredients.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2449,7 +2449,7 @@
       "id": "kitchen.oil_pressing",
       "domain": "kitchen",
       "name": "Oil pressing",
-      "description": "Oil pressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Press edible oils from seeds and nuts.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2720,7 +2720,7 @@
       "id": "kitchen.banquet_cooking",
       "domain": "kitchen",
       "name": "Banquet cooking",
-      "description": "Banquet cooking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate elaborate meals for large celebrations.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2991,7 +2991,7 @@
       "id": "kitchen.kitchen_safety",
       "domain": "kitchen",
       "name": "Kitchen safety",
-      "description": "Kitchen safety: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prevent burns, spoiled food and kitchen fires.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3262,7 +3262,7 @@
       "id": "kitchen.fuel_economy",
       "domain": "kitchen",
       "name": "Fuel economy",
-      "description": "Fuel economy: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cook effectively while conserving scarce firewood.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3533,7 +3533,7 @@
       "id": "kitchen.meal_planning",
       "domain": "kitchen",
       "name": "Meal planning",
-      "description": "Meal planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Plan meals against stores and dietary needs.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3804,7 +3804,7 @@
       "id": "kitchen.kitchen_stewardship",
       "domain": "kitchen",
       "name": "Kitchen stewardship",
-      "description": "Kitchen stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Organise cooks, provisions and kitchen duties.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

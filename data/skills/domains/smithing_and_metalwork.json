@@ -5,7 +5,7 @@
       "id": "smithing_and_metalwork.smithing",
       "domain": "smithing_and_metalwork",
       "name": "Smithing",
-      "description": "Smithing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Shape hot metal with hammer and anvil.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -283,7 +283,7 @@
       "id": "smithing_and_metalwork.blacksmithing",
       "domain": "smithing_and_metalwork",
       "name": "Blacksmithing",
-      "description": "Blacksmithing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Forge everyday iron goods for village use.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -554,7 +554,7 @@
       "id": "smithing_and_metalwork.tool_forging",
       "domain": "smithing_and_metalwork",
       "name": "Tool forging",
-      "description": "Tool forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make durable implements for demanding trades.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -825,7 +825,7 @@
       "id": "smithing_and_metalwork.blade_forging",
       "domain": "smithing_and_metalwork",
       "name": "Blade forging",
-      "description": "Blade forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Draw and shape cutting weapon blades.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1096,7 +1096,7 @@
       "id": "smithing_and_metalwork.nail_making",
       "domain": "smithing_and_metalwork",
       "name": "Nail making",
-      "description": "Nail making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Forge small fasteners for timber construction.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1367,7 +1367,7 @@
       "id": "smithing_and_metalwork.rivet_making",
       "domain": "smithing_and_metalwork",
       "name": "Rivet making",
-      "description": "Rivet making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make metal pins for permanent joints.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1638,7 +1638,7 @@
       "id": "smithing_and_metalwork.heat_treatment",
       "domain": "smithing_and_metalwork",
       "name": "Heat treatment",
-      "description": "Heat treatment: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Harden and temper metal to desired toughness.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1909,7 +1909,7 @@
       "id": "smithing_and_metalwork.hammer_welding",
       "domain": "smithing_and_metalwork",
       "name": "Hammer welding",
-      "description": "Hammer welding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Join heated iron surfaces through hammering.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2180,7 +2180,7 @@
       "id": "smithing_and_metalwork.edge_grinding",
       "domain": "smithing_and_metalwork",
       "name": "Edge grinding",
-      "description": "Edge grinding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Grind cutting edges to useful geometry.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2451,7 +2451,7 @@
       "id": "smithing_and_metalwork.armour_forging",
       "domain": "smithing_and_metalwork",
       "name": "Armour forging",
-      "description": "Armour forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Forge protective plates and defensive fittings.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2722,7 +2722,7 @@
       "id": "smithing_and_metalwork.lock_forging",
       "domain": "smithing_and_metalwork",
       "name": "Lock forging",
-      "description": "Lock forging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make lock components that resist forced entry.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2993,7 +2993,7 @@
       "id": "smithing_and_metalwork.farm_tool_repair",
       "domain": "smithing_and_metalwork",
       "name": "Farm tool repair",
-      "description": "Farm tool repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Restore worn ploughshares, hoes and sickles.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3264,7 +3264,7 @@
       "id": "smithing_and_metalwork.forge_tending",
       "domain": "smithing_and_metalwork",
       "name": "Forge tending",
-      "description": "Forge tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep the forge supplied and evenly hot.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3535,7 +3535,7 @@
       "id": "smithing_and_metalwork.metal_engraving",
       "domain": "smithing_and_metalwork",
       "name": "Metal engraving",
-      "description": "Metal engraving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut decorative marks into metal surfaces.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3806,7 +3806,7 @@
       "id": "smithing_and_metalwork.masterwork_planning",
       "domain": "smithing_and_metalwork",
       "name": "Masterwork planning",
-      "description": "Masterwork planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Plan exceptional pieces around demanding material choices.",
       "detailed": true,
       "key_attributes": [
         "strength",

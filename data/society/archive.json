@@ -1,0 +1,9 @@
+{
+  "enabled": true,
+  "snapshot_every_years": 1,
+  "large_population": 5000,
+  "large_snapshot_every_years": 10,
+  "top_skills": 8,
+  "top_ties": 12,
+  "faction_member_limit": 500
+}

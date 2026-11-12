@@ -5,7 +5,7 @@
       "id": "healing.medicine",
       "domain": "healing",
       "name": "Medicine",
-      "description": "Medicine: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Assess illness and provide practical village treatment.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -285,7 +285,7 @@
       "id": "healing.herbal_remedies",
       "domain": "healing",
       "name": "Herbal remedies",
-      "description": "Herbal remedies: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare plant remedies from known ingredients.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -556,7 +556,7 @@
       "id": "healing.bonesetting",
       "domain": "healing",
       "name": "Bonesetting",
-      "description": "Bonesetting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Set broken bones and support healing limbs.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -827,7 +827,7 @@
       "id": "healing.midwifery",
       "domain": "healing",
       "name": "Midwifery",
-      "description": "Midwifery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Assist childbirth and care for new mothers.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1098,7 +1098,7 @@
       "id": "healing.acupuncture",
       "domain": "healing",
       "name": "Acupuncture",
-      "description": "Acupuncture: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Place fine needles using learned therapeutic maps.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1369,7 +1369,7 @@
       "id": "healing.wound_tending",
       "domain": "healing",
       "name": "Wound tending",
-      "description": "Wound tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Clean, dress and monitor injured tissue.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1640,7 +1640,7 @@
       "id": "healing.pulse_reading",
       "domain": "healing",
       "name": "Pulse reading",
-      "description": "Pulse reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Read pulse qualities as diagnostic clues.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1911,7 +1911,7 @@
       "id": "healing.fever_care",
       "domain": "healing",
       "name": "Fever care",
-      "description": "Fever care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Support patients through prolonged high temperatures.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2182,7 +2182,7 @@
       "id": "healing.poultice_making",
       "domain": "healing",
       "name": "Poultice making",
-      "description": "Poultice making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Apply moist herbal dressings to affected areas.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2453,7 +2453,7 @@
       "id": "healing.medicine_drying",
       "domain": "healing",
       "name": "Medicine drying",
-      "description": "Medicine drying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Dry medicinal ingredients without losing usefulness.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2724,7 +2724,7 @@
       "id": "healing.dispensary_keeping",
       "domain": "healing",
       "name": "Dispensary keeping",
-      "description": "Dispensary keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Organise labelled remedies and treatment supplies.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2995,7 +2995,7 @@
       "id": "healing.dietary_care",
       "domain": "healing",
       "name": "Dietary care",
-      "description": "Dietary care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Adjust food to support a patient's recovery.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3266,7 +3266,7 @@
       "id": "healing.toxin_recognition",
       "domain": "healing",
       "name": "Toxin recognition",
-      "description": "Toxin recognition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Recognise harmful substances and poisoning symptoms.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3537,7 +3537,7 @@
       "id": "healing.recovery_nursing",
       "domain": "healing",
       "name": "Recovery nursing",
-      "description": "Recovery nursing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Help weakened patients regain everyday strength.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3808,7 +3808,7 @@
       "id": "healing.medical_teaching",
       "domain": "healing",
       "name": "Medical teaching",
-      "description": "Medical teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Teach safe treatment through supervised practice.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

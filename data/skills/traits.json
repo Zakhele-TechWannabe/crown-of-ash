@@ -325,5 +325,13 @@
     "output_bonus": 0.03,
     "mood_bonus": 0.0,
     "preferred_domain": ""
+  },
+  {
+    "id": "impartial",
+    "name": "Impartial",
+    "xp_multiplier": 1.0,
+    "output_bonus": 0.0,
+    "mood_bonus": 0.0,
+    "preferred_domain": "law"
   }
 ]

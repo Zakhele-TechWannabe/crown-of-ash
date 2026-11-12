@@ -5,105 +5,105 @@
       "id": "water_works.well_sinking",
       "domain": "water_works",
       "name": "Well sinking",
-      "description": "Well sinking applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Excavate reliable wells to clean groundwater.",
       "detailed": false
     },
     {
       "id": "water_works.reservoir_building",
       "domain": "water_works",
       "name": "Reservoir building",
-      "description": "Reservoir building applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build reservoirs with stable retaining banks.",
       "detailed": false
     },
     {
       "id": "water_works.pipe_laying",
       "domain": "water_works",
       "name": "Pipe laying",
-      "description": "Pipe laying applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Install conduits carrying water between locations.",
       "detailed": false
     },
     {
       "id": "water_works.aqueducts",
       "domain": "water_works",
       "name": "Aqueducts",
-      "description": "Aqueducts applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Construct raised channels spanning uneven ground.",
       "detailed": false
     },
     {
       "id": "water_works.sluice_gates",
       "domain": "water_works",
       "name": "Sluice gates",
-      "description": "Sluice gates applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fit gates controlling water through channels.",
       "detailed": false
     },
     {
       "id": "water_works.water_wheels",
       "domain": "water_works",
       "name": "Water wheels",
-      "description": "Water wheels applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build wheels converting flowing water into motion.",
       "detailed": false
     },
     {
       "id": "water_works.cistern_sealing",
       "domain": "water_works",
       "name": "Cistern sealing",
-      "description": "Cistern sealing applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Seal stored-water chambers against leakage.",
       "detailed": false
     },
     {
       "id": "water_works.flood_barriers",
       "domain": "water_works",
       "name": "Flood barriers",
-      "description": "Flood barriers applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Raise barriers against damaging floodwater.",
       "detailed": false
     },
     {
       "id": "water_works.canal_locks",
       "domain": "water_works",
       "name": "Canal locks",
-      "description": "Canal locks applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build stepped chambers lifting boats between levels.",
       "detailed": false
     },
     {
       "id": "water_works.drainage_systems",
       "domain": "water_works",
       "name": "Drainage systems",
-      "description": "Drainage systems applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Design drains that remove unwanted water.",
       "detailed": false
     },
     {
       "id": "water_works.water_testing",
       "domain": "water_works",
       "name": "Water testing",
-      "description": "Water testing applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Examine water for visible contamination and quality.",
       "detailed": false
     },
     {
       "id": "water_works.pump_building",
       "domain": "water_works",
       "name": "Pump building",
-      "description": "Pump building applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Construct mechanisms that raise or move water.",
       "detailed": false
     },
     {
       "id": "water_works.dredging",
       "domain": "water_works",
       "name": "Dredging",
-      "description": "Dredging applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remove sediment from navigable or working channels.",
       "detailed": false
     },
     {
       "id": "water_works.waterway_repair",
       "domain": "water_works",
       "name": "Waterway repair",
-      "description": "Waterway repair applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Repair damaged banks, gates and conduits.",
       "detailed": false
     },
     {
       "id": "water_works.water_system_planning",
       "domain": "water_works",
       "name": "Water system planning",
-      "description": "Water system planning applies water works to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan water supply across a growing settlement.",
       "detailed": false
     }
   ]

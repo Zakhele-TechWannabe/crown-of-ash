@@ -5,7 +5,7 @@
       "id": "letters.scholarship",
       "domain": "letters",
       "name": "Scholarship",
-      "description": "Scholarship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Study written learning and compare its claims.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -270,7 +270,7 @@
       "id": "letters.reading",
       "domain": "letters",
       "name": "Reading",
-      "description": "Reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Interpret written words and their meaning.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -541,7 +541,7 @@
       "id": "letters.writing",
       "domain": "letters",
       "name": "Writing",
-      "description": "Writing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Record language legibly using brush and ink.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -812,7 +812,7 @@
       "id": "letters.classics",
       "domain": "letters",
       "name": "Classics",
-      "description": "Classics: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Study inherited works of recognised learning.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -1083,7 +1083,7 @@
       "id": "letters.document_copying",
       "domain": "letters",
       "name": "Document copying",
-      "description": "Document copying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Reproduce documents while avoiding copying errors.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -1354,7 +1354,7 @@
       "id": "letters.archive_keeping",
       "domain": "letters",
       "name": "Archive keeping",
-      "description": "Archive keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Organise texts so later readers can find them.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -1625,7 +1625,7 @@
       "id": "letters.letter_composition",
       "domain": "letters",
       "name": "Letter composition",
-      "description": "Letter composition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Compose messages suited to their recipients.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -1896,7 +1896,7 @@
       "id": "letters.text_commentary",
       "domain": "letters",
       "name": "Text commentary",
-      "description": "Text commentary: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Explain difficult passages through careful notes.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -2167,7 +2167,7 @@
       "id": "letters.village_records",
       "domain": "letters",
       "name": "Village records",
-      "description": "Village records: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Record local decisions, births and notable happenings.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -2438,7 +2438,7 @@
       "id": "letters.oral_transcription",
       "domain": "letters",
       "name": "Oral transcription",
-      "description": "Oral transcription: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Turn spoken accounts into written records.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -2709,7 +2709,7 @@
       "id": "letters.lexicography",
       "domain": "letters",
       "name": "Lexicography",
-      "description": "Lexicography: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Compile meanings and uses of unfamiliar words.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -2980,7 +2980,7 @@
       "id": "letters.manuscript_repair",
       "domain": "letters",
       "name": "Manuscript repair",
-      "description": "Manuscript repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Restore damaged pages without losing surviving text.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -3251,7 +3251,7 @@
       "id": "letters.reading_circles",
       "domain": "letters",
       "name": "Reading circles",
-      "description": "Reading circles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Lead shared discussion of chosen writings.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -3522,7 +3522,7 @@
       "id": "letters.research_methods",
       "domain": "letters",
       "name": "Research methods",
-      "description": "Research methods: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Find and compare evidence for scholarly questions.",
       "detailed": true,
       "key_attributes": [
         "intellect",
@@ -3793,7 +3793,7 @@
       "id": "letters.scholarly_teaching",
       "domain": "letters",
       "name": "Scholarly teaching",
-      "description": "Scholarly teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Guide learners through sustained textual study.",
       "detailed": true,
       "key_attributes": [
         "intellect",

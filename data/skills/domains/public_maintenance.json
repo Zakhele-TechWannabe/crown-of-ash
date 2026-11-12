@@ -5,105 +5,105 @@
       "id": "public_maintenance.street_sweeping",
       "domain": "public_maintenance",
       "name": "Street sweeping",
-      "description": "Street sweeping applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sweep accumulated dirt from shared streets.",
       "detailed": false
     },
     {
       "id": "public_maintenance.drain_clearing",
       "domain": "public_maintenance",
       "name": "Drain clearing",
-      "description": "Drain clearing applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remove obstructions from public water drains.",
       "detailed": false
     },
     {
       "id": "public_maintenance.well_inspection",
       "domain": "public_maintenance",
       "name": "Well inspection",
-      "description": "Well inspection applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Check communal wells for damage or contamination.",
       "detailed": false
     },
     {
       "id": "public_maintenance.bridge_inspection",
       "domain": "public_maintenance",
       "name": "Bridge inspection",
-      "description": "Bridge inspection applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Examine shared crossings for unsafe wear.",
       "detailed": false
     },
     {
       "id": "public_maintenance.road_patching",
       "domain": "public_maintenance",
       "name": "Road patching",
-      "description": "Road patching applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fill damaged road surfaces before ruts deepen.",
       "detailed": false
     },
     {
       "id": "public_maintenance.public_lamps",
       "domain": "public_maintenance",
       "name": "Public lamps",
-      "description": "Public lamps applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain lighting in shared outdoor spaces.",
       "detailed": false
     },
     {
       "id": "public_maintenance.public_latrines",
       "domain": "public_maintenance",
       "name": "Public latrines",
-      "description": "Public latrines applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Care for privies serving the wider settlement.",
       "detailed": false
     },
     {
       "id": "public_maintenance.fire_cisterns",
       "domain": "public_maintenance",
       "name": "Fire cisterns",
-      "description": "Fire cisterns applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep emergency water reserves ready for fires.",
       "detailed": false
     },
     {
       "id": "public_maintenance.market_repairs",
       "domain": "public_maintenance",
       "name": "Market repairs",
-      "description": "Market repairs applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Repair structures used by trading stalls.",
       "detailed": false
     },
     {
       "id": "public_maintenance.notice_boards",
       "domain": "public_maintenance",
       "name": "Notice boards",
-      "description": "Notice boards applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain readable spaces for public announcements.",
       "detailed": false
     },
     {
       "id": "public_maintenance.tree_hazards",
       "domain": "public_maintenance",
       "name": "Tree hazards",
-      "description": "Tree hazards applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remove branches threatening paths or houses.",
       "detailed": false
     },
     {
       "id": "public_maintenance.waste_collection",
       "domain": "public_maintenance",
       "name": "Waste collection",
-      "description": "Waste collection applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Collect refuse from shared village spaces.",
       "detailed": false
     },
     {
       "id": "public_maintenance.tool_depots",
       "domain": "public_maintenance",
       "name": "Tool depots",
-      "description": "Tool depots applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage stores of communal repair tools.",
       "detailed": false
     },
     {
       "id": "public_maintenance.maintenance_ledgers",
       "domain": "public_maintenance",
       "name": "Maintenance ledgers",
-      "description": "Maintenance ledgers applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record completed repairs and outstanding defects.",
       "detailed": false
     },
     {
       "id": "public_maintenance.public_works_scheduling",
       "domain": "public_maintenance",
       "name": "Public works scheduling",
-      "description": "Public works scheduling applies public maintenance to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Assign labour to recurring communal repairs.",
       "detailed": false
     }
   ]

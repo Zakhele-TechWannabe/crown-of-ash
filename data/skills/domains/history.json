@@ -5,105 +5,105 @@
       "id": "history.oral_histories",
       "domain": "history",
       "name": "Oral histories",
-      "description": "Oral histories applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Gather memories passed down through speech.",
       "detailed": false
     },
     {
       "id": "history.chronicle_writing",
       "domain": "history",
       "name": "Chronicle writing",
-      "description": "Chronicle writing applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange notable events into dated narratives.",
       "detailed": false
     },
     {
       "id": "history.dynastic_records",
       "domain": "history",
       "name": "Dynastic records",
-      "description": "Dynastic records applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Study records of ruling houses and successions.",
       "detailed": false
     },
     {
       "id": "history.genealogy",
       "domain": "history",
       "name": "Genealogy",
-      "description": "Genealogy applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Trace descent through documented parent links.",
       "detailed": false
     },
     {
       "id": "history.local_gazetteers",
       "domain": "history",
       "name": "Local gazetteers",
-      "description": "Local gazetteers applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compile accounts of a place's people and resources.",
       "detailed": false
     },
     {
       "id": "history.source_comparison",
       "domain": "history",
       "name": "Source comparison",
-      "description": "Source comparison applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare conflicting witnesses to earlier events.",
       "detailed": false
     },
     {
       "id": "history.date_reconciliation",
       "domain": "history",
       "name": "Date reconciliation",
-      "description": "Date reconciliation applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Reconcile different calendars and uncertain event dates.",
       "detailed": false
     },
     {
       "id": "history.artifact_reading",
       "domain": "history",
       "name": "Artifact reading",
-      "description": "Artifact reading applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret surviving objects as evidence of former life.",
       "detailed": false
     },
     {
       "id": "history.biography",
       "domain": "history",
       "name": "Biography",
-      "description": "Biography applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write accounts of individual lives.",
       "detailed": false
     },
     {
       "id": "history.war_records",
       "domain": "history",
       "name": "War records",
-      "description": "War records applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Preserve records of campaigns and military disputes.",
       "detailed": false
     },
     {
       "id": "history.migration_records",
       "domain": "history",
       "name": "Migration records",
-      "description": "Migration records applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Track movements of families between regions.",
       "detailed": false
     },
     {
       "id": "history.economic_histories",
       "domain": "history",
       "name": "Economic histories",
-      "description": "Economic histories applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Study changing production, exchange and livelihoods.",
       "detailed": false
     },
     {
       "id": "history.archive_surveys",
       "domain": "history",
       "name": "Archive surveys",
-      "description": "Archive surveys applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Search collections for overlooked historical evidence.",
       "detailed": false
     },
     {
       "id": "history.historical_commentary",
       "domain": "history",
       "name": "Historical commentary",
-      "description": "Historical commentary applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Explain historical claims with supporting argument.",
       "detailed": false
     },
     {
       "id": "history.historian_teaching",
       "domain": "history",
       "name": "Historian teaching",
-      "description": "Historian teaching applies history to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach careful reconstruction of the past.",
       "detailed": false
     }
   ]

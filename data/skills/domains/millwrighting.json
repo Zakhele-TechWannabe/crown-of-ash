@@ -5,105 +5,105 @@
       "id": "millwrighting.mill_siting",
       "domain": "millwrighting",
       "name": "Mill siting",
-      "description": "Mill siting applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose mill locations with dependable power.",
       "detailed": false
     },
     {
       "id": "millwrighting.wheel_building",
       "domain": "millwrighting",
       "name": "Wheel building",
-      "description": "Wheel building applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build rotating wheels driven by flowing water.",
       "detailed": false
     },
     {
       "id": "millwrighting.millstones",
       "domain": "millwrighting",
       "name": "Millstones",
-      "description": "Millstones applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Shape paired stones for grinding grain.",
       "detailed": false
     },
     {
       "id": "millwrighting.gearing",
       "domain": "millwrighting",
       "name": "Gearing",
-      "description": "Gearing applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fit gears transmitting rotation between shafts.",
       "detailed": false
     },
     {
       "id": "millwrighting.shaft_alignment",
       "domain": "millwrighting",
       "name": "Shaft alignment",
-      "description": "Shaft alignment applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Align rotating parts to avoid destructive strain.",
       "detailed": false
     },
     {
       "id": "millwrighting.water_races",
       "domain": "millwrighting",
       "name": "Water races",
-      "description": "Water races applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Construct channels feeding and draining watermills.",
       "detailed": false
     },
     {
       "id": "millwrighting.grain_hoppers",
       "domain": "millwrighting",
       "name": "Grain hoppers",
-      "description": "Grain hoppers applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build feeders delivering grain steadily.",
       "detailed": false
     },
     {
       "id": "millwrighting.flour_sieves",
       "domain": "millwrighting",
       "name": "Flour sieves",
-      "description": "Flour sieves applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make screens separating flour by fineness.",
       "detailed": false
     },
     {
       "id": "millwrighting.wind_vanes",
       "domain": "millwrighting",
       "name": "Wind vanes",
-      "description": "Wind vanes applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fit surfaces that respond to wind direction.",
       "detailed": false
     },
     {
       "id": "millwrighting.mill_balancing",
       "domain": "millwrighting",
       "name": "Mill balancing",
-      "description": "Mill balancing applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Balance rotating assemblies against damaging vibration.",
       "detailed": false
     },
     {
       "id": "millwrighting.bearing_care",
       "domain": "millwrighting",
       "name": "Bearing care",
-      "description": "Bearing care applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain supports beneath turning mill shafts.",
       "detailed": false
     },
     {
       "id": "millwrighting.power_transmission",
       "domain": "millwrighting",
       "name": "Power transmission",
-      "description": "Power transmission applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Carry mechanical power to distant working parts.",
       "detailed": false
     },
     {
       "id": "millwrighting.mill_repair",
       "domain": "millwrighting",
       "name": "Mill repair",
-      "description": "Mill repair applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore worn mills to productive service.",
       "detailed": false
     },
     {
       "id": "millwrighting.mill_safety",
       "domain": "millwrighting",
       "name": "Mill safety",
-      "description": "Mill safety applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Guard workers against moving machinery.",
       "detailed": false
     },
     {
       "id": "millwrighting.mill_design",
       "domain": "millwrighting",
       "name": "Mill design",
-      "description": "Mill design applies millwrighting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan power, grain flow and mill structures.",
       "detailed": false
     }
   ]

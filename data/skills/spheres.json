@@ -57,6 +57,6 @@
     "id": "cultivation",
     "name": "Cultivation",
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   }
 ]

@@ -5,105 +5,105 @@
       "id": "funerary_care.body_washing",
       "domain": "funerary_care",
       "name": "Body washing",
-      "description": "Body washing applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Clean a deceased person's body respectfully.",
       "detailed": false
     },
     {
       "id": "funerary_care.shroud_making",
       "domain": "funerary_care",
       "name": "Shroud making",
-      "description": "Shroud making applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare burial cloth appropriate to local custom.",
       "detailed": false
     },
     {
       "id": "funerary_care.coffin_preparation",
       "domain": "funerary_care",
       "name": "Coffin preparation",
-      "description": "Coffin preparation applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Ready a coffin for a planned burial.",
       "detailed": false
     },
     {
       "id": "funerary_care.grave_tending",
       "domain": "funerary_care",
       "name": "Grave tending",
-      "description": "Grave tending applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain burial grounds against weeds and erosion.",
       "detailed": false
     },
     {
       "id": "funerary_care.mourning_rites",
       "domain": "funerary_care",
       "name": "Mourning rites",
-      "description": "Mourning rites applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe customs surrounding bereavement and remembrance.",
       "detailed": false
     },
     {
       "id": "funerary_care.memorial_tablets",
       "domain": "funerary_care",
       "name": "Memorial tablets",
-      "description": "Memorial tablets applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare named tablets honouring deceased relatives.",
       "detailed": false
     },
     {
       "id": "funerary_care.ancestor_records",
       "domain": "funerary_care",
       "name": "Ancestor records",
-      "description": "Ancestor records applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record ancestors for later family remembrance.",
       "detailed": false
     },
     {
       "id": "funerary_care.funeral_procession",
       "domain": "funerary_care",
       "name": "Funeral procession",
-      "description": "Funeral procession applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Organise a respectful journey to burial.",
       "detailed": false
     },
     {
       "id": "funerary_care.offerings",
       "domain": "funerary_care",
       "name": "Offerings",
-      "description": "Offerings applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange food, incense and memorial gifts.",
       "detailed": false
     },
     {
       "id": "funerary_care.burial_planning",
       "domain": "funerary_care",
       "name": "Burial planning",
-      "description": "Burial planning applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose burial arrangements within family resources.",
       "detailed": false
     },
     {
       "id": "funerary_care.bereavement_support",
       "domain": "funerary_care",
       "name": "Bereavement support",
-      "description": "Bereavement support applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Support relatives suffering a recent loss.",
       "detailed": false
     },
     {
       "id": "funerary_care.tomb_repair",
       "domain": "funerary_care",
       "name": "Tomb repair",
-      "description": "Tomb repair applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Repair damaged ancestral burial structures.",
       "detailed": false
     },
     {
       "id": "funerary_care.ritual_calendars",
       "domain": "funerary_care",
       "name": "Ritual calendars",
-      "description": "Ritual calendars applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Track dates requiring family memorial observances.",
       "detailed": false
     },
     {
       "id": "funerary_care.community_remembrance",
       "domain": "funerary_care",
       "name": "Community remembrance",
-      "description": "Community remembrance applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Organise remembrance of former village residents.",
       "detailed": false
     },
     {
       "id": "funerary_care.funerary_stewardship",
       "domain": "funerary_care",
       "name": "Funerary stewardship",
-      "description": "Funerary stewardship applies funerary care to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate burial duties when deaths are enabled.",
       "detailed": false
     }
   ]

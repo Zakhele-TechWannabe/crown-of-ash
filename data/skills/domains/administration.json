@@ -5,105 +5,105 @@
       "id": "administration.census_taking",
       "domain": "administration",
       "name": "Census taking",
-      "description": "Census taking applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Count residents and record household composition.",
       "detailed": false
     },
     {
       "id": "administration.registry_keeping",
       "domain": "administration",
       "name": "Registry keeping",
-      "description": "Registry keeping applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain dependable lists of people and holdings.",
       "detailed": false
     },
     {
       "id": "administration.tax_assessment",
       "domain": "administration",
       "name": "Tax assessment",
-      "description": "Tax assessment applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Estimate levies from recognised taxable resources.",
       "detailed": false
     },
     {
       "id": "administration.petition_handling",
       "domain": "administration",
       "name": "Petition handling",
-      "description": "Petition handling applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Receive and route formal public requests.",
       "detailed": false
     },
     {
       "id": "administration.office_correspondence",
       "domain": "administration",
       "name": "Office correspondence",
-      "description": "Office correspondence applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write correspondence on behalf of an office.",
       "detailed": false
     },
     {
       "id": "administration.seals_and_warrants",
       "domain": "administration",
       "name": "Seals and warrants",
-      "description": "Seals and warrants applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Issue authenticated orders using recognised seals.",
       "detailed": false
     },
     {
       "id": "administration.public_notices",
       "domain": "administration",
       "name": "Public notices",
-      "description": "Public notices applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Publish decisions so affected villagers can learn.",
       "detailed": false
     },
     {
       "id": "administration.work_orders",
       "domain": "administration",
       "name": "Work orders",
-      "description": "Work orders applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Turn decisions into clear assigned tasks.",
       "detailed": false
     },
     {
       "id": "administration.budget_drafting",
       "domain": "administration",
       "name": "Budget drafting",
-      "description": "Budget drafting applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan expenditures against available public resources.",
       "detailed": false
     },
     {
       "id": "administration.granary_auditing",
       "domain": "administration",
       "name": "Granary auditing",
-      "description": "Granary auditing applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare grain records with actual holdings.",
       "detailed": false
     },
     {
       "id": "administration.official_archives",
       "domain": "administration",
       "name": "Official archives",
-      "description": "Official archives applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Preserve documents needed for continuing governance.",
       "detailed": false
     },
     {
       "id": "administration.clerk_training",
       "domain": "administration",
       "name": "Clerk training",
-      "description": "Clerk training applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach reliable habits to junior scribes.",
       "detailed": false
     },
     {
       "id": "administration.inspection_rounds",
       "domain": "administration",
       "name": "Inspection rounds",
-      "description": "Inspection rounds applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Check conditions reported by local officials.",
       "detailed": false
     },
     {
       "id": "administration.policy_reading",
       "domain": "administration",
       "name": "Policy reading",
-      "description": "Policy reading applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret adopted rules before applying them.",
       "detailed": false
     },
     {
       "id": "administration.district_administration",
       "domain": "administration",
       "name": "District administration",
-      "description": "District administration applies administration to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate routine governance across several settlements.",
       "detailed": false
     }
   ]

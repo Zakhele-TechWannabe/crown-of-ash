@@ -5,7 +5,7 @@
       "id": "grain_farming.farming",
       "domain": "grain_farming",
       "name": "Farming",
-      "description": "Farming: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Grow rice and millet for village granaries.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -285,7 +285,7 @@
       "id": "grain_farming.nursery_care",
       "domain": "grain_farming",
       "name": "Nursery care",
-      "description": "Nursery care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep young rice seedlings healthy.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -556,7 +556,7 @@
       "id": "grain_farming.transplanting",
       "domain": "grain_farming",
       "name": "Transplanting",
-      "description": "Transplanting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Move seedlings into flooded paddies.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -827,7 +827,7 @@
       "id": "grain_farming.dryland_sowing",
       "domain": "grain_farming",
       "name": "Dryland sowing",
-      "description": "Dryland sowing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sow millet into rain-fed ground.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1098,7 +1098,7 @@
       "id": "grain_farming.terrace_tending",
       "domain": "grain_farming",
       "name": "Terrace tending",
-      "description": "Terrace tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain stepped fields on hillsides.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1369,7 +1369,7 @@
       "id": "grain_farming.water_scheduling",
       "domain": "grain_farming",
       "name": "Water scheduling",
-      "description": "Water scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Allocate field water across seasons.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1640,7 +1640,7 @@
       "id": "grain_farming.seed_husbandry",
       "domain": "grain_farming",
       "name": "Seed husbandry",
-      "description": "Seed husbandry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Select sound grain for next sowing.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1911,7 +1911,7 @@
       "id": "grain_farming.grain_threshing",
       "domain": "grain_farming",
       "name": "Grain threshing",
-      "description": "Grain threshing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Separate kernels from harvested stalks.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2182,7 +2182,7 @@
       "id": "grain_farming.winnowing",
       "domain": "grain_farming",
       "name": "Winnowing",
-      "description": "Winnowing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Blow chaff away from grain.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2453,7 +2453,7 @@
       "id": "grain_farming.harvest_planning",
       "domain": "grain_farming",
       "name": "Harvest planning",
-      "description": "Harvest planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Time reaping before storms arrive.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2724,7 +2724,7 @@
       "id": "grain_farming.pest_watching",
       "domain": "grain_farming",
       "name": "Pest watching",
-      "description": "Pest watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Spot insects before crops suffer.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2995,7 +2995,7 @@
       "id": "grain_farming.fallow_rotation",
       "domain": "grain_farming",
       "name": "Fallow rotation",
-      "description": "Fallow rotation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Rest exhausted fields between plantings.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3266,7 +3266,7 @@
       "id": "grain_farming.draft_ploughing",
       "domain": "grain_farming",
       "name": "Draft ploughing",
-      "description": "Draft ploughing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Guide oxen through heavy furrows.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3537,7 +3537,7 @@
       "id": "grain_farming.grain_storage",
       "domain": "grain_farming",
       "name": "Grain storage",
-      "description": "Grain storage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep harvested cereals dry and vermin-free.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3808,7 +3808,7 @@
       "id": "grain_farming.field_stewardship",
       "domain": "grain_farming",
       "name": "Field stewardship",
-      "description": "Field stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate a holding's seasonal fieldwork.",
       "detailed": true,
       "key_attributes": [
         "endurance",

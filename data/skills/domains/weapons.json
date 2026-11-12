@@ -5,105 +5,105 @@
       "id": "weapons.staff",
       "domain": "weapons",
       "name": "Staff",
-      "description": "Staff applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use a long wooden staff for reach.",
       "detailed": false
     },
     {
       "id": "weapons.spear",
       "domain": "weapons",
       "name": "Spear",
-      "description": "Spear applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Control a pointed pole through thrusting technique.",
       "detailed": false
     },
     {
       "id": "weapons.blade",
       "domain": "weapons",
       "name": "Blade",
-      "description": "Blade applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Wield a single-edged cutting weapon.",
       "detailed": false
     },
     {
       "id": "weapons.straight_sword",
       "domain": "weapons",
       "name": "Straight sword",
-      "description": "Straight sword applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use a double-edged sword with precise lines.",
       "detailed": false
     },
     {
       "id": "weapons.axe",
       "domain": "weapons",
       "name": "Axe",
-      "description": "Axe applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Strike and recover with a weighted axe.",
       "detailed": false
     },
     {
       "id": "weapons.hammer",
       "domain": "weapons",
       "name": "Hammer",
-      "description": "Hammer applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Control heavy blunt blows without overextension.",
       "detailed": false
     },
     {
       "id": "weapons.shield",
       "domain": "weapons",
       "name": "Shield",
-      "description": "Shield applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use a carried shield to cover openings.",
       "detailed": false
     },
     {
       "id": "weapons.polearm",
       "domain": "weapons",
       "name": "Polearm",
-      "description": "Polearm applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Handle long-shafted weapons with complex heads.",
       "detailed": false
     },
     {
       "id": "weapons.twin_weapons",
       "domain": "weapons",
       "name": "Twin weapons",
-      "description": "Twin weapons applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate a weapon in each hand.",
       "detailed": false
     },
     {
       "id": "weapons.chain_weapons",
       "domain": "weapons",
       "name": "Chain weapons",
-      "description": "Chain weapons applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage flexible weapons without striking oneself.",
       "detailed": false
     },
     {
       "id": "weapons.weapon_care",
       "domain": "weapons",
       "name": "Weapon care",
-      "description": "Weapon care applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep martial equipment sound and serviceable.",
       "detailed": false
     },
     {
       "id": "weapons.distance_control",
       "domain": "weapons",
       "name": "Distance control",
-      "description": "Distance control applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Judge the reach separating armed opponents.",
       "detailed": false
     },
     {
       "id": "weapons.weapon_sparring",
       "domain": "weapons",
       "name": "Weapon sparring",
-      "description": "Weapon sparring applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Practise armed exchanges using safe equipment.",
       "detailed": false
     },
     {
       "id": "weapons.weapon_forms",
       "domain": "weapons",
       "name": "Weapon forms",
-      "description": "Weapon forms applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Rehearse linked techniques with a chosen weapon.",
       "detailed": false
     },
     {
       "id": "weapons.weapons_instruction",
       "domain": "weapons",
       "name": "Weapons instruction",
-      "description": "Weapons instruction applies weapons to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Train pupils in responsible armed practice.",
       "detailed": false
     }
   ]

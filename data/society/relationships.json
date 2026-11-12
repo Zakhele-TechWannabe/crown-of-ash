@@ -1,0 +1,92 @@
+{
+  "compatibility": [
+    [
+      "hot_tempered",
+      "patient",
+      -8
+    ],
+    [
+      "curious",
+      "curious",
+      12
+    ],
+    [
+      "diligent",
+      "lazy",
+      -10
+    ],
+    [
+      "patient",
+      "patient",
+      8
+    ]
+  ],
+  "events": {
+    "shared_work": {
+      "opinion": 4,
+      "familiarity": 20,
+      "trust": 2
+    },
+    "meal": {
+      "opinion": 1,
+      "familiarity": 4,
+      "trust": 1
+    },
+    "hunger_help": {
+      "opinion": 15,
+      "trust": 10
+    },
+    "teaching": {
+      "opinion": 8,
+      "trust": 5
+    },
+    "saved_life": {
+      "opinion": 60,
+      "trust": 30,
+      "bond": 512
+    },
+    "festival_insult": {
+      "opinion": -12,
+      "trust": -3
+    },
+    "competition": {
+      "opinion": -15,
+      "bond": 128
+    },
+    "theft": {
+      "opinion": -35,
+      "trust": -25
+    },
+    "betrayal": {
+      "opinion": -80,
+      "trust": -80
+    },
+    "marriage": {
+      "opinion": 10,
+      "trust": 10,
+      "bond": 8
+    },
+    "apology": {
+      "opinion": 20,
+      "trust": 5
+    },
+    "mediation": {
+      "opinion": 15,
+      "trust": 5
+    },
+    "duel": {
+      "opinion": 5
+    },
+    "revenge": {
+      "opinion": -5
+    },
+    "filial_care": {
+      "opinion": 8,
+      "trust": 5
+    },
+    "first_cultivator": {
+      "opinion": 25,
+      "trust": 5
+    }
+  }
+}

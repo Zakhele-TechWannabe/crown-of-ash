@@ -1,0 +1,20 @@
+{
+  "week_days": 7,
+  "qi_site_visit_per_day": 0.00025,
+  "meditation_insight_per_day": 2e-05,
+  "spirit_fruit_find_per_day": 1e-05,
+  "ruin_manual_find_per_day": 1e-05,
+  "wanderer_per_year": 0.08,
+  "wanderer_manual_gift": 0.4,
+  "technique_creation_per_day": 1e-05,
+  "birth_per_day": 0.00045,
+  "birth_spacing_days": 730,
+  "fertility_min_age": 18,
+  "fertility_max_age": 44,
+  "child_sign_min_age": 6,
+  "child_sign_max_age": 12,
+  "complete_manual_share": 0.08,
+  "marriage_age_gap": 20,
+  "mixed_cultivation_opinion": 70,
+  "extended_kin_exclusion": false
+}

@@ -5,105 +5,105 @@
       "id": "archery.bow_stance",
       "domain": "archery",
       "name": "Bow stance",
-      "description": "Bow stance applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Stand so bow draw remains aligned.",
       "detailed": false
     },
     {
       "id": "archery.drawing",
       "domain": "archery",
       "name": "Drawing",
-      "description": "Drawing applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Pull a bow smoothly to a repeatable anchor.",
       "detailed": false
     },
     {
       "id": "archery.release",
       "domain": "archery",
       "name": "Release",
-      "description": "Release applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Loose the string without disturbing aim.",
       "detailed": false
     },
     {
       "id": "archery.aiming",
       "domain": "archery",
       "name": "Aiming",
-      "description": "Aiming applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Align arrow and target before release.",
       "detailed": false
     },
     {
       "id": "archery.range_judging",
       "domain": "archery",
       "name": "Range judging",
-      "description": "Range judging applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Estimate distance for appropriate arrow elevation.",
       "detailed": false
     },
     {
       "id": "archery.moving_targets",
       "domain": "archery",
       "name": "Moving targets",
-      "description": "Moving targets applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lead targets moving across a shooting field.",
       "detailed": false
     },
     {
       "id": "archery.mounted_shooting",
       "domain": "archery",
       "name": "Mounted shooting",
-      "description": "Mounted shooting applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Shoot while maintaining balance on a moving horse.",
       "detailed": false
     },
     {
       "id": "archery.long_shooting",
       "domain": "archery",
       "name": "Long shooting",
-      "description": "Long shooting applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Send arrows accurately toward distant marks.",
       "detailed": false
     },
     {
       "id": "archery.volley_shooting",
       "domain": "archery",
       "name": "Volley shooting",
-      "description": "Volley shooting applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate timed arrow releases within a group.",
       "detailed": false
     },
     {
       "id": "archery.bow_tuning",
       "domain": "archery",
       "name": "Bow tuning",
-      "description": "Bow tuning applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Adjust bow setup for consistent arrow flight.",
       "detailed": false
     },
     {
       "id": "archery.string_making",
       "domain": "archery",
       "name": "String making",
-      "description": "String making applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Twist and maintain dependable bowstrings.",
       "detailed": false
     },
     {
       "id": "archery.arrow_fletching",
       "domain": "archery",
       "name": "Arrow fletching",
-      "description": "Arrow fletching applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fit feathers stabilising an arrow's flight.",
       "detailed": false
     },
     {
       "id": "archery.wind_reading",
       "domain": "archery",
       "name": "Wind reading",
-      "description": "Wind reading applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Allow for wind acting upon arrows.",
       "detailed": false
     },
     {
       "id": "archery.competition_shooting",
       "domain": "archery",
       "name": "Competition shooting",
-      "description": "Competition shooting applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perform accurately under formal shooting rules.",
       "detailed": false
     },
     {
       "id": "archery.archery_instruction",
       "domain": "archery",
       "name": "Archery instruction",
-      "description": "Archery instruction applies archery to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach repeatable and safe bow technique.",
       "detailed": false
     }
   ]

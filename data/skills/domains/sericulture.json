@@ -5,105 +5,105 @@
       "id": "sericulture.silkworm_rearing",
       "domain": "sericulture",
       "name": "Silkworm rearing",
-      "description": "Silkworm rearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Rear silkworms through their feeding stages.",
       "detailed": false
     },
     {
       "id": "sericulture.mulberry_pruning",
       "domain": "sericulture",
       "name": "Mulberry pruning",
-      "description": "Mulberry pruning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prune mulberries for plentiful tender leaves.",
       "detailed": false
     },
     {
       "id": "sericulture.egg_keeping",
       "domain": "sericulture",
       "name": "Egg keeping",
-      "description": "Egg keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Store silkworm eggs until hatching time.",
       "detailed": false
     },
     {
       "id": "sericulture.larva_feeding",
       "domain": "sericulture",
       "name": "Larva feeding",
-      "description": "Larva feeding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Feed larvae clean leaves at proper intervals.",
       "detailed": false
     },
     {
       "id": "sericulture.cocoon_sorting",
       "domain": "sericulture",
       "name": "Cocoon sorting",
-      "description": "Cocoon sorting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Separate intact cocoons by thread quality.",
       "detailed": false
     },
     {
       "id": "sericulture.reeling",
       "domain": "sericulture",
       "name": "Reeling",
-      "description": "Reeling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Unwind continuous silk filaments from cocoons.",
       "detailed": false
     },
     {
       "id": "sericulture.silk_grading",
       "domain": "sericulture",
       "name": "Silk grading",
-      "description": "Silk grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Classify raw silk by fineness and strength.",
       "detailed": false
     },
     {
       "id": "sericulture.disease_watching",
       "domain": "sericulture",
       "name": "Disease watching",
-      "description": "Disease watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Watch rearing trays for spreading sickness.",
       "detailed": false
     },
     {
       "id": "sericulture.rearing_room_care",
       "domain": "sericulture",
       "name": "Rearing room care",
-      "description": "Rearing room care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep silkworm rooms clean and evenly warm.",
       "detailed": false
     },
     {
       "id": "sericulture.thread_joining",
       "domain": "sericulture",
       "name": "Thread joining",
-      "description": "Thread joining: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Join broken filaments into workable thread.",
       "detailed": false
     },
     {
       "id": "sericulture.leaf_storage",
       "domain": "sericulture",
       "name": "Leaf storage",
-      "description": "Leaf storage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep picked mulberry leaves fresh.",
       "detailed": false
     },
     {
       "id": "sericulture.moth_breeding",
       "domain": "sericulture",
       "name": "Moth breeding",
-      "description": "Moth breeding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Select moths for healthy egg production.",
       "detailed": false
     },
     {
       "id": "sericulture.silk_washing",
       "domain": "sericulture",
       "name": "Silk washing",
-      "description": "Silk washing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Clean gum and debris from raw silk.",
       "detailed": false
     },
     {
       "id": "sericulture.waste_silk_spinning",
       "domain": "sericulture",
       "name": "Waste silk spinning",
-      "description": "Waste silk spinning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Spin short discarded silk fibres.",
       "detailed": false
     },
     {
       "id": "sericulture.sericulture_planning",
       "domain": "sericulture",
       "name": "Sericulture planning",
-      "description": "Sericulture planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate eggs, leaves, labour and reeling.",
       "detailed": false
     }
   ]

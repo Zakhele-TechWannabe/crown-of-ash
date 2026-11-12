@@ -5,105 +5,105 @@
       "id": "lacquer.sap_tapping",
       "domain": "lacquer",
       "name": "Sap tapping",
-      "description": "Sap tapping applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Tap lacquer trees for usable sap.",
       "detailed": false
     },
     {
       "id": "lacquer.sap_filtering",
       "domain": "lacquer",
       "name": "Sap filtering",
-      "description": "Sap filtering applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Strain debris from raw lacquer resin.",
       "detailed": false
     },
     {
       "id": "lacquer.ground_coats",
       "domain": "lacquer",
       "name": "Ground coats",
-      "description": "Ground coats applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare underlying layers for durable lacquerware.",
       "detailed": false
     },
     {
       "id": "lacquer.layer_brushing",
       "domain": "lacquer",
       "name": "Layer brushing",
-      "description": "Layer brushing applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Brush thin resin coats onto prepared objects.",
       "detailed": false
     },
     {
       "id": "lacquer.dust_control",
       "domain": "lacquer",
       "name": "Dust control",
-      "description": "Dust control applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep dust from settling on wet lacquer.",
       "detailed": false
     },
     {
       "id": "lacquer.curing_chambers",
       "domain": "lacquer",
       "name": "Curing chambers",
-      "description": "Curing chambers applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain humid rooms where lacquer hardens.",
       "detailed": false
     },
     {
       "id": "lacquer.pigment_mixing",
       "domain": "lacquer",
       "name": "Pigment mixing",
-      "description": "Pigment mixing applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Mix colourants into compatible lacquer bases.",
       "detailed": false
     },
     {
       "id": "lacquer.inlay_work",
       "domain": "lacquer",
       "name": "Inlay work",
-      "description": "Inlay work applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Embed decorative shell or metal into surfaces.",
       "detailed": false
     },
     {
       "id": "lacquer.lacquer_carving",
       "domain": "lacquer",
       "name": "Lacquer carving",
-      "description": "Lacquer carving applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Cut relief patterns through thick lacquer.",
       "detailed": false
     },
     {
       "id": "lacquer.polishing",
       "domain": "lacquer",
       "name": "Polishing",
-      "description": "Polishing applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Smooth cured lacquer to a deep lustre.",
       "detailed": false
     },
     {
       "id": "lacquer.vessel_sealing",
       "domain": "lacquer",
       "name": "Vessel sealing",
-      "description": "Vessel sealing applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Seal wooden vessels against absorbed liquids.",
       "detailed": false
     },
     {
       "id": "lacquer.lacquer_repair",
       "domain": "lacquer",
       "name": "Lacquer repair",
-      "description": "Lacquer repair applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore chipped or damaged lacquer coatings.",
       "detailed": false
     },
     {
       "id": "lacquer.toxic_sap_care",
       "domain": "lacquer",
       "name": "Toxic sap care",
-      "description": "Toxic sap care applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Handle irritating raw sap with care.",
       "detailed": false
     },
     {
       "id": "lacquer.pattern_transfer",
       "domain": "lacquer",
       "name": "Pattern transfer",
-      "description": "Pattern transfer applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Transfer designs onto curved lacquer surfaces.",
       "detailed": false
     },
     {
       "id": "lacquer.lacquer_commissions",
       "domain": "lacquer",
       "name": "Lacquer commissions",
-      "description": "Lacquer commissions applies lacquer to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan layered decorative work for patrons.",
       "detailed": false
     }
   ]

@@ -5,7 +5,7 @@
       "id": "child_rearing.child_rearing",
       "domain": "child_rearing",
       "name": "Child rearing",
-      "description": "Child rearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Guide children's development within shared households.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -276,7 +276,7 @@
       "id": "child_rearing.infant_care",
       "domain": "child_rearing",
       "name": "Infant care",
-      "description": "Infant care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Feed, clean and soothe vulnerable infants.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -547,7 +547,7 @@
       "id": "child_rearing.play_learning",
       "domain": "child_rearing",
       "name": "Play learning",
-      "description": "Play learning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Use games to build coordination and curiosity.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -818,7 +818,7 @@
       "id": "child_rearing.story_teaching",
       "domain": "child_rearing",
       "name": "Story teaching",
-      "description": "Story teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Pass knowledge through memorable spoken tales.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1089,7 +1089,7 @@
       "id": "child_rearing.child_nutrition",
       "domain": "child_rearing",
       "name": "Child nutrition",
-      "description": "Child nutrition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Provide suitable food for growing children.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1360,7 +1360,7 @@
       "id": "child_rearing.child_safety",
       "domain": "child_rearing",
       "name": "Child safety",
-      "description": "Child safety: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep young people away from everyday hazards.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1631,7 +1631,7 @@
       "id": "child_rearing.youth_mentoring",
       "domain": "child_rearing",
       "name": "Youth mentoring",
-      "description": "Youth mentoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Advise adolescents learning adult responsibilities.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1902,7 +1902,7 @@
       "id": "child_rearing.sibling_guidance",
       "domain": "child_rearing",
       "name": "Sibling guidance",
-      "description": "Sibling guidance: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Help siblings cooperate without constant conflict.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2173,7 +2173,7 @@
       "id": "child_rearing.habit_teaching",
       "domain": "child_rearing",
       "name": "Habit teaching",
-      "description": "Habit teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Teach reliable routines through patient repetition.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2444,7 +2444,7 @@
       "id": "child_rearing.apprentice_readiness",
       "domain": "child_rearing",
       "name": "Apprentice readiness",
-      "description": "Apprentice readiness: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Judge when youths can begin supervised trades.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2715,7 +2715,7 @@
       "id": "child_rearing.family_mediation",
       "domain": "child_rearing",
       "name": "Family mediation",
-      "description": "Family mediation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Resolve tensions among parents and children.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2986,7 +2986,7 @@
       "id": "child_rearing.illness_watching",
       "domain": "child_rearing",
       "name": "Illness watching",
-      "description": "Illness watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Notice early signs of childhood illness.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3257,7 +3257,7 @@
       "id": "child_rearing.cradle_craft",
       "domain": "child_rearing",
       "name": "Cradle craft",
-      "description": "Cradle craft: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make safe sleeping furniture for infants.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3528,7 +3528,7 @@
       "id": "child_rearing.parent_coaching",
       "domain": "child_rearing",
       "name": "Parent coaching",
-      "description": "Parent coaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Teach new parents practical care skills.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3799,7 +3799,7 @@
       "id": "child_rearing.community_fostering",
       "domain": "child_rearing",
       "name": "Community fostering",
-      "description": "Community fostering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Arrange shared care for vulnerable children.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

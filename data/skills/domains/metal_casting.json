@@ -5,105 +5,105 @@
       "id": "metal_casting.mould_making",
       "domain": "metal_casting",
       "name": "Mould making",
-      "description": "Mould making applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Construct cavities shaped for molten metal.",
       "detailed": false
     },
     {
       "id": "metal_casting.wax_models",
       "domain": "metal_casting",
       "name": "Wax models",
-      "description": "Wax models applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sculpt wax originals for detailed castings.",
       "detailed": false
     },
     {
       "id": "metal_casting.sand_casting",
       "domain": "metal_casting",
       "name": "Sand casting",
-      "description": "Sand casting applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Cast metal inside compacted sand forms.",
       "detailed": false
     },
     {
       "id": "metal_casting.lost_wax_casting",
       "domain": "metal_casting",
       "name": "Lost wax casting",
-      "description": "Lost wax casting applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Replace sacrificial wax models with poured alloy.",
       "detailed": false
     },
     {
       "id": "metal_casting.pouring",
       "domain": "metal_casting",
       "name": "Pouring",
-      "description": "Pouring applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Deliver molten metal without breaking the mould.",
       "detailed": false
     },
     {
       "id": "metal_casting.runner_cutting",
       "domain": "metal_casting",
       "name": "Runner cutting",
-      "description": "Runner cutting applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Cut channels feeding a cast piece.",
       "detailed": false
     },
     {
       "id": "metal_casting.shrinkage_judging",
       "domain": "metal_casting",
       "name": "Shrinkage judging",
-      "description": "Shrinkage judging applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Allow for cooling contraction in mould dimensions.",
       "detailed": false
     },
     {
       "id": "metal_casting.bronze_vessels",
       "domain": "metal_casting",
       "name": "Bronze vessels",
-      "description": "Bronze vessels applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Cast bronze bowls, tripods and ritual ware.",
       "detailed": false
     },
     {
       "id": "metal_casting.bell_casting",
       "domain": "metal_casting",
       "name": "Bell casting",
-      "description": "Bell casting applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Cast resonant bells with controlled wall thickness.",
       "detailed": false
     },
     {
       "id": "metal_casting.iron_casting",
       "domain": "metal_casting",
       "name": "Iron casting",
-      "description": "Iron casting applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Pour iron into durable working forms.",
       "detailed": false
     },
     {
       "id": "metal_casting.casting_repair",
       "domain": "metal_casting",
       "name": "Casting repair",
-      "description": "Casting repair applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Repair defects in finished cast metal.",
       "detailed": false
     },
     {
       "id": "metal_casting.surface_chasing",
       "domain": "metal_casting",
       "name": "Surface chasing",
-      "description": "Surface chasing applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Refine cast surfaces with chasing tools.",
       "detailed": false
     },
     {
       "id": "metal_casting.alloy_weighing",
       "domain": "metal_casting",
       "name": "Alloy weighing",
-      "description": "Alloy weighing applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Weigh alloy ingredients before melting.",
       "detailed": false
     },
     {
       "id": "metal_casting.mould_drying",
       "domain": "metal_casting",
       "name": "Mould drying",
-      "description": "Mould drying applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remove mould moisture before dangerous pours.",
       "detailed": false
     },
     {
       "id": "metal_casting.foundry_planning",
       "domain": "metal_casting",
       "name": "Foundry planning",
-      "description": "Foundry planning applies metal casting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange foundry operations around heat and labour.",
       "detailed": false
     }
   ]

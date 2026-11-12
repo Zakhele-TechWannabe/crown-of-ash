@@ -5,7 +5,7 @@
       "id": "mines_and_ores.mining",
       "domain": "mines_and_ores",
       "name": "Mining",
-      "description": "Mining: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Recover useful ore from mineral workings.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -285,7 +285,7 @@
       "id": "mines_and_ores.prospecting",
       "domain": "mines_and_ores",
       "name": "Prospecting",
-      "description": "Prospecting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Search out signs of buried mineral deposits.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -556,7 +556,7 @@
       "id": "mines_and_ores.tunnel_digging",
       "domain": "mines_and_ores",
       "name": "Tunnel digging",
-      "description": "Tunnel digging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Excavate passages through earth and rock.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -827,7 +827,7 @@
       "id": "mines_and_ores.ore_sorting",
       "domain": "mines_and_ores",
       "name": "Ore sorting",
-      "description": "Ore sorting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Separate promising ore from barren waste.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1098,7 +1098,7 @@
       "id": "mines_and_ores.mine_shoring",
       "domain": "mines_and_ores",
       "name": "Mine shoring",
-      "description": "Mine shoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Support tunnels with fitted timber frames.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1369,7 +1369,7 @@
       "id": "mines_and_ores.mine_drainage",
       "domain": "mines_and_ores",
       "name": "Mine drainage",
-      "description": "Mine drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Remove accumulated water from mine workings.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1640,7 +1640,7 @@
       "id": "mines_and_ores.ventilation",
       "domain": "mines_and_ores",
       "name": "Ventilation",
-      "description": "Ventilation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Carry breathable air through underground passages.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1911,7 +1911,7 @@
       "id": "mines_and_ores.vein_reading",
       "domain": "mines_and_ores",
       "name": "Vein reading",
-      "description": "Vein reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Follow mineral veins through changing rock.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2182,7 +2182,7 @@
       "id": "mines_and_ores.shaft_sinking",
       "domain": "mines_and_ores",
       "name": "Shaft sinking",
-      "description": "Shaft sinking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sink vertical openings for access below.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2453,7 +2453,7 @@
       "id": "mines_and_ores.ore_hauling",
       "domain": "mines_and_ores",
       "name": "Ore hauling",
-      "description": "Ore hauling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Move broken ore to the surface.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2724,7 +2724,7 @@
       "id": "mines_and_ores.pick_maintenance",
       "domain": "mines_and_ores",
       "name": "Pick maintenance",
-      "description": "Pick maintenance: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sharpen and repair miners' picks.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2995,7 +2995,7 @@
       "id": "mines_and_ores.wash_dressing",
       "domain": "mines_and_ores",
       "name": "Wash dressing",
-      "description": "Wash dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Concentrate crushed ore using water.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3266,7 +3266,7 @@
       "id": "mines_and_ores.mine_surveying",
       "domain": "mines_and_ores",
       "name": "Mine surveying",
-      "description": "Mine surveying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Measure underground workings against surface landmarks.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3537,7 +3537,7 @@
       "id": "mines_and_ores.hazard_watching",
       "domain": "mines_and_ores",
       "name": "Hazard watching",
-      "description": "Hazard watching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Watch for collapses, fumes and flooding.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3808,7 +3808,7 @@
       "id": "mines_and_ores.mine_planning",
       "domain": "mines_and_ores",
       "name": "Mine planning",
-      "description": "Mine planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Plan safe access to mineral reserves.",
       "detailed": true,
       "key_attributes": [
         "strength",

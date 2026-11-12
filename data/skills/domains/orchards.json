@@ -5,7 +5,7 @@
       "id": "orchards.orcharding",
       "domain": "orchards",
       "name": "Orcharding",
-      "description": "Orcharding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Manage fruit trees through yearly cycles.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -257,7 +257,7 @@
       "id": "orchards.fruit_pruning",
       "domain": "orchards",
       "name": "Fruit pruning",
-      "description": "Fruit pruning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut branches to improve fruiting structure.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -528,7 +528,7 @@
       "id": "orchards.graft_tending",
       "domain": "orchards",
       "name": "Graft tending",
-      "description": "Graft tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Care for joined scions until healed.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -799,7 +799,7 @@
       "id": "orchards.bee_tending",
       "domain": "orchards",
       "name": "Bee tending",
-      "description": "Bee tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain hives that pollinate orchard blossom.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1070,7 +1070,7 @@
       "id": "orchards.pomology",
       "domain": "orchards",
       "name": "Pomology",
-      "description": "Pomology: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Identify fruit varieties and their needs.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1341,7 +1341,7 @@
       "id": "orchards.nut_growing",
       "domain": "orchards",
       "name": "Nut growing",
-      "description": "Nut growing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise trees bearing edible nuts.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1612,7 +1612,7 @@
       "id": "orchards.citrus_care",
       "domain": "orchards",
       "name": "Citrus care",
-      "description": "Citrus care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Protect citrus against frost and disease.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1883,7 +1883,7 @@
       "id": "orchards.pear_cultivation",
       "domain": "orchards",
       "name": "Pear cultivation",
-      "description": "Pear cultivation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cultivate pears suited to mountain weather.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2154,7 +2154,7 @@
       "id": "orchards.plum_cultivation",
       "domain": "orchards",
       "name": "Plum cultivation",
-      "description": "Plum cultivation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Tend plums for fresh and preserved harvests.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2425,7 +2425,7 @@
       "id": "orchards.mulberry_tending",
       "domain": "orchards",
       "name": "Mulberry tending",
-      "description": "Mulberry tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Grow mulberry trees for leaves and fruit.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2696,7 +2696,7 @@
       "id": "orchards.tree_nursery",
       "domain": "orchards",
       "name": "Tree nursery",
-      "description": "Tree nursery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise saplings before permanent planting.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2967,7 +2967,7 @@
       "id": "orchards.fruit_thinning",
       "domain": "orchards",
       "name": "Fruit thinning",
-      "description": "Fruit thinning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Remove excess fruit to improve remaining crops.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3238,7 +3238,7 @@
       "id": "orchards.orchard_drainage",
       "domain": "orchards",
       "name": "Orchard drainage",
-      "description": "Orchard drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Drain standing water around tree roots.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3509,7 +3509,7 @@
       "id": "orchards.fruit_drying",
       "domain": "orchards",
       "name": "Fruit drying",
-      "description": "Fruit drying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Preserve sliced fruit with sun and airflow.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3780,7 +3780,7 @@
       "id": "orchards.windbreak_tending",
       "domain": "orchards",
       "name": "Windbreak tending",
-      "description": "Windbreak tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Plant shelterbelts against damaging mountain winds.",
       "detailed": true,
       "key_attributes": [
         "endurance",

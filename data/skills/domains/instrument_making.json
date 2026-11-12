@@ -5,105 +5,105 @@
       "id": "instrument_making.soundboard_selection",
       "domain": "instrument_making",
       "name": "Soundboard selection",
-      "description": "Soundboard selection applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose resonant wood for stringed instruments.",
       "detailed": false
     },
     {
       "id": "instrument_making.wood_seasoning",
       "domain": "instrument_making",
       "name": "Wood seasoning",
-      "description": "Wood seasoning applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Season instrument timber against later distortion.",
       "detailed": false
     },
     {
       "id": "instrument_making.resonator_carving",
       "domain": "instrument_making",
       "name": "Resonator carving",
-      "description": "Resonator carving applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Hollow chambers that amplify musical sound.",
       "detailed": false
     },
     {
       "id": "instrument_making.string_twisting",
       "domain": "instrument_making",
       "name": "String twisting",
-      "description": "String twisting applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Twist fibres into responsive musical strings.",
       "detailed": false
     },
     {
       "id": "instrument_making.bridge_fitting",
       "domain": "instrument_making",
       "name": "Bridge fitting",
-      "description": "Bridge fitting applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Fit bridges transmitting string vibration.",
       "detailed": false
     },
     {
       "id": "instrument_making.reed_cutting",
       "domain": "instrument_making",
       "name": "Reed cutting",
-      "description": "Reed cutting applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare reeds that vibrate cleanly.",
       "detailed": false
     },
     {
       "id": "instrument_making.flute_boring",
       "domain": "instrument_making",
       "name": "Flute boring",
-      "description": "Flute boring applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Bore flutes to produce intended pitches.",
       "detailed": false
     },
     {
       "id": "instrument_making.drum_stretching",
       "domain": "instrument_making",
       "name": "Drum stretching",
-      "description": "Drum stretching applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Stretch drum skins to even tension.",
       "detailed": false
     },
     {
       "id": "instrument_making.bell_tuning",
       "domain": "instrument_making",
       "name": "Bell tuning",
-      "description": "Bell tuning applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Adjust bells toward their required notes.",
       "detailed": false
     },
     {
       "id": "instrument_making.pitch_measuring",
       "domain": "instrument_making",
       "name": "Pitch measuring",
-      "description": "Pitch measuring applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare sounds against reference musical pitches.",
       "detailed": false
     },
     {
       "id": "instrument_making.instrument_finishing",
       "domain": "instrument_making",
       "name": "Instrument finishing",
-      "description": "Instrument finishing applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Apply finishes without deadening resonance.",
       "detailed": false
     },
     {
       "id": "instrument_making.instrument_repair",
       "domain": "instrument_making",
       "name": "Instrument repair",
-      "description": "Instrument repair applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore cracked bodies and damaged fittings.",
       "detailed": false
     },
     {
       "id": "instrument_making.tuning_pegs",
       "domain": "instrument_making",
       "name": "Tuning pegs",
-      "description": "Tuning pegs applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make pegs that hold string tension.",
       "detailed": false
     },
     {
       "id": "instrument_making.acoustic_testing",
       "domain": "instrument_making",
       "name": "Acoustic testing",
-      "description": "Acoustic testing applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Test instruments for tone and response.",
       "detailed": false
     },
     {
       "id": "instrument_making.instrument_design",
       "domain": "instrument_making",
       "name": "Instrument design",
-      "description": "Instrument design applies instrument making to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan playable instruments around desired sound.",
       "detailed": false
     }
   ]

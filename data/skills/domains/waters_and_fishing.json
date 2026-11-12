@@ -5,7 +5,7 @@
       "id": "waters_and_fishing.fishing",
       "domain": "waters_and_fishing",
       "name": "Fishing",
-      "description": "Fishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Catch fish using local waters and gear.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -255,7 +255,7 @@
       "id": "waters_and_fishing.net_making",
       "domain": "waters_and_fishing",
       "name": "Net making",
-      "description": "Net making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Knot meshes sized for intended catches.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -526,7 +526,7 @@
       "id": "waters_and_fishing.pond_tending",
       "domain": "waters_and_fishing",
       "name": "Pond tending",
-      "description": "Pond tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain stocked ponds and their banks.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -797,7 +797,7 @@
       "id": "waters_and_fishing.river_angling",
       "domain": "waters_and_fishing",
       "name": "River angling",
-      "description": "River angling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Angle for river fish with baited hooks.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1068,7 +1068,7 @@
       "id": "waters_and_fishing.reed_traps",
       "domain": "waters_and_fishing",
       "name": "Reed traps",
-      "description": "Reed traps: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Weave submerged traps from reeds.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1339,7 +1339,7 @@
       "id": "waters_and_fishing.carp_breeding",
       "domain": "waters_and_fishing",
       "name": "Carp breeding",
-      "description": "Carp breeding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Breed carp in managed freshwater ponds.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1610,7 +1610,7 @@
       "id": "waters_and_fishing.water_reading",
       "domain": "waters_and_fishing",
       "name": "Water reading",
-      "description": "Water reading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Read currents and ripples for fish activity.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1881,7 +1881,7 @@
       "id": "waters_and_fishing.boat_fishing",
       "domain": "waters_and_fishing",
       "name": "Boat fishing",
-      "description": "Boat fishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Work fishing gear from small boats.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2152,7 +2152,7 @@
       "id": "waters_and_fishing.shellfish_gathering",
       "domain": "waters_and_fishing",
       "name": "Shellfish gathering",
-      "description": "Shellfish gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Gather edible freshwater snails and mussels.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2423,7 +2423,7 @@
       "id": "waters_and_fishing.fish_cleaning",
       "domain": "waters_and_fishing",
       "name": "Fish cleaning",
-      "description": "Fish cleaning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Gut and clean fish before cooking.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2694,7 +2694,7 @@
       "id": "waters_and_fishing.seasonal_runs",
       "domain": "waters_and_fishing",
       "name": "Seasonal runs",
-      "description": "Seasonal runs: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Follow seasonal fish movements upstream.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2965,7 +2965,7 @@
       "id": "waters_and_fishing.pond_drainage",
       "domain": "waters_and_fishing",
       "name": "Pond drainage",
-      "description": "Pond drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Empty ponds without losing breeding stock.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3236,7 +3236,7 @@
       "id": "waters_and_fishing.fry_rearing",
       "domain": "waters_and_fishing",
       "name": "Fry rearing",
-      "description": "Fry rearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Rear young fish until robust enough.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3507,7 +3507,7 @@
       "id": "waters_and_fishing.fishing_grounds",
       "domain": "waters_and_fishing",
       "name": "Fishing grounds",
-      "description": "Fishing grounds: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Manage access to productive fishing reaches.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3778,7 +3778,7 @@
       "id": "waters_and_fishing.fish_smoking",
       "domain": "waters_and_fishing",
       "name": "Fish smoking",
-      "description": "Fish smoking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Preserve fish over controlled wood smoke.",
       "detailed": true,
       "key_attributes": [
         "perception",

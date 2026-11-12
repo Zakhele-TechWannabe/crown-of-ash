@@ -5,105 +5,105 @@
       "id": "painting.brush_lines",
       "domain": "painting",
       "name": "Brush lines",
-      "description": "Brush lines applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Control expressive outlines with a fine brush.",
       "detailed": false
     },
     {
       "id": "painting.ink_washes",
       "domain": "painting",
       "name": "Ink washes",
-      "description": "Ink washes applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build tonal surfaces using diluted ink.",
       "detailed": false
     },
     {
       "id": "painting.colour_grinding",
       "domain": "painting",
       "name": "Colour grinding",
-      "description": "Colour grinding applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare smooth pigments from mineral colourants.",
       "detailed": false
     },
     {
       "id": "painting.landscape_painting",
       "domain": "painting",
       "name": "Landscape painting",
-      "description": "Landscape painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Depict mountains, water and distant settlements.",
       "detailed": false
     },
     {
       "id": "painting.bird_painting",
       "domain": "painting",
       "name": "Bird painting",
-      "description": "Bird painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe and paint the forms of birds.",
       "detailed": false
     },
     {
       "id": "painting.flower_painting",
       "domain": "painting",
       "name": "Flower painting",
-      "description": "Flower painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Render blossoms and foliage with convincing structure.",
       "detailed": false
     },
     {
       "id": "painting.portraiture",
       "domain": "painting",
       "name": "Portraiture",
-      "description": "Portraiture applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Capture a person's likeness and bearing.",
       "detailed": false
     },
     {
       "id": "painting.figure_painting",
       "domain": "painting",
       "name": "Figure painting",
-      "description": "Figure painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Draw human poses, clothing and movement.",
       "detailed": false
     },
     {
       "id": "painting.perspective",
       "domain": "painting",
       "name": "Perspective",
-      "description": "Perspective applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Suggest depth through scale and placement.",
       "detailed": false
     },
     {
       "id": "painting.scroll_composition",
       "domain": "painting",
       "name": "Scroll composition",
-      "description": "Scroll composition applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange scenes across long unfolding pictures.",
       "detailed": false
     },
     {
       "id": "painting.paper_preparation",
       "domain": "painting",
       "name": "Paper preparation",
-      "description": "Paper preparation applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Treat paper for the intended painting method.",
       "detailed": false
     },
     {
       "id": "painting.silk_painting",
       "domain": "painting",
       "name": "Silk painting",
-      "description": "Silk painting applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Paint colour and ink onto prepared silk.",
       "detailed": false
     },
     {
       "id": "painting.painting_criticism",
       "domain": "painting",
       "name": "Painting criticism",
-      "description": "Painting criticism applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Assess pictures through informed discussion.",
       "detailed": false
     },
     {
       "id": "painting.restoration",
       "domain": "painting",
       "name": "Restoration",
-      "description": "Restoration applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Stabilise and repair damaged painted works.",
       "detailed": false
     },
     {
       "id": "painting.studio_teaching",
       "domain": "painting",
       "name": "Studio teaching",
-      "description": "Studio teaching applies painting to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach observational painting through guided practice.",
       "detailed": false
     }
   ]

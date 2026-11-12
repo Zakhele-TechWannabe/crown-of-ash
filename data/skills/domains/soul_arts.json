@@ -5,105 +5,105 @@
       "id": "soul_arts.soul_sensing",
       "domain": "soul_arts",
       "name": "Soul sensing",
-      "description": "Soul sensing applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perceive signs of spiritual consciousness nearby.",
       "detailed": false
     },
     {
       "id": "soul_arts.spirit_concentration",
       "domain": "soul_arts",
       "name": "Spirit concentration",
-      "description": "Spirit concentration applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Gather scattered attention into sustained inner focus.",
       "detailed": false
     },
     {
       "id": "soul_arts.soul_shields",
       "domain": "soul_arts",
       "name": "Soul shields",
-      "description": "Soul shields applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Defend consciousness against hostile spiritual influence.",
       "detailed": false
     },
     {
       "id": "soul_arts.dream_walking",
       "domain": "soul_arts",
       "name": "Dream walking",
-      "description": "Dream walking applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Explore dream states while preserving self-awareness.",
       "detailed": false
     },
     {
       "id": "soul_arts.memory_palaces",
       "domain": "soul_arts",
       "name": "Memory palaces",
-      "description": "Memory palaces applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Organise remembered knowledge into imagined inner spaces.",
       "detailed": false
     },
     {
       "id": "soul_arts.soul_communication",
       "domain": "soul_arts",
       "name": "Soul communication",
-      "description": "Soul communication applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Convey meaning through cultivated spiritual contact.",
       "detailed": false
     },
     {
       "id": "soul_arts.spirit_separation",
       "domain": "soul_arts",
       "name": "Spirit separation",
-      "description": "Spirit separation applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Separate spiritual awareness from bodily sensation.",
       "detailed": false
     },
     {
       "id": "soul_arts.soul_nourishment",
       "domain": "soul_arts",
       "name": "Soul nourishment",
-      "description": "Soul nourishment applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore the strength of an exhausted spirit.",
       "detailed": false
     },
     {
       "id": "soul_arts.possession_resistance",
       "domain": "soul_arts",
       "name": "Possession resistance",
-      "description": "Possession resistance applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Resist another consciousness attempting bodily control.",
       "detailed": false
     },
     {
       "id": "soul_arts.soul_healing",
       "domain": "soul_arts",
       "name": "Soul healing",
-      "description": "Soul healing applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Repair harm affecting spiritual identity and awareness.",
       "detailed": false
     },
     {
       "id": "soul_arts.ancestral_echoes",
       "domain": "soul_arts",
       "name": "Ancestral echoes",
-      "description": "Ancestral echoes applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret lingering impressions left by ancestors.",
       "detailed": false
     },
     {
       "id": "soul_arts.spirit_binding",
       "domain": "soul_arts",
       "name": "Spirit binding",
-      "description": "Spirit binding applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Anchor a wandering spirit through prepared methods.",
       "detailed": false
     },
     {
       "id": "soul_arts.soul_lamps",
       "domain": "soul_arts",
       "name": "Soul lamps",
-      "description": "Soul lamps applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain lamps linked to a cultivator's spiritual state.",
       "detailed": false
     },
     {
       "id": "soul_arts.reincarnation_study",
       "domain": "soul_arts",
       "name": "Reincarnation study",
-      "description": "Reincarnation study applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Investigate claims about lives beyond present memory.",
       "detailed": false
     },
     {
       "id": "soul_arts.soul_cultivation",
       "domain": "soul_arts",
       "name": "Soul cultivation",
-      "description": "Soul cultivation applies soul arts to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Develop spiritual resilience through sustained inner practice.",
       "detailed": false
     }
   ]

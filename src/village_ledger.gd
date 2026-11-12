@@ -9,7 +9,7 @@ class LedgerButton extends Button:
 		tip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		return tip
 
-const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "work": "Work & fields", "chronicle": "Chronicle"}
+const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "society": "Society", "work": "Work & fields", "chronicle": "Chronicle"}
 const INK := Color("493423")
 const GOLD := Color("a57927")
 var selected_work := ""
@@ -41,6 +41,9 @@ const KPIS: Array[Dictionary] = [
 var kpi_cards: Dictionary = {}
 var hud_panel: PanelContainer
 var pause_button: Button
+var society_day := -1
+var society_offset := 0
+var skip_progress: ProgressBar
 var speed_selector: OptionButton
 var ledger_button: Button
 var clock: Label
@@ -134,7 +137,7 @@ func setup(ground_view: Node2D) -> void:
 	book.add_child(tabs)
 
 	for key: String in TABS:
-		var tab := button(tabs, {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "work": "Work", "chronicle": "Chronicle"}[key], func() -> void: open_tab(key))
+		var tab := button(tabs, {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "society": "Society", "work": "Work", "chronicle": "Chronicle"}[key], func() -> void: open_tab(key))
 		tab.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		tab.icon = icon(key)
 		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -231,11 +234,22 @@ func _build_hud(parchment: Theme) -> void:
 	pause_button.custom_minimum_size.x = 32
 	speed_selector = OptionButton.new()
 	speed_selector.custom_minimum_size.x = 100
+	speed_selector.fit_to_longest_item = false
 	for speed: int in SPEEDS:
 		speed_selector.add_item("%dx" % speed)
-	speed_selector.item_selected.connect(func(index: int) -> void: life.speed = SPEEDS[index]; _refresh_hud())
-	speed_selector.tooltip_text = "Simulation speed [1–7]"
+	for years: int in [1, 10, 100]: speed_selector.add_item("Skip %d years" % years)
+	speed_selector.add_item("Cancel skip")
+	speed_selector.item_selected.connect(func(index: int) -> void:
+		if index < SPEEDS.size(): life.speed = SPEEDS[index]
+		elif index < SPEEDS.size() + 3: life.start_skip([1, 10, 100][index - SPEEDS.size()])
+		else: life.cancel_skip()
+		_refresh_hud())
+	speed_selector.tooltip_text = "Speed [1–7], skip years, or cancel a skip"
 	speed_group.add_child(speed_selector)
+	skip_progress = ProgressBar.new()
+	skip_progress.custom_minimum_size = Vector2(100, 12)
+	skip_progress.hide()
+	speed_group.add_child(skip_progress)
 	ledger_button = button(row, "Ledger [L]", func() -> void:
 		if visible and not closing:
 			close()
@@ -320,6 +334,10 @@ func _food_tooltip(id: String, depth: int) -> String:
 
 
 func _refresh_hud() -> void:
+	if is_instance_valid(skip_progress):
+		skip_progress.visible = life.skip_target > 0
+		if life.skip_target > 0:
+			skip_progress.value = 100.0 * (life.population.day - life.skip_start) / maxi(1, life.skip_target - life.skip_start)
 	var e: RefCounted = life.economy
 	var food: Dictionary = kpi_cards.food
 	food.value.text = "%d d" % floori(e.days_left())
@@ -366,6 +384,7 @@ func _refresh_hud() -> void:
 
 
 func refresh() -> void:
+	society_day = -1
 	for child: Node in content.get_children():
 		content.remove_child(child)
 		child.queue_free()
@@ -381,6 +400,7 @@ func refresh() -> void:
 	refresh_values()
 
 func refresh_values() -> void:
+	if current == "society" and society_day == life.population.day: return
 	if current == "people" and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
 	# Keep filter controls and scroll position stable while replacing only data.
 	for child: Node in content.get_children():
@@ -397,6 +417,7 @@ func refresh_values() -> void:
 		"overview": _overview(data, e)
 		"food", "materials": _food(data, e)
 		"people": _people(data)
+		"society": _society(data)
 		"work": _work(data, e)
 		"chronicle":
 			var header := ""
@@ -706,6 +727,9 @@ func _people(parent: Node) -> void:
 		if arg.begins_with("--people-path="):
 			people_browser.path.assign(arg.trim_prefix("--people-path=").split("/", false))
 			people_browser.redraw()
+		if arg.begins_with("--graph="):
+			people_browser.graph_mode = arg.trim_prefix("--graph=")
+			people_browser.redraw()
 		if arg.begins_with("--person="):
 			people_browser.person = clampi(int(arg.trim_prefix("--person=")), 0, life.population.size() - 1)
 			people_browser.redraw()
@@ -936,3 +960,52 @@ func show_granary() -> void:
 	button(box, "Open ledger", func() -> void: granary_card.hide(); open_tab("food"))
 	button(box, "Close", granary_card.hide)
 	granary_card.show()
+
+func _society(parent: Node) -> void:
+	society_day = life.population.day
+	var society: RefCounted = life.population.society
+	if society.faction_pending:
+		society_day = -1
+		label(parent, "Society is updating…")
+		return
+	label(parent, "Lifespan death: " + ("on" if society.lifespan_death_enabled else "off · elders keep living"))
+	section(parent, "Factions")
+	var active: Array[Dictionary] = []
+	for faction: Dictionary in society.factions:
+		if not faction.members.is_empty() or faction.type == "outsiders": active.append(faction)
+	var navigation := HBoxContainer.new()
+	parent.add_child(navigation)
+	button(navigation, "Previous factions", func() -> void: society_offset = maxi(0, society_offset - 25); refresh())
+	label(navigation, "%d–%d of %d" % [mini(society_offset + 1, active.size()), mini(society_offset + 25, active.size()), active.size()])
+	button(navigation, "Next factions", func() -> void: society_offset = mini(maxi(0, active.size() - 1) / 25 * 25, society_offset + 25); refresh())
+	for faction: Dictionary in active.slice(society_offset, society_offset + 25):
+		var panel := PanelContainer.new()
+		parent.add_child(panel)
+		var box := VBoxContainer.new()
+		panel.add_child(box)
+		label(box, "%s · %s · %d members" % [faction.name, faction.type, faction.members.size()], true)
+		label(box, "Leader: %s · cohesion %.0f" % [life.population.names[faction.leader] if faction.leader >= 0 else "vacant", faction.cohesion])
+		var details := VBoxContainer.new()
+		box.add_child(details)
+		details.hide()
+		button(box, "Details", func() -> void: details.visible = not details.visible)
+		label(details, "Succession: %s · goals: %s" % [faction.succession, ", ".join(faction.goals)])
+		button(details, "Browse members", func() -> void:
+			open_tab("people")
+			people_browser.group_mode = "Faction"
+			people_browser.path.assign(["faction:%d" % faction.id])
+			people_browser.redraw())
+		for p: int in faction.members.slice(0, 12):
+			var target := p
+			button(details, life.population.names[p], func() -> void:
+				open_tab("people")
+				people_browser.person = target
+				people_browser.redraw())
+	section(parent, "Positions")
+	for position: Dictionary in society.positions:
+		label(parent, "%s · %s" % [position.name, (life.population.names[position.holder] if position.holder >= 0 else "Vacant") if position.exists else "Not yet existing"], true)
+		label(parent, "Exists: %s\nHolder: %s" % [position.condition, position.hold_when])
+	section(parent, "Social chronicle")
+	for i in range(society.chronicle.size() - 1, maxi(-1, society.chronicle.size() - 101), -1):
+		var event: Dictionary = society.chronicle[i]
+		label(parent, "Year %d, day %d · %s" % [event.day / 365 + 1, event.day % 365 + 1, event.text])

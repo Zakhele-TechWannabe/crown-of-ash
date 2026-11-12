@@ -5,105 +5,105 @@
       "id": "battlefield_medicine.triage",
       "domain": "battlefield_medicine",
       "name": "Triage",
-      "description": "Triage applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prioritise wounded people by immediate treatment need.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.bleeding_control",
       "domain": "battlefield_medicine",
       "name": "Bleeding control",
-      "description": "Bleeding control applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Stop dangerous blood loss with available supplies.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.arrow_extraction",
       "domain": "battlefield_medicine",
       "name": "Arrow extraction",
-      "description": "Arrow extraction applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remove embedded arrows with controlled technique.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.fracture_splints",
       "domain": "battlefield_medicine",
       "name": "Fracture splints",
-      "description": "Fracture splints applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Support broken limbs during urgent evacuation.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.burn_care",
       "domain": "battlefield_medicine",
       "name": "Burn care",
-      "description": "Burn care applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Cool and protect tissue injured by heat.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.camp_surgery",
       "domain": "battlefield_medicine",
       "name": "Camp surgery",
-      "description": "Camp surgery applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perform urgent procedures in a temporary infirmary.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.field_sanitation",
       "domain": "battlefield_medicine",
       "name": "Field sanitation",
-      "description": "Field sanitation applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep crowded treatment grounds separated from waste.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.stretcher_teams",
       "domain": "battlefield_medicine",
       "name": "Stretcher teams",
-      "description": "Stretcher teams applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Organise carriers moving injured people to care.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.medicine_stores",
       "domain": "battlefield_medicine",
       "name": "Medicine stores",
-      "description": "Medicine stores applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain treatment supplies against sudden demand.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.trauma_nursing",
       "domain": "battlefield_medicine",
       "name": "Trauma nursing",
-      "description": "Trauma nursing applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Nurse severe injuries through the first recovery period.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.battle_shock",
       "domain": "battlefield_medicine",
       "name": "Battle shock",
-      "description": "Battle shock applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Support people distressed after terrifying conflict.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.infection_watching",
       "domain": "battlefield_medicine",
       "name": "Infection watching",
-      "description": "Infection watching applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Watch injuries for signs of spreading infection.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.evacuation_routes",
       "domain": "battlefield_medicine",
       "name": "Evacuation routes",
-      "description": "Evacuation routes applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan safe paths away from active fighting.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.casualty_records",
       "domain": "battlefield_medicine",
       "name": "Casualty records",
-      "description": "Casualty records applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record injuries, treatment and patient locations.",
       "detailed": false
     },
     {
       "id": "battlefield_medicine.medic_instruction",
       "domain": "battlefield_medicine",
       "name": "Medic instruction",
-      "description": "Medic instruction applies battlefield medicine to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare others for disciplined emergency medical duties.",
       "detailed": false
     }
   ]

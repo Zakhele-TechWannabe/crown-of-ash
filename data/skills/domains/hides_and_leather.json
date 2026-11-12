@@ -5,7 +5,7 @@
       "id": "hides_and_leather.leatherwork",
       "domain": "hides_and_leather",
       "name": "Leatherwork",
-      "description": "Leatherwork: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Turn animal hides into useful leather articles.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -255,7 +255,7 @@
       "id": "hides_and_leather.hide_scraping",
       "domain": "hides_and_leather",
       "name": "Hide scraping",
-      "description": "Hide scraping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Remove flesh and hair from fresh skins.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -526,7 +526,7 @@
       "id": "hides_and_leather.bark_tanning",
       "domain": "hides_and_leather",
       "name": "Bark tanning",
-      "description": "Bark tanning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Preserve hides using tannin-rich bark solutions.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -797,7 +797,7 @@
       "id": "hides_and_leather.alum_tawing",
       "domain": "hides_and_leather",
       "name": "Alum tawing",
-      "description": "Alum tawing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Treat skins with alum for pale leather.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1068,7 +1068,7 @@
       "id": "hides_and_leather.leather_softening",
       "domain": "hides_and_leather",
       "name": "Leather softening",
-      "description": "Leather softening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Work dried hides until supple.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1339,7 +1339,7 @@
       "id": "hides_and_leather.leather_cutting",
       "domain": "hides_and_leather",
       "name": "Leather cutting",
-      "description": "Leather cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut leather pieces for fitted construction.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1610,7 +1610,7 @@
       "id": "hides_and_leather.saddle_making",
       "domain": "hides_and_leather",
       "name": "Saddle making",
-      "description": "Saddle making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build saddles distributing a rider's weight.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1881,7 +1881,7 @@
       "id": "hides_and_leather.shoe_making",
       "domain": "hides_and_leather",
       "name": "Shoe making",
-      "description": "Shoe making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Shape durable footwear from treated hides.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2152,7 +2152,7 @@
       "id": "hides_and_leather.leather_stitching",
       "domain": "hides_and_leather",
       "name": "Leather stitching",
-      "description": "Leather stitching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sew strong seams through thick leather.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2423,7 +2423,7 @@
       "id": "hides_and_leather.leather_armour",
       "domain": "hides_and_leather",
       "name": "Leather armour",
-      "description": "Leather armour: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make protective layered leather garments.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2694,7 +2694,7 @@
       "id": "hides_and_leather.harness_making",
       "domain": "hides_and_leather",
       "name": "Harness making",
-      "description": "Harness making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build straps for draught and riding animals.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2965,7 +2965,7 @@
       "id": "hides_and_leather.hide_grading",
       "domain": "hides_and_leather",
       "name": "Hide grading",
-      "description": "Hide grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Assess skins for scars, thickness and size.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3236,7 +3236,7 @@
       "id": "hides_and_leather.fur_dressing",
       "domain": "hides_and_leather",
       "name": "Fur dressing",
-      "description": "Fur dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Preserve skins while retaining their fur.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3507,7 +3507,7 @@
       "id": "hides_and_leather.leather_dyeing",
       "domain": "hides_and_leather",
       "name": "Leather dyeing",
-      "description": "Leather dyeing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Apply durable colours to prepared leather.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3778,7 +3778,7 @@
       "id": "hides_and_leather.leather_repair",
       "domain": "hides_and_leather",
       "name": "Leather repair",
-      "description": "Leather repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Restore damaged straps, shoes and leather goods.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

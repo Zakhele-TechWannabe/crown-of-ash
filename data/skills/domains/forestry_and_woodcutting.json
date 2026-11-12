@@ -5,7 +5,7 @@
       "id": "forestry_and_woodcutting.woodcutting",
       "domain": "forestry_and_woodcutting",
       "name": "Woodcutting",
-      "description": "Woodcutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Fell trees safely with axe and saw.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -270,7 +270,7 @@
       "id": "forestry_and_woodcutting.tree_marking",
       "domain": "forestry_and_woodcutting",
       "name": "Tree marking",
-      "description": "Tree marking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Mark trees suitable for particular uses.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -541,7 +541,7 @@
       "id": "forestry_and_woodcutting.crosscut_sawing",
       "domain": "forestry_and_woodcutting",
       "name": "Crosscut sawing",
-      "description": "Crosscut sawing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Saw felled trunks across the grain.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -812,7 +812,7 @@
       "id": "forestry_and_woodcutting.coppicing",
       "domain": "forestry_and_woodcutting",
       "name": "Coppicing",
-      "description": "Coppicing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut stools so useful shoots regrow.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1083,7 +1083,7 @@
       "id": "forestry_and_woodcutting.charcoal_burning",
       "domain": "forestry_and_woodcutting",
       "name": "Charcoal burning",
-      "description": "Charcoal burning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Convert stacked wood into charcoal.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1354,7 +1354,7 @@
       "id": "forestry_and_woodcutting.forest_nursery",
       "domain": "forestry_and_woodcutting",
       "name": "Forest nursery",
-      "description": "Forest nursery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise young trees for woodland renewal.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1625,7 +1625,7 @@
       "id": "forestry_and_woodcutting.bamboo_cutting",
       "domain": "forestry_and_woodcutting",
       "name": "Bamboo cutting",
-      "description": "Bamboo cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Harvest mature bamboo without destroying clumps.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1896,7 +1896,7 @@
       "id": "forestry_and_woodcutting.timber_hauling",
       "domain": "forestry_and_woodcutting",
       "name": "Timber hauling",
-      "description": "Timber hauling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Move heavy trunks from forest to road.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2167,7 +2167,7 @@
       "id": "forestry_and_woodcutting.log_grading",
       "domain": "forestry_and_woodcutting",
       "name": "Log grading",
-      "description": "Log grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sort logs by straightness and defects.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2438,7 +2438,7 @@
       "id": "forestry_and_woodcutting.forest_conservation",
       "domain": "forestry_and_woodcutting",
       "name": "Forest conservation",
-      "description": "Forest conservation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep woodland productive across repeated harvests.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2709,7 +2709,7 @@
       "id": "forestry_and_woodcutting.axe_care",
       "domain": "forestry_and_woodcutting",
       "name": "Axe care",
-      "description": "Axe care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sharpen and haft woodland axes.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2980,7 +2980,7 @@
       "id": "forestry_and_woodcutting.storm_clearing",
       "domain": "forestry_and_woodcutting",
       "name": "Storm clearing",
-      "description": "Storm clearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Clear fallen trees after mountain storms.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3251,7 +3251,7 @@
       "id": "forestry_and_woodcutting.firewood_stacking",
       "domain": "forestry_and_woodcutting",
       "name": "Firewood stacking",
-      "description": "Firewood stacking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Stack split fuelwood for thorough drying.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3522,7 +3522,7 @@
       "id": "forestry_and_woodcutting.resin_tapping",
       "domain": "forestry_and_woodcutting",
       "name": "Resin tapping",
-      "description": "Resin tapping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Tap resin without fatally wounding trees.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3793,7 +3793,7 @@
       "id": "forestry_and_woodcutting.forest_planning",
       "domain": "forestry_and_woodcutting",
       "name": "Forest planning",
-      "description": "Forest planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Schedule woodland cuts and regeneration.",
       "detailed": true,
       "key_attributes": [
         "endurance",

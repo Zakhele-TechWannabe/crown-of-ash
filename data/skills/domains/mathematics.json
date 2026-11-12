@@ -5,105 +5,105 @@
       "id": "mathematics.counting_rods",
       "domain": "mathematics",
       "name": "Counting rods",
-      "description": "Counting rods applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Represent numbers using arranged calculating rods.",
       "detailed": false
     },
     {
       "id": "mathematics.arithmetic",
       "domain": "mathematics",
       "name": "Arithmetic",
-      "description": "Arithmetic applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perform reliable basic numerical operations.",
       "detailed": false
     },
     {
       "id": "mathematics.fractions",
       "domain": "mathematics",
       "name": "Fractions",
-      "description": "Fractions applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Calculate with parts of whole quantities.",
       "detailed": false
     },
     {
       "id": "mathematics.area_measurement",
       "domain": "mathematics",
       "name": "Area measurement",
-      "description": "Area measurement applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Measure surfaces for land and building work.",
       "detailed": false
     },
     {
       "id": "mathematics.volume_measurement",
       "domain": "mathematics",
       "name": "Volume measurement",
-      "description": "Volume measurement applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Determine capacity from three-dimensional shapes.",
       "detailed": false
     },
     {
       "id": "mathematics.proportions",
       "domain": "mathematics",
       "name": "Proportions",
-      "description": "Proportions applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compare quantities through consistent ratios.",
       "detailed": false
     },
     {
       "id": "mathematics.algebraic_methods",
       "domain": "mathematics",
       "name": "Algebraic methods",
-      "description": "Algebraic methods applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Find unknown quantities from stated relationships.",
       "detailed": false
     },
     {
       "id": "mathematics.geometry",
       "domain": "mathematics",
       "name": "Geometry",
-      "description": "Geometry applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Reason about figures, angles and distances.",
       "detailed": false
     },
     {
       "id": "mathematics.series",
       "domain": "mathematics",
       "name": "Series",
-      "description": "Series applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Work with ordered numerical progressions.",
       "detailed": false
     },
     {
       "id": "mathematics.interest_reckoning",
       "domain": "mathematics",
       "name": "Interest reckoning",
-      "description": "Interest reckoning applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Calculate gains and obligations over time.",
       "detailed": false
     },
     {
       "id": "mathematics.survey_calculations",
       "domain": "mathematics",
       "name": "Survey calculations",
-      "description": "Survey calculations applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Reduce measured terrain into useful dimensions.",
       "detailed": false
     },
     {
       "id": "mathematics.calendar_arithmetic",
       "domain": "mathematics",
       "name": "Calendar arithmetic",
-      "description": "Calendar arithmetic applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Compute dates and repeated calendar intervals.",
       "detailed": false
     },
     {
       "id": "mathematics.error_checking",
       "domain": "mathematics",
       "name": "Error checking",
-      "description": "Error checking applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Find mistakes through independent numerical checks.",
       "detailed": false
     },
     {
       "id": "mathematics.mathematical_proofs",
       "domain": "mathematics",
       "name": "Mathematical proofs",
-      "description": "Mathematical proofs applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Demonstrate why a mathematical claim follows.",
       "detailed": false
     },
     {
       "id": "mathematics.numeracy_instruction",
       "domain": "mathematics",
       "name": "Numeracy instruction",
-      "description": "Numeracy instruction applies mathematics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach calculation through understandable practical examples.",
       "detailed": false
     }
   ]

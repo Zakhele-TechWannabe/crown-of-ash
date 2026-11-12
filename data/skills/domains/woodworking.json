@@ -5,7 +5,7 @@
       "id": "woodworking.carpentry",
       "domain": "woodworking",
       "name": "Carpentry",
-      "description": "Carpentry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build useful wooden structures and household goods.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -268,7 +268,7 @@
       "id": "woodworking.timber_seasoning",
       "domain": "woodworking",
       "name": "Timber seasoning",
-      "description": "Timber seasoning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Dry timber while limiting warping and splits.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -539,7 +539,7 @@
       "id": "woodworking.joinery",
       "domain": "woodworking",
       "name": "Joinery",
-      "description": "Joinery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Fit wood joints without relying on nails.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -810,7 +810,7 @@
       "id": "woodworking.cart_building",
       "domain": "woodworking",
       "name": "Cart building",
-      "description": "Cart building: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Construct carts suited to rough village roads.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1081,7 +1081,7 @@
       "id": "woodworking.house_framing",
       "domain": "woodworking",
       "name": "House framing",
-      "description": "House framing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise timber skeletons for houses.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1352,7 +1352,7 @@
       "id": "woodworking.boat_joinery",
       "domain": "woodworking",
       "name": "Boat joinery",
-      "description": "Boat joinery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Fit wooden parts within small vessels.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1623,7 +1623,7 @@
       "id": "woodworking.wood_carving",
       "domain": "woodworking",
       "name": "Wood carving",
-      "description": "Wood carving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut decorative or functional shapes into wood.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1894,7 +1894,7 @@
       "id": "woodworking.cooperage",
       "domain": "woodworking",
       "name": "Cooperage",
-      "description": "Cooperage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make sealed wooden casks from staves.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2165,7 +2165,7 @@
       "id": "woodworking.furniture_making",
       "domain": "woodworking",
       "name": "Furniture making",
-      "description": "Furniture making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build tables, stools, beds and cabinets.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2436,7 +2436,7 @@
       "id": "woodworking.tool_handles",
       "domain": "woodworking",
       "name": "Tool handles",
-      "description": "Tool handles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Fit comfortable wooden handles to tools.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2707,7 +2707,7 @@
       "id": "woodworking.wheel_making",
       "domain": "woodworking",
       "name": "Wheel making",
-      "description": "Wheel making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Construct strong spoked wheels for carts.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2978,7 +2978,7 @@
       "id": "woodworking.roof_framing",
       "domain": "woodworking",
       "name": "Roof framing",
-      "description": "Roof framing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Build the supporting timbers beneath roofs.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3249,7 +3249,7 @@
       "id": "woodworking.bamboo_joinery",
       "domain": "woodworking",
       "name": "Bamboo joinery",
-      "description": "Bamboo joinery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Join hollow bamboo into usable structures.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3520,7 +3520,7 @@
       "id": "woodworking.wood_finishing",
       "domain": "woodworking",
       "name": "Wood finishing",
-      "description": "Wood finishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Protect shaped wood with suitable surface treatments.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3791,7 +3791,7 @@
       "id": "woodworking.carpentry_planning",
       "domain": "woodworking",
       "name": "Carpentry planning",
-      "description": "Carpentry planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate timber, joinery and labour for commissions.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

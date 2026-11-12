@@ -1,11 +1,13 @@
 extends VBoxContainer
 ## Population drill-down and personal records; never depends on walker membership.
 const VirtualList = preload("res://src/people_list.gd")
+const EgoGraph = preload("res://src/ego_graph.gd")
 var ledger: PanelContainer
 var population: RefCounted
 var group_mode := "Place"
 var path: Array[String] = []
 var person := -1
+var graph_mode := "Relationships"
 var catalogue_mode := false
 var catalogue_path: Array[String] = []
 var results := PackedInt32Array()
@@ -30,8 +32,8 @@ func text(parent: Node, words: String, heading: bool = false) -> Label:
 
 func action(parent: Node, words: String, callback: Callable) -> Button:
 	var control: Button = ledger.button(parent, words, callback)
-	control.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	control.autowrap_mode = TextServer.AUTOWRAP_OFF
+	control.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	control.custom_minimum_size.x = 0
 	return control
 
@@ -51,10 +53,10 @@ func redraw() -> void:
 		return
 	if path.is_empty(): _notables()
 	var group := OptionButton.new()
-	for mode: String in ["Place", "Work", "Life stage", "Status"]: group.add_item(mode)
-	group.select(["Place", "Work", "Life stage", "Status"].find(group_mode))
+	for mode: String in ["Place", "Work", "Life stage", "Status", "Clan", "Faction", "Realm"]: group.add_item(mode)
+	group.select(["Place", "Work", "Life stage", "Status", "Clan", "Faction", "Realm"].find(group_mode))
 	group.item_selected.connect(func(index: int) -> void:
-		group_mode = ["Place", "Work", "Life stage", "Status"][index]
+		group_mode = ["Place", "Work", "Life stage", "Status", "Clan", "Faction", "Realm"][index]
 		path.clear()
 		redraw())
 	add_child(group)
@@ -78,10 +80,16 @@ func _notables() -> void:
 	add_child(grid)
 	var shown := 0
 	for p in population.size():
-		if population.best_level[p] < 31 and population.spirit_root[p] == 0 and population.day - population.last_insight_day[p] > 90 and population.age(p) < 60: continue
+		if population.best_level[p] < 31 and population.society.revealed[p] == 0 and population.day - population.last_insight_day[p] > 90 and population.age(p) < 60: continue
 		var target: int = p
-		var reason := "Spirit root" if population.spirit_root[p] else ("Recent insight" if population.day - population.last_insight_day[p] <= 90 else ("Master" if population.best_level[p] >= 31 else "Elder"))
-		action(grid, "%s\n%s · %s %d" % [population.names[p], reason, population.catalogue.title(population.best_level[p]), population.best_level[p]], func() -> void: person = target; redraw())
+		var reason := "Spirit root" if population.society.revealed[p] else ("Recent insight" if population.day - population.last_insight_day[p] <= 90 else ("Master" if population.best_level[p] >= 31 else "Elder"))
+		var card := PanelContainer.new()
+		grid.add_child(card)
+		var box := VBoxContainer.new()
+		card.add_child(box)
+		text(box, "%s · %s" % [population.names[p], reason])
+		text(box, "%s %d" % [population.catalogue.title(population.best_level[p]), population.best_level[p]])
+		action(box, "View", func() -> void: person = target; redraw())
 		shown += 1
 		if shown == 6: break
 	if shown == 0: text(grid, "A quiet village; no notables yet.")
@@ -92,20 +100,27 @@ func _breadcrumb() -> void:
 	action(crumbs, "All people", func() -> void: path.clear(); redraw())
 	for depth in path.size():
 		var upto := depth + 1
-		action(crumbs, path[depth], func() -> void: path.resize(upto); redraw())
+		action(crumbs, _group_label(path[depth]), func() -> void: path.resize(upto); redraw())
 
 func _keys(p: int) -> Array[String]:
 	match group_mode:
-		"Place": return ["Servants' Village" if population.settlement[p] == 0 else "Settlement %d" % population.settlement[p], "District %d" % (population.district[p] + 1), "Household %d" % (population.household[p] + 1)]
+		"Place": return ["Servants' Village" if population.settlement[p] == 0 else "Settlement %d" % population.settlement[p], population.district_name(p), population.household_name(p)]
 		"Work":
 			if population.best_skill[p] < 0: return ["Untrained", "No domain", "No discipline"]
 			var id: String = population.catalogue.ids[population.best_skill[p]]
 			var domain: Dictionary = population.catalogue.domains[id.get_slice(".", 0)]
 			return [population.catalogue.spheres[domain.sphere].name, domain.name, population.catalogue.disciplines[population.catalogue.discipline_for(id)].name]
+		"Realm": return [str(population.society.rules.realms[population.society.realm[p]].name)]
+		"Clan", "Faction":
+			var labels: Array[String] = []
+			for id: int in population.society.memberships.get(p, PackedInt32Array()):
+				var faction: Dictionary = population.society.factions[id]
+				if group_mode == "Faction" or faction.type == "clan": labels.append(faction.name)
+			return [", ".join(labels) if not labels.is_empty() else "Unaffiliated"]
 		"Life stage":
 			var years: int = population.age(p)
 			return ["Children" if years < 12 else ("Youths" if years < 18 else ("Adults" if years < 60 else "Elders"))]
-		_: return ["Hungry" if population.hunger[p] else ("Unhappy" if population.mood[p] < .45 else ("Stuck at a gate" if population.stuck[p] else ("Spirit root" if population.spirit_root[p] else ("Recently levelled" if population.day - population.recently_levelled[p] <= 30 else "Settled"))))]
+		_: return ["Hungry" if population.hunger[p] else ("Unhappy" if population.mood[p] < .45 else ("Stuck at a gate" if population.stuck[p] else ("Spirit root" if population.society.revealed[p] else ("Recently levelled" if population.day - population.recently_levelled[p] <= 30 else "Settled"))))]
 
 func _group_paths(p: int) -> Array[Array]:
 	var paths: Array[Array] = []
@@ -113,9 +128,14 @@ func _group_paths(p: int) -> Array[Array]:
 		if population.hunger[p] > 0: paths.append(["Hungry"])
 		if population.mood[p] < .45: paths.append(["Unhappy"])
 		if population.stuck[p] > 0: paths.append(["Stuck at a gate"])
-		if population.spirit_root[p] > 0: paths.append(["Spirit root"])
+		if population.society.revealed[p] > 0: paths.append(["Spirit root"])
 		if population.day - population.recently_levelled[p] <= 30: paths.append(["Recently levelled"])
 		if paths.is_empty(): paths.append(["Settled"])
+	elif group_mode in ["Faction", "Clan"]:
+		for id: int in population.society.memberships.get(p, PackedInt32Array()):
+			var faction: Dictionary = population.society.factions[id]
+			if group_mode == "Faction" or faction.type == "clan": paths.append(["faction:%d" % id])
+		if paths.is_empty(): paths.append(["Unaffiliated"])
 	elif group_mode == "Work":
 		for duty: String in population.schedules[population.job[p]]:
 			var discipline: String = population.catalogue.activities[duty].discipline
@@ -155,11 +175,18 @@ func _groups() -> Dictionary:
 	return grouped
 
 func _summary_card(parent: Node, key: String, summary: Dictionary) -> void:
+	var panel := PanelContainer.new()
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	parent.add_child(panel)
 	var card := VBoxContainer.new()
-	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	parent.add_child(card)
+	panel.add_child(card)
 	var target := key
-	action(card, "%s · %d people\nBest: %s %d\n%s mood · %s hunger" % [key, summary.count, population.catalogue.title(summary.best), summary.best, "●" if summary.mood / summary.count >= .45 else "○", "●" if summary.hungry > 0 else "○"], func() -> void: path.append(target); redraw())
+	text(card, "%s · %d people" % [_group_label(key), summary.count], true)
+	if key.begins_with("faction:"):
+		var group: Dictionary = population.society.factions[int(key.get_slice(":", 1))]
+		text(card, "Led by " + (population.names[group.leader] if group.leader >= 0 else "no one yet"))
+	text(card, "Best: %s %d · %s mood · %s hunger" % [population.catalogue.title(summary.best), summary.best, "●" if summary.mood / summary.count >= .45 else "○", "●" if summary.hungry > 0 else "○"])
+	action(card, "Browse", func() -> void: path.append(target); redraw())
 	var bar := ProgressBar.new()
 	bar.custom_minimum_size.y = 8
 	bar.show_percentage = false
@@ -216,7 +243,7 @@ func _update_list() -> void:
 	for p: int in results:
 		if chip == "Hungry" and population.hunger[p] == 0: continue
 		if chip == "Unhappy" and population.mood[p] >= .45: continue
-		if chip == "Spirit root" and population.spirit_root[p] == 0: continue
+		if chip == "Spirit root" and population.society.revealed[p] == 0: continue
 		if chip == "At gate" and population.stuck[p] == 0: continue
 		if chip == "Recent" and population.day - population.recently_levelled[p] > 30: continue
 		if not _matches_query(p): continue
@@ -259,29 +286,54 @@ func _matches_query(p: int) -> bool:
 func _person() -> void:
 	action(self, "Back to people", func() -> void: person = -1; redraw())
 	text(self, population.names[person], true)
-	text(self, "%s · age %d · %s\nHousehold %d · District %d · Settlement %d" % ["Female" if population.sex[person] else "Male", population.age(person), population.jobs[population.job[person]], population.household[person] + 1, population.district[person] + 1, population.settlement[person] + 1])
+	text(self, "%s · age %d · %s\n%s · %s · Servants' Village" % ["Female" if population.sex[person] else "Male", population.age(person), population.jobs[population.job[person]], population.household_name(person), population.district_name(person)])
 	var nearby := -1
 	for i in ledger.life.people.size():
 		if int(ledger.life.people[i].id) == person: nearby = i; break
 	var walker := nearby
 	var follow := action(self, "Follow" if nearby >= 0 else "Not nearby", func() -> void: ledger.life.followed = walker; ledger.close())
 	follow.disabled = nearby < 0
+	var views := HBoxContainer.new()
+	add_child(views)
+	for view: String in ["Relationships", "Family", "Lineage", "Skills"]:
+		var chosen := view
+		var tab := action(views, view, func() -> void: graph_mode = chosen; redraw())
+		tab.toggle_mode = true
+		tab.button_pressed = view == graph_mode
+	var graph := EgoGraph.new()
+	graph.custom_minimum_size = Vector2(0, 340)
+	graph.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	add_child(graph)
+	graph.build(population, person, graph_mode)
+	graph.opened.connect(func(target: int) -> void: person = target; redraw())
 	text(self, "Attributes", true)
+	var attributes_grid := GridContainer.new()
+	attributes_grid.columns = 2
+	attributes_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	add_child(attributes_grid)
 	for a in 8:
-		text(self, "%s  %.1f / 20" % [str(population.catalogue.rules.attributes[a]).capitalize(), population.attributes[person * 8 + a]])
+		var cell := VBoxContainer.new()
+		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		attributes_grid.add_child(cell)
+		text(cell, "%s  %.1f / 20" % [str(population.catalogue.rules.attributes[a]).capitalize(), population.attributes[person * 8 + a]])
 		var bar := ProgressBar.new()
 		bar.max_value = 20
 		bar.value = population.attributes[person * 8 + a]
 		bar.show_percentage = false
-		bar.custom_minimum_size.y = 10
-		add_child(bar)
+		_thin_bar(bar)
+		bar.custom_minimum_size.y = 4
+		cell.add_child(bar)
 	var trait_chips := HFlowContainer.new()
 	add_child(trait_chips)
 	for t in population.catalogue.traits.size():
-		if population.traits[person] & (1 << t): text(trait_chips, "[" + str(population.catalogue.traits[t].name) + "]")
+		if population.traits[person] & (1 << t):
+			var chip_panel := PanelContainer.new()
+			trait_chips.add_child(chip_panel)
+			text(chip_panel, str(population.catalogue.traits[t].name)).autowrap_mode = TextServer.AUTOWRAP_OFF
 	var skills: Dictionary = population.sparse_skills(person)
 	var ordered: Array = skills.keys()
 	ordered.sort_custom(func(a: String, b: String) -> bool: return int(skills[a].level) > int(skills[b].level))
+	_social_record()
 	text(self, "Top skills" + (" · stuck at a gate" if population.stuck[person] else ""), true)
 	for id: String in ordered.slice(0, 3):
 		var row: Dictionary = skills[id]
@@ -356,11 +408,13 @@ func _catalogue() -> void:
 		var id := str(row.id)
 		var summary := _skill_summary(id)
 		var is_locked := bool(row.get("locked", false)) or (catalogue_path.size() > 0 and catalogue_path[0] == "cultivation")
-		var words := str(row.name) + "\n" + ("Locked: " + str(row.get("condition", "Spirit root and sect entry")) if is_locked else ("Best %s · %d know it" % [summary.best, summary.count]))
+		var words := str(row.name) + "\n" + ("Locked: " + str(row.get("condition", "Revealed spirit root; manuals or teaching deepen practice")) if is_locked else ("Best %s · %d know it" % [summary.best, summary.count]))
 		var card := action(grid, words, func() -> void:
 			if catalogue_path.size() < 3: catalogue_path.append(id); redraw()
 			elif int(summary.person) >= 0: person = int(summary.person); catalogue_mode = false; redraw())
 		if is_locked: card.modulate = Color(.65, .65, .65)
+		card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		card.tooltip_text = str(row.get("description", ""))
 	if catalogue_path.size() == 3:
 		var discipline: Dictionary = population.catalogue.disciplines[catalogue_path[2]]
@@ -374,3 +428,80 @@ func _catalogue() -> void:
 func _skill_summary(id: String) -> Dictionary:
 	var summary: Dictionary = population.skill_statistics(id)
 	return {"count": summary.count, "best": population.catalogue.title(summary.best_level) + " " + str(summary.best_level), "person": summary.person}
+
+func _person_links(parent: Node, ids: PackedInt32Array) -> void:
+	var row := HFlowContainer.new()
+	parent.add_child(row)
+	for id: int in ids:
+		if id < 0: continue
+		var target := id
+		action(row, population.names[id], func() -> void: person = target; redraw())
+	if row.get_child_count() == 0: text(row, "None known")
+
+func _social_record() -> void:
+	var society: RefCounted = population.society
+	text(self, "Cultivation", true)
+	text(self, "%s · spirit root: %s" % [society.realm_label(person), society.root_label(person)])
+	text(self, "%s · lifespan %d%s" % [society.rules.techniques[society.technique[person]].name, society.lifespan(person), " · frail elder" if population.age(person) > society.lifespan(person) else ""])
+	var qi_bar := ProgressBar.new()
+	qi_bar.max_value = society.qi_cost(person)
+	qi_bar.value = society.qi[person]
+	qi_bar.show_percentage = false
+	qi_bar.custom_minimum_size.y = 8
+	qi_bar.tooltip_text = "%.1f / %.1f qi" % [society.qi[person], society.qi_cost(person)]
+	add_child(qi_bar)
+	text(self, "Family", true)
+	text(self, "Parents")
+	_person_links(self, society.parents(person))
+	text(self, "Spouse")
+	_person_links(self, PackedInt32Array([society.spouse[person]]))
+	text(self, "Children")
+	_person_links(self, society.children(person))
+	text(self, "Siblings")
+	_person_links(self, society.siblings(person))
+	text(self, "Lineage", true)
+	text(self, "Master · seniority %d" % society.seniority(person))
+	_person_links(self, PackedInt32Array([society.master[person]]))
+	text(self, "Disciples / apprentices")
+	_person_links(self, society.disciples(person))
+	text(self, "Relationships", true)
+	var rows: Array = society.ties.rows(person)
+	if rows.is_empty(): text(self, "No acquaintances yet")
+	for row: Dictionary in rows.slice(0, 8):
+		var target: int = row.person
+		var panel := PanelContainer.new()
+		add_child(panel)
+		var box := VBoxContainer.new()
+		panel.add_child(box)
+		action(box, population.names[target], func() -> void: person = target; redraw())
+		text(box, "%+.0f opinion · familiarity %d · trust %d" % [row.opinion, row.familiarity, row.trust])
+		var opinion_bar := ProgressBar.new()
+		opinion_bar.min_value = -100
+		opinion_bar.max_value = 100
+		opinion_bar.value = row.opinion
+		opinion_bar.show_percentage = false
+		opinion_bar.custom_minimum_size.y = 4
+		box.add_child(opinion_bar)
+		var bond_chips := HFlowContainer.new()
+		box.add_child(bond_chips)
+		for bond: String in society.ties.bond_names(row.bonds).split(", ", false):
+			var chip := PanelContainer.new()
+			bond_chips.add_child(chip)
+			text(chip, bond).autowrap_mode = TextServer.AUTOWRAP_OFF
+		if society.ties.has_grudge(row.entry):
+			var grudge: Dictionary = society.ties.grudge_record(row.entry)
+			text(box, "Grudge %.0f · %s · %s" % [grudge.intensity, grudge.cause, grudge.resolution])
+
+func _thin_bar(bar: ProgressBar) -> void:
+	var background := StyleBoxFlat.new()
+	background.bg_color = Color("d1c5a9")
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = Color("729363")
+	bar.add_theme_stylebox_override("background", background)
+	bar.add_theme_stylebox_override("fill", fill)
+
+func _group_label(key: String) -> String:
+	if key.begins_with("faction:"):
+		var id := int(key.get_slice(":", 1))
+		if id >= 0 and id < population.society.factions.size(): return str(population.society.factions[id].name)
+	return key

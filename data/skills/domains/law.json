@@ -5,105 +5,105 @@
       "id": "law.customary_law",
       "domain": "law",
       "name": "Customary law",
-      "description": "Customary law applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Understand rules established through village custom.",
       "detailed": false
     },
     {
       "id": "law.land_disputes",
       "domain": "law",
       "name": "Land disputes",
-      "description": "Land disputes applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Resolve competing claims over cultivated ground.",
       "detailed": false
     },
     {
       "id": "law.contract_law",
       "domain": "law",
       "name": "Contract law",
-      "description": "Contract law applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret obligations created by formal agreements.",
       "detailed": false
     },
     {
       "id": "law.inheritance_law",
       "domain": "law",
       "name": "Inheritance law",
-      "description": "Inheritance law applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Determine lawful claims to inherited property.",
       "detailed": false
     },
     {
       "id": "law.witness_questioning",
       "domain": "law",
       "name": "Witness questioning",
-      "description": "Witness questioning applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Ask witnesses questions that clarify events.",
       "detailed": false
     },
     {
       "id": "law.evidence_records",
       "domain": "law",
       "name": "Evidence records",
-      "description": "Evidence records applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Preserve accounts and objects supporting a case.",
       "detailed": false
     },
     {
       "id": "law.judgement_drafting",
       "domain": "law",
       "name": "Judgement drafting",
-      "description": "Judgement drafting applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write reasoned decisions others can understand.",
       "detailed": false
     },
     {
       "id": "law.petition_reading",
       "domain": "law",
       "name": "Petition reading",
-      "description": "Petition reading applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Read grievances submitted for official hearing.",
       "detailed": false
     },
     {
       "id": "law.criminal_procedure",
       "domain": "law",
       "name": "Criminal procedure",
-      "description": "Criminal procedure applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Apply agreed procedures when wrongdoing is alleged.",
       "detailed": false
     },
     {
       "id": "law.tax_law",
       "domain": "law",
       "name": "Tax law",
-      "description": "Tax law applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret duties owed through public levies.",
       "detailed": false
     },
     {
       "id": "law.water_law",
       "domain": "law",
       "name": "Water law",
-      "description": "Water law applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Resolve competing rights to shared water.",
       "detailed": false
     },
     {
       "id": "law.sect_charters",
       "domain": "law",
       "name": "Sect charters",
-      "description": "Sect charters applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Draft rules governing an emergent sect.",
       "detailed": false
     },
     {
       "id": "law.legal_commentary",
       "domain": "law",
       "name": "Legal commentary",
-      "description": "Legal commentary applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Explain difficult rules through written analysis.",
       "detailed": false
     },
     {
       "id": "law.appeals",
       "domain": "law",
       "name": "Appeals",
-      "description": "Appeals applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Review contested decisions for procedural mistakes.",
       "detailed": false
     },
     {
       "id": "law.magistrate_practice",
       "domain": "law",
       "name": "Magistrate practice",
-      "description": "Magistrate practice applies law to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Conduct hearings under recognised public authority.",
       "detailed": false
     }
   ]

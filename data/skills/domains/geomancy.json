@@ -5,105 +5,105 @@
       "id": "geomancy.landform_reading",
       "domain": "geomancy",
       "name": "Landform reading",
-      "description": "Landform reading applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret the shapes surrounding a proposed site.",
       "detailed": false
     },
     {
       "id": "geomancy.water_courses",
       "domain": "geomancy",
       "name": "Water courses",
-      "description": "Water courses applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Trace water paths through an inhabited landscape.",
       "detailed": false
     },
     {
       "id": "geomancy.mountain_veins",
       "domain": "geomancy",
       "name": "Mountain veins",
-      "description": "Mountain veins applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Read ridges as connected flows of terrain.",
       "detailed": false
     },
     {
       "id": "geomancy.compass_methods",
       "domain": "geomancy",
       "name": "Compass methods",
-      "description": "Compass methods applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use a compass within traditional siting methods.",
       "detailed": false
     },
     {
       "id": "geomancy.site_orientation",
       "domain": "geomancy",
       "name": "Site orientation",
-      "description": "Site orientation applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Align structures with chosen directions and light.",
       "detailed": false
     },
     {
       "id": "geomancy.wind_shelter",
       "domain": "geomancy",
       "name": "Wind shelter",
-      "description": "Wind shelter applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Find positions protected from harsh prevailing winds.",
       "detailed": false
     },
     {
       "id": "geomancy.soil_reading",
       "domain": "geomancy",
       "name": "Soil reading",
-      "description": "Soil reading applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Judge earth conditions beneath a proposed dwelling.",
       "detailed": false
     },
     {
       "id": "geomancy.dwelling_siting",
       "domain": "geomancy",
       "name": "Dwelling siting",
-      "description": "Dwelling siting applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose home sites balancing shelter and access.",
       "detailed": false
     },
     {
       "id": "geomancy.tomb_siting",
       "domain": "geomancy",
       "name": "Tomb siting",
-      "description": "Tomb siting applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Select burial locations according to family custom.",
       "detailed": false
     },
     {
       "id": "geomancy.garden_harmony",
       "domain": "geomancy",
       "name": "Garden harmony",
-      "description": "Garden harmony applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange planted spaces for balanced movement.",
       "detailed": false
     },
     {
       "id": "geomancy.town_alignments",
       "domain": "geomancy",
       "name": "Town alignments",
-      "description": "Town alignments applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Align settlement features within surrounding terrain.",
       "detailed": false
     },
     {
       "id": "geomancy.dragon_vein_records",
       "domain": "geomancy",
       "name": "Dragon vein records",
-      "description": "Dragon vein records applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record suspected spiritual currents beneath mountain ridges.",
       "detailed": false
     },
     {
       "id": "geomancy.ritual_boundaries",
       "domain": "geomancy",
       "name": "Ritual boundaries",
-      "description": "Ritual boundaries applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Mark meaningful edges around sacred sites.",
       "detailed": false
     },
     {
       "id": "geomancy.site_remediation",
       "domain": "geomancy",
       "name": "Site remediation",
-      "description": "Site remediation applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Adjust poorly placed features within occupied ground.",
       "detailed": false
     },
     {
       "id": "geomancy.geomantic_teaching",
       "domain": "geomancy",
       "name": "Geomantic teaching",
-      "description": "Geomantic teaching applies geomancy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach landscape interpretation through field observation.",
       "detailed": false
     }
   ]

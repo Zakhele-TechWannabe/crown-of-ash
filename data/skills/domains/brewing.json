@@ -5,7 +5,7 @@
       "id": "brewing.brewing",
       "domain": "brewing",
       "name": "Brewing",
-      "description": "Brewing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make fermented drinks from cultivated grains.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -276,7 +276,7 @@
       "id": "brewing.starter_tending",
       "domain": "brewing",
       "name": "Starter tending",
-      "description": "Starter tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain living cultures that begin fermentation.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -547,7 +547,7 @@
       "id": "brewing.rice_fermentation",
       "domain": "brewing",
       "name": "Rice fermentation",
-      "description": "Rice fermentation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Ferment cooked rice into village wine.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -818,7 +818,7 @@
       "id": "brewing.grain_malting",
       "domain": "brewing",
       "name": "Grain malting",
-      "description": "Grain malting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sprout grain to develop usable brewing sugars.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1089,7 +1089,7 @@
       "id": "brewing.mash_tending",
       "domain": "brewing",
       "name": "Mash tending",
-      "description": "Mash tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Control warm grain mixtures during brewing.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1360,7 +1360,7 @@
       "id": "brewing.wine_pressing",
       "domain": "brewing",
       "name": "Wine pressing",
-      "description": "Wine pressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Separate fermented juice from solid material.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1631,7 +1631,7 @@
       "id": "brewing.vinegar_tending",
       "domain": "brewing",
       "name": "Vinegar tending",
-      "description": "Vinegar tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain cultures turning alcohol into vinegar.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1902,7 +1902,7 @@
       "id": "brewing.jar_sealing",
       "domain": "brewing",
       "name": "Jar sealing",
-      "description": "Jar sealing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Close vessels against contamination and leakage.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2173,7 +2173,7 @@
       "id": "brewing.cellar_keeping",
       "domain": "brewing",
       "name": "Cellar keeping",
-      "description": "Cellar keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Store fermenting drinks under suitable conditions.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2444,7 +2444,7 @@
       "id": "brewing.water_selection",
       "domain": "brewing",
       "name": "Water selection",
-      "description": "Water selection: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Choose water suited to particular brews.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2715,7 +2715,7 @@
       "id": "brewing.brew_tasting",
       "domain": "brewing",
       "name": "Brew tasting",
-      "description": "Brew tasting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Judge fermented drinks by aroma and taste.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2986,7 +2986,7 @@
       "id": "brewing.lees_reuse",
       "domain": "brewing",
       "name": "Lees reuse",
-      "description": "Lees reuse: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Reuse brewing sediment without spoiling later batches.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3257,7 +3257,7 @@
       "id": "brewing.herbal_infusions",
       "domain": "brewing",
       "name": "Herbal infusions",
-      "description": "Herbal infusions: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Extract flavours from steeped herbs.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3528,7 +3528,7 @@
       "id": "brewing.tea_preparation",
       "domain": "brewing",
       "name": "Tea preparation",
-      "description": "Tea preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Steep tea to suit leaves and water.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3799,7 +3799,7 @@
       "id": "brewing.festival_brewing",
       "domain": "brewing",
       "name": "Festival brewing",
-      "description": "Festival brewing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare enough drink for public celebrations.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

@@ -5,105 +5,105 @@
       "id": "ritual_and_ceremony.calendar_rites",
       "domain": "ritual_and_ceremony",
       "name": "Calendar rites",
-      "description": "Calendar rites applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Conduct ceremonies tied to seasonal dates.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.ancestor_offerings",
       "domain": "ritual_and_ceremony",
       "name": "Ancestor offerings",
-      "description": "Ancestor offerings applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Present respectful gifts to family ancestors.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.festival_processions",
       "domain": "ritual_and_ceremony",
       "name": "Festival processions",
-      "description": "Festival processions applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange ceremonial movement through public spaces.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.marriage_rites",
       "domain": "ritual_and_ceremony",
       "name": "Marriage rites",
-      "description": "Marriage rites applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Conduct vows joining consenting marriage partners.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.coming_of_age",
       "domain": "ritual_and_ceremony",
       "name": "Coming of age",
-      "description": "Coming of age applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Mark a youth's entry into adult duties.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.harvest_blessings",
       "domain": "ritual_and_ceremony",
       "name": "Harvest blessings",
-      "description": "Harvest blessings applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lead customary gratitude after gathered crops.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.temple_etiquette",
       "domain": "ritual_and_ceremony",
       "name": "Temple etiquette",
-      "description": "Temple etiquette applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe appropriate conduct within sacred buildings.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.sacred_recitation",
       "domain": "ritual_and_ceremony",
       "name": "Sacred recitation",
-      "description": "Sacred recitation applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recite inherited ceremonial texts accurately.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.altar_preparation",
       "domain": "ritual_and_ceremony",
       "name": "Altar preparation",
-      "description": "Altar preparation applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare clean spaces for ritual offerings.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.ritual_music",
       "domain": "ritual_and_ceremony",
       "name": "Ritual music",
-      "description": "Ritual music applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate music accompanying formal rites.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.offering_accounts",
       "domain": "ritual_and_ceremony",
       "name": "Offering accounts",
-      "description": "Offering accounts applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Account for goods consumed in ceremonies.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.guest_precedence",
       "domain": "ritual_and_ceremony",
       "name": "Guest precedence",
-      "description": "Guest precedence applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Seat visitors according to recognised precedence.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.sect_ceremonies",
       "domain": "ritual_and_ceremony",
       "name": "Sect ceremonies",
-      "description": "Sect ceremonies applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Develop ceremonies for a sect after founding.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.ritual_histories",
       "domain": "ritual_and_ceremony",
       "name": "Ritual histories",
-      "description": "Ritual histories applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record how ceremonial practices have changed.",
       "detailed": false
     },
     {
       "id": "ritual_and_ceremony.ceremonial_stewardship",
       "domain": "ritual_and_ceremony",
       "name": "Ceremonial stewardship",
-      "description": "Ceremonial stewardship applies ritual and ceremony to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate people and materials for formal observances.",
       "detailed": false
     }
   ]

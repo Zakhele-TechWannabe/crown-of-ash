@@ -13,6 +13,10 @@ var routes: Dictionary = {}
 var minutes := 300.0
 var economy := preload("res://src/grain_economy.gd").new()
 var granary: Vector2i
+var skip_next_day := 0
+var skip_target := 0
+var skip_start := 0
+var skip_was_paused := false
 var speed := 1.0
 var paused := false
 var last_minute := -1
@@ -117,6 +121,11 @@ func setup(map: Node2D) -> void:
 	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
 	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
 	population.seed_residents(people)
+	var archive_settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))
+	if archive_settings.enabled and not "--no-archive" in OS.get_cmdline_user_args():
+		var society: RefCounted = population.society
+		society.archive = preload("res://src/archive.gd").new(population, int(sect.data.seed))
+		for record: Dictionary in society.chronicle: society.archive.event(record.day, record.person, record.kind, record.text)
 	economy.population = population
 	economy.setup(sect.data, people, int(world.data.get("seed", sect.data.seed)))
 	for arg in OS.get_cmdline_user_args():
@@ -127,7 +136,12 @@ func setup(map: Node2D) -> void:
 			if parts.size() == 2:
 				minutes = floorf(minutes / 1440.0) * 1440.0 + clampi(int(parts[0]), 0, 23) * 60 + clampi(int(parts[1]), 0, 59)
 	economy.advance_to(minutes)
-	if "--headless-sim" in OS.get_cmdline_user_args():
+	var skip_requested := false
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--skip-years="):
+			skip_requested = true
+			start_skip(maxi(1, int(arg.trim_prefix("--skip-years="))))
+	if "--headless-sim" in OS.get_cmdline_user_args() or (skip_requested and DisplayServer.get_name() == "headless"):
 		call_deferred("_headless_sim")
 	draw_order = people.duplicate()
 	_refresh(true)
@@ -233,14 +247,21 @@ func _refresh(initial: bool = false) -> void:
 
 
 func _process(dt: float) -> void:
+	if skip_target > 0:
+		_process_skip()
+		return
 	var elapsed := 0.0 if paused else dt * speed
 	minutes += elapsed * 2.4
 	var was_crisis: bool = economy.crisis
 	economy.advance_to(minutes)
 	if population.size() > 1000:
+		population.async_factions = true
 		if population.pending_day < 0 and population.day < int(minutes / 1440):
 			population.begin_day(population.day + 1)
-		population.process_batch(256)
+		var budget_start := Time.get_ticks_usec()
+		while population.pending_day >= 0 and Time.get_ticks_usec() - budget_start < 2000:
+			population.process_batch(32)
+			if population.society.faction_pending: break
 	if economy.pause_on_crisis and economy.crisis and not was_crisis:
 		paused = true
 	var schedule_tick := int(minutes / 720.0) if speed >= 64 else int(minutes)
@@ -342,35 +363,77 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 
+func start_skip(years: int) -> void:
+	if skip_target > 0: return
+	skip_next_day = 0
+	skip_start = population.day
+	skip_target = skip_start + years * 365
+	skip_was_paused = paused
+	economy.coarse_population = true
+
+func cancel_skip() -> void:
+	if skip_next_day > 0:
+		skip_target = skip_next_day
+		return
+	if population.pending_day >= 0:
+		skip_target = population.pending_day
+		return
+	skip_target = 0
+	economy.coarse_population = false
+	paused = skip_was_paused
+
+func _skip_week(target_day: int) -> void:
+	var next_day := mini(target_day, population.day + 7)
+	economy.advance_to(next_day * 1440.0)
+	population.tick_span(next_day)
+	minutes = next_day * 1440.0
+
+func _process_skip() -> void:
+	population.async_factions = population.size() > 1000
+	var began := Time.get_ticks_usec()
+	while skip_target > 0 and Time.get_ticks_usec() - began < 2000:
+		if population.pending_day < 0:
+			if skip_next_day == 0: skip_next_day = mini(skip_target, population.day + 7)
+			var target_minutes := skip_next_day * 1440.0
+			if economy.next_event <= target_minutes:
+				economy.advance_to(economy.next_event)
+				return
+			population.tick_days = skip_next_day - population.day
+			population.begin_day(skip_next_day)
+		if population.society.faction_pending: return
+		if population.process_batch(16):
+			skip_next_day = 0
+			population.tick_days = 1
+			minutes = population.day * 1440.0
+			if population.day >= skip_target: cancel_skip()
+
 func _headless_sim() -> void:
 	set_process(false)
+	population.async_factions = false
 	var years := 1
+	var coarse := false
 	for arg in OS.get_cmdline_user_args():
-		if arg.begins_with("--years="):
-			years = maxi(1, int(arg.trim_prefix("--years=")))
+		if arg.begins_with("--years="): years = maxi(1, int(arg.trim_prefix("--years=")))
+		if arg.begins_with("--skip-years="):
+			years = maxi(1, int(arg.trim_prefix("--skip-years=")))
+			coarse = true
+	economy.coarse_population = coarse
 	print("SKILLS Start: %s" % population.tier_distribution())
-	var starting_levels := population.best_level.duplicate()
 	for y in years:
-		var before_insights := population.total_insights
-		var before_levels := population.notable_levels
-		economy.advance_to((y * 365 + 199) * 1440.0)
-		for group: String in ["grains", "vegetables", "fruit", "meat", "fish", "pantry", "wood", "earth", "metal", "fibre", "other_materials"]:
-			print("DAY200 Year %d %s: %.2f %s" % [y + 1, group, economy.quantity(group) * 2, "jin / pieces" if group in ["wood", "earth", "metal", "fibre", "other_materials"] else "jin"])
-		for id: String in economy.descendants("materials"):
-			if economy.goods[id].grade == "mortal":
-				print("DAY200 Year %d %s: %.2f %s" % [y + 1, id, float(economy.stocks[id]) * 2, economy.goods[id].unit])
-		economy.advance_to((y + 1) * 365 * 1440.0)
-		print("SKILLS Year %d: %s | insights %d | notable level-ups %d" % [y + 1, population.tier_distribution(), population.total_insights - before_insights, population.notable_levels - before_levels])
-		print("SKILL_ENTRIES Year %d: %s" % [y + 1, population.skill_tier_distribution()])
-	for person in population.size():
-		print("GROWTH %s age %d best %s %d growth +%d skills %s" % [population.names[person], population.age(person), population.catalogue.title(population.best_level[person]), population.best_level[person], population.best_level[person] - starting_levels[person], population.sparse_skills(person)])
-	for summary: String in economy.summaries:
-		print(summary)
-	for entry: String in economy.chronicle:
-		print(entry)
+		var target_day := (y + 1) * 365
+		if coarse:
+			while population.day < target_day: _skip_week(target_day)
+		else: economy.advance_to(target_day * 1440.0)
+		if (y + 1) % 10 == 0 or y == years - 1:
+			print("DECADE %d SKILLS %s" % [y + 1, population.tier_distribution()])
+			print("DECADE %d SOCIETY %s" % [y + 1, JSON.stringify(population.society.summary())])
+			var records: Array = population.society.top_events(maxi(0, (y - 9) * 365))
+			for event: Dictionary in records:
+				print("CHRONICLE day=%d %s" % [event.day, event.text])
+		await get_tree().process_frame
+	_close_archive()
 	get_tree().quit()
 
-# Small foreground decorations bypass chunk rasterization entirely.
 func _setup_food_places() -> void:
 	for plan: Dictionary in sect.data.food_sites:
 		var at := nearest(sect.center + Vector2i(int(plan.at[0]), int(plan.at[1])))
@@ -585,3 +648,14 @@ func _refresh_population_views() -> void:
 		if person < people.size(): continue
 		if nearby_views.size() + people.size() >= WALKER_LIMIT: break
 		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Color("a6a078"), "carrying": false}
+
+func _close_archive() -> void:
+	var society: RefCounted = population.society if population else null
+	if society and society.archive:
+		# A run that stops exactly on a new year closes the finished year with its snapshot.
+		if population.day % 365 == 0 and society.archived_year != population.day / 365: society.archive.year_end(population.day / 365 - 1)
+		society.archive.close()
+		society.archive = null
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_PREDELETE: _close_archive()

@@ -171,7 +171,7 @@ func run() -> void:
 	ledger.open_tab("people")
 	var browser: VBoxContainer = ledger.people_browser
 	assert(browser.group_mode == "Place")
-	browser.path.assign(["Servants' Village", "District 1", "Household 1"])
+	browser.path.assign(["Servants' Village", world.life.population.district_name(0), world.life.population.household_name(0)])
 	browser.redraw()
 	assert(browser.virtual_list.ids.size() == 3)
 	browser.virtual_list.person_selected.emit(0)
@@ -181,6 +181,23 @@ func run() -> void:
 	follow.pressed.emit()
 	await settle(ledger)
 	assert(world.life.followed == 0 and not ledger.visible)
+	ledger.open_tab("people")
+	var groups: Array = world.life.population.society.factions
+	var village_name: String = groups[0].name
+	var home_name: String = groups[1].name
+	groups[0].name = "Shared name"
+	groups[1].name = "Shared name"
+	browser.group_mode = "Faction"
+	browser.path.assign(["faction:1"])
+	browser.person = -1
+	browser.redraw()
+	assert(browser.virtual_list.ids.size() == groups[1].members.size(), "Same-name factions must not merge their member lists")
+	groups[0].name = village_name
+	groups[1].name = home_name
+	browser.group_mode = "Place"
+	browser.path.clear()
+	browser.redraw()
+
 	for path: String in ["food/vegetables/greens", "food/fruit", "food/meat", "food/fish", "food/pantry"]:
 		ledger.open_tab(path)
 		await process_frame
@@ -225,7 +242,7 @@ func run() -> void:
 				if path == "people/work": browser.group_mode = "Work"
 				if path == "people/life": browser.group_mode = "Life stage"
 				if path == "people/status": browser.group_mode = "Status"
-				if path == "people/list": browser.path.assign(["Servants' Village", "District 1", "Household 1"])
+				if path == "people/list": browser.path.assign(["Servants' Village", world.life.population.district_name(0), world.life.population.household_name(0)])
 				if path == "people/person": browser.person = 0
 				if path.begins_with("people/skills"):
 					browser.catalogue_mode = true

@@ -5,105 +5,105 @@
       "id": "roads_and_bridges.road_grading",
       "domain": "roads_and_bridges",
       "name": "Road grading",
-      "description": "Road grading applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Shape road surfaces to a usable gradient.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.gravel_laying",
       "domain": "roads_and_bridges",
       "name": "Gravel laying",
-      "description": "Gravel laying applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Spread graded stone over prepared roadbeds.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.paving",
       "domain": "roads_and_bridges",
       "name": "Paving",
-      "description": "Paving applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lay durable surfaces along busy routes.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.culvert_laying",
       "domain": "roads_and_bridges",
       "name": "Culvert laying",
-      "description": "Culvert laying applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Install channels carrying water beneath roads.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.road_drainage",
       "domain": "roads_and_bridges",
       "name": "Road drainage",
-      "description": "Road drainage applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Divert runoff before it destroys road surfaces.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.bridge_footings",
       "domain": "roads_and_bridges",
       "name": "Bridge footings",
-      "description": "Bridge footings applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Set bridge supports below unstable ground.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.timber_bridges",
       "domain": "roads_and_bridges",
       "name": "Timber bridges",
-      "description": "Timber bridges applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build timber spans across small waterways.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.stone_bridges",
       "domain": "roads_and_bridges",
       "name": "Stone bridges",
-      "description": "Stone bridges applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Construct stone spans with stable arches.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.suspension_ropes",
       "domain": "roads_and_bridges",
       "name": "Suspension ropes",
-      "description": "Suspension ropes applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make load-bearing ropes for suspended crossings.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.ford_improvement",
       "domain": "roads_and_bridges",
       "name": "Ford improvement",
-      "description": "Ford improvement applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Strengthen shallow river crossings for regular traffic.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.slope_stabilisation",
       "domain": "roads_and_bridges",
       "name": "Slope stabilisation",
-      "description": "Slope stabilisation applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Secure unstable ground beside travelled routes.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.road_inspection",
       "domain": "roads_and_bridges",
       "name": "Road inspection",
-      "description": "Road inspection applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Check roads for damage and dangerous wear.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.bridge_repair",
       "domain": "roads_and_bridges",
       "name": "Bridge repair",
-      "description": "Bridge repair applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore weakened bridge timbers and joints.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.traffic_planning",
       "domain": "roads_and_bridges",
       "name": "Traffic planning",
-      "description": "Traffic planning applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange routes and passing places for traffic.",
       "detailed": false
     },
     {
       "id": "roads_and_bridges.route_engineering",
       "domain": "roads_and_bridges",
       "name": "Route engineering",
-      "description": "Route engineering applies roads and bridges to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Design practical roads through difficult terrain.",
       "detailed": false
     }
   ]

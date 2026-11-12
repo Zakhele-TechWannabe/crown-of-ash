@@ -1,0 +1,95 @@
+{
+  "elements": [
+    "Metal",
+    "Wood",
+    "Water",
+    "Fire",
+    "Earth",
+    "Wind",
+    "Thunder",
+    "Ice",
+    "Light",
+    "Shadow"
+  ],
+  "root_speed": [
+    3,
+    1.8,
+    1,
+    0.6,
+    0.35
+  ],
+  "density": [
+    1,
+    2,
+    4
+  ],
+  "techniques": [
+    {
+      "name": "Self-taught groping",
+      "rate": 0.1,
+      "cap": 2,
+      "grade": "Unformed",
+      "element": -1
+    },
+    {
+      "name": "Yellow breathing fragment",
+      "rate": 1,
+      "cap": 2,
+      "grade": "Yellow",
+      "element": 0
+    },
+    {
+      "name": "Complete lineage art",
+      "rate": 1.6,
+      "cap": 5,
+      "grade": "Profound",
+      "element": 0
+    }
+  ],
+  "realms": [
+    {
+      "name": "Mortal",
+      "lifespan": 70,
+      "cost": 0,
+      "chance": 1
+    },
+    {
+      "name": "Body Tempering",
+      "lifespan": 80,
+      "cost": 0,
+      "chance": 1
+    },
+    {
+      "name": "Qi Condensation",
+      "lifespan": 120,
+      "cost": 2000,
+      "chance": 0.8
+    },
+    {
+      "name": "Foundation Establishment",
+      "lifespan": 250,
+      "cost": 60000,
+      "chance": 0.3
+    },
+    {
+      "name": "Core Formation",
+      "lifespan": 500,
+      "cost": 600000,
+      "chance": 0.12
+    },
+    {
+      "name": "Nascent Soul",
+      "lifespan": 1000,
+      "cost": 6000000,
+      "chance": 0.05
+    }
+  ],
+  "constitutions": [
+    "Ordinary",
+    "Stone body",
+    "Cold-yin body",
+    "Pure-yang body",
+    "Spirit-sensitive eyes",
+    "Hundred meridians"
+  ]
+}

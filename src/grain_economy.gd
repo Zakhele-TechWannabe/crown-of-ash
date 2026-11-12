@@ -68,6 +68,7 @@ func record_good(id: String, key: String, value: float) -> void:
 var field_area := 0
 var seed_value := 718
 var people: Array[Dictionary] = []
+var coarse_population := false
 var population: RefCounted
 var skill_event_cursor := 0
 var order: Array[int] = []
@@ -106,6 +107,9 @@ func daily_need() -> float:
 	var total := 0.0
 	for p: Dictionary in people:
 		total += 0.5 if int(p.kind) == 8 else 1.0
+	if population != null:
+		for id in range(people.size(), population.size()):
+			if population.society.alive[id]: total += .5 if population.age(id) < 18 else 1.0
 	return total
 
 func days_left() -> float:
@@ -287,6 +291,15 @@ func _meal() -> void:
 			p.hunger = mini(4, int(p.hunger) + 1)
 		if int(p.hunger) > 0:
 			hungry += 1
+	if population != null:
+		for id in range(people.size(), population.size()):
+			if not population.society.alive[id]: continue
+			var need := .5 if population.age(id) < 18 else 1.0
+			var eaten := _eat_group("food", need * share, "children" if population.age(id) < 18 else "adults")
+			consumed += eaten
+			population.hunger[id] = maxi(0, population.hunger[id] - 1) if eaten >= need * .99 else mini(4, population.hunger[id] + 1)
+			population.mood[id] = lerpf(population.mood[id], eaten / need * .7, .12)
+			hungry += int(population.hunger[id] > 0)
 	if hungry > 0 and hungry_count == 0:
 		note("hunger begins; %d villagers hungry" % hungry)
 	elif hungry == 0 and hungry_count > 0:
@@ -309,8 +322,9 @@ func _thresholds() -> void:
 
 func _finish_day() -> void:
 	if population != null:
+		population.society.stores_years = stock / maxf(1, daily_need() * 365)
 		population.sync_walkers(people)
-		if population.size() <= 1000: population.tick_day((year - 1) * 365 + day)
+		if population.size() <= 1000 and not coarse_population: population.tick_day((year - 1) * 365 + day)
 		while skill_event_cursor < population.events.size():
 			note(population.events[skill_event_cursor].text)
 			skill_event_cursor += 1
@@ -327,6 +341,10 @@ func _finish_day() -> void:
 			elif autumn and hunger >= 2 and int(p.kind) != 8:
 				# Hungry villagers of any trade join the harvest.
 				labor += 0.5
+	if population != null and not no_farmers:
+		for id in range(people.size(), population.size()):
+			if population.age(id) < 12 or not population.society.alive[id]: continue
+			if "fields" in population.schedules[population.job[id]]: labor += EFFECT[population.hunger[id]] * population.output(id, "fields") * (.5 if population.age(id) < 18 else 1)
 	if day <= 182:
 		work += labor
 	elif day <= 273:

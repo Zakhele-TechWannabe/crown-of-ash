@@ -5,7 +5,7 @@
       "id": "stone_and_quarry.quarrying",
       "domain": "stone_and_quarry",
       "name": "Quarrying",
-      "description": "Quarrying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Extract useful stone from exposed rock faces.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -259,7 +259,7 @@
       "id": "stone_and_quarry.stone_splitting",
       "domain": "stone_and_quarry",
       "name": "Stone splitting",
-      "description": "Stone splitting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Split rock along favourable natural planes.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -530,7 +530,7 @@
       "id": "stone_and_quarry.block_dressing",
       "domain": "stone_and_quarry",
       "name": "Block dressing",
-      "description": "Block dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Shape rough blocks for sound masonry.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -801,7 +801,7 @@
       "id": "stone_and_quarry.rubble_sorting",
       "domain": "stone_and_quarry",
       "name": "Rubble sorting",
-      "description": "Rubble sorting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sort broken stone by construction use.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1072,7 +1072,7 @@
       "id": "stone_and_quarry.lime_burning",
       "domain": "stone_and_quarry",
       "name": "Lime burning",
-      "description": "Lime burning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Burn limestone into reactive building lime.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1343,7 +1343,7 @@
       "id": "stone_and_quarry.flagstone_cutting",
       "domain": "stone_and_quarry",
       "name": "Flagstone cutting",
-      "description": "Flagstone cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut flat slabs for paving.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1614,7 +1614,7 @@
       "id": "stone_and_quarry.grindstone_shaping",
       "domain": "stone_and_quarry",
       "name": "Grindstone shaping",
-      "description": "Grindstone shaping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Shape abrasive stones for grinding tools.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -1885,7 +1885,7 @@
       "id": "stone_and_quarry.stone_carving",
       "domain": "stone_and_quarry",
       "name": "Stone carving",
-      "description": "Stone carving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Carve durable forms into prepared stone.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2156,7 +2156,7 @@
       "id": "stone_and_quarry.slate_working",
       "domain": "stone_and_quarry",
       "name": "Slate working",
-      "description": "Slate working: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Work thin stone into roofing pieces.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2427,7 +2427,7 @@
       "id": "stone_and_quarry.quarry_drainage",
       "domain": "stone_and_quarry",
       "name": "Quarry drainage",
-      "description": "Quarry drainage: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep quarry pits free of standing water.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2698,7 +2698,7 @@
       "id": "stone_and_quarry.stone_hauling",
       "domain": "stone_and_quarry",
       "name": "Stone hauling",
-      "description": "Stone hauling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Transport blocks without cracking their edges.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -2969,7 +2969,7 @@
       "id": "stone_and_quarry.rock_assessment",
       "domain": "stone_and_quarry",
       "name": "Rock assessment",
-      "description": "Rock assessment: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Judge rock strength and hidden defects.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3240,7 +3240,7 @@
       "id": "stone_and_quarry.wedge_making",
       "domain": "stone_and_quarry",
       "name": "Wedge making",
-      "description": "Wedge making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Make wedges suitable for splitting stone.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3511,7 +3511,7 @@
       "id": "stone_and_quarry.quarry_shoring",
       "domain": "stone_and_quarry",
       "name": "Quarry shoring",
-      "description": "Quarry shoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Support unstable working faces against collapse.",
       "detailed": true,
       "key_attributes": [
         "strength",
@@ -3782,7 +3782,7 @@
       "id": "stone_and_quarry.stone_finishing",
       "domain": "stone_and_quarry",
       "name": "Stone finishing",
-      "description": "Stone finishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Smooth finished stone to required texture.",
       "detailed": true,
       "key_attributes": [
         "strength",

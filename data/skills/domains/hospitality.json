@@ -5,105 +5,105 @@
       "id": "hospitality.guest_greeting",
       "domain": "hospitality",
       "name": "Guest greeting",
-      "description": "Guest greeting applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Welcome arrivals with appropriate courtesy.",
       "detailed": false
     },
     {
       "id": "hospitality.room_preparation",
       "domain": "hospitality",
       "name": "Room preparation",
-      "description": "Room preparation applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Ready clean sleeping quarters for visitors.",
       "detailed": false
     },
     {
       "id": "hospitality.meal_service",
       "domain": "hospitality",
       "name": "Meal service",
-      "description": "Meal service applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Serve prepared dishes in orderly courses.",
       "detailed": false
     },
     {
       "id": "hospitality.tea_service",
       "domain": "hospitality",
       "name": "Tea service",
-      "description": "Tea service applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Offer tea with suitable vessels and timing.",
       "detailed": false
     },
     {
       "id": "hospitality.travel_advice",
       "domain": "hospitality",
       "name": "Travel advice",
-      "description": "Travel advice applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Explain local roads, hazards and customs.",
       "detailed": false
     },
     {
       "id": "hospitality.stable_reception",
       "domain": "hospitality",
       "name": "Stable reception",
-      "description": "Stable reception applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Receive travellers' animals and arrange stalls.",
       "detailed": false
     },
     {
       "id": "hospitality.guest_accounts",
       "domain": "hospitality",
       "name": "Guest accounts",
-      "description": "Guest accounts applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record guests' charges and settled bills.",
       "detailed": false
     },
     {
       "id": "hospitality.house_etiquette",
       "domain": "hospitality",
       "name": "House etiquette",
-      "description": "House etiquette applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe manners expected within a host's home.",
       "detailed": false
     },
     {
       "id": "hospitality.festival_hosting",
       "domain": "hospitality",
       "name": "Festival hosting",
-      "description": "Festival hosting applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Receive crowds during public celebrations.",
       "detailed": false
     },
     {
       "id": "hospitality.large_tables",
       "domain": "hospitality",
       "name": "Large tables",
-      "description": "Large tables applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate service at crowded communal meals.",
       "detailed": false
     },
     {
       "id": "hospitality.dispute_soothing",
       "domain": "hospitality",
       "name": "Dispute soothing",
-      "description": "Dispute soothing applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Calm disagreements between guests and hosts.",
       "detailed": false
     },
     {
       "id": "hospitality.guest_safety",
       "domain": "hospitality",
       "name": "Guest safety",
-      "description": "Guest safety applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Protect visitors and their belongings.",
       "detailed": false
     },
     {
       "id": "hospitality.supply_planning",
       "domain": "hospitality",
       "name": "Supply planning",
-      "description": "Supply planning applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Estimate provisions needed for expected guests.",
       "detailed": false
     },
     {
       "id": "hospitality.inn_management",
       "domain": "hospitality",
       "name": "Inn management",
-      "description": "Inn management applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage lodging, staff and household revenue.",
       "detailed": false
     },
     {
       "id": "hospitality.host_training",
       "domain": "hospitality",
       "name": "Host training",
-      "description": "Host training applies hospitality to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Teach attentive and competent hosting habits.",
       "detailed": false
     }
   ]

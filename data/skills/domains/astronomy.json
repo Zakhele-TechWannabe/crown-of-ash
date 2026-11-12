@@ -5,105 +5,105 @@
       "id": "astronomy.star_recognition",
       "domain": "astronomy",
       "name": "Star recognition",
-      "description": "Star recognition applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recognise recurring groups of visible stars.",
       "detailed": false
     },
     {
       "id": "astronomy.moon_phases",
       "domain": "astronomy",
       "name": "Moon phases",
-      "description": "Moon phases applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Track the moon's changing illuminated shape.",
       "detailed": false
     },
     {
       "id": "astronomy.solar_observations",
       "domain": "astronomy",
       "name": "Solar observations",
-      "description": "Solar observations applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Observe the sun through safe indirect methods.",
       "detailed": false
     },
     {
       "id": "astronomy.planet_tracking",
       "domain": "astronomy",
       "name": "Planet tracking",
-      "description": "Planet tracking applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record movements of wandering celestial lights.",
       "detailed": false
     },
     {
       "id": "astronomy.eclipse_records",
       "domain": "astronomy",
       "name": "Eclipse records",
-      "description": "Eclipse records applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep accurate accounts of darkened sun or moon.",
       "detailed": false
     },
     {
       "id": "astronomy.calendar_calculation",
       "domain": "astronomy",
       "name": "Calendar calculation",
-      "description": "Calendar calculation applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Calculate dates from observed celestial cycles.",
       "detailed": false
     },
     {
       "id": "astronomy.gnomon_measurement",
       "domain": "astronomy",
       "name": "Gnomon measurement",
-      "description": "Gnomon measurement applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use shadow lengths to measure solar position.",
       "detailed": false
     },
     {
       "id": "astronomy.armillary_spheres",
       "domain": "astronomy",
       "name": "Armillary spheres",
-      "description": "Armillary spheres applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Operate ringed models of celestial motion.",
       "detailed": false
     },
     {
       "id": "astronomy.night_watches",
       "domain": "astronomy",
       "name": "Night watches",
-      "description": "Night watches applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain disciplined observations after sunset.",
       "detailed": false
     },
     {
       "id": "astronomy.comet_records",
       "domain": "astronomy",
       "name": "Comet records",
-      "description": "Comet records applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record the appearance of unusual tailed stars.",
       "detailed": false
     },
     {
       "id": "astronomy.star_charts",
       "domain": "astronomy",
       "name": "Star charts",
-      "description": "Star charts applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Map stars into readable positional diagrams.",
       "detailed": false
     },
     {
       "id": "astronomy.time_keeping",
       "domain": "astronomy",
       "name": "Time keeping",
-      "description": "Time keeping applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain shared measures of passing time.",
       "detailed": false
     },
     {
       "id": "astronomy.season_reckoning",
       "domain": "astronomy",
       "name": "Season reckoning",
-      "description": "Season reckoning applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Relate sky cycles to agricultural seasons.",
       "detailed": false
     },
     {
       "id": "astronomy.instrument_calibration",
       "domain": "astronomy",
       "name": "Instrument calibration",
-      "description": "Instrument calibration applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Check observational tools against dependable references.",
       "detailed": false
     },
     {
       "id": "astronomy.celestial_commentary",
       "domain": "astronomy",
       "name": "Celestial commentary",
-      "description": "Celestial commentary applies astronomy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret accumulated records of celestial events.",
       "detailed": false
     }
   ]

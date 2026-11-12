@@ -5,105 +5,105 @@
       "id": "basketry.reed_cutting",
       "domain": "basketry",
       "name": "Reed cutting",
-      "description": "Reed cutting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Harvest reeds suitable for flexible weaving.",
       "detailed": false
     },
     {
       "id": "basketry.willow_soaking",
       "domain": "basketry",
       "name": "Willow soaking",
-      "description": "Willow soaking applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Soften willow rods before bending.",
       "detailed": false
     },
     {
       "id": "basketry.splitting_strips",
       "domain": "basketry",
       "name": "Splitting strips",
-      "description": "Splitting strips applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Split bamboo and cane into narrow strips.",
       "detailed": false
     },
     {
       "id": "basketry.base_weaving",
       "domain": "basketry",
       "name": "Base weaving",
-      "description": "Base weaving applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Weave a stable bottom for baskets.",
       "detailed": false
     },
     {
       "id": "basketry.stake_setting",
       "domain": "basketry",
       "name": "Stake setting",
-      "description": "Stake setting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Set upright ribs around a basket base.",
       "detailed": false
     },
     {
       "id": "basketry.rim_binding",
       "domain": "basketry",
       "name": "Rim binding",
-      "description": "Rim binding applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Bind upper edges against unravelling.",
       "detailed": false
     },
     {
       "id": "basketry.lid_fitting",
       "domain": "basketry",
       "name": "Lid fitting",
-      "description": "Lid fitting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make lids that fit woven containers.",
       "detailed": false
     },
     {
       "id": "basketry.pack_baskets",
       "domain": "basketry",
       "name": "Pack baskets",
-      "description": "Pack baskets applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Weave load-carrying baskets with strong straps.",
       "detailed": false
     },
     {
       "id": "basketry.fish_creels",
       "domain": "basketry",
       "name": "Fish creels",
-      "description": "Fish creels applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build ventilated baskets for fresh catches.",
       "detailed": false
     },
     {
       "id": "basketry.grain_baskets",
       "domain": "basketry",
       "name": "Grain baskets",
-      "description": "Grain baskets applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Make close-woven containers for dry grain.",
       "detailed": false
     },
     {
       "id": "basketry.wicker_repair",
       "domain": "basketry",
       "name": "Wicker repair",
-      "description": "Wicker repair applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Replace damaged wicker without undoing sound work.",
       "detailed": false
     },
     {
       "id": "basketry.bamboo_plaiting",
       "domain": "basketry",
       "name": "Bamboo plaiting",
-      "description": "Bamboo plaiting applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plait split bamboo into sheets and vessels.",
       "detailed": false
     },
     {
       "id": "basketry.pattern_weaving",
       "domain": "basketry",
       "name": "Pattern weaving",
-      "description": "Pattern weaving applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Work visible motifs into woven surfaces.",
       "detailed": false
     },
     {
       "id": "basketry.waterproof_lining",
       "domain": "basketry",
       "name": "Waterproof lining",
-      "description": "Waterproof lining applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Line baskets to slow water leakage.",
       "detailed": false
     },
     {
       "id": "basketry.basket_grading",
       "domain": "basketry",
       "name": "Basket grading",
-      "description": "Basket grading applies basketry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Judge woven goods by strength and finish.",
       "detailed": false
     }
   ]

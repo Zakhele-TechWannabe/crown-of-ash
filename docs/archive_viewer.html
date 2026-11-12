@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book of Lives</title>
+<style>
+:root{--bg:#14110f;--panel:#1d1916;--line:#3a312a;--ink:#eae0d2;--mute:#a3968a;--gold:#d8b46a;--jade:#6fbf9a;--red:#d9725f;--blue:#7aa6d9;--violet:#b58ad9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:2}
+h1{font:600 18px Georgia,serif;margin:0 12px 0 0;color:var(--gold)}
+nav button,button.chip{background:none;border:1px solid var(--line);color:var(--mute);padding:5px 12px;border-radius:14px;cursor:pointer;font:inherit}
+nav button.on,button.chip.on{border-color:var(--gold);color:var(--ink);background:#2a231d}
+select,input{background:#0f0d0b;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font:inherit}
+main{padding:16px;max-width:1400px;margin:0 auto}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.card b{display:block;font-size:22px;color:var(--gold)}
+.card span{color:var(--mute);font-size:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:16px}
+.panel h3{margin:0 0 8px;font:600 15px Georgia,serif;color:var(--gold)}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid #2a231d;white-space:nowrap}
+th{color:var(--mute);font-weight:500;cursor:pointer;position:sticky;top:0;background:var(--panel)}
+tr.click:hover{background:#2a231d;cursor:pointer}
+.scroll{max-height:62vh;overflow:auto}
+.mute{color:var(--mute)}
+a{color:var(--gold);cursor:pointer;text-decoration:none}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.split{grid-template-columns:1fr}}
+canvas{width:100%;display:block;background:#0f0d0b;border-radius:8px}
+#graph{height:68vh}
+.legend span{display:inline-flex;align-items:center;gap:5px;margin-right:12px;color:var(--mute);font-size:12px}
+.legend i{width:14px;height:3px;display:inline-block}
+.story p{margin:4px 0}
+.story .yr{color:var(--gold);display:inline-block;min-width:70px}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;border:1px solid var(--line);font-size:12px;color:var(--mute);margin:0 4px 4px 0}
+.bar{height:8px;background:#2a231d;border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--jade)}
+#tip{position:fixed;pointer-events:none;background:#000c;border:1px solid var(--line);padding:6px 9px;border-radius:6px;font-size:12px;display:none;z-index:5}
+.empty{padding:40px;text-align:center;color:var(--mute)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Book of Lives</h1>
+  <nav id="tabs"></nav>
+  <span style="flex:1"></span>
+  <label class="mute">Run <select id="run"></select></label>
+  <label class="mute">Year <input id="year" type="range" min="0" max="0" value="0" style="width:160px;vertical-align:middle"> <b id="yearLabel">–</b></label>
+</header>
+<main id="main"><div class="empty">Loading the archive…</div></main>
+<div id="tip"></div>
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const api = async (route, q = {}) => {
+  const r = await fetch('/api/' + route + '?' + new URLSearchParams({run: state.run, ...q}));
+  if (!r.ok) throw new Error((await r.json()).error || r.status);
+  return r.json();
+};
+const state = {run: '', tab: 'overview', year: null, years: [], person: null, sort: null};
+const REALM_COLORS = ['#a3968a', '#d9a35f', '#6fbf9a', '#7aa6d9', '#b58ad9', '#e8d27a'];
+const EDGE = {parent: '#d8b46a', spouse: '#d97aa6', master: '#6fbf9a', friend: '#7aa6d9', enemy: '#d9725f'};
+const TABS = {overview: 'Overview', people: 'People', person: 'Life story', graph: 'Knowledge graph', timeline: 'Timeline', factions: 'Factions'};
+const yearOf = day => Math.floor(day / 365) + 1;
+let SKILL_NAMES = {};
+const skillName = id => SKILL_NAMES[id] || id;
+
+function tabs() {
+  $('#tabs').innerHTML = Object.entries(TABS).map(([k, v]) => `<button data-t="${k}" class="${state.tab === k ? 'on' : ''}">${v}</button>`).join(' ');
+  $('#tabs').querySelectorAll('button').forEach(b => b.onclick = () => go(b.dataset.t));
+}
+function go(tab, person) {
+  state.tab = tab;
+  if (person !== undefined) state.person = person;
+  location.hash = tab + (tab === 'person' && state.person != null ? '/' + state.person : '');
+  tabs(); render();
+}
+function personLink(id, name) { return id == null || id < 0 ? '<span class="mute">—</span>' : `<a data-p="${id}">${esc(name ?? '#' + id)}</a>`; }
+function wireLinks(el) { el.querySelectorAll('a[data-p]').forEach(a => a.onclick = () => go('person', +a.dataset.p)); }
+
+async function boot() {
+  const {runs, latest} = await fetch('/api/runs').then(r => r.json());
+  SKILL_NAMES = (await fetch('/api/catalogue').then(r => r.json())).skills;
+  if (!runs.length) { $('#main').innerHTML = '<div class="empty">No archived runs yet. Play or skip some years in the game, then reload.</div>'; return; }
+  $('#run').innerHTML = runs.map(r => `<option value="${r.run}">${r.run.replace('run_', '')} · ${r.last_year == null ? 'no snapshot' : 'year ' + (r.last_year + 1)} · ${r.events} events</option>`).join('');
+  state.run = runs.some(r => r.run === latest) ? latest : runs[0].run;
+  $('#run').value = state.run;
+  $('#run').onchange = () => { state.run = $('#run').value; loadYears(); };
+  $('#year').oninput = () => { state.year = state.years[+$('#year').value]; $('#yearLabel').textContent = state.year + 1; };
+  $('#year').onchange = () => render();
+  const [tab, id] = location.hash.slice(1).split('/');
+  if (TABS[tab]) state.tab = tab;
+  if (id) state.person = +id;
+  tabs(); loadYears();
+}
+async function loadYears() {
+  const s = await api('summary');
+  state.summary = s;
+  state.years = s.years.map(y => y.year);
+  $('#year').max = Math.max(0, state.years.length - 1);
+  $('#year').value = $('#year').max;
+  state.year = state.years.at(-1) ?? null;
+  $('#yearLabel').textContent = state.year == null ? '–' : state.year + 1;
+  render();
+}
+async function render() {
+  const main = $('#main');
+  try { await VIEWS[state.tab](main); } catch (e) { main.innerHTML = `<div class="empty">${esc(e.message)}</div>`; }
+  wireLinks(main);
+}
+
+function lineChart(canvas, series, xs) {
+  const dpr = devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const g = canvas.getContext('2d'); g.scale(dpr, dpr);
+  const max = Math.max(1, ...series.flatMap(s => s.values));
+  const pad = 30, X = i => pad + (w - pad - 10) * (xs.length < 2 ? 0 : i / (xs.length - 1)), Y = v => h - 20 - (h - 34) * v / max;
+  g.strokeStyle = '#2a231d'; g.fillStyle = '#a3968a'; g.font = '11px system-ui';
+  for (let k = 0; k <= 4; k++) { const v = max * k / 4; g.beginPath(); g.moveTo(pad, Y(v)); g.lineTo(w - 10, Y(v)); g.stroke(); g.fillText(Math.round(v), 2, Y(v) + 4); }
+  xs.forEach((x, i) => { if (xs.length < 12 || i % Math.ceil(xs.length / 10) === 0) g.fillText(x + 1, X(i) - 6, h - 4); });
+  for (const s of series) {
+    g.strokeStyle = s.color; g.lineWidth = 2; g.beginPath();
+    s.values.forEach((v, i) => i ? g.lineTo(X(i), Y(v)) : g.moveTo(X(i), Y(v))); g.stroke();
+  }
+}
+
+const VIEWS = {
+  async overview(main) {
+    const s = state.summary, last = s.years.at(-1) || {};
+    const events = await api('events', {kind: '', limit: 5000});
+    const story = events.events.filter(e => ['awakening', 'breakthrough', 'formation', 'marriage', 'position', 'betrayal', 'schism', 'death', 'oath'].includes(e.kind) || /reached|awakened|formed|founded|became/.test(e.text)).slice(-40).reverse();
+    main.innerHTML = `
+      <div class="cards">
+        <div class="card"><b>${s.years.length}</b><span>years recorded</span></div>
+        <div class="card"><b>${last.people ?? 0}</b><span>living people</span></div>
+        <div class="card"><b>${last.couples ?? 0}</b><span>married couples</span></div>
+        <div class="card"><b>${last.body ?? 0}</b><span>Body Tempering</span></div>
+        <div class="card"><b>${last.qi ?? 0}</b><span>Qi Condensation</span></div>
+        <div class="card"><b>${last.beyond ?? 0}</b><span>Foundation and beyond</span></div>
+        <div class="card"><b>${last.disciples ?? 0}</b><span>with a master</span></div>
+      </div>
+      <div class="split">
+        <div class="panel"><h3>Population and cultivation by year</h3><canvas id="c1" style="height:240px"></canvas>
+          <div class="legend"><span><i style="background:#eae0d2"></i>people</span><span><i style="background:${REALM_COLORS[0]}"></i>mortal</span><span><i style="background:${REALM_COLORS[1]}"></i>body</span><span><i style="background:${REALM_COLORS[2]}"></i>qi</span><span><i style="background:${REALM_COLORS[3]}"></i>beyond</span></div></div>
+        <div class="panel"><h3>What happened, by kind</h3><div class="scroll" style="max-height:270px"><table>${s.kinds.map(k => `<tr class="click" data-k="${esc(k.kind)}"><td>${esc(k.kind)}</td><td>${k.n}</td></tr>`).join('')}</table></div></div>
+      </div>
+      <div class="panel story"><h3>Turning points</h3>${story.map(e => `<p><span class="yr">Year ${yearOf(e.day)}</span>${esc(e.text)}</p>`).join('') || '<p class="mute">Nothing notable yet.</p>'}</div>`;
+    lineChart($('#c1'), [
+      {color: '#eae0d2', values: s.years.map(y => y.people)}, {color: REALM_COLORS[0], values: s.years.map(y => y.mortal)},
+      {color: REALM_COLORS[1], values: s.years.map(y => y.body)}, {color: REALM_COLORS[2], values: s.years.map(y => y.qi)},
+      {color: REALM_COLORS[3], values: s.years.map(y => y.beyond)}], s.years.map(y => y.year));
+    main.querySelectorAll('tr[data-k]').forEach(tr => tr.onclick = () => { state.kind = tr.dataset.k; go('timeline'); });
+  },
+
+  async people(main) {
+    const d = await api('people', {year: state.year});
+    const cols = [['name', 'Name'], ['age', 'Age'], ['job', 'Work'], ['realm_label', 'Realm'], ['root', 'Spirit root'], ['best_skill', 'Best skill'], ['best_level', 'Lv'], ['reputation', 'Rep'], ['mood', 'Mood']];
+    const draw = () => {
+      const q = ($('#q')?.value || '').toLowerCase();
+      let list = d.people.filter(p => !q || JSON.stringify(p).toLowerCase().includes(q));
+      if (state.sort) { const [k, dir] = state.sort; list = [...list].sort((a, b) => (a[k] > b[k] ? 1 : a[k] < b[k] ? -1 : 0) * dir); }
+      $('#ptable').innerHTML = `<tr>${cols.map(([k, v]) => `<th data-k="${k}">${v}</th>`).join('')}</tr>` + list.map(p =>
+        `<tr class="click" data-id="${p.id}"><td>${esc(p.name)}${p.alive ? '' : ' <span class="mute">†</span>'}</td><td>${p.age}</td><td>${esc(p.job)}</td><td style="color:${REALM_COLORS[p.realm]}">${esc(p.realm_label)}</td><td>${esc(p.root)}</td><td>${esc(skillName(p.best_skill))}</td><td>${p.best_level}</td><td>${p.reputation}</td><td>${p.mood}</td></tr>`).join('');
+      $('#ptable').querySelectorAll('th').forEach(th => th.onclick = () => { state.sort = [th.dataset.k, state.sort?.[0] === th.dataset.k ? -state.sort[1] : 1]; draw(); });
+      $('#ptable').querySelectorAll('tr[data-id]').forEach(tr => tr.onclick = () => go('person', +tr.dataset.id));
+      $('#count').textContent = `${list.length} of ${d.people.length} at the end of year ${d.year + 1}`;
+    };
+    main.innerHTML = `<div class="row"><input id="q" placeholder="Search names, work, roots…" style="width:280px"><span id="count" class="mute"></span></div><div class="panel scroll"><table id="ptable"></table></div>`;
+    $('#q').oninput = draw; draw();
+  },
+
+  async person(main) {
+    if (state.person == null) { main.innerHTML = '<div class="empty">Pick someone from People or the graph.</div>'; return; }
+    const d = await api('person', {id: state.person}), p = d.person;
+    const firstYear = d.history[0]?.year ?? 0;
+    const age = state.years.length ? Math.floor(((d.history.at(-1)?.year ?? 0) + 1) * 365 - p.born) / 365 | 0 : 0;
+    const realmSteps = [];
+    d.history.forEach((h, i) => { if (!i || h.realm_label !== d.history[i - 1].realm_label) realmSteps.push(h); });
+    const maxLevel = Math.max(1, ...d.skills.map(s => s.level));
+    main.innerHTML = `
+      <div class="panel"><h3 style="font-size:20px">${esc(p.name)} <span class="mute" style="font-size:14px">${p.sex ? 'woman' : 'man'}, ${age}, ${esc(p.job)}${p.alive ? '' : ', deceased'}</span></h3>
+        <span class="tag" style="color:${REALM_COLORS[p.realm]}">${esc(p.realm_label)}</span><span class="tag">root: ${esc(p.root)}</span><span class="tag">reputation ${p.reputation}</span><span class="tag">mood ${p.mood}</span>
+        <p>Mother ${personLink(p.mother, p.mother_name)} · Father ${personLink(p.father, p.father_name)} · Spouse ${personLink(p.spouse, p.spouse_name)} · Master ${personLink(p.master, p.master_name)}</p>
+        <p>Children: ${d.children.map(c => personLink(c.id, c.name)).join(', ') || '<span class="mute">none</span>'} · Disciples: ${d.disciples.map(c => personLink(c.id, c.name)).join(', ') || '<span class="mute">none</span>'}</p>
+        <p><a id="toGraph">Show in the knowledge graph →</a></p></div>
+      <div class="split">
+        <div class="panel story"><h3>Life story</h3><div class="scroll" style="max-height:420px">
+          ${d.events.map(e => `<p><span class="yr">Year ${yearOf(e.day)}</span>${esc(e.text)}</p>`).join('') || '<p class="mute">No recorded events.</p>'}
+          ${realmSteps.length > 1 ? '<h3 style="margin-top:12px">Cultivation path</h3>' + realmSteps.map(h => `<p><span class="yr">Year ${h.year + 1}</span>${esc(h.realm_label)}</p>`).join('') : ''}
+        </div></div>
+        <div class="panel"><h3>Skills now</h3>${d.skills.map(s => `<div style="margin-bottom:6px"><div class="row" style="margin:0;justify-content:space-between"><span>${esc(skillName(s.skill))}</span><span class="mute">level ${s.level}</span></div><div class="bar"><i style="width:${100 * s.level / maxLevel}%"></i></div></div>`).join('') || '<p class="mute">None recorded.</p>'}
+          <h3 style="margin-top:12px">Skill growth</h3><canvas id="growth" style="height:180px"></canvas></div>
+      </div>
+      <div class="panel"><h3>Ties</h3><div class="scroll" style="max-height:300px"><table><tr><th>Person</th><th>Opinion</th><th>Trust</th><th>Bonds</th></tr>
+        ${d.ties.map(t => `<tr><td>${personLink(t.b, t.name)}</td><td style="color:${t.opinion < 0 ? 'var(--red)' : 'var(--jade)'}">${t.opinion}</td><td>${t.trust}</td><td>${esc(t.bond_names.join(', '))}</td></tr>`).join('')}</table></div></div>`;
+    $('#toGraph').onclick = () => { state.focus = state.person; go('graph'); };
+    const top = d.skills.slice(0, 5).map(s => s.skill), years = [...new Set(d.growth.map(g => g.year))].sort((a, b) => a - b);
+    const palette = ['#d8b46a', '#6fbf9a', '#7aa6d9', '#d9725f', '#b58ad9'];
+    lineChart($('#growth'), top.map((sk, i) => ({color: palette[i], values: years.map(y => d.growth.find(g => g.year === y && g.skill === sk)?.level ?? 0)})), years);
+    $('#growth').insertAdjacentHTML('afterend', `<div class="legend">${top.map((sk, i) => `<span><i style="background:${palette[i]}"></i>${esc(skillName(sk))}</span>`).join('')}</div>`);
+    void firstYear;
+  },
+
+  async graph(main) {
+    state.layers ??= new Set(['family', 'spouse', 'master', 'ties']);
+    const d = await api('graph', {year: state.year, layers: [...state.layers].join(','), min_opinion: state.minOpinion ?? 40});
+    main.innerHTML = `<div class="row">${['family', 'spouse', 'master', 'ties'].map(l => `<button class="chip ${state.layers.has(l) ? 'on' : ''}" data-l="${l}">${l}</button>`).join('')}
+      <label class="mute">ties at |opinion| ≥ <input id="minop" type="number" value="${state.minOpinion ?? 40}" style="width:60px"></label>
+      <label class="mute">Focus <select id="focus"><option value="">everyone</option>${d.people.map(p => `<option value="${p.id}" ${state.focus === p.id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></label>
+      <span class="legend">${Object.entries(EDGE).map(([k, c]) => `<span><i style="background:${c}"></i>${k}</span>`).join('')}</span></div>
+      <canvas id="graph"></canvas><p class="mute">Year ${d.year + 1}. Node colour is realm; size is reputation. Drag to move, scroll to zoom, click a person to open their life story.</p>`;
+    main.querySelectorAll('[data-l]').forEach(b => b.onclick = () => { state.layers.has(b.dataset.l) ? state.layers.delete(b.dataset.l) : state.layers.add(b.dataset.l); render(); });
+    $('#minop').onchange = () => { state.minOpinion = +$('#minop').value; render(); };
+    $('#focus').onchange = () => { state.focus = $('#focus').value === '' ? null : +$('#focus').value; render(); };
+    let people = d.people.filter(p => p.alive), edges = d.edges;
+    if (state.focus != null) {
+      const keep = new Set([state.focus]);
+      for (let hop = 0; hop < 2; hop++) for (const e of edges) { if (keep.has(e.a) || keep.has(e.b)) { keep.add(e.a); keep.add(e.b); } }
+      people = d.people.filter(p => keep.has(p.id)); edges = edges.filter(e => keep.has(e.a) && keep.has(e.b));
+    }
+    forceGraph($('#graph'), people, edges);
+  },
+
+  async timeline(main) {
+    const kinds = state.summary.kinds.map(k => k.kind);
+    main.innerHTML = `<div class="row"><select id="kind"><option value="">all kinds</option>${kinds.map(k => `<option ${state.kind === k ? 'selected' : ''}>${esc(k)}</option>`).join('')}</select>
+      <input id="tq" placeholder="Search text…" value="${esc(state.tq || '')}"> <label class="mute">years <input id="from" type="number" style="width:70px" value="${state.from ?? ''}"> to <input id="to" type="number" style="width:70px" value="${state.to ?? ''}"></label> <span id="tcount" class="mute"></span></div>
+      <div class="panel story scroll" id="tl"></div>`;
+    const draw = async () => {
+      state.kind = $('#kind').value; state.tq = $('#tq').value; state.from = $('#from').value; state.to = $('#to').value;
+      const d = await api('events', {kind: state.kind, q: state.tq, from: state.from ? state.from - 1 : '', to: state.to ? state.to - 1 : ''});
+      let year = -1;
+      $('#tl').innerHTML = d.events.map(e => { const y = yearOf(e.day), head = y !== year ? `<h3 style="margin-top:10px">Year ${y}</h3>` : ''; year = y; return head + `<p><span class="tag">${esc(e.kind)}</span>${e.person >= 0 ? personLink(e.person, e.text.split(' ').slice(0, 2).join(' ')) + ': ' : ''}${esc(e.text)}</p>`; }).join('') || '<p class="mute">No events match.</p>';
+      $('#tcount').textContent = `${d.events.length} events${d.events.length >= 2000 ? ' (first 2000)' : ''}`;
+      wireLinks($('#tl'));
+    };
+    ['kind', 'from', 'to'].forEach(id => $('#' + id).onchange = draw);
+    $('#tq').oninput = () => { clearTimeout(state.t); state.t = setTimeout(draw, 250); };
+    draw();
+  },
+
+  async factions(main) {
+    const d = await api('factions', {year: state.year});
+    const names = Object.fromEntries((await api('people', {year: state.year})).people.map(p => [p.id, p.name]));
+    const groups = {};
+    d.factions.forEach(f => (groups[f.type] ??= []).push(f));
+    main.innerHTML = Object.entries(groups).map(([type, list]) => `<div class="panel"><h3>${esc(type)} <span class="mute">(${list.length})</span></h3><table>
+      <tr><th>Name</th><th>Leader</th><th>Members</th><th>Cohesion</th><th>Reputation</th><th>People</th></tr>
+      ${list.map(f => `<tr><td>${esc(f.name)}${f.absorbed_into >= 0 ? ' <span class="mute">(absorbed)</span>' : ''}</td><td>${personLink(f.leader, f.leader_name)}</td><td>${f.size}</td><td>${Math.round(f.cohesion)}</td><td>${Math.round(f.reputation)}</td>
+      <td style="white-space:normal">${f.members.slice(0, 12).map(m => personLink(m, names[m])).join(', ')}${f.members.length > 12 ? ' …' : ''}</td></tr>`).join('')}</table></div>`).join('') || '<div class="empty">No factions this year.</div>';
+  },
+};
+
+function forceGraph(canvas, people, edges) {
+  const dpr = devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const g = canvas.getContext('2d');
+  const byId = new Map(), prev = forceGraph.positions ?? new Map();
+  const nodes = people.map((p, i) => { const old = prev.get(p.id), a = i * 2.4; const n = {...p, x: old?.x ?? Math.cos(a) * (40 + i * 3), y: old?.y ?? Math.sin(a) * (40 + i * 3), vx: 0, vy: 0, r: 5 + Math.sqrt(Math.max(0, p.reputation)) * .9}; byId.set(p.id, n); return n; });
+  const links = edges.map(e => ({...e, s: byId.get(e.a), t: byId.get(e.b)})).filter(e => e.s && e.t);
+  let view = {x: w / 2, y: h / 2, k: 1}, drag = null, hover = null, heat = 1;
+  const toWorld = (mx, my) => [(mx - view.x) / view.k, (my - view.y) / view.k];
+  function step() {
+    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i], b = nodes[j]; let dx = b.x - a.x, dy = b.y - a.y, d2 = dx * dx + dy * dy || .01;
+      if (d2 > 90000) continue;
+      const f = 900 / d2, d = Math.sqrt(d2); dx /= d; dy /= d;
+      a.vx -= dx * f; a.vy -= dy * f; b.vx += dx * f; b.vy += dy * f;
+    }
+    for (const l of links) {
+      const want = l.kind === 'spouse' ? 30 : l.kind === 'parent' ? 55 : 80;
+      let dx = l.t.x - l.s.x, dy = l.t.y - l.s.y, d = Math.hypot(dx, dy) || .01, f = (d - want) * .02;
+      dx /= d; dy /= d; l.s.vx += dx * f; l.s.vy += dy * f; l.t.vx -= dx * f; l.t.vy -= dy * f;
+    }
+    for (const n of nodes) {
+      n.vx -= n.x * .003; n.vy -= n.y * .003;
+      if (n !== drag) { n.x += n.vx * heat; n.y += n.vy * heat; }
+      n.vx *= .6; n.vy *= .6;
+    }
+    heat = Math.max(.02, heat * .985);
+  }
+  function draw() {
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    g.translate(view.x, view.y); g.scale(view.k, view.k);
+    for (const l of links) {
+      const lit = hover && (l.s === hover || l.t === hover);
+      g.strokeStyle = EDGE[l.kind] || '#555'; g.globalAlpha = hover ? (lit ? 1 : .12) : .55; g.lineWidth = (l.kind === 'spouse' ? 2.5 : 1.4) / view.k;
+      g.setLineDash(l.kind === 'enemy' ? [4 / view.k, 3 / view.k] : []);
+      g.beginPath(); g.moveTo(l.s.x, l.s.y); g.lineTo(l.t.x, l.t.y); g.stroke();
+    }
+    g.setLineDash([]); g.globalAlpha = 1;
+    const near = new Set(hover ? links.filter(l => l.s === hover || l.t === hover).flatMap(l => [l.s, l.t]) : []);
+    for (const n of nodes) {
+      g.globalAlpha = hover && !near.has(n) && n !== hover ? .25 : 1;
+      g.fillStyle = REALM_COLORS[n.realm] || '#fff'; g.beginPath(); g.arc(n.x, n.y, n.r, 0, Math.PI * 2); g.fill();
+      if (n.id === state.focus) { g.strokeStyle = '#fff'; g.lineWidth = 2 / view.k; g.stroke(); }
+      if (view.k > .7 || n === hover || near.has(n)) { g.fillStyle = '#eae0d2'; g.font = `${11 / view.k}px system-ui`; g.fillText(n.name, n.x + n.r + 2, n.y + 4); }
+    }
+    g.globalAlpha = 1;
+  }
+  const pick = (mx, my) => { const [x, y] = toWorld(mx, my); return nodes.find(n => Math.hypot(n.x - x, n.y - y) < n.r + 3); };
+  let moved = false, pan = null;
+  canvas.onmousedown = e => { moved = false; const n = pick(e.offsetX, e.offsetY); if (n) drag = n; else pan = [e.offsetX - view.x, e.offsetY - view.y]; };
+  canvas.onmousemove = e => {
+    if (drag) { [drag.x, drag.y] = toWorld(e.offsetX, e.offsetY); heat = Math.max(heat, .3); moved = true; }
+    else if (pan) { view.x = e.offsetX - pan[0]; view.y = e.offsetY - pan[1]; moved = true; }
+    else {
+      hover = pick(e.offsetX, e.offsetY) || null;
+      const tip = $('#tip');
+      if (hover) { tip.style.display = 'block'; tip.style.left = e.clientX + 12 + 'px'; tip.style.top = e.clientY + 12 + 'px'; tip.innerHTML = `<b>${esc(hover.name)}</b><br>${esc(hover.realm_label)} · ${esc(hover.job)}<br>reputation ${hover.reputation}`; }
+      else tip.style.display = 'none';
+    }
+  };
+  canvas.onmouseup = e => { if (drag && !moved) go('person', drag.id); drag = null; pan = null; };
+  canvas.onmouseleave = () => { drag = null; pan = null; hover = null; $('#tip').style.display = 'none'; };
+  canvas.onwheel = e => { e.preventDefault(); const f = e.deltaY < 0 ? 1.15 : 1 / 1.15; view.x = e.offsetX - (e.offsetX - view.x) * f; view.y = e.offsetY - (e.offsetY - view.y) * f; view.k *= f; };
+  cancelAnimationFrame(forceGraph.frame);
+  const loop = () => { if (!canvas.isConnected) return; step(); draw(); forceGraph.frame = requestAnimationFrame(loop); };
+  for (let i = 0; i < (prev.size ? 30 : 300); i++) step();
+  if (nodes.length) {
+    const xs = nodes.map(n => n.x), ys = nodes.map(n => n.y), minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+    view.k = Math.min(3, (w - 160) / Math.max(1, maxX - minX), (h - 60) / Math.max(1, maxY - minY));
+    view.x = w / 2 - (minX + maxX) / 2 * view.k; view.y = h / 2 - (minY + maxY) / 2 * view.k;
+  }
+  loop();
+  forceGraph.positions = new Map(nodes.map(n => [n.id, n]));
+}
+
+boot().catch(e => { $('#main').innerHTML = `<div class="empty">Could not reach the archive server: ${esc(e.message)}</div>`; });
+</script>
+</body>
+</html>

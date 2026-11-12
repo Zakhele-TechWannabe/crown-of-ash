@@ -5,105 +5,105 @@
       "id": "music.pitch_training",
       "domain": "music",
       "name": "Pitch training",
-      "description": "Pitch training applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Distinguish and reproduce intended musical notes.",
       "detailed": false
     },
     {
       "id": "music.rhythm",
       "domain": "music",
       "name": "Rhythm",
-      "description": "Rhythm applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain measured patterns of duration.",
       "detailed": false
     },
     {
       "id": "music.singing",
       "domain": "music",
       "name": "Singing",
-      "description": "Singing applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Shape the voice into controlled musical phrases.",
       "detailed": false
     },
     {
       "id": "music.qin_playing",
       "domain": "music",
       "name": "Qin playing",
-      "description": "Qin playing applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Play the plucked strings of a qin.",
       "detailed": false
     },
     {
       "id": "music.pipa_playing",
       "domain": "music",
       "name": "Pipa playing",
-      "description": "Pipa playing applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perform melodies on a fretted pipa.",
       "detailed": false
     },
     {
       "id": "music.flute_playing",
       "domain": "music",
       "name": "Flute playing",
-      "description": "Flute playing applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Control breath and fingering on flutes.",
       "detailed": false
     },
     {
       "id": "music.drumming",
       "domain": "music",
       "name": "Drumming",
-      "description": "Drumming applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sound rhythmic patterns on stretched-skin drums.",
       "detailed": false
     },
     {
       "id": "music.ensemble_work",
       "domain": "music",
       "name": "Ensemble work",
-      "description": "Ensemble work applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate parts with other musicians.",
       "detailed": false
     },
     {
       "id": "music.composition",
       "domain": "music",
       "name": "Composition",
-      "description": "Composition applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Create coherent melodies and musical structures.",
       "detailed": false
     },
     {
       "id": "music.notation",
       "domain": "music",
       "name": "Notation",
-      "description": "Notation applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record musical ideas using readable symbols.",
       "detailed": false
     },
     {
       "id": "music.ritual_music",
       "domain": "music",
       "name": "Ritual music",
-      "description": "Ritual music applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perform music suited to solemn ceremonies.",
       "detailed": false
     },
     {
       "id": "music.folk_songs",
       "domain": "music",
       "name": "Folk songs",
-      "description": "Folk songs applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Preserve songs carried through ordinary village life.",
       "detailed": false
     },
     {
       "id": "music.instrument_tuning",
       "domain": "music",
       "name": "Instrument tuning",
-      "description": "Instrument tuning applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Adjust instruments to shared reference pitches.",
       "detailed": false
     },
     {
       "id": "music.musical_teaching",
       "domain": "music",
       "name": "Musical teaching",
-      "description": "Musical teaching applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Help learners develop practical musical skill.",
       "detailed": false
     },
     {
       "id": "music.court_performance",
       "domain": "music",
       "name": "Court performance",
-      "description": "Court performance applies music to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Perform before patrons under formal expectations.",
       "detailed": false
     }
   ]

@@ -5,7 +5,7 @@
       "id": "cloth_and_thread.textiles",
       "domain": "cloth_and_thread",
       "name": "Textiles",
-      "description": "Textiles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Produce fabric and garments for daily use.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -283,7 +283,7 @@
       "id": "cloth_and_thread.hemp_retting",
       "domain": "cloth_and_thread",
       "name": "Hemp retting",
-      "description": "Hemp retting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Soak hemp stems to loosen usable fibres.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -554,7 +554,7 @@
       "id": "cloth_and_thread.fibre_combing",
       "domain": "cloth_and_thread",
       "name": "Fibre combing",
-      "description": "Fibre combing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Separate and align fibres before spinning.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -825,7 +825,7 @@
       "id": "cloth_and_thread.spinning",
       "domain": "cloth_and_thread",
       "name": "Spinning",
-      "description": "Spinning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Twist loose fibres into continuous yarn.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1096,7 +1096,7 @@
       "id": "cloth_and_thread.loom_dressing",
       "domain": "cloth_and_thread",
       "name": "Loom dressing",
-      "description": "Loom dressing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare warp threads on a loom.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1367,7 +1367,7 @@
       "id": "cloth_and_thread.weaving",
       "domain": "cloth_and_thread",
       "name": "Weaving",
-      "description": "Weaving: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Interlace warp and weft into cloth.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1638,7 +1638,7 @@
       "id": "cloth_and_thread.dyeing",
       "domain": "cloth_and_thread",
       "name": "Dyeing",
-      "description": "Dyeing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Colour fibres and cloth with prepared dyes.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1909,7 +1909,7 @@
       "id": "cloth_and_thread.tailoring",
       "domain": "cloth_and_thread",
       "name": "Tailoring",
-      "description": "Tailoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut and sew fitted clothing.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2180,7 +2180,7 @@
       "id": "cloth_and_thread.embroidery",
       "domain": "cloth_and_thread",
       "name": "Embroidery",
-      "description": "Embroidery: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Stitch decorative patterns into finished fabric.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2451,7 +2451,7 @@
       "id": "cloth_and_thread.rope_making",
       "domain": "cloth_and_thread",
       "name": "Rope making",
-      "description": "Rope making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Twist cords into stronger load-bearing rope.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2722,7 +2722,7 @@
       "id": "cloth_and_thread.felt_making",
       "domain": "cloth_and_thread",
       "name": "Felt making",
-      "description": "Felt making: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Bind animal fibres into dense unwoven cloth.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2993,7 +2993,7 @@
       "id": "cloth_and_thread.cloth_finishing",
       "domain": "cloth_and_thread",
       "name": "Cloth finishing",
-      "description": "Cloth finishing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Wash, beat and smooth woven fabric.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3264,7 +3264,7 @@
       "id": "cloth_and_thread.pattern_cutting",
       "domain": "cloth_and_thread",
       "name": "Pattern cutting",
-      "description": "Pattern cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Lay out garment pieces with little waste.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3535,7 +3535,7 @@
       "id": "cloth_and_thread.clothing_repair",
       "domain": "cloth_and_thread",
       "name": "Clothing repair",
-      "description": "Clothing repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Patch torn clothes and replace worn seams.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3806,7 +3806,7 @@
       "id": "cloth_and_thread.loom_maintenance",
       "domain": "cloth_and_thread",
       "name": "Loom maintenance",
-      "description": "Loom maintenance: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep looms aligned and working smoothly.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

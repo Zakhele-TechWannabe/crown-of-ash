@@ -5,7 +5,7 @@
       "id": "housekeeping.housekeeping",
       "domain": "housekeeping",
       "name": "Housekeeping",
-      "description": "Housekeeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain a healthy and orderly household.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -276,7 +276,7 @@
       "id": "housekeeping.sweeping",
       "domain": "housekeeping",
       "name": "Sweeping",
-      "description": "Sweeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Remove dirt from floors and courtyards.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -547,7 +547,7 @@
       "id": "housekeeping.laundry",
       "domain": "housekeeping",
       "name": "Laundry",
-      "description": "Laundry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Wash cloth without unnecessarily weakening fibres.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -818,7 +818,7 @@
       "id": "housekeeping.bedding_care",
       "domain": "housekeeping",
       "name": "Bedding care",
-      "description": "Bedding care: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Air, clean and repair sleeping materials.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1089,7 +1089,7 @@
       "id": "housekeeping.water_carrying",
       "domain": "housekeeping",
       "name": "Water carrying",
-      "description": "Water carrying: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Carry clean water from well to home.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1360,7 +1360,7 @@
       "id": "housekeeping.hearth_tending",
       "domain": "housekeeping",
       "name": "Hearth tending",
-      "description": "Hearth tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep domestic fires useful and contained.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1631,7 +1631,7 @@
       "id": "housekeeping.pantry_keeping",
       "domain": "housekeeping",
       "name": "Pantry keeping",
-      "description": "Pantry keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Rotate stored provisions before they spoil.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -1902,7 +1902,7 @@
       "id": "housekeeping.house_repair",
       "domain": "housekeeping",
       "name": "House repair",
-      "description": "House repair: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Mend minor damage around occupied homes.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2173,7 +2173,7 @@
       "id": "housekeeping.vermin_control",
       "domain": "housekeeping",
       "name": "Vermin control",
-      "description": "Vermin control: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep rats and insects out of stores.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2444,7 +2444,7 @@
       "id": "housekeeping.waste_composting",
       "domain": "housekeeping",
       "name": "Waste composting",
-      "description": "Waste composting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Compost household waste away from drinking water.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2715,7 +2715,7 @@
       "id": "housekeeping.clothes_mending",
       "domain": "housekeeping",
       "name": "Clothes mending",
-      "description": "Clothes mending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Repair small tears in everyday garments.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -2986,7 +2986,7 @@
       "id": "housekeeping.shrine_tending",
       "domain": "housekeeping",
       "name": "Shrine tending",
-      "description": "Shrine tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep domestic shrines clean and supplied.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3257,7 +3257,7 @@
       "id": "housekeeping.seasonal_cleaning",
       "domain": "housekeeping",
       "name": "Seasonal cleaning",
-      "description": "Seasonal cleaning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Deep-clean homes at seasonal turning points.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3528,7 +3528,7 @@
       "id": "housekeeping.guest_preparation",
       "domain": "housekeeping",
       "name": "Guest preparation",
-      "description": "Guest preparation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare a household to receive travellers.",
       "detailed": true,
       "key_attributes": [
         "dexterity",
@@ -3799,7 +3799,7 @@
       "id": "housekeeping.household_scheduling",
       "domain": "housekeeping",
       "name": "Household scheduling",
-      "description": "Household scheduling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Distribute recurring chores among household members.",
       "detailed": true,
       "key_attributes": [
         "dexterity",

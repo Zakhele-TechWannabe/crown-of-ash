@@ -5,7 +5,7 @@
       "id": "husbandry.husbandry",
       "domain": "husbandry",
       "name": "Husbandry",
-      "description": "Husbandry: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Manage livestock for household subsistence.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -283,7 +283,7 @@
       "id": "husbandry.swine_keeping",
       "domain": "husbandry",
       "name": "Swine keeping",
-      "description": "Swine keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Feed and house pigs without fouling wells.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -554,7 +554,7 @@
       "id": "husbandry.poultry_keeping",
       "domain": "husbandry",
       "name": "Poultry keeping",
-      "description": "Poultry keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise hens for eggs and meat.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -825,7 +825,7 @@
       "id": "husbandry.duck_tending",
       "domain": "husbandry",
       "name": "Duck tending",
-      "description": "Duck tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Tend ducks around ponds and paddies.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1096,7 +1096,7 @@
       "id": "husbandry.ox_tending",
       "domain": "husbandry",
       "name": "Ox tending",
-      "description": "Ox tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Train and care for working oxen.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1367,7 +1367,7 @@
       "id": "husbandry.goat_tending",
       "domain": "husbandry",
       "name": "Goat tending",
-      "description": "Goat tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Keep goats on browse and rough pasture.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1638,7 +1638,7 @@
       "id": "husbandry.fodder_cutting",
       "domain": "husbandry",
       "name": "Fodder cutting",
-      "description": "Fodder cutting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut grass and leaves for livestock feed.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -1909,7 +1909,7 @@
       "id": "husbandry.pasture_tending",
       "domain": "husbandry",
       "name": "Pasture tending",
-      "description": "Pasture tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain grazing ground without stripping it bare.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2180,7 +2180,7 @@
       "id": "husbandry.animal_birthing",
       "domain": "husbandry",
       "name": "Animal birthing",
-      "description": "Animal birthing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Assist difficult births among domestic animals.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2451,7 +2451,7 @@
       "id": "husbandry.livestock_selection",
       "domain": "husbandry",
       "name": "Livestock selection",
-      "description": "Livestock selection: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Choose breeding stock for useful qualities.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2722,7 +2722,7 @@
       "id": "husbandry.stable_tending",
       "domain": "husbandry",
       "name": "Stable tending",
-      "description": "Stable tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Clean stalls and maintain dry bedding.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -2993,7 +2993,7 @@
       "id": "husbandry.animal_handling",
       "domain": "husbandry",
       "name": "Animal handling",
-      "description": "Animal handling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Move nervous livestock without causing injury.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3264,7 +3264,7 @@
       "id": "husbandry.manure_management",
       "domain": "husbandry",
       "name": "Manure management",
-      "description": "Manure management: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Collect dung for safe field fertilisation.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3535,7 +3535,7 @@
       "id": "husbandry.herd_health",
       "domain": "husbandry",
       "name": "Herd health",
-      "description": "Herd health: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Recognise sickness before it spreads through herds.",
       "detailed": true,
       "key_attributes": [
         "endurance",
@@ -3806,7 +3806,7 @@
       "id": "husbandry.seasonal_herding",
       "domain": "husbandry",
       "name": "Seasonal herding",
-      "description": "Seasonal herding: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Move grazing animals with seasonal forage.",
       "detailed": true,
       "key_attributes": [
         "endurance",

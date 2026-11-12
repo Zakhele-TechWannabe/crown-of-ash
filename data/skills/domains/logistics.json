@@ -5,105 +5,105 @@
       "id": "logistics.demand_forecasting",
       "domain": "logistics",
       "name": "Demand forecasting",
-      "description": "Demand forecasting applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Estimate future needs from planned activity.",
       "detailed": false
     },
     {
       "id": "logistics.supply_ledgers",
       "domain": "logistics",
       "name": "Supply ledgers",
-      "description": "Supply ledgers applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record where provisions are held and owed.",
       "detailed": false
     },
     {
       "id": "logistics.route_planning",
       "domain": "logistics",
       "name": "Route planning",
-      "description": "Route planning applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose dependable paths for moving supplies.",
       "detailed": false
     },
     {
       "id": "logistics.pack_loading",
       "domain": "logistics",
       "name": "Pack loading",
-      "description": "Pack loading applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Distribute burdens across pack animals.",
       "detailed": false
     },
     {
       "id": "logistics.cart_loading",
       "domain": "logistics",
       "name": "Cart loading",
-      "description": "Cart loading applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Load carts within weight and balance limits.",
       "detailed": false
     },
     {
       "id": "logistics.convoy_scheduling",
       "domain": "logistics",
       "name": "Convoy scheduling",
-      "description": "Convoy scheduling applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate departures and arrival expectations.",
       "detailed": false
     },
     {
       "id": "logistics.warehouse_layout",
       "domain": "logistics",
       "name": "Warehouse layout",
-      "description": "Warehouse layout applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange stores for safe, accessible handling.",
       "detailed": false
     },
     {
       "id": "logistics.ration_planning",
       "domain": "logistics",
       "name": "Ration planning",
-      "description": "Ration planning applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Set portions according to journey requirements.",
       "detailed": false
     },
     {
       "id": "logistics.spoilage_control",
       "domain": "logistics",
       "name": "Spoilage control",
-      "description": "Spoilage control applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Reduce losses from damp, vermin and delay.",
       "detailed": false
     },
     {
       "id": "logistics.emergency_stores",
       "domain": "logistics",
       "name": "Emergency stores",
-      "description": "Emergency stores applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain reserves against disrupted supply.",
       "detailed": false
     },
     {
       "id": "logistics.dispatching",
       "domain": "logistics",
       "name": "Dispatching",
-      "description": "Dispatching applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Send goods toward current priority needs.",
       "detailed": false
     },
     {
       "id": "logistics.porter_crews",
       "domain": "logistics",
       "name": "Porter crews",
-      "description": "Porter crews applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Organise people carrying heavy shared loads.",
       "detailed": false
     },
     {
       "id": "logistics.delivery_records",
       "domain": "logistics",
       "name": "Delivery records",
-      "description": "Delivery records applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record consignments delivered to intended recipients.",
       "detailed": false
     },
     {
       "id": "logistics.transport_contracts",
       "domain": "logistics",
       "name": "Transport contracts",
-      "description": "Transport contracts applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Agree terms with carriers before shipment.",
       "detailed": false
     },
     {
       "id": "logistics.regional_provisioning",
       "domain": "logistics",
       "name": "Regional provisioning",
-      "description": "Regional provisioning applies logistics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate provisions across several settlements.",
       "detailed": false
     }
   ]

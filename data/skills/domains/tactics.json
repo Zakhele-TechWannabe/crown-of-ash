@@ -5,105 +5,105 @@
       "id": "tactics.terrain_use",
       "domain": "tactics",
       "name": "Terrain use",
-      "description": "Terrain use applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use ground features to shape an engagement.",
       "detailed": false
     },
     {
       "id": "tactics.formation_choice",
       "domain": "tactics",
       "name": "Formation choice",
-      "description": "Formation choice applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose group arrangements suited to an objective.",
       "detailed": false
     },
     {
       "id": "tactics.scouting_reports",
       "domain": "tactics",
       "name": "Scouting reports",
-      "description": "Scouting reports applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Interpret observations provided by forward scouts.",
       "detailed": false
     },
     {
       "id": "tactics.ambush_planning",
       "domain": "tactics",
       "name": "Ambush planning",
-      "description": "Ambush planning applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Prepare concealed coordinated action against an approach.",
       "detailed": false
     },
     {
       "id": "tactics.defensive_positions",
       "domain": "tactics",
       "name": "Defensive positions",
-      "description": "Defensive positions applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Select ground that strengthens a defended position.",
       "detailed": false
     },
     {
       "id": "tactics.flanking",
       "domain": "tactics",
       "name": "Flanking",
-      "description": "Flanking applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Move around an opponent's strongest facing.",
       "detailed": false
     },
     {
       "id": "tactics.retreats",
       "domain": "tactics",
       "name": "Retreats",
-      "description": "Retreats applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Withdraw while preserving order and supplies.",
       "detailed": false
     },
     {
       "id": "tactics.reserves",
       "domain": "tactics",
       "name": "Reserves",
-      "description": "Reserves applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Hold uncommitted forces for changing circumstances.",
       "detailed": false
     },
     {
       "id": "tactics.supply_lines",
       "domain": "tactics",
       "name": "Supply lines",
-      "description": "Supply lines applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Protect routes bringing provisions to active forces.",
       "detailed": false
     },
     {
       "id": "tactics.siege_tactics",
       "domain": "tactics",
       "name": "Siege tactics",
-      "description": "Siege tactics applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Plan pressure against defended enclosed places.",
       "detailed": false
     },
     {
       "id": "tactics.river_battles",
       "domain": "tactics",
       "name": "River battles",
-      "description": "River battles applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Account for water and vessels in engagements.",
       "detailed": false
     },
     {
       "id": "tactics.cavalry_tactics",
       "domain": "tactics",
       "name": "Cavalry tactics",
-      "description": "Cavalry tactics applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate mobile mounted groups.",
       "detailed": false
     },
     {
       "id": "tactics.infantry_tactics",
       "domain": "tactics",
       "name": "Infantry tactics",
-      "description": "Infantry tactics applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Direct organised groups fighting on foot.",
       "detailed": false
     },
     {
       "id": "tactics.battle_analysis",
       "domain": "tactics",
       "name": "Battle analysis",
-      "description": "Battle analysis applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Reconstruct decisions after a military encounter.",
       "detailed": false
     },
     {
       "id": "tactics.war_games",
       "domain": "tactics",
       "name": "War games",
-      "description": "War games applies tactics to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Practise command decisions through simulated contests.",
       "detailed": false
     }
   ]

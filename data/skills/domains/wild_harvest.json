@@ -5,7 +5,7 @@
       "id": "wild_harvest.foraging",
       "domain": "wild_harvest",
       "name": "Foraging",
-      "description": "Foraging: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Find edible wild plants through the seasons.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -270,7 +270,7 @@
       "id": "wild_harvest.mushroom_tending",
       "domain": "wild_harvest",
       "name": "Mushroom tending",
-      "description": "Mushroom tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Raise mushrooms on suitable damp substrates.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -541,7 +541,7 @@
       "id": "wild_harvest.herb_gathering",
       "domain": "wild_harvest",
       "name": "Herb gathering",
-      "description": "Herb gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Gather useful medicinal plants without confusion.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -812,7 +812,7 @@
       "id": "wild_harvest.wild_fruit_gathering",
       "domain": "wild_harvest",
       "name": "Wild fruit gathering",
-      "description": "Wild fruit gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Collect ripe fruit from uncultivated trees.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1083,7 +1083,7 @@
       "id": "wild_harvest.nut_gathering",
       "domain": "wild_harvest",
       "name": "Nut gathering",
-      "description": "Nut gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Gather mature nuts before animals consume them.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1354,7 +1354,7 @@
       "id": "wild_harvest.bamboo_shoots",
       "domain": "wild_harvest",
       "name": "Bamboo shoots",
-      "description": "Bamboo shoots: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Harvest tender young bamboo growth.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1625,7 +1625,7 @@
       "id": "wild_harvest.reed_gathering",
       "domain": "wild_harvest",
       "name": "Reed gathering",
-      "description": "Reed gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Cut reeds for mats, roofing and baskets.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -1896,7 +1896,7 @@
       "id": "wild_harvest.edible_roots",
       "domain": "wild_harvest",
       "name": "Edible roots",
-      "description": "Edible roots: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Dig edible wild roots without poisoning meals.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2167,7 +2167,7 @@
       "id": "wild_harvest.poison_recognition",
       "domain": "wild_harvest",
       "name": "Poison recognition",
-      "description": "Poison recognition: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Distinguish dangerous plants from edible lookalikes.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2438,7 +2438,7 @@
       "id": "wild_harvest.forest_gardening",
       "domain": "wild_harvest",
       "name": "Forest gardening",
-      "description": "Forest gardening: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Encourage useful plants within woodland margins.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2709,7 +2709,7 @@
       "id": "wild_harvest.resin_gathering",
       "domain": "wild_harvest",
       "name": "Resin gathering",
-      "description": "Resin gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Collect tree resins for practical uses.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -2980,7 +2980,7 @@
       "id": "wild_harvest.wild_honey",
       "domain": "wild_harvest",
       "name": "Wild honey",
-      "description": "Wild honey: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Take honey from wild colonies carefully.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3251,7 +3251,7 @@
       "id": "wild_harvest.medicinal_bark",
       "domain": "wild_harvest",
       "name": "Medicinal bark",
-      "description": "Medicinal bark: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Strip medicinal bark without killing whole stands.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3522,7 +3522,7 @@
       "id": "wild_harvest.seasonal_gathering",
       "domain": "wild_harvest",
       "name": "Seasonal gathering",
-      "description": "Seasonal gathering: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Time gathering around local ripening cycles.",
       "detailed": true,
       "key_attributes": [
         "perception",
@@ -3793,7 +3793,7 @@
       "id": "wild_harvest.harvest_conservation",
       "domain": "wild_harvest",
       "name": "Harvest conservation",
-      "description": "Harvest conservation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Leave enough seed and roots for regrowth.",
       "detailed": true,
       "key_attributes": [
         "perception",

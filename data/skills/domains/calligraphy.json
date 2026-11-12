@@ -5,105 +5,105 @@
       "id": "calligraphy.brush_loading",
       "domain": "calligraphy",
       "name": "Brush loading",
-      "description": "Brush loading applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Charge a brush with suitable ink.",
       "detailed": false
     },
     {
       "id": "calligraphy.stroke_order",
       "domain": "calligraphy",
       "name": "Stroke order",
-      "description": "Stroke order applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Follow reliable sequences when forming characters.",
       "detailed": false
     },
     {
       "id": "calligraphy.seal_script",
       "domain": "calligraphy",
       "name": "Seal script",
-      "description": "Seal script applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write formal rounded characters used on seals.",
       "detailed": false
     },
     {
       "id": "calligraphy.clerical_script",
       "domain": "calligraphy",
       "name": "Clerical script",
-      "description": "Clerical script applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Form broad structured characters of clerical hands.",
       "detailed": false
     },
     {
       "id": "calligraphy.regular_script",
       "domain": "calligraphy",
       "name": "Regular script",
-      "description": "Regular script applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Write balanced characters in a clear standard hand.",
       "detailed": false
     },
     {
       "id": "calligraphy.running_script",
       "domain": "calligraphy",
       "name": "Running script",
-      "description": "Running script applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Connect strokes within fluent everyday writing.",
       "detailed": false
     },
     {
       "id": "calligraphy.cursive_script",
       "domain": "calligraphy",
       "name": "Cursive script",
-      "description": "Cursive script applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Use abbreviated flowing forms with controlled energy.",
       "detailed": false
     },
     {
       "id": "calligraphy.ink_control",
       "domain": "calligraphy",
       "name": "Ink control",
-      "description": "Ink control applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Manage wetness, density and pooling ink.",
       "detailed": false
     },
     {
       "id": "calligraphy.paper_selection",
       "domain": "calligraphy",
       "name": "Paper selection",
-      "description": "Paper selection applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Choose paper suited to intended brushwork.",
       "detailed": false
     },
     {
       "id": "calligraphy.copying_masters",
       "domain": "calligraphy",
       "name": "Copying masters",
-      "description": "Copying masters applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Learn technique by closely copying admired examples.",
       "detailed": false
     },
     {
       "id": "calligraphy.composition",
       "domain": "calligraphy",
       "name": "Composition",
-      "description": "Composition applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Balance characters across a complete written piece.",
       "detailed": false
     },
     {
       "id": "calligraphy.inscription_layout",
       "domain": "calligraphy",
       "name": "Inscription layout",
-      "description": "Inscription layout applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange characters on stone or wooden inscriptions.",
       "detailed": false
     },
     {
       "id": "calligraphy.brush_care",
       "domain": "calligraphy",
       "name": "Brush care",
-      "description": "Brush care applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Clean and store brushes without damaging tips.",
       "detailed": false
     },
     {
       "id": "calligraphy.calligraphic_criticism",
       "domain": "calligraphy",
       "name": "Calligraphic criticism",
-      "description": "Calligraphic criticism applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Assess brushwork through informed visual comparison.",
       "detailed": false
     },
     {
       "id": "calligraphy.scroll_mounting",
       "domain": "calligraphy",
       "name": "Scroll mounting",
-      "description": "Scroll mounting applies calligraphy to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Mount finished writing for display and protection.",
       "detailed": false
     }
   ]

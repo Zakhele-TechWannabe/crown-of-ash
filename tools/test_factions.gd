@@ -1,0 +1,25 @@
+extends SceneTree
+func _initialize() -> void:
+	var p := preload("res://src/population.gd").new()
+	var j := p.register_job("farmer", ["fields"])
+	for i in 10:
+		p.add_person("Wang %d" % i, 30, j)
+		p.touch(i, "grain_farming.farming", 16)
+	var s: RefCounted = p.society
+	p.touch(0, "leadership.leadership", 8)
+	s.seed()
+	assert(s.factions[0].type == "village")
+	assert(s.positions[0].holder == 0)
+	assert(not s.positions[3].exists, "No sect at start")
+	assert(s.positions[1].exists and s.positions[1].holder >= 0)
+	s.ties.tie(0, 1, 40)
+	assert(s.accept(0, 1) == false, "No five-level craft advantage")
+	p.touch(0, "grain_farming.farming.paddy_rice", 25)
+	assert(s.accept(0, 1))
+	assert(s.seniority(1) == 1)
+	s.refresh_factions()
+	assert(s.faction_keys.has("lineage:0"))
+	s.betray(1)
+	assert(s.betrayal_happened and s.master[1] == -1)
+	print("PASS factions: village, guild, conditional positions, no sect, apprenticeship, seniority, betrayal")
+	quit()

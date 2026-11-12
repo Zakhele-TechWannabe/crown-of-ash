@@ -1,0 +1,86 @@
+[
+  {
+    "id": "headman",
+    "name": "Village headman",
+    "exists_when": "Always",
+    "hold_when": "Adult; Leadership \u2265 8; average opinion \u2265 20"
+  },
+  {
+    "id": "craftsman",
+    "name": "Master craftsman",
+    "exists_when": "3+ practitioners in a domain",
+    "hold_when": "Best in domain; level \u2265 16"
+  },
+  {
+    "id": "hall_master",
+    "name": "Hall master",
+    "exists_when": "A hall has formed",
+    "hold_when": "Founder; Qi Condensation 3+"
+  },
+  {
+    "id": "sect_master",
+    "name": "Sect Master",
+    "exists_when": "A sect has been founded",
+    "hold_when": "Foundation Establishment+"
+  },
+  {
+    "id": "elder",
+    "name": "Elder",
+    "exists_when": "Sect has 12+ members",
+    "hold_when": "Foundation or QC9 and 40 years of service"
+  },
+  {
+    "id": "inner",
+    "name": "Inner disciple",
+    "exists_when": "A personal disciple slot is free",
+    "hold_when": "QC4+ and Middle root, or exceptional merit"
+  },
+  {
+    "id": "outer",
+    "name": "Outer disciple",
+    "exists_when": "Sect founded",
+    "hold_when": "Revealed root and entry aptitude test"
+  },
+  {
+    "id": "steward",
+    "name": "Outer court steward",
+    "exists_when": "20+ outer disciples",
+    "hold_when": "Administration \u2265 16 and loyal"
+  },
+  {
+    "id": "mission",
+    "name": "Mission Hall deacon",
+    "exists_when": "30+ sect members",
+    "hold_when": "Logistics or Administration \u2265 16"
+  },
+  {
+    "id": "scripture",
+    "name": "Scripture Pavilion keeper",
+    "exists_when": "3+ manuals held",
+    "hold_when": "Letters \u2265 16 and QC5+"
+  },
+  {
+    "id": "alchemy",
+    "name": "Alchemy Hall head",
+    "exists_when": "Alchemy \u2265 20 exists",
+    "hold_when": "Best alchemist"
+  },
+  {
+    "id": "law",
+    "name": "Law Hall enforcer",
+    "exists_when": "50+ members or betrayal",
+    "hold_when": "Law \u2265 12; martial strength; impartial"
+  },
+  {
+    "id": "peak",
+    "name": "Peak lord",
+    "exists_when": "3+ qi sites; 100+ sect members",
+    "hold_when": "Core or late Foundation with 10 lineage members"
+  },
+  {
+    "id": "grand_elder",
+    "name": "Grand elder",
+    "exists_when": "Retired Sect Master or Core elder",
+    "hold_when": "Core Formation+"
+  }
+]

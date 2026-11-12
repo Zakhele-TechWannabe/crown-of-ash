@@ -1,0 +1,902 @@
+<title>The Long Road</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a scroll of seven sections behind a sticky tab rail; ink on mist-grey paper, jade for qi, cinnabar for seals and danger */
+:root{
+  --bg:#e9ede8; --panel:#f6f8f4; --ink:#1b2320; --muted:#5b6862; --line:#c9d2cb;
+  --jade:#23735f; --jade-soft:#d3e7df; --cin:#b23a26; --cin-soft:#f3dcd5; --gold:#9a7428; --gold-soft:#efe3c6;
+  --sky:#3d6a9e; --plum:#7a4a86;
+  --display:"Shippori Mincho","Songti SC","Noto Serif",Georgia,serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111715; --panel:#18201d; --ink:#dfe7e2; --muted:#93a39b; --line:#2c3833;
+  --jade:#5cb89d; --jade-soft:#1d3a31; --cin:#e57a63; --cin-soft:#432520; --gold:#d3ac5c; --gold-soft:#3a3020;
+  --sky:#7fa7d6; --plum:#b68ac2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111715; --panel:#18201d; --ink:#dfe7e2; --muted:#93a39b; --line:#2c3833;
+  --jade:#5cb89d; --jade-soft:#1d3a31; --cin:#e57a63; --cin-soft:#432520; --gold:#d3ac5c; --gold-soft:#3a3020;
+  --sky:#7fa7d6; --plum:#b68ac2; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:.01em}
+h2{font-size:clamp(24px,3.4vw,34px);font-weight:700}
+h3{font-size:19px;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+header.hero{padding-block:36px 22px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+.hero .seal{display:inline-grid;place-items:center;width:52px;height:52px;border:2px solid var(--cin);color:var(--cin);font:800 22px var(--display);border-radius:6px;transform:rotate(-4deg)}
+.hero-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+nav.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:2px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.rail a{flex:none;padding:7px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font-weight:500;font-size:14px}
+nav.rail a[aria-current="true"]{background:var(--ink);color:var(--bg)}
+nav.rail a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+section.view{padding-block:28px 60px;display:grid;gap:26px}
+.lead{font-size:17px;max-width:72ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.tag{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:4px;background:var(--jade-soft);color:var(--jade)}
+.tag.cin{background:var(--cin-soft);color:var(--cin)} .tag.gold{background:var(--gold-soft);color:var(--gold)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+ul.clean{margin:0;padding-left:18px;display:grid;gap:4px}
+code,.formula{font-family:var(--mono);font-size:13px}
+.formula{display:block;background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:10px 12px;overflow-x:auto;white-space:pre}
+button,select,input[type=search]{font:inherit;color:var(--ink)}
+button.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;cursor:pointer;font-size:13px}
+button.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+/* Emergence timeline */
+.era{display:grid;grid-template-columns:110px 1fr;gap:16px;padding-block:14px;border-top:1px solid var(--line)}
+.era:first-child{border-top:0}
+.era .when{font:500 13px/1.3 var(--mono);color:var(--muted)}
+.era .when b{display:block;font:800 20px var(--display);color:var(--ink)}
+@media (max-width:560px){.era{grid-template-columns:1fr;gap:6px}}
+/* Realm ladder */
+.ladder{display:grid;gap:6px}
+.rung{display:grid;grid-template-columns:minmax(0,190px) 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line)}
+.rung .bar{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--jade),var(--gold));}
+.rung small{color:var(--muted)}
+@media (max-width:560px){.rung{grid-template-columns:1fr}}
+/* Calculator */
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.field{display:grid;gap:4px}
+.field label{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.field label output{font-family:var(--mono);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--jade)}
+select{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.bigout{display:grid;gap:10px}
+.stat{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-block:6px}
+.stat b{font:700 20px var(--display)}
+/* Skill explorer */
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px}
+.crumbs button{border:0;background:none;color:var(--jade);cursor:pointer;padding:2px 0;font-weight:600}
+.crumbs span{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:8px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:10px 12px;text-align:left;cursor:pointer;display:grid;gap:4px;min-width:0;color:var(--ink)}
+.card:hover{border-color:var(--jade)}
+.card .n{font-weight:600;line-height:1.3}
+.card .m{font:12px var(--mono);color:var(--muted)}
+.card.locked{opacity:.62;border-style:dashed}
+.card.detail{border-left:3px solid var(--jade)}
+.tiers{display:flex;gap:2px;flex-wrap:wrap}
+.tier{flex:1 1 80px;padding:8px;border-radius:4px;background:var(--jade-soft);font-size:12px;display:grid;gap:2px}
+.tier b{font:700 14px var(--display)}
+.tier.q{background:var(--gold-soft)}
+/* Relationship graph */
+.graphbox{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.graphbox{grid-template-columns:1fr}}
+.graphbox canvas{width:100%;height:auto;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;touch-action:manipulation;cursor:pointer}
+canvas#rel{width:100%;aspect-ratio:4/3;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:8px;touch-action:none}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:13px}
+.legend i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.opbar{height:10px;border-radius:5px;background:var(--line);position:relative;overflow:hidden}
+.opbar span{position:absolute;top:0;bottom:0}
+.log{font:13px/1.5 var(--mono);color:var(--muted);max-height:150px;overflow:auto}
+/* Factions nest */
+.nest{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:8px;background:var(--panel)}
+.nest .nest{background:var(--bg)}
+.nest h4{margin:0;font:600 14px var(--body);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.nest .kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+/* Perf */
+.meter{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--jade)}
+.meter.warn span{background:var(--gold)} .meter.bad span{background:var(--cin)}
+footer{padding-block:30px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="hero-row"><span class="seal" aria-hidden="true">道</span><span class="eyebrow">Design bible · Seven Stars Continent · approved draft 2</span></div>
+  <h1>The Long Road</h1>
+  <p class="lead">The game starts with twenty servants in a village under a mountain and no sect at all. Over a hundred or a thousand years they will cultivate, take disciples, make enemies, form families and factions, and found the sect themselves. The machine plays every life. You watch, and set the rules. This page lays out every system that makes that happen, so we can work on them together before building.</p>
+</header>
+
+<nav class="rail" aria-label="Sections">
+  <a href="#emergence">Emergence</a><a href="#cultivation">Cultivation</a><a href="#skills">Skill tree</a><a href="#relationships">Relationships</a><a href="#family">Family &amp; lineage</a><a href="#factions">Factions</a><a href="#mind">Mind</a><a href="#archive">Archive</a><a href="#performance">Performance</a>
+</nav>
+
+<!-- ============ EMERGENCE ============ -->
+<section class="view" id="v-emergence">
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">The premise</span><h2>Nothing is given. Everything is earned.</h2>
+      <p>No roster, no elders, no ranks at the start. Every position in the sect exists only once someone has met its conditions, and is held only by someone who qualifies. The first sect master is a villager's grandchild, or their great-great-grandchild. The chronicle records the whole story.</p></div>
+    <div class="box"><span class="eyebrow">What you do</span><h3>You are the heavens, not a character</h3>
+      <ul class="clean"><li>Watch at any speed, from 1x up to "skip a century".</li><li>Set rules and policies later: zones, priorities, sect laws.</li><li>Get pinged on big moments: an awakening, a founding, a schism, a breakthrough.</li><li>Inhabit nobody. Follow anybody.</li></ul></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">A likely course · nothing here is scripted</span><h2>From hamlet to sect</h2>
+    <div>
+      <div class="era"><div class="when"><b>Year 0</b>the hamlet</div><div><h3>Twenty mortals</h3><p>Farming, crafts, families. The only paths open are skills (up to level 35) and <b>Body Tempering</b>, the mortal martial road that hard labour and practice slowly open. No one can sense qi yet.</p></div></div>
+      <div class="era"><div class="when"><b>Years 5–80</b>awakening</div><div><h3>The first spirit root is revealed</h3><p>A root is hidden until something reveals it:</p><ul class="clean"><li>a child born with one (about 3% of births)</li><li>an insight while meditating at the spirit spring</li><li>a spirit fruit found in the dark forest</li><li>a wandering cultivator on the West Road who tests the village youth</li><li>a broken manual dug out of old ruins</li></ul><p>With no manual the awakened one gropes blindly at 10% speed.</p></div></div>
+      <div class="era"><div class="when"><b>+10–40 yrs</b>first cultivator</div><div><h3>Qi Condensation, layer 1</h3><p>The first immortal of the valley. Their lifespan rises to 120. Villagers call them <i>xianshi</i> (immortal master), and their opinion of the cultivator jumps. A cult of reverence, or of envy, starts here.</p></div></div>
+      <div class="era"><div class="when"><b>+5–30 yrs</b>a lineage</div><div><h3>The first master and disciple</h3><p>The cultivator accepts a rooted youth. Teaching gives the disciple +50% speed and passes on the technique. A lineage now exists, with its own name, seniority and loyalty.</p></div></div>
+      <div class="era"><div class="when"><b>+20–100 yrs</b>a hall</div><div><h3>The Hall faction forms</h3><p>It needs three or more cultivators in one lineage, a claimed qi site (the peak) and a named founder. It starts taking a share of the harvest, and its first internal posts open.</p></div></div>
+      <div class="era"><div class="when"><b>+50–300 yrs</b>founding</div><div><h3>A sect is founded</h3><p>It needs all of these:</p><ul class="clean"><li>the founder at Foundation Establishment</li><li>a complete technique</li><li>at least five cultivators</li><li>a qi site of grade 2 or higher</li><li>stores for a year</li></ul><p>The founder names it, and the chronicle writes the founding day. Positions unlock as the sect grows (table below).</p></div></div>
+      <div class="era"><div class="when"><b>Centuries</b>growth</div><div><h3>Ranks, peaks, rivals, schisms</h3><p>Recruitment fairs, outer and inner courts, elders, then several peaks. Internal factions and rival sects follow. A bitter elder may leave with followers and found a rival sect across the valley. None of it is scripted, and all of it can happen.</p></div></div>
+    </div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Positions appear when the world is ready</span><h3>Every post has a condition to exist, and a condition to hold it</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Position</th><th>Exists when</th><th>Who can hold it</th><th>How it is filled</th></tr></thead>
+      <tbody>
+        <tr><td>Village headman</td><td>always</td><td>adult, Leadership ≥ 8, respected (average opinion ≥ 20)</td><td>elders' consensus</td></tr>
+        <tr><td>Master craftsman</td><td>3+ people in a domain</td><td>best in the domain, level ≥ 16</td><td>by skill</td></tr>
+        <tr><td>Hall master</td><td>Hall faction formed</td><td>founder, Qi Condensation 3+</td><td>founding</td></tr>
+        <tr><td>Sect Master</td><td>sect founded</td><td>Foundation Establishment+</td><td>founder, then designation, contest or elders' vote</td></tr>
+        <tr><td>Elder</td><td>sect ≥ 12 members</td><td>Foundation, or Qi Condensation 9 with 40+ years of service</td><td>Sect Master appoints</td></tr>
+        <tr><td>Inner disciple</td><td>an elder or master has a free personal-disciple slot</td><td>Qi Condensation 4+, Middle root or better, or exceptional merit</td><td>accepted by a master</td></tr>
+        <tr><td>Outer disciple</td><td>sect founded</td><td>any spirit root, passes the entry test</td><td>recruitment fair</td></tr>
+        <tr><td>Steward of the outer court</td><td>outer disciples ≥ 20</td><td>Administration ≥ 16, loyal</td><td>appointed</td></tr>
+        <tr><td>Mission Hall deacon</td><td>sect ≥ 30</td><td>Logistics or Administration ≥ 16</td><td>appointed</td></tr>
+        <tr><td>Scripture Pavilion keeper</td><td>3+ manuals held</td><td>Letters ≥ 16, Qi Condensation 5+</td><td>appointed</td></tr>
+        <tr><td>Alchemy Hall head</td><td>someone has Alchemy ≥ 20</td><td>best alchemist</td><td>by skill</td></tr>
+        <tr><td>Law Hall enforcer</td><td>sect ≥ 50 or a betrayal has happened</td><td>Law ≥ 12, Martial strong, impartial trait</td><td>appointed</td></tr>
+        <tr><td>Peak lord</td><td>3+ qi sites held, sect ≥ 100</td><td>Core Formation, or late Foundation with a lineage of 10+</td><td>Sect Master and elders</td></tr>
+        <tr><td>Grand elder</td><td>someone retires from Sect Master, or a Core Formation elder exists</td><td>Core Formation+</td><td>honour</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<!-- ============ CULTIVATION ============ -->
+<section class="view" id="v-cultivation" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Three roads</span><h2>How a mortal climbs</h2>
+      <ul class="clean">
+        <li><b>The qi road</b> needs a spirit root. It is fast, long-lived and leads all the way up.</li>
+        <li><b>The body road</b> is open to anyone. It is slow, painful and needs resources, and it plateaus near Foundation strength. It suits the rootless and martial villagers.</li>
+        <li><b>The craft road</b> is skills to level 35. Beyond that a craftsman needs qi, their own or a patron's spirit resources.</li>
+      </ul></div>
+    <div class="box"><span class="eyebrow">Hidden until revealed</span><h3>Spirit roots</h3>
+      <p>Ten root types: the five phases (Metal, Wood, Water, Fire, Earth) and five mutations (Wind, Thunder, Ice, Light, Shadow). A person has 1–5 of them, and a purity from 0 to 100.</p>
+      <div class="tablewrap"><table><thead><tr><th>Roots</th><th>Speed</th><th>Grade if pure</th><th>Share of rooted</th></tr></thead><tbody>
+        <tr><td>Single</td><td class="num">×3.0</td><td>Heavenly</td><td class="num">1%</td></tr>
+        <tr><td>Dual</td><td class="num">×1.8</td><td>Superior</td><td class="num">9%</td></tr>
+        <tr><td>Triple</td><td class="num">×1.0</td><td>Middle</td><td class="num">30%</td></tr>
+        <tr><td>Quad</td><td class="num">×0.6</td><td>Inferior</td><td class="num">35%</td></tr>
+        <tr><td>Penta</td><td class="num">×0.35</td><td>Trash</td><td class="num">25%</td></tr>
+      </tbody></table></div>
+      <p class="muted">Speed is also scaled by purity (×0.5 at purity 0 up to ×1.2 at purity 100). A mutation root counts as one rank purer.</p></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">The ladder</span><h2>Realms</h2>
+    <div class="ladder" id="ladder"></div>
+    <p class="muted">Each layer has a qi cost and a bottleneck. Realm boundaries are major breakthroughs that can fail. A realm also lifts the skill ceiling: 35 for mortals, 40 at Qi Condensation, 45 at Foundation, 50 at Core Formation.</p>
+  </div>
+
+  <div class="box"><span class="eyebrow">Paths branch by competency</span><h2>The cultivation tree</h2>
+    <p>Realms are the trunk. Branches open only when a person's skills, root, physique, technique or heart qualify. Several branches can be walked at once. Pick a person to see which branches are open to them (solid), almost open (dashed, one condition short) and closed (faint). Click a node for its conditions.</p>
+    <div class="chips" id="cv-persona"></div>
+    <div class="graphbox">
+      <canvas id="cvg" width="900" height="640" aria-label="Cultivation path graph"></canvas>
+      <div class="box" style="background:var(--bg)"><span class="eyebrow" id="cv-kind">Path</span><h3 id="cv-name">Click a node</h3><p id="cv-desc" class="muted">Each node lists what it takes and what it gives.</p><div id="cv-reqs"></div></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--jade)"></i>open to this person</span><span><i style="background:var(--gold)"></i>one condition short</span><span><i style="background:var(--line)"></i>closed</span><span><i style="background:var(--cin)"></i>dark branch</span></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Try it</span><h2>How long does a life of cultivation take?</h2>
+    <code class="formula">qi per day = hours × root speed × purity × element match × qi density × technique × resources × comprehension × modifiers</code>
+    <div class="calc">
+      <div class="grid3" style="grid-template-columns:1fr">
+        <div class="field"><label for="c-root">Root <output id="o-root"></output></label><select id="c-root"><option value="3">Single (Heavenly)</option><option value="1.8">Dual (Superior)</option><option value="1" selected>Triple (Middle)</option><option value="0.6">Quad (Inferior)</option><option value="0.35">Penta (Trash)</option><option value="0.1">None, self-taught groping</option></select></div>
+        <div class="field"><label for="c-pur">Purity <output id="o-pur"></output></label><input id="c-pur" type="range" min="0" max="100" value="50"></div>
+        <div class="field"><label for="c-site">Where they meditate <output id="o-site"></output></label><select id="c-site"><option value="1">Village (×1)</option><option value="1.5">Outer slopes (×1.5)</option><option value="2" selected>The peak (×2)</option><option value="4">Spirit spring (×4)</option><option value="8">Gathering formation on the spring (×8)</option></select></div>
+        <div class="field"><label for="c-tech">Technique <output id="o-tech"></output></label><select id="c-tech"><option value="0.5">Mortal breathing method (×0.5)</option><option value="1" selected>Yellow grade (×1)</option><option value="1.6">Profound grade (×1.6)</option><option value="2.5">Earth grade (×2.5)</option><option value="4">Heaven grade (×4)</option></select></div>
+        <div class="field"><label for="c-match">Technique element matches root <output id="o-match"></output></label><select id="c-match"><option value="1" selected>Matches (×1)</option><option value="0.6">Does not match (×0.6)</option></select></div>
+        <div class="field"><label for="c-res">Resources <output id="o-res"></output></label><select id="c-res"><option value="1">Ordinary food (×1)</option><option value="1.15" selected>Spirit grain diet (×1.15)</option><option value="1.5">Plus qi-gathering pills (×1.5)</option><option value="2.2">Plus spirit stones (×2.2)</option></select></div>
+        <div class="field"><label for="c-comp">Comprehension <output id="o-comp"></output></label><input id="c-comp" type="range" min="0.5" max="2" step="0.05" value="1"></div>
+        <div class="field"><label for="c-hrs">Hours meditating per day <output id="o-hrs"></output></label><input id="c-hrs" type="range" min="1" max="14" value="6"></div>
+        <div class="field"><label for="c-age">Age at awakening <output id="o-age"></output></label><input id="c-age" type="range" min="6" max="60" value="14"></div>
+      </div>
+      <div class="bigout">
+        <div class="stat"><span>Qi per day</span><b id="r-qi" class="num"></b></div>
+        <div class="stat"><span>Qi Condensation 1</span><b id="r-q1" class="num"></b></div>
+        <div class="stat"><span>Qi Condensation 9 (whole realm)</span><b id="r-q9" class="num"></b></div>
+        <div class="stat"><span>Ready for Foundation</span><b id="r-fe" class="num"></b></div>
+        <div class="stat"><span>Ready for Core Formation</span><b id="r-cf" class="num"></b></div>
+        <p class="muted" id="r-note"></p>
+        <p class="muted" style="font-size:13px">Assumptions: a layer costs 2,000 × 1.2<sup>layer</sup> qi. Foundation needs 60,000 qi beyond layer 9, and Core needs 600,000. Late starters learn slower: ×1 under 16, then −2% for each year over 16. Bottleneck waits are left out.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Breakthroughs</span><h3>Every boundary is a gamble</h3>
+      <code class="formula">chance = base + pill + insight + seclusion + willpower/2 − heart demons
+base: layer 80% · Foundation 30% · Core 12% · Nascent Soul 5%
+cap 95%</code>
+      <ul class="clean">
+        <li><b>Heart demons</b> come from the relationship system. Unresolved grudges, guilt, a betrayed master and a dead spouse all add risk. A person at peace breaks through more easily.</li>
+        <li><b>Failure</b> means losing 10–40% of the stored qi, an injury that takes weeks to years to heal, and occasionally a damaged foundation that permanently slows them. <b>Death is off by default.</b> You can switch it on.</li>
+        <li><b>Being stuck</b> slowly raises the chance (+1% per year at the bottleneck) and adds frustration to mood.</li>
+      </ul></div>
+    <div class="box"><span class="eyebrow">What makes a cultivator different</span><h3>Physiques, techniques, resources</h3>
+      <ul class="clean">
+        <li><b>Physiques</b> are about 1 in 5,000: Stone body, Cold-yin body, Pure-yang body, Spirit-sensitive eyes, Hundred meridians. Each changes growth, roads or breakthroughs.</li>
+        <li><b>Techniques</b> have a grade, an element and a realm cap. A Yellow technique stops at Qi Condensation 9. They come from ruins, wanderers, trade, or <b>creation</b>: someone at Foundation or above with high comprehension can write a new technique in an insight. That is how a sect's own lineage art is born.</li>
+        <li><b>Qi density</b> belongs to places. The peak, the spring and later formations all raise it, so who lives where is political.</li>
+        <li><b>Resources:</b> spirit grains already exist. Pills, spirit stones, spirit herbs and beast cores arrive with alchemy and the dark forest.</li>
+        <li><b>Lifespan</b> rises with each realm (70 mortal, 120, 250, 500, 1,000). Running out of years before a breakthrough is a real fear.</li>
+      </ul></div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="view" id="v-skills" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">The live catalogue</span><h2>100 domains, 1,500 disciplines</h2>
+      <p>This is the real catalogue Codex is writing into the game right now, read straight from <code>data/skills/</code>. Domains marked with a jade edge are fleshed out, with specialisations and perks. The rest are named and waiting for detail.</p>
+      <div class="chips" id="sk-stats"></div></div>
+    <div class="box"><span class="eyebrow">Levels 0–50</span><h3>Ten tiers of five</h3>
+      <div class="tiers" id="tiers"></div>
+      <p class="muted">Every fifth level is a gate that needs a condition as well as XP. Above 35 the person needs qi.</p></div>
+  </div>
+  <div class="box">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+      <nav class="crumbs" id="sk-crumbs" aria-label="Skill tree path"></nav>
+      <input type="search" id="sk-q" placeholder="Search 1,500 disciplines…" aria-label="Search disciplines" style="border:1px solid var(--line);border-radius:6px;padding:6px 10px;background:var(--panel);min-width:0;flex:1 1 200px;max-width:320px">
+    </div>
+    <div id="sk-body"></div>
+  </div>
+  <div class="box"><span class="eyebrow">A domain as a living tree</span><h2>Skill graph</h2>
+    <p>The domain sits at the centre, with its disciplines around it and their specialisations on the outer ring. Thin lines are spillover links between related disciplines. Move the competency slider to watch a person's tree open up: specialisations light when the discipline reaches their unlock level, and perks show as the ring fills.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:end">
+      <div class="field" style="min-width:min(100%,240px)"><label for="sg-dom">Domain</label><select id="sg-dom"></select></div>
+      <div class="field" style="flex:1 1 220px"><label for="sg-lv">Competency in every discipline <output id="sg-lvo"></output></label><input id="sg-lv" type="range" min="0" max="50" value="12"></div>
+    </div>
+    <div class="graphbox">
+      <canvas id="skg" width="900" height="700" aria-label="Skill graph of one domain"></canvas>
+      <div class="box" style="background:var(--bg)"><span class="eyebrow" id="sg-kind">Node</span><h3 id="sg-name">Click a node</h3><div id="sg-info" class="muted">Disciplines show their specialisations and perks. Specialisations show what unlocks them.</div></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Earning XP</span><code class="formula">XP/hour = base × key attribute/10 × comprehension
+        × age × mood × teacher × difficulty × tools
+        × traits × modifiers</code>
+      <ul class="clean"><li>40% spills over to the discipline, and 5% to related disciplines.</li><li>Easy work gives 10% XP once you are 5 or more levels above it, so you plateau on chores.</li><li>A teacher 5 or more levels higher adds +50%, but can only lift you to their own level − 1.</li><li>First-time work, failures (50%) and children watching their parents (20%) all count.</li></ul></div>
+    <div class="box"><span class="eyebrow">Gates and insights</span>
+      <ul class="clean"><li><b>Gates</b> sit at levels 5, 10 … 45. Each discipline sets its own conditions: days practised, a full season cycle, a milestone work, a master teacher, an insight.</li><li><b>Insights</b> are a daily roll while stuck, scaled by comprehension, willpower and luck. Storms, festivals and grief can trigger one.</li><li><b>Rust:</b> above level 15, unused skills fade slowly, but never below their tier floor.</li><li><b>Modifiers</b> such as spirit fruits, tea, manuals, formations and qi-rich ground all feed one general system.</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ RELATIONSHIPS ============ -->
+<section class="view" id="v-relationships" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">The model</span><h2>Every tie is a small record</h2>
+      <p>A relationship only exists once two people have reason to know each other. Each side keeps its own view, because A may adore B while B barely notices A.</p>
+      <div class="tablewrap"><table><thead><tr><th>Field</th><th>Range</th><th>Meaning</th></tr></thead><tbody>
+        <tr><td>opinion</td><td class="num">−100…100</td><td>how much A likes B</td></tr>
+        <tr><td>familiarity</td><td class="num">0…100</td><td>how well A knows B; grows with proximity and shared work, fades with absence</td></tr>
+        <tr><td>trust</td><td class="num">0…100</td><td>separate from liking. You can respect a rival you trust, or love a liar.</td></tr>
+        <tr><td>bonds</td><td>flags</td><td>friend, sworn sibling, romance, master, disciple, rival, enemy, benefactor, debtor…</td></tr>
+        <tr><td>memories</td><td>up to 3</td><td>the strongest events between them, each with a weight that decays: "saved my son from the river (+60)".</td></tr>
+      </tbody></table></div></div>
+    <div class="box"><span class="eyebrow">What moves opinion</span>
+      <div class="tablewrap"><table><thead><tr><th>Event</th><th class="r">Δ opinion</th><th>Side effect</th></tr></thead><tbody id="evtable"></tbody></table></div>
+      <p class="muted">Opinion also drifts each day from <b>trait compatibility</b> (Hot-tempered against Patient −, Curious with Curious +), drifts toward a baseline over years, and is <b>inherited</b> at 30% from parents: "my father's enemy is my enemy".</p></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Play with a village</span><h2>The ties of eighteen villagers</h2>
+    <div class="graphbox">
+      <div style="display:grid;gap:8px;min-width:0">
+        <canvas id="rel" width="800" height="600" aria-label="Relationship graph of sample villagers"></canvas>
+        <div class="legend" id="legend"></div>
+        <div class="chips" id="relfilter"></div>
+      </div>
+      <div class="box" style="background:var(--bg)">
+        <span class="eyebrow">Selected</span>
+        <h3 id="sel-name">Click a person</h3>
+        <p id="sel-info" class="muted">Then click a second person to pick a pair and apply events to them.</p>
+        <div id="pair" hidden style="display:grid;gap:8px">
+          <div class="mono" id="pair-names"></div>
+          <div><span class="muted" style="font-size:13px">A → B opinion</span><div class="opbar"><span id="op-ab"></span></div></div>
+          <div><span class="muted" style="font-size:13px">B → A opinion</span><div class="opbar"><span id="op-ba"></span></div></div>
+          <div class="chips" id="evbtns"></div>
+        </div>
+        <div class="log" id="rel-log" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="box"><span class="tag">Friend</span><p>Opinion ≥ 40 and familiarity ≥ 30. Friends share food when hungry, teach each other, and back each other in disputes.</p></div>
+    <div class="box"><span class="tag">Sworn sibling</span><p>Friends at ≥ 80 who go through a trial together (a famine, a beast attack) may swear an oath. It is permanent and binds like kin, and betraying it is a huge heart demon.</p></div>
+    <div class="box"><span class="tag gold">Benefactor / debt of grace</span><p>A saved life or a great kindness creates a debt the debtor feels bound to repay, sometimes generations later, by a grandchild.</p></div>
+    <div class="box"><span class="tag cin">Rival</span><p>Two people competing for the same thing (a post, a master, a spouse, a breakthrough resource) with opinion < 10. Rivals push each other's XP +10% and resent each other's wins.</p></div>
+    <div class="box"><span class="tag cin">Enemy and grudge</span><p>Opinion ≤ −60 with a cause. A grudge has an intensity, a cause, and an <i>inheritable</i> flag. It ends through an apology with compensation, mediation, a duel, time, or revenge. Revenge is humiliation, injury or theft by default, not death.</p></div>
+    <div class="box"><span class="tag">Romance and Dao companion</span><p>Mutual opinion ≥ 50, age and status fit. It leads to courtship, a marriage arranged with the families' approval, and children. Between cultivators it can become a Dao companionship: shared cultivation, +10% to both, and a deep heart demon if lost.</p></div>
+  </div>
+</section>
+
+<!-- ============ FAMILY ============ -->
+<section class="view" id="v-family" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Blood</span><h2>Family, households and clans</h2>
+      <ul class="clean">
+        <li><b>Kin is computed, never stored.</b> Each person keeps only their mother and father ids. Siblings, cousins, grandparents and in-laws are walked from those links when needed.</li>
+        <li><b>Households</b> share a home, food and work. They split when a son marries and builds, and merge when elders move in.</li>
+        <li><b>Clans</b> are the descendants of a founding ancestor sharing a surname. They form once a lineage reaches 3 generations and 10 or more living members. They have a head, a reputation, and an ancestral hall later.</li>
+        <li><b>Marriage</b> needs mutual opinion, the parents' approval (their opinion of the match and the other family's standing) and a matchmaker. Cultivators prefer cultivators. A rooted child raises a family's status sharply.</li>
+        <li><b>Children</b> inherit attributes, Potential and roots from their parents with some noise. A root is far likelier when a parent has one, so cultivator dynasties emerge.</li>
+        <li><b>Duty:</b> filial piety means caring for elders, mourning (a year's reduced work) and obeying the clan head. Neglect hurts reputation.</li>
+        <li><b>Inheritance:</b> houses, land plots, tools, manuals and treasures. Disputes over inheritance are a classic source of grudges.</li>
+      </ul></div>
+    <div class="box"><span class="eyebrow">Dao lineage</span><h2>Masters and disciples</h2>
+      <ul class="clean">
+        <li><b>Acceptance</b> needs the master to be at least 5 levels or one realm above, opinion ≥ 20, an aptitude test, and a free slot. A master holds 1 personal disciple at Qi Condensation, 3 at Foundation and 6 at Core. Crafts use the same bond: a master smith takes an apprentice.</li>
+        <li><b>The master's duties:</b> teaching (+50% XP, technique transmission), resources, protection, and finding the disciple a place.</li>
+        <li><b>The disciple's duties:</b> obedience, labour, filial piety toward the master, and defending or avenging the master's name.</li>
+        <li><b>Seniority</b> is computed by entry date within a lineage. It gives the forms of address: senior brother, junior sister, martial uncle, grand-master. Seniority matters for promotions and disputes.</li>
+        <li><b>Betrayal</b> (defecting, stealing a technique, harming the master) is the biggest event in the system. It creates a grudge across the whole lineage, the Law Hall's first case, and sometimes a schism.</li>
+        <li><b>Legacy:</b> when a master dies or vanishes into seclusion, their notes, technique and treasures pass to the chosen heir. Choosing the heir creates rivals.</li>
+      </ul></div>
+  </div>
+  <div class="box"><span class="eyebrow">Four generations of the Wang and Han families, with one Dao lineage running through them · illustrative</span><h2>Blood and lineage in one graph</h2>
+    <p>Rows are generations. Click anyone to see what everyone else is to them. Kin terms are worked out from parent and spouse links on the spot. Nothing is stored except who someone's parents, spouse and master are.</p>
+    <div class="graphbox">
+      <div style="display:grid;gap:8px;min-width:0">
+        <canvas id="fam" width="900" height="600" aria-label="Family and lineage graph"></canvas>
+        <div class="legend" id="fam-legend"></div>
+        <div class="chips" id="fam-filter"></div>
+      </div>
+      <div class="box" style="background:var(--bg)"><span class="eyebrow">Seen from</span><h3 id="fam-name">Click a person</h3><p class="muted" id="fam-info">Their kin, master, disciples and martial siblings will be listed here.</p><div class="log" id="fam-terms" style="max-height:320px"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FACTIONS ============ -->
+<section class="view" id="v-factions" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Groups with a will</span><h2>Factions</h2>
+      <p>A faction is any group the sim treats as an actor. It has a leader, members, goals, money and relations with other factions. Factions emerge from rules and are never placed by hand.</p>
+      <div class="tablewrap"><table><thead><tr><th>Type</th><th>Forms when</th></tr></thead><tbody>
+        <tr><td>Household</td><td>people share a home</td></tr>
+        <tr><td>Clan</td><td>3 generations, 10+ living descendants</td></tr>
+        <tr><td>Village</td><td>a settlement with a headman</td></tr>
+        <tr><td>Guild</td><td>3+ practitioners of a domain at Journeyman or above</td></tr>
+        <tr><td>Lineage</td><td>a master with disciples</td></tr>
+        <tr><td>Hall</td><td>3+ cultivators in a lineage plus a qi site</td></tr>
+        <tr><td>Sect</td><td>founding conditions (Emergence)</td></tr>
+        <tr><td>Peak / court</td><td>inside a sect, around a peak lord or elder</td></tr>
+        <tr><td>Clique</td><td>3+ members of a larger faction who share a grievance or goal</td></tr>
+        <tr><td>Alliance</td><td>two or more factions sign a pact</td></tr>
+        <tr><td><i>Outsiders</i></td><td>city merchant houses, magistrate, rival sects, rogue cultivators, bandits, later demonic sects and beast tides</td></tr>
+      </tbody></table></div></div>
+    <div class="box"><span class="eyebrow">Each faction tracks</span>
+      <ul class="clean">
+        <li><b>Leader</b> and succession rule: designation, eldest, strongest, election, or contest.</li>
+        <li><b>Members:</b> each person stores their factions. Loyalty is opinion of the leader + benefits received + kin inside + doctrine fit.</li>
+        <li><b>Cohesion</b> is the average loyalty minus the cliques' grievances.</li>
+        <li><b>Reputation</b> covers righteous, demonic or neutral standing, plus fame.</li>
+        <li><b>Wealth</b> is stores, sites, manuals and treasures.</li>
+        <li><b>Doctrine</b> mixes martial, scholarly, mercantile, reclusive and expansionist, which shapes its choices.</li>
+        <li><b>Goals</b> are things like "found a sect", "take the spirit spring" or "avenge the founder".</li>
+        <li><b>Relations</b> is an opinion matrix between factions, plus treaties, tributes and feuds.</li>
+      </ul>
+      <span class="eyebrow" style="margin-top:8px">Dynamics</span>
+      <ul class="clean">
+        <li><b>Schism:</b> cohesion < 30 plus a rival leader with followers makes the faction split. Half the sects in the world are born this way.</li>
+        <li><b>Absorption:</b> a weak faction joins a strong one, by choice or by pressure.</li>
+        <li><b>Politics:</b> peaks compete for disciples, resources and the next Sect Master seat.</li>
+        <li><b>Conflict</b> (no death by default): disputes, sabotage, duels, theft, sieges of trade. Wars come later and only if you switch them on.</li>
+      </ul></div>
+  </div>
+  <div class="box"><span class="eyebrow">Example world, Year 312 · illustrative</span><h3>Factions nest and overlap</h3>
+    <div class="nest"><h4>Azure Cloud Sect <span class="tag">sect · 146</span><span class="tag gold">cohesion 64</span></h4>
+      <div class="kids">
+        <div class="nest"><h4>Summit Peak <span class="tag">peak · 51</span></h4><p class="muted" style="font-size:13px">Sect Master Lu Qiao's line. Holds the spring.</p></div>
+        <div class="nest"><h4>Crane Peak <span class="tag">peak · 48</span><span class="tag cin">rival</span></h4><p class="muted" style="font-size:13px">Han line. Wants the next Sect Master seat.</p>
+          <div class="nest"><h4>Orchard Clique <span class="tag cin">clique · 7</span></h4><p class="muted" style="font-size:13px">Outer disciples angry over spirit grain shares.</p></div></div>
+        <div class="nest"><h4>Alchemy Hall <span class="tag">hall · 12</span></h4></div>
+      </div></div>
+    <div class="kids" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin-top:8px">
+      <div class="nest"><h4>Han Clan <span class="tag">clan · 34</span></h4><p class="muted" style="font-size:13px">Overlaps Crane Peak; 6 cultivators, 28 mortals in the village.</p></div>
+      <div class="nest"><h4>Servants' Village <span class="tag">village · 410</span></h4><p class="muted" style="font-size:13px">Headman Wang Erniu. Tithe to the sect.</p>
+        <div class="nest"><h4>Smiths' Guild <span class="tag">guild · 9</span></h4></div></div>
+      <div class="nest"><h4>Iron Gorge Hall <span class="tag cin">enemy · 23</span></h4><p class="muted" style="font-size:13px">Founded by the defector Zhou Bo. Feud with the whole Lu lineage.</p></div>
+      <div class="nest"><h4>Western Market City <span class="tag gold">outsider</span></h4><p class="muted" style="font-size:13px">Merchant houses buy spirit grain and sell pills.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MIND ============ -->
+<section class="view" id="v-mind" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Brain + heart</span><h2>How a person decides</h2>
+      <p>Logic and feeling are two layers. The <b>brain</b> scores what makes sense. The <b>heart</b> pushes those scores with urges nobody designed. A little structured randomness picks the winner, and every decision keeps its true reason.</p>
+      <code class="formula">score(option) = Π question curves (each 0–1)
+              × heart urges (spite, longing, fear, pride, restlessness, devotion)
+              × mood momentum
+choice      = best score, or a near-best one for impulsive people</code></div>
+    <div class="box"><span class="eyebrow">A worked example</span><h3>Wang Ming, autumn noon</h3>
+      <div class="tablewrap"><table><thead><tr><th>Option</th><th>Questions</th><th class="r">Score</th></tr></thead><tbody>
+        <tr><td>Harvest the paddy</td><td>season 1.0 · rested 0.8 · his job 1.0</td><td class="r num"><b>0.80</b></td></tr>
+        <tr><td>Eat</td><td>hunger 0.5 · food near 1.0</td><td class="r num">0.50</td></tr>
+        <tr><td>Train with master</td><td>wants it 0.9 · master free 0.3 · harvest needs him 0.4</td><td class="r num">0.11</td></tr>
+        <tr><td>Confront Li Gang</td><td>grudge 0.7 · Li Gang near 0.2 · calm 0.3</td><td class="r num">0.04</td></tr>
+      </tbody></table></div>
+      <p class="muted">Three days later, at the festival, angry after an insult with Li Gang across the square, "confront" scores 0.6 and wins. Nobody scripted it.</p></div>
+  </div>
+  <div class="grid3">
+    <div class="box"><span class="tag">The heart</span><p>A tiny network per person, about 200 numbers: 16 inputs (mood, needs, memories, traits, who is near) and 8 urges. It is <b>never trained</b>. A child's heart blends their parents' plus mutation, and strong experiences nudge it (betrayal makes them suspicious for life). Families grow temperaments nobody designed.</p></div>
+    <div class="box"><span class="tag">Emotions with momentum</span><p>Anger fades over days, grief over a year, joy fades fast. Mood colours every score, so people act differently on a bad week.</p></div>
+    <div class="box"><span class="tag">Biases and impulses</span><p>Grudges outweigh facts. People trust kin over strangers, and pride and superstition get in the way. Rarely, someone acts on pure impulse: runs away, confesses at the festival, gambles the harvest.</p></div>
+    <div class="box"><span class="tag">Beliefs, not truth</span><p>People act on what they believe, rumours included. Misunderstandings start feuds, and the truth can surface decades later.</p></div>
+    <div class="box"><span class="tag">Life goals</span><p>"Become Lu Wen's disciple" breaks down into steps: raise Martial, earn his regard, pass the test. Ambitions span decades and are checked monthly or when something happens.</p></div>
+    <div class="box"><span class="tag gold">No language model</span><p>No AI writing thoughts or dialogue. The chronicle and life stories are written from templates driven by the real recorded reasons.</p></div>
+  </div>
+  <div class="box"><span class="eyebrow">Keeping it cheap</span><h3>Decide rarely, in batches, coarsely when nobody is watching</h3>
+    <div class="tablewrap"><table><thead><tr><th>Rule</th><th>Effect</th></tr></thead><tbody>
+      <tr><td>Commit to an activity for hours</td><td>about 15 decisions per walker per day, not 60 per second</td></tr>
+      <tr><td>Interrupts instead of polling</td><td>re-decide only when something happens to you: insult, fire, rumour, sick child</td></tr>
+      <tr><td>Only options that fit the place and time</td><td>about 6 options scored, not 300</td></tr>
+      <tr><td>Per-frame budget queue (1–2 ms)</td><td>the frame rate is protected at any population</td></tr>
+      <tr><td>Level of detail</td><td>walkers: full · settlement: half-day blocks · everyone: one daily plan (weekly while skipping) · far away: factions decide</td></tr>
+      <tr><td>Big life choices are rare</td><td>marriage, betrayal, seeking a master: monthly or on triggers</td></tr>
+      <tr><td>Lookup-table curves</td><td>no maths in the hot loop; the heart runs only at decision points</td></tr>
+    </tbody></table></div>
+    <div class="tablewrap" style="margin-top:10px"><table><thead><tr><th>Situation</th><th>Decisions per game day</th><th class="r">Cost per game day</th></tr></thead><tbody>
+      <tr><td>20 villagers</td><td>~300</td><td class="r">&lt; 1 ms</td></tr>
+      <tr><td>2,000 people, 100 walking</td><td>~1,500 + 4,000 blocks</td><td class="r">~10 ms</td></tr>
+      <tr><td>100,000 people</td><td>~1,500 + 100,000 plans</td><td class="r">~0.5–1 s</td></tr>
+      <tr><td>Skip a century, 2,000 people</td><td>weekly plans</td><td class="r">about a minute in total</td></tr>
+    </tbody></table></div>
+    <p class="muted">A game day lasts 10 real minutes, so these costs are spread thin. Estimates; each build step carries a benchmark test.</p></div>
+</section>
+
+<!-- ============ ARCHIVE ============ -->
+<section class="view" id="v-archive" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Everything that ever happened</span><h2>The archive</h2>
+      <p>The game writes a complete record to disk and never reads it back, so it costs the sim nothing. You explore it outside the game, in a local viewer page with a knowledge graph, timelines and tables.</p>
+      <div class="tablewrap"><table><thead><tr><th>Layer</th><th>What</th><th>Detail</th></tr></thead><tbody>
+        <tr><td>Life events</td><td>birth, awakening, marriage, master taken, breakthrough, betrayal, grudge, promotion, insight, tier reached, child born</td><td>every one, with its reason</td></tr>
+        <tr><td>Decisions</td><td>big choices, interrupts, social acts, each with its top reasons and heart urges</td><td>every one</td></tr>
+        <tr><td>Routine</td><td>farming, eating, sleeping</td><td>monthly summary per person: hours by activity, XP, output, mood</td></tr>
+        <tr><td>Snapshots</td><td>skills, attributes, relationships, factions</td><td>once per game year</td></tr>
+      </tbody></table></div></div>
+    <div class="box"><span class="eyebrow">On disk</span>
+      <code class="formula">archive/&lt;world&gt;/
+  year-0001/events.jsonl.gz
+  year-0001/decisions.jsonl.gz
+  year-0001/routine.jsonl.gz
+  year-0001/snapshot.json.gz
+  index.sqlite   ← built by the indexer</code>
+      <ul class="clean">
+        <li>Append-only. Writes are buffered and flushed on a background thread once per game day.</li>
+        <li>Size: about 20 people × 100 years is a few MB. 2,000 people × 300 years is about 300–600 MB.</li>
+        <li>At 100,000 people: full detail for notable people, and summaries only for minor people after their death.</li>
+        <li>An indexer (Python standard library only) builds one SQLite file. The viewer reads it through a helper bound to 127.0.0.1 (this machine only) or a folder picker.</li>
+      </ul></div>
+  </div>
+  <div class="grid3">
+    <div class="box"><span class="tag">Knowledge graph</span><p>Nodes: people, families, clans, lineages, factions, places, techniques, key events. Edges: kin, spouse, master/disciple, friend, rival, enemy, member of, founded, betrayed, taught. Expand by clicking; a time slider shows any year.</p></div>
+    <div class="box"><span class="tag">Life stories</span><p>Each person's page tells their life from events and decisions with reasons, and has skill and realm charts plus opinion-over-time lines with key people.</p></div>
+    <div class="box"><span class="tag">Tables</span><p>Searchable and filterable: people, events, decisions, factions, positions held, techniques and holders, grudges and how they ended.</p></div>
+    <div class="box"><span class="tag">Timeline</span><p>Centuries on one axis: foundings, schisms, first awakenings, great breakthroughs.</p></div>
+    <div class="box"><span class="tag">Questions</span><p>"Who taught whom?" "Grudges that crossed three generations." "Every betrayal and its cause." Saved queries, no coding needed.</p></div>
+    <div class="box"><span class="tag gold">Build order</span><p>The writer comes with the in-game graphs, the decision log with the brain, and the viewer once decades of data exist.</p></div>
+  </div>
+</section>
+
+<!-- ============ PERFORMANCE ============ -->
+<section class="view" id="v-performance" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">The rule</span><h2>Simulate deeply, draw little</h2>
+      <p>Thinking about a person is cheap: a few numbers once a day. Drawing a person, walking them and pathfinding is expensive. So almost everyone is simulated on paper, and only the people near the camera are real walkers.</p>
+      <div class="tablewrap"><table><thead><tr><th>Tier</th><th>Who</th><th>Updated</th><th>Cost</th></tr></thead><tbody>
+        <tr><td><b>A</b> walkers</td><td>≤ 100 near the camera</td><td>every frame: moving, pathing, drawn</td><td>highest, capped</td></tr>
+        <tr><td><b>B</b> local</td><td>the rest of that settlement</td><td>each game hour: schedule only, no paths</td><td>low</td></tr>
+        <tr><td><b>C</b> region</td><td>everyone else simulated</td><td>once per game day, batched across frames</td><td>very low</td></tr>
+        <tr><td><b>D</b> far world</td><td>other regions</td><td>once per game month, as statistics</td><td>tiny</td></tr>
+      </tbody></table></div></div>
+    <div class="box"><span class="eyebrow">Techniques</span>
+      <ul class="clean">
+        <li><b>Packed arrays, not objects:</b> one array per field across all people, which is fast to loop and small in memory.</li>
+        <li><b>Sparse storage:</b> a person stores only the skills they touched (~40) and the ties they actually have (~40, about Dunbar's number).</li>
+        <li><b>Derived, not stored:</b> kin, seniority and lineage are computed from parent and master links when needed.</li>
+        <li><b>Event-driven:</b> opinion changes on events and a weekly drift, not every pair every day.</li>
+        <li><b>Time-sliced:</b> the daily batch gets a fixed budget per frame (e.g. 2 ms), so the screen never stutters.</li>
+        <li><b>Coarser ticks when skipping:</b> at "skip a century", ticks become weekly or monthly with scaled results.</li>
+        <li><b>Escape hatch:</b> if GDScript is too slow at 100k, the daily batch moves to C# or a native module, and nothing else changes.</li>
+      </ul></div>
+  </div>
+  <div class="box"><span class="eyebrow">Estimate</span><h2>What would your laptop carry?</h2>
+    <div class="calc">
+      <div style="display:grid;gap:12px">
+        <div class="field"><label for="p-pop">Simulated people <output id="o-pop"></output></label><input id="p-pop" type="range" min="0" max="100" value="40"></div>
+        <div class="field"><label for="p-ties">Ties per person <output id="o-ties"></output></label><input id="p-ties" type="range" min="5" max="150" value="40"></div>
+        <div class="field"><label for="p-years">Years to skip <output id="o-years"></output></label><input id="p-years" type="range" min="1" max="1000" value="100"></div>
+        <div class="field"><label for="p-tick">Tick while skipping</label><select id="p-tick"><option value="1">Daily</option><option value="7" selected>Weekly</option><option value="30">Monthly</option></select></div>
+        <div class="field"><label for="p-lang">Daily batch written in</label><select id="p-lang"><option value="6">GDScript (≈6 µs per person-tick)</option><option value="0.6">C# or native (≈0.6 µs)</option></select></div>
+      </div>
+      <div class="bigout">
+        <div class="stat"><span>Memory for people</span><b id="pr-mem" class="num"></b></div>
+        <div class="meter" id="pm-mem"><span></span></div>
+        <div class="stat"><span>One game day at 1x speed</span><b id="pr-day" class="num"></b></div>
+        <div class="stat"><span>Time to skip the years</span><b id="pr-skip" class="num"></b></div>
+        <div class="meter" id="pm-skip"><span></span></div>
+        <p class="muted" id="pr-note"></p>
+        <p class="muted" style="font-size:13px">Rough planning numbers: about 1.1 KB per person (core 256 B, skills 320 B, ties 12 B each, memories) and per-tick costs measured from similar loops. Codex's benchmark of the real code will replace them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Draft for discussion. Numbers are starting values to tune, not promises. Everything here is data-driven, so it can change without rewriting code.</footer>
+</div>
+
+<script>
+const SK = __SKILLS__;
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('en-US',{maximumFractionDigits:0});
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+/* ---------- routing ---------- */
+const VIEWS=['emergence','cultivation','skills','relationships','family','factions','mind','archive','performance'];
+function route(){
+  let h=(location.hash||'').slice(1); if(!VIEWS.includes(h)) h='emergence';
+  VIEWS.forEach(v=>{ $('#v-'+v).hidden = v!==h; });
+  document.querySelectorAll('nav.rail a').forEach(a=>a.setAttribute('aria-current', a.getAttribute('href')==='#'+h));
+  if(h==='relationships') startGraph();
+  if(h==='cultivation') startCult();
+  if(h==='skills') startSkillGraph();
+  if(h==='family') startFamily();
+}
+addEventListener('hashchange',()=>{route(); window.scrollTo({top:0});});
+
+/* ---------- realm ladder ---------- */
+const REALMS=[
+ ['Mortal','—','70','ceiling 35','anyone',8],
+ ['Body Tempering','layers 1–9','80','martial body','anyone, slow',18],
+ ['Qi Condensation','layers 1–9 (13 for perfect foundations)','120','skills to 40','spirit root',36],
+ ['Foundation Establishment','early · middle · late · peak','250','skills to 45 · flight on a sword','major breakthrough, 30%',56],
+ ['Core Formation','core grade 1–9 · four stages','500','skills to 50 · domain-shaking','major breakthrough, 12%',74],
+ ['Nascent Soul','four stages','1,000','soul leaves the body','5% · beyond this valley',88],
+ ['Beyond','Soul Transformation and higher','—','defined later','—',100]];
+$('#ladder').innerHTML = REALMS.map(r=>`<div class="rung"><div><b>${r[0]}</b><br><small>${r[1]}</small></div><div style="display:grid;gap:4px"><div class="bar" style="width:${r[5]}%"></div><small>${r[3]} · ${r[4]}</small></div><div class="mono num" title="lifespan">${r[2]} yrs</div></div>`).join('');
+
+/* ---------- qi calculator ---------- */
+function yrs(days){ if(!isFinite(days)) return 'never'; const y=days/365; return y<1? Math.max(1,Math.round(days))+' days' : (y<10? y.toFixed(1): fmt(y))+' years'; }
+function calc(){
+  const g=id=>parseFloat($(id).value);
+  const root=g('#c-root'), pur=g('#c-pur'), site=g('#c-site'), tech=g('#c-tech'), match=g('#c-match'), res=g('#c-res'), comp=g('#c-comp'), hrs=g('#c-hrs'), age=g('#c-age');
+  const purM=0.5+0.7*pur/100, ageM=Math.max(0.2, age<=16?1:1-0.02*(age-16));
+  const qi=hrs*root*purM*match*site*tech*res*comp*ageM;
+  $('#o-root').textContent='×'+root; $('#o-pur').textContent=pur+' (×'+purM.toFixed(2)+')'; $('#o-site').textContent='×'+site; $('#o-tech').textContent='×'+tech; $('#o-match').textContent='×'+match; $('#o-res').textContent='×'+res; $('#o-comp').textContent='×'+comp.toFixed(2); $('#o-hrs').textContent=hrs+' h'; $('#o-age').textContent=age+(ageM<1?' (×'+ageM.toFixed(2)+')':'');
+  const layer=n=>2000*Math.pow(1.2,n-1); let q9=0; for(let i=1;i<=9;i++) q9+=layer(i);
+  const d1=layer(1)/qi, d9=q9/qi, dfe=(q9+60000)/qi, dcf=(q9+60000+600000)/qi;
+  $('#r-qi').textContent=qi.toFixed(1); $('#r-q1').textContent=yrs(d1); $('#r-q9').textContent=yrs(d9); $('#r-fe').textContent=yrs(dfe); $('#r-cf').textContent=yrs(dcf);
+  const life=[[d9,120,'Qi Condensation'],[dfe,120,'Foundation (with a 120-year life)'],[dcf,250,'Core (with a 250-year life)']];
+  const fail=life.find(([d,l])=>age+d/365>l);
+  $('#r-note').textContent = fail? `This person runs out of lifespan before reaching ${fail[2]}. They would need better resources, a better site, or a stronger technique.` : 'Within reach of a lifetime, if the bottlenecks allow it.';
+}
+document.querySelectorAll('#v-cultivation select,#v-cultivation input').forEach(e=>e.addEventListener('input',calc)); calc();
+
+/* ---------- skill explorer ---------- */
+const TIERS=[['Novice','1–5'],['Apprentice','6–10'],['Journeyman','11–15'],['Skilled','16–20'],['Adept','21–25'],['Expert','26–30'],['Master','31–35'],['Grandmaster','36–40'],['Sage','41–45'],['Peerless','46–50']];
+$('#tiers').innerHTML=TIERS.map((t,i)=>`<div class="tier${i>=7?' q':''}"><b>${t[0]}</b><span class="mono">${t[1]}</span></div>`).join('');
+const nDisc=SK.domains.reduce((a,d)=>a+d[5].length,0), nDet=SK.domains.reduce((a,d)=>a+d[5].filter(x=>x.length>1).length,0), nSpec=SK.domains.reduce((a,d)=>a+d[5].reduce((b,x)=>b+(x[1]?x[1].length:0),0),0), nPerk=SK.domains.reduce((a,d)=>a+d[5].reduce((b,x)=>b+(x[2]?x[2].length:0),0),0);
+$('#sk-stats').innerHTML=[[SK.spheres.length,'spheres'],[SK.domains.length,'domains'],[nDisc,'disciplines'],[nDet,'detailed'],[nSpec,'specialisations'],[nPerk,'perks']].map(([n,l])=>`<span class="tag">${fmt(n)} ${l}</span>`).join('');
+let skPath=[];
+function skRender(){
+  const q=$('#sk-q').value.trim().toLowerCase(); const body=$('#sk-body'); const cr=$('#sk-crumbs');
+  if(q){ cr.innerHTML=`<span>Search results</span>`; const hits=[];
+    SK.domains.forEach((d,di)=>d[5].forEach((x,xi)=>{ if(x[0].toLowerCase().includes(q)||d[2].toLowerCase().includes(q)) hits.push([di,xi]); }));
+    body.innerHTML = `<p class="muted" style="margin:10px 0">${hits.length} matches</p><div class="cards">`+hits.slice(0,120).map(([di,xi])=>{const d=SK.domains[di],x=d[5][xi];return `<button class="card${x.length>1?' detail':''}${d[3]?' locked':''}" data-go="${di},${xi}"><span class="n">${x[0]}</span><span class="m">${d[2]}</span></button>`}).join('')+'</div>';
+    return; }
+  const parts=[`<button data-crumb="0">All spheres</button>`];
+  if(skPath.length>=1) parts.push(`<span>›</span><button data-crumb="1">${SK.spheres.find(s=>s[0]===skPath[0])[1]}</button>`);
+  if(skPath.length>=2) parts.push(`<span>›</span><button data-crumb="2">${SK.domains[skPath[1]][2]}</button>`);
+  if(skPath.length>=3) parts.push(`<span>›</span><span>${SK.domains[skPath[1]][5][skPath[2]][0]}</span>`);
+  cr.innerHTML=parts.join('');
+  if(skPath.length===0){
+    body.innerHTML='<div class="cards" style="margin-top:10px">'+SK.spheres.map(s=>{const ds=SK.domains.filter(d=>d[1]===s[0]);const det=ds.filter(d=>d[5].some(x=>x.length>1)).length;return `<button class="card${s[2]?' locked':''}" data-sphere="${s[0]}"><span class="n">${s[1]}</span><span class="m">${ds.length} domains · ${ds.reduce((a,d)=>a+d[5].length,0)} disciplines</span><span class="m">${det? det+' detailed':'names only'}${s[2]?' · locked':''}</span></button>`}).join('')+'</div>';
+  } else if(skPath.length===1){
+    body.innerHTML='<div class="cards" style="margin-top:10px">'+SK.domains.map((d,i)=>[d,i]).filter(([d])=>d[1]===skPath[0]).map(([d,i])=>{const det=d[5].filter(x=>x.length>1).length;return `<button class="card${det?' detail':''}${d[3]?' locked':''}" data-domain="${i}"><span class="n">${d[2]}</span><span class="m">${d[5].length} disciplines${det?' · '+det+' detailed':''}</span>${d[3]?`<span class="m">🔒 ${d[4]||'locked'}</span>`:''}</button>`}).join('')+'</div>';
+  } else if(skPath.length===2){
+    const d=SK.domains[skPath[1]];
+    body.innerHTML=(d[3]?`<p class="muted" style="margin:10px 0">Locked: ${d[4]||'needs cultivation'}</p>`:'')+'<div class="cards" style="margin-top:10px">'+d[5].map((x,i)=>`<button class="card${x.length>1?' detail':''}" data-disc="${i}"><span class="n">${x[0]}</span><span class="m">${x.length>1? x[1].length+' specialisations · '+x[2].length+' perks':'detail to come'}</span></button>`).join('')+'</div>';
+  } else {
+    const d=SK.domains[skPath[1]], x=d[5][skPath[2]];
+    if(x.length<2){ body.innerHTML=`<p style="margin-top:12px">${x[0]} is named in the catalogue. Its specialisations, perks and gates are written in a later Codex pass.</p>`; return; }
+    body.innerHTML=`<div class="grid2" style="margin-top:12px"><div class="box"><span class="eyebrow">Specialisations · unlock level</span><div class="tablewrap"><table><tbody>${x[1].map(s=>`<tr><td>${s[0]}${s[2]?' <span class="tag cin">locked</span>':''}</td><td class="r num">${s[1]}</td></tr>`).join('')}</tbody></table></div><p class="muted">Key attributes: ${(x[3]||[]).join(', ')}</p></div><div class="box"><span class="eyebrow">Perks</span><div class="tablewrap"><table><tbody>${x[2].map(p=>`<tr><td class="num mono">${p[0]}</td><td>${p[1]}</td></tr>`).join('')}</tbody></table></div></div></div>`;
+  }
+}
+$('#sk-body').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.sphere){skPath=[b.dataset.sphere];} else if(b.dataset.domain){skPath=[skPath[0],+b.dataset.domain];} else if(b.dataset.disc){skPath=[skPath[0],skPath[1],+b.dataset.disc];}
+  else if(b.dataset.go){const [di,xi]=b.dataset.go.split(',').map(Number); skPath=[SK.domains[di][1],di,xi]; $('#sk-q').value='';}
+  skRender();});
+$('#sk-crumbs').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; skPath=skPath.slice(0,+b.dataset.crumb); skRender();});
+$('#sk-q').addEventListener('input',skRender); skRender();
+
+/* ---------- relationships ---------- */
+const EVENTS=[['Worked the same field all season','+4','familiarity +20'],['Shared food in a hungry winter','+15','memory'],['Taught a skill for a month','+8','teacher bond'],['Saved their life','+60','debt of grace'],['Insulted at a festival','−12','grudge if repeated'],['Won the post they both wanted','−15','rivalry'],['Stole from their stores','−35','grudge, reputation −'],['Betrayed their master','−80','lineage-wide grudge'],['Married into their family','+10','kin'],['Apologised with gifts','+20','grudge −50%']];
+$('#evtable').innerHTML=EVENTS.map(e=>`<tr><td>${e[0]}</td><td class="r num mono">${e[1]}</td><td class="muted">${e[2]}</td></tr>`).join('');
+const KINDS={kin:['--jade','Kin'],friend:['--sky','Friend'],master:['--gold','Master → disciple'],rival:['--plum','Rival'],enemy:['--cin','Enemy']};
+const PEOPLE=['Wang Erniu','Wang Lan','Wang Xiaoyu','Wang Shu','Li Fu','Li Mei','Li Gang','Li Rou','Zhao Heng','Zhao Yun','Zhao Pei','Chen Bo','Chen Ying','Chen Ming','Sun Qi','Sun Hua','Old Feng','Liu the Smith'];
+const EDGES=[[0,1,'kin'],[0,2,'kin'],[1,2,'kin'],[0,3,'kin'],[4,5,'kin'],[4,6,'kin'],[5,7,'kin'],[8,9,'kin'],[8,10,'kin'],[11,12,'kin'],[11,13,'kin'],[14,15,'kin'],
+  [17,6,'master'],[16,2,'master'],[16,13,'master'],[0,8,'friend'],[1,5,'friend'],[2,13,'friend'],[9,12,'friend'],[3,15,'friend'],[6,10,'rival'],[2,9,'rival'],[4,11,'enemy'],[7,14,'enemy'],[10,17,'friend'],[12,16,'friend']];
+const op={}; const key=(a,b)=>a+'>'+b;
+EDGES.forEach(([a,b,k])=>{const base={kin:55,friend:50,master:45,rival:-20,enemy:-70}[k]; op[key(a,b)]=base+((a*7+b*3)%11-5); op[key(b,a)]=base+((b*5+a*2)%13-6);});
+let nodes, graphOn=false, sel=null, sel2=null, shown=new Set(Object.keys(KINDS));
+const cv=$('#rel'), cx=cv.getContext('2d');
+$('#legend').innerHTML=Object.entries(KINDS).map(([k,v])=>`<span><i style="background:var(${v[0]})"></i>${v[1]}</span>`).join('');
+$('#relfilter').innerHTML=Object.entries(KINDS).map(([k,v])=>`<button class="chip" aria-pressed="true" data-k="${k}">${v[1]}</button>`).join('');
+$('#relfilter').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; const k=b.dataset.k; shown.has(k)?shown.delete(k):shown.add(k); b.setAttribute('aria-pressed',shown.has(k)); draw();});
+function startGraph(){ if(graphOn) return; graphOn=true;
+  nodes=PEOPLE.map((n,i)=>{const a=i/PEOPLE.length*Math.PI*2; return {n,x:400+230*Math.cos(a),y:300+200*Math.sin(a),vx:0,vy:0};});
+  let it=0; const step=()=>{ for(let k=0;k<3;k++) physics(); draw(); if(++it<160) requestAnimationFrame(step); };
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){ for(let i=0;i<480;i++) physics(); draw(); } else step();
+}
+function physics(){
+  for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1;const f=4200/(d*d);a.vx-=f*dx/d;a.vy-=f*dy/d;b.vx+=f*dx/d;b.vy+=f*dy/d;}
+  EDGES.forEach(([i,j,k])=>{const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1;const L=k==='kin'?90:k==='enemy'?230:150;const f=(d-L)*0.012;a.vx+=f*dx/d;a.vy+=f*dy/d;b.vx-=f*dx/d;b.vy-=f*dy/d;});
+  nodes.forEach(n=>{n.vx+=(400-n.x)*0.002;n.vy+=(300-n.y)*0.002;n.x+=n.vx*0.5;n.y+=n.vy*0.5;n.vx*=0.6;n.vy*=0.6;n.x=Math.max(60,Math.min(740,n.x));n.y=Math.max(40,Math.min(560,n.y));});
+}
+function draw(){ if(!nodes) return; cx.clearRect(0,0,800,600);
+  EDGES.forEach(([i,j,k])=>{ if(!shown.has(k)) return; const a=nodes[i],b=nodes[j]; const hot=sel===i||sel===j;
+    cx.strokeStyle=css(KINDS[k][0]); cx.globalAlpha=sel===null||hot?0.9:0.15; cx.lineWidth=hot?3.5:2; cx.setLineDash(k==='rival'?[6,5]:[]);
+    cx.beginPath(); cx.moveTo(a.x,a.y); cx.lineTo(b.x,b.y); cx.stroke(); });
+  cx.setLineDash([]); cx.globalAlpha=1;
+  nodes.forEach((n,i)=>{ const on=i===sel||i===sel2; cx.fillStyle=on?css('--ink'):css('--panel'); cx.strokeStyle=css('--ink'); cx.lineWidth=1.5;
+    cx.beginPath(); cx.arc(n.x,n.y,on?11:8,0,7); cx.fill(); cx.stroke();
+    cx.fillStyle=css('--ink'); cx.font='500 15px "IBM Plex Sans", sans-serif'; cx.textAlign='center'; cx.fillText(n.n,n.x,n.y-15); });
+}
+cv.addEventListener('click',e=>{ if(!nodes) return; const r=cv.getBoundingClientRect(); const x=(e.clientX-r.left)*800/r.width, y=(e.clientY-r.top)*600/r.height;
+  let best=-1,bd=30; nodes.forEach((n,i)=>{const d=Math.hypot(n.x-x,n.y-y); if(d<bd){bd=d;best=i;}}); if(best<0) return;
+  if(sel===null||sel2!==null||best===sel){ sel=best; sel2=null; } else sel2=best;
+  showSel(); draw(); });
+function showSel(){
+  const ties=EDGES.filter(([a,b])=>a===sel||b===sel).map(([a,b,k])=>`${PEOPLE[a===sel?b:a]} (${KINDS[k][1].toLowerCase()}, ${op[key(sel,a===sel?b:a)]|0})`);
+  $('#sel-name').textContent=PEOPLE[sel]; $('#sel-info').textContent=ties.length? 'Ties: '+ties.join(' · ') : 'No ties yet.';
+  const p=$('#pair'); p.hidden=sel2===null; if(sel2===null) return;
+  const ab=key(sel,sel2), ba=key(sel2,sel); if(op[ab]===undefined){op[ab]=0;op[ba]=0;}
+  $('#pair-names').textContent=PEOPLE[sel]+' ↔ '+PEOPLE[sel2]; bars();
+  $('#evbtns').innerHTML=EVENTS.map((ev,i)=>`<button class="chip" data-e="${i}">${ev[0]}</button>`).join('');
+}
+function bars(){ [['#op-ab',key(sel,sel2)],['#op-ba',key(sel2,sel)]].forEach(([id,k])=>{const v=Math.max(-100,Math.min(100,op[k])); const s=$(id); s.style.left=v>=0?'50%':(50+v/2)+'%'; s.style.width=Math.abs(v)/2+'%'; s.style.background=v>=0?'var(--jade)':'var(--cin)'; s.title=v;}); }
+$('#evbtns').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; const ev=EVENTS[+b.dataset.e]; const d=parseFloat(ev[1].replace('−','-'));
+  const ab=key(sel,sel2), ba=key(sel2,sel); op[ab]=Math.max(-100,Math.min(100,op[ab]+d)); op[ba]=Math.max(-100,Math.min(100,op[ba]+d*(d<0?1.2:0.8)));
+  const verdict=v=>v<=-60?'enemy':v<0?'cold':v>=80?'could swear an oath':v>=40?'friend':'acquaintance';
+  $('#rel-log').insertAdjacentHTML('afterbegin',`<div>${ev[0]}: ${PEOPLE[sel]} ${op[ab]|0} (${verdict(op[ab])}), ${PEOPLE[sel2]} ${op[ba]|0} (${verdict(op[ba])})</div>`); bars(); });
+
+/* ---------- performance estimate ---------- */
+function pcalc(){
+  const t=+$('#p-pop').value; const pop=Math.round(20*Math.pow(5000,t/100)); const ties=+$('#p-ties').value, years=+$('#p-years').value, tick=+$('#p-tick').value, us=+$('#p-lang').value;
+  $('#o-pop').textContent=fmt(pop); $('#o-ties').textContent=ties; $('#o-years').textContent=fmt(years);
+  const bytes=pop*(256+320+ties*12+64); const mb=bytes/1048576;
+  $('#pr-mem').textContent= mb<1? (bytes/1024).toFixed(0)+' KB' : mb.toFixed(mb<10?1:0)+' MB';
+  const mm=$('#pm-mem'); mm.className='meter'+(mb>500?' bad':mb>150?' warn':''); mm.firstElementChild.style.width=Math.min(100,mb/600*100)+'%';
+  const perTick=pop*us*(1+ties/80)/1000; // ms
+  $('#pr-day').textContent=perTick<1? '<1 ms of work, spread over 10 minutes' : fmt(perTick)+' ms of work, spread over 10 minutes';
+  const ticks=years*365/tick, skipS=ticks*perTick/1000*(tick>1?1.6:1);
+  const sk=skipS<60? Math.max(1,Math.round(skipS))+' seconds' : skipS<3600? (skipS/60).toFixed(0)+' minutes' : (skipS/3600).toFixed(1)+' hours';
+  $('#pr-skip').textContent=sk;
+  const sm=$('#pm-skip'); sm.className='meter'+(skipS>3600?' bad':skipS>600?' warn':''); sm.firstElementChild.style.width=Math.min(100,skipS/7200*100)+'%';
+  $('#pr-note').textContent = skipS>3600? 'Too slow to skip comfortably. Use monthly ticks, or move the batch to C#.' : pop<2000? 'Early-game scale. Your laptop will not notice.' : 'Comfortable.';
+}
+document.querySelectorAll('#v-performance select,#v-performance input').forEach(e=>e.addEventListener('input',pcalc)); pcalc();
+
+/* ---------- shared graph engine ---------- */
+// nodes: {label, sub, x,y, fx?,fy? (pinned), r, fill, stroke, dim, dash, ring}; edges: {a,b,color,w,dash,alpha,len}
+function Graph(canvas, nodes, edges, opt={}){
+  const g=this, W=canvas.width, H=canvas.height, cx=canvas.getContext('2d');
+  g.nodes=nodes; g.edges=edges; g.sel=null;
+  nodes.forEach(n=>{ if(n.x===undefined){n.x=W/2+(Math.random()-.5)*W*.6; n.y=H/2+(Math.random()-.5)*H*.6;} n.vx=0; n.vy=0; });
+  g.step=()=>{
+    const rep=opt.repel??3200;
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1; if(d>260) continue; const f=rep/(d*d);a.vx-=f*dx/d;a.vy-=f*dy/d;b.vx+=f*dx/d;b.vy+=f*dy/d;}
+    edges.forEach(e=>{const a=nodes[e.a],b=nodes[e.b];let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1;const f=(d-(e.len||110))*(e.k??0.02);a.vx+=f*dx/d;a.vy+=f*dy/d;b.vx-=f*dx/d;b.vy-=f*dy/d;});
+    nodes.forEach(n=>{ if(n.fx!==undefined){n.x+=(n.fx-n.x)*0.3;} if(n.fy!==undefined){n.y+=(n.fy-n.y)*0.3;}
+      n.x+=n.vx*0.5; n.y+=n.vy*0.5; n.vx*=0.55; n.vy*=0.55; n.x=Math.max(50,Math.min(W-50,n.x)); n.y=Math.max(30,Math.min(H-24,n.y)); });
+  };
+  g.draw=()=>{
+    cx.clearRect(0,0,W,H); cx.lineCap='round';
+    edges.forEach(e=>{const a=nodes[e.a],b=nodes[e.b]; if(e.hidden) return; const hot=g.sel!==null&&(e.a===g.sel||e.b===g.sel);
+      cx.strokeStyle=css(e.color||'--line'); cx.globalAlpha=(g.sel===null||hot? (e.alpha??0.85):0.12); cx.lineWidth=(e.w||2)+(hot?1.5:0);
+      cx.setLineDash(e.dash||[]); cx.beginPath(); cx.moveTo(a.x,a.y);
+      if(e.curve){const mx=(a.x+b.x)/2+(b.y-a.y)*0.15,my=(a.y+b.y)/2-(b.x-a.x)*0.15; cx.quadraticCurveTo(mx,my,b.x,b.y);} else cx.lineTo(b.x,b.y); cx.stroke();});
+    cx.setLineDash([]); cx.globalAlpha=1;
+    nodes.forEach((n,i)=>{ const on=i===g.sel; cx.globalAlpha=n.dim?0.35:1;
+      if(n.ring){cx.strokeStyle=css(n.ring);cx.lineWidth=3;cx.beginPath();cx.arc(n.x,n.y,(n.r||8)+5,0,7);cx.stroke();}
+      cx.fillStyle=css(on?'--ink':(n.fill||'--panel')); cx.strokeStyle=css(n.stroke||'--ink'); cx.lineWidth=on?2.5:1.5; cx.setLineDash(n.dash?[4,3]:[]);
+      cx.beginPath(); cx.arc(n.x,n.y,n.r||8,0,7); cx.fill(); cx.stroke(); cx.setLineDash([]);
+      if(n.label){cx.fillStyle=css('--ink'); cx.font=`${n.bold?'700':'500'} ${n.fs||14}px "IBM Plex Sans", sans-serif`; cx.textAlign='center'; cx.fillText(n.label,n.x,n.y-(n.r||8)-6);
+        if(n.sub){cx.fillStyle=css('--muted'); cx.font=`400 ${(n.fs||14)-2}px "IBM Plex Mono", monospace`; cx.fillText(n.sub,n.x,n.y+(n.r||8)+15);}}
+      cx.globalAlpha=1; });
+  };
+  g.settle=(frames=140)=>{ if(matchMedia('(prefers-reduced-motion: reduce)').matches){for(let i=0;i<frames*3;i++) g.step(); g.draw(); return;}
+    let it=0; const run=()=>{ for(let k=0;k<3;k++) g.step(); g.draw(); if(++it<frames) requestAnimationFrame(run); }; run(); };
+  canvas.addEventListener('click',ev=>{const r=canvas.getBoundingClientRect(); const x=(ev.clientX-r.left)*W/r.width, y=(ev.clientY-r.top)*H/r.height;
+    let best=-1,bd=34; nodes.forEach((n,i)=>{const d=Math.hypot(n.x-x,n.y-y); if(d<bd){bd=d;best=i;}}); if(best<0) return; g.sel=best; g.draw(); opt.onSelect&&opt.onSelect(best);});
+}
+
+/* ---------- cultivation tree ---------- */
+// req: list of [label, fn(p)->bool]
+const CV=[
+ {id:'mortal',l:'Mortal',k:'trunk',row:0,col:0,d:'Where everyone starts. Skills to level 35.',req:[]},
+ {id:'body',l:'Body Tempering',k:'trunk',row:1,col:-2.2,from:['mortal'],d:'Open to anyone through hard labour and martial practice. Slow; the rootless road up.',req:[['Martial or heavy labour skill ≥ 10',p=>p.martial>=10||p.labour>=10],['Endurance ≥ 10',p=>p.end>=10]]},
+ {id:'craft',l:'Craft mastery',k:'trunk',row:1,col:2.2,from:['mortal'],d:'A lifetime of one skill. Past level 35 it needs qi from your own cultivation or a patron’s spirit resources.',req:[['Any skill ≥ 31 (Master)',p=>p.best>=31]]},
+ {id:'qc',l:'Qi Condensation',k:'trunk',row:1,col:0,from:['mortal'],d:'Sensing and storing qi. Lifespan 120.',req:[['Spirit root revealed',p=>p.root>0],['A technique, or 10% speed groping without one',p=>true]]},
+ {id:'sword',l:'Sword cultivation',k:'branch',row:2,col:-2.6,from:['qc'],d:'Qi poured through a blade. Sword intent at Foundation. The sect’s fighters.',req:[['Weapons ≥ 20',p=>p.weapons>=20],['Metal root, or Willpower ≥ 14',p=>p.el.includes('metal')||p.wil>=14]]},
+ {id:'bodyqi',l:'Body refining',k:'branch',row:2,col:-4,from:['qc','body'],d:'Both roads at once: a cultivator whose body is a treasure. Rare, slow, very hard to kill.',req:[['Body Tempering 9',p=>p.bt>=9],['Spirit root revealed',p=>p.root>0]]},
+ {id:'alch',l:'Alchemy',k:'branch',row:2,col:-0.9,from:['qc'],d:'Pills from spirit herbs. The sect’s richest hall.',req:[['Alchemy ≥ 20',p=>p.alch>=20],['Fire or Wood root',p=>p.el.includes('fire')||p.el.includes('wood')],['Intellect ≥ 12',p=>p.int>=12]]},
+ {id:'form',l:'Formations',k:'branch',row:2,col:0.6,from:['qc'],d:'Arrays that gather qi, guard gates and trap enemies. The formation master raises every disciple’s speed.',req:[['Formations ≥ 20',p=>p.form>=20],['Intellect ≥ 14',p=>p.int>=14]]},
+ {id:'tali',l:'Talismans',k:'branch',row:2,col:1.9,from:['qc'],d:'Spells fixed in paper and ink. Calligraphy matters.',req:[['Talismans ≥ 15',p=>p.tali>=15],['Calligraphy ≥ 15',p=>p.calli>=15]]},
+ {id:'beast',l:'Beast taming',k:'branch',row:2,col:3.2,from:['qc'],d:'Bonds with spirit beasts from the dark forest.',req:[['Beast lore ≥ 15',p=>p.beast>=15],['Trait: Animal friend',p=>p.traits.includes('animal')]]},
+ {id:'fe',l:'Foundation',k:'trunk',row:3,col:0,from:['qc'],d:'A real breakthrough (30% base). Lifespan 250. The founding realm of a sect.',req:[['Qi Condensation 9',p=>p.layer>=9],['Foundation pill, or an insight',p=>p.pill||p.insight]]},
+ {id:'perfect',l:'Perfect foundation',k:'branch',row:4,col:-1.2,from:['fe'],d:'Breaking through with no flaw. Core Formation becomes far likelier. Legends start here.',req:[['Heavenly or Superior root',p=>p.root>=4],['No heart demons',p=>p.grudge<20],['Comprehension ≥ 1.5',p=>p.comp>=1.5]]},
+ {id:'flawed',l:'Flawed foundation',k:'branch',row:4,col:1.2,from:['fe'],d:'The usual result: a cracked foundation. Core Formation chance halves unless repaired.',req:[['Broke through without a perfect foundation',p=>true]]},
+ {id:'swordintent',l:'Sword intent',k:'branch',row:4,col:-3,from:['sword','fe'],d:'The sword becomes a will. Duels are decided before they start.',req:[['Sword cultivation',p=>p.weapons>=20],['Foundation',p=>p.realm>=3],['An insight in battle',p=>p.insight]]},
+ {id:'founder',l:'Technique creation',k:'branch',row:4,col:3,from:['fe'],d:'Writing a new technique in an insight. How a sect gets its own lineage art.',req:[['Foundation',p=>p.realm>=3],['Comprehension ≥ 1.6',p=>p.comp>=1.6],['Letters ≥ 20',p=>p.letters>=20]]},
+ {id:'cf',l:'Core Formation',k:'trunk',row:5,col:0,from:['fe','perfect','flawed'],d:'12% base. Lifespan 500. Core grade 1–9 decides the future.',req:[['Late Foundation',p=>p.realm>=3&&p.layer>=12],['A core-forming resource',p=>p.pill]]},
+ {id:'demon',l:'Demonic arts',k:'dark',row:3,col:-4.3,from:['qc'],d:'Fast power through blood, grudges and stolen qi. Speed ×2, but every heart demon grows. The road to schism and enemy sects.',req:[['Grudge intensity ≥ 70',p=>p.grudge>=70],['Found a forbidden manual',p=>p.forbidden]]},
+ {id:'ns',l:'Nascent Soul',k:'trunk',row:6,col:0,from:['cf'],d:'5%. Beyond this valley for now.',req:[['Core Formation peak',p=>false]]}];
+const PERSONAS=[
+ ['Wang Erniu · rootless farmer',{root:0,el:[],martial:4,labour:22,end:14,best:22,weapons:3,bt:0,alch:0,int:12,form:0,tali:0,calli:0,beast:2,traits:[],layer:0,realm:0,pill:false,insight:false,grudge:5,comp:0.9,wil:9,letters:4,forbidden:false}],
+ ['Li Xiaolan · fire-root herbalist',{root:3,el:['fire','wood','earth'],martial:2,labour:6,end:9,best:24,weapons:0,bt:0,alch:19,int:14,form:4,tali:6,calli:12,beast:0,traits:[],layer:6,realm:2,pill:false,insight:true,grudge:10,comp:1.4,wil:11,letters:16,forbidden:false}],
+ ['Zhao Heng · grudge-laden swordsman',{root:2,el:['metal','water','fire','earth'],martial:26,labour:12,end:13,best:26,weapons:24,bt:6,alch:0,int:9,form:0,tali:0,calli:0,beast:6,traits:[],layer:9,realm:2,pill:true,insight:false,grudge:82,comp:1.0,wil:15,letters:3,forbidden:true}],
+ ['Han Mei · heavenly water root',{root:5,el:['water'],martial:10,labour:4,end:11,best:28,weapons:12,bt:2,alch:8,int:16,form:21,tali:9,calli:18,beast:15,traits:['animal'],layer:13,realm:3,pill:true,insight:true,grudge:0,comp:1.8,wil:16,letters:24,forbidden:false}]];
+let cvG=null, cvP=0;
+function cvShow(i){const n=CV[i],p=PERSONAS[cvP][1];
+  $('#cv-kind').textContent=n.k==='trunk'?'Realm':n.k==='dark'?'Dark branch':'Branch'; $('#cv-name').textContent=n.l; $('#cv-desc').textContent=n.d;
+  $('#cv-reqs').innerHTML=n.req.length?'<ul class="clean">'+n.req.map(r=>`<li>${r[1](p)?'<span class="tag">met</span>':'<span class="tag cin">not yet</span>'} ${r[0]}</li>`).join('')+'</ul>':'<p class="muted">No conditions.</p>';}
+function cvState(n,p){ const ok=n.req.filter(r=>r[1](p)).length; return ok===n.req.length?'open':ok===n.req.length-1?'near':'closed'; }
+function startCult(){
+  if(!cvG){
+    const nodes=CV.map(n=>({label:n.l,r:n.k==='trunk'?13:9,bold:n.k==='trunk',fx:450+n.col*95,fy:50+n.row*92,x:450+n.col*95,y:50+n.row*92}));
+    const edges=[]; CV.forEach((n,i)=>(n.from||[]).forEach(f=>edges.push({a:CV.findIndex(m=>m.id===f),b:i,w:n.k==='trunk'?4:2,len:90,k:0.001})));
+    cvG=new Graph($('#cvg'),nodes,edges,{repel:600,onSelect:i=>cvShow(i)});
+    $('#cv-persona').innerHTML=PERSONAS.map((p,i)=>`<button class="chip" data-p="${i}" aria-pressed="${i===0}">${p[0]}</button>`).join('');
+    $('#cv-persona').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; cvP=+b.dataset.p; document.querySelectorAll('#cv-persona button').forEach(x=>x.setAttribute('aria-pressed',x===b)); cvPaint(); if(cvG.sel!==null) cvShow(cvG.sel); });
+  }
+  cvPaint(); cvG.settle(30);
+}
+function cvPaint(){ const p=PERSONAS[cvP][1];
+  CV.forEach((n,i)=>{const s=cvState(n,p), nd=cvG.nodes[i]; nd.dim=s==='closed'; nd.dash=s==='near';
+    nd.fill=s==='open'?(n.k==='dark'?'--cin-soft':'--jade-soft'):s==='near'?'--gold-soft':'--panel'; nd.stroke=n.k==='dark'?'--cin':s==='open'?'--jade':s==='near'?'--gold':'--muted';});
+  cvG.edges.forEach(e=>{const s=cvState(CV[e.b],p); e.color=CV[e.b].k==='dark'?'--cin':s==='open'?'--jade':s==='near'?'--gold':'--line'; e.dash=s==='near'?[6,5]:[]; e.alpha=s==='closed'?0.35:0.9;});
+  cvG.draw(); }
+
+/* ---------- skill graph ---------- */
+let sgG=null;
+const DETAILED=SK.domains.map((d,i)=>[d,i]).filter(([d])=>d[5].some(x=>x.length>1));
+function startSkillGraph(){
+  if(!$('#sg-dom').options.length){ $('#sg-dom').innerHTML=DETAILED.map(([d,i])=>`<option value="${i}">${d[2]}</option>`).join('');
+    $('#sg-dom').addEventListener('change',buildSkillGraph); $('#sg-lv').addEventListener('input',paintSkillGraph); }
+  if(!sgG) buildSkillGraph();
+}
+let sgMeta=[];
+function buildSkillGraph(){
+  const d=SK.domains[+$('#sg-dom').value]; const nodes=[], edges=[]; sgMeta=[];
+  nodes.push({label:d[2],r:16,bold:true,fs:16,fx:450,fy:350}); sgMeta.push({t:'domain',d});
+  const discs=d[5]; const N=discs.length;
+  discs.forEach((x,i)=>{const a=i/N*Math.PI*2-Math.PI/2; const di=nodes.length;
+    nodes.push({label:x[0],r:9,fs:12,x:450+180*Math.cos(a),y:350+180*Math.sin(a),fx:450+185*Math.cos(a),fy:350+185*Math.sin(a)}); sgMeta.push({t:'disc',x});
+    edges.push({a:0,b:di,w:2.5,len:180,k:0.002});
+    (x[1]||[]).forEach((s,j,arr)=>{const off=(j-(arr.length-1)/2)*0.075; const aa=a+off; const si=nodes.length;
+      nodes.push({label:'',r:5,x:450+300*Math.cos(aa),y:350+300*Math.sin(aa),fx:450+(285+ (j%2)*28)*Math.cos(aa),fy:350+(285+(j%2)*28)*Math.sin(aa)}); sgMeta.push({t:'spec',s,x,di});
+      edges.push({a:di,b:si,w:1.5,len:110,k:0.002});});
+  });
+  // spillover between neighbouring disciplines (related links are listed per discipline in the game data)
+  discs.forEach((x,i)=>{ if(i%3===0){const j=(i+4)%N; edges.push({a:1+discIndex(discs,i),b:1+discIndex(discs,j),w:1,dash:[2,4],alpha:0.5,curve:true,len:300,k:0});}});
+  sgG=new Graph($('#skg'),nodes,edges,{repel:500,onSelect:sgSelect});
+  paintSkillGraph(); sgG.settle(40);
+}
+function discIndex(discs,i){ let n=0; for(let k=0;k<i;k++) n+=1+((discs[k][1]||[]).length); return n; }
+function paintSkillGraph(){ if(!sgG) return; const lv=+$('#sg-lv').value; const tier=lv===0?'Untrained':TIERS[Math.min(9,Math.floor((lv-1)/5))][0];
+  $('#sg-lvo').textContent=lv+' · '+tier;
+  sgMeta.forEach((m,i)=>{const n=sgG.nodes[i];
+    if(m.t==='disc'){ const det=m.x.length>1; n.fill=lv>0?(lv>35?'--gold-soft':'--jade-soft'):'--panel'; n.stroke=det?'--jade':'--muted'; n.dim=!det&&lv===0;
+      const perks=det?m.x[2].filter(p=>p[0]<=lv).length:0; n.ring=perks>=5?'--gold':perks>0?'--jade':null; n.label=m.x[0].length>18?m.x[0].slice(0,17)+'…':m.x[0]; }
+    if(m.t==='spec'){ const open=!m.s[2]&&lv>=m.s[1]; n.fill=m.s[2]?'--cin-soft':open?'--jade':'--panel'; n.stroke=m.s[2]?'--cin':open?'--jade':'--muted'; n.dim=!open&&!m.s[2]; n.dash=m.s[2]; n.label=(sgG.sel===i||sgG.sel===m.di)?m.s[0]:''; }});
+  sgG.edges.forEach(e=>{const m=sgMeta[e.b]; if(m&&m.t==='spec'){const open=!m.s[2]&&lv>=m.s[1]; e.color=open?'--jade':'--line';}});
+  sgG.draw(); }
+function sgSelect(i){ const m=sgMeta[i]; const lv=+$('#sg-lv').value;
+  if(m.t==='domain'){$('#sg-kind').textContent='Domain'; $('#sg-name').textContent=m.d[2]; $('#sg-info').innerHTML=`${m.d[5].length} disciplines. ${m.d[5].filter(x=>x.length>1).length} of them detailed so far.`;}
+  else if(m.t==='disc'){ const x=m.x; $('#sg-kind').textContent='Discipline'; $('#sg-name').textContent=x[0];
+    $('#sg-info').innerHTML= x.length<2? 'Named; detail comes in a later pass.' : `<p>Key attributes: ${(x[3]||[]).join(', ')}</p><span class="eyebrow">Specialisations</span><ul class="clean">${x[1].map(s=>`<li>${s[2]?'<span class="tag cin">locked</span>':lv>=s[1]?'<span class="tag">open</span>':'<span class="tag gold">at '+s[1]+'</span>'} ${s[0]}</li>`).join('')}</ul><span class="eyebrow">Perks</span><ul class="clean">${x[2].map(p=>`<li>${p[0]<=lv?'<span class="tag">has</span>':'<span class="tag gold">'+p[0]+'</span>'} ${p[1]}</li>`).join('')}</ul>`; }
+  else { $('#sg-kind').textContent='Specialisation'; $('#sg-name').textContent=m.s[0]; $('#sg-info').innerHTML= m.s[2]? 'Locked behind cultivation. It needs a spirit root or sect teaching.' : `Unlocks when ${m.x[0]} reaches level ${m.s[1]}. ${lv>=m.s[1]?'Open at the current competency.':'Not yet open.'}`; }
+  paintSkillGraph(); }
+
+/* ---------- family + lineage ---------- */
+// [name, gen, sex, father, mother, spouse, master, note]
+const FAM=[
+ ['Wang Erniu',0,'m',null,null,'Wang Lan',null,'farmer, d. Year 58'],
+ ['Wang Lan',0,'f',null,null,'Wang Erniu',null,'weaver'],
+ ['Han Bao',0,'m',null,null,'Han Su',null,'smith'],
+ ['Han Su',0,'f',null,null,'Han Bao',null,'cook'],
+ ['Wang Shu',1,'m','Wang Erniu','Wang Lan','Han Yue',null,'farmer · headman'],
+ ['Wang Xiaoyu',1,'f','Wang Erniu','Wang Lan',null,'Lu Wen','first awakened · QC 7'],
+ ['Han Yue',1,'f','Han Bao','Han Su','Wang Shu',null,'herbalist'],
+ ['Han Gang',1,'m','Han Bao','Han Su','Zhao Pei',null,'smith'],
+ ['Lu Wen',1,'m',null,null,null,null,'wanderer · founder · Foundation'],
+ ['Zhao Pei',1,'f',null,null,'Han Gang',null,'from the city'],
+ ['Wang Ming',2,'m','Wang Shu','Han Yue',null,'Wang Xiaoyu','QC 4'],
+ ['Wang Ping',2,'f','Wang Shu','Han Yue','Han Ling',null,'farmer'],
+ ['Han Mei',2,'f','Han Gang','Zhao Pei',null,'Lu Wen','heavenly root · Foundation'],
+ ['Han Ling',2,'m','Han Gang','Zhao Pei','Wang Ping',null,'smith · master craftsman'],
+ ['Zhou Bo',2,'m',null,null,null,'Lu Wen','left the hall ✗'],
+ ['Han Xin',3,'f','Han Ling','Wang Ping',null,'Han Mei','QC 2'],
+ ['Wang Tao',3,'m',null,null,null,'Wang Ming','QC 1'],
+ ['Han Jun',3,'m','Han Ling','Wang Ping',null,null,'apprentice smith']];
+const FI=Object.fromEntries(FAM.map((f,i)=>[f[0],i]));
+const FK={parent:['--jade','Parent → child'],spouse:['--gold','Spouse'],master:['--plum','Master → disciple']};
+let fmG=null, fmShown=new Set(Object.keys(FK));
+function kinTerm(a,b){ // what b is to a
+  const P=i=>[FAM[i][3],FAM[i][4]].filter(Boolean).map(n=>FI[n]); const sp=i=>FAM[i][5]?FI[FAM[i][5]]:null;
+  const kids=i=>FAM.map((f,j)=>j).filter(j=>P(j).includes(i)); const sib=i=>{const ps=P(i); return ps.length?FAM.map((f,j)=>j).filter(j=>j!==i&&P(j).some(x=>ps.includes(x))):[];};
+  const m=FAM[b][2]==='m';
+  if(sp(a)===b) return m?'husband':'wife';
+  if(P(a).includes(b)) return m?'father':'mother';
+  if(kids(a).includes(b)) return m?'son':'daughter';
+  if(sib(a).includes(b)) return m?'brother':'sister';
+  if(P(a).some(p=>P(p).includes(b))) return m?'grandfather':'grandmother';
+  if(kids(a).some(k=>kids(k).includes(b))) return m?'grandson':'granddaughter';
+  if(P(a).some(p=>sib(p).includes(b))) return m?'uncle':'aunt';
+  if(sib(a).some(s=>kids(s).includes(b))) return m?'nephew':'niece';
+  if(P(a).some(p=>sib(p).some(s=>kids(s).includes(b)))) return 'cousin';
+  if(sp(a)!==null&&P(sp(a)).includes(b)) return m?'father-in-law':'mother-in-law';
+  if(kids(a).some(k=>sp(k)===b)) return m?'son-in-law':'daughter-in-law';
+  if(sib(a).some(s=>sp(s)===b)||(sp(a)!==null&&sib(sp(a)).includes(b))) return m?'brother-in-law':'sister-in-law';
+  return null; }
+function lineageTerm(a,b){ const M=i=>FAM[i][6]?FI[FAM[i][6]]:null; const ds=i=>FAM.map((f,j)=>j).filter(j=>M(j)===i);
+  const m=FAM[b][2]==='m';
+  if(M(a)===b) return 'master (shifu)'; if(ds(a).includes(b)) return 'disciple';
+  if(M(a)!==null&&M(a)===M(b)){ const ia=ds(M(a)).indexOf(a), ib=ds(M(a)).indexOf(b); return (ib<ia?(m?'senior martial brother':'senior martial sister'):(m?'junior martial brother':'junior martial sister')); }
+  if(M(a)!==null&&M(M(a))===b) return 'grand-master';
+  if(M(a)!==null&&M(M(a))!==null&&ds(M(M(a))).includes(b)&&b!==M(a)) return m?'martial uncle':'martial aunt';
+  if(M(a)!==null&&ds(M(a)).some(s=>ds(s).includes(b))) return 'martial nephew/niece';
+  return null; }
+function startFamily(){ if(fmG) return;
+  const counts={}; const nodes=FAM.map((f,i)=>{const g=f[1]; counts[g]=(counts[g]||0)+1; return {label:f[0],sub:f[7].split(' · ').pop(),r:f[6]||FAM.some(x=>x[6]===f[0])?10:8,fy:60+g*150,x:80+((i*137)%740),y:60+g*150,fs:13};});
+  const edges=[]; FAM.forEach((f,i)=>{ if(f[3]) edges.push({a:FI[f[3]],b:i,kind:'parent',color:FK.parent[0],w:2,len:150}); if(f[4]) edges.push({a:FI[f[4]],b:i,kind:'parent',color:FK.parent[0],w:2,len:150});
+    if(f[5]&&FI[f[5]]>i) edges.push({a:i,b:FI[f[5]],kind:'spouse',color:FK.spouse[0],w:4,len:70,k:0.05});
+    if(f[6]) edges.push({a:FI[f[6]],b:i,kind:'master',color:FK.master[0],w:2.5,dash:[7,5],curve:true,len:200,k:0.006}); });
+  nodes.forEach((n,i)=>{ if(FAM[i][7].includes('QC')||FAM[i][7].includes('Foundation')) n.ring='--plum'; if(FAM[i][7].includes('✗')) n.stroke='--cin'; });
+  fmG=new Graph($('#fam'),nodes,edges,{repel:2600,onSelect:i=>{ const lines=[]; FAM.forEach((f,j)=>{ if(j===i) return; const k=kinTerm(i,j), l=lineageTerm(i,j); if(k||l) lines.push(`<div><b>${f[0]}</b>: ${[k,l].filter(Boolean).join(' · ')}</div>`); });
+    $('#fam-name').textContent=FAM[i][0]; $('#fam-info').textContent=FAM[i][7]; $('#fam-terms').innerHTML=lines.join('')||'No kin or lineage ties in this sample.'; }});
+  $('#fam-legend').innerHTML=Object.values(FK).map(v=>`<span><i style="background:var(${v[0]})"></i>${v[1]}</span>`).join('')+'<span><i style="background:var(--plum);height:8px;width:8px;border-radius:50%"></i>cultivator</span>';
+  $('#fam-filter').innerHTML=Object.entries(FK).map(([k,v])=>`<button class="chip" aria-pressed="true" data-k="${k}">${v[1]}</button>`).join('');
+  $('#fam-filter').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; const k=b.dataset.k; fmShown.has(k)?fmShown.delete(k):fmShown.add(k); b.setAttribute('aria-pressed',fmShown.has(k)); fmG.edges.forEach(ed=>ed.hidden=!fmShown.has(ed.kind)); fmG.draw();});
+  fmG.settle(160); }
+
+route();
+</script>

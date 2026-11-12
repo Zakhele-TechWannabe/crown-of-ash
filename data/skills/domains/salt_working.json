@@ -5,105 +5,105 @@
       "id": "salt_working.brine_finding",
       "domain": "salt_working",
       "name": "Brine finding",
-      "description": "Brine finding applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Locate underground waters carrying dissolved salt.",
       "detailed": false
     },
     {
       "id": "salt_working.well_drawing",
       "domain": "salt_working",
       "name": "Well drawing",
-      "description": "Well drawing applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Raise brine from deep wells.",
       "detailed": false
     },
     {
       "id": "salt_working.brine_filtering",
       "domain": "salt_working",
       "name": "Brine filtering",
-      "description": "Brine filtering applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Remove sediment before concentrating salty water.",
       "detailed": false
     },
     {
       "id": "salt_working.salt_pans",
       "domain": "salt_working",
       "name": "Salt pans",
-      "description": "Salt pans applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Maintain shallow beds for salt crystallisation.",
       "detailed": false
     },
     {
       "id": "salt_working.evaporation",
       "domain": "salt_working",
       "name": "Evaporation",
-      "description": "Evaporation applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Concentrate brine through sun and airflow.",
       "detailed": false
     },
     {
       "id": "salt_working.salt_boiling",
       "domain": "salt_working",
       "name": "Salt boiling",
-      "description": "Salt boiling applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Boil concentrated brine in heated pans.",
       "detailed": false
     },
     {
       "id": "salt_working.crystal_grading",
       "domain": "salt_working",
       "name": "Crystal grading",
-      "description": "Crystal grading applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Separate salt crystals by size and cleanliness.",
       "detailed": false
     },
     {
       "id": "salt_working.salt_washing",
       "domain": "salt_working",
       "name": "Salt washing",
-      "description": "Salt washing applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Wash impurities from newly formed salt.",
       "detailed": false
     },
     {
       "id": "salt_working.fuel_tending",
       "domain": "salt_working",
       "name": "Fuel tending",
-      "description": "Fuel tending applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Keep salt furnaces supplied with dry fuel.",
       "detailed": false
     },
     {
       "id": "salt_working.pan_repair",
       "domain": "salt_working",
       "name": "Pan repair",
-      "description": "Pan repair applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Mend damaged vessels used for brine heating.",
       "detailed": false
     },
     {
       "id": "salt_working.salt_packing",
       "domain": "salt_working",
       "name": "Salt packing",
-      "description": "Salt packing applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Pack dried salt for storage and transport.",
       "detailed": false
     },
     {
       "id": "salt_working.brine_channels",
       "domain": "salt_working",
       "name": "Brine channels",
-      "description": "Brine channels applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Direct brine through controlled shallow channels.",
       "detailed": false
     },
     {
       "id": "salt_working.salt_storage",
       "domain": "salt_working",
       "name": "Salt storage",
-      "description": "Salt storage applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Protect stored salt against damp.",
       "detailed": false
     },
     {
       "id": "salt_working.salt_tax_records",
       "domain": "salt_working",
       "name": "Salt tax records",
-      "description": "Salt tax records applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Record duties levied on salt production.",
       "detailed": false
     },
     {
       "id": "salt_working.saltern_planning",
       "domain": "salt_working",
       "name": "Saltern planning",
-      "description": "Saltern planning applies salt working to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coordinate a saltworks across weather and fuel supplies.",
       "detailed": false
     }
   ]

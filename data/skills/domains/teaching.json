@@ -5,7 +5,7 @@
       "id": "teaching.teaching",
       "domain": "teaching",
       "name": "Teaching",
-      "description": "Teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Help others acquire dependable skills.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -257,7 +257,7 @@
       "id": "teaching.apprenticing",
       "domain": "teaching",
       "name": "Apprenticing",
-      "description": "Apprenticing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Guide beginners through supervised trade practice.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -528,7 +528,7 @@
       "id": "teaching.demonstration",
       "domain": "teaching",
       "name": "Demonstration",
-      "description": "Demonstration: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Show a procedure slowly enough to learn.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -799,7 +799,7 @@
       "id": "teaching.lesson_planning",
       "domain": "teaching",
       "name": "Lesson planning",
-      "description": "Lesson planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sequence exercises around a learner's progress.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1070,7 +1070,7 @@
       "id": "teaching.literacy_teaching",
       "domain": "teaching",
       "name": "Literacy teaching",
-      "description": "Literacy teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Teach the recognition and reading of words.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1341,7 +1341,7 @@
       "id": "teaching.numeracy_teaching",
       "domain": "teaching",
       "name": "Numeracy teaching",
-      "description": "Numeracy teaching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Teach practical calculation for daily life.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1612,7 +1612,7 @@
       "id": "teaching.craft_mentoring",
       "domain": "teaching",
       "name": "Craft mentoring",
-      "description": "Craft mentoring: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Help craftspeople improve through guided work.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1883,7 +1883,7 @@
       "id": "teaching.field_instruction",
       "domain": "teaching",
       "name": "Field instruction",
-      "description": "Field instruction: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Teach agricultural tasks where they are performed.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2154,7 +2154,7 @@
       "id": "teaching.story_instruction",
       "domain": "teaching",
       "name": "Story instruction",
-      "description": "Story instruction: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Use spoken narratives to convey lasting lessons.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2425,7 +2425,7 @@
       "id": "teaching.assessment",
       "domain": "teaching",
       "name": "Assessment",
-      "description": "Assessment: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Judge what a learner can do independently.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2696,7 +2696,7 @@
       "id": "teaching.patient_correction",
       "domain": "teaching",
       "name": "Patient correction",
-      "description": "Patient correction: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Correct mistakes without discouraging further effort.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2967,7 +2967,7 @@
       "id": "teaching.study_circles",
       "domain": "teaching",
       "name": "Study circles",
-      "description": "Study circles: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Organise peers learning together regularly.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3238,7 +3238,7 @@
       "id": "teaching.manual_writing",
       "domain": "teaching",
       "name": "Manual writing",
-      "description": "Manual writing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Write usable instructions for future learners.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3509,7 +3509,7 @@
       "id": "teaching.teacher_training",
       "domain": "teaching",
       "name": "Teacher training",
-      "description": "Teacher training: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare experienced practitioners to teach others.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3780,7 +3780,7 @@
       "id": "teaching.school_stewardship",
       "domain": "teaching",
       "name": "School stewardship",
-      "description": "School stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Organise sustained learning within a village school.",
       "detailed": true,
       "key_attributes": [
         "charisma",

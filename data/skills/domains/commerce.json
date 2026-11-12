@@ -5,7 +5,7 @@
       "id": "commerce.trade",
       "domain": "commerce",
       "name": "Trade",
-      "description": "Trade: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Exchange useful goods between producers and buyers.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -261,7 +261,7 @@
       "id": "commerce.haggling",
       "domain": "commerce",
       "name": "Haggling",
-      "description": "Haggling: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Negotiate prices without destroying future trust.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -532,7 +532,7 @@
       "id": "commerce.bookkeeping",
       "domain": "commerce",
       "name": "Bookkeeping",
-      "description": "Bookkeeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Record commercial income, costs and balances.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -803,7 +803,7 @@
       "id": "commerce.appraisal",
       "domain": "commerce",
       "name": "Appraisal",
-      "description": "Appraisal: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Judge the quality and value of goods.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1074,7 +1074,7 @@
       "id": "commerce.market_tending",
       "domain": "commerce",
       "name": "Market tending",
-      "description": "Market tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Organise orderly places for local exchange.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1345,7 +1345,7 @@
       "id": "commerce.caravan_provisioning",
       "domain": "commerce",
       "name": "Caravan provisioning",
-      "description": "Caravan provisioning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Equip trading parties for overland journeys.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1616,7 +1616,7 @@
       "id": "commerce.contract_drafting",
       "domain": "commerce",
       "name": "Contract drafting",
-      "description": "Contract drafting: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Write explicit terms for commercial agreements.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1887,7 +1887,7 @@
       "id": "commerce.weights_and_measures",
       "domain": "commerce",
       "name": "Weights and measures",
-      "description": "Weights and measures: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Maintain honest units of weight and volume.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2158,7 +2158,7 @@
       "id": "commerce.commodity_grading",
       "domain": "commerce",
       "name": "Commodity grading",
-      "description": "Commodity grading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Sort traded goods into consistent quality classes.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2429,7 +2429,7 @@
       "id": "commerce.credit_keeping",
       "domain": "commerce",
       "name": "Credit keeping",
-      "description": "Credit keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Track advances, loans and expected repayments.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2700,7 +2700,7 @@
       "id": "commerce.storefront_keeping",
       "domain": "commerce",
       "name": "Storefront keeping",
-      "description": "Storefront keeping: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Manage goods and customers at fixed shops.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2971,7 +2971,7 @@
       "id": "commerce.trade_route_planning",
       "domain": "commerce",
       "name": "Trade route planning",
-      "description": "Trade route planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Choose profitable routes within travel constraints.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3242,7 +3242,7 @@
       "id": "commerce.bargain_mediation",
       "domain": "commerce",
       "name": "Bargain mediation",
-      "description": "Bargain mediation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Help trading partners settle disputed terms.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3513,7 +3513,7 @@
       "id": "commerce.inventory_control",
       "domain": "commerce",
       "name": "Inventory control",
-      "description": "Inventory control: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Track stock entering and leaving stores.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3784,7 +3784,7 @@
       "id": "commerce.merchant_stewardship",
       "domain": "commerce",
       "name": "Merchant stewardship",
-      "description": "Merchant stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate a trading household's long-term affairs.",
       "detailed": true,
       "key_attributes": [
         "charisma",

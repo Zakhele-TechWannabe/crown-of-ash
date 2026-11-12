@@ -3,7 +3,7 @@
     "id": "grain_farming",
     "sphere": "land",
     "name": "Grain farming",
-    "description": "Grain farming sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Raising staple cereals from flooded paddies and dry terraces.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -15,7 +15,7 @@
     "id": "gardens",
     "sphere": "land",
     "name": "Gardens",
-    "description": "Gardens sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Cultivating vegetables, culinary herbs and small intensively tended plots.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -27,7 +27,7 @@
     "id": "orchards",
     "sphere": "land",
     "name": "Orchards",
-    "description": "Orchards sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Tending long-lived fruit trees, grafted varieties and pollinating hives.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -39,7 +39,7 @@
     "id": "husbandry",
     "sphere": "land",
     "name": "Husbandry",
-    "description": "Husbandry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Keeping domestic animals healthy enough to supply meat, eggs and labour.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -51,7 +51,7 @@
     "id": "irrigation",
     "sphere": "land",
     "name": "Irrigation",
-    "description": "Irrigation sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Moving scarce water between springs, reservoirs and cultivated fields.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -63,7 +63,7 @@
     "id": "forestry_and_woodcutting",
     "sphere": "land",
     "name": "Forestry and woodcutting",
-    "description": "Forestry and woodcutting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Harvesting timber and fuel while preserving productive woodland.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -75,7 +75,7 @@
     "id": "soil_stewardship",
     "sphere": "land",
     "name": "Soil stewardship",
-    "description": "Soil stewardship sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Maintaining fertile ground through rotation, organic matter and erosion control.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -87,7 +87,7 @@
     "id": "sericulture",
     "sphere": "land",
     "name": "Sericulture",
-    "description": "Sericulture sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Raising silkworms and extracting usable silk from their cocoons.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -99,7 +99,7 @@
     "id": "tea_growing",
     "sphere": "land",
     "name": "Tea growing",
-    "description": "Tea growing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Growing hillside tea and processing leaves into distinct drinks.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -111,7 +111,7 @@
     "id": "estate_management",
     "sphere": "land",
     "name": "Estate management",
-    "description": "Estate management sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Coordinating farmland, tenants, stores and obligations across large holdings.",
     "key_attributes": [
       "endurance",
       "intellect"
@@ -123,7 +123,7 @@
     "id": "game_and_hunting",
     "sphere": "wilds",
     "name": "Game and hunting",
-    "description": "Game and hunting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Tracking and taking wild game without exhausting mountain hunting grounds.",
     "key_attributes": [
       "perception",
       "agility"
@@ -135,7 +135,7 @@
     "id": "waters_and_fishing",
     "sphere": "wilds",
     "name": "Waters and fishing",
-    "description": "Waters and fishing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Harvesting fish and managing productive ponds, rivers and reed margins.",
     "key_attributes": [
       "perception",
       "agility"
@@ -147,7 +147,7 @@
     "id": "wild_harvest",
     "sphere": "wilds",
     "name": "Wild harvest",
-    "description": "Wild harvest sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Gathering usable forest foods and herbs while leaving sources to regenerate.",
     "key_attributes": [
       "perception",
       "agility"
@@ -159,7 +159,7 @@
     "id": "beast_lore",
     "sphere": "wilds",
     "name": "Beast lore",
-    "description": "Beast lore sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Understanding wild animals, their habitats and signs of spiritual change.",
     "key_attributes": [
       "perception",
       "agility"
@@ -171,7 +171,7 @@
     "id": "survival",
     "sphere": "wilds",
     "name": "Survival",
-    "description": "Survival sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Staying alive and finding a way home in hostile wilderness.",
     "key_attributes": [
       "perception",
       "agility"
@@ -183,7 +183,7 @@
     "id": "mountain_travel",
     "sphere": "wilds",
     "name": "Mountain travel",
-    "description": "Mountain travel sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Moving people and loads through steep, unstable and exposed country.",
     "key_attributes": [
       "perception",
       "agility"
@@ -195,7 +195,7 @@
     "id": "river_travel",
     "sphere": "wilds",
     "name": "River travel",
-    "description": "River travel sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Navigating boats, ferries and cargo along inland waterways.",
     "key_attributes": [
       "perception",
       "agility"
@@ -207,7 +207,7 @@
     "id": "weather_lore",
     "sphere": "wilds",
     "name": "Weather lore",
-    "description": "Weather lore sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Reading local skies and seasonal records to anticipate dangerous weather.",
     "key_attributes": [
       "perception",
       "agility"
@@ -219,7 +219,7 @@
     "id": "wilderness_medicine",
     "sphere": "wilds",
     "name": "Wilderness medicine",
-    "description": "Wilderness medicine sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Treating injuries and illness far from a settled dispensary.",
     "key_attributes": [
       "perception",
       "agility"
@@ -231,7 +231,7 @@
     "id": "frontier_scouting",
     "sphere": "wilds",
     "name": "Frontier scouting",
-    "description": "Frontier scouting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Gathering useful intelligence beyond settled roads without drawing attention.",
     "key_attributes": [
       "perception",
       "agility"
@@ -243,7 +243,7 @@
     "id": "stone_and_quarry",
     "sphere": "earth_and_metal",
     "name": "Stone and quarry",
-    "description": "Stone and quarry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Extracting workable stone and preparing blocks, slabs and carved pieces.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -255,7 +255,7 @@
     "id": "mines_and_ores",
     "sphere": "earth_and_metal",
     "name": "Mines and ores",
-    "description": "Mines and ores sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Finding mineral deposits and extracting ore through maintained underground workings.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -267,7 +267,7 @@
     "id": "clay_and_kilns",
     "sphere": "earth_and_metal",
     "name": "Clay and kilns",
-    "description": "Clay and kilns sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Shaping earth into durable pottery, tiles, bricks and heat-resistant wares.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -279,7 +279,7 @@
     "id": "smelting",
     "sphere": "earth_and_metal",
     "name": "Smelting",
-    "description": "Smelting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Separating metals from ore and judging furnace heat, slag and alloys.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -291,7 +291,7 @@
     "id": "smithing_and_metalwork",
     "sphere": "earth_and_metal",
     "name": "Smithing and metalwork",
-    "description": "Smithing and metalwork sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Forging iron tools, weapons, fittings and repairs at a village hearth.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -303,7 +303,7 @@
     "id": "salt_working",
     "sphere": "earth_and_metal",
     "name": "Salt working",
-    "description": "Salt working sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Extracting and distributing salt from brine wells and evaporation pans.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -315,7 +315,7 @@
     "id": "gem_cutting",
     "sphere": "earth_and_metal",
     "name": "Gem cutting",
-    "description": "Gem cutting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Revealing colour and form in jade, crystals and decorative stones.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -327,7 +327,7 @@
     "id": "coal_and_charcoal",
     "sphere": "earth_and_metal",
     "name": "Coal and charcoal",
-    "description": "Coal and charcoal sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Preparing dependable furnace fuels and controlling dangerous burns.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -339,7 +339,7 @@
     "id": "metal_casting",
     "sphere": "earth_and_metal",
     "name": "Metal casting",
-    "description": "Metal casting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Pouring molten alloys into prepared moulds for tools, bells and vessels.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -351,7 +351,7 @@
     "id": "surveying",
     "sphere": "earth_and_metal",
     "name": "Surveying",
-    "description": "Surveying sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Measuring land, gradients and boundaries for construction and ownership.",
     "key_attributes": [
       "strength",
       "endurance"
@@ -363,7 +363,7 @@
     "id": "woodworking",
     "sphere": "craft",
     "name": "Woodworking",
-    "description": "Woodworking sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Turning timber and bamboo into buildings, vehicles, furniture and utensils.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -375,7 +375,7 @@
     "id": "cloth_and_thread",
     "sphere": "craft",
     "name": "Cloth and thread",
-    "description": "Cloth and thread sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Converting plant and animal fibres into thread, fabric and clothing.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -387,7 +387,7 @@
     "id": "hides_and_leather",
     "sphere": "craft",
     "name": "Hides and leather",
-    "description": "Hides and leather sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Preserving animal skins and working leather into durable fitted goods.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -399,7 +399,7 @@
     "id": "paper_and_ink",
     "sphere": "craft",
     "name": "Paper and ink",
-    "description": "Paper and ink sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Making writing surfaces, carbon inks and bound records that endure.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -411,7 +411,7 @@
     "id": "lacquer",
     "sphere": "craft",
     "name": "Lacquer",
-    "description": "Lacquer sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Building protective and decorative resin coatings through patient layered work.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -423,7 +423,7 @@
     "id": "basketry",
     "sphere": "craft",
     "name": "Basketry",
-    "description": "Basketry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Weaving reeds, willow and bamboo into light containers and carrying gear.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -435,7 +435,7 @@
     "id": "jewellery",
     "sphere": "craft",
     "name": "Jewellery",
-    "description": "Jewellery sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Working small precious materials into ornaments, clasps and personal tokens.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -447,7 +447,7 @@
     "id": "glass_working",
     "sphere": "craft",
     "name": "Glass working",
-    "description": "Glass working sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Melting mineral mixtures into vessels, beads, panes and optical pieces.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -459,7 +459,7 @@
     "id": "instrument_making",
     "sphere": "craft",
     "name": "Instrument making",
-    "description": "Instrument making sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Building tuned musical instruments from wood, strings, reeds, hide and metal.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -471,7 +471,7 @@
     "id": "mechanisms",
     "sphere": "craft",
     "name": "Mechanisms",
-    "description": "Mechanisms sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Making small moving devices that transmit, regulate or measure motion.",
     "key_attributes": [
       "dexterity",
       "perception"
@@ -483,7 +483,7 @@
     "id": "kitchen",
     "sphere": "household",
     "name": "Kitchen",
-    "description": "Kitchen sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Turning stored staples and fresh produce into nourishing meals and preserves.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -495,7 +495,7 @@
     "id": "brewing",
     "sphere": "household",
     "name": "Brewing",
-    "description": "Brewing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Managing fermentation and steeping to make drinks, vinegar and useful by-products.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -507,7 +507,7 @@
     "id": "healing",
     "sphere": "household",
     "name": "Healing",
-    "description": "Healing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Practising village medicine through observation, remedies, nursing and careful hands.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -519,7 +519,7 @@
     "id": "housekeeping",
     "sphere": "household",
     "name": "Housekeeping",
-    "description": "Housekeeping sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Keeping shared homes clean, supplied, repaired and ready for daily life.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -531,7 +531,7 @@
     "id": "child_rearing",
     "sphere": "household",
     "name": "Child rearing",
-    "description": "Child rearing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Helping children survive, learn useful habits and enter adult village life.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -543,7 +543,7 @@
     "id": "elder_care",
     "sphere": "household",
     "name": "Elder care",
-    "description": "Elder care sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Supporting ageing villagers with dignity, mobility, food and companionship.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -555,7 +555,7 @@
     "id": "bathing_and_sanitation",
     "sphere": "household",
     "name": "Bathing and sanitation",
-    "description": "Bathing and sanitation sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Protecting settlement health through clean water, washing and controlled waste.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -567,7 +567,7 @@
     "id": "hospitality",
     "sphere": "household",
     "name": "Hospitality",
-    "description": "Hospitality sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Welcoming travellers and managing inns, meals and temporary lodging.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -579,7 +579,7 @@
     "id": "household_accounts",
     "sphere": "household",
     "name": "Household accounts",
-    "description": "Household accounts sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Recording family resources, purchases, debts and long-term obligations.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -591,7 +591,7 @@
     "id": "funerary_care",
     "sphere": "household",
     "name": "Funerary care",
-    "description": "Funerary care sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Maintaining ancestral remembrance and, when enabled, caring for the dead.",
     "key_attributes": [
       "dexterity",
       "intellect"
@@ -603,7 +603,7 @@
     "id": "masonry",
     "sphere": "building_and_works",
     "name": "Masonry",
-    "description": "Masonry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Building lasting walls, arches and foundations from fitted stone and brick.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -615,7 +615,7 @@
     "id": "roads_and_bridges",
     "sphere": "building_and_works",
     "name": "Roads and bridges",
-    "description": "Roads and bridges sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Creating reliable routes across wet ground, steep slopes and waterways.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -627,7 +627,7 @@
     "id": "water_works",
     "sphere": "building_and_works",
     "name": "Water works",
-    "description": "Water works sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Constructing wells, reservoirs and powered water systems for settlements.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -639,7 +639,7 @@
     "id": "shipbuilding",
     "sphere": "building_and_works",
     "name": "Shipbuilding",
-    "description": "Shipbuilding sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Building and repairing wooden vessels, sails and rigging for inland navigation.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -651,7 +651,7 @@
     "id": "architecture",
     "sphere": "building_and_works",
     "name": "Architecture",
-    "description": "Architecture sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Planning habitable buildings whose layouts, proportions and structures suit their setting.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -663,7 +663,7 @@
     "id": "roofing",
     "sphere": "building_and_works",
     "name": "Roofing",
-    "description": "Roofing sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Keeping buildings dry through sound roof frames, coverings and drainage.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -675,7 +675,7 @@
     "id": "earthworks",
     "sphere": "building_and_works",
     "name": "Earthworks",
-    "description": "Earthworks sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Shaping soil into banks, terraces, foundations and water-retaining structures.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -687,7 +687,7 @@
     "id": "fortification",
     "sphere": "building_and_works",
     "name": "Fortification",
-    "description": "Fortification sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Protecting settlements with defensible layouts, watch structures and sheltered stores.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -699,7 +699,7 @@
     "id": "millwrighting",
     "sphere": "building_and_works",
     "name": "Millwrighting",
-    "description": "Millwrighting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Building and maintaining mechanisms that turn water or wind into useful work.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -711,7 +711,7 @@
     "id": "public_maintenance",
     "sphere": "building_and_works",
     "name": "Public maintenance",
-    "description": "Public maintenance sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Keeping communal roads, water points, lights and buildings safe and usable.",
     "key_attributes": [
       "strength",
       "intellect"
@@ -723,7 +723,7 @@
     "id": "teaching",
     "sphere": "society",
     "name": "Teaching",
-    "description": "Teaching sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Passing practical and scholarly knowledge through demonstration, practice and patient correction.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -735,7 +735,7 @@
     "id": "leadership",
     "sphere": "society",
     "name": "Leadership",
-    "description": "Leadership sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Earning cooperation and coordinating village work, decisions and succession.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -747,7 +747,7 @@
     "id": "commerce",
     "sphere": "society",
     "name": "Commerce",
-    "description": "Commerce sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Moving goods through fair measures, negotiated prices and reliable accounts.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -759,7 +759,7 @@
     "id": "law",
     "sphere": "society",
     "name": "Law",
-    "description": "Law sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Interpreting local rules and settling disputes through records, testimony and judgement.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -771,7 +771,7 @@
     "id": "diplomacy",
     "sphere": "society",
     "name": "Diplomacy",
-    "description": "Diplomacy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Managing relations between households and factions through envoys, gifts and agreements.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -783,7 +783,7 @@
     "id": "espionage",
     "sphere": "society",
     "name": "Espionage",
-    "description": "Espionage sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Collecting guarded information through concealed observation, sources and coded reports.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -795,7 +795,7 @@
     "id": "ritual_and_ceremony",
     "sphere": "society",
     "name": "Ritual and ceremony",
-    "description": "Ritual and ceremony sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Organising rites that express family memory, public obligation and faction identity.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -807,7 +807,7 @@
     "id": "administration",
     "sphere": "society",
     "name": "Administration",
-    "description": "Administration sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Keeping the registries, budgets, orders and archives that let institutions function.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -819,7 +819,7 @@
     "id": "mediation",
     "sphere": "society",
     "name": "Mediation",
-    "description": "Mediation sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Reducing conflict by clarifying grievances and arranging acceptable restitution.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -831,7 +831,7 @@
     "id": "logistics",
     "sphere": "society",
     "name": "Logistics",
-    "description": "Logistics sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Getting supplies and people to the places that need them on time.",
     "key_attributes": [
       "charisma",
       "intellect"
@@ -843,7 +843,7 @@
     "id": "letters",
     "sphere": "arts_and_learning",
     "name": "Letters",
-    "description": "Letters sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Reading, writing and preserving the texts through which knowledge survives.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -855,7 +855,7 @@
     "id": "calligraphy",
     "sphere": "arts_and_learning",
     "name": "Calligraphy",
-    "description": "Calligraphy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Giving written characters clarity, rhythm and expressive form through brush control.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -867,7 +867,7 @@
     "id": "music",
     "sphere": "arts_and_learning",
     "name": "Music",
-    "description": "Music sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Performing and composing organised sound for work, leisure, rites and courts.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -879,7 +879,7 @@
     "id": "painting",
     "sphere": "arts_and_learning",
     "name": "Painting",
-    "description": "Painting sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Depicting people, landscapes and living things with ink, colour and composition.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -891,7 +891,7 @@
     "id": "astronomy",
     "sphere": "arts_and_learning",
     "name": "Astronomy",
-    "description": "Astronomy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Observing celestial cycles to keep calendars, charts and reliable time.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -903,7 +903,7 @@
     "id": "geomancy",
     "sphere": "arts_and_learning",
     "name": "Geomancy",
-    "description": "Geomancy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Reading terrain and orientation when siting homes, gardens and spiritual works.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -915,7 +915,7 @@
     "id": "history",
     "sphere": "arts_and_learning",
     "name": "History",
-    "description": "History sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Reconstructing past lives and institutions from testimony, documents and surviving objects.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -927,7 +927,7 @@
     "id": "mathematics",
     "sphere": "arts_and_learning",
     "name": "Mathematics",
-    "description": "Mathematics sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Solving practical and abstract problems with quantities, shapes and demonstrable reasoning.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -939,7 +939,7 @@
     "id": "poetry",
     "sphere": "arts_and_learning",
     "name": "Poetry",
-    "description": "Poetry sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Shaping language into verse that carries place, memory, feeling and argument.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -951,7 +951,7 @@
     "id": "natural_philosophy",
     "sphere": "arts_and_learning",
     "name": "Natural philosophy",
-    "description": "Natural philosophy sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Investigating plants, animals and physical effects through observation and repeatable trials.",
     "key_attributes": [
       "intellect",
       "willpower"
@@ -963,7 +963,7 @@
     "id": "unarmed_arts",
     "sphere": "martial",
     "name": "Unarmed arts",
-    "description": "Unarmed arts sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Training balance, defence and controlled striking without weapons.",
     "key_attributes": [
       "agility",
       "strength"
@@ -975,7 +975,7 @@
     "id": "weapons",
     "sphere": "martial",
     "name": "Weapons",
-    "description": "Weapons sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Handling and maintaining melee arms through controlled practice and measured distance.",
     "key_attributes": [
       "agility",
       "strength"
@@ -987,7 +987,7 @@
     "id": "archery",
     "sphere": "martial",
     "name": "Archery",
-    "description": "Archery sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Shooting accurately through consistent posture, release and judgement of range.",
     "key_attributes": [
       "agility",
       "strength"
@@ -999,7 +999,7 @@
     "id": "riding",
     "sphere": "martial",
     "name": "Riding",
-    "description": "Riding sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Caring for mounts and travelling or practising martial skills from the saddle.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1011,7 +1011,7 @@
     "id": "tactics",
     "sphere": "martial",
     "name": "Tactics",
-    "description": "Tactics sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Planning contests of force around terrain, information, timing and supply.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1023,7 +1023,7 @@
     "id": "body_tempering",
     "sphere": "martial",
     "name": "Body tempering",
-    "description": "Body tempering sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Slowly strengthening mortal bodies through disciplined exertion, recovery and medicinal support.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1035,7 +1035,7 @@
     "id": "guard_duty",
     "sphere": "martial",
     "name": "Guard duty",
-    "description": "Guard duty sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Watching approaches, maintaining order and responding to settlement emergencies.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1047,7 +1047,7 @@
     "id": "wrestling",
     "sphere": "martial",
     "name": "Wrestling",
-    "description": "Wrestling sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Contesting balance and control through grips, throws and safe falls.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1059,7 +1059,7 @@
     "id": "military_drill",
     "sphere": "martial",
     "name": "Military drill",
-    "description": "Military drill sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Building coordinated unit habits through repeated movement, signals and equipment routines.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1071,7 +1071,7 @@
     "id": "battlefield_medicine",
     "sphere": "martial",
     "name": "Battlefield medicine",
-    "description": "Battlefield medicine sustains the mountain settlements through patient work, local knowledge and duties owed to neighbours.",
+    "description": "Organising urgent treatment and evacuation during dangerous group conflicts.",
     "key_attributes": [
       "agility",
       "strength"
@@ -1083,120 +1083,120 @@
     "id": "qi_arts",
     "sphere": "cultivation",
     "name": "Qi arts",
-    "description": "Qi arts studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Sensing, gathering and directing spiritual energy through cultivated channels and foundations.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "alchemy",
     "sphere": "cultivation",
     "name": "Alchemy",
-    "description": "Alchemy studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Refining spiritual ingredients into pills and elixirs with controlled heat and formulae.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "artifact_refining",
     "sphere": "cultivation",
     "name": "Artifact refining",
-    "description": "Artifact refining studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Making durable objects that store, channel or respond to spiritual energy.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "formations",
     "sphere": "cultivation",
     "name": "Formations",
-    "description": "Formations studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Arranging linked anchors and inscriptions to shape qi across physical space.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "talismans",
     "sphere": "cultivation",
     "name": "Talismans",
-    "description": "Talismans studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Writing expendable spiritual scripts on prepared surfaces for specific effects.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "beast_taming",
     "sphere": "cultivation",
     "name": "Beast taming",
-    "description": "Beast taming studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Building sustained bonds with spiritual beasts through care, training and mutual trust.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "soul_arts",
     "sphere": "cultivation",
     "name": "Soul arts",
-    "description": "Soul arts studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Training perception and resilience of the spirit beyond ordinary bodily awareness.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "spiritual_botany",
     "sphere": "cultivation",
     "name": "Spiritual botany",
-    "description": "Spiritual botany studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Growing plants whose health and medicinal properties depend on spiritual conditions.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "divination",
     "sphere": "cultivation",
     "name": "Divination",
-    "description": "Divination studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Interpreting uncertain signs and spiritual patterns while respecting the cost of prediction.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   },
   {
     "id": "dao_contemplation",
     "sphere": "cultivation",
     "name": "Dao contemplation",
-    "description": "Dao contemplation studies the hidden currents of heaven and earth under sect instruction.",
+    "description": "Seeking lasting insight through disciplined reflection on nature, craft and one's conduct.",
     "key_attributes": [
       "willpower",
       "intellect"
     ],
     "locked": true,
-    "condition": "Spirit root and sect entry"
+    "condition": "Revealed spirit root; manuals or teaching deepen practice"
   }
 ]

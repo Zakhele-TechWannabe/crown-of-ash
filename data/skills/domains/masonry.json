@@ -5,105 +5,105 @@
       "id": "masonry.foundation_laying",
       "domain": "masonry",
       "name": "Foundation laying",
-      "description": "Foundation laying applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Set stable bases beneath planned structures.",
       "detailed": false
     },
     {
       "id": "masonry.mortar_mixing",
       "domain": "masonry",
       "name": "Mortar mixing",
-      "description": "Mortar mixing applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Blend binders, sand and water for masonry.",
       "detailed": false
     },
     {
       "id": "masonry.brick_laying",
       "domain": "masonry",
       "name": "Brick laying",
-      "description": "Brick laying applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Lay bricks in strong interlocking patterns.",
       "detailed": false
     },
     {
       "id": "masonry.stone_bonding",
       "domain": "masonry",
       "name": "Stone bonding",
-      "description": "Stone bonding applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Arrange stone courses to distribute loads.",
       "detailed": false
     },
     {
       "id": "masonry.arch_building",
       "domain": "masonry",
       "name": "Arch building",
-      "description": "Arch building applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build curved spans using compression.",
       "detailed": false
     },
     {
       "id": "masonry.vault_building",
       "domain": "masonry",
       "name": "Vault building",
-      "description": "Vault building applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Raise arched ceilings over enclosed spaces.",
       "detailed": false
     },
     {
       "id": "masonry.wall_raising",
       "domain": "masonry",
       "name": "Wall raising",
-      "description": "Wall raising applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build straight walls with sound bonding.",
       "detailed": false
     },
     {
       "id": "masonry.plastering",
       "domain": "masonry",
       "name": "Plastering",
-      "description": "Plastering applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Coat rough walls with smooth protective plaster.",
       "detailed": false
     },
     {
       "id": "masonry.pointing",
       "domain": "masonry",
       "name": "Pointing",
-      "description": "Pointing applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Refill exposed mortar joints against weather.",
       "detailed": false
     },
     {
       "id": "masonry.drain_channels",
       "domain": "masonry",
       "name": "Drain channels",
-      "description": "Drain channels applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Construct durable paths for controlled runoff.",
       "detailed": false
     },
     {
       "id": "masonry.retaining_walls",
       "domain": "masonry",
       "name": "Retaining walls",
-      "description": "Retaining walls applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build walls supporting higher ground behind.",
       "detailed": false
     },
     {
       "id": "masonry.scaffold_setting",
       "domain": "masonry",
       "name": "Scaffold setting",
-      "description": "Scaffold setting applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Erect temporary platforms for elevated work.",
       "detailed": false
     },
     {
       "id": "masonry.masonry_repair",
       "domain": "masonry",
       "name": "Masonry repair",
-      "description": "Masonry repair applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Restore cracked or displaced masonry.",
       "detailed": false
     },
     {
       "id": "masonry.load_reading",
       "domain": "masonry",
       "name": "Load reading",
-      "description": "Load reading applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recognise how weight travels through structures.",
       "detailed": false
     },
     {
       "id": "masonry.mason_supervision",
       "domain": "masonry",
       "name": "Mason supervision",
-      "description": "Mason supervision applies masonry to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Direct masonry crews and inspect their work.",
       "detailed": false
     }
   ]

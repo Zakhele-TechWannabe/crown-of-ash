@@ -5,105 +5,105 @@
       "id": "coal_and_charcoal.coal_finding",
       "domain": "coal_and_charcoal",
       "name": "Coal finding",
-      "description": "Coal finding applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Find workable seams of combustible rock.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.coal_grading",
       "domain": "coal_and_charcoal",
       "name": "Coal grading",
-      "description": "Coal grading applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Sort coal by heat and impurities.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.coal_washing",
       "domain": "coal_and_charcoal",
       "name": "Coal washing",
-      "description": "Coal washing applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Wash dirt and waste from coal.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.charcoal_mounds",
       "domain": "coal_and_charcoal",
       "name": "Charcoal mounds",
-      "description": "Charcoal mounds applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Build covered piles for charcoal burning.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.earth_kilns",
       "domain": "coal_and_charcoal",
       "name": "Earth kilns",
-      "description": "Earth kilns applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Operate enclosed earth-built charcoal furnaces.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.airflow_tending",
       "domain": "coal_and_charcoal",
       "name": "Airflow tending",
-      "description": "Airflow tending applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Regulate the air reaching slow-burning wood.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.wood_selection",
       "domain": "coal_and_charcoal",
       "name": "Wood selection",
-      "description": "Wood selection applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Select timber appropriate to fuel requirements.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.fuel_drying",
       "domain": "coal_and_charcoal",
       "name": "Fuel drying",
-      "description": "Fuel drying applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Dry fuel before furnace or hearth use.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.coke_burning",
       "domain": "coal_and_charcoal",
       "name": "Coke burning",
-      "description": "Coke burning applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Convert coal into cleaner furnace fuel.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.ash_sorting",
       "domain": "coal_and_charcoal",
       "name": "Ash sorting",
-      "description": "Ash sorting applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Separate useful ash from burned residues.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.fuel_hauling",
       "domain": "coal_and_charcoal",
       "name": "Fuel hauling",
-      "description": "Fuel hauling applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Move bulky fuel to places of demand.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.fire_watching",
       "domain": "coal_and_charcoal",
       "name": "Fire watching",
-      "description": "Fire watching applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Watch controlled burns for runaway fire.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.fume_safety",
       "domain": "coal_and_charcoal",
       "name": "Fume safety",
-      "description": "Fume safety applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Recognise hazardous smoke in confined spaces.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.fuel_accounting",
       "domain": "coal_and_charcoal",
       "name": "Fuel accounting",
-      "description": "Fuel accounting applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Account for fuel deliveries and consumption.",
       "detailed": false
     },
     {
       "id": "coal_and_charcoal.burn_scheduling",
       "domain": "coal_and_charcoal",
       "name": "Burn scheduling",
-      "description": "Burn scheduling applies coal and charcoal to the needs and traditions of mountain villages and their sect patrons.",
+      "description": "Schedule burns against weather and demand.",
       "detailed": false
     }
   ]

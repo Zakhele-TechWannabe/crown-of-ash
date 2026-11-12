@@ -5,7 +5,7 @@
       "id": "leadership.leadership",
       "domain": "leadership",
       "name": "Leadership",
-      "description": "Leadership: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Earn cooperation through sound practical judgement.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -259,7 +259,7 @@
       "id": "leadership.crew_leading",
       "domain": "leadership",
       "name": "Crew leading",
-      "description": "Crew leading: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Direct small teams on shared tasks.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -530,7 +530,7 @@
       "id": "leadership.work_planning",
       "domain": "leadership",
       "name": "Work planning",
-      "description": "Work planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Arrange tasks to meet realistic deadlines.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -801,7 +801,7 @@
       "id": "leadership.village_stewardship",
       "domain": "leadership",
       "name": "Village stewardship",
-      "description": "Village stewardship: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Guide decisions affecting the whole village.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1072,7 +1072,7 @@
       "id": "leadership.dispute_hearing",
       "domain": "leadership",
       "name": "Dispute hearing",
-      "description": "Dispute hearing: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Hear competing accounts before resolving disputes.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1343,7 +1343,7 @@
       "id": "leadership.emergency_coordination",
       "domain": "leadership",
       "name": "Emergency coordination",
-      "description": "Emergency coordination: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate help when ordinary routines break down.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1614,7 +1614,7 @@
       "id": "leadership.resource_allocation",
       "domain": "leadership",
       "name": "Resource allocation",
-      "description": "Resource allocation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Allocate scarce supplies among competing needs.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -1885,7 +1885,7 @@
       "id": "leadership.public_speaking",
       "domain": "leadership",
       "name": "Public speaking",
-      "description": "Public speaking: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Address a gathered crowd clearly.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2156,7 +2156,7 @@
       "id": "leadership.morale_tending",
       "domain": "leadership",
       "name": "Morale tending",
-      "description": "Morale tending: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Support shared resolve during difficult work.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2427,7 +2427,7 @@
       "id": "leadership.mentor_matching",
       "domain": "leadership",
       "name": "Mentor matching",
-      "description": "Mentor matching: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Pair learners with appropriate experienced teachers.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2698,7 +2698,7 @@
       "id": "leadership.council_practice",
       "domain": "leadership",
       "name": "Council practice",
-      "description": "Council practice: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Participate constructively in collective village decisions.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -2969,7 +2969,7 @@
       "id": "leadership.duty_rotation",
       "domain": "leadership",
       "name": "Duty rotation",
-      "description": "Duty rotation: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Share necessary burdens across available workers.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3240,7 +3240,7 @@
       "id": "leadership.festival_planning",
       "domain": "leadership",
       "name": "Festival planning",
-      "description": "Festival planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Coordinate communal celebrations and their supplies.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3511,7 +3511,7 @@
       "id": "leadership.succession_planning",
       "domain": "leadership",
       "name": "Succession planning",
-      "description": "Succession planning: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Prepare successors before leadership becomes vacant.",
       "detailed": true,
       "key_attributes": [
         "charisma",
@@ -3782,7 +3782,7 @@
       "id": "leadership.ethical_judgement",
       "domain": "leadership",
       "name": "Ethical judgement",
-      "description": "Ethical judgement: judge local conditions, practise safe methods and pass reliable results to the next household.",
+      "description": "Weigh duties and consequences before public decisions.",
       "detailed": true,
       "key_attributes": [
         "charisma",
