@@ -116,6 +116,34 @@ canvas#rel{width:100%;aspect-ratio:4/3;max-width:100%;background:var(--panel);bo
 .meter{height:12px;border-radius:6px;background:var(--line);overflow:hidden}
 .meter span{display:block;height:100%;background:var(--jade)}
 .meter.warn span{background:var(--gold)} .meter.bad span{background:var(--cin)}
+/* Body tempering */
+.bt-wrap{display:grid;grid-template-columns:minmax(0,230px) 1fr;gap:20px;align-items:start}
+@media (max-width:640px){.bt-wrap{grid-template-columns:1fr}}
+#bt-fig{width:100%;max-width:230px;justify-self:center;overflow:visible}
+#bt-fig g,#bt-fig circle.bt-l9{transition:opacity .35s}
+.bt-flesh{fill:var(--cin-soft)}
+.bt-skin{fill:none;stroke:var(--gold);stroke-width:2.5}
+.bt-bone{fill:none;stroke:var(--muted);stroke-width:3;stroke-linecap:round}
+.bt-marrow{fill:var(--gold)}
+.bt-sinew{fill:none;stroke:var(--plum);stroke-width:3.2;stroke-linecap:round}
+.bt-blood{fill:none;stroke:var(--cin);stroke-width:1.6}
+.bt-organ{fill:var(--cin);fill-opacity:.55}
+.bt-meridian{fill:none;stroke:var(--jade);stroke-width:1.8;stroke-dasharray:4 4}
+#bt-fig .bt-cur{filter:drop-shadow(0 0 2px var(--jade))}
+#bt-fig .bt-perf{filter:drop-shadow(0 0 4px var(--gold)) drop-shadow(0 0 2px var(--gold))}
+button.chip:disabled{opacity:.4;cursor:not-allowed}
+.bt-layers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.bt-layers .ph{grid-column:1/-1;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.bt-layers button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 9px;text-align:left;cursor:pointer;color:var(--ink);display:grid;gap:1px;min-width:0}
+.bt-layers button b{font:700 15px/1.2 var(--display)}
+.bt-layers button small{color:var(--muted);font:11px var(--mono)}
+.bt-layers button.on{background:var(--jade-soft);border-color:var(--jade)}
+.bt-layers button[aria-pressed="true"]{outline:2px solid var(--gold);outline-offset:1px}
+.mrow{display:grid;gap:4px;padding-block:6px;border-bottom:1px solid var(--line)}
+.mrow .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.mtrack{height:10px;border-radius:5px;background:var(--line);position:relative;overflow:hidden}
+.mtrack span{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+.mtrack i{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink)}
 footer{padding-block:30px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -128,7 +156,7 @@ footer{padding-block:30px;color:var(--muted);font-size:13px;border-top:1px solid
 </header>
 
 <nav class="rail" aria-label="Sections">
-  <a href="#emergence">Emergence</a><a href="#cultivation">Cultivation</a><a href="#skills">Skill tree</a><a href="#relationships">Relationships</a><a href="#family">Family &amp; lineage</a><a href="#factions">Factions</a><a href="#mind">Mind</a><a href="#archive">Archive</a><a href="#performance">Performance</a>
+  <a href="#emergence">Emergence</a><a href="#cultivation">Cultivation</a><a href="#body">Body tempering</a><a href="#skills">Skill tree</a><a href="#relationships">Relationships</a><a href="#family">Family &amp; lineage</a><a href="#factions">Factions</a><a href="#mind">Mind</a><a href="#archive">Archive</a><a href="#performance">Performance</a>
 </nav>
 
 <!-- ============ EMERGENCE ============ -->
@@ -255,6 +283,192 @@ cap 95%</code>
         <li><b>Lifespan</b> rises with each realm (70 mortal, 120, 250, 500, 1,000). Running out of years before a breakthrough is a real fear.</li>
       </ul></div>
   </div>
+</section>
+
+<!-- ============ BODY TEMPERING ============ -->
+<section class="view" id="v-body" hidden>
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Draft 1 · the first road anyone can walk</span><h2>Body Tempering</h2>
+      <p>Before anyone in the valley can sense qi, they can harden the body. Body Tempering is nine layers of forging skin, flesh, bone and blood through drills, hardship and medicine. Anyone can start it, with or without a spirit root.</p>
+      <p>Drills are free. <b>The medicine for the higher layers is not.</b> It grows in a few forest patches and walks around inside a few beasts. Mortals who never temper keep their easy, abundant life. Tempering is the first thing villagers want that there isn't enough of, so it is where conflict first appears, on its own.</p></div>
+    <div class="box"><span class="eyebrow">What changes from today</span><h3>The current placeholder</h3>
+      <ul class="clean">
+        <li><b>Today:</b> a hidden counter fills from willpower and labour, and grants a layer every 10 years. Nobody chooses it, nothing is consumed, and nothing is fought over.</li>
+        <li><b>Draft:</b> tempering becomes something a person <b>decides</b> to do through the brain. It is paid for in hours, strain and materials. Each layer has a gate that names what it needs to break through.</li>
+        <li>The current pieces carry over: the 16 Body Tempering disciplines (skin, tendon, bone, breath, cold, heat, impact…), the strength and endurance attributes, and the Stone-body physique.</li>
+      </ul></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Click a layer, then set its grade · a sample body, Han Bo</span><h2>Nine layers, three stages</h2>
+    <div class="bt-wrap">
+      <svg id="bt-fig" viewBox="0 0 200 350" role="img" aria-label="Tempered body figure">
+        <circle class="bt-l9" cx="100" cy="170" r="160" fill="url(#bt-glow)"/>
+        <defs><radialGradient id="bt-glow"><stop offset="0" stop-color="var(--gold)" stop-opacity=".35"/><stop offset="1" stop-color="var(--gold)" stop-opacity="0"/></radialGradient></defs>
+        <g class="bt-l2 bt-flesh"><circle cx="100" cy="38" r="22"/><rect x="70" y="66" width="60" height="112" rx="18"/><rect x="44" y="70" width="20" height="112" rx="10"/><rect x="136" y="70" width="20" height="112" rx="10"/><rect x="73" y="172" width="23" height="158" rx="11"/><rect x="104" y="172" width="23" height="158" rx="11"/></g>
+        <g class="bt-l4 bt-bone"><path d="M100 64V172M54 80V176M146 80V176M84 182V320M116 182V320"/><path d="M80 92q20 8 40 0M78 106q22 8 44 0M78 120q22 8 44 0M80 134q20 7 40 0"/></g>
+        <g class="bt-l5 bt-marrow"><circle cx="54" cy="110" r="2.6"/><circle cx="54" cy="150" r="2.6"/><circle cx="146" cy="110" r="2.6"/><circle cx="146" cy="150" r="2.6"/><circle cx="84" cy="230" r="2.6"/><circle cx="84" cy="280" r="2.6"/><circle cx="116" cy="230" r="2.6"/><circle cx="116" cy="280" r="2.6"/><circle cx="100" cy="150" r="2.6"/></g>
+        <g class="bt-l3 bt-sinew"><path d="M64 76l8 4M136 76l-8 4M48 124h12M140 124h12M76 252h16M108 252h16M80 178l6 6M120 178l-6 6"/></g>
+        <g class="bt-l6 bt-blood"><path d="M93 100c-12 20-30 10-38 40s-2 30-2 40M107 100c12 20 30 10 38 40s2 30 2 40M96 112c-8 60-14 90-12 200M104 112c8 60 14 90 12 200"/></g>
+        <g class="bt-l7 bt-organ"><path d="M92 92c-6-8-16 0-8 10l8 8 8-8c8-10-2-18-8-10z"/><ellipse cx="82" cy="104" rx="7" ry="13"/><ellipse cx="118" cy="104" rx="7" ry="13"/><circle cx="100" cy="158" r="7"/></g>
+        <g class="bt-l8 bt-meridian"><path d="M100 18V320M54 76c0 40 0 80-2 110M146 76c0 40 0 80 2 110M86 180c-2 50-2 100-4 145M114 180c2 50 2 100 4 145"/></g>
+        <g class="bt-l1 bt-skin"><circle cx="100" cy="38" r="22"/><rect x="70" y="66" width="60" height="112" rx="18"/><rect x="44" y="70" width="20" height="112" rx="10"/><rect x="136" y="70" width="20" height="112" rx="10"/><rect x="73" y="172" width="23" height="158" rx="11"/><rect x="104" y="172" width="23" height="158" rx="11"/></g>
+      </svg>
+      <div style="display:grid;gap:10px;min-width:0">
+        <div class="bt-layers" id="bt-layers"></div>
+        <div class="box" style="background:var(--bg)" aria-live="polite">
+          <span class="eyebrow" id="bt-stage"></span><h3 id="bt-name"></h3><p id="bt-desc"></p>
+          <div class="tablewrap"><table><tbody id="bt-facts"></tbody></table></div>
+          <span class="eyebrow" style="margin-top:4px">Forged at grade</span>
+          <div class="chips" id="bt-grades" role="group" aria-label="Grade of this layer"></div>
+          <p class="muted" id="bt-gnote" style="font-size:13px"></p>
+        </div>
+        <p id="bt-sum" class="muted"></p>
+      </div>
+    </div>
+    <p class="muted">After layer 9 the roads part. A person with a spirit root carries the tempered body into Qi Condensation, with a better first breakthrough and a sturdier foundation. A rootless person stops at the peak of the realm for now (sandbox): in a fist fight as strong as an early Qi Condensation cultivator, and the strongest mortal the valley has seen. A full body-refining road beyond that is left for later.</p>
+  </div>
+
+  <div class="box"><span class="eyebrow">Quality · bodybuilding is not cultivation</span><h2>Every layer is forged at a grade</h2>
+    <p>Two villagers can both reach Copper Skin and be nothing alike. One got there hauling stone. The other followed a real method, soaked in extra medicine and polished the layer for a year before moving on. Each layer is stamped with a grade when it breaks through, and that grade stays with the person.</p>
+    <div class="tablewrap"><table><thead><tr><th>Grade</th><th>Typically takes</th><th class="r">Layer's gifts</th></tr></thead><tbody>
+      <tr><td><span class="tag" style="background:var(--line);color:var(--muted)">Low</span></td><td>plain exercise or labour, no method · rushing through the gate</td><td class="r num">×0.6</td></tr>
+      <tr><td><span class="tag">Middle</span></td><td>folk drills or a manual, with the standard medicine</td><td class="r num">×1.0</td></tr>
+      <tr><td><span class="tag gold">High</span></td><td>a proper tempering manual, double medicine, a good teacher or a talent</td><td class="r num">×1.4</td></tr>
+      <tr><td><span class="tag cin">Perfect</span></td><td>a complete method or a true cultivation technique, triple medicine, talent, time spent polishing at the gate, <b>and every layer below also Perfect</b></td><td class="r num">×2.0</td></tr>
+    </tbody></table></div>
+    <div class="grid2">
+      <div style="display:grid;gap:8px;min-width:0"><code class="formula">grade points = 0.5
+  + extra medicine   (+0.75 double dose, +1.25 triple)
+  + talent           (+0.5 strong body, +1 physique e.g. Stone body)
+  + teacher of a higher grade (+0.5)
+  + polishing at the gate (+0.5 a year, up to +1)
+  ± luck 0.5
+grade = points rounded down, capped by
+  · the method:  none → Low · folk drills → Middle
+                 manual → High · complete method → Perfect
+  · the layer below + 1
+  · Perfect only if every layer below is Perfect</code></div>
+      <ul class="clean">
+        <li><b>The method sets the ceiling.</b> That is the line between bodybuilding and cultivation. A strong labourer can never forge better than Low.</li>
+        <li><b>Foundations matter.</b> A layer can be at most one grade above the layer beneath it. Rushing the early layers drags everything above them down.</li>
+        <li><b>Perfect is all or nothing.</b> A Perfect layer can only be forged on a body that has been Perfect from Copper Skin up. Miss it once and that body's limit is High for the rest of the road. A Perfected Body at Perfect grade is the rarest thing in the valley.</li>
+        <li><b>Re-forging:</b> a person can later re-temper a layer one grade up, for half its tempering and its medicine again, but only up to High. A lost Perfect never comes back. Old masters fix the mistakes of their youth, within limits.</li>
+        <li><b>Body grade</b> is the average of the layers. At the peak it sets fist-fight strength and, for the rooted, the Qi Condensation bonus (+5% for Low up to +25% for Perfect).</li>
+        <li><b>It feeds the conflict.</b> High grades eat two or three times the medicine. One ambitious family chasing Perfect bones can strip a herb patch.</li>
+        <li><b>The chronicle notices:</b> "Han Bo forged a Perfect Iron Bone, the first in the valley."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">Daily progress</span><h3>Temper, strain, rest</h3>
+      <code class="formula">tempering per day = training hours × method × medicine
+                  × teacher × willpower/10 × age
+strain per day    = training hours × (1 − medicine soothing)</code>
+      <ul class="clean">
+        <li><b>Strain</b> builds up as a person trains and fades with rest. Too much strain means a torn sinew or a cracked bone, with weeks to months of rest. Medicine and a careful teacher keep strain low, so a rich family can train harder.</li>
+        <li><b>Labour counts a little.</b> Hauling, quarrying and farming give a quarter as much as drills, and only up to layer 2. A strong farmer is "hardened", not a martial artist.</li>
+        <li><b>Gates:</b> once the layer's tempering is full, the person needs the gate's requirement (a method, a bath, beast marrow, an insight) to break through. Without it they wait at the gate, frustrated, like a qi bottleneck.</li>
+        <li><b>Age:</b> full speed until 25, then 3% slower each year. Late starters can still reach the outer layers.</li>
+      </ul></div>
+    <div class="box"><span class="eyebrow">Where the knowledge comes from</span><h3>Year 0: nobody knows how</h3>
+      <ul class="clean">
+        <li><b>Folk drills</b> (method ×0.6, up to layer 3) come from a villager with hunting, wrestling or military-drill skill who starts training others. They spread by teaching and by watching.</li>
+        <li><b>A tempering manual</b> (×1.0, up to layer 6) can be found exploring ruins, traded from the West Road, or carried in by a wandering martial artist.</li>
+        <li><b>A complete method</b> (×1.4, up to layer 9) is rare, or is written by a layer 7+ villager with high comprehension in an insight. That is the valley's first original art.</li>
+        <li><b>Teachers</b> at least two layers higher add ×1.5 and reduce injuries. This is the first master and disciple bond, and it predates any cultivator.</li>
+      </ul></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Try it</span><h2>How long to temper a body?</h2>
+    <div class="calc">
+      <div class="grid3" style="grid-template-columns:1fr">
+        <div class="field"><label for="b-hrs">Hours of drills per day <output id="bo-hrs"></output></label><input id="b-hrs" type="range" min="0" max="8" step="0.5" value="2"></div>
+        <div class="field"><label for="b-meth">Method <output id="bo-meth"></output></label><select id="b-meth"><option value="0.6,3">Folk drills (×0.6, to layer 3)</option><option value="1,6" selected>Tempering manual (×1.0, to layer 6)</option><option value="1.4,9">Complete method (×1.4, to layer 9)</option></select></div>
+        <div class="field"><label for="b-med">Medicine <output id="bo-med"></output></label><select id="b-med"><option value="1,3">None (gates past layer 3 stay shut)</option><option value="1.3,5" selected>Iron-bark baths (×1.3, opens 4–5)</option><option value="1.6,6">Plus beast marrow broth (×1.6, opens 6)</option><option value="2,9">Plus seven-leaf spirit herb (×2.0, opens 7–9)</option></select></div>
+        <div class="field"><label for="b-teach">Teacher <output id="bo-teach"></output></label><select id="b-teach"><option value="1">None (×1)</option><option value="1.5" selected>Teacher two layers higher (×1.5)</option></select></div>
+        <div class="field"><label for="b-aim">Aim for grade <output id="bo-aim"></output></label><select id="b-aim"><option value="0">Low (rush through)</option><option value="1" selected>Middle</option><option value="2">High (double medicine, polish)</option><option value="3">Perfect (triple medicine, long polish)</option></select></div>
+        <div class="field"><label for="b-will">Willpower <output id="bo-will"></output></label><input id="b-will" type="range" min="4" max="20" value="10"></div>
+        <div class="field"><label for="b-age">Age when starting <output id="bo-age"></output></label><input id="b-age" type="range" min="10" max="50" value="16"></div>
+      </div>
+      <div class="bigout">
+        <div class="stat"><span>Tempering per day</span><b id="br-rate" class="num"></b></div>
+        <div class="stat"><span>Outer stage done (layer 3)</span><b id="br-3" class="num"></b></div>
+        <div class="stat"><span>Inner stage done (layer 6)</span><b id="br-6" class="num"></b></div>
+        <div class="stat"><span>Peak (layer 9)</span><b id="br-9" class="num"></b></div>
+        <div class="stat"><span>Highest layer reachable</span><b id="br-cap" class="num"></b></div>
+        <div class="stat"><span>Best grade this method allows</span><b id="br-grade" class="num"></b></div>
+        <div class="stat"><span>Medicine used</span><b id="br-dose" class="num"></b></div>
+        <p class="muted" id="br-note"></p>
+        <p class="muted" style="font-size:13px">Assumptions: layer 1 costs 300 tempering and each layer costs 1.7× the one before (about 50,000 for all nine). The age penalty applies from the starting age. Higher grades add polishing time (+15% for High, +40% for Perfect). Injuries and gate waits are left out.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box"><span class="eyebrow">The conflict engine</span><h2>Materials are finite. Desire is not.</h2>
+    <p>Each tempering material has a source in the world and a regrowth rate. Demand comes only from people who chose to temper and reached the layers that need it. When demand passes supply the valley changes on its own: first sharing, then queues and favours, then rivalries, hoarding and theft. These flow into the ties, grudges and decisions that already exist. No events are scripted.</p>
+    <div class="calc">
+      <div class="grid3" style="grid-template-columns:1fr;align-content:start">
+        <div class="field"><label for="m-n">Villagers tempering <output id="mo-n"></output></label><input id="m-n" type="range" min="0" max="80" value="12"></div>
+        <div class="field"><label for="m-deep">Share past the outer stage <output id="mo-deep"></output></label><input id="m-deep" type="range" min="0" max="100" value="35"></div>
+        <div class="field"><label for="m-hi">Chasing High or Perfect grades <output id="mo-hi"></output></label><input id="m-hi" type="range" min="0" max="100" value="30"></div>
+        <div class="field"><label for="m-sc">How rich is the valley <output id="mo-sc"></output></label><select id="m-sc"><option value="2">Generous (×2 supply)</option><option value="1">Normal</option><option value="0.5" selected>Scarce (×0.5 supply) · sandbox default</option></select></div>
+        <div class="chips" id="m-presets"></div>
+      </div>
+      <div class="bigout" id="m-out"></div>
+    </div>
+    <div class="tablewrap" style="margin-top:6px"><table><thead><tr><th>Material</th><th>Where it comes from</th><th>Needed by</th><th class="r">Per person per year</th></tr></thead><tbody id="m-table"></tbody></table></div>
+  </div>
+
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">New choices for the brain</span><h3>What a tempering villager can decide</h3>
+      <div class="tablewrap"><table><thead><tr><th>Option</th><th>Pushed by</th></tr></thead><tbody>
+        <tr><td>Train (drills, waterfall, cold spring)</td><td>ambition, pride · lowered by strain and work</td></tr>
+        <tr><td>Gather tempering herbs</td><td>at a gate that needs them · curiosity</td></tr>
+        <tr><td>Hunt a beast for marrow</td><td>at a blood or marrow gate · courage, restlessness · risk of injury</td></tr>
+        <tr><td>Spar with someone</td><td>pride, rivalry · both gain, and the winner gains standing</td></tr>
+        <tr><td>Ask for, trade or gift materials</td><td>devotion, friendship, debt of grace</td></tr>
+        <tr><td>Claim a patch or a spot</td><td>scarcity × pride · others resent it</td></tr>
+        <tr><td>Steal or hoard</td><td>only when spite, need and a grudge line up · rare, remembered for life</td></tr>
+      </tbody></table></div>
+      <p class="muted">The existing confront, make peace, gossip and help options handle what follows. A stolen root becomes a grudge, a gift becomes a debt of grace, and a won spar becomes a rivalry.</p></div>
+    <div class="box"><span class="eyebrow">What a tempered body is worth</span><h3>Why anyone bothers</h3>
+      <ul class="clean">
+        <li><b>Strength and endurance</b> may rise past their natural ceiling by +1 per layer.</li>
+        <li><b>Work:</b> +5% labour output per layer for heavy work: hauling, quarrying, felling, building.</li>
+        <li><b>Toughness:</b> injuries heal faster and illness is rarer from Marrow on.</li>
+        <li><b>Lifespan:</b> 70 rises to 80 by layer 9. A tempered elder still works at 75.</li>
+        <li><b>Standing:</b> reputation, marriage appeal, and a say in village disputes. The village's protector is usually its most tempered member.</li>
+        <li><b>Qi:</b> at the Blood layer a hidden spirit root has a yearly chance to reveal itself, because the body begins to feel qi. Tempering is a road to awakening.</li>
+        <li><b>A first faction:</b> three or more villagers at layer 4+ who share a teacher form a <b>Martial Hall</b>. It is the valley's first group defined by power rather than blood, a generation before any cultivator.</li>
+      </ul></div>
+  </div>
+
+  <div class="grid2">
+    <div class="box"><span class="eyebrow">What you see</span><h3>Few numbers on screen</h3>
+      <ul class="clean">
+        <li>The person page gets a small body figure lit to their layer (as above), with their gate and what it waits on, such as "waits for iron-bark".</li>
+        <li>Walkers training at the waterfall or the drill yard are visible in the village.</li>
+        <li>The chronicle gets lines like: "Han Bo reached Iron Bone (layer 4)", "Wang Li took the last iron-bark from the north patch", "Zhou Mei gave her marrow broth to her junior".</li>
+        <li>The Book of Lives gets a materials chart (supply and demand per year) and a tempering column.</li>
+      </ul></div>
+    <div class="box"><span class="eyebrow">Build order, if you approve</span><h3>Four small steps</h3>
+      <ol class="clean" style="padding-left:20px">
+        <li><b>Layers and drills:</b> tempering, strain, gates, methods, teachers, grades, the brain's "train" option, and the body figure on the person page.</li>
+        <li><b>Materials in the world:</b> herb patches and beasts in the forest, gathering and hunting, regrowth, and medicine consumed at gates.</li>
+        <li><b>Contention:</b> claims, sharing, trading, sparring, hoarding and theft feed ties and grudges. A materials chart goes in the Book of Lives.</li>
+        <li><b>The Martial Hall</b> faction, written methods, and root reveals at the Blood layer.</li>
+      </ol></div>
+  </div>
+
+  <div class="box"><span class="eyebrow">Decided · sandbox mode</span><h3>Your answers</h3>
+    <ul class="clean">
+      <li><b>Rootless ceiling:</b> they stop at layer 9 for now.</li>
+      <li><b>Richness:</b> scarce by default, so we can watch conflict form. It's a single setting in the data, easy to turn back up.</li>
+      <li><b>Theft:</b> allowed. It's rare, never deadly, and leaves a lifelong grudge.</li>
+      <li><b>Names:</b> kept. Quality grades added (above).</li>
+      <li><b>Perfect</b> needs an unbroken Perfect foundation. Miss it once and High is the limit. Approved.</li>
+    </ul></div>
 </section>
 
 <!-- ============ SKILLS ============ -->
@@ -569,13 +783,14 @@ const fmt = n => n.toLocaleString('en-US',{maximumFractionDigits:0});
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
 /* ---------- routing ---------- */
-const VIEWS=['emergence','cultivation','skills','relationships','family','factions','mind','archive','performance'];
+const VIEWS=['emergence','cultivation','body','skills','relationships','family','factions','mind','archive','performance'];
 function route(){
   let h=(location.hash||'').slice(1); if(!VIEWS.includes(h)) h='emergence';
   VIEWS.forEach(v=>{ $('#v-'+v).hidden = v!==h; });
   document.querySelectorAll('nav.rail a').forEach(a=>a.setAttribute('aria-current', a.getAttribute('href')==='#'+h));
   if(h==='relationships') startGraph();
   if(h==='cultivation') startCult();
+  if(h==='body') startBody();
   if(h==='skills') startSkillGraph();
   if(h==='family') startFamily();
 }
@@ -897,6 +1112,79 @@ function startFamily(){ if(fmG) return;
   $('#fam-filter').innerHTML=Object.entries(FK).map(([k,v])=>`<button class="chip" aria-pressed="true" data-k="${k}">${v[1]}</button>`).join('');
   $('#fam-filter').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; const k=b.dataset.k; fmShown.has(k)?fmShown.delete(k):fmShown.add(k); b.setAttribute('aria-pressed',fmShown.has(k)); fmG.edges.forEach(ed=>ed.hidden=!fmShown.has(ed.kind)); fmG.draw();});
   fmG.settle(160); }
+
+/* ---------- body tempering ---------- */
+const BT=[
+ ['Copper Skin','Outer stage','Skin thickens and darkens under daily beating with sandbags and switches.','Drills alone. Hard labour can get a person here too.','Cuts and scrapes barely matter · +5% heavy work','—'],
+ ['Dense Flesh','Outer stage','Muscle packs dense. A full day of hauling no longer tires them.','Drills or labour.','+1 strength ceiling · +10% heavy work','—'],
+ ['Steel Sinew','Outer stage','Tendons and joints take loads that would tear an ordinary man.','A method someone teaches them. Folk drills are enough.','+1 agility and endurance ceilings · fewer sprains','Waterfall or drill yard'],
+ ['Iron Bone','Inner stage','Bones are soaked in bitter baths and struck until they ring.','A tempering manual plus iron-bark baths.','Heavy blows and falls rarely break anything','Iron-bark root (4 a year)'],
+ ['Jade Marrow','Inner stage','The marrow is renewed. Wounds close fast and illness rarely takes hold.','Beast marrow broth.','Injuries heal twice as fast · illness much rarer','Iron-bark + beast marrow'],
+ ['Living Blood','Inner stage','Blood runs hot with a force close to qi. A hidden spirit root may wake.','Beast blood plus an insight.','Yearly chance to reveal a hidden spirit root · +3 years of life','Beast marrow and blood (2 a year)'],
+ ['Five Viscera','Core stage','Heart, lungs and dantian are tempered from the inside with breath.','A complete method plus a seven-leaf herb.','Endurance work all day · +3 years of life','Seven-leaf spirit herb'],
+ ['Open Meridians','Core stage','The eight extraordinary meridians open. The body can hold and feel qi.','Seven-leaf herb plus a teacher or an insight.','Rooted: Qi Condensation chance +15% later','Seven-leaf spirit herb'],
+ ['Perfected Body','Core stage','Every part is forged as one. The peak of the realm.','A great trial (a beast hunt, a winter on the peak) plus a seven-leaf herb.','Matches early Qi Condensation in a fist fight · lifespan 80','Seven-leaf spirit herb']];
+const BT_COST=BT.map((_,i)=>Math.round(300*Math.pow(1.7,i)));
+const BT_CUM=BT_COST.map((_,i)=>BT_COST.slice(0,i+1).reduce((a,b)=>a+b,0));
+let btSel=4;
+const GR=['Low','Middle','High','Perfect'], GRM=[.6,1,1.4,2], GRO=[.38,.62,.88,1];
+const btG=[1,0,1,2,2,1,0,0,0];
+function btShow(l){ btSel=l;
+  for(let i=1;i<=9;i++) document.querySelectorAll('#bt-fig .bt-l'+i).forEach(g=>{g.style.opacity=i>l?.07:GRO[btG[i-1]]; g.classList.toggle('bt-perf',i<=l&&btG[i-1]===3); g.classList.toggle('bt-cur',i===l);});
+  document.querySelectorAll('#bt-layers button').forEach(b=>{const n=+b.dataset.l; b.classList.toggle('on',n<=l); b.setAttribute('aria-pressed',n===l); b.querySelector('.g').textContent=n<=l?' · '+GR[btG[n-1]]:'';});
+  const gl=btG[l-1], below=l>1?btG[l-2]:3, lostPerfect=btG.slice(0,l-1).some(x=>x<3);
+  $('#bt-grades').innerHTML=GR.map((g,k)=>`<button class="chip" data-g="${k}" aria-pressed="${k===gl}"${k>below+1||(k===3&&lostPerfect)?' disabled title="'+(k===3&&lostPerfect?'Perfect was missed on an earlier layer':'One grade above the layer below at most')+'"':''}>${g} ×${GRM[k]}</button>`).join('');
+  $('#bt-gnote').textContent=l>1?(lostPerfect?`Perfect was missed below, so High is the limit${below<1?`, and with ${GR[below]} beneath it, ${GR[below+1]} for this layer`:''}.`:`Every layer below is Perfect, so Perfect is still possible.`):'The first layer has nothing beneath it.';
+  const avg=btG.slice(0,l).reduce((a,b)=>a+b,0)/l;
+  $('#bt-sum').innerHTML=`Han Bo's body up to layer ${l}: <b>${GR[Math.round(avg)]}</b> overall (average ${(avg+1).toFixed(1)} of 4). The faint parts are Low, the bright parts High, and the glowing parts Perfect.`;
+  const L=BT[l-1]; $('#bt-stage').textContent=`Layer ${l} · ${L[1]}`; $('#bt-name').textContent=L[0]; $('#bt-desc').textContent=L[2];
+  $('#bt-facts').innerHTML=[['Gate',L[3]],['Gives',L[4]],['Material',L[5]],['This grade',`${GR[gl]}: the layer's gifts ×${GRM[gl]}`],['Tempering to fill',fmt(BT_COST[l-1])+' (total '+fmt(BT_CUM[l-1])+')']].map(r=>`<tr><th style="width:34%">${r[0]}</th><td>${r[1]}</td></tr>`).join(''); }
+function btCalc(){
+  const g=id=>$(id).value, [meth,mcap]=g('#b-meth').split(',').map(Number), [med,dcap]=g('#b-med').split(',').map(Number);
+  const aim=+g('#b-aim'), gcap=mcap>=9?3:(mcap>=6?2:1), polish=[1,1,1.15,1.4][aim], doses=[1,1,2,3][aim];
+  const hrs=+g('#b-hrs'), teach=+g('#b-teach'), will=+g('#b-will'), age=+g('#b-age');
+  const ageM=age<=25?1:Math.max(.2,1-.03*(age-25)), rate=hrs*meth*med*teach*will/10*ageM, cap=Math.min(mcap,dcap);
+  $('#bo-hrs').textContent=hrs+' h'; $('#bo-meth').textContent='×'+meth; $('#bo-med').textContent='×'+med; $('#bo-teach').textContent='×'+teach; $('#bo-will').textContent=will; $('#bo-age').textContent=age+(ageM<1?` (×${ageM.toFixed(2)})`:'');
+  $('#br-rate').textContent=rate.toFixed(1);
+  const at=l=>l>cap?'gate shut':(rate<=0?'never':yrs(BT_CUM[l-1]/rate*polish));
+  $('#bo-aim').textContent=GR[aim]; $('#br-grade').textContent=GR[gcap]; $('#br-dose').textContent=dcap>3?'×'+doses+' the standard':'none';
+  $('#br-3').textContent=at(3); $('#br-6').textContent=at(6); $('#br-9').textContent=at(9);
+  $('#br-cap').textContent=`${cap} · ${BT[cap-1][0]}`;
+  const why=mcap<dcap?'the method':(dcap<mcap?'the medicine':'both method and medicine');
+  $('#br-note').textContent=cap<9?`Stops at layer ${cap} because of ${why}. Better ${mcap<dcap?'methods come from manuals, wanderers or insight':'medicine comes from the forest, so it is shared, traded or fought over'}.`:'Everything in place. Strain from long drills is the remaining limit, so expect a few injuries along the way.';
+  if(aim>gcap) $('#br-note').textContent+=` ${GR[aim]} is out of reach with this method: it forges ${GR[gcap]} at best.`;
+  else if(aim>=2&&dcap<=3) $('#br-note').textContent+=` ${GR[aim]} needs extra medicine, and there is none.`; }
+const MATS=[
+ {n:'Iron-bark root',src:'6 patches in the dark forest, each regrowing 5 roots a year',who:'layers 4–5, baths',per:'4',supply:30,dem:(o,i,c)=>i*.6*4,unit:'roots'},
+ {n:'Beast marrow and blood',src:'about 40 beasts in the forest. Hunting more than 1 in 5 a year shrinks the herd',who:'layers 5–6, broth',per:'2',supply:8,dem:(o,i,c)=>i*.6*2,unit:'beasts'},
+ {n:'Seven-leaf spirit herb',src:'a few plants by the spirit spring, about 3 a year',who:'layers 7–9',per:'1',supply:3,dem:(o,i,c)=>c,unit:'herbs'},
+ {n:'Places under the waterfall',src:'3 ledges, 4 people each. Space, not used up, and not affected by richness',who:'layers 2–4, impact',per:'a spot',supply:12,fixed:true,dem:(o,i,c)=>o*.5+i*.4,unit:'trainers'}];
+const MSTAT=[[.5,'Plenty','','Shared freely. Gifts of medicine build friendships and debts of grace.'],[1,'Tight','gold','First come, first served. Favours, trades and mild rivalries; families pool supplies for their best child.'],[2,'Contested','cin','Patches get claimed, spots are sparred for, and some hoard. The first real grudges appear.'],[1e9,'Fought over','cin','Theft, guarded patches, groups forming around who controls supply. The Martial Hall guards its own.']];
+function mCalc(){
+  const hi=+$('#m-hi').value/100; $('#mo-hi').textContent=Math.round(hi*100)+'%';
+  const n=+$('#m-n').value, deep=+$('#m-deep').value/100, sc=+$('#m-sc').value;
+  $('#mo-n').textContent=n; $('#mo-deep').textContent=Math.round(deep*100)+'%'; $('#mo-sc').textContent=sc===1?'':('×'+sc);
+  const o=n*(1-deep), i=n*deep*.75, c=n*deep*.25; let worst=-1;
+  const rows=MATS.map(m=>{ const s=m.fixed?m.supply:m.supply*sc, d=m.dem(o,i,c)*(m.fixed?1:1+hi*1.5), r=s?d/s:0, k=MSTAT.findIndex(x=>r<x[0]); worst=Math.max(worst,d>0?k:-1);
+    const col=k===0?'var(--jade)':(k===1?'var(--gold)':'var(--cin)'), w=Math.min(100,r/2*100);
+    return `<div class="mrow"><div class="top"><b>${m.n}</b><span class="tag ${MSTAT[k][2]}">${MSTAT[k][1]}</span></div>
+      <div class="mtrack" title="demand vs supply"><span style="width:${w}%;background:${col}"></span><i style="left:50%"></i></div>
+      <small class="muted mono">want ${d.toFixed(d<10?1:0)} · have ${s.toFixed(s<10?1:0)} ${m.unit} a year${k>=2&&m.unit==='beasts'?' · the herd shrinks each year':''}</small></div>`; });
+  const W=worst<0?null:MSTAT[worst];
+  $('#m-out').innerHTML=rows.join('')+`<p class="muted" style="font-size:13px">The line marks demand equal to supply.</p>`+(W?`<div class="box" style="background:var(--bg)"><span class="eyebrow">What the valley does</span><p><b>${W[1]}.</b> ${W[3]}</p></div>`:`<div class="box" style="background:var(--bg)"><span class="eyebrow">What the valley does</span><p>Nobody tempers past the drills, so nobody competes.</p></div>`); }
+let btStarted=false;
+function startBody(){ if(btStarted) return; btStarted=true;
+  const ph=['Outer stage · drills and labour','Inner stage · medicine and beasts','Core stage · spirit herbs and insight'];
+  $('#bt-layers').innerHTML=BT.map((L,i)=>(i%3===0?`<div class="ph">${ph[i/3]}</div>`:'')+`<button data-l="${i+1}" aria-pressed="false"><small>LAYER ${i+1}<span class="g"></span></small><b>${L[0]}</b></button>`).join('');
+  $('#bt-layers').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) btShow(+b.dataset.l);});
+  $('#bt-grades').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||b.disabled) return; btG[btSel-1]=+b.dataset.g; for(let k=btSel;k<9;k++) btG[k]=Math.min(btG[k],btG[k-1]+1,btG.slice(0,k).some(x=>x<3)?2:3); btShow(btSel);});
+  ['#b-hrs','#b-meth','#b-med','#b-teach','#b-will','#b-age','#b-aim'].forEach(id=>$(id).addEventListener('input',btCalc));
+  ['#m-n','#m-deep','#m-sc','#m-hi'].forEach(id=>$(id).addEventListener('input',mCalc));
+  $('#m-table').innerHTML=MATS.map(m=>`<tr><td>${m.n}</td><td>${m.src}</td><td>${m.who}</td><td class="r">${m.per}</td></tr>`).join('');
+  const P=[['Year 30: a few hopefuls',5,0],['Year 80: a martial village',20,40],['Year 200: before the sect',60,60]];
+  $('#m-presets').innerHTML=P.map((p,k)=>`<button class="chip" data-k="${k}">${p[0]}</button>`).join('');
+  $('#m-presets').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; const p=P[+b.dataset.k]; $('#m-n').value=p[1]; $('#m-deep').value=p[2]; mCalc();});
+  btShow(btSel); btCalc(); mCalc(); }
 
 route();
 </script>
