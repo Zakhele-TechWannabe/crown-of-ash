@@ -2,6 +2,7 @@ extends RefCounted
 ## Social simulation owns packed birth/master/cultivation columns; kin is derived.
 const Relationships = preload("res://src/relationships.gd")
 const Mind = preload("res://src/mind.gd")
+const BodyTempering = preload("res://src/body_tempering.gd")
 var ties := Relationships.new()
 var store_ref: WeakRef
 var population: RefCounted:
@@ -15,7 +16,6 @@ var awakening_age := PackedByteArray()
 var realm := PackedByteArray()
 var layer := PackedByteArray()
 var qi := PackedFloat32Array()
-var body := PackedFloat32Array()
 var technique := PackedByteArray()
 var technique_element := PackedInt32Array()
 var site := PackedByteArray()
@@ -50,17 +50,21 @@ var faction_relations: Dictionary = {}
 var memberships: Dictionary = {}
 var archive: RefCounted = null
 var mind: RefCounted = null
+var temper: RefCounted = null
 var archived_year := -1
 
 func _init(store: RefCounted) -> void:
 	store_ref = weakref(store)
 	lifespan_death_enabled = bool(ProjectSettings.get_setting("simulation/lifespan_death_enabled", false))
+	var body_probe: RefCounted = BodyTempering.new(self)
+	if body_probe.config.enabled: temper = body_probe
 	var probe: RefCounted = Mind.new(self)
 	if probe.config.enabled: mind = probe
 
 func add_person() -> void:
 	ties.add_person()
 	if mind: mind.add_person()
+	if temper: temper.add_person()
 	father.append(-1)
 	spouse.append(-1)
 	master.append(-1)
@@ -70,7 +74,6 @@ func add_person() -> void:
 	realm.append(0)
 	layer.append(0)
 	qi.append(0)
-	body.append(0)
 	technique.append(0)
 	technique_element.append(-1)
 	site.append(0)
@@ -104,6 +107,8 @@ func _feel_event(person: int, kind: String) -> void:
 				if parent >= 0: mind.feel(parent, Mind.JOY, .5)
 		"awakening", "breakthrough", "manual", "technique": mind.feel(person, Mind.JOY, .5)
 		"setback": mind.feel(person, Mind.AFRAID, .5)
+		"tempering": mind.feel(person, Mind.JOY, .4)
+		"injury": mind.feel(person, Mind.AFRAID, .3)
 		"old_age":
 			for kin: int in children(person): mind.feel(kin, Mind.GRIEF, .8)
 			if spouse[person] >= 0: mind.feel(spouse[person], Mind.GRIEF, 1.0)
@@ -145,6 +150,7 @@ func layer_cap(person: int) -> int:
 	return 9
 
 func lifespan(person: int) -> int:
+	if realm[person] < 2 and temper: return temper.lifespan(person)
 	return int(rules.realms[realm[person]].lifespan)
 
 func heart_demons(person: int) -> float:
@@ -180,11 +186,6 @@ func qi_cost(person: int) -> float:
 func cultivate(person: int, days: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
 	if store.age(person) < 12 or injury_until[person] > store.day: return
-	# Labour opens the body road, but requires decades rather than free early ranks.
-	body[person] += days * store.attributes[person * 8 + 6] / 10.0
-	if realm[person] < 2 and body[person] >= 3650 * (layer[person] + 1):
-		realm[person] = 1
-		layer[person] = mini(9, layer[person] + 1)
 	if not revealed[person]: return
 	qi[person] += qi_rate(person) * days
 	var cost := qi_cost(person)
@@ -194,6 +195,8 @@ func cultivate(person: int, days: int) -> void:
 	var major: bool = realm[person] >= 2 and layer[person] >= layer_cap(person)
 	if major and int(rules.techniques[technique[person]].cap) <= realm[person]: return
 	var base: float = float(rules.realms[realm[person] + 1].chance) if major else .8
+	# A tempered body steadies the first step onto the qi road; a Perfect one most of all.
+	if realm[person] < 2 and temper: base += temper.qi_bonus(person)
 	var chance := minf(.95, base + store.attributes[person * 8 + 6] / 200.0 - heart_demons(person) + (store.day - bottleneck_since[person]) / 36500.0)
 	if store.rng.randf() < chance:
 		qi[person] -= cost
@@ -552,6 +555,7 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		technique_element[p] = store.rng.randi_range(0, 9)
 		note(p, "manual", "%s received %s from the West Road wanderer" % [store.names[p], "a complete Profound method" if technique[p] == 2 else "a Yellow breathing fragment"])
 	cultivate(p, days)
+	if temper: temper.weekly(p, days, on_day)
 	if mind: mind.weekly(p, days, on_day, n)
 	if master[p] >= 0 and on_day % 30 < 7:
 		ties.event(p, master[p], "teaching", on_day)
@@ -1072,7 +1076,7 @@ func summary() -> Dictionary:
 	for pos: Dictionary in positions: filled += int(pos.holder >= 0)
 	var active_factions := 0
 	for f: Dictionary in factions: active_factions += int(not f.members.is_empty() or f.type == "outsiders")
-	return {"population": store.size(), "marriages": marriages, "births": births, "clans": clans, "awakenings": awakenings, "realms": realms, "factions": active_factions, "positions_filled": filled, "grudges": ties.grudge_count()}
+	return {"population": store.size(), "marriages": marriages, "births": births, "clans": clans, "awakenings": awakenings, "realms": realms, "factions": active_factions, "positions_filled": filled, "grudges": ties.grudge_count(), "body": temper.summary() if temper else {}}
 
 func social_event(observer: int, actor: int, kind: String) -> void:
 	if observer == actor: return

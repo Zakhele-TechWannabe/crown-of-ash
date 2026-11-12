@@ -1,0 +1,68 @@
+extends SceneTree
+## Body tempering: drills fill layers, gates hold, grades obey the method cap and the Perfect rule, strain injures.
+const Population = preload("res://src/population.gd")
+
+func _init() -> void:
+	var p: RefCounted = Population.new()
+	var j: int = p.register_job("field hand", ["fields"])
+	var idle: int = p.register_job("scribe", ["chores"])
+	for i in 30: p.add_person("Person %d" % i, 18 + i % 20, j if i < 20 else idle, i / 4)
+	var s: RefCounted = p.society
+	var t: RefCounted = s.temper
+	assert(t != null, "Body tempering is enabled by default")
+	s.seed()
+	# Labour hardens a field hand through the first layers only.
+	for w in 520: t.weekly(0, 7, 7 * w + 1)
+	assert(t.body_layer[0] == 2 and t.grade(0, 1) == t.LOW, "Labour reaches Dense Flesh at Low grade (got layer %d)" % t.body_layer[0])
+	assert(t.rate(0, 7 * 521) == 0.0 and t.gate_need(0) == "folk drills", "Past layer 2, labour is not enough: %s" % t.gate_need(0))
+	# A scribe who never drills goes nowhere.
+	for w in 100: t.weekly(25, 7, 7 * w + 1)
+	assert(t.body_layer[25] == 0, "No drills and no labour, no tempering")
+	# Drills with folk drills reach Steel Sinew but stop at the Iron Bone gate without a manual and medicine.
+	t.method[1] = 1
+	var day := 1
+	for w in 1500:
+		day = 7 * w + 1
+		if not t.training(1, day): t.start_regimen(1, 2, day)
+		s.injury_until[1] = 0
+		t.weekly(1, 7, day)
+	assert(t.body_layer[1] == 3, "Folk drills reach Steel Sinew (got %d)" % t.body_layer[1])
+	assert(t.gate_need(1) == "a tempering manual", "Iron Bone needs a manual: %s" % t.gate_need(1))
+	for l in 3: assert(t.grade(1, l + 1) <= t.MIDDLE, "Folk drills cap the grade at Middle")
+	t.method[1] = 2
+	assert(t.gate_need(1) == "iron-bark baths", "Then it needs medicine: %s" % t.gate_need(1))
+	t.medicine["iron_bark"][1] = 1
+	t.gate_since[1] = 1
+	t.break_through(1, day + 400)
+	assert(t.body_layer[1] == 4 and t.medicine["iron_bark"][1] == 0, "Medicine opens the gate and is used up")
+	# Perfect is all or nothing: once a layer misses it, High is the ceiling for good.
+	t.method[2] = 3
+	p.constitution[2] = 1
+	t.body_layer[2] = 2
+	t.grades[2 * 9] = t.PERFECT
+	t.grades[2 * 9 + 1] = t.PERFECT
+	assert(t.grade_ceiling(2) == t.PERFECT, "Perfect foundation keeps Perfect open")
+	t.grades[2 * 9 + 1] = t.HIGH
+	assert(t.grade_ceiling(2) == t.HIGH, "A missed Perfect caps the rest at High")
+	t.grades[2 * 9] = t.LOW
+	t.grades[2 * 9 + 1] = t.LOW
+	assert(t.grade_ceiling(2) == t.MIDDLE, "At most one grade above the layer below")
+	# Too many hours without a teacher tears a sinew.
+	t.method[3] = 1
+	t.start_regimen(3, 4, 1)
+	t.teacher[3] = -1
+	t.regimen_until[3] = 100000
+	var hurt := false
+	for w in 30:
+		t.weekly(3, 7, 7 * w + 2)
+		if s.injury_until[3] > 7 * w + 2: hurt = true
+	assert(hurt, "Overtraining injures")
+	# The brain offers tempering and carries it out.
+	var options: Array = s.mind._options(5, s.mind.urges(5))
+	assert(options.any(func(o: Dictionary) -> bool: return o.option == s.mind.Option.TRAIN), "Training is an option")
+	var record: String = s.mind._act(5, {"option": s.mind.Option.TRAIN, "target": -1, "hours": 2}, 10)
+	assert(t.training(5, 11) and record.contains("drilled"), "Choosing to train starts a regimen")
+	assert(s.lifespan(1) > 70, "Tempering lengthens a mortal life")
+	print("BODY summary %s" % JSON.stringify(t.summary()))
+	print("PASS test_body")
+	quit()

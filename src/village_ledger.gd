@@ -736,6 +736,11 @@ func _people(parent: Node) -> void:
 		if arg == "--skills":
 			people_browser.catalogue_mode = true
 			people_browser.redraw()
+		# For screenshots: refresh the open record after a few seconds of play, then scroll the drawer.
+		if arg.begins_with("--scroll="):
+			var pixels := int(arg.trim_prefix("--scroll="))
+			get_tree().create_timer(12.0).timeout.connect(func() -> void: people_browser.redraw())
+			get_tree().create_timer(12.5).timeout.connect(func() -> void: drawer_scroll.scroll_vertical = pixels)
 
 func section(parent: Node, title: String) -> void:
 	label(parent, title, true)

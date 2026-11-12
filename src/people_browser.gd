@@ -2,6 +2,7 @@ extends VBoxContainer
 ## Population drill-down and personal records; never depends on walker membership.
 const VirtualList = preload("res://src/people_list.gd")
 const EgoGraph = preload("res://src/ego_graph.gd")
+const BodyFigure = preload("res://src/body_figure.gd")
 var ledger: PanelContainer
 var population: RefCounted
 var group_mode := "Place"
@@ -450,6 +451,7 @@ func _social_record() -> void:
 	qi_bar.custom_minimum_size.y = 8
 	qi_bar.tooltip_text = "%.1f / %.1f qi" % [society.qi[person], society.qi_cost(person)]
 	add_child(qi_bar)
+	_body_record()
 	_mind_record()
 	text(self, "Family", true)
 	text(self, "Parents")
@@ -492,6 +494,41 @@ func _social_record() -> void:
 		if society.ties.has_grudge(row.entry):
 			var grudge: Dictionary = society.ties.grudge_record(row.entry)
 			text(box, "Grudge %.0f · %s · %s" % [grudge.intensity, grudge.cause, grudge.resolution])
+
+func _body_record() -> void:
+	var temper: RefCounted = population.society.temper
+	if temper == null: return
+	var state: Dictionary = temper.describe(person)
+	text(self, "Body tempering", true)
+	var row := HBoxContainer.new()
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	add_child(row)
+	var figure: Control = BodyFigure.new()
+	figure.custom_minimum_size = Vector2(80, 140)
+	var grades: Array = []
+	for l in state.layer: grades.append(temper.grade(person, l + 1))
+	figure.show_body(grades)
+	row.add_child(figure)
+	var info := VBoxContainer.new()
+	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(info)
+	if state.layer == 0: text(info, "Untempered · knows %s" % state.method)
+	else: text(info, "Layer %d · %s · %s overall" % [state.layer, state.name, state.grade])
+	var forged: PackedStringArray = []
+	for layer: Array in state.layers: forged.append("%s %s" % [layer[0], str(layer[1]).to_lower()])
+	if not forged.is_empty(): text(info, ", ".join(forged))
+	if state.layer > 0 or state.training: text(info, "Method: %s · best grade still possible: %s" % [state.method, state.ceiling])
+	if state.training: text(info, "Drilling %d h a day%s · strain %d%%" % [state.hours, (" under " + str(state.teacher)) if not str(state.teacher).is_empty() else " alone", roundi(state.strain * 100)])
+	if not str(state.gate).is_empty(): text(info, "At the gate of %s: needs %s" % [temper.layer_name(state.layer + 1), state.gate])
+	elif state.layer < temper.LAYERS:
+		var bar := ProgressBar.new()
+		bar.max_value = 1
+		bar.value = state.progress
+		bar.show_percentage = false
+		_thin_bar(bar)
+		bar.custom_minimum_size.y = 6
+		bar.tooltip_text = "Tempering toward %s" % temper.layer_name(state.layer + 1)
+		info.add_child(bar)
 
 func _mind_record() -> void:
 	var mind: RefCounted = population.society.mind

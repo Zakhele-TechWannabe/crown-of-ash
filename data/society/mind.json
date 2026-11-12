@@ -88,5 +88,7 @@
   "habit": 1.0,
   "refusal_cooldown_days": 365,
   "explore_time_away": 0.6,
-  "visit_friend_need": 0.4
+  "visit_friend_need": 0.4,
+  "train_time_after_work": 0.5,
+  "train_renew": 0.5
 }

@@ -74,6 +74,9 @@ func _snapshot(year: int) -> void:
 		for row: Dictionary in society.ties.rows(p):
 			if ties.size() >= top_ties: break
 			ties.append([row.person, snappedf(row.opinion, .1), row.trust, row.bonds])
+		var forged: Array = []
+		if society.temper:
+			for l in society.temper.body_layer[p]: forged.append(society.temper.grade(p, l + 1))
 		var groups: Array = []
 		if society.memberships.has(p):
 			for id: int in society.memberships[p]: groups.append(id)
@@ -83,7 +86,7 @@ func _snapshot(year: int) -> void:
 			"spouse": society.spouse[p], "master": society.master[p], "realm": society.realm[p], "layer": society.layer[p],
 			"realm_label": society.realm_label(p), "qi": snappedf(society.qi[p], .1), "root": society.root_label(p),
 			"reputation": snappedf(society.reputation[p], .1), "mood": snappedf(store.mood[p], .1),
-			"skills": skills, "ties": ties, "factions": groups}))
+			"skills": skills, "ties": ties, "factions": groups, "body_grades": forged}))
 	_write_gz("%s/year_%04d/people.jsonl.gz" % [root, year], people)
 	var factions := PackedStringArray()
 	var limit := int(config.faction_member_limit)

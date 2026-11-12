@@ -18,12 +18,12 @@ const INPUT_NAMES := ["mood", "hunger", "anger", "grief", "joy", "fear", "age", 
 const EMOTIONS := ["anger", "grief", "joy", "fear"]
 enum {SPITE, LONGING, FEAR, PRIDE, RESTLESS, DEVOTION, AMBITION, CURIOSITY}
 enum {ANGER, GRIEF, JOY, AFRAID}
-enum Option {ROUTINE, COURT, SEEK_MASTER, CULTIVATE, EXPLORE, CONFRONT, RECONCILE, HELP, GOSSIP}
+enum Option {ROUTINE, COURT, SEEK_MASTER, CULTIVATE, EXPLORE, CONFRONT, RECONCILE, HELP, GOSSIP, TRAIN}
 const OPTION_NAMES := ["keep to the daily routine", "court", "seek a master", "cultivate in earnest", "explore the wilds",
-	"confront", "make peace with", "help", "gossip about"]
-enum Goal {NONE, MARRY, FIND_MASTER, ASCEND, MASTER_CRAFT, AVENGE, PROVIDE}
-const GOAL_NAMES := ["", "find a spouse", "find a master", "break through", "master a craft", "settle a grudge", "provide for the family"]
-const GOAL_OPTION := [-1, Option.COURT, Option.SEEK_MASTER, Option.CULTIVATE, Option.ROUTINE, Option.CONFRONT, Option.HELP]
+	"confront", "make peace with", "help", "gossip about", "temper the body"]
+enum Goal {NONE, MARRY, FIND_MASTER, ASCEND, MASTER_CRAFT, AVENGE, PROVIDE, TEMPER}
+const GOAL_NAMES := ["", "find a spouse", "find a master", "break through", "master a craft", "settle a grudge", "provide for the family", "temper the body"]
+const GOAL_OPTION := [-1, Option.COURT, Option.SEEK_MASTER, Option.CULTIVATE, Option.ROUTINE, Option.CONFRONT, Option.HELP, Option.TRAIN]
 
 var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/mind.json"))
 var society_ref: WeakRef
@@ -323,7 +323,7 @@ func _options(p: int, urge: PackedFloat32Array) -> Array[Dictionary]:
 	if teacher >= 0:
 		options.append(_option(p, Option.SEEK_MASTER, teacher, [["respect", _ramp(ties.opinion[ties.find(p, teacher)], 15, 60)],
 			["what they could teach", _ramp(teacher_value, 0, 12)], ["youth", 1.0 if years < 25 else 0.5]], {"ambition": 1.0, "devotion": 0.5, "pride": -0.4}, urge))
-	options.append(_option(p, Option.CULTIVATE, -1, [["spirit root", 1.0 if society.revealed[p] else 0.25], ["health", 0.0 if society.injury_until[p] > store.day else 1.0],
+	options.append(_option(p, Option.CULTIVATE, -1, [["spirit root", 1.0 if society.revealed[p] else (0.1 if society.temper else 0.25)], ["health", 0.0 if society.injury_until[p] > store.day else 1.0],
 		["free time", 1.0 - minf(store.hunger[p] / 2.0, 1.0)]], {"ambition": 1.0, "pride": 0.4, "curiosity": 0.2}, urge))
 	if years >= 14 and years <= 60:
 		options.append(_option(p, Option.EXPLORE, -1, [["daring", 1.0 - 0.7 * emotion[p * 4 + AFRAID]], ["fed", 1.0 if store.hunger[p] == 0 else 0.3],
@@ -338,6 +338,15 @@ func _options(p: int, urge: PackedFloat32Array) -> Array[Dictionary]:
 		if friend >= 0 and friend != foe:
 			options.append(_option(p, Option.GOSSIP, foe, [["dislike", _ramp(-foe_opinion, 0, 60)], ["a willing ear", _ramp(friend_opinion, 30, 80)]],
 				{"spite": 0.8, "curiosity": 0.4, "devotion": -0.4}, urge))
+	var temper: RefCounted = society.temper
+	if temper and years >= 12 and years <= 60 and temper.body_layer[p] < temper.LAYERS:
+		var at_gate: bool = temper.tempering[p] >= temper.cost(temper.body_layer[p] + 1)
+		var lacking: String = temper.gate_need(p) if at_gate else ""
+		var train := _option(p, Option.TRAIN, -1, [["health", 0.0 if society.injury_until[p] > store.day else 1.0], ["rested", 1.0 - minf(temper.strain[p], 1.0)],
+			["time after work", float(config.train_time_after_work)], ["a way forward", 0.3 if not lacking.is_empty() and lacking != "drills" else 1.0],
+			["already drilling", float(config.train_renew) if temper.training(p, store.day) else 1.0]], {"ambition": 1.0, "pride": 0.6, "restlessness": 0.3, "fear": -0.3}, urge)
+		train["hours"] = 1 + roundi(2.0 * urge[AMBITION] + urge[PRIDE])
+		options.append(train)
 	var helped := needy if needy >= 0 else friend
 	if helped >= 0:
 		options.append(_option(p, Option.HELP, helped, [["need", 1.0 if helped == needy else float(config.visit_friend_need)], ["bond", _ramp(ties.opinion[ties.find(p, helped)], 20, 80)]],
@@ -372,7 +381,7 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 		Option.CULTIVATE:
 			society.site[p] = maxi(society.site[p], 1 if society.realm[p] < 2 else 2)
 			society.cultivate(p, 3)
-			return "meditated at a qi spot" if society.revealed[p] else "trained the body"
+			return "meditated at a qi spot" if society.revealed[p] else "sat in meditation"
 		Option.EXPLORE:
 			if store.rng.randf() < float(config.explore_injury):
 				society.injury_until[p] = on_day + store.rng.randi_range(14, 60)
@@ -386,6 +395,10 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 				society.technique_element[p] = store.rng.randi_range(0, 9)
 				society.note(p, "manual", "%s found a damaged Yellow breathing manual while exploring" % store.names[p])
 				return "found a manual"
+			if society.temper and society.temper.method[p] < 2 and store.rng.randf() < float(society.temper.config.explore_tempering_manual):
+				society.temper.method[p] = 2
+				society.note(p, "tempering_method", "%s found a tempering manual in ruins while exploring" % store.names[p])
+				return "found a tempering manual"
 			feel(p, JOY, 0.1)
 			return "came back with nothing but stories"
 		Option.CONFRONT:
@@ -430,6 +443,8 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 				ties.event(listener, p, "meal", on_day)
 			society.reputation[t] = maxf(-100.0, society.reputation[t] - 0.5)
 			return "spread a rumour"
+		Option.TRAIN:
+			return society.temper.start_regimen(p, int(chosen.get("hours", 2)), on_day)
 	return "carried on"
 
 ## Life goals are chosen from the heart's strongest fitting urge and checked whenever the person decides.
@@ -445,6 +460,7 @@ func _review_goal(p: int, urge: PackedFloat32Array, on_day: int) -> void:
 		Goal.MASTER_CRAFT: done = store.best_level[p] >= goal_target[p]
 		Goal.AVENGE: done = _max_grudge(p) <= 0.0
 		Goal.PROVIDE: done = on_day - goal_since[p] > 3650
+		Goal.TEMPER: done = society.temper != null and society.temper.body_layer[p] > goal_target[p]
 	if done:
 		society.note(p, "goal", "%s fulfilled a long-held wish to %s" % [store.names[p], GOAL_NAMES[goal[p]]])
 		feel(p, JOY, 0.5)
@@ -457,6 +473,7 @@ func _review_goal(p: int, urge: PackedFloat32Array, on_day: int) -> void:
 	if years >= 14: wants[Goal.MASTER_CRAFT] = urge[PRIDE] * 0.6 + urge[AMBITION] * 0.4
 	if _max_grudge(p) > 30.0: wants[Goal.AVENGE] = urge[SPITE] + 0.1
 	if child_count[p] > 0: wants[Goal.PROVIDE] = urge[DEVOTION]
+	if society.temper and years >= 12 and years <= 50 and society.temper.body_layer[p] < society.temper.LAYERS: wants[Goal.TEMPER] = urge[AMBITION] * 0.5 + urge[PRIDE] * 0.5
 	var pick := Goal.NONE
 	var strength := 0.55
 	for g: int in wants:
@@ -466,6 +483,7 @@ func _review_goal(p: int, urge: PackedFloat32Array, on_day: int) -> void:
 	goal[p] = pick
 	goal_since[p] = on_day
 	goal_target[p] = society.realm[p] * 10 + society.layer[p] if pick == Goal.ASCEND else (mini(50, store.best_level[p] + 5) if pick == Goal.MASTER_CRAFT else -1)
+	if pick == Goal.TEMPER: goal_target[p] = society.temper.body_layer[p]
 
 func _max_grudge(p: int) -> float:
 	var ties: RefCounted = society_ref.get_ref().ties
