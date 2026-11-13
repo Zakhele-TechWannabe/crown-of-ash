@@ -1,8 +1,9 @@
 extends Control
-## A small figure lit up to a person's tempering layer. Faint parts are Low grade, bright parts High, glowing parts Perfect.
+## A small figure lit up to a person's tempering layer. The body is always drawn solid with an ink outline; each forged
+## layer shows in its colour (dimmer at Low grade, full at High, glowing at Perfect), unforged layers as muted traces.
 const Palette = preload("res://src/palette.gd")
-const OPACITY := [0.5, 0.7, 0.9, 1.0]
-const UNFORGED := 0.08
+const OPACITY := [0.72, 0.84, 0.94, 1.0]
+const UNFORGED := 0.28
 var layers: Array = []
 
 func show_body(grades: Array) -> void:
@@ -19,7 +20,10 @@ func _draw() -> void:
 	if layers.size() == 9 and layers.all(func(g: int) -> bool: return g == 3):
 		for r in [150.0, 110.0, 70.0]: draw_circle(Vector2(100, 170), r, Color(Palette.GOLD, 0.1))
 	var parts := [Rect2(70, 66, 60, 112), Rect2(44, 70, 20, 112), Rect2(136, 70, 20, 112), Rect2(73, 172, 23, 158), Rect2(104, 172, 23, 158)]
-	var flesh := Color(Palette.EARTH.lightened(0.35), _alpha(2))
+	# The plain body, always readable.
+	draw_circle(Vector2(100, 38), 22, Palette.PAPER_LIGHT)
+	for r: Rect2 in parts: draw_rect(r, Palette.PAPER_LIGHT)
+	var flesh := Color(Palette.EARTH.lightened(0.2), _alpha(2) if layers.size() >= 2 else 0.0)
 	draw_circle(Vector2(100, 38), 22, flesh)
 	for r: Rect2 in parts: draw_rect(r, flesh)
 	var bone := Color(Palette.INK_SOFT, _alpha(4))
@@ -47,6 +51,9 @@ func _draw() -> void:
 	var meridian := Color(Palette.JADE, _alpha(8))
 	for line: Array in [[100, 18, 100, 320], [54, 76, 52, 186], [146, 76, 148, 186], [86, 180, 82, 325], [114, 180, 118, 325]]:
 		draw_dashed_line(Vector2(line[0], line[1]), Vector2(line[2], line[3]), meridian, 1.8, 4.0)
-	var skin := Color(Palette.BRASS, _alpha(1))
-	draw_arc(Vector2(100, 38), 22, 0, TAU, 32, skin, 2.5)
-	for r: Rect2 in parts: draw_rect(r, skin, false, 2.5)
+	# Outline: ink always; Copper Skin, once forged, rims it in brass.
+	var forged_skin := layers.size() >= 1
+	var skin := Palette.BRASS.darkened(0.3 - 0.1 * layers[0]) if forged_skin else Palette.INK_SOFT
+	var width := 3.0 if forged_skin else 2.0
+	draw_arc(Vector2(100, 38), 22, 0, TAU, 32, skin, width)
+	for r: Rect2 in parts: draw_rect(r, skin, false, width)
