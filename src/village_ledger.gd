@@ -990,7 +990,9 @@ func _bestiary(parent: Node) -> void:
 			var box := VBoxContainer.new()
 			panel.add_child(box)
 			label(box, str(entry.name))
-			var notes: Array[String] = [str(entry.group), " and ".join(entry.get("habitat", []))]
+			var places: Array = entry.get("habitat", [])
+			var where := ", ".join(places.slice(0, -1)) + " and " + str(places[-1]) if places.size() > 1 else ("".join(places))
+			var notes: Array[String] = [str(entry.group), where]
 			if not str(entry.get("use", "")).is_empty(): notes.append("used for " + str(entry.use))
 			if int(entry.get("danger", 0)) >= 2: notes.append("dangerous")
 			small(box, " · ".join(notes))
