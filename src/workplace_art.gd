@@ -9,8 +9,8 @@ static func texture(kind: String, w: int, h: int, variant: int) -> ImageTexture:
 	if not _cache.has(key): _cache[key] = ImageTexture.create_from_image(_build(kind, w, h, variant))
 	return _cache[key]
 
-static func anchor(h: int) -> Vector2:
-	return Vector2(3, h * 16 + 36)
+static func anchor(h: int, kind: String = "") -> Vector2:
+	return Vector2(3, h * 16 + (60 if kind.begins_with("gate_side") else 36))
 
 static func _box(im: Image, r: Rect2i, col: Color) -> void:
 	im.fill_rect(r, col)
@@ -19,7 +19,7 @@ static func _box(im: Image, r: Rect2i, col: Color) -> void:
 
 static func _build(kind: String, w: int, h: int, variant: int) -> Image:
 	var width := w * 16
-	var im := Image.create(width + 6, h * 16 + 36, false, Image.FORMAT_RGBA8)
+	var im := Image.create(width + 6, h * 16 + (60 if kind.begins_with("gate_side") else 36), false, Image.FORMAT_RGBA8)
 	var foot := im.get_height() - 2
 	var timber := Palette.EARTH.darkened(0.5)
 	var stone := Palette.STONE.darkened(0.14)
@@ -47,6 +47,24 @@ static func _build(kind: String, w: int, h: int, variant: int) -> Image:
 			for x in [10, 13]: _box(im, Rect2i(x, foot - 28, 2, 16), timber)
 			_box(im, Rect2i(9, foot - 34, 4, 18), timber)
 			_box(im, Rect2i(9, foot - 18, 4, 18), timber)
+		"gate_side", "gate_side_back", "gate_side_front":
+			var cx := width / 2
+			var depth := h * 16 + 8
+			# Far post is tucked behind the narrow roof; the near post plants its feet in front.
+			var bases: Array = [foot - depth] if kind == "gate_side_back" else ([foot] if kind == "gate_side_front" else [foot - depth, foot])
+			for base: int in bases:
+				var post_x := cx - 11 if base < foot else cx
+				_box(im, Rect2i(post_x - 3, base - 3, 10, 4), stone)
+				_box(im, Rect2i(post_x, base - 31, 5, 29), Palette.RED.darkened(0.18))
+			if kind == "gate_side_back":
+				BuildingArt._outline(im)
+				return im
+			for y in range(foot - depth - 39, foot - 33):
+				var tip := 3 if y < foot - depth - 35 or y > foot - 37 else 0
+				_box(im, Rect2i(cx - 7 - tip, y, 19 + tip * 2, 1), roof)
+			_box(im, Rect2i(cx - 5, foot - depth - 38, 3, depth + 5), roof.lightened(0.18))
+			_box(im, Rect2i(cx + 9, foot - depth - 36, 3, depth + 4), timber)
+			_box(im, Rect2i(cx - 7, foot - 33, 19, 5), roof.darkened(0.2))
 		"gate":
 			for x in [7, width - 4]:
 				_box(im, Rect2i(x - 2, foot - 3, 9, 4), stone)

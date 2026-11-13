@@ -38,20 +38,29 @@ func setup(ground: RefCounted, walk_grid: AStarGrid2D, walkers: Array, terrain: 
 			var middle := origin + Vector2i(int(r[2]) / 2, int(r[3]))
 			# Lateral gates touch the outer terrace; the mountain gate faces south.
 			if not sect.inside_grounds(middle) and not sect.inside_grounds(middle + Vector2i.UP * 3): continue
+			var lateral := preload("res://src/gate_direction.gd").east_west(source, origin, int(r[2]), int(r[3]))
+			var outward := "west" if middle.x < sect.center.x else "east"
 			var pair := guardians.size()
 			for side in 2:
 				var post := origin + Vector2i(-1 if side == 0 else int(r[2]), int(r[3]))
-				if b.name in ["West Gate", "East Gate"]: post = middle + Vector2i(0, -3 if side == 0 else 2)
-				var direction := ("west" if side == 0 else "east") if b.name == "Mountain Gate" else ("north" if side == 0 else "south")
+				if lateral: post = middle + Vector2i(0, -3 if side == 0 else 2)
+				var direction := ("west" if side == 0 else "east") if not lateral else ("north" if side == 0 else "south")
 				var g := {"id": guardians.size(), "gate": str(b.name), "name": "the %s swordsman of the %s" % [direction, b.name],
-					"post": post, "tile": post, "facing": "west" if b.name == "West Gate" else ("east" if b.name == "East Gate" else "south"), "state": "guarding", "energy": float(config.energy_max), "kills": 0, "breaks": 0,
+					"post": post, "tile": post, "facing": outward if lateral else "south", "state": "guarding", "energy": float(config.energy_max), "kills": 0, "breaks": 0,
 					"partner": pair + 1 - side, "sight": {}, "night": {}}
-				for at: Vector2i in sect.grounds:
-					if Vector2(post).distance_to(Vector2(at)) > float(config.day_sight): continue
-					if line_clear(post, at):
-						g.sight[at] = true
-						if Vector2(post).distance_to(Vector2(at)) <= float(config.night_sight): g.night[at] = true
 				guardians.append(g)
+	rebuild_sight()
+
+func rebuild_sight() -> void:
+	for g: Dictionary in guardians:
+		g.sight = {}
+		g.night = {}
+		for at: Vector2i in sect.grounds:
+			if Vector2(g.post).distance_to(Vector2(at)) > float(config.day_sight): continue
+			if line_clear(g.post, at):
+				g.sight[at] = true
+				if Vector2(g.post).distance_to(Vector2(at)) <= float(config.night_sight): g.night[at] = true
+
 
 ## Bresenham, with opaque footprints and tall terrace faces.
 func line_clear(a: Vector2i, b: Vector2i) -> bool:

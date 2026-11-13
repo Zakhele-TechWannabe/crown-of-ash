@@ -9,6 +9,13 @@ const BLUE := Palette.BLUE
 const PANEL := Palette.PAPER
 const DIRECTIONS := [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
 
+const WorldSave = preload("res://src/world_save.gd")
+var save_elapsed := 0.0
+var save_day := -1
+var save_ready := false
+var restored_world := false
+var quitting := false
+
 var life: Node2D
 var ground_view: Node2D
 var map_layer: CanvasLayer
@@ -142,11 +149,43 @@ func _ready() -> void:
 	if not start_map and destination.is_empty() and not start_at:
 		_start_in_valley.call_deferred()
 	_window_setup()
+	var load_failed := false
+	if WorldSave.enabled():
+		get_tree().auto_accept_quit = false
+		if not "--new-world" in OS.get_cmdline_user_args():
+			restored_world = WorldSave.read(self)
+			load_failed = not restored_world and (FileAccess.file_exists(WorldSave.PATH) or FileAccess.file_exists(WorldSave.PATH + ".bak"))
+		save_ready = not load_failed
+		if load_failed: life.paused = true
+		save_day = life.population.day
+		_save_world.call_deferred()
+	var new_world := Button.new()
+	new_world.text = "New world"
+	new_world.position = Vector2(710, 7)
+	overlay.add_child(new_world)
+	var confirmation := ConfirmationDialog.new()
+	confirmation.theme = preload("res://src/ui_theme.gd").build()
+	confirmation.dialog_text = "Replace this valley with a new world?"
+	add_child(confirmation)
+	new_world.pressed.connect(func() -> void: confirmation.popup_centered())
+	if load_failed:
+		var notice := AcceptDialog.new()
+		notice.theme = preload("res://src/ui_theme.gd").build()
+		notice.dialog_text = "Could not load the world save or its backup. Both files have been kept. Choose New world on the atlas to replace them."
+		add_child(notice)
+		notice.popup_centered.call_deferred()
+	confirmation.confirmed.connect(func() -> void:
+		save_ready = false
+		life._close_archive()
+		if WorldSave.enabled():
+			for path: String in [WorldSave.PATH, WorldSave.PATH + ".bak"]:
+				if FileAccess.file_exists(path): DirAccess.remove_absolute(path)
+		get_tree().reload_current_scene())
 
 
 ## Played normally, the game opens on the village rather than the continent; tests build the scene themselves.
 func _start_in_valley() -> void:
-	if get_tree().current_scene == self and not on_ground:
+	if get_tree().current_scene == self and not on_ground and not restored_world:
 		_go_to("Servants' Village", false)
 
 
@@ -226,6 +265,9 @@ func _clamp_camera() -> void:
 
 
 func _process(dt: float) -> void:
+	if save_ready:
+		save_elapsed += dt
+		if life.population.day != save_day or save_elapsed >= 120.0: _save_world()
 	var complete := true
 	if on_ground:
 		complete = ground.update_chunks(ground_view.cam, 8 if not shot_path.is_empty() else 2)
@@ -452,3 +494,37 @@ func _window_setup() -> void:
 		win.mode = Window.MODE_WINDOWED
 		win.current_screen = target
 	win.mode = Window.MODE_FULLSCREEN
+
+
+func _save_world() -> void:
+	if not save_ready: return
+	var error := WorldSave.write(self)
+	if error == ERR_BUSY: return
+	if error != OK: push_error("World save failed: %s" % error_string(error))
+	else:
+		save_day = life.population.day
+		save_elapsed = 0.0
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST and WorldSave.enabled():
+		_quit_world()
+	elif what == NOTIFICATION_PREDELETE:
+		_save_world()
+		save_ready = false
+
+
+func _exit_tree() -> void:
+	_save_world()
+	save_ready = false
+
+
+func _quit_world() -> void:
+	if quitting: return
+	quitting = true
+	set_process(false)
+	life.set_process(false)
+	while life.population.society.faction_pending:
+		await get_tree().process_frame
+	_save_world()
+	save_ready = false
+	get_tree().quit()

@@ -283,7 +283,7 @@ func _building(b: Dictionary) -> void:
 			for x in w: standing_tiles[origin + Vector2i(x, y)] = true
 		return
 	if kind in ["house", "hall", "gate"]:
-		standing.append({"origin": origin, "w": w, "h": h, "kind": kind, "variant": absi(origin.x * 31 + origin.y * 17) % 3})
+		standing.append({"origin": origin, "w": w, "h": h, "kind": kind, "side_passage": kind == "gate" and preload("res://src/gate_direction.gd").east_west(self, origin, w, h), "variant": absi(origin.x * 31 + origin.y * 17) % 3})
 		for y in h:
 			for x in w: standing_tiles[origin + Vector2i(x, y)] = true
 	# A path across each terrace joins its buildings to the central ascent.

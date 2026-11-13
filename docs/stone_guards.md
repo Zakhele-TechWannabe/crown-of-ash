@@ -131,3 +131,23 @@ Death uses `society.die(p, "killed", "...was cut down by the north swordsman of 
 - A Perfected Body (layer 9) beats a swordsman about half the time. A broken swordsman stays broken and leaves its gate with one guardian.
 - Over a 10-year headless sim (`--headless-sim --years=10`): print breaches, seen, killed, escaped, pursuits, frozen and broken counts. The valley must not be wiped out: at least half the founders' line is still alive.
 - Run the full suite. ground_lod, village and sect must still pass.
+
+## Version 1.1: wear, mending, and a card
+
+- **Harm persists.** Each guardian keeps a `harm` value (0–100) between fights, and a fight starts from it: pass the starting harm into Combat.fight with a `start_harm: [a, b]` option, applied before the first blow. Breaking still happens at 100.
+- **Cracks show.** The guarding and pursuing textures get crack overlays at harm ≥ 30 and ≥ 60, plus a chip or two missing at ≥ 60.
+- **Mending.** Only on its plinth, the old formation beneath the grounds mends a guardian by `mend_per_day` (law.json, start at 2 harm a day). Nothing mends off the plinth, and rubble never mends. A guardian with harm above `retreat_harm` (law.json, 60) won't start a pursuit. Formations (later) will multiply mending and recharge.
+- **Clicking a guardian** (or its rubble) opens a small card in the same style and place as the villager card (src/villager_card.gd), following the HUD conventions: a small contextual card, not a big panel. It shows:
+  - its name and gate, and its state;
+  - an energy bar, and a harm bar labelled by the crack level;
+  - power, guard, speed and breath, adjusted for the current harm;
+  - kills, trespassers driven off, and fights;
+  - its last fight in one line;
+  - for rubble: who broke it, and when.
+  
+  Hover shows its name.
+- **Tests (add to test_law.gd):**
+  - harm carries between fights;
+  - mending only on the plinth, never for rubble;
+  - no pursuit when harm is above retreat_harm;
+  - the card opens for a guardian and for rubble.

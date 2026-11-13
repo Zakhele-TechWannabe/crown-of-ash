@@ -12,7 +12,17 @@ var last_snapshot_year := -1
 func _init(store: RefCounted, seed_value: int) -> void:
 	store_ref = weakref(store)
 	var stamp := Time.get_datetime_string_from_system(false, true).replace(":", "").replace(" ", "_").replace("-", "")
-	root = "user://archive/run_%s" % stamp
+	root = "user://archive/run_%s_%d" % [stamp, Time.get_ticks_usec()]
+	if preload("res://src/world_save.gd").enabled() and not "--new-world" in OS.get_cmdline_user_args():
+		for path: String in ["user://saves/world.save", "user://saves/world.save.bak"]:
+			if not FileAccess.file_exists(path): continue
+			var saved: Dictionary = preload("res://src/world_save.gd").read_envelope(path)
+			if not saved.is_empty():
+				var previous: String = saved.get("state", {}).get("life", {}).get("population", {}).get("society", {}).get("archive", {}).get("root", "")
+				if not previous.is_empty():
+					root = previous
+					_write_text("user://archive/latest.txt", root.get_file())
+					return
 	DirAccess.make_dir_recursive_absolute(root)
 	var meta := {"version": VERSION, "run": root.get_file(), "started": Time.get_datetime_string_from_system(false, true), "seed": seed_value, "start_day": store.day, "people": store.size()}
 	_write_text(root + "/meta.json", JSON.stringify(meta, "  "))

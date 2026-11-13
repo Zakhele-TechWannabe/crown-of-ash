@@ -395,11 +395,13 @@ func _draw() -> void:
 			for state: String in ["plinth", str(g.get("visual_state", g.state))]:
 				var tile: Vector2 = Vector2(g.post) if state == "plinth" else Vector2(g.get("visual_tile", g.tile))
 				var foot := (tile + Vector2.ONE * 0.5) * 32.0 - Vector2(0, world.ground.terrace_level(Vector2i(tile)) * world.ground.exaggeration)
-				if area.grow(64).has_point(foot): trees.append([foot, -1, {"kind": "guardian", "state": state, "w": 1}])
+				if area.grow(64).has_point(foot): trees.append([foot, -1, {"kind": "guardian", "state": state, "facing": g.facing, "w": 1}])
 		trees.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
 	var shade := Color(Palette.INK, 0.22)
 	for tree: Array in trees:
 		if tree[1] >= 0: _shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
+		elif str(tree[2].kind).begins_with("gate_side"):
+			_shadow(tree[0] + Vector2(tree[2].w * 16 + (-16 if tree[2].kind == "gate_side_back" else 6), -2), 16.0, shade)
 		else: _standing_shadow(tree[0], tree[2].w)
 	for p: Dictionary in draw_order:
 		if not p.hidden: _shadow(point(p) + Vector2(3, -1), 11.0, shade)
@@ -453,7 +455,16 @@ func _trees_in(area: Rect2) -> Array:
 	for b: Dictionary in sect.standing + workplace_sprites:
 		var anchor: Vector2i = b.origin + Vector2i(b.w / 2, b.h - 1)
 		var foot := Vector2(b.origin.x, b.origin.y + b.h) * 32.0 - Vector2(0, world.ground.terrace_level(anchor) * world.ground.exaggeration)
-		if bounds.grow(b.w * 32.0).has_point(foot): tree_view.append([foot, -1, b])
+		if bounds.grow(b.w * 32.0).has_point(foot):
+			if b.kind == "gate" and b.get("side_passage", false):
+				var back := b.duplicate()
+				back.kind = "gate_side_back"
+				back.visual_offset = Vector2(0, (b.h * 16 + 8) * 2)
+				tree_view.append([foot - back.visual_offset, -1, back])
+				var front := b.duplicate()
+				front.kind = "gate_side_front"
+				tree_view.append([foot, -1, front])
+			else: tree_view.append([foot, -1, b])
 	tree_view.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
 	return tree_view
 
@@ -462,7 +473,7 @@ func _tree(tree: Array) -> void:
 	if tree[1] < 0:
 		var b: Dictionary = tree[2]
 		if b.kind == "guardian":
-			var sprite := GuardianArt.texture(b.state)
+			var sprite := GuardianArt.texture(b.state, b.get("facing", "south"))
 			draw_texture_rect(sprite, Rect2(tree[0] - Vector2(20, 64), sprite.get_size() * 2.0), false)
 			return
 		if b.kind == "orchard":
@@ -471,8 +482,8 @@ func _tree(tree: Array) -> void:
 			return
 		var building: bool = b.kind in ["house", "hall", "cave"]
 		var texture: ImageTexture = BuildingArt.texture(b.kind, b.w, b.h, b.variant) if building else WorkplaceArt.texture(b.kind, b.w, b.h, b.variant)
-		var anchor: Vector2 = BuildingArt.anchor(b.kind, b.h) if building else WorkplaceArt.anchor(b.h)
-		draw_texture_rect(texture, Rect2(tree[0] - anchor * 2.0, texture.get_size() * 2.0), false)
+		var anchor: Vector2 = BuildingArt.anchor(b.kind, b.h) if building else WorkplaceArt.anchor(b.h, b.kind)
+		draw_texture_rect(texture, Rect2(tree[0] + b.get("visual_offset", Vector2.ZERO) - anchor * 2.0, texture.get_size() * 2.0), false)
 		return
 	var region := TreeArt.region(tree[1], tree[2])
 	draw_texture_rect_region(TreeArt.texture(), Rect2(tree[0] - Vector2(TreeArt.FOOT) * 2.0, region.size * 2.0), region)
@@ -888,7 +899,7 @@ func _close_archive() -> void:
 		society.archive = null
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_PREDELETE: _close_archive()
+	if what == NOTIFICATION_PREDELETE: _close_archive()
 
 
 # ---------- fights on the map ----------
