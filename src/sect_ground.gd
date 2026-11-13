@@ -268,6 +268,9 @@ func _building(b: Dictionary) -> void:
 		return
 	if kind == "cave":
 		_paint(r, "cave")
+		standing.append({"origin": origin, "w": w, "h": h, "kind": "cave", "variant": absi(origin.x * 31 + origin.y * 17) % 3})
+		for y in h:
+			for x in w: standing_tiles[origin + Vector2i(x, y)] = true
 		return
 	if kind in ["house", "hall"]:
 		standing.append({"origin": origin, "w": w, "h": h, "kind": kind, "variant": absi(origin.x * 31 + origin.y * 17) % 3})
@@ -340,7 +343,6 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 		image.fill_rect(Rect2i(pos + Vector2i(4, 5), Vector2i(8, 1)), Palette.JADE.lightened(0.7))
 	elif surface == "cave":
 		image.fill_rect(rect, Palette.STONE.darkened(0.3))
-		image.fill_rect(Rect2i(pos + Vector2i(3, 4), Vector2i(10, 12)), ink)
 	else:
 		# Paving stays under the stalls: faint seams only.
 		var steps := surface == "stairs"

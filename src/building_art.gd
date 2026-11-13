@@ -5,7 +5,7 @@ extends RefCounted
 const Palette = preload("res://src/palette.gd")
 ## Overhang of the eaves beyond the walls, and how far a roof rises above its footprint, in texels.
 const EAVE := 3
-const RISE := {"house": 14, "hall": 22}
+const RISE := {"house": 14, "hall": 22, "cave": 22}
 
 static var _cache: Dictionary = {}
 
@@ -24,6 +24,7 @@ static func anchor(kind: String, h: int) -> Vector2:
 
 
 static func _build(kind: String, w: int, h: int, variant: int) -> Image:
+	if kind == "cave": return _cave(w, h, variant)
 	var hall := kind == "hall"
 	var width := w * 16
 	var size := Vector2i(width + EAVE * 2, h * 16 + RISE[kind])
@@ -112,6 +113,41 @@ static func _build(kind: String, w: int, h: int, variant: int) -> Image:
 	for x in range(EAVE, EAVE + width):
 		for y in range(bottom, mini(bottom + 3, size.y - footing)):
 			image.set_pixel(x, y, image.get_pixel(x, y).darkened(0.25))
+	_outline(image)
+	return image
+
+
+## A seclusion cave: a mossy outcrop with an arched mouth, a stone sill and a paper talisman sealing it.
+static func _cave(w: int, h: int, variant: int) -> Image:
+	var size := Vector2i(w * 16 + EAVE * 2, h * 16 + RISE["cave"])
+	var image := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	var rock := Palette.STONE.darkened(0.18 + variant * 0.04)
+	var middle := size.x / 2.0
+	# The outcrop: a rounded hump of rock, lit from the top left.
+	for y in size.y:
+		for x in size.x:
+			var dx := (x + 0.5 - middle) / (size.x / 2.0)
+			var top := size.y * (0.08 + 0.55 * dx * dx) + sin(x * 0.7 + variant) * 1.5
+			if y < top: continue
+			var light := -dx * 0.5 - float(y) / size.y * 0.4
+			var col := rock.lightened(0.12) if light > 0.0 else (rock if light > -0.35 else rock.darkened(0.15))
+			if (x * 7 + y * 3 + variant) % 23 == 0: col = col.darkened(0.25)
+			if y < top + 3 and (x + variant) % 5 < 3: col = Palette.GREEN.darkened(0.2)
+			image.set_pixel(x, y, col)
+	# The arched mouth, darkest at the back.
+	var mouth := Vector2i(16, 20)
+	var left := int(middle) - mouth.x / 2
+	var bottom := size.y - 3
+	for y in mouth.y:
+		var t := float(y) / mouth.y
+		var half := int(mouth.x / 2.0 * sqrt(clampf(t * 1.6, 0.0, 1.0)))
+		for x in range(-half, half):
+			image.set_pixel(int(middle) + x, bottom - mouth.y + y, Palette.INK.lerp(Palette.INK_SOFT, absf(float(x)) / maxf(1, half) * 0.4))
+	image.fill_rect(Rect2i(left - 3, bottom, mouth.x + 6, 3), Palette.STONE.lightened(0.05))
+	# A talisman on a cord across the entrance.
+	image.fill_rect(Rect2i(left, bottom - mouth.y + 6, mouth.x, 1), Palette.BRASS)
+	image.fill_rect(Rect2i(int(middle) - 2, bottom - mouth.y + 7, 4, 8), Palette.GOLD.lightened(0.15))
+	image.fill_rect(Rect2i(int(middle) - 1, bottom - mouth.y + 9, 2, 4), Palette.RED)
 	_outline(image)
 	return image
 
