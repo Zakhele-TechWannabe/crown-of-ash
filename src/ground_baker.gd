@@ -237,7 +237,8 @@ func _bake_row(key: Vector2i, y: int) -> void:
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.EARTH.darkened(0.45))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
-		if info.decoration >= 0 and sect.hunting.cached_weight(tile) < 0.25:
+		# Trees (13–16) stand up as sprites (see trees_in_block); only low things are painted on the ground.
+		if info.decoration >= 0 and not info.decoration in [13, 14, 15, 16] and sect.hunting.cached_weight(tile) < 0.25:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))
 
 func bake(key: Vector2i) -> void:

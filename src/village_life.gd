@@ -28,6 +28,9 @@ var child_art: Array[ImageTexture] = []
 var selected := -1
 ## The first twenty as they arrived; a fresh twenty is sent from these if the valley ever empties.
 var founders: Array[Dictionary] = []
+const TreeArt = preload("res://src/tree_art.gd")
+var tree_view: Array = []
+var tree_view_key := Rect2i()
 const LANES := ["earth", "paving", "bridge"]
 ## Tiles on a bank that walkers may not cross (unless a ramp is cut there).
 var cliffs: Dictionary = {}
@@ -361,11 +364,23 @@ func _draw() -> void:
 	draw_order = people.duplicate()
 	for p: Dictionary in nearby_views.values(): draw_order.append(p)
 	draw_order.sort_custom(_feet_before)
+	# Trees stand up off the ground: shadows first, then trees and people in order of their feet,
+	# so a villager can walk behind a trunk.
+	var trees := _trees_in(area.grow(256))
+	var shade := Color(Palette.INK, 0.22)
+	for tree: Array in trees:
+		_shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
+	for p: Dictionary in draw_order:
+		if not p.hidden: _shadow(point(p) + Vector2(3, -1), 11.0, shade)
+	var next_tree := 0
 	var drawn := 0
 	for p: Dictionary in draw_order:
 		var at := point(p)
 		if p.hidden or not area.has_point(at):
 			continue
+		while next_tree < trees.size() and trees[next_tree][0].y <= at.y:
+			_tree(trees[next_tree])
+			next_tree += 1
 		if drawn >= WALKER_LIMIT: break
 		drawn += 1
 		var child: bool = p.kind == 8 or population.age(int(p.get("id", 0))) < 16
@@ -378,6 +393,36 @@ func _draw() -> void:
 		draw_texture_rect((child_art if child else person_art)[frame], Rect2(at - Vector2(18, 34), Vector2(36, 36)), false, p.tint)
 		if p.get("carrying", false):
 			draw_texture_rect_region(atlas, Rect2(at - Vector2(16, (28 if child else 34) + 26), Vector2(32, 32)), Rect2(0, 128, 16, 16))
+	while next_tree < trees.size():
+		_tree(trees[next_tree])
+		next_tree += 1
+
+
+## The trees the ground has placed around the view, sorted by their feet.
+func _trees_in(area: Rect2) -> Array:
+	var first := Vector2i((area.position / (32.0 * 16.0)).floor())
+	var last := Vector2i((area.end / (32.0 * 16.0)).floor()) + Vector2i(0, 1)
+	var key := Rect2i(first, last - first)
+	if key == tree_view_key: return tree_view
+	tree_view_key = key
+	tree_view = []
+	for by in range(first.y, last.y + 1):
+		for bx in range(first.x, last.x + 1):
+			for tree: Array in world.ground.trees_in_block(Vector2i(bx, by)):
+				tree_view.append(tree)
+	tree_view.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
+	return tree_view
+
+
+func _tree(tree: Array) -> void:
+	var region := TreeArt.region(tree[1], tree[2])
+	draw_texture_rect_region(TreeArt.texture(), Rect2(tree[0] - Vector2(TreeArt.FOOT) * 2.0, region.size * 2.0), region)
+
+
+func _shadow(at: Vector2, radius: float, colour: Color) -> void:
+	draw_set_transform(at, 0.0, Vector2(1.0, 0.38))
+	draw_circle(Vector2.ZERO, radius, colour)
+	draw_set_transform(Vector2.ZERO)
 
 
 func _feet_before(a: Dictionary, b: Dictionary) -> bool:

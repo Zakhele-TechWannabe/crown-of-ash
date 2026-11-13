@@ -1,6 +1,7 @@
 extends Node2D
 ## Disposable chunks share one small atlas; samples never depend on visit order.
 const Palette = preload("res://src/palette.gd")
+const TreeArt = preload("res://src/tree_art.gd")
 
 const SIDE := 64
 const TILE := 32.0
@@ -16,6 +17,7 @@ var exaggeration := E
 var atlas_image: Image
 var mountain := FastNoiseLite.new()
 var height_cache: Dictionary = {}
+var tree_blocks: Dictionary = {}
 var baking := false
 var pending: Dictionary = {}
 var jobs: Dictionary = {}
@@ -199,7 +201,48 @@ func sample(tile: Vector2i) -> Dictionary:
 		elif decoration in [13, 14, 15]:
 			decoration = 16
 	var shade := clampi(roundi((light - 0.5) / 0.125), 0, SHADES - 1) if kind > 2 else 4
-	return {"kind": kind, "decoration": decoration, "shade": shade, "band": band if kind > 2 else 0, "cover": covers[kind] if kind in [4, 5] else cover, "height": height, "level": terrace_level(tile)}
+	return {"kind": kind, "decoration": decoration, "shade": shade, "band": band if kind > 2 else 0, "cover": covers[kind] if kind in [4, 5] else cover, "height": height, "level": terrace_level(tile), "biome": b}
+
+
+## Standing trees in a 16×16-tile block: [foot (world px), species, variant], sorted by foot.
+## One candidate per jittered 3×3-tile cell; the species follows the land (TreeArt).
+func trees_in_block(block: Vector2i) -> Array:
+	if tree_blocks.has(block): return tree_blocks[block]
+	var found: Array = []
+	var low := block * 16
+	for cy in range(floori(low.y / 3.0), ceili((low.y + 16) / 3.0)):
+		for cx in range(floori(low.x / 3.0), ceili((low.x + 16) / 3.0)):
+			var h := _hash(cx * 7 + 11, cy * 13 + 5)
+			var jitter := Vector2((h % 1000) / 400.0, ((h >> 10) % 1000) / 400.0)
+			var spot := Vector2(cx * 3, cy * 3) + jitter
+			var tile := Vector2i(spot.floor())
+			if not Rect2i(low, Vector2i(16, 16)).has_point(tile) or sect.has_tile(tile) or _near_building(tile): continue
+			var species := -1
+			var weight: float = sect.hunting.cached_weight(tile)
+			if weight >= 0.25:
+				if sect.hunting.cached_flag(tile, 1) or sect.hunting.cached_flag(tile, 2) or (h >> 3) % 1000 > weight * 900: continue
+				species = [TreeArt.GIANT, TreeArt.GIANT, TreeArt.GIANT, TreeArt.CONIFER, TreeArt.CONIFER, TreeArt.OAK][(h >> 5) % 6]
+			else:
+				var info := sample(tile)
+				match int(info.decoration):
+					13: species = TreeArt.WILLOW if int(info.biome) == 10 else (TreeArt.CONIFER if float(info.height) > 0.72 else (TreeArt.BIRCH if (h >> 5) % 4 == 0 else TreeArt.OAK))
+					14: species = TreeArt.BAMBOO
+					15: species = [TreeArt.SPIRIT, TreeArt.SPIRIT, TreeArt.OAK, TreeArt.OAK, TreeArt.BIRCH, TreeArt.CONIFER][(h >> 5) % 6]
+					16: species = TreeArt.SHRUB if (h >> 5) % 10 < 7 else TreeArt.CONIFER
+			if species < 0: continue
+			var foot := (spot + Vector2(0.5, 0.9)) * TILE - Vector2(0, terrace_level(tile) * exaggeration)
+			found.append([foot, species, (h >> 8) % TreeArt.VARIANTS])
+	found.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
+	tree_blocks[block] = found
+	return found
+
+
+## A crown reaches about four tiles up from its foot: keep it off roofs and out of doorways.
+func _near_building(tile: Vector2i) -> bool:
+	for dy in range(-3, 2):
+		for dx in range(-1, 2):
+			if sect.plinth.has(tile + Vector2i(dx, dy)): return true
+	return false
 
 
 func _river_distance(p: Vector2) -> float:
@@ -290,6 +333,7 @@ func set_exaggeration(value: float) -> void:
 	chunks.clear()
 	pending.clear()
 	height_cache.clear()
+	tree_blocks.clear()
 	generation += 1
 	far_cache.clear()
 	far_lru.clear()
@@ -446,7 +490,8 @@ func _bake_row(key: Vector2i, y: int) -> void:
 			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.EARTH.darkened(0.45))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		sect.hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
-		if info.decoration >= 0 and sect.hunting.cached_weight(tile) < 0.25:
+		# Trees (13–16) stand up as sprites (see trees_in_block); only low things are painted on the ground.
+		if info.decoration >= 0 and not info.decoration in [13, 14, 15, 16] and sect.hunting.cached_weight(tile) < 0.25:
 			image.blend_rect(atlas_image, Rect2i(int(info.decoration) * 16, int(info.shade) * 16, 16, 16), Vector2i(x * 16, top))
 
 func natural_dry(at: Vector2i) -> bool:

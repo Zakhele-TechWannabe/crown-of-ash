@@ -293,31 +293,7 @@ func draw(image: Image, tile: Vector2i, pos: Vector2i, occupied: bool) -> void:
 			for step in 5:
 				for side in [-1, 1]:
 					image.fill_rect(Rect2i(pos + Vector2i(8 + side * step, 9 - step / 2), Vector2i(2, 1)), Palette.GREEN.darkened(0.45))
-		if prepared and w > 0.99:
-			for operation: Array in render_tiles.get(tile, []):
-				image.blend_rect(crown_atlas[operation[2]], operation[0], pos + operation[1])
-		else:
-			for crown: Array in crowns_at(Vector2i(floori(tile.x / 3.0), floori(tile.y / 3.0))):
-				var center: Vector2 = Vector2(pos) + (crown[0] - Vector2(tile)) * 16.0
-				if center.distance_squared_to(Vector2(pos) + Vector2(8, 8)) > pow(float(crown[1]) * 20 + 12, 2):
-					continue
-				var origin := Vector2i(center.round()) - Vector2i(48, 48)
-				var clipped := bounds.intersection(Rect2i(origin, Vector2i(96, 96)))
-				if not clipped.has_area():
-					continue
-				var seed: int = crown[2]
-				var variant := 0 if seed % 67 == 0 else 1 + seed % 23
-				var size := clampi(roundi((float(crown[1]) - 1.0) / 0.75), 0, 2)
-				if w > 0.99:
-					image.blend_rect(crown_atlas[size * 24 + variant], Rect2i(clipped.position - origin, clipped.size), clipped.position)
-				else:
-					var patch := crown_atlas[size * 24 + variant].get_region(Rect2i(clipped.position - origin, clipped.size))
-					for y in patch.get_height():
-						for x in patch.get_width():
-							var col := patch.get_pixel(x, y)
-							col.a *= w
-							patch.set_pixel(x, y, col)
-					image.blend_rect(patch, Rect2i(Vector2i.ZERO, patch.get_size()), clipped.position)
+		# Crowns now stand up as tree sprites (ground_terrain.trees_in_block); the floor stays painted.
 	# The packed-earth ribbon has subpixel coverage and a textured, soft edge.
 	if not local.is_empty():
 		for yy in 16:
