@@ -11,6 +11,8 @@ var surfaces := PackedByteArray()
 var levels := PackedInt32Array()
 ## Footprint (plus a one-tile margin and doorstep) of every building on natural ground → the tile whose level it is built at.
 var plinth: Dictionary = {}
+## Tiles on either side of a bank where a ramp of earth steps is cut, so walkers can change level there.
+var ramps: Dictionary = {}
 var heights := PackedFloat32Array()
 var art := PackedInt32Array()
 var labels: Array[Dictionary] = []

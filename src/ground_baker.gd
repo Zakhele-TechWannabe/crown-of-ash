@@ -209,10 +209,17 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		pending.min_y = mini(pending.min_y, top)
 		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
 		if drop > 0:
-			# Natural ground keeps low contrast and no outline: a slope is a soft turf shade. Only built terraces (below) are walls of stone.
-			var face := Palette.GRASS.darkened(0.16).lerp(Palette.GREEN.darkened(0.3), sect.hunting.cached_weight(tile))
-			if sect.surface_at(tile) == "field": face = Palette.EARTH.darkened(0.22)
+			# Natural banks are earth and turf; built terraces (below) are faced with stone; a ramp is a flight of earth steps.
+			var face := Palette.EARTH.darkened(0.38).lerp(Palette.GRASS.darkened(0.42), 0.45).lerp(Palette.GREEN.darkened(0.5), sect.hunting.cached_weight(tile)).darkened(minf(0.2, drop * 0.006))
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
+			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.18))
+			for stripe in range(3, drop, 4) if sect.hunting.cached_weight(tile) < 0.1 else []:
+				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.12))
+			if sect.ramps.has(tile) and sect.ramps.has(tile + Vector2i.DOWN):
+				var tread := Palette.EARTH.darkened(0.08)
+				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), tread)
+				for riser in range(3, drop, 4):
+					image.fill_rect(Rect2i(x * 16, top + 16 + riser, 16, 1), tread.darkened(0.25))
 			if sect.level_at(tile) >= 0:
 				var steps: bool = sect.surface_at(tile) == "stairs"
 				var stone := Palette.STONE.darkened(0.3)
@@ -225,9 +232,9 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		var source := Rect2i(int(info.kind) * 16, (int(info.shade) + int(info.band) * SHADES) * 16, 16, 16)
 		image.blit_rect(atlas_image, source, Vector2i(x * 16, top))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.RIGHT):
-			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Palette.GRASS.darkened(0.2))
+			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Palette.EARTH.darkened(0.45))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
-			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.GRASS.darkened(0.2))
+			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.EARTH.darkened(0.45))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
 		if info.decoration >= 0 and sect.hunting.cached_weight(tile) < 0.25:

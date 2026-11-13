@@ -92,6 +92,19 @@ func _run() -> void:
 			assert(life.sect.art[life.sect.index_at(tile)] < 0)
 			assert(life.sect.dry.call(tile))
 			claimed[tile] = true
+	# Nobody climbs a cliff: every change of level on a route happens on a ramp or a stair.
+	var climbs := 0
+	for p: Dictionary in life.people:
+		for target: Vector2i in [p.work, life.square, life.granary]:
+			var route: PackedVector2Array = life.grid.get_point_path(p.home, target)
+			assert(not route.is_empty(), "Unreachable after the cliffs: %s" % p.name)
+			for k in range(1, route.size()):
+				var a := Vector2i(route[k - 1])
+				var b := Vector2i(route[k])
+				if life.heights[life.sect.index_at(a)] != life.heights[life.sect.index_at(b)]:
+					climbs += 1
+					assert((life.sect.ramps.has(a) and life.sect.ramps.has(b)) or "stairs" in [life.sect.surface_at(a), life.sect.surface_at(b)], "Walked up a cliff at %s" % str(b))
+	print("climbs on ramps or stairs: %d, ramps: %d" % [climbs, life.sect.ramps.size()])
 	# Housemates are unrelated friends living in a named cottage.
 	var pop: RefCounted = life.population
 	var society: RefCounted = pop.society

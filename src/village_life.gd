@@ -28,6 +28,9 @@ var child_art: Array[ImageTexture] = []
 var selected := -1
 ## The first twenty as they arrived; a fresh twenty is sent from these if the valley ever empties.
 var founders: Array[Dictionary] = []
+const LANES := ["earth", "paving", "bridge"]
+## Tiles on a bank that walkers may not cross (unless a ramp is cut there).
+var cliffs: Dictionary = {}
 var tended_day := -1
 var heights := PackedInt32Array()
 var square: Vector2i
@@ -72,8 +75,9 @@ func setup(map: Node2D) -> void:
 					if sect.level_at(at + offset) != level and sect.surface_at(at + offset) != "stairs":
 						walk = false
 			grid.set_point_solid(at, not walk)
-	# Terrace faces are solid; only stair tiles connect different heights.
-	var faces: Array[Vector2i] = []
+	# Terrace faces and natural banks are cliffs: nobody walks up them. Stairs join the built terraces;
+	# where a lane crosses a one-step bank, a ramp of earth steps is cut into it.
+	var pairs: Array = []
 	for y in range(grid.region.position.y, grid.region.end.y):
 		for x in range(grid.region.position.x, grid.region.end.x):
 			var at := Vector2i(x, y)
@@ -81,10 +85,22 @@ func setup(map: Node2D) -> void:
 				continue
 			for offset: Vector2i in [Vector2i.RIGHT, Vector2i.DOWN]:
 				var other := at + offset
-				if grid.is_in_boundsv(other) and not grid.is_point_solid(other) and sect.surface_at(other) != "stairs" and absi(heights[sect.index_at(at)] - heights[sect.index_at(other)]) > (1 if sect.level_at(at) < 0 or y - sect.center.y >= 151 or (x - sect.center.x >= 110 and y - sect.center.y >= 90) else 0):
-					faces.append(at)
-	for at: Vector2i in faces:
-		grid.set_point_solid(at)
+				if not grid.is_in_boundsv(other) or grid.is_point_solid(other) or sect.surface_at(other) == "stairs": continue
+				var step := absi(heights[sect.index_at(at)] - heights[sect.index_at(other)])
+				if step == 0: continue
+				if step == 1 and sect.level_at(at) < 0 and sect.level_at(other) < 0 and (sect.surface_at(at) in LANES or sect.surface_at(other) in LANES):
+					sect.ramps[at] = true
+					sect.ramps[other] = true
+				else:
+					pairs.append([at, other])
+	# Each cliff blocks one side: the one that is not a ramp for some other crossing.
+	for pair: Array in pairs:
+		var a: Vector2i = pair[0]
+		var b: Vector2i = pair[1]
+		if grid.is_point_solid(a) or grid.is_point_solid(b) or (sect.ramps.has(a) and sect.ramps.has(b)): continue
+		var block: Vector2i = b if sect.ramps.has(a) else a
+		cliffs[block] = true
+		grid.set_point_solid(block)
 	# The plaza, well and shrine can be relocated inland during sect setup.
 	for b: Dictionary in sect.data.buildings:
 		if str(b.name) == "Servants' Village":
@@ -135,6 +151,7 @@ func setup(map: Node2D) -> void:
 	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
 	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
 	for p: Dictionary in people: founders.append(p.duplicate(true))
+	_link_levels()
 	population.seed_residents(people)
 	var archive_settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))
 	if archive_settings.enabled and not "--no-archive" in OS.get_cmdline_user_args():
@@ -307,9 +324,23 @@ func _process(dt: float) -> void:
 
 
 func point(p: Dictionary) -> Vector2:
-	var tile := Vector2i(Vector2(p.pos).round())
-	var i: int = sect.index_at(tile)
-	return (Vector2(p.pos) + Vector2.ONE * 0.5) * 32.0 - Vector2(0, heights[i] * world.ground.exaggeration if i >= 0 else 0)
+	# Height blends between neighbouring tiles, so a walker climbs a ramp instead of popping up a level.
+	var pos := Vector2(p.pos)
+	var base := Vector2i(pos.floor())
+	var f := pos - Vector2(base)
+	var level := 0.0
+	var total := 0.0
+	for corner: Vector2i in [Vector2i.ZERO, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.ONE]:
+		var at := base + corner
+		var i: int = sect.index_at(at)
+		if i < 0 or not grid.is_in_boundsv(at) or grid.is_point_solid(at): continue
+		var weight := (f.x if corner.x else 1.0 - f.x) * (f.y if corner.y else 1.0 - f.y)
+		level += weight * heights[i]
+		total += weight
+	if total <= 0.0:
+		var own: int = sect.index_at(Vector2i(pos.round()))
+		return (pos + Vector2.ONE * 0.5) * 32.0 - Vector2(0, (heights[own] if own >= 0 else 0) * world.ground.exaggeration)
+	return (pos + Vector2.ONE * 0.5) * 32.0 - Vector2(0, level / total * world.ground.exaggeration)
 
 
 func _draw() -> void:
@@ -406,6 +437,62 @@ func _tend_the_dead() -> void:
 		if followed >= people.size(): followed = -1
 		economy.walkers_changed()
 		routes.clear()
+
+
+## Every home and workplace must be reachable from the square. Where a bank cuts one off,
+## a ramp is cut at the crossing that needs the fewest cliff tiles opened.
+func _link_levels() -> void:
+	var targets: Array[Vector2i] = [square, well, granary, shrine]
+	for p: Dictionary in people:
+		targets.append(p.home)
+		targets.append(p.work)
+	for place: Variant in food_places.values() + material_places.values():
+		if place is Vector2i: targets.append(place)
+	var region := grid.region
+	var cost := PackedInt32Array()
+	cost.resize(region.size.x * region.size.y)
+	cost.fill(1 << 30)
+	var came := PackedInt32Array()
+	came.resize(cost.size())
+	came.fill(-1)
+	var index := func(at: Vector2i) -> int: return (at.y - region.position.y) * region.size.x + at.x - region.position.x
+	# 0-1 search from the square: open ground costs nothing, crossing a cliff tile costs one.
+	var front: Array[Vector2i] = [square]
+	var back: Array[Vector2i] = []
+	cost[index.call(square)] = 0
+	while not front.is_empty() or not back.is_empty():
+		if front.is_empty():
+			front = back
+			back = []
+		var at: Vector2i = front.pop_back()
+		var here: int = cost[index.call(at)]
+		for offset: Vector2i in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+			var next := at + offset
+			if not grid.is_in_boundsv(next): continue
+			var open := not grid.is_point_solid(next)
+			if not open and not cliffs.has(next): continue
+			var step := here + (0 if open else 1)
+			var i: int = index.call(next)
+			if step >= cost[i]: continue
+			cost[i] = step
+			came[i] = index.call(at)
+			if open: front.append(next)
+			else: back.append(next)
+	var carved := 0
+	for target: Vector2i in targets:
+		if not grid.is_in_boundsv(target) or cost[index.call(target)] == 0: continue
+		var i: int = index.call(target)
+		while i >= 0:
+			var at := Vector2i(i % region.size.x + region.position.x, i / region.size.x + region.position.y)
+			if grid.is_point_solid(at) and cliffs.has(at):
+				grid.set_point_solid(at, false)
+				sect.ramps[at] = true
+				for offset: Vector2i in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+					if cliffs.has(at + offset) or not grid.is_point_solid(at + offset): sect.ramps[at + offset] = true
+				carved += 1
+			i = came[i]
+	# The ground may have been drawn before the ramps were known.
+	if carved > 0 or not sect.ramps.is_empty(): world.ground.set_exaggeration(world.ground.exaggeration)
 
 
 func walker_of(id: int) -> int:
