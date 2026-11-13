@@ -111,8 +111,9 @@ func note(person: int, kind: String, words: String) -> void:
 	if chronicle.size() > 2048: chronicle.pop_front()
 	if archive: archive.event(store.day, person, kind, words)
 	if mind and person >= 0: _feel_event(person, kind)
+	# Keep the shared event stream, but mark its origin so economy does not chronicle it again.
 	if store.retain_events and store.events.size() < 8192:
-		store.events.append({"day": store.day, "person": person, "kind": kind, "text": words})
+		store.events.append({"day": store.day, "person": person, "kind": kind, "text": words, "source": "society"})
 
 # Feelings that follow what happens to someone; strong ones interrupt their routine and force a fresh decision.
 func _feel_event(person: int, kind: String) -> void:

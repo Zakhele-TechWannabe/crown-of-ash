@@ -12,7 +12,12 @@ class LedgerButton extends Button:
 
 const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
-const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "tempering": "Tempering", "forest": "Forest", "society": "Society", "work": "Work", "chronicle": "Chronicle", "bestiary": "Bestiary", "laws": "Laws"}
+const Law = preload("res://src/law.gd")
+const TABS := {"cultivators": "Cultivators", "tempering": "Paths & realms", "medicine": "Medicine & methods", "fifty": "The Fifty", "laws": "Laws & guardians", "people": "Everyone", "society": "Families & factions", "chronicle": "Chronicle", "overview": "Overview", "food": "Food", "materials": "Materials & work", "forest": "Forest & beasts", "bestiary": "Bestiary"}
+const GROUPS := {"Cultivation": ["cultivators", "tempering", "medicine"], "Heaven": ["fifty", "laws"], "People": ["people", "society", "chronicle"], "The valley": ["overview", "food", "materials"], "The wild": ["forest", "bestiary"]}
+var sidebar: VBoxContainer
+var sections_button: MenuButton
+
 const INK := Palette.INK
 const GOLD := Palette.BRASS
 const MAX_WIDTH := 1320.0
@@ -25,7 +30,7 @@ var closing := false
 var slide: Tween
 var view: Node2D
 var life: Node2D
-var current := "overview"
+var current := "cultivators"
 var content: VBoxContainer
 var timer := 0.0
 var people_browser: VBoxContainer
@@ -97,28 +102,46 @@ func setup(ground_view: Node2D) -> void:
 	_layout()
 	var book := VBoxContainer.new()
 	add_child(book)
-	var tabs := HBoxContainer.new()
-	tabs.add_theme_constant_override("separation", 4)
-	book.add_child(tabs)
-	for key: String in TABS:
-		var tab := button(tabs, TABS[key], func() -> void: open_tab(key))
-		tab.theme_type_variation = "Tab"
-		tab.toggle_mode = true
-		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		tab.tooltip_text = "%s [F%d]" % [TABS[key], TABS.keys().find(key) + 1]
-		tab_buttons[key] = tab
-	var close_button := button(tabs, "Esc ✕", close)
-	close_button.tooltip_text = "Close the book [Esc or L]"
+	var top := HBoxContainer.new()
+	book.add_child(top)
+	sections_button = MenuButton.new()
+	sections_button.text = "Sections ▾"
+	top.add_child(sections_button)
+	for group: String in GROUPS:
+		sections_button.get_popup().add_separator(group)
+		for key: String in GROUPS[group]:
+			sections_button.get_popup().add_item(TABS[key], TABS.keys().find(key))
+	sections_button.get_popup().id_pressed.connect(func(id: int) -> void: open_tab(TABS.keys()[id]))
+	var space := Control.new()
+	space.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	top.add_child(space)
+	button(top, "Esc ✕", close)
+	var pages := HBoxContainer.new()
+	pages.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	pages.add_theme_constant_override("separation", UiTheme.SPACE_24)
+	book.add_child(pages)
+	sidebar = VBoxContainer.new()
+	sidebar.custom_minimum_size.x = 208
+	pages.add_child(sidebar)
+	for group: String in GROUPS:
+		small(sidebar, group)
+		for key: String in GROUPS[group]:
+			var tab := button(sidebar, TABS[key], func() -> void: open_tab(key))
+			tab.theme_type_variation = "Chip"
+			tab.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			tab.toggle_mode = true
+			tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			tab_buttons[key] = tab
 	var scroll := ScrollContainer.new()
 	drawer_scroll = scroll
 	scroll.mouse_force_pass_scroll_events = false
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	book.add_child(scroll)
+	pages.add_child(scroll)
 	content = VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", 8)
+	content.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	scroll.add_child(content)
 	hide()
 	for arg: String in OS.get_cmdline_user_args():
@@ -129,6 +152,8 @@ func setup(ground_view: Node2D) -> void:
 func _layout() -> void:
 	var screen := get_viewport_rect().size
 	var width := minf(MAX_WIDTH, screen.x - 96)
+	if is_instance_valid(sidebar): sidebar.visible = screen.x >= 1450
+	if is_instance_valid(sections_button): sections_button.visible = screen.x < 1450
 	anchor_left = 0.0
 	anchor_right = 1.0
 	anchor_top = 0.0
@@ -140,7 +165,7 @@ func _layout() -> void:
 
 ## Usable width inside the page, for tables and grids.
 func content_width() -> float:
-	return minf(MAX_WIDTH, get_viewport_rect().size.x - 96) - 56
+	return minf(MAX_WIDTH, get_viewport_rect().size.x - 96) - 72 - (232 if get_viewport_rect().size.x >= 1450 else 0)
 
 func label(parent: Node, text: String, heading: bool = false) -> Label:
 	var node := Label.new()
@@ -172,7 +197,7 @@ func _build_hud() -> void:
 	top_bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	view.ui.add_child(top_bar)
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 8)
+	row.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	top_bar.add_child(row)
 	var location := VBoxContainer.new()
 	location.custom_minimum_size.x = 200
@@ -187,7 +212,7 @@ func _build_hud() -> void:
 	food_chip.theme_type_variation = "Chip"
 	food_chip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	alert_row = HBoxContainer.new()
-	alert_row.add_theme_constant_override("separation", 6)
+	alert_row.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	row.add_child(alert_row)
 	var space := Control.new()
 	space.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -268,7 +293,7 @@ func open_tab(key: String) -> void:
 				if category.id == part and category.parent == food_path[-1]:
 					food_path.append(part)
 		key = food_path[0]
-	current = key if TABS.has(key) else "overview"
+	current = key if TABS.has(key) or key == "work" else "cultivators"
 	for tab: String in tab_buttons:
 		tab_buttons[tab].set_pressed_no_signal(tab == current)
 	_layout()
@@ -387,7 +412,7 @@ func refresh() -> void:
 	for child: Node in content.get_children():
 		content.remove_child(child)
 		child.queue_free()
-	var heading := label(content, TABS[current])
+	var heading := label(content, TABS.get(current, "Materials & work"))
 	heading.theme_type_variation = "Heading"
 	if current == "chronicle":
 		var years := OptionButton.new()
@@ -402,7 +427,7 @@ func refresh() -> void:
 
 func refresh_values() -> void:
 	if current in ["society", "tempering", "forest", "chronicle", "bestiary", "laws"] and page_day == life.population.day: return
-	if current == "people" and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
+	if current in ["people", "cultivators"] and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
 	# Keep filter controls and scroll position stable while replacing only data.
 	for child: Node in content.get_children():
 		if child.has_meta("data"):
@@ -411,20 +436,43 @@ func refresh_values() -> void:
 	var data := VBoxContainer.new()
 	data.set_meta("data", true)
 	data.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	data.add_theme_constant_override("separation", 8)
+	data.add_theme_constant_override("separation", UiTheme.SPACE_16)
 	content.add_child(data)
 	var e: RefCounted = life.economy
+	_summary(data)
 	match current:
 		"overview": _overview(data, e)
-		"food", "materials": _food(data, e)
-		"people": _people(data)
+		"food": _food(data, e)
+		"materials":
+			_food(data, e)
+			_work(data, e)
+		"people", "cultivators": _people(data)
 		"tempering": _tempering(data)
+		"medicine": _medicine(data)
+		"fifty": label(data, "Raising the Fifty: coming soon")
 		"forest": _forest(data)
 		"society": _society(data)
 		"work": _work(data, e)
 		"chronicle": _chronicle(data, e)
 		"bestiary": _bestiary(data)
 		"laws": _laws(data)
+	_group_cards(data)
+
+## Each titled section gets whitespace and its own parchment card.
+func _group_cards(data: VBoxContainer) -> void:
+	var box: VBoxContainer
+	for child: Node in data.get_children().slice(1):
+		if child is HSeparator:
+			child.queue_free()
+			continue
+		if box == null or (child is Label and child.theme_type_variation == "Title"):
+			var card := PanelContainer.new()
+			card.theme_type_variation = "CardPanel"
+			data.add_child(card)
+			box = VBoxContainer.new()
+			box.add_theme_constant_override("separation", UiTheme.SPACE_12)
+			card.add_child(box)
+		child.reparent(box)
 
 func stage() -> String:
 	return ["Planting", "Tending", "Harvest", "Fallow"][life.economy.season()]
@@ -519,7 +567,7 @@ func _food(parent: Node, e: RefCounted) -> void:
 	if not is_good:
 		var breakdown := HBoxContainer.new()
 		breakdown.custom_minimum_size.y = 20
-		breakdown.add_theme_constant_override("separation", 2)
+		breakdown.add_theme_constant_override("separation", UiTheme.SPACE_8)
 		parent.add_child(breakdown)
 		var children: Array[Dictionary] = []
 		for category: Dictionary in e.catalogue.categories:
@@ -667,7 +715,7 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 		refresh_values())
 	slot.theme_type_variation = "Card"
 	slot.set_meta("food_id", id)
-	slot.custom_minimum_size = Vector2(120, 184)
+	slot.custom_minimum_size = Vector2(120, 208)
 	slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var spirit: bool = is_good and e.goods[id].grade == "spirit"
 	if spirit:
@@ -678,7 +726,7 @@ func food_slot(id: String, title: String, is_good: bool, e: RefCounted) -> void:
 	box.offset_right = -8
 	box.offset_top = 8
 	box.offset_bottom = -8
-	box.add_theme_constant_override("separation", 4)
+	box.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	slot.add_child(box)
 	var mark := small(box, "✦ Tier %d" % int(e.goods[id].spirit_tier) if spirit else "")
@@ -717,6 +765,7 @@ func quantity_text(e: RefCounted, id: String, yesterday: bool = false) -> String
 func _people(parent: Node) -> void:
 	people_browser = preload("res://src/people_browser.gd").new()
 	parent.add_child(people_browser)
+	people_browser.cultivation_mode = current == "cultivators"
 	people_browser.setup(self)
 	for arg: String in OS.get_cmdline_user_args():
 		if arg.begins_with("--people-path="):
@@ -897,12 +946,15 @@ func _tempering(parent: Node) -> void:
 		for g in grades.size():
 			if grades[g] > 0: words.append("%d %s" % [grades[g], str(temper.config.grade_names[g]).to_lower()])
 		label(parent, ", ".join(words) + ". A layer's grade is fixed when it is forged: a better method, a teacher and patience raise it; rushing lowers it.")
-	section(parent, "Methods known")
-	var methods: Array = summary.methods
-	var known: PackedStringArray = []
-	for m in methods.size():
-		if methods[m] > 0: known.append("%d know %s" % [methods[m], temper.config.method_names[m]])
-	label(parent, ", ".join(known) + ".")
+	if current == "tempering":
+		label(parent, "Qi cultivation", true)
+		var qi_rows: Array = []
+		for realm in society.rules.realms.size():
+			var count := 0
+			for p in population.size():
+				if society.alive[p] and society.realm[p] == realm: count += 1
+			qi_rows.append([society.rules.realms[realm].name, count])
+		table(parent, ["Realm", "People"], qi_rows)
 	var gate: Array[int] = []
 	var drilling: Array[int] = []
 	for p in population.size():
@@ -1031,7 +1083,7 @@ func _work(parent: Node, e: RefCounted) -> void:
 			var card := button(grid, "", func() -> void: selected_work = id; refresh_values())
 			card.theme_type_variation = "Card"
 			card.set_meta("work_id", id)
-			card.custom_minimum_size = Vector2(264, 112)
+			card.custom_minimum_size = Vector2(264, 160)
 			card.size_flags_horizontal = Control.SIZE_FILL
 			var box := VBoxContainer.new()
 			card.add_child(box)
@@ -1041,7 +1093,7 @@ func _work(parent: Node, e: RefCounted) -> void:
 			box.offset_top = 8
 			box.offset_bottom = -8
 			box.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			box.add_theme_constant_override("separation", 3)
+			box.add_theme_constant_override("separation", UiTheme.SPACE_8)
 			var heading := HBoxContainer.new()
 			box.add_child(heading)
 			var picture := TextureRect.new()
@@ -1074,6 +1126,7 @@ func _work(parent: Node, e: RefCounted) -> void:
 			effectiveness.value = total / maxf(1, record.people.size()) * 100
 			card.tooltip_text = "%s · %d workers / no capacity limit\nEffectiveness: %d%%" % [work_name(id), record.people.size(), roundi(effectiveness.value)]
 			box.add_child(effectiveness)
+			small(box, "%d%% effectiveness" % roundi(effectiveness.value))
 			for child: Control in box.get_children(): child.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if not registry.has(selected_work): return
 	var chosen: Dictionary = registry[selected_work]
@@ -1114,17 +1167,21 @@ func _chronicle(parent: Node, e: RefCounted) -> void:
 			order.append(key)
 		buckets[key].append(line)
 	var society: RefCounted = life.population.society
+	var society_lines: Dictionary = {}
 	for i in range(society.chronicle.size() - 1, maxi(-1, society.chronicle.size() - 400), -1):
 		var entry: Dictionary = society.chronicle[i]
 		var year := int(entry.day) / 365 + 1
 		if year_filter > 0 and year != year_filter: continue
-		add.call(year, mini(3, (int(entry.day) % 365) / 91), str(entry.text))
+		var season := mini(3, (int(entry.day) % 365) / 91)
+		society_lines["%d:%d:%s" % [year, season, entry.text]] = true
+		add.call(year, season, str(entry.text))
 	for i in range(e.chronicle.size() - 1, -1, -1):
 		var line: String = e.chronicle[i]
 		var year := int(line.get_slice(" ", 0).trim_prefix("Y"))
 		if year_filter > 0 and year != year_filter: continue
 		var season := maxi(0, seasons.find(line.get_slice(" ", 1).trim_suffix(":")))
-		add.call(year, season, line.get_slice(": ", 1) if ": " in line else line)
+		var words := line.get_slice(": ", 1) if ": " in line else line
+		if not society_lines.has("%d:%d:%s" % [year, season, words]): add.call(year, season, words)
 	order.sort()
 	order.reverse()
 	for key: int in order:
@@ -1202,7 +1259,8 @@ func _laws(parent: Node) -> void:
 	if not law: return
 	section(parent, "The swordsmen")
 	for g: Dictionary in law.guardians:
-		label(parent, "%s · %s" % [str(g.name).capitalize(), str(g.get("visual_state", g.state))])
+		button(parent, "%s · %s" % [Law.title(g.name), str(g.get("visual_state", g.state))], func() -> void: close(); view.guardian_card.open(g))
+		meter(parent, "Harm", float(g.get("harm", 0.0)), 100, "%.0f / 100 harm" % float(g.get("harm", 0.0)), Palette.RED)
 		meter(parent, "Energy", float(g.energy), float(law.config.energy_max), "%d energy · %d kills · %d breaks" % [int(g.energy), g.kills, g.breaks], Palette.JADE)
 	section(parent, "This year")
 	var year: Dictionary = law.years.get(life.population.day / 365, {})
@@ -1216,3 +1274,55 @@ func _laws(parent: Node) -> void:
 	for i in range(society.breaches.size() - 1, maxi(-1, society.breaches.size() - 11), -1):
 		var r: Dictionary = society.breaches[i]
 		label(parent, "Day %d · %s" % [r.day, r.text])
+
+func _medicine(parent: Node) -> void:
+	var temper: RefCounted = life.population.society.temper
+	if not temper: return
+	var summary: Dictionary = temper.summary()
+	section(parent, "Methods known")
+	var methods: Array = summary.methods
+	var known: PackedStringArray = []
+	for m in methods.size():
+		if methods[m] > 0: known.append("%d know %s" % [methods[m], temper.config.method_names[m]])
+	label(parent, ", ".join(known) + ".")
+	_forest(parent)
+
+func _summary(parent: Node) -> void:
+	var store: RefCounted = life.population
+	var society: RefCounted = store.society
+	var values: Array = []
+	if current in ["cultivators", "tempering", "medicine"]:
+		var tempering := 0
+		var gates := 0
+		var roots := 0
+		var highest := 0
+		var qi := 0
+		var highest_qi := 0
+		for p in store.size():
+			if not society.alive[p]: continue
+			if society.temper:
+				tempering += int(society.temper.body_layer[p] > 0 or society.temper.training(p, store.day))
+				gates += int(society.temper.at_gate(p))
+				highest = maxi(highest, society.temper.body_layer[p])
+			highest_qi = maxi(highest_qi, society.realm[p])
+			roots += int(society.revealed[p] > 0)
+			qi += int(society.realm[p] >= 2 or society.qi[p] > 0)
+		values = [[tempering, "tempering"], [gates, "at a gate"], [roots, "roots revealed"], [society.rules.realms[highest_qi].name if highest_qi >= 2 else str(highest), "highest realm" if highest_qi >= 2 else "highest body layer"], [qi, "qi cultivators"]]
+	elif current == "laws" and society.law:
+		var law: RefCounted = society.law
+		values = [[law.guardians.filter(func(g: Dictionary) -> bool: return g.state != "broken").size(), "swordsmen"], [law.hunt_list.size(), "warm trails"], [law.totals.breaches, "breaches"], [law.totals.broken, "broken"]]
+	elif current == "food":
+		values = [[floori(life.economy.days_left()), "days of food"], [life.economy.hungry_count, "hungry"], [living, "mouths to feed"]]
+	else:
+		values = [[living, "people"], [society.factions.size(), "families & factions"], [store.day / 365 + 1, "year in the valley"]]
+	var row := HFlowContainer.new()
+	parent.add_child(row)
+	for value: Array in values:
+		var panel := PanelContainer.new()
+		panel.theme_type_variation = "CardPanel"
+		panel.custom_minimum_size.x = 144
+		row.add_child(panel)
+		var box := VBoxContainer.new()
+		panel.add_child(box)
+		label(box, str(value[0]), true)
+		small(box, str(value[1]))

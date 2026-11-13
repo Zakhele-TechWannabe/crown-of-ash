@@ -56,12 +56,35 @@ func _run() -> void:
 	assert(g.state == "frozen", "Frozen stone cannot recharge")
 	g.state = "guarding"
 	g.energy = 100.0
+	# Wear carries into combat; only stone resting on its plinth mends.
+	g.harm = 65.0
+	assert(not law.can_leave(g, 0), "Wounded stone stays home")
+	law.advance(s, 24)
+	assert(is_equal_approx(g.harm, 63.0), "Plinth mends configured harm")
+	g.tile = g.post + Vector2i(1, 0)
+	law.advance(s, 25)
+	assert(is_equal_approx(g.harm, 63.0), "No mending off plinth")
+	g.state = "broken"
+	g.tile = g.post
+	law.advance(s, 26)
+	assert(is_equal_approx(g.harm, 63.0), "Rubble never mends")
+	var card: PanelContainer = map.ground_view.guardian_card
+	card.open(g)
+	assert(card.visible and card.guardian.state == "broken", "Rubble card opens")
+	g.state = "guarding"
+	g.harm = 35.0
+	card.open(g)
+	assert(card.visible and card.guardian.harm == 35.0, "Guardian card opens")
+	card.hide()
+	g.harm = 0.0
+	law.last_day = 23
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 781
 	var mortal := {"name": "mortal", "person": 0, "power": 10.0, "guard": 10.0, "speed": 5.0, "breath": 8.0, "will": 9, "motive": "own", "lethal": true, "verb": "strikes"}
 	var deaths := 0
 	for i in 1000:
-		var r := Combat.fight(Combat.beast("stone swordsman"), mortal, {}, rng)
+		var r := Combat.fight(Combat.beast("stone swordsman"), mortal, {"start_harm": [35.0, 0.0]}, rng)
+		assert(r.harm[0] >= 35.0, "Fight starts from retained harm")
 		if r.harm[1] >= 100.0: deaths += 1
 	assert(deaths > 900, "Mortals almost always die once caught")
 	var body: RefCounted = s.temper
@@ -102,6 +125,7 @@ func _run() -> void:
 		s.injury_until[p] = 0
 		for post: Dictionary in law.guardians:
 			post.energy = 100.0
+			post.harm = 0.0
 			post.state = "guarding"
 			post.tile = post.post
 		var r: Dictionary = law.trespass(s, p, "plaza", false)
@@ -140,6 +164,7 @@ func _run() -> void:
 	law.guardians[3].state = "guarding"
 	escort.state = "guarding"
 	escort.energy = 100.0
+	escort.harm = 0.0
 	var old_home: Vector2i = worker.home
 	worker.home = law.nearest(escort.post)
 	s.alive[p] = 1

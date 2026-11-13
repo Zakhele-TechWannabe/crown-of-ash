@@ -417,7 +417,7 @@ func _draw() -> void:
 			for state: String in ["plinth", str(g.get("visual_state", g.state))]:
 				var tile: Vector2 = Vector2(g.post) if state == "plinth" else Vector2(g.get("visual_tile", g.tile))
 				var foot := (tile + Vector2.ONE * 0.5) * 32.0 - Vector2(0, world.ground.terrace_level(Vector2i(tile)) * world.ground.exaggeration)
-				if area.grow(64).has_point(foot): trees.append([foot, -1, {"kind": "guardian", "state": state, "facing": g.facing, "w": 1}])
+				if area.grow(64).has_point(foot): trees.append([foot, -1, {"kind": "guardian", "state": state, "harm": g.get("harm", 0.0), "facing": g.facing, "w": 1}])
 		trees.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
 	var shade := Color(Palette.INK, 0.22)
 	for tree: Array in trees:
@@ -495,7 +495,7 @@ func _tree(tree: Array) -> void:
 	if tree[1] < 0:
 		var b: Dictionary = tree[2]
 		if b.kind == "guardian":
-			var sprite := GuardianArt.texture(b.state, b.get("facing", "south"))
+			var sprite := GuardianArt.texture(b.state, b.get("facing", "south"), float(b.get("harm", 0.0)))
 			draw_texture_rect(sprite, Rect2(tree[0] - Vector2(20, 64), sprite.get_size() * 2.0), false)
 			return
 		if b.kind == "orchard":

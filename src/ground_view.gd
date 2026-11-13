@@ -6,6 +6,7 @@ const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
 const TILE := 32.0
 const MAJOR_NAMES := ["Unnamed Sect", "Leader's Hall", "Main Hall", "Great Plaza", "Mountain Gate", "Servants' Village", "Spirit Fields"]
+var guardian_card: PanelContainer
 var ledger: PanelContainer
 var villager: PanelContainer
 var stories: PanelContainer
@@ -68,6 +69,8 @@ func setup_panels() -> void:
 	stories.setup(self)
 	villager.setup(self)
 	ledger.setup(self)
+	guardian_card = preload("res://src/guardian_card.gd").new()
+	guardian_card.setup(self)
 	tour.setup(self)
 
 
@@ -140,6 +143,13 @@ func _process(dt: float) -> void:
 		card_text.text = map.life.population.names[hovered] + (" · " + map.life.activity_text(map.life.people[walker]) if walker >= 0 else "")
 		card.reset_size()
 		card.position = (mouse + Vector2(14, 18)).min(get_viewport_rect().size - card.size - Vector2(8, 8))
+	if hovered < 0 and not ledger.visible and get_viewport().gui_get_hovered_control() == null:
+		var stone := pick_guardian(get_global_mouse_position())
+		if not stone.is_empty():
+			card.visible = true
+			card_text.text = str(stone.name).capitalize()
+			card.reset_size()
+			card.position = (mouse + Vector2(14, 18)).min(get_viewport_rect().size - card.size - Vector2(8, 8))
 	cam.position += motion * dt * 650.0 / cam.zoom.x
 	_clamp_camera()
 	_update_readout()
@@ -197,6 +207,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			var stone := pick_guardian(get_global_mouse_position())
+			if not stone.is_empty():
+				guardian_card.open(stone)
+				return
+			guardian_card.hide()
 			var person: int = map.life.pick(get_global_mouse_position())
 			map.life.selected = person
 			map.life.followed = -1
@@ -248,3 +263,12 @@ func _draw_names() -> void:
 		box.position = box.position.round()
 		names.draw_style_box(tag, box)
 		names.draw_string(font, box.position + Vector2(7, px + 1), text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, Palette.INK)
+
+func pick_guardian(at: Vector2) -> Dictionary:
+	var law: RefCounted = map.life.population.society.law
+	if law == null: return {}
+	for g: Dictionary in law.guardians:
+		var tile := Vector2(g.get("visual_tile", g.tile))
+		var foot := (tile + Vector2.ONE * .5) * 32.0 - Vector2(0, map.ground.terrace_level(Vector2i(tile)) * map.ground.exaggeration)
+		if Rect2(foot - Vector2(20, 64), Vector2(44, 68)).has_point(at): return g
+	return {}

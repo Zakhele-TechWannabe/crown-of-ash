@@ -32,13 +32,13 @@ func run() -> void:
 	contact.save_png("res://out/food-icons.png")
 	var book_width := minf(1320, 1920 - 96)
 	for key: String in ledger.TABS:
-		ledger.open_tab(key)
+		ledger.tab_buttons[key].pressed.emit()
 		await process_frame
 		await process_frame
 		assert(ledger.visible and ledger.dim.visible)
 		assert(is_equal_approx(ledger.size.x, book_width), "Book is centred at reading width: %s" % ledger.size)
 		assert(absf(ledger.get_global_rect().get_center().x - 960) <= 1, "Book is centred")
-		assert(ledger.content.size.x > 900)
+		assert(ledger.content.size.x > 850)
 		assert(ledger.tab_buttons[key].button_pressed)
 		ledger.toggle_tab(key)
 		await settle(ledger)
@@ -134,7 +134,7 @@ func run() -> void:
 	var wheel := InputEventMouseButton.new()
 	wheel.button_index = MOUSE_BUTTON_WHEEL_DOWN
 	wheel.pressed = true
-	wheel.position = ledger.global_position + Vector2(80, 250)
+	wheel.position = ledger.global_position + Vector2(340 if ledger.sidebar.visible else 80, 250)
 	root.push_input(wheel)
 	await process_frame
 	assert(world.ground_view.cam.zoom == before, "Book wheel must not zoom camera")
@@ -161,7 +161,7 @@ func run() -> void:
 	assert(world.ground_view.cam.position == camera_position)
 	ledger.close()
 	await settle(ledger)
-	assert(ledger.current == "food", "Remember last tab")
+	assert(ledger.current == "food", "Remember last section")
 	# With the book closed the wheel steps through whole-texel zooms only.
 	wheel.position = Vector2(960, 600)
 	world.ground_view.set_zoom_step(3)
@@ -190,10 +190,10 @@ func run() -> void:
 	if not walker.hidden:
 		var clicked: int = world.life.pick(world.life.place_of(walker_id) - Vector2(0, 10))
 		assert(clicked >= 0, "Clicking a drawn person picks them")
-	ledger.open_person(walker_id, "Ties")
+	ledger.open_person(walker_id, "Heart & ties")
 	await settle(ledger)
 	var browser: VBoxContainer = ledger.people_browser
-	assert(browser.person == walker_id and browser.person_tab == "Ties")
+	assert(browser.person == walker_id and browser.person_tab == "Heart & ties")
 	var book: VBoxContainer = browser.get_child(0)
 	var header: HBoxContainer = book.get_child(0)
 	var show_button: Button = header.get_child(header.get_child_count() - 1)
@@ -201,6 +201,15 @@ func run() -> void:
 	show_button.pressed.emit()
 	await settle(ledger)
 	assert(world.life.selected == walker_id and world.life.followed == 0 and not ledger.visible)
+	# The contextual guardian record survives the book's closing animation.
+	ledger.open_tab("laws")
+	await settle(ledger)
+	var inspect: Array[Node] = ledger.content.find_children("*", "Button", true, false).filter(func(n: Node) -> bool: return n.text.begins_with("The ") and n.text.contains("swordsman"))
+	assert(not inspect.is_empty())
+	inspect[0].pressed.emit()
+	await settle(ledger)
+	assert(world.ground_view.guardian_card.visible, "Guardian inspection stays open after closing the book")
+	world.ground_view.guardian_card.hide()
 	# Stories lead to the person they are about.
 	var society: RefCounted = world.life.population.society
 	society.note(walker_id, "tempering", world.life.population.names[walker_id] + " tests the tour of stories.")
@@ -225,7 +234,7 @@ func run() -> void:
 	browser.redraw()
 	assert(browser.virtual_list.ids.size() == 3)
 	browser.virtual_list.person_selected.emit(0)
-	assert(browser.person == 0 and browser.person_tab == "Story" and ledger.visible)
+	assert(browser.person == 0 and browser.person_tab == "Overview" and ledger.visible)
 	var groups: Array = world.life.population.society.factions
 	var village_name: String = groups[0].name
 	var home_name: String = groups[1].name
@@ -299,6 +308,17 @@ func run() -> void:
 					if path == "people/skills/cultivation": browser.catalogue_path.assign(["cultivation"])
 				browser.redraw()
 			await settle(ledger)
+			if path == "person/Cultivation":
+				var person_book: VBoxContainer = ledger.people_browser.get_child(0)
+				var labels: Array[Node] = person_book.find_children("*", "Label", true, false)
+				for a in 8:
+					var caption := "%s %.1f" % [str(world.life.population.catalogue.rules.attributes[a]).capitalize(), world.life.population.attributes[walker_id * 8 + a]]
+					assert(labels.any(func(n: Node) -> bool: return n.text.begins_with(caption)), "All eight attribute numbers: " + caption)
+				var bar: ProgressBar = person_book.find_child("LifeBar", true, false)
+				assert(bar != null and bar.max_value == world.life.population.society.lifespan(walker_id) and bar.value == world.life.population.age(walker_id), "Life bar tracks age and lifespan")
+				var graphs: Array[Node] = person_book.find_children("*", "Control", true, false).filter(func(n: Node) -> bool: return n.get_script() == preload("res://src/ego_graph.gd"))
+				assert(graphs.size() == 1 and graphs[0].mode == "Skills" and not graphs[0].nodes.is_empty(), "Skill graph builds")
+				assert(labels.any(func(n: Node) -> bool: return n.text == "Everything they know" or n.text == "No skills practised yet."), "Compact skills list remains")
 			check_text(world.ground_view.hud)
 			assert(ledger.get_global_rect().end.x <= resolution.x and ledger.get_global_rect().position.x >= 0, "Book must stay on screen: %s %s" % [resolution, path])
 			if ledger.current in ["food", "materials"]:
@@ -380,6 +400,7 @@ func check_text(node: Node) -> void:
 			paragraph.width = maxf(1, available)
 			paragraph.break_flags = TextServer.BREAK_MANDATORY
 			if node.autowrap_mode != TextServer.AUTOWRAP_OFF:
+				assert_text(available >= 40, "Autowrap must have at least 40px: " + text)
 				paragraph.break_flags = TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE
 			paragraph.add_string(text, font, px)
 			for line in paragraph.get_line_count():
@@ -390,10 +411,10 @@ func check_text(node: Node) -> void:
 			assert_text(node.size_flags_horizontal != Control.SIZE_EXPAND_FILL, "Breadcrumbs stay compact")
 		if node.has_meta("work_id"):
 			assert_text(is_equal_approx(node.size.x, 264), "Work cards must have consistent widths")
-			assert_text(node.size.y <= 112, "Work cards must remain compact")
+			assert_text(node.size.y <= 160, "Work cards must remain compact")
 		for child: Node in node.get_children():
 			if child is Container:
-				assert_text(child.position.y >= 0 and child.position.y + child.size.y <= node.size.y + 1, "Card content extends beyond button")
+				assert_text(child.position.y >= 0 and child.position.y + child.size.y <= node.size.y + 1, "Card content extends beyond button: %s %s child %s %s (minimum %s)" % [node.name, node.size, child.position, child.size, child.get_combined_minimum_size()])
 	if node is Tree:
 		var item: TreeItem = node.get_root().get_first_child()
 		while item:

@@ -40,6 +40,31 @@ func _initialize() -> void:
 	assert(store.modifiers.value(p, "grain_farming.farming", "xp_multiplier", 4) > 1)
 	store.modifiers.expire(7)
 	assert(is_equal_approx(store.modifiers.value(p, "grain_farming.farming", "xp_multiplier", 7), 1))
+	# Chronicle events also live in the population buffer; the personal story shows one specific entry.
+	var PersonBook = preload("res://src/person_book.gd")
+	store.society.note(p, "tempering", "A unique breakthrough")
+	store.events.append({"day": store.day, "person": p, "kind": "milestone", "text": "A unique breakthrough"})
+	var story: Array = PersonBook.story_entries(store, p).filter(func(e: Array) -> bool: return e[2] == "A unique breakthrough")
+	assert(story.size() == 1 and story[0][1] == "tempering", "Story merges buffers and prefers the specific kind")
+	var browser := preload("res://src/people_browser.gd").new()
+	browser.population = store
+	store.society.temper.body_layer[p] = 4
+	browser.path_filter = "Body Tempering"
+	browser.stage_filter = "4–6"
+	assert(browser.cultivation_matches(p))
+	browser.stage_filter = "7–9"
+	assert(not browser.cultivation_matches(p))
+	store.society.revealed[p] = 1
+	store.society.temper.hours[p] = 2
+	store.society.temper.regimen_until[p] = store.day + 100
+	store.society.temper.teacher[p] = p
+	store.society.temper.tempering[p] = store.society.temper.cost(5)
+	store.birth_day[p] = store.day - 65 * 365
+	store.last_insight_day[p] = store.day
+	store.best_level[p] = 31
+	store.society.injury_until[p] = store.day + 10
+	assert(browser.notable_reason(p).size() == 10, "All notable reasons appear together")
+	browser.free()
 	# Identical day transactions must not depend on the frame batch size.
 	var first := preload("res://src/population.gd").new()
 	var second := preload("res://src/population.gd").new()

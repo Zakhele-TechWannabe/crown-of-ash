@@ -1,11 +1,12 @@
 extends VBoxContainer
-## One person's page in the valley book: a header and six tabs that each fit on one screen.
-## Words come first; exact numbers live in tooltips. Sections with nothing to say are left out.
+## One personal record: cultivation first, with supporting skills and separate heart and ties cards.
 const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
 const EgoGraph = preload("res://src/ego_graph.gd")
 const BodyFigure = preload("res://src/body_figure.gd")
-const TABS := ["Story", "Body & cultivation", "Heart & mind", "Family & lineage", "Ties", "Skills"]
+const AttributeMeter = preload("res://src/attribute_meter.gd")
+const TABS := ["Overview", "Cultivation", "Heart & ties"]
+const OLD_TABS := {"Story": "Overview", "Body & cultivation": "Cultivation", "Skills": "Cultivation", "Heart & mind": "Heart & ties", "Family & lineage": "Heart & ties", "Ties": "Heart & ties"}
 var browser: VBoxContainer
 var ledger: PanelContainer
 var population: RefCounted
@@ -20,20 +21,70 @@ func build(owner_browser: VBoxContainer) -> void:
 	society = population.society
 	person = browser.person
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_theme_constant_override("separation", 10)
+	add_theme_constant_override("separation", UiTheme.SPACE_8)
 	_header()
-	var tab: String = browser.person_tab if browser.person_tab in TABS else "Story"
+	var tab: String = browser.person_tab if browser.person_tab in TABS else str(OLD_TABS.get(browser.person_tab, "Overview"))
 	var page := VBoxContainer.new()
 	page.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	page.add_theme_constant_override("separation", 8)
+	page.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	add_child(page)
 	match tab:
-		"Story": _story(page)
-		"Body & cultivation": _body(page)
-		"Heart & mind": _mind(page)
-		"Family & lineage": _family(page)
-		"Ties": _ties(page)
-		"Skills": _skills(page)
+		"Overview":
+			var overview := _card(page, "Life in the valley")
+			_lifespan(overview)
+			text(overview, "Household · " + population.household_name(person))
+			text(overview, "Path · " + path_stage(population, person))
+			var tags := HFlowContainer.new()
+			overview.add_child(tags)
+			browser.tags(tags, person)
+			var walker: int = ledger.life.walker_of(person)
+			if walker >= 0: text(overview, "Current activity · " + str(ledger.life.people[walker].get("activity", "living in the valley")))
+			_story(_card(page, "Story and recent events"))
+		"Cultivation":
+			var cultivation := _card(page, "Cultivation")
+			_lifespan(cultivation)
+			_body(cultivation)
+			_skills(_card(page, "Supporting skills"))
+		"Heart & ties":
+			_mind(_card(page, "Heart and mind"))
+			_family(_card(page, "Family and lineage"))
+			_ties(_card(page, "Ties and grudges"))
+
+func _card(parent: Node, title: String) -> VBoxContainer:
+	var panel := PanelContainer.new()
+	panel.theme_type_variation = "CardPanel"
+	parent.add_child(panel)
+	var box := VBoxContainer.new()
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel.add_child(box)
+	text(box, title, true)
+	return box
+
+static func path_stage(store: RefCounted, p: int) -> String:
+	var state: RefCounted = store.society
+	if state.realm[p] >= 2: return state.realm_label(p)
+	if state.temper and state.temper.body_layer[p] > 0:
+		var description: Dictionary = state.temper.describe(p)
+		return "%s · %s" % [description.name, description.grade]
+	return "Not yet tempering"
+
+func _lifespan(parent: Node) -> void:
+	var years: int = society.lifespan(person)
+	var age: int = population.age(person)
+	var line := text(parent, "Age %d · expected lifespan %d" % [age, years])
+	line.name = "Lifespan"
+	if years - age <= 5: line.add_theme_color_override("font_color", Palette.RED)
+	var bar := ProgressBar.new()
+	bar.name = "LifeBar"
+	bar.max_value = years
+	bar.value = age
+	UiTheme.thin(bar, Palette.RED if years - age <= 5 else Palette.GREEN, UiTheme.SPACE_8)
+	parent.add_child(bar)
+	small(parent, "%d of ~%d years" % [age, years])
+	if society.realm[person] >= 2:
+		small(parent, "%s extends life to %d years." % [society.rules.realms[society.realm[person]].name, years])
+	elif society.temper:
+		small(parent, "Body Tempering raises it: %s lives to %d." % [society.temper.layer_name(society.temper.LAYERS), society.temper.config.peak_lifespan])
 
 
 func text(parent: Node, words: String, heading: bool = false) -> Label:
@@ -57,14 +108,14 @@ func when(day: int) -> String:
 
 func _header() -> void:
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 12)
+	row.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	add_child(row)
 	var back: Button = ledger.button(row, "‹ People", func() -> void: browser.person = -1; browser.redraw())
 	back.theme_type_variation = "Chip"
 	back.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	var title := VBoxContainer.new()
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.add_theme_constant_override("separation", 0)
+	title.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	row.add_child(title)
 	var name_label := text(title, population.names[person])
 	name_label.theme_type_variation = "Heading"
@@ -76,15 +127,15 @@ func _header() -> void:
 			ledger.close())
 		show.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		show.tooltip_text = "Close the book and select %s in the valley" % population.names[person]
-	var tabs := HBoxContainer.new()
-	tabs.add_theme_constant_override("separation", 4)
+	var tabs := HFlowContainer.new()
+	tabs.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	add_child(tabs)
 	for tab: String in TABS:
 		var chosen := tab
 		var button: Button = ledger.button(tabs, tab, func() -> void: browser.person_tab = chosen; browser.redraw())
 		button.theme_type_variation = "Tab"
 		button.toggle_mode = true
-		button.set_pressed_no_signal(tab == browser.person_tab or (tab == "Story" and not browser.person_tab in TABS))
+		button.set_pressed_no_signal(tab == str(OLD_TABS.get(browser.person_tab, browser.person_tab)))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(HSeparator.new())
 
@@ -119,13 +170,7 @@ func _story(page: VBoxContainer) -> void:
 	if not lines.is_empty():
 		text(page, " ".join(lines))
 	# Their own entries in the chronicle and milestones, newest first.
-	var entries: Array = []
-	for entry: Dictionary in society.chronicle:
-		if int(entry.person) == person:
-			entries.append([int(entry.day), str(entry.kind), str(entry.text)])
-	for entry: Dictionary in population.events:
-		if int(entry.person) == person:
-			entries.append([int(entry.day), "milestone", str(entry.text)])
+	var entries := story_entries(population, person)
 	entries.sort_custom(func(a: Array, b: Array) -> bool: return a[0] > b[0])
 	text(page, "Their story", true)
 	if entries.is_empty():
@@ -139,13 +184,25 @@ func _story(page: VBoxContainer) -> void:
 		text(row, entry[2])
 
 
+## The population buffer also retains chronicle events; merge by identity, keeping the specific kind.
+static func story_entries(store: RefCounted, p: int) -> Array:
+	var unique: Dictionary = {}
+	for source: Array in [store.society.chronicle, store.events]:
+		for entry: Dictionary in source:
+			if int(entry.person) != p: continue
+			var key := "%d:%s" % [int(entry.day), str(entry.text)]
+			var kind := str(entry.get("kind", "milestone"))
+			if not unique.has(key) or (unique[key][1] == "milestone" and kind != "milestone"):
+				unique[key] = [int(entry.day), kind, str(entry.text)]
+	return unique.values()
+
 func _attribute_words(value: float) -> String:
 	return "far below most" if value < 5 else ("below most" if value < 8.5 else ("like most" if value < 11.5 else ("above most" if value < 15 else "far above most")))
 
 
 func _body(page: VBoxContainer) -> void:
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 24)
+	row.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	page.add_child(row)
 	var temper: RefCounted = society.temper
 	var info := VBoxContainer.new()
@@ -161,6 +218,7 @@ func _body(page: VBoxContainer) -> void:
 		row.add_child(figure)
 		row.add_child(info)
 		text(info, "Body tempering", true)
+		if population.spirit_root[person]: text(info, "Spirit root: tempers %.2fx faster" % temper.spirit_root_factor(person))
 		if state.layer == 0: text(info, "Untempered. Knows %s." % state.method)
 		else: text(info, "Layer %d of 9: %s, %s overall." % [state.layer, state.name, str(state.grade).to_lower()])
 		var forged := HFlowContainer.new()
@@ -186,6 +244,7 @@ func _body(page: VBoxContainer) -> void:
 			UiTheme.thin(bar, Palette.BRASS, 8)
 			bar.tooltip_text = "%d%% of the way to %s" % [roundi(state.progress * 100), temper.layer_name(state.layer + 1)]
 			info.add_child(bar)
+			small(info, bar.tooltip_text)
 	else:
 		row.add_child(info)
 	if society.revealed[person] or society.realm[person] > 0:
@@ -198,26 +257,33 @@ func _body(page: VBoxContainer) -> void:
 		UiTheme.thin(qi, Palette.JADE, 8)
 		qi.tooltip_text = "%.1f of %.1f qi toward the next step" % [society.qi[person], society.qi_cost(person)]
 		info.add_child(qi)
+		small(info, qi.tooltip_text)
 	text(page, "Body and gifts", true)
 	var grid := GridContainer.new()
-	grid.columns = 4
+	grid.columns = 2
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	page.add_child(grid)
 	for a in 8:
 		var value: float = population.attributes[person * 8 + a]
 		var cell := VBoxContainer.new()
 		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		cell.add_theme_constant_override("separation", 2)
-		cell.tooltip_text = "%.1f of 20" % value
+		cell.add_theme_constant_override("separation", UiTheme.SPACE_8)
+		cell.tooltip_text = "%.1f now, potential %d (of 20)" % [value, population.potential[person * 8 + a]]
 		cell.mouse_filter = Control.MOUSE_FILTER_PASS
 		grid.add_child(cell)
-		text(cell, "%s · %s" % [str(population.catalogue.rules.attributes[a]).capitalize(), _attribute_words(value)])
-		var bar := ProgressBar.new()
+		text(cell, "%s %.1f · %s" % [str(population.catalogue.rules.attributes[a]).capitalize(), value, _attribute_words(value)])
+		var bar := AttributeMeter.new()
+		bar.potential = population.potential[person * 8 + a]
 		bar.max_value = 20
 		bar.value = value
 		UiTheme.thin(bar, Palette.GREEN, 5)
 		bar.mouse_filter = Control.MOUSE_FILTER_PASS
 		cell.add_child(bar)
+
+	var talents := HFlowContainer.new()
+	page.add_child(talents)
+	for words: String in ["Comprehension %.2f" % population.comprehension[person], "Luck %.2f" % population.luck[person], "Constitution %d" % population.constitution[person]]: UiTheme.tag(talents, words)
+	if society.revealed[person]: UiTheme.tag(talents, "Spirit root · " + society.root_label(person))
 
 
 func _feeling_words(value: float) -> String:
@@ -243,17 +309,17 @@ func _mind(page: VBoxContainer) -> void:
 	text(page, "Driven most by %s and %s.%s" % [urges[0][0], urges[1][0], (" Wants to %s." % state.goal) if not str(state.goal).is_empty() else ""])
 	text(page, "How they feel", true)
 	var grid := GridContainer.new()
-	grid.columns = 4
+	grid.columns = 2
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	page.add_child(grid)
 	for feeling: Array in state.feelings:
 		var cell := VBoxContainer.new()
 		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		cell.add_theme_constant_override("separation", 2)
+		cell.add_theme_constant_override("separation", UiTheme.SPACE_8)
 		cell.tooltip_text = "%.2f" % feeling[1]
 		cell.mouse_filter = Control.MOUSE_FILTER_PASS
 		grid.add_child(cell)
-		text(cell, "%s · %s" % [str(feeling[0]).capitalize(), _feeling_words(feeling[1])])
+		text(cell, "%s · %.0f%% · %s" % [str(feeling[0]).capitalize(), float(feeling[1]) * 100, _feeling_words(feeling[1])])
 		var bar := ProgressBar.new()
 		bar.max_value = 1
 		bar.value = feeling[1]
@@ -354,7 +420,7 @@ func _ties(page: VBoxContainer) -> void:
 		panel.tooltip_text = "Opinion %+.0f · familiarity %d · trust %d" % [row.opinion, row.familiarity, row.trust]
 		grid.add_child(panel)
 		var box := VBoxContainer.new()
-		box.add_theme_constant_override("separation", 4)
+		box.add_theme_constant_override("separation", UiTheme.SPACE_8)
 		panel.add_child(box)
 		link(box, target, "", "Ties")
 		small(box, "%s them · %s · %s" % [_opinion_words(row.opinion), "knows them well" if row.familiarity >= 60 else ("knows them" if row.familiarity >= 25 else "barely knows them"), "trusts them" if row.trust >= 50 else ("some trust" if row.trust >= 20 else "little trust")])
@@ -370,6 +436,7 @@ func _ties(page: VBoxContainer) -> void:
 
 
 func _skills(page: VBoxContainer) -> void:
+	_graph(page, ["Skills"], 360)
 	var skills: Dictionary = population.sparse_skills(person)
 	var ordered: Array = skills.keys()
 	ordered.sort_custom(func(a: String, b: String) -> bool: return int(skills[a].level) > int(skills[b].level))
@@ -381,8 +448,8 @@ func _skills(page: VBoxContainer) -> void:
 		var line := HBoxContainer.new()
 		page.add_child(line)
 		var name_label := text(line, "%s · %s" % [population.catalogue.skills[id].name, population.catalogue.title(row.level)])
-		name_label.custom_minimum_size.x = 360
-		name_label.size_flags_horizontal = Control.SIZE_FILL
+		name_label.custom_minimum_size.x = 240
+		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		var bar := ProgressBar.new()
 		bar.max_value = population.catalogue.thresholds[row.level]
 		bar.value = row.xp
@@ -391,11 +458,13 @@ func _skills(page: VBoxContainer) -> void:
 		bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		bar.tooltip_text = "Level %d · %.1f / %.1f XP · %d practice days" % [row.level, row.xp, bar.max_value, row.days_practised]
 		line.add_child(bar)
+		small(page, bar.tooltip_text)
 	if ordered.is_empty():
 		return
 	text(page, "Everything they know", true)
 	var tree := Tree.new()
 	tree.hide_root = true
+	tree.scroll_horizontal_enabled = false
 	tree.custom_minimum_size.y = 320
 	tree.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	page.add_child(tree)
@@ -415,6 +484,7 @@ func _skills(page: VBoxContainer) -> void:
 		if id == di: continue
 		var leaf := tree.create_item(parents[di])
 		leaf.set_text(0, "%s · %d" % [population.catalogue.skills[id].name, skills[id].level])
+	tree.custom_minimum_size.y = clampi(parents.size() * 30 + 16, 120, 320)
 	for di: String in parents:
 		if not population.catalogue.disciplines.has(di): continue
 		var level: int = int(skills.get(di, {"level": 0}).level)

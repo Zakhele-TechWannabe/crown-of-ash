@@ -14,6 +14,10 @@ var routes: Dictionary = {}
 var walk_paths: Dictionary = {}
 var last_day := -1
 
+## A guardian's name opening a sentence: "The west swordsman of the Mountain Gate".
+static func title(name: String) -> String:
+	return name.substr(0, 1).to_upper() + name.substr(1)
+
 func setup(ground: RefCounted, walk_grid: AStarGrid2D, walkers: Array, terrain: Node2D = null) -> void:
 	sect = ground
 	grid = walk_grid
@@ -46,7 +50,7 @@ func setup(ground: RefCounted, walk_grid: AStarGrid2D, walkers: Array, terrain: 
 				if lateral: post = middle + Vector2i(0, -3 if side == 0 else 2)
 				var direction := ("west" if side == 0 else "east") if not lateral else ("north" if side == 0 else "south")
 				var g := {"id": guardians.size(), "gate": str(b.name), "name": "the %s swordsman of the %s" % [direction, b.name],
-					"post": post, "tile": post, "facing": outward if lateral else "south", "state": "guarding", "energy": float(config.energy_max), "kills": 0, "breaks": 0,
+					"post": post, "tile": post, "facing": outward if lateral else "south", "state": "guarding", "energy": float(config.energy_max), "kills": 0, "breaks": 0, "harm": 0.0, "fights": 0, "driven_off": 0, "last_fight": "", "broken_by": "", "broken_day": -1,
 					"partner": pair + 1 - side, "sight": {}, "night": {}}
 				guardians.append(g)
 	rebuild_sight()
@@ -85,7 +89,7 @@ func line_clear(a: Vector2i, b: Vector2i) -> bool:
 	return true
 
 func awake(g: Dictionary) -> bool:
-	return g.state == "guarding" and float(g.energy) > 0.0
+	return g.state == "guarding" and float(g.energy) > 0.0 and float(g.get("harm", 0.0)) <= float(config.retreat_harm)
 
 func destination(place: String) -> Vector2i:
 	var r: Array = config.places.get(place, config.places.spring)
@@ -186,7 +190,7 @@ func freeze(society: RefCounted, g: Dictionary) -> void:
 	g.state = "frozen"
 	_count("frozen", society.population.day)
 	var where := "in the rice paddies" if sect.surface_at(g.tile) == "field" else ("on the sect terraces" if sect.inside_grounds(g.tile) else "outside the sect grounds")
-	society.note(-1, "guardian", "%s stands frozen %s" % [str(g.name).capitalize(), where])
+	society.note(-1, "guardian", "%s stands frozen %s" % [title(g.name), where])
 
 func _return(society: RefCounted, g: Dictionary) -> void:
 	if g.state in ["broken", "frozen"]: return
@@ -216,8 +220,11 @@ func battle(society: RefCounted, g: Dictionary, p: int, kin: bool = false) -> Di
 		society.note(p, "guardian", "%s stood together against %s" % [", ".join(names), g.name])
 	var stone := Combat.beast("stone swordsman")
 	stone.name = g.name
-	var r := Combat.fight(stone, person, {"lethal": true, "escape_cover": cover(g.tile, false)}, store.rng)
+	var r := Combat.fight(stone, person, {"lethal": true, "escape_cover": cover(g.tile, false), "start_harm": [float(g.get("harm", 0.0)), 0.0]}, store.rng)
 	r.merge({"kind": "guardian", "day": store.day, "ids": [-1, p], "names": [g.name, store.names[p]], "motives": ["own", "own"], "defenders": defenders})
+	g.harm = float(r.harm[0])
+	g.fights = int(g.get("fights", 0)) + 1
+	g.last_fight = "Day %d · %s · %s" % [store.day, store.names[p], r.how]
 	g.energy = maxf(0.0, float(g.energy) - float(config.fight_cost))
 	var killed := false
 	var harms: Dictionary = {}
@@ -247,6 +254,8 @@ func battle(society: RefCounted, g: Dictionary, p: int, kin: bool = false) -> Di
 		else: Combat._hurt(society, q, harm, -1, r)
 	if float(r.harm[0]) >= 100.0:
 		g.state = "broken"
+		g.broken_by = store.names[p]
+		g.broken_day = store.day
 		g.breaks += 1
 		_count("broken", store.day)
 		for q: int in defenders: society.reputation[q] += float(config.renown)
@@ -256,6 +265,7 @@ func battle(society: RefCounted, g: Dictionary, p: int, kin: bool = false) -> Di
 				if society.alive[q]: society.mind.feel(q, society.mind.JOY if store.rng.randf() < float(config.coin) else society.mind.AFRAID, float(config.village_feeling))
 	elif g.energy <= 0.0: freeze(society, g)
 	r.outcome = "killed" if killed else ("broken" if g.state == "broken" else "escaped")
+	if r.outcome == "escaped": g.driven_off = int(g.get("driven_off", 0)) + 1
 	society.record_fight(r)
 	return r
 
@@ -293,6 +303,7 @@ func trespass(society: RefCounted, p: int, place: String, at_night: bool) -> Dic
 				r.fight = battle(society, g, p)
 				r.outcome = r.fight.outcome
 			if r.outcome == "escaped":
+				if not r.has("fight"): g.driven_off = int(g.get("driven_off", 0)) + 1
 				_count("escaped", store.day)
 				mark(p, "fight" if r.has("fight") else place, store.day)
 			_return(society, g)
@@ -313,7 +324,9 @@ func advance(society: RefCounted, day: int) -> void:
 	var days := 1 if last_day < 0 else day - last_day
 	last_day = day
 	for g: Dictionary in guardians:
-		if g.state == "guarding": g.energy = minf(float(config.energy_max), float(g.energy) + days * float(config.recharge))
+		if g.state == "guarding" and g.tile == g.post:
+			g.energy = minf(float(config.energy_max), float(g.energy) + days * float(config.recharge))
+			g.harm = maxf(0.0, float(g.get("harm", 0.0)) - days * float(config.mend_per_day))
 	for p: int in hunt_list.keys():
 		if not society.alive[p]: hunt_list.erase(p)
 		elif day - int(hunt_list[p].day) > int(config.cold_days):
@@ -337,7 +350,7 @@ func advance(society: RefCounted, day: int) -> void:
 		spend(society, g, path)
 		var fight := battle(society, g, p, true)
 		var r := {"day": day, "person": p, "place": "village", "trip": "day", "seen": true, "outcome": fight.outcome, "guardian": g.id, "spot": target, "fight": fight, "pursuit": true}
-		r.text = "%s followed the trail into the village to %s; %s" % [str(g.name).capitalize(), society.population.names[p], r.outcome]
+		r.text = "%s followed the trail into the village to %s; %s" % [title(g.name), society.population.names[p], r.outcome]
 		society.note(p, "guardian", r.text)
 		society.record_breach(r)
 		if r.outcome in ["killed", "broken"]: hunt_list.erase(p)

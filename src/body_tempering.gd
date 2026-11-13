@@ -102,7 +102,15 @@ func rate(p: int, on_day: int) -> float:
 		var with_teacher := float(config.teacher_rate) if teacher[p] >= 0 else 1.0
 		total += hours[p] * float(config.method_rate[method[p]]) * with_teacher
 	if body_layer[p] < int(config.labour_max_layer): total += _labour_hours(p) * float(config.labour_rate)
-	return total * will * age_factor(p)
+	return total * will * age_factor(p) * spirit_root_factor(p)
+
+## Even a hidden root helps tempering; awakening guides qi through the body.
+func spirit_root_factor(p: int) -> float:
+	var society: RefCounted = society_ref.get_ref()
+	var store: RefCounted = society.population
+	if not store.spirit_root[p]: return 1.0
+	var factor: float = 1.0 + float(config.spirit_root_rate) + float(config.spirit_root_purity) * store.root_purity[p] / 100.0
+	return factor * (float(config.spirit_root_revealed) if society.revealed[p] else 1.0)
 
 ## What the gate of the next layer still lacks, or "" when the way is open.
 func gate_need(p: int) -> String:
@@ -169,6 +177,8 @@ func break_through(p: int, on_day: int) -> int:
 	var l: int = body_layer[p]
 	var med: String = config.gate_medicine[l]
 	var points: float = float(config.grade_base) + store.rng.randf_range(-float(config.luck), float(config.luck))
+	# Grade quality uses one unit per grade: five percentage points is 0.05.
+	if store.spirit_root[p] and society.revealed[p]: points += float(config.spirit_root_grade_quality) / 100.0
 	# Extra doses of medicine only help a body that can still forge High or better.
 	if not med.is_empty():
 		var held: int = medicine[med][p] / wild.units(med)

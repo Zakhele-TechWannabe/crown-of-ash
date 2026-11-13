@@ -137,5 +137,9 @@
     "a hawk hold itself still in the wind",
     "the waterfall beat the rocks below the peak",
     "ice crack the boulders of the north ridge each winter"
-  ]
+  ],
+  "spirit_root_rate": 0.15,
+  "spirit_root_purity": 0.15,
+  "spirit_root_revealed": 1.1,
+  "spirit_root_grade_quality": 5
 }

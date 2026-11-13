@@ -11,6 +11,40 @@ func _init() -> void:
 	var t: RefCounted = s.temper
 	assert(t != null, "Body tempering is enabled by default")
 	s.seed()
+	# Identical bodies isolate the root's hidden and revealed advantages.
+	p.spirit_root[29] = 0
+	t.hours[29] = 2
+	t.regimen_until[29] = 1000
+	var unrooted: float = t.rate(29, 1)
+	p.spirit_root[29] = 1
+	p.root_purity[29] = 100
+	s.revealed[29] = 0
+	var hidden: float = t.rate(29, 1)
+	s.revealed[29] = 1
+	assert(hidden > unrooted and t.rate(29, 1) > hidden, "Rooted bodies outpace unrooted; revealed beats hidden")
+	for method in 4:
+		t.body_layer[29] = 0
+		t.method[29] = method
+		assert(t.break_through(29, 1) <= int(t.config.method_grade_cap[method]), "Root quality never bypasses method cap")
+	var base: float = t.config.grade_base
+	var luck: float = t.config.luck
+	t.config.grade_base = .98
+	t.config.luck = 0.0
+	p.constitution[29] = 0
+	p.potential[29 * 8] = 10
+	t.method[29] = 1
+	t.teacher[29] = -1
+	t.body_layer[29] = 0
+	t.gate_since[29] = 1
+	s.revealed[29] = 0
+	var hidden_grade: int = t.break_through(29, 1)
+	t.body_layer[29] = 0
+	t.gate_since[29] = 1
+	s.revealed[29] = 1
+	assert(t.break_through(29, 1) > hidden_grade, "Revealed roots give a small grade quality push")
+	t.config.grade_base = base
+	t.config.luck = luck
+	assert(not s.body_ready(29), "Qi still needs all nine layers")
 	# Labour hardens a field hand through the first layers only.
 	for w in 520: t.weekly(0, 7, 7 * w + 1)
 	assert(t.body_layer[0] == 2 and t.grade(0, 1) == t.LOW, "Labour reaches Dense Flesh at Low grade (got layer %d)" % t.body_layer[0])

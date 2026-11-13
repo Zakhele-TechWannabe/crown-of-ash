@@ -97,9 +97,11 @@ static func motive(society: RefCounted, p: int, q: int) -> String:
 ## yield, spar or apart.
 static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumberGenerator) -> Dictionary:
 	var f: Array[Dictionary] = []
-	for side: Dictionary in [a, b]:
+	var starting: Array = opt.get("start_harm", [0.0, 0.0])
+	for side: Dictionary in [worn(a, float(starting[0])), worn(b, float(starting[1]))]:
 		f.append({"s": side, "h": 0.0, "next": 0.0, "last": -1.0, "lungs": float(side.breath) * float(config.breath_seconds),
 			"winded": false, "retry": 0.0, "allin": false, "will": will_for(int(side.will), str(side.motive))})
+	for i in 2: f[i].h = clampf(float(starting[i]), 0.0, 100.0)
 	var spar: bool = opt.get("spar", false)
 	var forest: bool = opt.get("ground", "open") == "forest"
 	var events: Array[Dictionary] = []
@@ -161,6 +163,9 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 			finish.call(t, "spar" if spar else "death", i, 1 - i)
 			return true
 		return false
+
+	for i in 2:
+		if over.call(i, 0.0): return _done(events, result, f)
 
 	# Closing in takes a moment; whoever strikes from hiding lands first and the other reels.
 	for i in 2: f[i].next = 0.8 + rng.randf() * gap.call(i, 0.0) * 0.5
@@ -304,3 +309,11 @@ static func story(r: Dictionary) -> String:
 ## Running pace before breath runs out; forest undergrowth slows people.
 static func running(fighter: Dictionary, forest: bool = false) -> float:
 	return float(fighter.speed) * (0.75 if forest and int(fighter.person) >= 0 else 1.0)
+
+## Existing cracks reduce a stone fighter's strength; fresh fighters keep their catalogue values.
+static func worn(stats: Dictionary, harm: float) -> Dictionary:
+	var result := stats.duplicate()
+	if harm > 0:
+		for key: String in ["power", "guard", "speed", "breath"]:
+			result[key] = float(stats[key]) * (1.0 - clampf(harm, 0, 100) * .003)
+	return result

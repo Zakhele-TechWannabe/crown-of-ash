@@ -2,7 +2,11 @@ extends VBoxContainer
 ## A fixed-height virtual list. Filtering/sorting builds an ID index once; scrolling
 ## only materialises the viewport plus two overscan rows, regardless of population.
 signal person_selected(person: int)
-const ROW_HEIGHT := 42
+const UiTheme = preload("res://src/ui_theme.gd")
+const Palette = preload("res://src/palette.gd")
+const PersonBook = preload("res://src/person_book.gd")
+const ROW_HEIGHT := 150
+var reason_source: VBoxContainer
 var population: RefCounted
 var ids := PackedInt32Array()
 var scroll: ScrollContainer
@@ -51,9 +55,38 @@ func build_page(force_first: int = -1) -> void:
 		row.set_meta("person", person)
 		row.position = Vector2(0, (start + i) * ROW_HEIGHT)
 		row.size = Vector2(maxf(100, scroll.size.x - 18), ROW_HEIGHT - 2)
-		var best := int(population.best_skill[person])
-		var skill_name := str(population.catalogue.nodes[best].name) if best >= 0 else "Untrained"
-		row.text = "%s · %d · %s %d · %s" % [population.names[person], population.age(person), population.catalogue.title(population.best_level[person]), population.best_level[person], skill_name]
-		if population.age(person) < 12: row.text = "%s · %d · %s" % [population.names[person], population.age(person), population.society.childhood.activity(person)]
-		row.tooltip_text = "%s\n%s · %s\nMood %.0f%% · Hunger %d" % [row.text, population.jobs[population.job[person]], "female" if population.sex[person] else "male", population.mood[person] * 100, population.hunger[person]]
+		for child: Node in row.get_children():
+			row.remove_child(child)
+			child.queue_free()
+		row.text = ""
+		var box := VBoxContainer.new()
+		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		box.position = Vector2(UiTheme.SPACE_16, UiTheme.SPACE_8)
+		box.size = Vector2(row.size.x - UiTheme.SPACE_16 * 2, ROW_HEIGHT - UiTheme.SPACE_16)
+		row.add_child(box)
+		var name_label := Label.new()
+		name_label.text = population.names[person] + " · " + PersonBook.path_stage(population, person)
+		name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		name_label.clip_text = true
+		box.add_child(name_label)
+		var subtitle := Label.new()
+		subtitle.theme_type_variation = "Small"
+		subtitle.text = "%d · %s · %s" % [population.age(person), population.jobs[population.job[person]], population.district_name(person)]
+		box.add_child(subtitle)
+		var years: int = population.society.lifespan(person)
+		var life_label := Label.new()
+		life_label.theme_type_variation = "Small"
+		life_label.text = "%d of ~%d years" % [population.age(person), years]
+		box.add_child(life_label)
+		var bar := ProgressBar.new()
+		bar.max_value = years
+		bar.value = population.age(person)
+		UiTheme.thin(bar, Palette.RED if years - population.age(person) <= 5 else Palette.GREEN, UiTheme.SPACE_8)
+		box.add_child(bar)
+		var tags := HFlowContainer.new()
+		box.add_child(tags)
+		if is_instance_valid(reason_source): reason_source.tags(tags, person)
+		for child: Control in box.get_children(): child.mouse_filter = Control.MOUSE_FILTER_PASS
+		row.tooltip_text = "%s · %s" % [population.names[person], PersonBook.path_stage(population, person)]
+
 	page_build_usec = Time.get_ticks_usec() - began

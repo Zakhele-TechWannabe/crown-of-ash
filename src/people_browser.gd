@@ -4,13 +4,20 @@ const VirtualList = preload("res://src/people_list.gd")
 const PersonBook = preload("res://src/person_book.gd")
 const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
+var cultivation_mode := false
+var path_filter := "All"
+var stage_filter := "All"
+var also_filters: Array[String] = []
+var talent_cutoff := 0.0
+var comprehension_cutoff := 0.0
+var advanced := false
 var ledger: PanelContainer
 var population: RefCounted
 var group_mode := "Place"
 var path: Array[String] = []
 var person := -1
 var graph_mode := "Family"
-var person_tab := "Story"
+var person_tab := "Overview"
 var catalogue_mode := false
 var catalogue_path: Array[String] = []
 var results := PackedInt32Array()
@@ -28,6 +35,17 @@ func setup(book: PanelContainer) -> void:
 	ledger = book
 	population = ledger.life.population
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var potentials: Array[float] = []
+	var comprehensions: Array[float] = []
+	for p in population.size():
+		potentials.append(_potential(p))
+		comprehensions.append(population.comprehension[p])
+	potentials.sort()
+	comprehensions.sort()
+	if not potentials.is_empty():
+		talent_cutoff = potentials[mini(potentials.size() - 1, floori(potentials.size() * .9))]
+		comprehension_cutoff = comprehensions[mini(comprehensions.size() - 1, floori(comprehensions.size() * .9))]
+	if cultivation_mode: sort_key = "Stage"; descending = true
 	redraw()
 
 func text(parent: Node, words: String, heading: bool = false) -> Label:
@@ -54,7 +72,7 @@ func redraw() -> void:
 		book.build(self)
 		return
 	var modes := HBoxContainer.new()
-	modes.add_theme_constant_override("separation", 4)
+	modes.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	add_child(modes)
 	for mode: String in ["People", "Skills catalogue"]:
 		var tab := action(modes, mode, func() -> void: catalogue_mode = mode != "People"; person = -1; redraw())
@@ -63,6 +81,12 @@ func redraw() -> void:
 		tab.set_pressed_no_signal(catalogue_mode == (mode != "People"))
 	if catalogue_mode:
 		_catalogue()
+		return
+	if cultivation_mode:
+		results.clear()
+		for p in population.size():
+			if population.society.alive[p]: results.append(p)
+		_list()
 		return
 	if path.is_empty(): _notables()
 	var group := OptionButton.new()
@@ -87,18 +111,34 @@ func redraw() -> void:
 	else:
 		_list()
 
-## Why someone stands out, or "" if they do not.
-func notable_reason(p: int) -> String:
-	if not population.society.alive[p]: return ""
+func _potential(p: int) -> float:
+	var total := 0.0
+	for a in 8: total += population.potential[p * 8 + a]
+	return total / 8.0
+
+## Every applicable reason, shared by rows, cards and the personal record.
+func notable_reason(p: int) -> Array[String]:
+	var reasons: Array[String] = []
+	if not population.society.alive[p]: return reasons
 	var temper: RefCounted = population.society.temper
-	if temper and temper.at_gate(p): return "at the %s gate" % temper.layer_name(temper.body_layer[p] + 1)
-	if population.society.revealed[p]: return "spirit root"
-	if temper and temper.body_layer[p] >= 3: return temper.layer_name(temper.body_layer[p])
-	if population.day - population.last_insight_day[p] <= 90: return "recent insight"
-	if population.best_level[p] >= 31: return "master of a craft"
-	if temper and temper.training(p, population.day) and temper.teacher[p] >= 0: return "drilling under a teacher"
-	if population.age(p) >= 60: return "elder"
-	return ""
+	if temper and temper.at_gate(p): reasons.append("at a gate")
+	if population.society.revealed[p]: reasons.append("spirit root revealed")
+	if temper and temper.body_layer[p] >= 3: reasons.append("layer 3+")
+	if population.last_insight_day[p] >= 0 and population.day - population.last_insight_day[p] <= 90: reasons.append("recent insight")
+	if population.best_level[p] >= 31: reasons.append("master of a craft")
+	if temper and temper.training(p, population.day) and temper.teacher[p] >= 0: reasons.append("drilling under a teacher")
+	if population.age(p) >= 60: reasons.append("elder")
+	if _potential(p) >= talent_cutoff or population.comprehension[p] >= comprehension_cutoff: reasons.append("rare talent")
+	if population.society.injury_until[p] > population.day: reasons.append("injured")
+	if temper and temper.training(p, population.day): reasons.append("training now")
+	return reasons
+
+const REASONS := {"at a gate": "Progress is full; the next body layer needs a gate requirement.", "spirit root revealed": "Their spirit root has awakened.", "layer 3+": "Has forged at least three body layers.", "recent insight": "An insight within the last 90 days.", "master of a craft": "A supporting skill at level 31 or higher.", "drilling under a teacher": "Training now under a body tempering teacher.", "elder": "At least 60 years old.", "rare talent": "Top tenth of the valley in average attribute potential or comprehension.", "injured": "Still recovering from an injury.", "training now": "Currently practising body tempering drills."}
+
+func tags(parent: Node, p: int) -> void:
+	for reason: String in notable_reason(p):
+		var tag := UiTheme.tag(parent, reason)
+		tag.tooltip_text = REASONS[reason]
 
 func _notables() -> void:
 	text(self, "Worth knowing", true)
@@ -109,12 +149,19 @@ func _notables() -> void:
 	var shown := 0
 	for p in population.size():
 		var reason := notable_reason(p)
-		if reason.is_empty() or reason == "elder": continue
+		if reason.is_empty() or reason == ["elder"]: continue
 		var target: int = p
-		var card := action(grid, "%s\n%s · %s" % [population.names[p], reason, population.jobs[population.job[p]]], func() -> void: person = target; person_tab = "Story"; redraw())
-		card.theme_type_variation = "Card"
-		card.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var panel := PanelContainer.new()
+		panel.theme_type_variation = "CardPanel"
+		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_child(panel)
+		var card := VBoxContainer.new()
+		panel.add_child(card)
+		action(card, population.names[p], func() -> void: person = target; person_tab = "Overview"; redraw(), "Chip")
+		small(card, population.jobs[population.job[p]])
+		var reasons := HFlowContainer.new()
+		card.add_child(reasons)
+		tags(reasons, p)
 		shown += 1
 		if shown == 6: break
 	if shown == 0: text(grid, "A quiet village; no one stands out yet.")
@@ -205,7 +252,7 @@ func _summary_card(parent: Node, key: String, summary: Dictionary) -> void:
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	parent.add_child(panel)
 	var card := VBoxContainer.new()
-	card.add_theme_constant_override("separation", 4)
+	card.add_theme_constant_override("separation", UiTheme.SPACE_8)
 	panel.add_child(card)
 	var target := key
 	text(card, "%s · %d people" % [_group_label(key), summary.count], true)
@@ -220,6 +267,7 @@ func _summary_card(parent: Node, key: String, summary: Dictionary) -> void:
 	bar.value = 100.0 * summary.female / summary.count
 	bar.tooltip_text = "%d female · %d male · %d youths · %d elders" % [summary.female, summary.count - summary.female, summary.young, summary.elder]
 	card.add_child(bar)
+	small(card, bar.tooltip_text)
 	var ages := HBoxContainer.new()
 	ages.custom_minimum_size.y = 5
 	card.add_child(ages)
@@ -230,40 +278,103 @@ func _summary_card(parent: Node, key: String, summary: Dictionary) -> void:
 		segment.size_flags_stretch_ratio = maxf(.01, [summary.young, summary.count - summary.young - summary.elder, summary.elder][stage])
 		ages.add_child(segment)
 
+func _filter_row(caption: String, choices: Array, value: String, changed: Callable, parent: Node = self) -> void:
+	var row := HFlowContainer.new()
+	parent.add_child(row)
+	small(row, caption)
+	for choice: String in choices:
+		var chosen := choice
+		var control := action(row, choice, func() -> void: changed.call(chosen); redraw(), "Chip")
+		control.toggle_mode = true
+		control.set_pressed_no_signal(choice == value)
+
 func _list() -> void:
+	_filter_row("Path", ["All", "Body Tempering", "Qi cultivation", "Not yet started"], path_filter, func(value: String) -> void: path_filter = value)
+	_filter_row("Stage", ["All", "Layers 1–3", "4–6", "7–9", "At a gate", "Perfect grades"], stage_filter, func(value: String) -> void: stage_filter = value)
+	var realms: Array = ["All realms"]
+	for realm: Dictionary in population.society.rules.realms: realms.append(str(realm.name))
+	_filter_row("Qi realm", realms, qi_realm, func(value: String) -> void: qi_realm = value)
+	var also := HFlowContainer.new()
+	add_child(also)
+	small(also, "Also")
+	for choice: String in ["Spirit root", "Training now", "Injured", "Has a teacher"]:
+		_also_button(also, choice)
+	var more := MenuButton.new()
+	more.text = "More ▾"
+	also.add_child(more)
+	for choice: String in ["Hungry", "Unhappy", "Elders", "Children", "Recent insight"]: more.get_popup().add_check_item(choice)
+	more.get_popup().index_pressed.connect(func(index: int) -> void:
+		var value := more.get_popup().get_item_text(index)
+		_toggle_also(value)
+		more.get_popup().set_item_checked(index, value in also_filters)
+		_update_list())
+	_filter_row("Sort", ["Stage", "Grade", "Talent", "Age", "Years left", "Name"], sort_key, func(value: String) -> void: sort_key = value)
+	action(self, "Advanced ▾", func() -> void: advanced = not advanced; redraw(), "Chip")
+	var fold := VBoxContainer.new()
+	fold.visible = advanced
+	add_child(fold)
 	search = LineEdit.new()
 	search.placeholder_text = "Name, age:12-30, skill:id>=16"
 	search.text = query
-	search.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(search)
+	fold.add_child(search)
 	search.text_changed.connect(func(value: String) -> void: query = value; _update_list())
-	var chips := HFlowContainer.new()
-	add_child(chips)
-	var chip_group := ButtonGroup.new()
-	for filter_name: String in ["All", "Notable", "Hungry", "Unhappy", "Spirit root", "At gate", "Recent"]:
-		var selected := filter_name
-		var control := action(chips, filter_name, func() -> void: chip = selected; _update_list())
-		control.theme_type_variation = "Chip"
-		control.toggle_mode = true
-		control.button_group = chip_group
-		control.set_pressed_no_signal(chip == filter_name)
-	var sorting := HBoxContainer.new()
-	add_child(sorting)
-	var choices := OptionButton.new()
-	for key: String in ["Name", "Age", "Level", "Mood", "Hunger", "Discipline"]: choices.add_item(key)
-	choices.item_selected.connect(func(index: int) -> void: sort_key = ["Name", "Age", "Level", "Mood", "Hunger", "Discipline"][index]; _update_list())
-	sorting.add_child(choices)
 	var discipline_sort := LineEdit.new()
 	discipline_sort.placeholder_text = "Sort discipline id"
-	discipline_sort.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	discipline_sort.tooltip_text = "Example: grain_farming.farming; select Discipline to sort by it"
+	fold.add_child(discipline_sort)
 	discipline_sort.text_submitted.connect(func(value: String) -> void: sort_discipline = value; sort_key = "Discipline"; _update_list())
-	add_child(discipline_sort)
-	action(sorting, "Reverse", func() -> void: descending = not descending; _update_list(), "Chip")
+	action(fold, "Reverse sort", func() -> void: descending = not descending; _update_list(), "Chip")
 	body = VBoxContainer.new()
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(body)
 	_update_list()
+
+var qi_realm := "All realms"
+
+func _toggle_also(value: String) -> void:
+	if value in also_filters: also_filters.erase(value)
+	else: also_filters.append(value)
+
+func _also_button(parent: Node, value: String) -> void:
+	var control := action(parent, value, func() -> void: _toggle_also(value); _update_list(), "Chip")
+	control.toggle_mode = true
+	control.set_pressed_no_signal(value in also_filters)
+
+func cultivation_matches(p: int) -> bool:
+	var society: RefCounted = population.society
+	var temper: RefCounted = society.temper
+	var layer: int = temper.body_layer[p] if temper else 0
+	var qi: bool = society.realm[p] >= 2 or society.qi[p] > 0
+	if path_filter == "Body Tempering" and layer == 0 and not (temper and temper.training(p, population.day)): return false
+	if path_filter == "Qi cultivation" and not qi: return false
+	if path_filter == "Not yet started" and (layer > 0 or qi or (temper and temper.training(p, population.day))): return false
+	var stage: int = society.layer[p] if path_filter == "Qi cultivation" or (qi and qi_realm != "All realms") else layer
+	if stage_filter == "Layers 1–3" and (stage < 1 or stage > 3): return false
+	if stage_filter == "4–6" and (stage < 4 or stage > 6): return false
+	if stage_filter == "7–9" and (stage < 7 or stage > 9): return false
+	if stage_filter == "At a gate" and not (temper and temper.at_gate(p)): return false
+	if stage_filter == "Perfect grades" and not (temper and layer > 0 and temper.perfect_so_far(p)): return false
+	if qi_realm != "All realms" and str(society.rules.realms[society.realm[p]].name) != qi_realm: return false
+	for filter: String in also_filters:
+		match filter:
+			"Spirit root":
+				if not society.revealed[p]: return false
+			"Training now":
+				if not (temper and temper.training(p, population.day)): return false
+			"Injured":
+				if society.injury_until[p] <= population.day: return false
+			"Has a teacher":
+				if society.master[p] < 0 and not (temper and temper.teacher[p] >= 0): return false
+			"Hungry":
+				if population.hunger[p] == 0: return false
+			"Unhappy":
+				if population.mood[p] >= .45: return false
+			"Elders":
+				if population.age(p) < 60: return false
+			"Children":
+				if population.age(p) >= 18: return false
+			"Recent insight":
+				if population.last_insight_day[p] < 0 or population.day - population.last_insight_day[p] > 90: return false
+	return true
 
 func _update_list() -> void:
 	for child: Node in body.get_children():
@@ -271,6 +382,7 @@ func _update_list() -> void:
 		child.queue_free()
 	var selected: Array[int] = []
 	for p: int in results:
+		if not cultivation_matches(p): continue
 		if chip == "Notable" and notable_reason(p).is_empty(): continue
 		if chip == "Hungry" and population.hunger[p] == 0: continue
 		if chip == "Unhappy" and population.mood[p] >= .45: continue
@@ -288,11 +400,17 @@ func _update_list() -> void:
 	small(body, "%d people · select a name to open their page" % selected.size())
 	virtual_list = VirtualList.new()
 	body.add_child(virtual_list)
+	virtual_list.reason_source = self
 	virtual_list.setup(population, PackedInt32Array(selected))
-	virtual_list.person_selected.connect(func(id: int) -> void: person = id; person_tab = "Story"; redraw())
+	small(body, "Tags: gate · root · layer 3+ · insight (90 days) · craft master (31+) · teacher · elder (60+) · rare talent (top 10%) · injured · training. Hover a tag for its reason.")
+	virtual_list.person_selected.connect(func(id: int) -> void: person = id; person_tab = "Overview"; redraw())
 
 func _sort_value(p: int) -> Variant:
 	match sort_key:
+		"Stage": return population.society.realm[p] * 100 + (population.society.layer[p] if population.society.realm[p] > 0 else (population.society.temper.body_layer[p] if population.society.temper else 0))
+		"Grade": return population.society.temper.grade(p, population.society.temper.body_layer[p]) if population.society.temper and population.society.temper.body_layer[p] > 0 else -1
+		"Talent": return _potential(p) + population.comprehension[p] * 10
+		"Years left": return population.society.lifespan(p) - population.age(p)
 		"Age": return population.age(p)
 		"Level": return population.best_level[p]
 		"Mood": return population.mood[p]

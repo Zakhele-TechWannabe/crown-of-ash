@@ -342,7 +342,8 @@ func _finish_day() -> void:
 		population.sync_walkers(people)
 		if population.size() <= 1000 and not coarse_population: population.tick_day((year - 1) * 365 + day)
 		while skill_event_cursor < population.events.size():
-			note(population.events[skill_event_cursor].text)
+			var event: Dictionary = population.events[skill_event_cursor]
+			if event.get("source", "") != "society": note(event.text)
 			skill_event_cursor += 1
 	_food_production()
 	_material_production()

@@ -4,12 +4,12 @@ const Palette = preload("res://src/palette.gd")
 const BuildingArt = preload("res://src/building_art.gd")
 static var cache: Dictionary = {}
 
-static func texture(state: String, facing: String = "south") -> ImageTexture:
-	var key := state + ":" + facing
-	if not cache.has(key): cache[key] = ImageTexture.create_from_image(image(state, facing))
+static func texture(state: String, facing: String = "south", harm: float = 0.0) -> ImageTexture:
+	var key := state + ":" + facing + ":" + str(2 if harm >= 60 else (1 if harm >= 30 else 0))
+	if not cache.has(key): cache[key] = ImageTexture.create_from_image(image(state, facing, harm))
 	return cache[key]
 
-static func image(state: String, facing: String = "south") -> Image:
+static func image(state: String, facing: String = "south", harm: float = 0.0) -> Image:
 	var im := Image.create(22, 34, false, Image.FORMAT_RGBA8)
 	var stone := Palette.STONE.darkened(0.18)
 	var moss := Palette.GREEN.darkened(0.4)
@@ -69,5 +69,12 @@ static func image(state: String, facing: String = "south") -> Image:
 		if state == "frozen":
 			im.fill_rect(Rect2i(12, 17, 3, 3), moss)
 			im.fill_rect(Rect2i(7, 27, 3, 3), moss)
+	if state in ["guarding", "pursuing"] and harm >= 30:
+		var lift := 7 if state == "guarding" else 0
+		for at: Vector2i in [Vector2i(9, 17), Vector2i(10, 18), Vector2i(9, 19), Vector2i(9, 20)]:
+			im.set_pixelv(at - Vector2i(0, lift), Palette.OUTLINE)
+		if harm >= 60:
+			im.fill_rect(Rect2i(5, 22 - lift, 3, 3), Color.TRANSPARENT)
+			im.fill_rect(Rect2i(12, 25 - lift, 1, 5), Palette.OUTLINE)
 	BuildingArt._outline(im)
 	return im

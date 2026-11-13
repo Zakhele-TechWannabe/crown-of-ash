@@ -78,6 +78,7 @@ static func write(map: Node2D, path: String = PATH) -> Error:
 	if archive: archive.close()
 	var state := {"life": capture(map.life), "on_ground": map.on_ground,
 		"map_position": map.cam.position, "map_zoom": map.cam.zoom,
+		"book_section": map.ground_view.ledger.current,
 		"ground_position": map.ground_view.cam.position, "ground_zoom": map.ground_view.cam.zoom}
 	var error := DirAccess.make_dir_recursive_absolute(path.get_base_dir())
 	if error != OK: return error
@@ -159,6 +160,7 @@ static func read(map: Node2D, path: String = PATH) -> bool:
 		map.cam.zoom = state.get("map_zoom", map.cam.zoom)
 		map.ground_view.cam.position = state.get("ground_position", map.ground_view.cam.position)
 		map.ground_view.cam.zoom = state.get("ground_zoom", map.ground_view.cam.zoom)
+		map.ground_view.ledger.current = state.get("book_section", "cultivators")
 		map.ground_view.entered_once = true
 		return true
 	return false

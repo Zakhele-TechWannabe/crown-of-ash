@@ -3,6 +3,10 @@ extends RefCounted
 ## Fonts: one heading face (serif) and one body face. Sizes: Palette.SMALL, BODY, TITLE, HEAD.
 ## Buttons: one flat box in four variations. Button (brass, an action), Tab, Chip (a filter or small fact) and Card (a clickable tile).
 const Palette = preload("res://src/palette.gd")
+const SPACE_8 := 8
+const SPACE_12 := 12
+const SPACE_16 := 16
+const SPACE_24 := 24
 static var _theme: Theme
 static var _heading: Font
 static var _body: Font
@@ -60,8 +64,8 @@ static func build() -> Theme:
 	theme.default_font_size = Palette.BODY
 	for container: String in ["HBoxContainer", "VBoxContainer", "HFlowContainer"]:
 		theme.set_constant("separation", container, 8)
-	theme.set_constant("h_separation", "HFlowContainer", 6)
-	theme.set_constant("v_separation", "HFlowContainer", 6)
+	theme.set_constant("h_separation", "HFlowContainer", SPACE_8)
+	theme.set_constant("v_separation", "HFlowContainer", SPACE_8)
 	theme.set_constant("h_separation", "GridContainer", 8)
 	theme.set_constant("v_separation", "GridContainer", 8)
 
@@ -77,9 +81,9 @@ static func build() -> Theme:
 	theme.set_color("font_color", "Small", Palette.INK_SOFT)
 
 	# Panels: the page, a card on the page, the top bar and a small tag.
-	theme.set_stylebox("panel", "PanelContainer", box(Palette.PAPER, Palette.LINE, 2, 14, 12, 6))
+	theme.set_stylebox("panel", "PanelContainer", box(Palette.PAPER, Palette.LINE, 1, SPACE_16, SPACE_16, 6))
 	theme.set_type_variation("CardPanel", "PanelContainer")
-	theme.set_stylebox("panel", "CardPanel", box(Palette.PAPER_LIGHT, Palette.LINE, 1, 10, 8))
+	theme.set_stylebox("panel", "CardPanel", box(Palette.PAPER_LIGHT, Palette.LINE, 0, SPACE_16, SPACE_12))
 	theme.set_type_variation("Bar", "PanelContainer")
 	var bar := box(Palette.PAPER, Palette.LINE, 0, 12, 5, 0)
 	bar.border_width_bottom = 2

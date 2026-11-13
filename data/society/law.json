@@ -76,5 +76,7 @@
     "spring": "meditating at the spring",
     "work": "straying off a work pass",
     "plaza": "entering the Great Plaza"
-  }
+  },
+  "mend_per_day": 2,
+  "retreat_harm": 60
 }

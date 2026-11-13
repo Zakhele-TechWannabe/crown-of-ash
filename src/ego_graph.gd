@@ -1,6 +1,6 @@
 extends Control
 ## Small knowledge graph around one person: relationships, family, lineage or skills.
-## Laid out once when built (at most ~60 nodes), then only redrawn; clicking a person node calls `opened`.
+## Laid out once when built, then only redrawn; clicking a person node calls `opened`.
 signal opened(person: int)
 const Palette = preload("res://src/palette.gd")
 const EDGE_COLORS := {"parent": Palette.BRASS, "spouse": Palette.PLUM, "sibling": Palette.GOLD, "master": Palette.JADE,
@@ -13,6 +13,7 @@ var mode := "Relationships"
 var nodes: Array[Dictionary] = []
 var edges: Array[Dictionary] = []
 var hovered := -1
+var focused := -1
 var index: Dictionary = {}
 var labels_above := false
 
@@ -35,7 +36,7 @@ func build(store: RefCounted, person: int, view: String) -> void:
 
 func _node(key: String, label: String, person: int = -1, color: Color = Palette.INK_SOFT, radius: float = 7.0) -> int:
 	if index.has(key): return index[key]
-	if nodes.size() >= MAX_NODES: return -1
+	if mode != "Skills" and nodes.size() >= MAX_NODES: return -1
 	index[key] = nodes.size()
 	nodes.append({"key": key, "label": label, "person": person, "color": color, "r": radius, "pos": Vector2.ZERO, "v": Vector2.ZERO, "dim": false})
 	return nodes.size() - 1
@@ -110,7 +111,7 @@ func _skills() -> void:
 	var ordered: Array = skills.keys()
 	ordered.sort_custom(func(a: String, b: String) -> bool: return int(skills[a].level) > int(skills[b].level))
 	var me := _person_node(center)
-	for id: String in ordered.slice(0, 12):
+	for id: String in ordered:
 		var domain: Dictionary = catalogue.domains[catalogue.domain_for(id)]
 		var discipline: String = catalogue.discipline_for(id)
 		var sphere := _node("sphere:" + str(domain.sphere), str(catalogue.spheres[domain.sphere].name), -1, Palette.INK_SOFT, 8)
@@ -129,6 +130,17 @@ func _skills() -> void:
 			if sn >= 0:
 				nodes[sn].dim = true
 				_edge(di, sn, "branch")
+
+	for discipline: String in catalogue.disciplines:
+		if not index.has(discipline): continue
+		for related: String in catalogue.disciplines[discipline].get("related_disciplines", []):
+			if index.has(related): _edge(index[discipline], index[related], "branch")
+	for node: Dictionary in nodes:
+		var key := str(node.key)
+		if skills.has(key):
+			var row: Dictionary = skills[key]
+			node.tip = "%s · level %d · %s\n%.1f XP to next level · %d practice days" % [catalogue.skills[key].name, row.level, catalogue.title(row.level), maxf(0, catalogue.thresholds[mini(catalogue.thresholds.size() - 1, row.level)] - row.xp), row.days_practised]
+			node.best = key in ordered.slice(0, 3)
 
 # Trees read better in layers: generations as rows (family, lineage), the skill tree as columns.
 # Directed edges (parent, master, skill, branch) step one layer; spouse and sibling stay level.
@@ -213,6 +225,13 @@ func _transform() -> Transform2D:
 	if nodes.is_empty(): return Transform2D(0, size / 2)
 	var bounds := Rect2(nodes[0].pos, Vector2.ZERO)
 	for n: Dictionary in nodes: bounds = bounds.expand(n.pos)
+	if labels_above:
+		var widest := 0.0
+		var font := get_theme_default_font()
+		for node: Dictionary in nodes:
+			widest = maxf(widest, font.get_string_size(node.label, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL).x)
+		var fit := maxf(.01, minf(2.2, minf((size.x - widest - 24) / maxf(bounds.size.x, 1), (size.y - 80) / maxf(bounds.size.y, 1))))
+		return Transform2D(0, Vector2(fit, fit), 0, size / 2 + Vector2(0, 8) - bounds.get_center() * fit)
 	# Labels run right of (or centred above) their nodes, so reserve room on that side.
 	bounds = bounds.grow_individual(40 if labels_above else 14, 24 if labels_above else 14, 60 if labels_above else 14, 14)
 	var label_room := 0.0 if labels_above else 110.0
@@ -228,14 +247,29 @@ func _draw() -> void:
 	var t := _transform()
 	var font := get_theme_default_font()
 	var lit: Dictionary = {}
-	if hovered >= 0:
-		lit[hovered] = true
-		for e: Dictionary in edges:
-			if e.a == hovered: lit[e.b] = true
-			if e.b == hovered: lit[e.a] = true
+	var active := hovered if hovered >= 0 else focused
+	if active >= 0:
+		lit[active] = true
+		if mode == "Skills":
+			# Focus descendants and the path back to their sphere, without lighting sibling branches.
+			for backwards: bool in [false, true]:
+				var pending: Array[int] = [active]
+				var visited: Dictionary = {active: true}
+				while not pending.is_empty():
+					var at: int = pending.pop_front()
+					for edge: Dictionary in edges:
+						var other: int = edge.a if backwards and edge.b == at else (edge.b if not backwards and edge.a == at else -1)
+						if other < 0 or visited.has(other) or edge.kind != "skill": continue
+						visited[other] = true
+						lit[other] = true
+						pending.append(other)
+		else:
+			for e: Dictionary in edges:
+				if e.a == active: lit[e.b] = true
+				if e.b == active: lit[e.a] = true
 	for e: Dictionary in edges:
 		var color: Color = EDGE_COLORS.get(e.kind, Color.GRAY)
-		if hovered >= 0 and not (lit.has(e.a) and lit.has(e.b)): color.a = .15
+		if active >= 0 and not (lit.has(e.a) and lit.has(e.b)): color.a = .15
 		var a: Vector2 = t * nodes[e.a].pos
 		var b: Vector2 = t * nodes[e.b].pos
 		if e.kind in ["enemy", "branch"]: draw_dashed_line(a, b, color, 1.5, 5)
@@ -243,13 +277,14 @@ func _draw() -> void:
 	for i in nodes.size():
 		var n: Dictionary = nodes[i]
 		var at: Vector2 = t * n.pos
-		var fade := hovered >= 0 and not lit.has(i)
+		var fade := active >= 0 and not lit.has(i)
 		var color: Color = n.color
 		if n.dim: color.a = .55
 		if fade: color.a = .25
 		draw_circle(at, n.r, color)
 		if n.person == center: draw_arc(at, n.r + 3, 0, TAU, 24, Palette.INK, 2, true)
 		var ink := Color(Palette.INK, .3 if fade else (.6 if n.dim else 1.0))
+		if labels_above and not (n.get("best", false) or (active >= 0 and lit.has(i)) or str(n.key).begins_with("sphere:") or str(n.key).begins_with("domain:")): continue
 		if labels_above:
 			var width := font.get_string_size(n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL).x
 			draw_string(font, at + Vector2(-width / 2, -n.r - 4), n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, ink)
@@ -266,12 +301,16 @@ func _gui_input(event: InputEvent) -> void:
 		var under := _node_at(event.position)
 		if under != hovered:
 			hovered = under
-			tooltip_text = nodes[under].label if under >= 0 else ""
+			tooltip_text = nodes[under].get("tip", nodes[under].label) if under >= 0 else ""
 			mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if under >= 0 and nodes[under].person >= 0 else Control.CURSOR_ARROW
 			queue_redraw()
 	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var under := _node_at(event.position)
-		if under >= 0 and nodes[under].person >= 0 and nodes[under].person != center:
+		if mode == "Skills":
+			focused = -1 if focused == under else under
+			queue_redraw()
+			accept_event()
+		elif under >= 0 and nodes[under].person >= 0 and nodes[under].person != center:
 			accept_event()
 			opened.emit(int(nodes[under].person))
 
