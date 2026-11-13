@@ -16,5 +16,8 @@
   "complete_manual_share": 0.08,
   "marriage_age_gap": 20,
   "mixed_cultivation_opinion": 70,
-  "extended_kin_exclusion": false
+  "extended_kin_exclusion": false,
+  "gestation_days": 273,
+  "twin_gestation_days": 243,
+  "twin_chance": 0.03
 }

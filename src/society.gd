@@ -23,6 +23,9 @@ var injury_until := PackedInt32Array()
 var bottleneck_since := PackedInt32Array()
 var damage := PackedFloat32Array()
 var last_birth := PackedInt32Array()
+## The day a pregnancy comes to term (-1 when not with child), and whether it is twins.
+var due_day := PackedInt32Array()
+var twins := PackedByteArray()
 var rivalry := PackedByteArray()
 var guilt := PackedFloat32Array()
 var resources := PackedFloat32Array()
@@ -81,6 +84,8 @@ func add_person() -> void:
 	bottleneck_since.append(0)
 	damage.append(1)
 	last_birth.append(-2000)
+	due_day.append(-1)
+	twins.append(0)
 	rivalry.append(0)
 	guilt.append(0)
 	resources.append(1)
@@ -572,10 +577,12 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 				if reverse >= 0 and ties.opinion[reverse] >= 50 and not marriage_related(p, other): ties.bonds[e] |= Relationships.ROMANCE
 				if marry(p, other): break
 			e = ties.next[e]
-	if store.sex[p] == 1 and spouse[p] >= 0 and years >= int(events.fertility_min_age) and years <= int(events.fertility_max_age) and on_day - last_birth[p] >= int(events.birth_spacing_days) and store.hunger[p] == 0 and store.rng.randf() < days * float(events.birth_per_day):
-		var dad := spouse[p]
-		last_birth[p] = on_day
-		store.add_child(child_name(store.names[dad].get_slice(" ", 0), store.size() % 2), p, dad)
+	if due_day[p] >= 0 and on_day >= due_day[p]: deliver(p, on_day)
+	elif due_day[p] < 0 and store.sex[p] == 1 and spouse[p] >= 0 and years >= int(events.fertility_min_age) and years <= int(events.fertility_max_age) and on_day - last_birth[p] >= int(events.birth_spacing_days) and store.hunger[p] == 0 and store.rng.randf() < days * float(events.birth_per_day):
+		# Nine months to term; twins come a month early.
+		twins[p] = 1 if store.rng.randf() < float(events.twin_chance) else 0
+		due_day[p] = on_day + int(events.twin_gestation_days if twins[p] else events.gestation_days)
+		note(p, "pregnancy", "%s is with child%s" % [store.names[p], " (twins)" if twins[p] else ""])
 	if mind == null and years >= 12 and years < 30 and master[p] < 0 and social_flags & 2:
 		var e := ties.head[p]
 		while e >= 0:
@@ -588,6 +595,17 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		ties.event(p, child, "filial_care", on_day)
 		reputation[child] += 1
 		if years == 70: pass_legacy(p, child)
+
+## The father is the husband at conception; if he has died the child still takes his name.
+func deliver(mother: int, on_day: int) -> void:
+	var store: RefCounted = store_ref.get_ref()
+	var dad := spouse[mother]
+	var surname: String = store.names[dad if dad >= 0 else mother].get_slice(" ", 0)
+	for n in 2 if twins[mother] else 1:
+		store.add_child(child_name(surname, store.rng.randi_range(0, 1)), mother, dad if dad >= 0 else mother)
+	last_birth[mother] = on_day
+	due_day[mother] = -1
+	twins[mother] = 0
 
 func faction(kind: String, key: String, title: String, members: PackedInt32Array, leader: int) -> int:
 	var id: int = faction_keys.get(key, -1)

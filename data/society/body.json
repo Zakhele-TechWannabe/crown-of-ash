@@ -36,7 +36,7 @@
   "luck": 0.5,
   "qi_bonus_by_grade": [0.05, 0.1, 0.18, 0.25],
   "mortal_lifespan": 70,
-  "peak_lifespan": 80,
+  "peak_lifespan": 100,
   "blood_root_reveal_per_year": 0.2,
   "folk_drills_per_day": 0.0009,
   "folk_drills_hunter_factor": 3.0,

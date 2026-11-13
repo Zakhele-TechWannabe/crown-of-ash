@@ -102,7 +102,7 @@ func setup(map: Node2D) -> void:
 		var household := n / 3 if n < 12 else (4 + (n - 12) / 2 if n < 18 else 4 + n - 18)
 		var b: Dictionary = sect.data.village[household * 8]
 		var home := nearest(sect.center + Vector2i(int(b.rect[0]) + 2, int(b.rect[1]) + int(b.rect[3])))
-		var job := 0 if n < 8 else (n - 7 if n < 11 else (4 if n < 13 else (5 if n < 15 else (6 if n == 15 else (7 if n < 18 else 8)))))
+		var job := 0 if n < 8 else (n - 7 if n < 11 else (4 if n < 13 else (5 if n < 15 else (6 if n == 15 else (7 if n < 18 else 4)))))
 		var work := square
 		if job == 0:
 			var f: Dictionary = sect.data.fields[n]
@@ -115,7 +115,7 @@ func setup(map: Node2D) -> void:
 			work = nearest(sect.center + Vector2i(80 + n % 2 * 8, 245))
 		else:
 			work = nearest(square + Vector2i(n % 4 * 2 - 3, n % 3 * 2))
-		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": rng.randi_range(12, 16) if job == 8 else rng.randi_range(18, 60), "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.1, 0.28), rng.randf_range(0.85, 1.0))})
+		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": 12, "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.1, 0.28), rng.randf_range(0.85, 1.0))})
 	var trades := ["gardener", "gardener", "orchard keeper", "herder", "herder", "fisher", "hunter", "cook / pickler", "mushroom grower", "cook / pickler"]
 	# Keep the first eight adults on rice, and the two children at home.
 	var facilities := ["garden", "garden", "orchard", "herd", "herd", "fishery", "hunt", "kitchen", "logs", "kitchen"]
@@ -329,7 +329,7 @@ func _draw() -> void:
 			continue
 		if drawn >= WALKER_LIMIT: break
 		drawn += 1
-		var child: bool = p.kind == 8
+		var child: bool = p.kind == 8 or population.age(int(p.get("id", 0))) < 16
 		var phase := minutes * 5 + int(p.age)
 		if int(p.get("id", -1)) == selected:
 			draw_arc(at - Vector2(0, 2), 15, 0, TAU, 24, Palette.OUTLINE, 5)

@@ -16,11 +16,13 @@ func _run() -> void:
 	for p: Dictionary in life.people:
 		households[p.home_cottage] = int(households.get(p.home_cottage, 0)) + 1
 		jobs[p.job] = int(jobs.get(p.job, 0)) + 1
-		assert(p.age >= 12 and p.age <= 60)
+		assert(p.age == 12)
 		assert(not life.grid.get_point_path(p.home, p.work).is_empty(), "Unreachable workplace: " + str(p.name))
 	for count: int in households.values():
 		assert(count >= 2 and count <= 3)
-	assert(jobs["field hand"] == 8 and jobs["child"] == 2)
+	assert(jobs["field hand"] == 8 and not jobs.has("child"))
+	# Ten boys and ten girls, all twelve, with no parents in the valley.
+	assert(life.people.filter(func(p: Dictionary) -> bool: return p.sex == "female").size() == 10)
 	for job: String in ["orchard keeper", "fisher", "hunter", "woodcutter", "quarryman", "miner", "smith", "weaver", "tanner", "kiln tender"]:
 		assert(jobs.has(job))
 	var food_duties: Dictionary = {}
