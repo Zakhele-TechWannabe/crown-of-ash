@@ -4,14 +4,19 @@ func _initialize() -> void:
 	var j := p.register_job("chores", ["chores"])
 	p.add_person("Wang Mother", 25, j)
 	p.add_person("Li Father", 25, j)
-	p.add_person("Zhao Matchmaker", 60, j)
 	p.sex[0] = 1
 	p.sex[1] = 0
 	var s: RefCounted = p.society
 	for a: int in [0, 1]:
 		var e: int = s.ties.tie(a, 1 - a, 60)
 		s.ties.familiarity[e] = 50
+	var elder := p.add_person("Wang Elder", 48, j)
+	p.parent_id[0] = elder
+	s.ties.tie(elder, 1, -20)
+	var parent_child: int = s.ties.tie(elder, 0, 60)
 	assert(s.marry(0, 1))
+	assert(s.ties.opinion[parent_child] < 60)
+	assert(s.chronicle[-1].text.contains("against their family"))
 	assert(p.household[0] == p.household[1])
 	var child := p.add_child("Li Child", 0, 1)
 	assert(s.father[child] == 1 and p.parent_id[child] == 0)
@@ -31,8 +36,9 @@ func _initialize() -> void:
 	p.day = 20 * 365
 	var aunt := p.add_person("Zhao Aunt", 48, j, 2)
 	var cousin := p.add_person("Cao Cousin", 18, j, 3)
-	s.father[0] = 2
-	s.father[aunt] = 2
+	var grandparent := p.add_person("Zhao Grandparent", 70, j)
+	s.father[0] = grandparent
+	s.father[aunt] = grandparent
 	p.parent_id[cousin] = aunt
 	assert(s.related(child, cousin) and not s.marriage_related(child, cousin))
 	assert(s.marriage_related(0, cousin), "Avuncular marriage remains excluded")
@@ -50,5 +56,5 @@ func _initialize() -> void:
 	p.day = 36500
 	s.tick(p.day)
 	assert(s.alive[0] == 0, "Lifespan deaths are on: a 125-year-old mortal has died")
-	print("PASS family: mutual marriage, matchmaker, household split, two parents, kin, birth, pregnancy and twins, frail elders")
+	print("PASS family: mutual marriage, household split, two parents, kin, birth, pregnancy and twins, frail elders")
 	quit()

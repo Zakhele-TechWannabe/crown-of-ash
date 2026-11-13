@@ -4,7 +4,7 @@ const Palette = preload("res://src/palette.gd")
 const FILTERS := {
 	"All": [],
 	"Tempering": ["tempering_method", "tempering_gate", "tempering", "gathering", "hunt", "injury"],
-	"Family": ["pregnancy", "birth", "marriage", "old_age", "legacy", "apprenticeship"],
+	"Family": ["talent", "childhood", "pregnancy", "birth", "marriage", "old_age", "legacy", "apprenticeship"],
 	"Cultivation": ["awakening", "breakthrough", "technique", "manual", "setback", "absorption", "formation", "harvested"],
 	"Conflict": ["trespass", "guardian", "confrontation", "fight", "killed", "schism", "betrayal", "reconciliation", "oath"],
 }

@@ -268,7 +268,7 @@ func _meal() -> void:
 	for n: int in order:
 		var p: Dictionary = people[n]
 		var need := 0.5 if int(p.kind) == 8 else 1.0
-		var wild := minf(need, 0.3) if int(p.hunger) >= 3 else 0.0
+		var wild := minf(need, 0.3) if int(p.hunger) >= 3 and (population == null or population.age(int(p.id)) >= 12) else 0.0
 		p.foraged += wild
 		flow("foraged", wild)
 		var eaten := minf(stock, need * share - wild) if need * share > wild else 0.0
@@ -350,18 +350,19 @@ func _finish_day() -> void:
 	if not no_farmers:
 		var autumn := day > 182 and day <= 273
 		for p: Dictionary in people:
+			if population and population.age(int(p.id)) < 12: continue
 			var hunger := int(p.hunger)
 			if int(p.kind) == 0:
 				# Starving farmers still put in half a day; at harvest the food is right in front of them.
 				labor += (maxf(EFFECT[hunger], 0.5) if autumn else (EFFECT[hunger] if hunger < 3 else EFFECT[hunger] * 0.5)) * _skill_output(p, "fields")
 			elif autumn and hunger >= 2 and int(p.kind) != 8:
 				# Hungry villagers of any trade join the harvest.
-				labor += 0.5
+				labor += 0.5 * (population.society.childhood.work_fraction(int(p.id)) if population else 1.0)
 	if population != null and not no_farmers:
 		for id in population.size():
 			if walker_ids.has(id): continue
 			if population.age(id) < 12 or not population.society.alive[id]: continue
-			if "fields" in population.schedules[population.job[id]]: labor += EFFECT[population.hunger[id]] * population.output(id, "fields") * (.5 if population.age(id) < 18 else 1)
+			if "fields" in population.schedules[population.job[id]]: labor += EFFECT[population.hunger[id]] * population.output(id, "fields") * population.society.childhood.work_fraction(id) * (.5 if population.age(id) < 18 else 1)
 	if day <= 182:
 		work += labor
 	elif day <= 273:
@@ -480,6 +481,7 @@ func _food_production() -> void:
 	var workers: Dictionary = {}
 	var raw_workers: Dictionary = {}
 	for p: Dictionary in people:
+		if population and population.age(int(p.id)) < 12: continue
 		var facility := str(p.get("food_work", ""))
 		raw_workers[facility] = float(raw_workers.get(facility, 0.0)) + EFFECT[int(p.hunger)]
 		workers[facility] = float(workers.get(facility, 0.0)) + EFFECT[int(p.hunger)] * _skill_output(p, facility)
@@ -527,6 +529,7 @@ func _material_production() -> void:
 	var staffing: Dictionary = {}
 	var raw_workers: Dictionary = {}
 	for person: Dictionary in people:
+		if population and population.age(int(person.id)) < 12: continue
 		var trade := str(person.get("material_work", ""))
 		raw_workers[trade] = float(raw_workers.get(trade, 0.0)) + EFFECT[int(person.hunger)]
 		staffing[trade] = float(staffing.get(trade, 0.0)) + EFFECT[int(person.hunger)] * _skill_output(person, trade)
@@ -557,6 +560,6 @@ func _material_production() -> void:
 
 func _skill_output(person: Dictionary, duty: String) -> float:
 	if population == null or not person.has("id") or not population.catalogue.activities.has(duty): return 1.0
-	var output: float = population.output(int(person.id), duty)
+	var output: float = population.output(int(person.id), duty) * population.society.childhood.work_fraction(int(person.id))
 	if duty in ["fields", "garden"] and population.has_trait(int(person.id), "green_thumb"): output *= 1.1
 	return output

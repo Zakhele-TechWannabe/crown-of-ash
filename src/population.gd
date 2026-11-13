@@ -121,7 +121,7 @@ func add_person(name_text: String, age: int, job_index: int, home: int = 0) -> i
 	locations.append(Vector2.ZERO)
 	settlement.append(0)
 	district.append(home / 20)
-	job.append(job_index)
+	job.append(register_job("child", []) if age < 12 else job_index)
 	person_versions.append(-1)
 	for a in 8:
 		var cap := rng.randi_range(10, 20)
@@ -339,16 +339,16 @@ func _tick_person(person: int) -> void:
 	if not society.alive[person]: return
 	stuck[person] = 0
 	var years := age(person, pending_day)
-	var age_factor := 1.6 if years < 12 else (1.4 if years < 18 else (1.0 if years <= 35 else (.8 if years <= 50 else (.55 if years <= 65 else .35))))
+	if years < 12:
+		society.childhood.grow(person, tick_days, pending_day)
+		return
+	var age_factor := 1.4 if years < 18 else (1.0 if years <= 35 else (.8 if years <= 50 else (.55 if years <= 65 else .35)))
 	var food_factor := 0.0 if hunger[person] >= 4 else (.6 if hunger[person] > 0 else (1.1 if mood[person] >= .45 and mood[person] < .78 else (1.0 if mood[person] >= .78 else .9)))
 	if person_versions[person] != job_versions[job[person]]: prepare_person(person)
 	var span_multiplier := tick_days * (1.1 if society.rivalry[person] else 1.0)
-	var learning: float = base_xp_hour * comprehension[person] * age_factor * food_factor * xp_traits[person] * TOOL_RATES[tool_quality[person]] * span_multiplier
+	var learning: float = society.childhood.work_fraction(person) * base_xp_hour * comprehension[person] * age_factor * food_factor * xp_traits[person] * TOOL_RATES[tool_quality[person]] * span_multiplier
 	var task_slot := person * 6
 	for task: Dictionary in prepared_tasks[job[person]]:
-		if years < 12 and task.discipline != "housekeeping.housekeeping":
-			task_slot += 3
-			continue
 		var attr := 0.0
 		for attribute_index: int in task.attribute_indices:
 			attr += attributes[person * 8 + attribute_index]
@@ -383,13 +383,6 @@ func _tick_person(person: int) -> void:
 			if constitution[person] == 2 and trained_attribute >= 4: growth *= 1.15
 			if daily_has_modifiers and modifiers.active.has(person): growth *= modifiers.value(person, "attribute:" + str(catalogue.rules.attributes[trained_attribute]), "attribute_multiplier", pending_day)
 			attributes[index] = minf(cap, current_attribute + growth)
-	if years < 12:
-		var known_parent: int = parent_id[person] if parent_id[person] >= 0 else society.father[person]
-		if known_parent >= 0:
-			var parent_person := known_parent
-			for parent_duty: String in schedules[job[parent_person]]:
-				var parent_task: Dictionary = catalogue.activities[parent_duty]
-				_gain(person, touch(person, parent_task.discipline), base_xp_hour * float(parent_task.hours) * .2 * tick_days, 10.0, best_level[parent_person], maxi(0, best_level[parent_person] - 1))
 	# Attribute ageing is daily, independent of work. Rust consumes banked XP only;
 	# levels never cross a title floor and skills never lose their acquired title.
 	if years > 50:
@@ -415,6 +408,7 @@ func _rust_person(person: int, rust_days: int) -> void:
 		entry = skill_next[entry]
 
 func _gain(person: int, entry: int, xp: float, attr: float, teacher: int, learning_ceiling: int = 50) -> void:
+	if age(person, maxi(day, pending_day)) < 12: return
 	if xp <= 0.0: return
 	if skill_days[entry] < 30 and has_trait(person, "curious"): xp *= 1.1
 	if skill_days[entry] == 0:
@@ -492,6 +486,7 @@ func output_for(person: int, entry: int) -> float:
 	return .5 + .03 * level + bonus
 
 func output(person: int, duty: String) -> float:
+	if age(person) < 12: return 0.0
 	var entry := touch(person, catalogue.activities[duty].specialisation)
 	return output_for(person, entry)
 
@@ -605,7 +600,7 @@ func rebuild_best(person: int) -> void:
 		entry = skill_next[entry]
 
 func add_child(name_text: String, mother: int, father: int) -> int:
-	var chores := register_job("child", ["chores"])
+	var chores := register_job("child", [])
 	var child := add_person(name_text, 0, chores, household[mother])
 	birth_day[child] = day
 	parent_id[child] = mother

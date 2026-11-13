@@ -218,6 +218,13 @@ func _refresh(initial: bool = false) -> void:
 	var time := fmod(minutes, 1440.0)
 	for n in people.size():
 		var p: Dictionary = people[n]
+		if int(p.kind) == 8 and population.age(int(p.id)) >= 12:
+			for model: Dictionary in founders:
+				if str(model.job) != population.jobs[population.job[int(p.id)]]: continue
+				p.job = str(model.job)
+				for key: String in ["kind", "work", "food_work", "material_work"]:
+					if model.has(key): p[key] = model[key]
+				break
 		if p.get("law_scene", false): continue
 		var variation := (n * 17 + day * 13 + int(sect.data.seed)) % 61
 		var target: Vector2i = p.home
@@ -277,6 +284,21 @@ func _refresh(initial: bool = false) -> void:
 			target = nearest(sect.center + Vector2i(80 + n % 5 * 2, 245))
 			activity = "foraging along the forest edge"
 			p.carrying = false
+		var id := int(p.id)
+		if population.age(id) < 12:
+			p.kind = 8
+			p.carrying = false
+			activity = population.society.childhood.activity(id)
+			var watching: int = population.society.childhood.watching[id]
+			var adult := walker_of(watching) if watching >= 0 else -1
+			if adult >= 0 and population.society.childhood.watching_day[id] == population.day:
+				target = nearest(Vector2i(people[adult].pos) + Vector2i(1, 0))
+			else:
+				var anchor: Vector2i = square if population.age(id) >= 6 else Vector2i(p.home)
+				target = nearest(anchor + Vector2i((day + int(time / 30)) % 5 - 2 + id % 3, (day + int(time / 45)) % 5 - 2))
+			if time < 360 or time >= 1200:
+				target = p.home
+				activity = "sleeping at home"
 		var scene := _scene_for(p, target, activity)
 		target = scene[0]
 		activity = scene[1]
@@ -556,6 +578,27 @@ func _tend_the_dead() -> void:
 		people.append_array(arrivals)
 		society.note(int(arrivals[0].id), "arrival", "The valley stood empty; twenty new servants, all twelve years old, were sent down to it")
 		changed = true
+	for id in population.size():
+		if people.size() >= WALKER_LIMIT: break
+		if not society.alive[id] or population.age(id) < 3 or walker_of(id) >= 0: continue
+		var parent: int = society.childhood.carer(id)
+		var model := walker_of(parent) if parent >= 0 else -1
+		if model < 0 and people.is_empty(): continue
+		var p: Dictionary = people[maxi(0, model)].duplicate(true)
+		p.id = id
+		p.name = population.names[id]
+		p.age = population.age(id)
+		p.kind = 8 if population.age(id) < 12 else p.kind
+		p.job = population.jobs[population.job[id]]
+		p.pos = Vector2(p.home)
+		p.path = PackedVector2Array()
+		p.step = 0
+		p.destination = Vector2i(-999, -999)
+		p.erase("food_work")
+		p.erase("material_work")
+		p.activity = society.childhood.activity(id) if population.age(id) < 12 else "preparing for the day"
+		people.append(p)
+		changed = true
 	if changed:
 		if followed >= people.size(): followed = -1
 		economy.walkers_changed()
@@ -632,6 +675,7 @@ func place_of(id: int) -> Vector2:
 
 
 func activity_text(p: Dictionary) -> String:
+	if population.age(int(p.id)) < 12: return population.society.childhood.activity(int(p.id))
 	if int(p.step) < p.path.size():
 		return "walking home" if p.destination == p.home else "walking to work" if p.destination == p.work else "walking through the village"
 	return str(p.activity)
@@ -745,6 +789,10 @@ func _headless_sim() -> void:
 			for event: Dictionary in records:
 				print("CHRONICLE day=%d %s" % [event.day, event.text])
 		await get_tree().process_frame
+	var children_alive := 0
+	for id in population.size():
+		if population.society.alive[id] and population.age(id) < 12: children_alive += 1
+	print("FAMILY %d years: marriages=%d births=%d children_alive=%d" % [years, population.society.marriages, population.society.births, children_alive])
 	_close_archive()
 	get_tree().quit()
 
@@ -886,7 +934,7 @@ func _refresh_population_views() -> void:
 	var extent := get_viewport_rect().size / camera.zoom / 32.0
 	var area := Rect2(camera.position / 32.0 - extent / 2.0, extent).grow(16)
 	for person: int in population.nearby(area, WALKER_LIMIT):
-		if walker_of(person) >= 0 or not population.society.alive[person]: continue
+		if population.age(person) < 3 or walker_of(person) >= 0 or not population.society.alive[person]: continue
 		if nearby_views.size() + people.size() >= WALKER_LIMIT: break
 		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Palette.PAPER, "carrying": false}
 

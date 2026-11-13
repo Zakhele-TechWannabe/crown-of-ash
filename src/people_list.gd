@@ -54,5 +54,6 @@ func build_page(force_first: int = -1) -> void:
 		var best := int(population.best_skill[person])
 		var skill_name := str(population.catalogue.nodes[best].name) if best >= 0 else "Untrained"
 		row.text = "%s · %d · %s %d · %s" % [population.names[person], population.age(person), population.catalogue.title(population.best_level[person]), population.best_level[person], skill_name]
+		if population.age(person) < 12: row.text = "%s · %d · %s" % [population.names[person], population.age(person), population.society.childhood.activity(person)]
 		row.tooltip_text = "%s\n%s · %s\nMood %.0f%% · Hunger %d" % [row.text, population.jobs[population.job[person]], "female" if population.sex[person] else "male", population.mood[person] * 100, population.hunger[person]]
 	page_build_usec = Time.get_ticks_usec() - began

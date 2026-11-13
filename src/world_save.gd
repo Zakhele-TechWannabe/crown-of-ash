@@ -4,7 +4,7 @@ const PATH := "user://saves/world.save"
 const VERSION := 1
 const CHILDREN := [
 	"population", "society", "ties", "mind", "temper", "nature", "wild",
-	"archive", "economy", "law", "modifiers",
+	"archive", "economy", "law", "modifiers", "childhood",
 ]
 const SKIP := [
 	"world", "sect", "grid", "catalogue", "config", "rules", "given_names",
@@ -124,6 +124,10 @@ static func read(map: Node2D, path: String = PATH) -> bool:
 			if index >= 0: stage.walker = map.life.people[index]
 		map.life.population.spatial_cells.clear()
 		for person in map.life.population.size():
+			if map.life.population.age(person) < 12:
+				var child_job: int = map.life.population.register_job("child", [])
+				map.life.population.schedules[child_job] = []
+				map.life.population.job[person] = child_job
 			map.life.population.set_location(person, map.life.population.locations[person])
 			var xp := 1.0
 			var output := 0.0
@@ -169,6 +173,7 @@ static func repair_columns(object: Object, defaults: Dictionary, count: int) -> 
 		"mind.gd": ["heart", "heart_ready", "emotion", "goal", "goal_target", "goal_since", "interrupt", "last_choice", "child_count", "refused_until"],
 		"body_tempering.gd": ["body_layer", "grades", "tempering", "strain", "method", "hours", "regimen_until", "teacher", "gate_since", "aim_doses"],
 		"nature.gd": ["studied"],
+		"childhood.gd": ["interests", "talent_given", "hungry_days", "potential_lost", "watching", "watching_day"],
 	}
 	var strides := {"attributes": 8, "potential": 8, "practice_entries": 6, "grades": 9, "heart": preload("res://src/mind.gd").WEIGHTS, "emotion": 4}
 	var script_name: String = object.get_script().resource_path.get_file()
@@ -179,7 +184,9 @@ static func repair_columns(object: Object, defaults: Dictionary, count: int) -> 
 		var before: int = values.size()
 		values.resize(count * stride)
 		for i in range(before, values.size()):
-			if not template.is_empty(): values[i] = template[i % mini(stride, template.size())]
+			if not template.is_empty():
+				var default: Variant = template[i % mini(stride, template.size())]
+				values[i] = default.duplicate(true) if default is Dictionary else default
 		object.set(key, values)
 	if script_name == "body_tempering.gd":
 		for key: String in object.config.medicine_names:
@@ -187,6 +194,6 @@ static func repair_columns(object: Object, defaults: Dictionary, count: int) -> 
 			var doses: PackedByteArray = object.medicine[key]
 			doses.resize(count)
 			object.medicine[key] = doses
-	for key: String in ["society", "ties", "mind", "temper", "nature"]:
+	for key: String in ["society", "ties", "mind", "temper", "nature", "childhood"]:
 		if key in object and object.get(key) != null:
 			repair_columns(object.get(key), defaults.get(key, {}), count)

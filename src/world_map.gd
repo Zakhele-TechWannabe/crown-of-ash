@@ -15,6 +15,9 @@ var save_day := -1
 var save_ready := false
 var restored_world := false
 var quitting := false
+var quit_poll := 0.0
+var quit_request_path := "user://quit.%d.request" % OS.get_process_id()
+var quit_save_path := WorldSave.PATH
 
 var life: Node2D
 var ground_view: Node2D
@@ -265,6 +268,10 @@ func _clamp_camera() -> void:
 
 
 func _process(dt: float) -> void:
+	quit_poll += dt
+	if quit_poll >= 1.0:
+		quit_poll = 0.0
+		if poll_quit_request(): return
 	if save_ready:
 		save_elapsed += dt
 		if life.population.day != save_day or save_elapsed >= 120.0: _save_world()
@@ -525,6 +532,23 @@ func _quit_world() -> void:
 	life.set_process(false)
 	while life.population.society.faction_pending:
 		await get_tree().process_frame
-	_save_world()
+	if not save_ready and quit_save_path == WorldSave.PATH:
+		get_tree().quit()
+		return
+	var error := WorldSave.write(self, quit_save_path)
+	if error != OK:
+		push_error("Quit save failed: %s" % error_string(error))
+		quitting = false
+		set_process(true)
+		life.set_process(true)
+		return
+	DirAccess.remove_absolute(quit_request_path)
 	save_ready = false
 	get_tree().quit()
+
+## The explicit test path keeps headless checks away from the player slot.
+func poll_quit_request() -> bool:
+	if not save_ready and quit_save_path == WorldSave.PATH: return false
+	if not FileAccess.file_exists(quit_request_path): return false
+	_quit_world()
+	return true

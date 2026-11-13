@@ -447,6 +447,7 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 				if store.rng.randf() < float(Combat.config.bitter_blows) * (0.5 + anger):
 					Combat.between(society, p, t, "brawl")
 					return "came to blows" if society.alive[p] else "was killed"
+				society.childhood.parent_fight(t)
 				society.note(p, "confrontation", "%s confronted %s and it turned bitter" % [store.names[p], store.names[t]])
 				return "it turned bitter"
 			Combat.between(society, p, t, "spar")

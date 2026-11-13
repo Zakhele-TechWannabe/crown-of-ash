@@ -90,6 +90,10 @@ func _header() -> void:
 
 
 func _story(page: VBoxContainer) -> void:
+	if population.age(person) < 12:
+		small(page, population.society.childhood.activity(person))
+		for trade: String in population.society.childhood.interests[person]:
+			small(page, "Interest in %s: %.0f%%" % [trade, population.society.childhood.interests[person][trade] * 100])
 	var lines: PackedStringArray = []
 	var temper: RefCounted = society.temper
 	if temper:

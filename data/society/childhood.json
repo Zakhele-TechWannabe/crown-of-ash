@@ -1,0 +1,36 @@
+{
+  "care_hours_cut": 0.4,
+  "second_year_cut": 0.2,
+  "play_chance": 0.65,
+  "quarrel_chance": 0.08,
+  "tag_along_chance": 0.25,
+  "interest_gain": 0.12,
+  "warm_mood": 0.6,
+  "warm_scar": 0.002,
+  "hunger_scar": 0.003,
+  "death_scar": 0.04,
+  "fight_scar": 0.02,
+  "talent_percentile": 0.85,
+  "talent_comprehension": 1.4,
+  "wander_chance": 0.025,
+  "scrape_chance": 0.15,
+  "scrape_days": [
+    2,
+    5
+  ],
+  "hunger_days": 30,
+  "hunger_potential_loss": 1,
+  "hunger_loss_cap": 3,
+  "growth_per_day": 0.002,
+  "interest_weight": 4.0,
+  "aptitude_weight": 1.0,
+  "need_weight": 0.6,
+  "family_weight": 0.3,
+  "choice_randomness": 0.25,
+  "wander_stories": [
+    "found a bird's nest at the forest edge",
+    "fell in the stream and came home dripping",
+    "followed dragonflies beside the stream"
+  ],
+  "wildlife_encounter_chance": 0.03
+}

@@ -103,6 +103,22 @@
     "killed_kin": {
       "opinion": -100,
       "trust": -100
+    },
+    "family_defiance": {
+      "opinion": -15,
+      "trust": -5
+    },
+    "family_time": {
+      "opinion": 1,
+      "familiarity": 2
+    },
+    "play": {
+      "opinion": 2,
+      "familiarity": 3
+    },
+    "quarrel": {
+      "opinion": -3,
+      "familiarity": 1
     }
   }
 }

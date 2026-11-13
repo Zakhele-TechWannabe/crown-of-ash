@@ -62,6 +62,7 @@ var mind: RefCounted = null
 var temper: RefCounted = null
 var nature: RefCounted = null
 var archived_year := -1
+var childhood: RefCounted
 
 func _init(store: RefCounted) -> void:
 	store_ref = weakref(store)
@@ -71,12 +72,14 @@ func _init(store: RefCounted) -> void:
 	var probe: RefCounted = Mind.new(self)
 	if probe.config.enabled: mind = probe
 	nature = Nature.new(self)
+	childhood = preload("res://src/childhood.gd").new(self)
 
 func add_person() -> void:
 	ties.add_person()
 	if mind: mind.add_person()
 	if temper: temper.add_person()
 	nature.add_person()
+	childhood.add_person()
 	father.append(-1)
 	spouse.append(-1)
 	master.append(-1)
@@ -103,6 +106,7 @@ func add_person() -> void:
 
 func note(person: int, kind: String, words: String) -> void:
 	var store: RefCounted = store_ref.get_ref()
+	if kind == "confrontation": childhood.parent_fight(person)
 	chronicle.append({"day": store.day, "person": person, "kind": kind, "text": words})
 	if chronicle.size() > 2048: chronicle.pop_front()
 	if archive: archive.event(store.day, person, kind, words)
@@ -112,6 +116,7 @@ func note(person: int, kind: String, words: String) -> void:
 
 # Feelings that follow what happens to someone; strong ones interrupt their routine and force a fresh decision.
 func _feel_event(person: int, kind: String) -> void:
+	var store: RefCounted = store_ref.get_ref()
 	match kind:
 		"marriage":
 			mind.feel(person, Mind.JOY, .6)
@@ -124,11 +129,17 @@ func _feel_event(person: int, kind: String) -> void:
 		"tempering": mind.feel(person, Mind.JOY, .4)
 		"injury": mind.feel(person, Mind.AFRAID, .3)
 		"old_age":
-			for kin: int in children(person): mind.feel(kin, Mind.GRIEF, .8)
+			for kin: int in children(person):
+				mind.feel(kin, Mind.GRIEF, .8)
+				if store.age(kin) < 12:
+					mind.scar(kin, Mind.FEAR, childhood.config.death_scar)
+					mind.scar(kin, Mind.SPITE, childhood.config.death_scar)
 			if spouse[person] >= 0: mind.feel(spouse[person], Mind.GRIEF, 1.0)
 
 ## Recent fights, newest last, for the stories and the village to show.
 func record_fight(fight: Dictionary) -> void:
+	if fight.get("kind", "") == "brawl":
+		for parent: int in fight.get("ids", []): childhood.parent_fight(parent)
 	fights.append(fight)
 	fight_count += 1
 	if fights.size() > 64: fights.pop_front()
@@ -152,6 +163,9 @@ func die(person: int, kind: String, words: String, killer: int = -1) -> void:
 		if kin < 0 or not alive[kin]: continue
 		if mind:
 			mind.feel(kin, Mind.GRIEF, 1.0)
+			if store.age(kin) < 12:
+				mind.scar(kin, Mind.FEAR, childhood.config.death_scar)
+				mind.scar(kin, Mind.SPITE, childhood.config.death_scar)
 			if killer >= 0: mind.scar(kin, Mind.SPITE, .3)
 		if killer >= 0 and kin != killer: ties.event(kin, killer, "killed_kin", store.day)
 	var heirs := children(person)
@@ -303,13 +317,14 @@ func ancestors(person: int, depth: int) -> PackedInt32Array:
 
 func approval(person: int, candidate: int) -> bool:
 	for parent: int in parents(person):
-		if parent < 0: continue
+		if parent < 0 or not alive[parent]: continue
 		var e := ties.find(parent, candidate)
 		if reputation[candidate] < 0 or (e >= 0 and ties.opinion[e] < 0): return false
 	return true
 
 func marry(a: int, b: int) -> bool:
 	var store: RefCounted = store_ref.get_ref()
+	if not alive[a] or not alive[b]: return false
 	if a == b or spouse[a] >= 0 or spouse[b] >= 0: return false
 	if store.age(a) < 18 or store.age(b) < 18 or marriage_related(a, b): return false
 	if absi(store.age(a) - store.age(b)) > int(events.marriage_age_gap): return false
@@ -317,14 +332,14 @@ func marry(a: int, b: int) -> bool:
 	var ba := ties.find(b, a)
 	var minimum: float = float(events.mixed_cultivation_opinion) if (realm[a] >= 2) != (realm[b] >= 2) else 50.0
 	if ab < 0 or ba < 0 or ties.opinion[ab] < minimum or ties.opinion[ba] < minimum: return false
-	if not approval(a, b) or not approval(b, a): return false
-	# A respected adult mediates the match; no invisible pre-made sect official.
-	var matchmaker := -1
-	for p in store.size():
-		if p != a and p != b and store.age(p) >= 40 and reputation[p] >= 20:
-			matchmaker = p
-			break
-	if matchmaker < 0: return false
+	var pressure := ""
+	for pair: Array in [[a, b], [b, a]]:
+		for parent: int in parents(pair[0]):
+			if parent < 0 or not alive[parent]: continue
+			var edge := ties.find(parent, pair[1])
+			if reputation[pair[1]] < 0 or (edge >= 0 and ties.opinion[edge] < 0):
+				ties.event(parent, pair[0], "family_defiance", store.day)
+				pressure = " against their family's wishes"
 	spouse[a] = b
 	spouse[b] = a
 	ties.event(a, b, "marriage", store.day)
@@ -337,7 +352,7 @@ func marry(a: int, b: int) -> bool:
 	store.household[b] = household_serial
 	store.household_names_day = -1
 	marriages += 1
-	note(a, "marriage", "%s and %s married, with %s arranging the match" % [store.names[a], store.names[b], store.names[matchmaker]])
+	note(a, "marriage", "%s and %s married%s" % [store.names[a], store.names[b], pressure])
 	return true
 
 func accept(teacher: int, pupil: int) -> bool:
@@ -568,9 +583,7 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 			var heirs := children(p)
 			if not heirs.is_empty(): pass_legacy(p, heirs[0])
 			return
-	if years >= 12 and years < 18 and store.parent_id[p] >= 0 and store.jobs[store.job[p]] == "child":
-		store.job[p] = store.job[store.parent_id[p]]
-		store.prepare_person(p)
+	childhood.weekly(p, days, on_day)
 	# Resolve one proximity contact per person/week, never every pair.
 	var contact := (p + on_day / 7) % n
 	if contact != p and store.settlement[contact] == store.settlement[p]:

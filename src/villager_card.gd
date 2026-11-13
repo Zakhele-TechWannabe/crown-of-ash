@@ -114,7 +114,9 @@ func refresh() -> void:
 		if society.revealed[id]:
 			body_line.text += " · " + society.realm_label(id)
 	var now := ""
-	if temper and not str(state.gate).is_empty():
+	if population.age(id) < 12:
+		now = society.childhood.activity(id)
+	elif temper and not str(state.gate).is_empty():
 		now = "waiting at the gate of %s" % temper.layer_name(int(state.layer) + 1)
 	elif temper and state.training and walker < 0:
 		now = "drilling %d h a day%s" % [state.hours, (" under " + str(state.teacher)) if not str(state.teacher).is_empty() else ""]
