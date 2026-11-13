@@ -13,6 +13,7 @@ var weights := PackedFloat32Array()
 var elevations := PackedFloat32Array()
 var shades := PackedColorArray()
 var flags := PackedByteArray()
+const Palette = preload("res://src/palette.gd")
 
 func cache_index(tile: Vector2i) -> int:
 	var at := tile - CACHE_ORIGIN
@@ -58,11 +59,11 @@ func build_samples() -> void:
 			var i := y * CACHE_SIZE.x + x
 			if weights[i] <= 0:
 				continue
-			var col := Color8(22, 44, 36).lerp(Color8(44, 62, 39), (field(Vector2(at), 23) + 1) * 0.5)
+			var col := Palette.JADE.darkened(0.7).lerp(Palette.GREEN.darkened(0.5), (field(Vector2(at), 23) + 1) * 0.5)
 			if (flags[i] & 1) != 0:
-				col = Color8(67, 77, 43)
+				col = Palette.GREEN.darkened(0.35)
 			if (flags[i] & 2) != 0:
-				col = Color8(66, 77, 72) * (0.8 + (field(Vector2(at), 6) + 1) * 0.24)
+				col = Palette.STONE.darkened(0.6) * (0.8 + (field(Vector2(at), 6) + 1) * 0.24)
 			var dx := cached_height(at + Vector2i(3, 0), 0.8) - cached_height(at - Vector2i(3, 0), 0.8)
 			var dy := cached_height(at + Vector2i(0, 3), 0.8) - cached_height(at - Vector2i(0, 3), 0.8)
 			col *= clampf(1.0 - (dx + dy) * 12.0, 0.55, 1.4)
@@ -141,12 +142,12 @@ func build_atlas() -> void:
 		for variant in 24:
 			var image := Image.create(96, 96, false, Image.FORMAT_RGBA8)
 			var radius := 16.0 + size * 12.0
-			var tint := Color8(10, 28, 29).lerp(Color8(36, 57, 36), variant / 24.0)
+			var tint := Palette.JADE.darkened(0.7).lerp(Palette.GREEN.darkened(0.55), variant / 24.0)
 			if variant == 0:
-				tint = Color8(63, 67, 57)
+				tint = Palette.STONE.darkened(0.65)
 			for step in ceili(radius):
 				for side in [-1, 0, 1]:
-					image.set_pixel(48 + roundi(step * side * 0.36), 48 + step, Color8(59, 55, 39))
+					image.set_pixel(48 + roundi(step * side * 0.36), 48 + step, Palette.EARTH.darkened(0.7))
 			for blob in range(3 + variant % 4):
 				var bh := hash_at(variant, blob)
 				var center := Vector2(48, 48) + Vector2(cos(bh % 628 / 100.0), sin(bh % 628 / 100.0)) * radius * 0.46
@@ -213,11 +214,11 @@ static func rocky(tile: Vector2i) -> bool:
 
 static func color(tile: Vector2i) -> Color:
 	var p := Vector2(tile)
-	var col := Color8(22, 44, 36).lerp(Color8(44, 62, 39), (field(p, 23) + 1) * 0.5)
+	var col := Palette.JADE.darkened(0.7).lerp(Palette.GREEN.darkened(0.5), (field(p, 23) + 1) * 0.5)
 	if clearing(tile):
-		col = Color8(67, 77, 43)
+		col = Palette.GREEN.darkened(0.35)
 	if rocky(tile):
-		col = Color8(66, 77, 72) * (0.8 + (field(p, 6) + 1.0) * 0.24)
+		col = Palette.STONE.darkened(0.6) * (0.8 + (field(p, 6) + 1.0) * 0.24)
 	var dx := mountain_height(tile + Vector2i(3, 0), 0.8) - mountain_height(tile - Vector2i(3, 0), 0.8)
 	var dy := mountain_height(tile + Vector2i(0, 3), 0.8) - mountain_height(tile - Vector2i(0, 3), 0.8)
 	col *= clampf(1.0 - (dx + dy) * 12.0, 0.55, 1.4)
@@ -287,11 +288,11 @@ func draw(image: Image, tile: Vector2i, pos: Vector2i, occupied: bool) -> void:
 		var detail := hash_at(tile.x, tile.y)
 		if detail % 23 == 0:
 			for step in 10:
-				image.fill_rect(Rect2i(pos + Vector2i(2 + step, 4 + step / 2), Vector2i(2, 2)), Color8(57, 53, 38))
+				image.fill_rect(Rect2i(pos + Vector2i(2 + step, 4 + step / 2), Vector2i(2, 2)), Palette.EARTH.darkened(0.7))
 		elif detail % 9 == 0:
 			for step in 5:
 				for side in [-1, 1]:
-					image.fill_rect(Rect2i(pos + Vector2i(8 + side * step, 9 - step / 2), Vector2i(2, 1)), Color8(47, 70, 41))
+					image.fill_rect(Rect2i(pos + Vector2i(8 + side * step, 9 - step / 2), Vector2i(2, 1)), Palette.GREEN.darkened(0.45))
 		if prepared and w > 0.99:
 			for operation: Array in render_tiles.get(tile, []):
 				image.blend_rect(crown_atlas[operation[2]], operation[0], pos + operation[1])
@@ -326,9 +327,9 @@ func draw(image: Image, tile: Vector2i, pos: Vector2i, occupied: bool) -> void:
 				if amount <= 0:
 					continue
 				var h := hash_at(tile.x * 16 + xx, tile.y * 16 + yy)
-				var col := Color8(83, 77, 53) * (0.9 + h % 21 / 100.0)
+				var col := Palette.INK.lightened(0.15) * (0.9 + h % 21 / 100.0)
 				if h % 83 < 3:
-					col = Color8(53, 51, 35)
+					col = Palette.GRASS.darkened(0.7)
 				col.a = 1.0
 				var at := pos + Vector2i(xx, yy)
 				image.set_pixelv(at, image.get_pixelv(at).lerp(col, amount * w))

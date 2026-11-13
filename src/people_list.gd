@@ -39,6 +39,7 @@ func build_page(force_first: int = -1) -> void:
 		row.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		row.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		row.clip_text = true
+		row.theme_type_variation = "Card"
 		row.pressed.connect(func() -> void: person_selected.emit(int(row.get_meta("person"))))
 		surface.add_child(row)
 		buttons.append(row)

@@ -30,44 +30,50 @@ func run() -> void:
 		icon_index += 1
 	contact.resize(contact.get_width() * 2, contact.get_height() * 2, Image.INTERPOLATE_NEAREST)
 	contact.save_png("res://out/food-icons.png")
+	var book_width := minf(1320, 1920 - 96)
 	for key: String in ledger.TABS:
 		ledger.open_tab(key)
 		await process_frame
 		await process_frame
-		assert(ledger.visible)
-		assert(is_equal_approx(ledger.size.x, 960))
-		assert(ledger.content.size.x > 500)
+		assert(ledger.visible and ledger.dim.visible)
+		assert(is_equal_approx(ledger.size.x, book_width), "Book is centred at reading width: %s" % ledger.size)
+		assert(absf(ledger.get_global_rect().get_center().x - 960) <= 1, "Book is centred")
+		assert(ledger.content.size.x > 900)
+		assert(ledger.tab_buttons[key].button_pressed)
 		ledger.toggle_tab(key)
 		await settle(ledger)
-		assert(not ledger.visible)
-	assert(ledger.kpi_cards.size() == 4)
-	for entry: Dictionary in ledger.kpi_cards.values():
-		assert(entry.button.size.x >= 150 and entry.button.size.x <= 170, "KPI cards remain compact")
-	var tab_strip: HBoxContainer = ledger.get_child(0).get_child(0)
-	var close_button: Button = tab_strip.get_child(tab_strip.get_child_count() - 1)
-	assert(close_button.size.x <= 40, "Close button remains a small square")
-	assert(ledger.kpi_cards.year.label.text == "after harvest")
-	assert(ledger.kpi_cards.year.value.text.ends_with(" d"))
-	assert("Next harvest" in ledger.kpi_cards.year.button.tooltip_text)
+		assert(not ledger.visible and not ledger.dim.visible)
 	for width: int in [1920, 1366]:
 		root.content_scale_size = Vector2i(width, 1080)
 		root.size = Vector2i(width, 1080)
+		world.life.economy.hungry_count = 2
+		ledger.alerts_day = -1
 		ledger._refresh_hud()
 		await process_frame
 		await process_frame
-		assert(ledger.hud_panel.get_combined_minimum_size().x <= width, "HUD must fit viewport")
-		assert(ledger.hud_panel.size.y <= 64, "HUD must stay one thin row")
-		var row: HBoxContainer = ledger.hud_panel.get_child(0)
+		assert(ledger.top_bar.get_combined_minimum_size().x <= width, "Top bar must fit viewport")
+		assert(ledger.top_bar.size.y <= 64, "Top bar must stay one thin row: %s" % ledger.top_bar.size)
+		var row: HBoxContainer = ledger.top_bar.get_child(0)
 		var previous_right := 0.0
 		for child: Control in row.get_children():
-			assert(child.position.x >= previous_right, "HUD controls must not overlap")
+			if not child.visible: continue
+			assert(child.position.x >= previous_right, "Top bar controls must not overlap")
 			previous_right = child.position.x + child.size.x
-			if child is Button:
-				assert(child.text not in ["Overview", "Food", "People", "Work", "Chronicle"])
 		assert(previous_right <= width)
-	for definition: Dictionary in ledger.KPIS:
-		ledger.kpi_cards[definition.id].button.pressed.emit()
-		assert(ledger.current == definition.tab and ledger.visible)
+		check_text(ledger.top_bar)
+	root.content_scale_size = Vector2i(1920, 1080)
+	root.size = Vector2i(1920, 1080)
+	await process_frame
+	var hungry_chip: Button = ledger.alert_row.get_child(0)
+	assert(hungry_chip.visible and hungry_chip.text == "2 hungry" and hungry_chip.theme_type_variation == "Hot")
+	hungry_chip.pressed.emit()
+	assert(ledger.current == "people" and ledger.visible)
+	world.life.economy.hungry_count = 0
+	ledger.food_chip.pressed.emit()
+	assert(ledger.current == "food")
+	ledger.people_button.pressed.emit()
+	assert(ledger.current == "people")
+	assert(ledger.people_button.text.ends_with(" people") and int(ledger.people_button.text) == ledger.living)
 	ledger.ledger_button.pressed.emit()
 	await settle(ledger)
 	assert(not ledger.visible)
@@ -101,14 +107,7 @@ func run() -> void:
 		tab_key.keycode = KEY_F1 + index
 		world.ground_view._unhandled_input(tab_key)
 		assert(ledger.current == ledger.TABS.keys()[index])
-	world.life.economy.day = 300
-	ledger._refresh_hud()
-	assert(ledger.kpi_cards.harvest.label.text == "planting in 66 d")
-	world.life.economy.day = 1
-	world.life.economy.hungry_count = 2
-	ledger._refresh_hud()
-	assert(ledger.kpi_cards.people.label.text == "2 hungry")
-	assert(ledger.kpi_cards.people.value.get_theme_color("font_color") == Color("a23522"))
+		await settle(ledger)
 	ledger.open_tab("rice")
 	assert(ledger.current == "food")
 	await settle(ledger)
@@ -138,8 +137,8 @@ func run() -> void:
 	wheel.position = ledger.global_position + Vector2(80, 250)
 	root.push_input(wheel)
 	await process_frame
-	assert(world.ground_view.cam.zoom == before, "Drawer wheel must not zoom camera")
-	assert(ledger.drawer_scroll.scroll_vertical > scroll_before, "Good details scroll in the outer container")
+	assert(world.ground_view.cam.zoom == before, "Book wheel must not zoom camera")
+	assert(ledger.drawer_scroll.scroll_vertical > scroll_before, "Good details scroll in the page")
 	var back := InputEventKey.new()
 	back.pressed = true
 	back.keycode = KEY_BACKSPACE
@@ -151,37 +150,82 @@ func run() -> void:
 	right.position = wheel.position
 	root.push_input(right)
 	assert(ledger.food_path == ["food"])
-	# Exercise the camera guard directly, including a drag crossing into the drawer.
+	# While the book is open the world beneath it does not move, even mid-drag.
 	world.ground_view.dragging = true
 	var motion := InputEventMouseMotion.new()
-	motion.position = wheel.position
+	motion.position = Vector2(30, 300)
 	motion.relative = Vector2(30, 20)
 	var camera_position: Vector2 = world.ground_view.cam.position
 	world.ground_view._unhandled_input(motion)
 	assert(not world.ground_view.dragging)
 	assert(world.ground_view.cam.position == camera_position)
-	wheel.position = Vector2(30, 300)
-	world.ground_view._unhandled_input(wheel)
-	assert(world.ground_view.cam.zoom.x < before.x, "World area remains interactive")
-	ledger.open_tab("food")
-	assert(ledger.food_path == ["food"] and ledger.selected_food.is_empty())
 	ledger.close()
 	await settle(ledger)
 	assert(ledger.current == "food", "Remember last tab")
-	ledger.open_tab("people")
+	# With the book closed the wheel steps through whole-texel zooms only.
+	wheel.position = Vector2(960, 600)
+	world.ground_view.set_zoom_step(3)
+	world.ground_view._unhandled_input(wheel)
+	assert(is_equal_approx(world.ground_view.cam.zoom.x, 1.0), "Wheel steps down one zoom: %s" % world.ground_view.cam.zoom)
+	wheel.button_index = MOUSE_BUTTON_WHEEL_UP
+	for i in 6: world.ground_view._unhandled_input(wheel)
+	assert(is_equal_approx(world.ground_view.cam.zoom.x, 2.0), "Zoom stops at the largest step")
+	world.ground_view.set_zoom_step(3)
+	# Selecting someone on the map opens their card; the card leads to the book.
+	var walker: Dictionary = world.life.people[0]
+	var walker_id := int(walker.id)
+	assert(world.life.walker_of(walker_id) == 0)
+	world.ground_view.show_person(walker_id)
+	await process_frame
+	await process_frame
+	var card: PanelContainer = world.ground_view.villager
+	assert(card.visible and card.name_label.text == world.life.population.names[walker_id])
+	assert(world.life.followed == 0)
+	card.follow_button.pressed.emit()
+	assert(world.life.followed == -1, "Follow toggles off")
+	card.follow_button.pressed.emit()
+	assert(world.life.followed == 0)
+	assert(card.get_global_rect().end.y <= 1080 and card.get_global_rect().position.x >= 0)
+	check_text(card)
+	if not walker.hidden:
+		var clicked: int = world.life.pick(world.life.place_of(walker_id) - Vector2(0, 10))
+		assert(clicked >= 0, "Clicking a drawn person picks them")
+	ledger.open_person(walker_id, "Ties")
+	await settle(ledger)
 	var browser: VBoxContainer = ledger.people_browser
+	assert(browser.person == walker_id and browser.person_tab == "Ties")
+	var book: VBoxContainer = browser.get_child(0)
+	var header: HBoxContainer = book.get_child(0)
+	var show_button: Button = header.get_child(header.get_child_count() - 1)
+	assert(show_button.text == "Show on map")
+	show_button.pressed.emit()
+	await settle(ledger)
+	assert(world.life.selected == walker_id and world.life.followed == 0 and not ledger.visible)
+	# Stories lead to the person they are about.
+	var society: RefCounted = world.life.population.society
+	society.note(walker_id, "tempering", world.life.population.names[walker_id] + " tests the tour of stories.")
+	var rail: PanelContainer = world.ground_view.stories
+	rail.refresh()
+	var story: Button = rail.list.get_child(0)
+	assert("tests the tour of stories" in story.text)
+	world.life.selected = -1
+	story.pressed.emit()
+	assert(world.life.selected == walker_id)
+	for filter: String in rail.FILTERS:
+		rail.filter = filter
+		rail.seen = ""
+		rail.refresh()
+		await process_frame
+		check_text(rail)
+	rail.filter = "All"
+	ledger.open_tab("people")
+	browser = ledger.people_browser
 	assert(browser.group_mode == "Place")
 	browser.path.assign(["Servants' Village", world.life.population.district_name(0), world.life.population.household_name(0)])
 	browser.redraw()
 	assert(browser.virtual_list.ids.size() == 3)
 	browser.virtual_list.person_selected.emit(0)
-	assert(browser.person == 0 and ledger.visible)
-	var follow: Button = browser.get_child(4)
-	assert(follow.text == "Follow")
-	follow.pressed.emit()
-	await settle(ledger)
-	assert(world.life.followed == 0 and not ledger.visible)
-	ledger.open_tab("people")
+	assert(browser.person == 0 and browser.person_tab == "Story" and ledger.visible)
 	var groups: Array = world.life.population.society.factions
 	var village_name: String = groups[0].name
 	var home_name: String = groups[1].name
@@ -206,18 +250,19 @@ func run() -> void:
 		await process_frame
 		assert(not ledger.selected_food.is_empty())
 		assert(ledger.grain_icon(ledger.selected_food, Color.WHITE) != null)
-	assert("Vegetables" in ledger.kpi_cards.food.button.tooltip_text)
-	assert("Preserved & pantry" in ledger.kpi_cards.food.button.tooltip_text)
+	assert("Vegetables" in ledger.food_chip.tooltip_text)
+	assert("Preserved & pantry" in ledger.food_chip.tooltip_text)
 	ledger.show_granary()
-	await process_frame
-	assert(ledger.granary_card.visible and ledger.granary_card.size.x >= 460)
+	assert(ledger.visible and ledger.current == "food")
 	world.life.paused = true
 	world.life.minutes = 199 * 1440.0 + 720
 	world.life.economy.advance_to(world.life.minutes)
 	ledger.set_process(false)
+	var tour: Control = world.ground_view.tour
 	for resolution: Vector2i in [Vector2i(1920, 1080), Vector2i(1366, 768)]:
 		root.content_scale_size = resolution
 		root.size = resolution
+		ledger._layout()
 		ledger._refresh_hud()
 		await process_frame
 		await process_frame
@@ -233,17 +278,19 @@ func run() -> void:
 						ancestor = entry.parent
 						break
 			paths.append("/".join(ancestry))
-		for people_path: String in ["people/place", "people/work", "people/life", "people/status", "people/list", "people/person", "people/skills", "people/skills/land", "people/skills/grain", "people/skills/farming", "people/skills/cultivation"]: paths.append(people_path)
+		for people_path: String in ["people/place", "people/work", "people/life", "people/status", "people/list", "people/skills", "people/skills/land", "people/skills/grain", "people/skills/farming", "people/skills/cultivation"]: paths.append(people_path)
+		for tab: String in preload("res://src/person_book.gd").TABS: paths.append("person/" + tab)
 		for path: String in paths:
-			ledger.open_tab(path)
+			if path.begins_with("person/"):
+				ledger.open_person(walker_id, path.trim_prefix("person/"))
+			else:
+				ledger.open_tab("people" if path.begins_with("people/") else path)
 			if path.begins_with("people/"):
-				ledger.open_tab("people")
 				browser = ledger.people_browser
 				if path == "people/work": browser.group_mode = "Work"
 				if path == "people/life": browser.group_mode = "Life stage"
 				if path == "people/status": browser.group_mode = "Status"
 				if path == "people/list": browser.path.assign(["Servants' Village", world.life.population.district_name(0), world.life.population.household_name(0)])
-				if path == "people/person": browser.person = 0
 				if path.begins_with("people/skills"):
 					browser.catalogue_mode = true
 					if path == "people/skills/land": browser.catalogue_path.assign(["land"])
@@ -253,7 +300,7 @@ func run() -> void:
 				browser.redraw()
 			await settle(ledger)
 			check_text(world.ground_view.hud)
-			assert(ledger.size.x <= resolution.x / 2.0 + 1, "Drawer must remain half width: %s %s %s min %s" % [resolution, path, ledger.size, ledger.get_combined_minimum_size()])
+			assert(ledger.get_global_rect().end.x <= resolution.x and ledger.get_global_rect().position.x >= 0, "Book must stay on screen: %s %s" % [resolution, path])
 			if ledger.current in ["food", "materials"]:
 				var goods: Array[String] = []
 				for slot_button: Button in ledger.food_grid.get_children():
@@ -265,15 +312,14 @@ func run() -> void:
 					await process_frame
 					await process_frame
 					check_text(world.ground_view.hud)
-		for definition: Dictionary in ledger.KPIS:
-			var tip_panel := PanelContainer.new()
-			tip_panel.theme = ledger.theme
-			root.add_child(tip_panel)
-			tip_panel.add_child(ledger.kpi_cards[definition.id].button._make_custom_tooltip(ledger.kpi_cards[definition.id].button.tooltip_text))
-			await process_frame
-			await process_frame
-			check_text(tip_panel)
-			tip_panel.queue_free()
+		var tip_panel := PanelContainer.new()
+		tip_panel.theme = world.ground_view.ui.theme
+		root.add_child(tip_panel)
+		tip_panel.add_child(ledger.food_chip._make_custom_tooltip(ledger.food_chip.tooltip_text))
+		await process_frame
+		await process_frame
+		check_text(tip_panel)
+		tip_panel.queue_free()
 		ledger.open_tab("work")
 		for id: String in ledger.workplaces(ledger.life.economy):
 			ledger.selected_work = id
@@ -281,7 +327,28 @@ func run() -> void:
 			await process_frame
 			await process_frame
 			check_text(world.ground_view.hud)
-	print("PASS ledger UI: navigation, controls, camera isolation, follow, granary; all tabs, food paths/goods and work details fit at 1920x1080 and 1366x768 on day 200")
+		# Every tour stop explains itself on screen, with its card beside the part it points at.
+		ledger.close()
+		await settle(ledger)
+		for stop: int in tour.STOPS.size():
+			tour.go(stop)
+			await settle(ledger)
+			tour._process(0.0)
+			await process_frame
+			assert(tour.visible and tour.title.text == tour.STOPS[stop].title)
+			var rect: Rect2 = tour.card.get_global_rect()
+			assert(rect.position.x >= 0 and rect.position.y >= 0 and rect.end.x <= resolution.x and rect.end.y <= resolution.y, "Tour card on screen: stop %d %s" % [stop + 1, rect])
+			check_text(tour.card)
+		tour.leave()
+		assert(not tour.visible)
+		var saved := ConfigFile.new()
+		assert(saved.load(tour.SAVE) == OK and int(saved.get_value("tour", "stop")) == tour.STOPS.size() - 1, "Tour resumes where it was left")
+		tour.start()
+		assert(tour.stop == tour.STOPS.size() - 1)
+		tour.finish()
+		ledger.close()
+		await settle(ledger)
+	print("PASS ledger UI: top bar, alerts, centred book, person tabs, villager card, stories, tour, integer zoom; every page fits at 1920x1080 and 1366x768 on day 200")
 	quit()
 
 # Heavy chunk workers can span a frame; a wall-clock timer does not imply the

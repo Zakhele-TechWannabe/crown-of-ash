@@ -12,11 +12,13 @@ var levels := PackedInt32Array()
 var heights := PackedFloat32Array()
 var art := PackedInt32Array()
 var labels: Array[Dictionary] = []
-var town: Image
+var built: Image
+var things: Image
 var farm: Image
 var far_colors := PackedColorArray()
 var dry: Callable
 var crop_colours: Dictionary = {}
+const Palette = preload("res://src/palette.gd")
 
 
 func index_at(at: Vector2i) -> int:
@@ -59,8 +61,9 @@ func setup(is_dry: Callable) -> void:
 	heights.resize(count)
 	art.resize(count)
 	art.fill(-1)
-	town = (load("res://assets/kenney/tiny-town/Tilemap/tilemap_packed.png") as Texture2D).get_image()
-	farm = (load("res://assets/kenney/tiny-farm/Tilemap/tilemap_packed.png") as Texture2D).get_image()
+	built = Palette.atlas("tiny-town", Palette.BUILT)
+	things = Palette.atlas("tiny-town", Palette.THING)
+	farm = Palette.atlas("tiny-farm", Palette.THING)
 	var edge := FastNoiseLite.new()
 	edge.seed = int(data.get("seed", 718))
 	edge.frequency = 0.048
@@ -135,17 +138,19 @@ func setup(is_dry: Callable) -> void:
 		_stamp(center + Vector2i(int(stamp.at[0]), int(stamp.at[1])), int(stamp.tile))
 	for i in count:
 		no_trees[i] = int(surfaces[i] != 0)
-	var colors := [Color8(113, 151, 77), Color8(142, 195, 117), Color8(153, 119, 77), Color8(163, 173, 170), Color8(163, 173, 170), Color8(110, 105, 49), Color8(72, 165, 182), Color8(45, 49, 53), Color8(142, 195, 117), Color8(144, 99, 59), Color8(145, 159, 111)]
+	var soil := Palette.BRASS.darkened(0.3)
+	var colors := [Palette.GRASS, Palette.GRASS, Palette.EARTH, Palette.STONE, Palette.STONE, soil, Palette.BLUE.lightened(0.2), Palette.INK, Palette.GRASS, Palette.BRASS.darkened(0.15), Palette.GRASS.darkened(0.05)]
 	var art_colors: Array[Color] = []
 	for index in 132:
+		var sheet := _sheet(index)
 		var total := Color(0, 0, 0, 0)
 		for yy in 16:
 			for xx in 16:
-				var col := town.get_pixel((index % 12) * 16 + xx, (index / 12) * 16 + yy)
+				var col := sheet.get_pixel((index % 12) * 16 + xx, (index / 12) * 16 + yy)
 				total += Color(col.r * col.a, col.g * col.a, col.b * col.a, col.a)
 		art_colors.append(Color(total.r / maxf(1, total.a), total.g / maxf(1, total.a), total.b / maxf(1, total.a), total.a / 256.0))
 	for extra in 8:
-		art_colors.append(Color8(180 + extra * 5, 104 + extra * 8, 65))
+		art_colors.append(Palette.BRASS.lightened(0.04 * extra))
 	far_colors.resize(count)
 	for i in count:
 		var col: Color = colors[surfaces[i]]
@@ -273,69 +278,101 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 	var i := index_at(tile)
 	var surface: String = SURFACES[surfaces[i]]
 	var rect := Rect2i(pos, Vector2i(16, 16))
+	var ink := Palette.OUTLINE
+	# Ground: quiet palette fills, low contrast, never outlined.
 	if surface in ["grass", "garden"]:
-		_blit(image, town, (tile.x + tile.y) % 2, pos)
+		image.fill_rect(rect, Palette.GRASS)
+		var tuft := (tile.x * 7 + tile.y * 13) % 11
+		if tuft < 3:
+			image.fill_rect(Rect2i(pos + Vector2i(3 + tuft * 4, 5 + tuft * 3), Vector2i(2, 1)), Palette.GRASS.darkened(0.08))
 		if surface == "garden" and tile.x % 3 == 0 and tile.y % 3 == 0:
-			_blit(image, town, 4, pos)
+			_blit(image, things, 4, pos)
 	elif surface == "bridge":
-		image.fill_rect(rect, Color8(144, 99, 59))
+		image.fill_rect(rect, Palette.BRASS.darkened(0.15))
 		for yy in range(0, 16, 4):
-			image.fill_rect(Rect2i(pos + Vector2i(0, yy), Vector2i(16, 1)), Color8(83, 62, 43))
+			image.fill_rect(Rect2i(pos + Vector2i(0, yy), Vector2i(16, 1)), Palette.BRASS.darkened(0.35))
 	elif surface == "boundary":
-		image.fill_rect(Rect2i(pos + Vector2i(6, 6), Vector2i(4, 4)), Color8(177, 179, 125))
+		image.fill_rect(Rect2i(pos + Vector2i(6, 6), Vector2i(4, 4)), Palette.STONE)
 	elif surface == "earth":
-		_blit(image, town, 25, pos)
-		if tile.x % 3 != 1:
-			image.fill_rect(Rect2i(pos + Vector2i(3, 0), Vector2i(1, 16)), Color8(166, 119, 72))
+		image.fill_rect(rect, Palette.EARTH)
+		if (tile.x * 5 + tile.y * 3) % 7 == 0:
+			image.fill_rect(Rect2i(pos + Vector2i(5, 9), Vector2i(3, 1)), Palette.EARTH.darkened(0.07))
 	elif surface == "field":
-		image.fill_rect(rect, Color8(124, 81, 48))
+		var soil := Palette.BRASS.darkened(0.3)
+		image.fill_rect(rect, soil)
 		for row in [2, 7, 12]:
-			image.fill_rect(Rect2i(pos + Vector2i(0, row), Vector2i(16, 2)), Color8(84, 57, 38))
+			image.fill_rect(Rect2i(pos + Vector2i(0, row), Vector2i(16, 2)), soil.darkened(0.12))
 		_blit(image, farm, 64 if tile.y % 2 == 0 else 65, pos)
 		for field: Dictionary in data.get("fields", []):
 			var r: Array = field.rect
 			if Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[3])).has_point(tile - center):
-				var col: Color = crop_colours[field.crop]
+				var col: Color = Palette.tone(crop_colours[field.crop], Palette.THING)
 				for xx in range(2, 16, 4):
 					image.fill_rect(Rect2i(pos + Vector2i(xx, 3 + (tile.y % 3)), Vector2i(2, 8)), col.darkened(0.25))
 					image.fill_rect(Rect2i(pos + Vector2i(xx - 1, 2 + (tile.y % 3)), Vector2i(4, 3)), col)
 
 	elif surface == "spring":
-		image.fill_rect(rect, Color8(157, 219, 212))
-		image.fill_rect(Rect2i(pos + Vector2i(2, 2), Vector2i(12, 12)), Color8(72, 165, 182))
-		image.fill_rect(Rect2i(pos + Vector2i(4, 5), Vector2i(8, 1)), Color8(202, 255, 239))
+		image.fill_rect(rect, Palette.JADE.lightened(0.55))
+		image.fill_rect(Rect2i(pos + Vector2i(2, 2), Vector2i(12, 12)), Palette.BLUE.lightened(0.2))
+		image.fill_rect(Rect2i(pos + Vector2i(4, 5), Vector2i(8, 1)), Palette.JADE.lightened(0.7))
 	elif surface == "cave":
-		image.fill_rect(rect, Color8(102, 108, 109))
-		image.fill_rect(Rect2i(pos + Vector2i(3, 4), Vector2i(10, 12)), Color8(27, 31, 38))
+		image.fill_rect(rect, Palette.STONE.darkened(0.3))
+		image.fill_rect(Rect2i(pos + Vector2i(3, 4), Vector2i(10, 12)), ink)
 	else:
-		image.fill_rect(rect, Color8(163, 173, 170))
-		for y in range(0, 16, 4 if surface == "stairs" else 8):
-			image.fill_rect(Rect2i(pos + Vector2i(0, y), Vector2i(16, 1)), Color8(108, 124, 128))
-			image.fill_rect(Rect2i(pos + Vector2i(0, y + 1), Vector2i(16, 1)), Color8(199, 206, 194))
-			if surface != "stairs":
-				image.fill_rect(Rect2i(pos + Vector2i(4 if y == 0 else 12, y), Vector2i(1, 8)), Color8(108, 124, 128))
+		# Paving stays under the stalls: faint seams only.
+		var steps := surface == "stairs"
+		image.fill_rect(rect, Palette.STONE)
+		for y in range(0, 16, 4 if steps else 8):
+			image.fill_rect(Rect2i(pos + Vector2i(0, y), Vector2i(16, 1)), Palette.STONE.darkened(0.16 if steps else 0.07))
+			if not steps:
+				image.fill_rect(Rect2i(pos + Vector2i(4 if y == 0 else 12, y), Vector2i(1, 8)), Palette.STONE.darkened(0.07))
+	# Things: full contrast and an ink outline.
 	if art[i] >= 132:
 		var value := art[i]
 		if value == 136:
 			# Tapered wooden hull and a pale mooring line.
+			for yy in range(1, 16):
+				var inset := absi(8 - yy) / 3
+				image.fill_rect(Rect2i(pos + Vector2i(2 + inset, yy), Vector2i(12 - inset * 2, 1)), ink)
 			for yy in range(2, 15):
 				var inset := absi(8 - yy) / 3
-				image.fill_rect(Rect2i(pos + Vector2i(3 + inset, yy), Vector2i(10 - inset * 2, 1)), Color8(108, 65, 41))
-			image.fill_rect(Rect2i(pos + Vector2i(7, 4), Vector2i(2, 8)), Color8(205, 160, 101))
+				image.fill_rect(Rect2i(pos + Vector2i(3 + inset, yy), Vector2i(10 - inset * 2, 1)), Palette.BRASS.darkened(0.35))
+			image.fill_rect(Rect2i(pos + Vector2i(7, 4), Vector2i(2, 8)), Palette.PAPER)
 		elif value == 137:
+			for yy in 13:
+				image.fill_rect(Rect2i(pos + Vector2i(6 - yy / 2, yy + 2), Vector2i(4 + yy, 1)), ink)
 			for yy in 12:
-				image.fill_rect(Rect2i(pos + Vector2i(7 - yy / 2, yy + 3), Vector2i(2 + yy, 1)), Color8(184, 159, 106))
+				image.fill_rect(Rect2i(pos + Vector2i(7 - yy / 2, yy + 3), Vector2i(2 + yy, 1)), Palette.PAPER_DARK)
 		elif value == 138:
-			image.fill_rect(Rect2i(pos + Vector2i(3, 4), Vector2i(10, 10)), Color8(92, 77, 59))
-			image.fill_rect(Rect2i(pos + Vector2i(6, 5), Vector2i(5, 7)), Color8(222, 112, 47))
+			image.fill_rect(Rect2i(pos + Vector2i(3, 4), Vector2i(10, 10)), ink)
+			image.fill_rect(Rect2i(pos + Vector2i(4, 5), Vector2i(8, 8)), Palette.INK_SOFT)
+			image.fill_rect(Rect2i(pos + Vector2i(6, 5), Vector2i(5, 7)), Palette.GOLD)
+			image.fill_rect(Rect2i(pos + Vector2i(7, 7), Vector2i(3, 5)), Palette.RED)
 		else:
-			var colors := [Color8(191, 66, 52), Color8(76, 133, 157), Color8(211, 167, 62), Color8(120, 153, 91)]
-			image.fill_rect(Rect2i(pos + Vector2i(2, 3), Vector2i(12, 8)), colors[(value - 132) % 4])
+			var awnings := [Palette.RED, Palette.BLUE, Palette.GOLD, Palette.GREEN]
+			image.fill_rect(Rect2i(pos + Vector2i(1, 2), Vector2i(14, 14)), ink)
+			image.fill_rect(Rect2i(pos + Vector2i(2, 3), Vector2i(12, 8)), awnings[(value - 132) % 4])
 			for xx in [3, 7, 11]:
-				image.fill_rect(Rect2i(pos + Vector2i(xx, 3), Vector2i(2, 8)), Color8(226, 209, 163))
-			image.fill_rect(Rect2i(pos + Vector2i(2, 12), Vector2i(12, 3)), Color8(112, 77, 47))
+				image.fill_rect(Rect2i(pos + Vector2i(xx, 3), Vector2i(2, 8)), Palette.PAPER_LIGHT)
+			image.fill_rect(Rect2i(pos + Vector2i(2, 12), Vector2i(12, 3)), Palette.BRASS.darkened(0.25))
 	elif art[i] >= 0:
-		_blit(image, town, art[i], pos)
+		var sheet := _sheet(art[i])
+		_blit(image, sheet, art[i], pos)
+		# The ink edge follows the silhouette wherever a built tile meets open ground.
+		var origin := Vector2i((art[i] % 12) * 16, (art[i] / 12) * 16)
+		for side: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+			var other := index_at(tile + side)
+			if other >= 0 and art[other] >= 0:
+				continue
+			for step in 16:
+				var at := Vector2i(0 if side.x < 0 else (15 if side.x > 0 else step), 0 if side.y < 0 else (15 if side.y > 0 else step))
+				if sheet.get_pixel(origin.x + at.x, origin.y + at.y).a > 0.5:
+					image.fill_rect(Rect2i(pos + at, Vector2i.ONE), ink)
+
+
+## Roof tiles are calmed; walls, doors, trees and props keep full contrast.
+func _sheet(index: int) -> Image:
+	return built if index >= 48 and index < 72 else things
 
 
 func _blit(image: Image, source: Image, index: int, pos: Vector2i) -> void:

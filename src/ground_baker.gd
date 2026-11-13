@@ -20,6 +20,7 @@ var max_level := 0
 var noise := FastNoiseLite.new()
 var woodland := FastNoiseLite.new()
 var covers := ["deep water", "shallow water", "river", "sand", "bare rock", "snow", "tundra", "marsh", "desert", "steppe", "grass", "tufts", "flowers", "tree", "autumn tree", "spirit tree", "bamboo", "rock", "bush", "stump"]
+const Palette = preload("res://src/palette.gd")
 
 
 func _hash(x: int, y: int) -> int:
@@ -189,26 +190,26 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		pending.min_y = mini(pending.min_y, top)
 		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
 		if drop > 0:
-			var face := Color8(110, 99, 85).lerp(Color8(43, 49, 39), sect.hunting.cached_weight(tile)).darkened(minf(0.45, drop * 0.012))
+			var face := Palette.STONE.darkened(0.42).lerp(Palette.GREEN.darkened(0.5), sect.hunting.cached_weight(tile)).darkened(minf(0.3, drop * 0.008))
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
-			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
+			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.18))
 			for stripe in range(3, drop, 4) if sect.hunting.cached_weight(tile) < 0.1 else []:
-				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
+				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.12))
 			if sect.level_at(tile) >= 0:
 				var steps: bool = sect.surface_at(tile) == "stairs"
-				var stone := Color8(137, 147, 149)
+				var stone := Palette.STONE.darkened(0.3)
 				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), stone)
 				for seam in range(0, drop, 3 if steps else 6):
-					image.fill_rect(Rect2i(x * 16, top + 16 + seam, 16, 1), stone.darkened(0.3))
-					image.fill_rect(Rect2i(x * 16, top + 17 + seam, 16, 1), stone.lightened(0.2))
+					image.fill_rect(Rect2i(x * 16, top + 16 + seam, 16, 1), stone.darkened(0.22))
+					image.fill_rect(Rect2i(x * 16, top + 17 + seam, 16, 1), stone.lightened(0.12))
 					if not steps:
-						image.fill_rect(Rect2i(x * 16 + (4 if seam % 12 == 0 else 12), top + 16 + seam, 1, mini(6, drop - seam)), stone.darkened(0.3))
+						image.fill_rect(Rect2i(x * 16 + (4 if seam % 12 == 0 else 12), top + 16 + seam, 1, mini(6, drop - seam)), stone.darkened(0.22))
 		var source := Rect2i(int(info.kind) * 16, (int(info.shade) + int(info.band) * SHADES) * 16, 16, 16)
 		image.blit_rect(atlas_image, source, Vector2i(x * 16, top))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.RIGHT):
-			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Color8(83, 77, 62))
+			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Palette.STONE.darkened(0.45))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
-			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
+			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.STONE.darkened(0.45))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
 		if info.decoration >= 0 and sect.hunting.cached_weight(tile) < 0.25:
@@ -260,7 +261,7 @@ func _far_image(key: Vector2i) -> Image:
 			var top := y - roundi(level * exaggeration / TILE)
 			var col: Color = colors[index]
 			if kinds[index] > 3 and kinds[index] != 8 and height < 0.84 and float(_hash(tile.x, tile.y) % 1000) / 1000.0 < smoothstep(0.28, 0.8, smoothstep(-0.35, 0.45, woodland.get_noise_2dv((Vector2(tile) + Vector2.ONE * 0.5) / 16.0))) * 0.55:
-				col = Color8(43, 76, 45)
+				col = Palette.GREEN.darkened(0.4)
 			if sect.has_tile(tile):
 				col = sect.far_color(tile)
 			var forest_index: int = sect.hunting.cache_index(tile)

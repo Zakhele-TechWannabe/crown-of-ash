@@ -4,10 +4,12 @@ var samples: Array[Vector2] = []
 var bars := false
 var caption := ""
 var unit := "jin"
-var font: Font = preload("res://assets/fonts/Lato-Bold.ttf")
+const Palette = preload("res://src/palette.gd")
+var font: Font = preload("res://src/ui_theme.gd").body()
 
 func _draw() -> void:
-	var ink := Color("513b28")
+	var ink := Palette.INK
+	draw_style_box(preload("res://src/ui_theme.gd").box(Palette.PAPER_LIGHT), Rect2(Vector2.ZERO, size))
 	var maximum := 1.0
 	for p: Vector2 in samples:
 		maximum = maxf(maximum, p.y)
@@ -26,11 +28,11 @@ func _draw() -> void:
 	for i in samples.size():
 		var at := Vector2(area.position.x + (float(i) + 0.5) / samples.size() * area.size.x, area.end.y - samples[i].y / maximum * area.size.y)
 		if bars:
-			draw_rect(Rect2(at - Vector2(5, 0), Vector2(10, area.end.y - at.y)), Color("b38a35"))
+			draw_rect(Rect2(at - Vector2(5, 0), Vector2(10, area.end.y - at.y)), Palette.BRASS)
 		elif i > 0:
-			draw_line(previous, at, Color("947022"), 2.0, true)
+			draw_line(previous, at, Palette.BRASS.darkened(0.25), 2.0, true)
 		else:
-			draw_circle(at, 3, Color("947022"))
+			draw_circle(at, 3, Palette.BRASS.darkened(0.25))
 		previous = at
 	draw_string(font, Vector2(area.position.x, size.y - 8), "%s %.0f" % ["Year" if bars else "Day", samples[0].x], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)
 	draw_string(font, Vector2(area.end.x - 100, size.y - 8), "%s %.0f" % ["Year" if bars else "Day", samples[-1].x], HORIZONTAL_ALIGNMENT_LEFT, -1, 16, ink)

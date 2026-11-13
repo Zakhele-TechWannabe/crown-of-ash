@@ -1,5 +1,6 @@
 extends Node2D
 ## Disposable chunks share one small atlas; samples never depend on visit order.
+const Palette = preload("res://src/palette.gd")
 
 const SIDE := 64
 const TILE := 32.0
@@ -62,12 +63,11 @@ func setup(map: Node2D) -> void:
 
 
 func _build_atlas() -> void:
-	var town := load("res://assets/kenney/tiny-town/Tilemap/tilemap_packed.png") as Texture2D
-	var farm := load("res://assets/kenney/tiny-farm/Tilemap/tilemap_packed.png") as Texture2D
-	var town_image := town.get_image()
-	var farm_image := farm.get_image()
+	var ground_image := Palette.atlas("tiny-town", Palette.GROUND)
+	var town_image := Palette.atlas("tiny-town", Palette.THING)
+	var farm_image := Palette.atlas("tiny-farm", Palette.THING)
 	var image := Image.create(20 * 16, SHADES * BANDS * 16, false, Image.FORMAT_RGBA8)
-	var colors := [Color8(32, 68, 109), Color8(57, 115, 148), Color8(63, 133, 160), Color8(218, 198, 139), Color8(125, 127, 126), Color8(233, 240, 239), Color8(141, 158, 134), Color8(100, 119, 78), Color8(224, 183, 113), Color8(157, 168, 91)]
+	var colors := [Palette.BLUE.darkened(0.3), Palette.BLUE, Palette.BLUE.lightened(0.12), Palette.EARTH.lightened(0.25), Palette.STONE.darkened(0.2), Palette.STONE.lightened(0.75), Palette.GRASS.lightened(0.2), Palette.GREEN.lightened(0.1), Palette.EARTH.lightened(0.1), Palette.GRASS.darkened(0.05)]
 	var indices := [0, 1, 2, 4, 3, 5, 16, 77, 39, 89]
 	for kind in 20:
 		for row in SHADES * BANDS:
@@ -80,12 +80,12 @@ func _build_atlas() -> void:
 						col = colors[kind]
 						var speck := _hash(x + kind * 31, y) % 37
 						if speck < 3:
-							col = col.lightened(0.16) if kind < 3 else col.darkened(0.13)
+							col = col.lightened(0.08) if kind < 3 else col.darkened(0.07)
 						if kind == 7 and (x * 3 + y * 7) % 23 < 3:
-							col = col.darkened(0.3)
+							col = col.darkened(0.14)
 					else:
 						var index: int = indices[kind - 10]
-						var source := farm_image if kind >= 17 else town_image
+						var source := farm_image if kind >= 17 else (ground_image if kind < 13 else town_image)
 						col = source.get_pixel((index % 12) * 16 + x, (index / 12) * 16 + y)
 						if kind == 15:
 							col *= Color(0.55, 0.86, 0.8)
@@ -93,14 +93,14 @@ func _build_atlas() -> void:
 							# Readable evergreen silhouette for sheltered highland groves.
 							col = Color.TRANSPARENT
 							if y >= 11 and y <= 15 and x in [7, 8]:
-								col = Color8(78, 62, 42)
+								col = Palette.INK_SOFT.darkened(0.3)
 							for tier in 3:
 								var top := 1 + tier * 3
 								if y >= top and y <= top + 5 and abs(x - 7) <= (y - top) / 2 + tier:
-									col = Color8(47, 82, 52) if x < 8 else Color8(34, 61, 42)
+									col = Palette.JADE.darkened(0.45) if x < 8 else Palette.JADE.darkened(0.6)
 					# Elevation palettes are shared by every land biome, including highlands.
 					if kind >= 3 and kind < 10 or kind == 10 or kind == 11 or kind == 12:
-						var palettes := [Color8(113, 151, 77), Color8(122, 154, 79), Color8(132, 152, 82), Color8(141, 149, 88), Color8(148, 143, 96), Color8(140, 134, 116), Color8(160, 160, 155), Color8(206, 216, 214), Color8(236, 242, 240)]
+						var palettes := [Palette.GREEN.lightened(0.15), Palette.GREEN.lightened(0.2), Palette.GRASS.darkened(0.15), Palette.GRASS.darkened(0.1), Palette.GRASS.lerp(Palette.STONE, 0.5).darkened(0.1), Palette.STONE.darkened(0.2), Palette.STONE.darkened(0.08), Palette.STONE.lightened(0.45), Palette.STONE.lightened(0.75)]
 						var tint: Color = palettes[band]
 						col = col.lerp(tint, 0.2 if kind in [3, 4, 5] else 0.85)
 					var light := 0.50 + shade * 0.125
@@ -399,26 +399,26 @@ func _bake_row(key: Vector2i, y: int) -> void:
 		pending.min_y = mini(pending.min_y, top)
 		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
 		if drop > 0:
-			var face := Color8(110, 99, 85).lerp(Color8(43, 49, 39), sect.hunting.cached_weight(tile)).darkened(minf(0.45, drop * 0.012))
+			var face := Palette.STONE.darkened(0.42).lerp(Palette.GREEN.darkened(0.5), sect.hunting.cached_weight(tile)).darkened(minf(0.3, drop * 0.008))
 			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
-			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.24))
+			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.18))
 			for stripe in range(3, drop, 4) if sect.hunting.cached_weight(tile) < 0.1 else []:
-				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.18))
+				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.12))
 			if sect.level_at(tile) >= 0:
 				var steps: bool = sect.surface_at(tile) == "stairs"
-				var stone := Color8(137, 147, 149)
+				var stone := Palette.STONE.darkened(0.3)
 				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), stone)
 				for seam in range(0, drop, 3 if steps else 6):
-					image.fill_rect(Rect2i(x * 16, top + 16 + seam, 16, 1), stone.darkened(0.3))
-					image.fill_rect(Rect2i(x * 16, top + 17 + seam, 16, 1), stone.lightened(0.2))
+					image.fill_rect(Rect2i(x * 16, top + 16 + seam, 16, 1), stone.darkened(0.22))
+					image.fill_rect(Rect2i(x * 16, top + 17 + seam, 16, 1), stone.lightened(0.12))
 					if not steps:
-						image.fill_rect(Rect2i(x * 16 + (4 if seam % 12 == 0 else 12), top + 16 + seam, 1, mini(6, drop - seam)), stone.darkened(0.3))
+						image.fill_rect(Rect2i(x * 16 + (4 if seam % 12 == 0 else 12), top + 16 + seam, 1, mini(6, drop - seam)), stone.darkened(0.22))
 		var source := Rect2i(int(info.kind) * 16, (int(info.shade) + int(info.band) * SHADES) * 16, 16, 16)
 		image.blit_rect(atlas_image, source, Vector2i(x * 16, top))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.RIGHT):
-			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Color8(83, 77, 62))
+			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Palette.STONE.darkened(0.45))
 		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
-			image.fill_rect(Rect2i(x * 16, top, 1, 16), Color8(101, 94, 76))
+			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.STONE.darkened(0.45))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
 		sect.hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
 		if info.decoration >= 0 and sect.hunting.cached_weight(tile) < 0.25:

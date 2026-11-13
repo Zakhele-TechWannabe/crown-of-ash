@@ -1,14 +1,16 @@
 extends VBoxContainer
 ## Population drill-down and personal records; never depends on walker membership.
 const VirtualList = preload("res://src/people_list.gd")
-const EgoGraph = preload("res://src/ego_graph.gd")
-const BodyFigure = preload("res://src/body_figure.gd")
+const PersonBook = preload("res://src/person_book.gd")
+const Palette = preload("res://src/palette.gd")
+const UiTheme = preload("res://src/ui_theme.gd")
 var ledger: PanelContainer
 var population: RefCounted
 var group_mode := "Place"
 var path: Array[String] = []
 var person := -1
-var graph_mode := "Relationships"
+var graph_mode := "Family"
+var person_tab := "Story"
 var catalogue_mode := false
 var catalogue_path: Array[String] = []
 var results := PackedInt32Array()
@@ -31,8 +33,12 @@ func setup(book: PanelContainer) -> void:
 func text(parent: Node, words: String, heading: bool = false) -> Label:
 	return ledger.label(parent, words, heading)
 
-func action(parent: Node, words: String, callback: Callable) -> Button:
+func small(parent: Node, words: String) -> Label:
+	return ledger.small(parent, words)
+
+func action(parent: Node, words: String, callback: Callable, variation: String = "") -> Button:
 	var control: Button = ledger.button(parent, words, callback)
+	control.theme_type_variation = variation
 	control.autowrap_mode = TextServer.AUTOWRAP_OFF
 	control.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	control.custom_minimum_size.x = 0
@@ -42,20 +48,28 @@ func redraw() -> void:
 	for child: Node in get_children():
 		remove_child(child)
 		child.queue_free()
+	if person >= 0 and not catalogue_mode:
+		var book := PersonBook.new()
+		add_child(book)
+		book.build(self)
+		return
 	var modes := HBoxContainer.new()
+	modes.add_theme_constant_override("separation", 4)
 	add_child(modes)
-	action(modes, "People", func() -> void: catalogue_mode = false; person = -1; redraw())
-	action(modes, "Skills catalogue", func() -> void: catalogue_mode = true; redraw())
+	for mode: String in ["People", "Skills catalogue"]:
+		var tab := action(modes, mode, func() -> void: catalogue_mode = mode != "People"; person = -1; redraw())
+		tab.theme_type_variation = "Tab"
+		tab.toggle_mode = true
+		tab.set_pressed_no_signal(catalogue_mode == (mode != "People"))
 	if catalogue_mode:
 		_catalogue()
-		return
-	if person >= 0:
-		_person()
 		return
 	if path.is_empty(): _notables()
 	var group := OptionButton.new()
 	for mode: String in ["Place", "Work", "Life stage", "Status", "Clan", "Faction", "Realm"]: group.add_item(mode)
 	group.select(["Place", "Work", "Life stage", "Status", "Clan", "Faction", "Realm"].find(group_mode))
+	group.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	group.tooltip_text = "Group people by"
 	group.item_selected.connect(func(index: int) -> void:
 		group_mode = ["Place", "Work", "Life stage", "Status", "Clan", "Faction", "Realm"][index]
 		path.clear()
@@ -65,7 +79,7 @@ func redraw() -> void:
 	var groups := _groups()
 	if not groups.is_empty():
 		var grid := GridContainer.new()
-		grid.columns = 2 if ledger.get_viewport_rect().size.x >= 1500 else 1
+		grid.columns = 3 if ledger.content_width() >= 1100 else 2
 		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		add_child(grid)
 		for key: String in groups:
@@ -73,35 +87,45 @@ func redraw() -> void:
 	else:
 		_list()
 
+## Why someone stands out, or "" if they do not.
+func notable_reason(p: int) -> String:
+	if not population.society.alive[p]: return ""
+	var temper: RefCounted = population.society.temper
+	if temper and temper.at_gate(p): return "at the %s gate" % temper.layer_name(temper.body_layer[p] + 1)
+	if population.society.revealed[p]: return "spirit root"
+	if temper and temper.body_layer[p] >= 3: return temper.layer_name(temper.body_layer[p])
+	if population.day - population.last_insight_day[p] <= 90: return "recent insight"
+	if population.best_level[p] >= 31: return "master of a craft"
+	if temper and temper.training(p, population.day) and temper.teacher[p] >= 0: return "drilling under a teacher"
+	if population.age(p) >= 60: return "elder"
+	return ""
+
 func _notables() -> void:
-	text(self, "Notable people", true)
+	text(self, "Worth knowing", true)
 	var grid := GridContainer.new()
-	grid.columns = 2 if ledger.get_viewport_rect().size.x >= 1500 else 1
+	grid.columns = 3 if ledger.content_width() >= 1100 else 2
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(grid)
 	var shown := 0
 	for p in population.size():
-		if population.best_level[p] < 31 and population.society.revealed[p] == 0 and population.day - population.last_insight_day[p] > 90 and population.age(p) < 60: continue
+		var reason := notable_reason(p)
+		if reason.is_empty() or reason == "elder": continue
 		var target: int = p
-		var reason := "Spirit root" if population.society.revealed[p] else ("Recent insight" if population.day - population.last_insight_day[p] <= 90 else ("Master" if population.best_level[p] >= 31 else "Elder"))
-		var card := PanelContainer.new()
-		grid.add_child(card)
-		var box := VBoxContainer.new()
-		card.add_child(box)
-		text(box, "%s · %s" % [population.names[p], reason])
-		text(box, "%s %d" % [population.catalogue.title(population.best_level[p]), population.best_level[p]])
-		action(box, "View", func() -> void: person = target; redraw())
+		var card := action(grid, "%s\n%s · %s" % [population.names[p], reason, population.jobs[population.job[p]]], func() -> void: person = target; person_tab = "Story"; redraw())
+		card.theme_type_variation = "Card"
+		card.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		shown += 1
 		if shown == 6: break
-	if shown == 0: text(grid, "A quiet village; no notables yet.")
+	if shown == 0: text(grid, "A quiet village; no one stands out yet.")
 
 func _breadcrumb() -> void:
 	var crumbs := HFlowContainer.new()
 	add_child(crumbs)
-	action(crumbs, "All people", func() -> void: path.clear(); redraw())
+	action(crumbs, "All people", func() -> void: path.clear(); redraw(), "Chip")
 	for depth in path.size():
 		var upto := depth + 1
-		action(crumbs, _group_label(path[depth]), func() -> void: path.resize(upto); redraw())
+		action(crumbs, _group_label(path[depth]), func() -> void: path.resize(upto); redraw(), "Chip")
 
 func _keys(p: int) -> Array[String]:
 	match group_mode:
@@ -177,20 +201,22 @@ func _groups() -> Dictionary:
 
 func _summary_card(parent: Node, key: String, summary: Dictionary) -> void:
 	var panel := PanelContainer.new()
+	panel.theme_type_variation = "CardPanel"
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	parent.add_child(panel)
 	var card := VBoxContainer.new()
+	card.add_theme_constant_override("separation", 4)
 	panel.add_child(card)
 	var target := key
 	text(card, "%s · %d people" % [_group_label(key), summary.count], true)
 	if key.begins_with("faction:"):
 		var group: Dictionary = population.society.factions[int(key.get_slice(":", 1))]
 		text(card, "Led by " + (population.names[group.leader] if group.leader >= 0 else "no one yet"))
-	text(card, "Best: %s %d · %s mood · %s hunger" % [population.catalogue.title(summary.best), summary.best, "●" if summary.mood / summary.count >= .45 else "○", "●" if summary.hungry > 0 else "○"])
-	action(card, "Browse", func() -> void: path.append(target); redraw())
+	var mood_words := "content" if summary.mood / summary.count >= .45 else "unhappy"
+	small(card, "Best %s · mostly %s%s" % [population.catalogue.title(summary.best).to_lower(), mood_words, (" · %d hungry" % summary.hungry) if summary.hungry > 0 else ""])
+	action(card, "Browse", func() -> void: path.append(target); redraw(), "Chip")
 	var bar := ProgressBar.new()
-	bar.custom_minimum_size.y = 8
-	bar.show_percentage = false
+	UiTheme.thin(bar, Palette.PLUM, 5)
 	bar.value = 100.0 * summary.female / summary.count
 	bar.tooltip_text = "%d female · %d male · %d youths · %d elders" % [summary.female, summary.count - summary.female, summary.young, summary.elder]
 	card.add_child(bar)
@@ -199,7 +225,7 @@ func _summary_card(parent: Node, key: String, summary: Dictionary) -> void:
 	card.add_child(ages)
 	for stage in 3:
 		var segment := ColorRect.new()
-		segment.color = [Color("8aaf70"), Color("b89953"), Color("9686a4")][stage]
+		segment.color = [Palette.GREEN, Palette.BRASS, Palette.INK_SOFT][stage]
 		segment.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		segment.size_flags_stretch_ratio = maxf(.01, [summary.young, summary.count - summary.young - summary.elder, summary.elder][stage])
 		ages.add_child(segment)
@@ -213,11 +239,14 @@ func _list() -> void:
 	search.text_changed.connect(func(value: String) -> void: query = value; _update_list())
 	var chips := HFlowContainer.new()
 	add_child(chips)
-	for filter_name: String in ["All", "Hungry", "Unhappy", "Spirit root", "At gate", "Recent"]:
+	var chip_group := ButtonGroup.new()
+	for filter_name: String in ["All", "Notable", "Hungry", "Unhappy", "Spirit root", "At gate", "Recent"]:
 		var selected := filter_name
 		var control := action(chips, filter_name, func() -> void: chip = selected; _update_list())
+		control.theme_type_variation = "Chip"
 		control.toggle_mode = true
-		control.button_pressed = chip == filter_name
+		control.button_group = chip_group
+		control.set_pressed_no_signal(chip == filter_name)
 	var sorting := HBoxContainer.new()
 	add_child(sorting)
 	var choices := OptionButton.new()
@@ -230,7 +259,7 @@ func _list() -> void:
 	discipline_sort.tooltip_text = "Example: grain_farming.farming; select Discipline to sort by it"
 	discipline_sort.text_submitted.connect(func(value: String) -> void: sort_discipline = value; sort_key = "Discipline"; _update_list())
 	add_child(discipline_sort)
-	action(sorting, "Reverse", func() -> void: descending = not descending; _update_list())
+	action(sorting, "Reverse", func() -> void: descending = not descending; _update_list(), "Chip")
 	body = VBoxContainer.new()
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(body)
@@ -242,10 +271,11 @@ func _update_list() -> void:
 		child.queue_free()
 	var selected: Array[int] = []
 	for p: int in results:
+		if chip == "Notable" and notable_reason(p).is_empty(): continue
 		if chip == "Hungry" and population.hunger[p] == 0: continue
 		if chip == "Unhappy" and population.mood[p] >= .45: continue
 		if chip == "Spirit root" and population.society.revealed[p] == 0: continue
-		if chip == "At gate" and population.stuck[p] == 0: continue
+		if chip == "At gate" and population.stuck[p] == 0 and not (population.society.temper and population.society.temper.at_gate(p)): continue
 		if chip == "Recent" and population.day - population.recently_levelled[p] > 30: continue
 		if not _matches_query(p): continue
 		selected.append(p)
@@ -255,11 +285,11 @@ func _update_list() -> void:
 		var va: Variant = sort_values[a]
 		var vb: Variant = sort_values[b]
 		return va > vb if descending else va < vb)
-	text(body, "%d people · select a name for their record" % selected.size())
+	small(body, "%d people · select a name to open their page" % selected.size())
 	virtual_list = VirtualList.new()
 	body.add_child(virtual_list)
 	virtual_list.setup(population, PackedInt32Array(selected))
-	virtual_list.person_selected.connect(func(id: int) -> void: person = id; redraw())
+	virtual_list.person_selected.connect(func(id: int) -> void: person = id; person_tab = "Story"; redraw())
 
 func _sort_value(p: int) -> Variant:
 	match sort_key:
@@ -284,113 +314,13 @@ func _matches_query(p: int) -> bool:
 		elif not token in population.names[p].to_lower(): return false
 	return true
 
-func _person() -> void:
-	action(self, "Back to people", func() -> void: person = -1; redraw())
-	text(self, population.names[person], true)
-	text(self, "%s · age %d · %s\n%s · %s · Servants' Village" % ["Female" if population.sex[person] else "Male", population.age(person), population.jobs[population.job[person]], population.household_name(person), population.district_name(person)])
-	var nearby := -1
-	for i in ledger.life.people.size():
-		if int(ledger.life.people[i].id) == person: nearby = i; break
-	var walker := nearby
-	var follow := action(self, "Follow" if nearby >= 0 else "Not nearby", func() -> void: ledger.life.followed = walker; ledger.close())
-	follow.disabled = nearby < 0
-	var views := HBoxContainer.new()
-	add_child(views)
-	for view: String in ["Relationships", "Family", "Lineage", "Skills"]:
-		var chosen := view
-		var tab := action(views, view, func() -> void: graph_mode = chosen; redraw())
-		tab.toggle_mode = true
-		tab.button_pressed = view == graph_mode
-	var graph := EgoGraph.new()
-	graph.custom_minimum_size = Vector2(0, 340)
-	graph.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(graph)
-	graph.build(population, person, graph_mode)
-	graph.opened.connect(func(target: int) -> void: person = target; redraw())
-	text(self, "Attributes", true)
-	var attributes_grid := GridContainer.new()
-	attributes_grid.columns = 2
-	attributes_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(attributes_grid)
-	for a in 8:
-		var cell := VBoxContainer.new()
-		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		attributes_grid.add_child(cell)
-		text(cell, "%s  %.1f / 20" % [str(population.catalogue.rules.attributes[a]).capitalize(), population.attributes[person * 8 + a]])
-		var bar := ProgressBar.new()
-		bar.max_value = 20
-		bar.value = population.attributes[person * 8 + a]
-		bar.show_percentage = false
-		_thin_bar(bar)
-		bar.custom_minimum_size.y = 4
-		cell.add_child(bar)
-	var trait_chips := HFlowContainer.new()
-	add_child(trait_chips)
-	for t in population.catalogue.traits.size():
-		if population.traits[person] & (1 << t):
-			var chip_panel := PanelContainer.new()
-			trait_chips.add_child(chip_panel)
-			text(chip_panel, str(population.catalogue.traits[t].name)).autowrap_mode = TextServer.AUTOWRAP_OFF
-	var skills: Dictionary = population.sparse_skills(person)
-	var ordered: Array = skills.keys()
-	ordered.sort_custom(func(a: String, b: String) -> bool: return int(skills[a].level) > int(skills[b].level))
-	_social_record()
-	text(self, "Top skills" + (" · stuck at a gate" if population.stuck[person] else ""), true)
-	for id: String in ordered.slice(0, 3):
-		var row: Dictionary = skills[id]
-		text(self, "%s · %s %d" % [population.catalogue.skills[id].name, population.catalogue.title(row.level), row.level])
-		var bar := ProgressBar.new()
-		bar.max_value = population.catalogue.thresholds[row.level]
-		bar.value = row.xp
-		bar.tooltip_text = "%.1f / %.1f XP · %d practice days" % [row.xp, bar.max_value, row.days_practised]
-		bar.custom_minimum_size.y = 16
-		add_child(bar)
-	text(self, "Personal skill tree", true)
-	var tree := Tree.new()
-	tree.hide_root = true
-	tree.custom_minimum_size.y = 280
-	tree.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(tree)
-	var root := tree.create_item()
-	var parents: Dictionary = {}
-	for id: String in ordered:
-		var di: String = population.catalogue.discipline_for(id)
-		var domain: Dictionary = population.catalogue.domains[population.catalogue.domain_for(id)]
-		for node_id: String in [domain.sphere, domain.id, di]:
-			if parents.has(node_id): continue
-			var parent_item: TreeItem = root if node_id == domain.sphere else (parents[domain.sphere] if node_id == domain.id else parents[domain.id])
-			var item := tree.create_item(parent_item)
-			var name_text := str(population.catalogue.spheres[node_id].name) if node_id == domain.sphere else (str(domain.name) if node_id == domain.id else str(population.catalogue.disciplines[di].name))
-			item.set_text(0, name_text + (" · %d" % skills[node_id].level if skills.has(node_id) else ""))
-			item.collapsed = true
-			parents[node_id] = item
-		if id == di: continue
-		var leaf := tree.create_item(parents[di])
-		leaf.set_text(0, "%s · %d" % [population.catalogue.skills[id].name, skills[id].level])
-	for di: String in parents:
-		if not population.catalogue.disciplines.has(di): continue
-		var level: int = int(skills.get(di, {"level": 0}).level)
-		for spec: Dictionary in population.catalogue.disciplines[di].get("specialisations", []):
-			if skills.has(spec.id) or int(spec.unlock_level) > level + 5: continue
-			var leaf := tree.create_item(parents[di])
-			leaf.set_text(0, "%s · unlock %d" % [spec.name, spec.unlock_level])
-			leaf.set_custom_color(0, Color("888078"))
-			leaf.set_tooltip_text(0, str(spec.condition) if spec.locked else str(spec.attribute_requirements))
-	text(self, "History", true)
-	var lines := 0
-	for entry: Dictionary in population.events:
-		if int(entry.person) == person:
-			text(self, "Day %d: %s" % [entry.day, entry.text])
-			lines += 1
-	if lines == 0: text(self, "No recorded milestones yet.")
-
 func _catalogue() -> void:
 	var crumbs := HFlowContainer.new()
 	add_child(crumbs)
-	action(crumbs, "All spheres", func() -> void: catalogue_path.clear(); redraw())
+	action(crumbs, "All spheres", func() -> void: catalogue_path.clear(); redraw(), "Chip")
 	for depth in catalogue_path.size():
 		var upto := depth + 1
-		action(crumbs, catalogue_path[depth].replace("_", " ").capitalize(), func() -> void: catalogue_path.resize(upto); redraw())
+		action(crumbs, catalogue_path[depth].replace("_", " ").capitalize(), func() -> void: catalogue_path.resize(upto); redraw(), "Chip")
 	var rows: Array[Dictionary] = []
 	if catalogue_path.is_empty(): rows.assign(population.catalogue.spheres.values())
 	elif catalogue_path.size() == 1:
@@ -402,7 +332,7 @@ func _catalogue() -> void:
 	else:
 		rows.assign(population.catalogue.disciplines[catalogue_path[2]].get("specialisations", []))
 	var grid := GridContainer.new()
-	grid.columns = 2 if ledger.get_viewport_rect().size.x >= 1500 else 1
+	grid.columns = 3 if ledger.content_width() >= 1100 else 2
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(grid)
 	for row: Dictionary in rows:
@@ -412,8 +342,10 @@ func _catalogue() -> void:
 		var words := str(row.name) + "\n" + ("Locked: " + str(row.get("condition", "Revealed spirit root; manuals or teaching deepen practice")) if is_locked else ("Best %s · %d know it" % [summary.best, summary.count]))
 		var card := action(grid, words, func() -> void:
 			if catalogue_path.size() < 3: catalogue_path.append(id); redraw()
-			elif int(summary.person) >= 0: person = int(summary.person); catalogue_mode = false; redraw())
-		if is_locked: card.modulate = Color(.65, .65, .65)
+			elif int(summary.person) >= 0: person = int(summary.person); person_tab = "Skills"; catalogue_mode = false; redraw())
+		card.theme_type_variation = "Card"
+		card.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		if is_locked: card.modulate = Color(1, 1, 1, .6)
 		card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		card.tooltip_text = str(row.get("description", ""))
@@ -429,146 +361,6 @@ func _catalogue() -> void:
 func _skill_summary(id: String) -> Dictionary:
 	var summary: Dictionary = population.skill_statistics(id)
 	return {"count": summary.count, "best": population.catalogue.title(summary.best_level) + " " + str(summary.best_level), "person": summary.person}
-
-func _person_links(parent: Node, ids: PackedInt32Array) -> void:
-	var row := HFlowContainer.new()
-	parent.add_child(row)
-	for id: int in ids:
-		if id < 0: continue
-		var target := id
-		action(row, population.names[id], func() -> void: person = target; redraw())
-	if row.get_child_count() == 0: text(row, "None known")
-
-func _social_record() -> void:
-	var society: RefCounted = population.society
-	text(self, "Cultivation", true)
-	text(self, "%s · spirit root: %s" % [society.realm_label(person), society.root_label(person)])
-	text(self, "%s · lifespan %d%s" % [society.rules.techniques[society.technique[person]].name, society.lifespan(person), " · frail elder" if population.age(person) > society.lifespan(person) else ""])
-	var qi_bar := ProgressBar.new()
-	qi_bar.max_value = society.qi_cost(person)
-	qi_bar.value = society.qi[person]
-	qi_bar.show_percentage = false
-	qi_bar.custom_minimum_size.y = 8
-	qi_bar.tooltip_text = "%.1f / %.1f qi" % [society.qi[person], society.qi_cost(person)]
-	add_child(qi_bar)
-	_body_record()
-	_mind_record()
-	text(self, "Family", true)
-	text(self, "Parents")
-	_person_links(self, society.parents(person))
-	text(self, "Spouse")
-	_person_links(self, PackedInt32Array([society.spouse[person]]))
-	text(self, "Children")
-	_person_links(self, society.children(person))
-	text(self, "Siblings")
-	_person_links(self, society.siblings(person))
-	text(self, "Lineage", true)
-	text(self, "Master · seniority %d" % society.seniority(person))
-	_person_links(self, PackedInt32Array([society.master[person]]))
-	text(self, "Disciples / apprentices")
-	_person_links(self, society.disciples(person))
-	text(self, "Relationships", true)
-	var rows: Array = society.ties.rows(person)
-	if rows.is_empty(): text(self, "No acquaintances yet")
-	for row: Dictionary in rows.slice(0, 8):
-		var target: int = row.person
-		var panel := PanelContainer.new()
-		add_child(panel)
-		var box := VBoxContainer.new()
-		panel.add_child(box)
-		action(box, population.names[target], func() -> void: person = target; redraw())
-		text(box, "%+.0f opinion · familiarity %d · trust %d" % [row.opinion, row.familiarity, row.trust])
-		var opinion_bar := ProgressBar.new()
-		opinion_bar.min_value = -100
-		opinion_bar.max_value = 100
-		opinion_bar.value = row.opinion
-		opinion_bar.show_percentage = false
-		opinion_bar.custom_minimum_size.y = 4
-		box.add_child(opinion_bar)
-		var bond_chips := HFlowContainer.new()
-		box.add_child(bond_chips)
-		for bond: String in society.ties.bond_names(row.bonds).split(", ", false):
-			var chip := PanelContainer.new()
-			bond_chips.add_child(chip)
-			text(chip, bond).autowrap_mode = TextServer.AUTOWRAP_OFF
-		if society.ties.has_grudge(row.entry):
-			var grudge: Dictionary = society.ties.grudge_record(row.entry)
-			text(box, "Grudge %.0f · %s · %s" % [grudge.intensity, grudge.cause, grudge.resolution])
-
-func _body_record() -> void:
-	var temper: RefCounted = population.society.temper
-	if temper == null: return
-	var state: Dictionary = temper.describe(person)
-	text(self, "Body tempering", true)
-	var row := HBoxContainer.new()
-	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(row)
-	var figure: Control = BodyFigure.new()
-	figure.custom_minimum_size = Vector2(80, 140)
-	var grades: Array = []
-	for l in state.layer: grades.append(temper.grade(person, l + 1))
-	figure.show_body(grades)
-	row.add_child(figure)
-	var info := VBoxContainer.new()
-	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(info)
-	if state.layer == 0: text(info, "Untempered · knows %s" % state.method)
-	else: text(info, "Layer %d · %s · %s overall" % [state.layer, state.name, state.grade])
-	var forged: PackedStringArray = []
-	for layer: Array in state.layers: forged.append("%s %s" % [layer[0], str(layer[1]).to_lower()])
-	if not forged.is_empty(): text(info, ", ".join(forged))
-	if state.layer > 0 or state.training: text(info, "Method: %s · best grade still possible: %s" % [state.method, state.ceiling])
-	if state.training: text(info, "Drilling %d h a day%s · strain %d%%" % [state.hours, (" under " + str(state.teacher)) if not str(state.teacher).is_empty() else " alone", roundi(state.strain * 100)])
-	if not state.holds.is_empty(): text(info, "Holds " + ", ".join(state.holds))
-	if not str(state.gate).is_empty(): text(info, "At the gate of %s: needs %s" % [temper.layer_name(state.layer + 1), state.gate])
-	elif state.layer < temper.LAYERS:
-		var bar := ProgressBar.new()
-		bar.max_value = 1
-		bar.value = state.progress
-		bar.show_percentage = false
-		_thin_bar(bar)
-		bar.custom_minimum_size.y = 6
-		bar.tooltip_text = "Tempering toward %s" % temper.layer_name(state.layer + 1)
-		info.add_child(bar)
-
-func _mind_record() -> void:
-	var mind: RefCounted = population.society.mind
-	if mind == null: return
-	var state: Dictionary = mind.describe(person)
-	text(self, "Heart and mind", true)
-	var urges: Array = state.urges
-	text(self, "Driven most by %s and %s%s" % [urges[0][0], urges[1][0], (" · wants to " + str(state.goal)) if not str(state.goal).is_empty() else ""])
-	var grid := GridContainer.new()
-	grid.columns = 4
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(grid)
-	for feeling: Array in state.feelings:
-		var cell := VBoxContainer.new()
-		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		grid.add_child(cell)
-		text(cell, str(feeling[0]).capitalize())
-		var bar := ProgressBar.new()
-		bar.max_value = 1
-		bar.value = feeling[1]
-		bar.show_percentage = false
-		_thin_bar(bar)
-		bar.custom_minimum_size.y = 4
-		cell.add_child(bar)
-	if state.recent.is_empty(): text(self, "No recent decisions yet.")
-	for record: Dictionary in state.recent.slice(0, 4):
-		var target: int = record.target
-		var reasons: PackedStringArray = []
-		for reason: Array in record.reasons.slice(0, 3): reasons.append("%s %.2f" % [reason[0], reason[1]])
-		text(self, "Day %d: chose to %s%s, %s (%s)%s" % [record.day, record.option, (" " + population.names[target]) if target >= 0 else "", record.outcome,
-			", ".join(reasons), " · on impulse" if not str(record.impulse).is_empty() else ""])
-
-func _thin_bar(bar: ProgressBar) -> void:
-	var background := StyleBoxFlat.new()
-	background.bg_color = Color("d1c5a9")
-	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color("729363")
-	bar.add_theme_stylebox_override("background", background)
-	bar.add_theme_stylebox_override("fill", fill)
 
 func _group_label(key: String) -> String:
 	if key.begins_with("faction:"):

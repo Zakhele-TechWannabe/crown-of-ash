@@ -1,11 +1,12 @@
 extends Node2D
 ## The atlas is baked once; only screen-space names and controls redraw.
+const Palette = preload("res://src/palette.gd")
 
 const CELL := 8.0
-const GOLD := Color(1.0, 0.8, 0.35)
-const INK := Color(0.19, 0.12, 0.07)
-const BLUE := Color8(36, 79, 102)
-const PANEL := Color(0.16, 0.1, 0.06, 0.94)
+const GOLD := Palette.GOLD
+const INK := Palette.INK
+const BLUE := Palette.BLUE
+const PANEL := Palette.PAPER
 const DIRECTIONS := [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
 
 var life: Node2D
@@ -29,7 +30,7 @@ var temperature: PackedByteArray
 var cam: Camera2D
 var overlay: Control
 var river_art: Node2D
-var serif: SystemFont
+var serif: Font
 var font: Font
 var fit_zoom := 1.0
 var dragging := false
@@ -42,7 +43,7 @@ var taking_shot := false
 
 
 func _ready() -> void:
-	RenderingServer.set_default_clear_color(Color8(38, 74, 94))
+	RenderingServer.set_default_clear_color(Palette.BLUE.darkened(0.4))
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://data/world_zi-xue-718.json"))
 	w = int(data.width)
 	h = int(data.height)
@@ -52,10 +53,9 @@ func _ready() -> void:
 	rivers = Marshalls.base64_to_raw(data.river)
 	directions = Marshalls.base64_to_raw(data.down_dir)
 	temperature = Marshalls.base64_to_raw(data.temperature)
-	font = load("res://assets/fonts/Lato-Bold.ttf")
-	serif = SystemFont.new()
-	serif.font_names = PackedStringArray(["Georgia", "DejaVu Serif", "Liberation Serif"])
-	serif.font_italic = true
+	font = preload("res://src/ui_theme.gd").body()
+	# Atlas names use the ledger's heading face; there are only two font families in the game.
+	serif = preload("res://src/ui_theme.gd").heading()
 	_bake_terrain()
 	river_art = Node2D.new()
 	river_art.draw.connect(_draw_rivers)
@@ -69,7 +69,7 @@ func _ready() -> void:
 	life = preload("res://src/village_life.gd").new()
 	add_child(life)
 	life.setup(self)
-	ground_view.ledger.setup(ground_view)
+	ground_view.setup_panels()
 	cam = Camera2D.new()
 	cam.position = Vector2(w, h) * CELL / 2.0
 	add_child(cam)
@@ -80,6 +80,7 @@ func _ready() -> void:
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.draw.connect(_draw_overlay)
+	overlay.theme = preload("res://src/ui_theme.gd").build()
 	layer.add_child(overlay)
 	var places := OptionButton.new()
 	places.position = Vector2(300, 7)
@@ -138,7 +139,15 @@ func _ready() -> void:
 			_travel_to(at)
 	if ground_zoom > 0.0:
 		ground_view.cam.zoom = Vector2.ONE * clampf(ground_zoom, 0.2, 2.0)
+	if not start_map and destination.is_empty() and not start_at:
+		_start_in_valley.call_deferred()
 	_window_setup()
+
+
+## Played normally, the game opens on the village rather than the continent; tests build the scene themselves.
+func _start_in_valley() -> void:
+	if get_tree().current_scene == self and not on_ground:
+		_go_to("Servants' Village", false)
 
 
 func _height(x: int, y: int) -> float:
@@ -197,7 +206,7 @@ func _draw_rivers() -> void:
 				continue
 			var at := (Vector2(x, y) + Vector2.ONE * 0.5) * CELL
 			var end := at + Vector2(DIRECTIONS[directions[i]]) * CELL
-			river_art.draw_line(at, end, Color8(58, 104, 128), minf(2.4, 0.4 + rivers[i] / 10.0 * 0.32) * CELL, true)
+			river_art.draw_line(at, end, Palette.BLUE.darkened(0.15), minf(2.4, 0.4 + rivers[i] / 10.0 * 0.32) * CELL, true)
 
 
 func _resize() -> void:
@@ -324,20 +333,20 @@ func _draw_overlay() -> void:
 		var text: String = feature.name
 		var offset := Vector2(-serif.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, px).x / 2.0, 0)
 		overlay.draw_set_transform(at, angle)
-		overlay.draw_string_outline(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color8(244, 236, 214, 217))
+		overlay.draw_string_outline(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color(Palette.PAPER.lightened(0.45), 0.85))
 		overlay.draw_string(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, BLUE if kind in ["Rivers", "Lakes"] else INK)
 	overlay.draw_set_transform(Vector2.ZERO)
 	for name: String in ["Western Market City", "Eastern Hunting Grounds"]:
 		if not ground.sect.destinations.has(name):
 			continue
 		var at: Vector2 = transform * (Vector2(ground.sect.destinations[name]) * CELL / 16.0)
-		overlay.draw_circle(at, 5, Color8(184, 100, 43))
+		overlay.draw_circle(at, 5, Palette.RED.lightened(0.05))
 		overlay.draw_string(serif, at + Vector2(9, -8), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, INK)
 	var sect_at: Vector2 = transform * (Vector2(ground.sect.center) * CELL / 16.0)
-	overlay.draw_circle(sect_at, 5, Color8(184, 48, 43))
+	overlay.draw_circle(sect_at, 5, Palette.RED)
 	var sect_name: String = ground.sect.data.name
 	var sect_offset := sect_at + Vector2(9, -8)
-	overlay.draw_string_outline(serif, sect_offset, sect_name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, 4, Color8(244, 236, 214))
+	overlay.draw_string_outline(serif, sect_offset, sect_name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, 4, Palette.PAPER.lightened(0.45))
 	overlay.draw_string(serif, sect_offset, sect_name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, INK)
 	if _inside(selected):
 		var at: Vector2 = transform * ((Vector2(selected) + Vector2.ONE * 0.5) * CELL)
@@ -346,29 +355,29 @@ func _draw_overlay() -> void:
 		overlay.draw_line(at - Vector2(0, 11), at + Vector2(0, 11), GOLD, 1)
 		var card := Rect2(size.x - 430, 60, 412, 160)
 		overlay.draw_style_box(_box(), card)
-		overlay.draw_string(font, card.position + Vector2(12, 24), "SELECTED · %d, %d" % [selected.x, selected.y], HORIZONTAL_ALIGNMENT_LEFT, -1, 17, GOLD)
+		overlay.draw_string(font, card.position + Vector2(12, 24), "Selected · %d, %d" % [selected.x, selected.y], HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.TITLE, INK)
 		var lines := _info(selected).replace(" · ", "\n").split("\n")
 		for i in lines.size():
-			overlay.draw_string(font, card.position + Vector2(12, 46 + i * 16), lines[i], HORIZONTAL_ALIGNMENT_LEFT, 390, 14, Color(0.95, 0.92, 0.85))
+			overlay.draw_string(font, card.position + Vector2(12, 46 + i * 16), lines[i], HORIZONTAL_ALIGNMENT_LEFT, 390, Palette.SMALL, Palette.INK_SOFT)
 	overlay.draw_style_box(_box(), Rect2(0, 0, size.x, 46))
-	overlay.draw_string(font, Vector2(18, 30), str(data.continent), HORIZONTAL_ALIGNMENT_LEFT, -1, 23, GOLD)
-	overlay.draw_string(font, Vector2(size.x - 420, 29), "Seed %s" % data.seed, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color(0.95, 0.92, 0.85))
+	overlay.draw_string(font, Vector2(18, 30), str(data.continent), HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.TITLE, INK)
+	overlay.draw_string(font, Vector2(size.x - 420, 29), "Seed %s" % data.seed, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, Palette.INK_SOFT)
 	overlay.draw_style_box(_box(), Rect2(0, size.y - 42, size.x, 42))
-	overlay.draw_string(font, Vector2(18, size.y - 16), _info(_mouse_cell()), HORIZONTAL_ALIGNMENT_LEFT, size.x - 36, 17, Color(0.95, 0.92, 0.85))
+	overlay.draw_string(font, Vector2(18, size.y - 16), _info(_mouse_cell()), HORIZONTAL_ALIGNMENT_LEFT, size.x - 36, Palette.BODY, INK)
 	var scale_cells := 50.0 if cam.zoom.x < 2.0 else (5.0 if cam.zoom.x < 12.0 else 0.25)
 	var length := scale_cells * CELL * cam.zoom.x
 	var base := Vector2(24, size.y - 66)
 	overlay.draw_style_box(_box(), Rect2(base - Vector2(10, 28), Vector2(length + 20, 42)))
-	overlay.draw_line(base, base + Vector2(length, 0), GOLD, 2)
+	overlay.draw_line(base, base + Vector2(length, 0), INK, 2)
 	for x in [0.0, length]:
-		overlay.draw_line(base + Vector2(x, -5), base + Vector2(x, 3), GOLD, 2)
-	overlay.draw_string(font, base + Vector2(0, -9), "%.1f li" % (scale_cells * 10.0), HORIZONTAL_ALIGNMENT_LEFT, -1, 14, GOLD)
+		overlay.draw_line(base + Vector2(x, -5), base + Vector2(x, 3), INK, 2)
+	overlay.draw_string(font, base + Vector2(0, -9), "%.1f li" % (scale_cells * 10.0), HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, INK)
 
 
 func _box() -> StyleBoxFlat:
 	var box := StyleBoxFlat.new()
 	box.bg_color = PANEL
-	box.border_color = Color(0.76, 0.58, 0.3)
+	box.border_color = Palette.LINE
 	box.set_border_width_all(1)
 	box.set_content_margin_all(6)
 	return box

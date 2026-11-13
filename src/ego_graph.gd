@@ -2,9 +2,10 @@ extends Control
 ## Small knowledge graph around one person: relationships, family, lineage or skills.
 ## Laid out once when built (at most ~60 nodes), then only redrawn; clicking a person node calls `opened`.
 signal opened(person: int)
-const EDGE_COLORS := {"parent": Color("a87b2e"), "spouse": Color("b8507a"), "sibling": Color("c49a52"), "master": Color("3f8a64"),
-	"disciple": Color("3f8a64"), "friend": Color("4f78a8"), "enemy": Color("b5483a"), "skill": Color("8a7a62"), "branch": Color("b9ab92")}
-const REALM_COLORS := [Color("8f8272"), Color("c98a3e"), Color("3f9a72"), Color("4f78a8"), Color("8a5fb0"), Color("c9a83a")]
+const Palette = preload("res://src/palette.gd")
+const EDGE_COLORS := {"parent": Palette.BRASS, "spouse": Palette.PLUM, "sibling": Palette.GOLD, "master": Palette.JADE,
+	"disciple": Palette.JADE, "friend": Palette.BLUE, "enemy": Palette.RED, "skill": Palette.INK_SOFT, "branch": Palette.LINE}
+const REALM_COLORS := [Palette.INK_SOFT, Palette.BRASS, Palette.JADE, Palette.BLUE, Palette.PLUM, Palette.GOLD]
 const MAX_NODES := 60
 var population: RefCounted
 var center := -1
@@ -32,7 +33,7 @@ func build(store: RefCounted, person: int, view: String) -> void:
 	else: _layered_layout(view == "Skills")
 	queue_redraw()
 
-func _node(key: String, label: String, person: int = -1, color: Color = Color("8f8272"), radius: float = 7.0) -> int:
+func _node(key: String, label: String, person: int = -1, color: Color = Palette.INK_SOFT, radius: float = 7.0) -> int:
 	if index.has(key): return index[key]
 	if nodes.size() >= MAX_NODES: return -1
 	index[key] = nodes.size()
@@ -112,19 +113,19 @@ func _skills() -> void:
 	for id: String in ordered.slice(0, 12):
 		var domain: Dictionary = catalogue.domains[catalogue.domain_for(id)]
 		var discipline: String = catalogue.discipline_for(id)
-		var sphere := _node("sphere:" + str(domain.sphere), str(catalogue.spheres[domain.sphere].name), -1, Color("6e5a3c"), 8)
+		var sphere := _node("sphere:" + str(domain.sphere), str(catalogue.spheres[domain.sphere].name), -1, Palette.INK_SOFT, 8)
 		_edge(me, sphere, "skill")
-		var dn := _node("domain:" + str(domain.id), str(domain.name), -1, Color("8a6d40"), 7)
+		var dn := _node("domain:" + str(domain.id), str(domain.name), -1, Palette.BRASS, 7)
 		_edge(sphere, dn, "skill")
 		var level: int = int(skills.get(discipline, {"level": 0}).level)
-		var di := _node(discipline, "%s %d" % [catalogue.disciplines[discipline].name, level], -1, Color("3f9a72"), 5 + level / 6.0)
+		var di := _node(discipline, "%s %d" % [catalogue.disciplines[discipline].name, level], -1, Palette.JADE, 5 + level / 6.0)
 		_edge(dn, di, "skill")
 		if id != discipline:
-			_edge(di, _node(id, "%s %d" % [catalogue.skills[id].name, skills[id].level], -1, Color("4f78a8"), 5 + int(skills[id].level) / 6.0), "skill")
+			_edge(di, _node(id, "%s %d" % [catalogue.skills[id].name, skills[id].level], -1, Palette.BLUE, 5 + int(skills[id].level) / 6.0), "skill")
 		# Branches within reach: specialisations unlocking up to five levels above current competency.
 		for spec: Dictionary in catalogue.disciplines[discipline].get("specialisations", []):
 			if skills.has(spec.id) or int(spec.unlock_level) > level + 5: continue
-			var sn := _node(spec.id, "%s (at %d)" % [spec.name, spec.unlock_level], -1, Color("b9ab92"), 4)
+			var sn := _node(spec.id, "%s (at %d)" % [spec.name, spec.unlock_level], -1, Palette.LINE, 4)
 			if sn >= 0:
 				nodes[sn].dim = true
 				_edge(di, sn, "branch")
@@ -219,10 +220,10 @@ func _transform() -> Transform2D:
 	return Transform2D(0, Vector2(scale_by, scale_by), 0, size / 2 - Vector2(label_room / 2, 0) - bounds.get_center() * scale_by)
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), Color("f3ead6"))
-	draw_rect(Rect2(Vector2.ZERO, size), Color("c9b994"), false, 1)
+	draw_rect(Rect2(Vector2.ZERO, size), Palette.PAPER_LIGHT)
+	draw_rect(Rect2(Vector2.ZERO, size), Palette.LINE, false, 1)
 	if nodes.is_empty():
-		draw_string(get_theme_default_font(), Vector2(12, 24), "Nothing to show yet", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("6b5d4a"))
+		draw_string(get_theme_default_font(), Vector2(12, 24), "Nothing to show yet", HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, Palette.INK_SOFT)
 		return
 	var t := _transform()
 	var font := get_theme_default_font()
@@ -247,12 +248,12 @@ func _draw() -> void:
 		if n.dim: color.a = .55
 		if fade: color.a = .25
 		draw_circle(at, n.r, color)
-		if n.person == center: draw_arc(at, n.r + 3, 0, TAU, 24, Color("3a2e20"), 2, true)
-		var ink := Color("3a2e20", .3 if fade else (.6 if n.dim else 1.0))
+		if n.person == center: draw_arc(at, n.r + 3, 0, TAU, 24, Palette.INK, 2, true)
+		var ink := Color(Palette.INK, .3 if fade else (.6 if n.dim else 1.0))
 		if labels_above:
-			var width := font.get_string_size(n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
-			draw_string(font, at + Vector2(-width / 2, -n.r - 4), n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, ink)
-		else: draw_string(font, at + Vector2(n.r + 3, 4), n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, ink)
+			var width := font.get_string_size(n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL).x
+			draw_string(font, at + Vector2(-width / 2, -n.r - 4), n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, ink)
+		else: draw_string(font, at + Vector2(n.r + 3, 4), n.label, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, ink)
 
 func _node_at(point: Vector2) -> int:
 	var t := _transform()

@@ -22,6 +22,10 @@ var paused := false
 var last_minute := -1
 var followed := -1
 var atlas: Texture2D
+var person_art: Array[ImageTexture] = []
+var child_art: Array[ImageTexture] = []
+## Population id of the villager the card is showing, ringed on the map.
+var selected := -1
 var heights := PackedInt32Array()
 var square: Vector2i
 var well: Vector2i
@@ -30,6 +34,7 @@ var food_patches: Array[Dictionary] = []
 var material_patches: Array[Dictionary] = []
 var material_places: Dictionary = {}
 var shrine: Vector2i
+const Palette = preload("res://src/palette.gd")
 
 
 func setup(map: Node2D) -> void:
@@ -37,7 +42,12 @@ func setup(map: Node2D) -> void:
 	sect = map.ground.sect
 	z_index = 1000
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	atlas = load("res://assets/kenney/tiny-farm/Tilemap/tilemap_packed.png")
+	var sheet := Palette.atlas("tiny-farm", Palette.THING)
+	atlas = ImageTexture.create_from_image(sheet)
+	# Everyone shares one texel size; a child is the same art with a shorter body.
+	for frame in [108, 109]:
+		person_art.append(ImageTexture.create_from_image(Palette.outlined(sheet, frame)))
+		child_art.append(ImageTexture.create_from_image(Palette.outlined(sheet, frame, [4, 11, 12])))
 	grid.region = Rect2i(sect.center + sect.BOUNDS.position, sect.BOUNDS.size)
 	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	grid.update()
@@ -105,7 +115,7 @@ func setup(map: Node2D) -> void:
 			work = nearest(sect.center + Vector2i(80 + n % 2 * 8, 245))
 		else:
 			work = nearest(square + Vector2i(n % 4 * 2 - 3, n % 3 * 2))
-		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": rng.randi_range(12, 16) if job == 8 else rng.randi_range(18, 60), "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.12, 0.32), rng.randf_range(0.55, 0.85))})
+		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": rng.randi_range(12, 16) if job == 8 else rng.randi_range(18, 60), "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.1, 0.28), rng.randf_range(0.85, 1.0))})
 	var trades := ["gardener", "gardener", "orchard keeper", "herder", "herder", "fisher", "hunter", "cook / pickler", "mushroom grower", "cook / pickler"]
 	# Keep the first eight adults on rice, and the two children at home.
 	var facilities := ["garden", "garden", "orchard", "herd", "herd", "fishery", "hunt", "kitchen", "logs", "kitchen"]
@@ -319,14 +329,16 @@ func _draw() -> void:
 			continue
 		if drawn >= WALKER_LIMIT: break
 		drawn += 1
-		var size := Vector2.ONE * (22.4 if p.kind == 8 else 32.0)
+		var child: bool = p.kind == 8
 		var phase := minutes * 5 + int(p.age)
-		at.y -= absf(sin(phase)) * 1.5
-		var index := 108 if sin(phase * 0.3) > 0 else 109
-		draw_texture_rect_region(atlas, Rect2(at - Vector2(size.x / 2, size.y), size), Rect2((index % 12) * 16, (index / 12) * 16, 16, 16), p.tint)
-
+		if int(p.get("id", -1)) == selected:
+			draw_arc(at - Vector2(0, 2), 15, 0, TAU, 24, Palette.OUTLINE, 5)
+			draw_arc(at - Vector2(0, 2), 15, 0, TAU, 24, Palette.GOLD, 3)
+		at.y -= roundf(absf(sin(phase)))
+		var frame := 0 if sin(phase * 0.3) > 0 else 1
+		draw_texture_rect((child_art if child else person_art)[frame], Rect2(at - Vector2(18, 34), Vector2(36, 36)), false, p.tint)
 		if p.get("carrying", false):
-			draw_texture_rect_region(atlas, Rect2(at - Vector2(8, size.y + 12), Vector2(16, 16)), Rect2(0, 128, 16, 16))
+			draw_texture_rect_region(atlas, Rect2(at - Vector2(16, (28 if child else 34) + 26), Vector2(32, 32)), Rect2(0, 128, 16, 16))
 
 
 func _feet_before(a: Dictionary, b: Dictionary) -> bool:
@@ -338,6 +350,32 @@ func hover(at: Vector2) -> int:
 		if not people[n].hidden and Rect2(point(people[n]) - Vector2(14, 32), Vector2(28, 36)).has_point(at):
 			return n
 	return -1
+
+
+## Whoever stands under the pointer, as a population id. Walkers first, then the neighbours drawn around them.
+func pick(at: Vector2) -> int:
+	var best := -1
+	var feet := -INF
+	for p: Dictionary in people + nearby_views.values():
+		if p.hidden: continue
+		var here := point(p)
+		if Rect2(here - Vector2(18, 36), Vector2(36, 42)).has_point(at) and here.y > feet:
+			feet = here.y
+			best = int(p.get("id", -1))
+	return best
+
+
+func walker_of(id: int) -> int:
+	for n in people.size():
+		if int(people[n].id) == id: return n
+	return -1
+
+
+## Where a person stands in the world, whether or not they are being drawn.
+func place_of(id: int) -> Vector2:
+	var walker := walker_of(id)
+	if walker >= 0: return point(people[walker])
+	return point({"pos": population.locations[id]})
 
 
 func activity_text(p: Dictionary) -> String:
@@ -496,59 +534,59 @@ func _draw_food_places(area: Rect2) -> void:
 		var at := (_food_point(patch.tiles[0]) + _food_point(patch.tiles[-1])) * 0.5 if not patch.tiles.is_empty() else _food_point(patch.tile)
 		if not area.grow(500).has_point(at):
 			continue
-		var brown := Color("805731")
+		var brown := Palette.BRASS.darkened(0.3)
 		match str(patch.kind):
 			"garden":
 				for tile: Vector2i in patch.tiles:
 					var pos := _food_point(tile)
-					draw_rect(Rect2(pos - Vector2(16, 16), Vector2(32, 32)), Color("936440"))
+					draw_rect(Rect2(pos - Vector2(16, 16), Vector2(32, 32)), Palette.BRASS.darkened(0.2))
 					for row in 3:
 						for col in 3:
 							var crop := Color(["78a64c", "c1b476", "c68d43", "598745"][posmod(tile.x + tile.y, 4)])
-							draw_rect(Rect2(pos + Vector2(col * 10 - 13, row * 10 - 12), Vector2(7, 5)), crop if economy.season() != 3 else Color("b3a577"))
+							draw_rect(Rect2(pos + Vector2(col * 10 - 13, row * 10 - 12), Vector2(7, 5)), crop if economy.season() != 3 else Palette.EARTH.darkened(0.05))
 			"orchard":
 				for i in patch.tiles.size():
 					if i % 12 % 2 != 0 or i / 12 % 2 != 0:
 						continue
 					var pos := _food_point(patch.tiles[i]) + Vector2(1, 32)
 					draw_rect(Rect2(pos - Vector2(3, 20), Vector2(6, 24)), brown)
-					draw_circle(pos - Vector2(0, 29), 17, Color("527b43") if economy.season() != 3 else Color("82785d"))
+					draw_circle(pos - Vector2(0, 29), 17, Palette.GREEN.darkened(0.05) if economy.season() != 3 else Palette.PAPER.darkened(0.45))
 					if economy.season() != 3:
 						for j in 5:
-							draw_circle(pos + Vector2(j * 6 - 12, -28 + j % 2 * 7), 3, Color("f2c7cd") if economy.season() == 0 else Color("e8a268"))
+							draw_circle(pos + Vector2(j * 6 - 12, -28 + j % 2 * 7), 3, Palette.RED.lightened(0.7) if economy.season() == 0 else Palette.GOLD.lightened(0.2))
 			"herd", "fishery":
 				for tile: Vector2i in patch.tiles:
 					var pos := _food_point(tile)
-					draw_rect(Rect2(pos - Vector2(15, 15), Vector2(30, 30)), Color("61949b") if patch.kind == "fishery" else Color("95744c"))
+					draw_rect(Rect2(pos - Vector2(15, 15), Vector2(30, 30)), Palette.BLUE.lightened(0.05) if patch.kind == "fishery" else Palette.BRASS.darkened(0.15))
 					draw_line(pos - Vector2(15, 14), pos + Vector2(15, -14), brown, 2)
 					draw_line(pos - Vector2(14, 15), pos + Vector2(-14, 15), brown, 2)
 					if patch.kind == "herd":
-						draw_circle(pos, 5, Color("d4a599") if tile.x % 2 == 0 else Color("efdfbd"))
+						draw_circle(pos, 5, Palette.RED.lightened(0.5) if tile.x % 2 == 0 else Palette.PAPER.lightened(0.1))
 					else:
-						draw_line(pos - Vector2(12, 12), pos + Vector2(12, 12), Color("c4c3a0"), 1)
-				draw_rect(Rect2(at - Vector2(26, 18), Vector2(52, 36)), Color("61949b") if patch.kind == "fishery" else Color("95744c"))
+						draw_line(pos - Vector2(12, 12), pos + Vector2(12, 12), Palette.GRASS.lightened(0.3), 1)
+				draw_rect(Rect2(at - Vector2(26, 18), Vector2(52, 36)), Palette.BLUE.lightened(0.05) if patch.kind == "fishery" else Palette.BRASS.darkened(0.15))
 				for i in 5:
 					var pos := at + Vector2(i * 10 - 22, -16)
-					draw_line(pos, pos + Vector2(0, 32), brown if patch.kind == "herd" else Color("c4c3a0"), 2)
+					draw_line(pos, pos + Vector2(0, 32), brown if patch.kind == "herd" else Palette.GRASS.lightened(0.3), 2)
 				if patch.kind == "herd":
-					draw_rect(Rect2(at + Vector2(-18, -5), Vector2(15, 9)), Color("d4a599"))
-					draw_rect(Rect2(at + Vector2(8, -4), Vector2(7, 6)), Color("efdfbd"))
-					draw_rect(Rect2(at + Vector2(28, -5), Vector2(25, 18)), Color("61949b"))
-					draw_rect(Rect2(at + Vector2(33, 0), Vector2(8, 5)), Color("eee4bf"))
+					draw_rect(Rect2(at + Vector2(-18, -5), Vector2(15, 9)), Palette.RED.lightened(0.5))
+					draw_rect(Rect2(at + Vector2(8, -4), Vector2(7, 6)), Palette.PAPER.lightened(0.1))
+					draw_rect(Rect2(at + Vector2(28, -5), Vector2(25, 18)), Palette.BLUE.lightened(0.05))
+					draw_rect(Rect2(at + Vector2(33, 0), Vector2(8, 5)), Palette.PAPER.lightened(0.15))
 					draw_rect(Rect2(at + Vector2(-18, -33), Vector2(22, 13)), brown)
 				else:
 					for i in 3:
-						draw_line(at + Vector2(-24, i * 10 - 12), at + Vector2(24, i * 10 - 12), Color("c4c3a0"), 1)
+						draw_line(at + Vector2(-24, i * 10 - 12), at + Vector2(24, i * 10 - 12), Palette.GRASS.lightened(0.3), 1)
 			"logs":
 				for i in 4:
 					var pos := at + Vector2(i % 2 * 24, i / 2 * 16)
 					draw_rect(Rect2(pos, Vector2(20, 7)), brown)
-					draw_rect(Rect2(pos + Vector2(5, -4), Vector2(7, 5)), Color("c0aa89"))
+					draw_rect(Rect2(pos + Vector2(5, -4), Vector2(7, 5)), Palette.PAPER.darkened(0.2))
 			"kitchen":
-				draw_rect(Rect2(at - Vector2(22, 25), Vector2(44, 25)), Color("bca174"))
-				draw_rect(Rect2(at - Vector2(26, 32), Vector2(52, 9)), Color("795245"))
+				draw_rect(Rect2(at - Vector2(22, 25), Vector2(44, 25)), Palette.EARTH.darkened(0.05))
+				draw_rect(Rect2(at - Vector2(26, 32), Vector2(52, 9)), Palette.INK_SOFT.lightened(0.05))
 				for i in 5:
-					draw_rect(Rect2(at + Vector2(i * 9 - 20, 4), Vector2(6, 9)), Color("a97945"))
+					draw_rect(Rect2(at + Vector2(i * 9 - 20, 4), Vector2(6, 9)), Palette.BRASS.darkened(0.05))
 
 			"hunt":
 				# A game drying rack beside the existing lodge destination.
@@ -556,8 +594,8 @@ func _draw_food_places(area: Rect2) -> void:
 					draw_rect(Rect2(at + Vector2(x, -28), Vector2(3, 32)), brown)
 				draw_line(at + Vector2(-20, -26), at + Vector2(23, -26), brown, 3)
 				for i in 4:
-					draw_line(at + Vector2(i * 10 - 14, -26), at + Vector2(i * 10 - 14, -19), Color("c3b492"), 1)
-					draw_rect(Rect2(at + Vector2(i * 10 - 17, -19), Vector2(6, 11)), Color("b4775e"))
+					draw_line(at + Vector2(i * 10 - 14, -26), at + Vector2(i * 10 - 14, -19), Palette.PAPER.darkened(0.2), 1)
+					draw_rect(Rect2(at + Vector2(i * 10 - 17, -19), Vector2(6, 11)), Palette.RED.lightened(0.25))
 
 func _setup_material_places() -> void:
 	var occupied: Dictionary = {}
@@ -585,56 +623,56 @@ func _draw_material_places(area: Rect2) -> void:
 	for patch: Dictionary in material_patches:
 		var at := (_food_point(patch.tiles[0]) + _food_point(patch.tiles[-1])) * 0.5
 		if not area.grow(500).has_point(at): continue
-		var timber := Color("795336")
-		var rock := Color("99988b")
+		var timber := Palette.BRASS.darkened(0.35)
+		var rock := Palette.STONE.darkened(0.15)
 		for tile: Vector2i in patch.tiles:
-			draw_rect(Rect2(_food_point(tile) - Vector2(16, 16), Vector2(32, 32)), Color("8d785b"))
+			draw_rect(Rect2(_food_point(tile) - Vector2(16, 16), Vector2(32, 32)), Palette.INK_SOFT.lightened(0.2))
 		match str(patch.kind):
 			"woodcutting":
 				for x in [-65, 65]:
 					draw_rect(Rect2(at + Vector2(x - 8, -30), Vector2(16, 14)), timber)
-					draw_circle(at + Vector2(x, -30), 9, Color("c69b69"))
+					draw_circle(at + Vector2(x, -30), 9, Palette.BRASS.lightened(0.15))
 					draw_arc(at + Vector2(x, -30), 5, 0, TAU, 12, timber, 1)
 				for i in 5:
 					var pos := at + Vector2(i * 24 - 50, i % 2 * 24)
 					draw_rect(Rect2(pos, Vector2(25, 10)), timber)
-					draw_circle(pos, 6, Color("c69b69"))
+					draw_circle(pos, 6, Palette.BRASS.lightened(0.15))
 				draw_line(at + Vector2(-20, -25), at + Vector2(20, -25), timber, 6)
 				for x in [-15, 15]: draw_line(at + Vector2(x, -25), at + Vector2(x * 1.5, 0), timber, 4)
 			"quarry", "mine":
 				draw_rect(Rect2(at + Vector2(-60, -45), Vector2(120, 30)), rock)
 				for i in 4: draw_rect(Rect2(at + Vector2(i * 26 - 50, 10), Vector2(22, 16)), rock.lightened(0.15))
 				if patch.kind == "mine":
-					draw_rect(Rect2(at + Vector2(-18, -42), Vector2(36, 32)), Color("292c2d"))
+					draw_rect(Rect2(at + Vector2(-18, -42), Vector2(36, 32)), Palette.PLUM.darkened(0.65))
 					for x in [-40, 20]:
 						draw_rect(Rect2(at + Vector2(x, 0), Vector2(25, 14)), timber)
-						draw_circle(at + Vector2(x + 5, 16), 4, Color("454848"))
-						draw_circle(at + Vector2(x + 20, 16), 4, Color("454848"))
+						draw_circle(at + Vector2(x + 5, 16), 4, Palette.STONE.darkened(0.6))
+						draw_circle(at + Vector2(x + 20, 16), 4, Palette.STONE.darkened(0.6))
 						draw_circle(at + Vector2(x + 12, 1), 6, rock.darkened(0.25))
 				else:
 					draw_line(at + Vector2(35, -65), at + Vector2(15, 5), timber, 4)
 					draw_line(at + Vector2(35, -65), at + Vector2(60, 5), timber, 4)
-					draw_line(at + Vector2(35, -65), at + Vector2(35, -5), Color("d3c7a3"), 2)
+					draw_line(at + Vector2(35, -65), at + Vector2(35, -5), Palette.PAPER.darkened(0.1), 2)
 			"clay":
-				_draw_material_pit(at, Color("aa7654"))
+				_draw_material_pit(at, Palette.BRASS.darkened(0.05))
 			"kiln", "smith":
 				for x in [-35, 25]:
-					draw_circle(at + Vector2(x, 0), 22, Color("55554c") if x < 0 and patch.kind == "kiln" else Color("aa7352"))
-					draw_rect(Rect2(at + Vector2(x - 7, -8), Vector2(14, 18)), Color("302e2c"))
-					draw_rect(Rect2(at + Vector2(x - 3, 0), Vector2(6, 8)), Color("e29b45"))
+					draw_circle(at + Vector2(x, 0), 22, Palette.STONE.darkened(0.55) if x < 0 and patch.kind == "kiln" else Palette.BRASS.darkened(0.05))
+					draw_rect(Rect2(at + Vector2(x - 7, -8), Vector2(14, 18)), Palette.STONE.darkened(0.7))
+					draw_rect(Rect2(at + Vector2(x - 3, 0), Vector2(6, 8)), Palette.GOLD)
 			"weaver":
 				draw_rect(Rect2(at + Vector2(-32, -60), Vector2(64, 30)), timber)
-				draw_rect(Rect2(at + Vector2(-37, -65), Vector2(74, 8)), Color("8e6547"))
+				draw_rect(Rect2(at + Vector2(-37, -65), Vector2(74, 8)), Palette.BRASS.darkened(0.2))
 				for i in 12:
 					var pos := at + Vector2(i % 6 * 20 - 60, i / 6 * 24)
-					draw_line(pos, pos - Vector2(0, 26), Color("648348"), 3)
-					draw_line(pos - Vector2(8, 15), pos + Vector2(8, -22), Color("789950"), 3)
+					draw_line(pos, pos - Vector2(0, 26), Palette.GREEN.lightened(0.05), 3)
+					draw_line(pos - Vector2(8, 15), pos + Vector2(8, -22), Palette.GREEN.lightened(0.15), 3)
 				draw_rect(Rect2(at + Vector2(-25, -58), Vector2(50, 22)), timber)
-				for i in 10: draw_line(at + Vector2(i * 4 - 18, -55), at + Vector2(i * 4 - 18, -37), Color("e2d3a2"), 1)
+				for i in 10: draw_line(at + Vector2(i * 4 - 18, -55), at + Vector2(i * 4 - 18, -37), Palette.PAPER.darkened(0.05), 1)
 			"tanner":
 				for x in [-40, 0, 40]:
 					draw_rect(Rect2(at + Vector2(x - 12, -30), Vector2(24, 38)), timber, false, 3)
-					draw_rect(Rect2(at + Vector2(x - 8, -25), Vector2(16, 26)), Color("b59a72"))
+					draw_rect(Rect2(at + Vector2(x - 8, -25), Vector2(16, 26)), Palette.EARTH.darkened(0.1))
 
 func _draw_material_pit(at: Vector2, colour: Color) -> void:
 	draw_set_transform(at, 0, Vector2(2, 1))
@@ -652,7 +690,7 @@ func _refresh_population_views() -> void:
 	for person: int in population.nearby(area, WALKER_LIMIT):
 		if person < people.size(): continue
 		if nearby_views.size() + people.size() >= WALKER_LIMIT: break
-		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Color("a6a078"), "carrying": false}
+		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Palette.PAPER, "carrying": false}
 
 func _close_archive() -> void:
 	var society: RefCounted = population.society if population else null
