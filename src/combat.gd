@@ -183,6 +183,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		if them.will >= NEVER or them.h < HARM_AT[mini(4, them.will)] or t < them.retry: continue
 		var sp: float = running.call(j, t)
 		var chance: float = sp / (sp + running.call(i, t))
+		chance *= float(opt.get("escape_cover", 1.0))
 		# People who can't outrun another person yield; so do the proud. Beasts and stone never do.
 		if people.call(j) and people.call(i) and (chance < 0.4 or them.s.motive == "pride"):
 			events.append({"t": "yield", "time": t + 0.2, "i": j, "chance": chance, "harm": [f[0].h, f[1].h]})
@@ -298,3 +299,8 @@ static func story(r: Dictionary) -> String:
 		"escape": return "%s; %s ran from %s, %s" % [lead, loser, winner, hurt]
 		"death": return "%s; %s fell" % [lead, loser]
 	return lead
+
+
+## Running pace before breath runs out; forest undergrowth slows people.
+static func running(fighter: Dictionary, forest: bool = false) -> float:
+	return float(fighter.speed) * (0.75 if forest and int(fighter.person) >= 0 else 1.0)

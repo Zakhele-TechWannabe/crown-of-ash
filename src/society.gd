@@ -23,6 +23,9 @@ var site := PackedByteArray()
 var injury_until := PackedInt32Array()
 var fights: Array[Dictionary] = []
 var fight_count := 0
+var breaches: Array[Dictionary] = []
+var breach_count := 0
+var law: RefCounted = null
 var bottleneck_since := PackedInt32Array()
 var damage := PackedFloat32Array()
 var last_birth := PackedInt32Array()
@@ -129,6 +132,11 @@ func record_fight(fight: Dictionary) -> void:
 	fights.append(fight)
 	fight_count += 1
 	if fights.size() > 64: fights.pop_front()
+
+func record_breach(record: Dictionary) -> void:
+	breaches.append(record)
+	breach_count += 1
+	if breaches.size() > 64: breaches.pop_front()
 
 ## Death by violence or accident. The family grieves; a killer becomes their enemy, a grudge their children inherit.
 func die(person: int, kind: String, words: String, killer: int = -1) -> void:
@@ -484,6 +492,7 @@ var faction_pending := false
 
 func begin_tick(on_day: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
+	if law: law.advance(self, on_day)
 	if on_day - last_week < int(events.week_days) or social_pending: return
 	social_days = on_day - last_week
 	last_week = on_day

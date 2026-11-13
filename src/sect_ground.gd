@@ -16,6 +16,8 @@ var ramps: Dictionary = {}
 ## Houses and halls drawn standing (BuildingArt), sorted with people and trees: {origin, w, h, kind, variant}.
 var standing: Array[Dictionary] = []
 var standing_tiles: Dictionary = {}
+## Legal boundary, independent of walk solidity and sprite footprints.
+var grounds: Dictionary = {}
 var boundary_art: Dictionary = {}
 var heights := PackedFloat32Array()
 var art := PackedInt32Array()
@@ -156,6 +158,7 @@ func setup(is_dry: Callable) -> void:
 					heights[i] = 0.5 + levels[i] * 0.02
 	for stamp: Dictionary in data.get("stamps", []):
 		_stamp(center + Vector2i(int(stamp.at[0]), int(stamp.at[1])), int(stamp.tile))
+	_build_grounds()
 	_register_props()
 	for i in count:
 		no_trees[i] = int(surfaces[i] != 0)
@@ -241,6 +244,10 @@ func _building(b: Dictionary) -> void:
 	if kind == "marker":
 		return
 	if kind == "prop":
+		if data.has("tiers") and int(r[1]) >= 156:
+			standing.append({"origin": origin, "w": w, "h": h, "kind": "well", "variant": 0})
+			for y in h:
+				for x in w: standing_tiles[origin + Vector2i(x, y)] = true
 		_stamp(origin, 95)
 		return
 	if kind == "wall":
@@ -449,3 +456,57 @@ func _blit(image: Image, source: Image, index: int, pos: Vector2i) -> void:
 
 func far_color(tile: Vector2i) -> Color:
 	return far_colors[index_at(tile)]
+
+
+## The built terraces, including their stairs and the lateral gate approaches.
+func _build_grounds() -> void:
+	grounds.clear()
+	if not data.has("tiers"): return
+	var north := bounds.end.y
+	var south := bounds.position.y
+	for tier: Dictionary in data.tiers:
+		north = mini(north, int(tier.y0))
+		south = maxi(south, int(tier.y1))
+	var edges: Dictionary = {}
+	for y in bounds.size.y:
+		for x in bounds.size.x:
+			var at := center + bounds.position + Vector2i(x, y)
+			var i := index_at(at)
+			if at.y - center.y <= south and levels[i] >= 0:
+				grounds[at] = true
+				var row := at.y - center.y
+				if not edges.has(row): edges[row] = Vector2i(at.x, at.x)
+				edges[row] = Vector2i(mini(edges[row].x, at.x), maxi(edges[row].y, at.x))
+	# A cave or hall can overhang the natural terrace envelope.
+	for building: Dictionary in data.get("buildings", []):
+		var r: Array = building.rect
+		if int(r[1]) < north or int(r[1]) > south: continue
+		for y in range(int(r[1]), mini(south + 1, int(r[1]) + int(r[3]))):
+			for x in range(int(r[0]), int(r[0]) + int(r[2])):
+				var at := center + Vector2i(x, y)
+				grounds[at] = true
+				if not edges.has(y): edges[y] = Vector2i(at.x, at.x)
+				edges[y] = Vector2i(mini(edges[y].x, at.x), maxi(edges[y].y, at.x))
+	# Bank faces between shelves belong to the same grounds, even where nobody can walk.
+	for y in range(north, south + 1):
+		var above := y
+		var below := y
+		while above >= north and not edges.has(above): above -= 1
+		while below <= south and not edges.has(below): below += 1
+		if above < north or below > south: continue
+		var blend := float(y - above) / maxf(1, below - above)
+		var left := roundi(lerpf(edges[above].x, edges[below].x, blend))
+		var right := roundi(lerpf(edges[above].y, edges[below].y, blend))
+		for x in range(left, right + 1): grounds[Vector2i(x, center.y + y)] = true
+	var law: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/law.json"))
+	for r: Array in law.grounds_approaches:
+		for y in range(int(r[1]), int(r[1]) + int(r[3])):
+			for x in range(int(r[0]), int(r[0]) + int(r[2])): grounds[center + Vector2i(x, y)] = true
+	for stair: Dictionary in data.get("stairs", []):
+		var r: Array = stair.rect
+		for y in range(int(r[1]), mini(south + 1, int(r[1]) + int(r[3]))):
+			for x in range(int(r[0]), int(r[0]) + int(r[2])): grounds[center + Vector2i(x, y)] = true
+
+
+func inside_grounds(at: Vector2i) -> bool:
+	return grounds.has(at)

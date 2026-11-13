@@ -240,6 +240,14 @@ func _alternatives(options: Array[Dictionary], chosen: Dictionary) -> Array:
 
 ## Score = product of the brain's questions × the heart's push × mood momentum × the life goal's pull.
 func _option(p: int, kind: int, target: int, questions: Array, push: Dictionary, urge: PackedFloat32Array) -> Dictionary:
+	var society: RefCounted = society_ref.get_ref()
+	var trip := "day"
+	if society.law and (kind == Option.CULTIVATE or (kind == Option.GATHER and society.temper.wanted_medicine(p) == "seven_leaf")):
+		var law: RefCounted = society.law
+		var caution := clampf(float(law.config.caution_base) + float(law.config.caution_base) * emotion[p * 4 + AFRAID] - float(law.config.drive_discount) * (urge[AMBITION] + urge[SPITE] + urge[PRIDE] + minf(society.population.hunger[p], 1.0)), 0.0, 1.0)
+		trip = "night" if caution >= float(law.config.night_caution) else "day"
+		var place := "spring" if kind == Option.CULTIVATE and society.realm[p] < 2 else ("peak" if kind == Option.CULTIVATE else "seven_leaf")
+		questions.append(["safe from the guardians", 1.0 - law.danger(society, p, place, trip == "night") * caution])
 	var score := 1.0
 	for q: Array in questions: score *= clampf(q[1], 0.0, 1.0)
 	var heart_push := 1.0
@@ -270,7 +278,7 @@ func _option(p: int, kind: int, target: int, questions: Array, push: Dictionary,
 	if grief >= .3: reasons.append(["grief", snappedf(grief, .01)])
 	if joy >= .3: reasons.append(["joy", snappedf(joy, .01)])
 	if fear >= .3: reasons.append(["fear", snappedf(fear, .01)])
-	return {"option": kind, "target": target, "score": score, "reasons": reasons}
+	return {"option": kind, "target": target, "score": score, "trip": trip, "reasons": reasons}
 
 ## Training still makes sense without a method (that is how drills are learned), much less while waiting on medicine.
 func _way_forward(temper: RefCounted, lacking: String) -> float:
@@ -402,6 +410,9 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 			refused_until[p] = on_day + int(config.refusal_cooldown_days)
 			return "refused"
 		Option.CULTIVATE:
+			if society.law:
+				var breach: Dictionary = society.law.trespass(society, p, "spring" if society.realm[p] < 2 else "peak", chosen.get("trip", "night") == "night")
+				if breach.seen: return "guardians: " + str(breach.outcome)
 			society.site[p] = maxi(society.site[p], 1 if society.realm[p] < 2 else 2)
 			society.cultivate(p, 3)
 			return "meditated at a qi spot" if society.revealed[p] else "sat in meditation"
@@ -481,6 +492,9 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 		Option.GATHER:
 			var temper: RefCounted = society.temper
 			if chosen.get("medicine", "") == "seven_leaf":
+				if society.law:
+					var breach: Dictionary = society.law.trespass(society, p, "seven_leaf", chosen.get("trip", "night") == "night")
+					if breach.seen: return "guardians: " + str(breach.outcome)
 				if temper.wild.gather_herb(p):
 					temper.medicine["seven_leaf"][p] += 1
 					society.note(p, "gathering", "%s picked a seven-leaf herb at the spirit spring" % store.names[p])

@@ -6,7 +6,7 @@ const FILTERS := {
 	"Tempering": ["tempering_method", "tempering_gate", "tempering", "gathering", "hunt", "injury"],
 	"Family": ["pregnancy", "birth", "marriage", "old_age", "legacy", "apprenticeship"],
 	"Cultivation": ["awakening", "breakthrough", "technique", "manual", "setback", "absorption", "formation", "harvested"],
-	"Conflict": ["confrontation", "fight", "killed", "schism", "betrayal", "reconciliation", "oath"],
+	"Conflict": ["trespass", "guardian", "confrontation", "fight", "killed", "schism", "betrayal", "reconciliation", "oath"],
 }
 const WIDTH := 300.0
 const SHOWN := 30

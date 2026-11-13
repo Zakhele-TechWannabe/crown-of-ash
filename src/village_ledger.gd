@@ -12,7 +12,7 @@ class LedgerButton extends Button:
 
 const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
-const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "tempering": "Tempering", "forest": "Forest", "society": "Society", "work": "Work", "chronicle": "Chronicle", "bestiary": "Bestiary"}
+const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "tempering": "Tempering", "forest": "Forest", "society": "Society", "work": "Work", "chronicle": "Chronicle", "bestiary": "Bestiary", "laws": "Laws"}
 const INK := Palette.INK
 const GOLD := Palette.BRASS
 const MAX_WIDTH := 1320.0
@@ -401,7 +401,7 @@ func refresh() -> void:
 	refresh_values()
 
 func refresh_values() -> void:
-	if current in ["society", "tempering", "forest", "chronicle", "bestiary"] and page_day == life.population.day: return
+	if current in ["society", "tempering", "forest", "chronicle", "bestiary", "laws"] and page_day == life.population.day: return
 	if current == "people" and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
 	# Keep filter controls and scroll position stable while replacing only data.
 	for child: Node in content.get_children():
@@ -424,6 +424,7 @@ func refresh_values() -> void:
 		"work": _work(data, e)
 		"chronicle": _chronicle(data, e)
 		"bestiary": _bestiary(data)
+		"laws": _laws(data)
 
 func stage() -> String:
 	return ["Planting", "Tending", "Harvest", "Fallow"][life.economy.season()]
@@ -1189,3 +1190,29 @@ func _society(parent: Node) -> void:
 		label(row, "%s · %s" % [position.name, (life.population.names[position.holder] if position.holder >= 0 else "vacant") if position.exists else "not yet existing"])
 		row.tooltip_text = "Exists: %s\nHolder: %s" % [position.condition, position.hold_when]
 		row.mouse_filter = Control.MOUSE_FILTER_PASS
+
+
+## The first law, its stone enforcers and the trails that are still warm.
+func _laws(parent: Node) -> void:
+	page_day = life.population.day
+	label(parent, "No one enters the sect grounds without an invitation.")
+	label(parent, "All villagers are bound. Servants have a work pass only at their own workplace during work hours. Stone swordsmen enforce the law; those caught face pursuit and lethal combat.")
+	var society: RefCounted = life.population.society
+	var law: RefCounted = society.law
+	if not law: return
+	section(parent, "The swordsmen")
+	for g: Dictionary in law.guardians:
+		label(parent, "%s · %s" % [str(g.name).capitalize(), str(g.get("visual_state", g.state))])
+		meter(parent, "Energy", float(g.energy), float(law.config.energy_max), "%d energy · %d kills · %d breaks" % [int(g.energy), g.kills, g.breaks], Palette.JADE)
+	section(parent, "This year")
+	var year: Dictionary = law.years.get(life.population.day / 365, {})
+	label(parent, "%d breaches · %d seen · %d escaped · %d killed · %d swordsmen broken" % [int(year.get("breaches", 0)), int(year.get("seen", 0)), int(year.get("escaped", 0)), int(year.get("killed", 0)), int(year.get("broken", 0))])
+	section(parent, "The hunt list")
+	if law.hunt_list.is_empty(): small(parent, "No warm trails.")
+	for entry: Dictionary in law.hunt_list.values():
+		var days: int = life.population.day - int(entry.day)
+		label(parent, "%s · %s · %d days · priority %.2f%s" % [life.population.names[entry.person], str(law.config.offences.get(entry.place, entry.place)), days, law.priority(entry, life.population.day), " · trail nearly cold" if days >= int(law.config.cold_days) - int(law.config.cold_warning) else ""])
+	section(parent, "Recent breaches")
+	for i in range(society.breaches.size() - 1, maxi(-1, society.breaches.size() - 11), -1):
+		var r: Dictionary = society.breaches[i]
+		label(parent, "Day %d · %s" % [r.day, r.text])

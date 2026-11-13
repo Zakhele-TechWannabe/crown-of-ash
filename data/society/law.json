@@ -1,0 +1,80 @@
+{
+  "day_sight": 60,
+  "night_sight": 6,
+  "day_seen": 0.9,
+  "night_seen": 0.25,
+  "stealth_step": 5,
+  "stealth_reduction": 0.1,
+  "cover_reach": 6,
+  "energy_max": 100,
+  "recharge": 10,
+  "inside_cost": 0.5,
+  "outside_cost": 1.5,
+  "fight_cost": 10,
+  "reserve": 25,
+  "cold_days": 21,
+  "half_life": 30,
+  "repeat": 0.5,
+  "renown": 15,
+  "kin_layer": 3,
+  "adult_age": 18,
+  "dawn": 330,
+  "evening": 1260,
+  "work_start": 390,
+  "work_end": 1080,
+  "caution_base": 0.5,
+  "drive_discount": 0.2,
+  "night_caution": 0.5,
+  "weights": {
+    "seven_leaf": 1.0,
+    "fight": 1.0,
+    "peak": 0.7,
+    "spring": 0.6,
+    "work": 0.2
+  },
+  "places": {
+    "spring": [
+      50,
+      -32
+    ],
+    "peak": [
+      0,
+      -115
+    ],
+    "plaza": [
+      0,
+      15
+    ]
+  },
+  "recent_limit": 64,
+  "grounds_approaches": [
+    [
+      -99,
+      92,
+      15,
+      7
+    ],
+    [
+      85,
+      92,
+      15,
+      7
+    ]
+  ],
+  "pass_radius": 1,
+  "midday_start": 720,
+  "midday_end": 780,
+  "cold_warning": 3,
+  "scar_fear": 0.3,
+  "scar_spite": 0.2,
+  "village_feeling": 0.3,
+  "coin": 0.5,
+  "offences": {
+    "seven_leaf": "stealing seven-leaf from the spring",
+    "fight": "fighting a guardian",
+    "peak": "meditating at the peak",
+    "spring": "meditating at the spring",
+    "work": "straying off a work pass",
+    "plaza": "entering the Great Plaza"
+  }
+}

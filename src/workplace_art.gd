@@ -25,6 +25,14 @@ static func _build(kind: String, w: int, h: int, variant: int) -> Image:
 	var stone := Palette.STONE.darkened(0.14)
 	var roof := Palette.STONE.darkened(0.42).lerp(Palette.BLUE, 0.12)
 	match kind:
+		"well":
+			_box(im, Rect2i(5, foot - 14, width - 4, 14), stone)
+			_box(im, Rect2i(3, foot - 17, width, 5), stone.lightened(0.14))
+			im.fill_rect(Rect2i(7, foot - 16, width - 8, 3), Palette.INK)
+			for x in [5, width - 1]: _box(im, Rect2i(x, foot - 33, 3, 24), timber)
+			_box(im, Rect2i(3, foot - 35, width + 1, 4), timber)
+			im.fill_rect(Rect2i(width / 2 + 2, foot - 31, 1, 17), Palette.PAPER_DARK)
+			_box(im, Rect2i(width / 2, foot - 20, 5, 5), timber)
 		"wall":
 			_box(im, Rect2i(3, foot - 22, width, 22), stone)
 			for y in range(foot - 19, foot, 6):

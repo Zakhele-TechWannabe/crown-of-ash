@@ -38,6 +38,7 @@
     "hunter_weapon": 1.3
   },
   "beasts": {
+    "stone swordsman": {"power": 66, "guard": 70, "speed": 9, "breath": 30, "will": 9, "lethal": true, "weight": 0.0, "verb": "cuts with its jian"},
     "sika deer": {"power": 6, "guard": 6, "speed": 11, "breath": 10, "will": 1, "lethal": false, "weight": 0.62, "verb": "kicks"},
     "wild boar": {"power": 20, "guard": 14, "speed": 5, "breath": 8, "will": 2, "lethal": true, "weight": 0.38, "verb": "charges, tusks low"},
     "black bear": {"power": 45, "guard": 40, "speed": 5, "breath": 6, "will": 2, "lethal": true, "weight": 0.0, "verb": "mauls"}

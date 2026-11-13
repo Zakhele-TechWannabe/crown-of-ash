@@ -28,6 +28,9 @@ var child_art: Array[ImageTexture] = []
 var selected := -1
 ## The first twenty as they arrived; a fresh twenty is sent from these if the valley ever empties.
 var founders: Array[Dictionary] = []
+const GuardianArt = preload("res://src/guardian_art.gd")
+var law_stages: Array[Dictionary] = []
+var breaches_seen := 0
 const TreeArt = preload("res://src/tree_art.gd")
 const WorkplaceArt = preload("res://src/workplace_art.gd")
 var workplace_sprites: Array[Dictionary] = []
@@ -167,6 +170,8 @@ func setup(map: Node2D) -> void:
 	for p: Dictionary in people: founders.append(p.duplicate(true))
 	_link_levels()
 	population.seed_residents(people)
+	population.society.law = preload("res://src/law.gd").new()
+	population.society.law.setup(sect, grid, people, world.ground)
 	var archive_settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))
 	if archive_settings.enabled and not "--no-archive" in OS.get_cmdline_user_args():
 		var society: RefCounted = population.society
@@ -213,6 +218,7 @@ func _refresh(initial: bool = false) -> void:
 	var time := fmod(minutes, 1440.0)
 	for n in people.size():
 		var p: Dictionary = people[n]
+		if p.get("law_scene", false): continue
 		var variation := (n * 17 + day * 13 + int(sect.data.seed)) % 61
 		var target: Vector2i = p.home
 		var activity := "sleeping at home"
@@ -318,6 +324,7 @@ func _process(dt: float) -> void:
 		paused = true
 	_watch_fights()
 	_advance_stages(elapsed)
+	_advance_law(elapsed)
 	var schedule_tick := int(minutes / 720.0) if speed >= 64 else int(minutes)
 	if schedule_tick != last_minute:
 		last_minute = schedule_tick
@@ -382,7 +389,14 @@ func _draw() -> void:
 	draw_order.sort_custom(_feet_before)
 	# Trees stand up off the ground: shadows first, then trees and people in order of their feet,
 	# so a villager can walk behind a trunk.
-	var trees := _trees_in(area.grow(256))
+	var trees := _trees_in(area.grow(256)).duplicate()
+	if population.society.law:
+		for g: Dictionary in population.society.law.guardians:
+			for state: String in ["plinth", str(g.get("visual_state", g.state))]:
+				var tile: Vector2 = Vector2(g.post) if state == "plinth" else Vector2(g.get("visual_tile", g.tile))
+				var foot := (tile + Vector2.ONE * 0.5) * 32.0 - Vector2(0, world.ground.terrace_level(Vector2i(tile)) * world.ground.exaggeration)
+				if area.grow(64).has_point(foot): trees.append([foot, -1, {"kind": "guardian", "state": state, "w": 1}])
+		trees.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
 	var shade := Color(Palette.INK, 0.22)
 	for tree: Array in trees:
 		if tree[1] >= 0: _shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
@@ -419,6 +433,7 @@ func _draw() -> void:
 		_tree(trees[next_tree])
 		next_tree += 1
 	_draw_fights(area)
+	_draw_law_harm(area)
 
 
 ## The trees the ground has placed around the view, sorted by their feet.
@@ -446,6 +461,10 @@ func _trees_in(area: Rect2) -> Array:
 func _tree(tree: Array) -> void:
 	if tree[1] < 0:
 		var b: Dictionary = tree[2]
+		if b.kind == "guardian":
+			var sprite := GuardianArt.texture(b.state)
+			draw_texture_rect(sprite, Rect2(tree[0] - Vector2(20, 64), sprite.get_size() * 2.0), false)
+			return
 		if b.kind == "orchard":
 			var region := TreeArt.region(TreeArt.OAK, b.variant)
 			draw_texture_rect_region(TreeArt.texture(), Rect2(tree[0] + Vector2(16, 0) - Vector2(TreeArt.FOOT), region.size), region)
@@ -626,6 +645,8 @@ func _input(event: InputEvent) -> void:
 
 func start_skip(years: int) -> void:
 	if skip_target > 0: return
+	for st: Dictionary in law_stages: _finish_law(st)
+	law_stages.clear()
 	skip_next_day = 0
 	skip_start = population.day
 	skip_target = skip_start + years * 365
@@ -640,6 +661,7 @@ func cancel_skip() -> void:
 		skip_target = population.pending_day
 		return
 	skip_target = 0
+	breaches_seen = population.society.breach_count
 	economy.coarse_population = false
 	paused = skip_was_paused
 
@@ -695,6 +717,18 @@ func _headless_sim() -> void:
 				print("DECADE %d MIND decisions=%d ms=%d %s" % [y + 1, mind.decisions, mind.decide_usec / 1000, JSON.stringify(mix)])
 			var kinds: Dictionary = {}
 			for fight: Dictionary in population.society.fights: kinds[fight.kind + ":" + fight.how] = int(kinds.get(fight.kind + ":" + fight.how, 0)) + 1
+			print("LAW " + JSON.stringify(population.society.law.totals))
+			var founder_line := PackedByteArray()
+			founder_line.resize(population.size())
+			var line_living := 0
+			var founders_living := 0
+			for p in population.size():
+				founder_line[p] = int(p < founders.size())
+				for parent: int in population.society.parents(p):
+					if parent >= 0 and founder_line[parent]: founder_line[p] = 1
+				if founder_line[p] and population.society.alive[p]: line_living += 1
+				if p < founders.size() and population.society.alive[p]: founders_living += 1
+			print("LAW LINE living=%d founders_alive=%d initial=%d" % [line_living, founders_living, founders.size()])
 			print("DECADE %d FIGHTS total=%d recent=%s" % [y + 1, population.society.fight_count, JSON.stringify(kinds)])
 			var records: Array = population.society.top_events(maxi(0, (y - 9) * 365))
 			for event: Dictionary in records:
@@ -863,6 +897,7 @@ func _staged_ids() -> Dictionary:
 	var ids := {}
 	for st: Dictionary in stages:
 		for id: int in st.r.ids: ids[id] = st
+	for st: Dictionary in law_stages: ids[int(st.r.person)] = st
 	return ids
 
 
@@ -878,7 +913,7 @@ func _watch_fights() -> void:
 		fights_seen += 1
 		if back > fights.size(): continue
 		var r: Dictionary = fights[fights.size() - back]
-		if r.kind == "hunt" or walker_of(int(r.ids[0])) < 0 or walker_of(int(r.ids[1])) < 0: continue
+		if r.kind in ["hunt", "guardian"] or walker_of(int(r.ids[0])) < 0 or walker_of(int(r.ids[1])) < 0: continue
 		stages.append({"r": r, "phase": "wait", "clock": 0.0, "next": 0, "pops": [], "spot": Vector2i.ZERO, "met": 0.0})
 
 
@@ -1027,3 +1062,113 @@ func _draw_fights(area: Rect2) -> void:
 			draw_string_outline(font, at - Vector2(width / 2.0, 0), pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, 3, outline)
 			draw_string(font, at - Vector2(width / 2.0, 0), pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, colour)
 		st.pops = kept
+
+
+## Breach records become trips, gliding chases, blows and returns at the chosen hour.
+func _advance_law(elapsed: float) -> void:
+	var society: RefCounted = population.society
+	if not society.law: return
+	if speed >= 64:
+		breaches_seen = society.breach_count
+		for st: Dictionary in law_stages: _finish_law(st)
+		law_stages.clear()
+		return
+	while breaches_seen < society.breach_count:
+		var back: int = society.breach_count - breaches_seen
+		breaches_seen += 1
+		if back > society.breaches.size(): continue
+		var r: Dictionary = society.breaches[society.breaches.size() - back]
+		var n := walker_of(int(r.person))
+		if n < 0: continue
+		law_stages.append({"r": r, "phase": "wait", "clock": 0.0, "next": 0, "pops": [], "walker": people[n], "start": Vector2(people[n].pos)})
+	var time := fmod(minutes, 1440.0)
+	for st: Dictionary in law_stages:
+		var r: Dictionary = st.r
+		var w: Dictionary = st.walker
+		var g: Dictionary = society.law.guardians[int(r.guardian)] if int(r.guardian) >= 0 else {}
+		if st.phase == "wait":
+			var night: bool = time >= float(society.law.config.evening) or time < float(society.law.config.dawn)
+			if night != (r.trip == "night"): continue
+			st.phase = "trip"
+			if r.get("pursuit", false):
+				st.path = grid.get_id_path(society.law.nearest(g.post), nearest(r.spot))
+			else:
+				st.path = society.law.route(r.place).duplicate()
+				if r.seen:
+					var index: int = st.path.find(r.spot)
+					if index >= 0: st.path = st.path.slice(0, index + 1)
+			w.law_scene = true
+			w.activity = "facing a stone swordsman" if r.get("pursuit", false) else "trespassing by " + str(r.trip)
+			w.hidden = false
+			w.path = PackedVector2Array()
+			w.fighting = 1
+			st.clock = 0.0
+		st.clock += elapsed
+		var target := Vector2(r.spot)
+		match st.phase:
+			"trip":
+				var path: Array = st.path
+				if not path.is_empty():
+					var index := mini(path.size() - 1, int(st.clock * 2.0))
+					if r.get("pursuit", false):
+						g.visual_state = "pursuing"
+						g.visual_tile = Vector2(path[index])
+					else: w.pos = Vector2(path[index])
+					if index < path.size() - 1: continue
+				st.phase = "chase" if r.seen else "return"
+				st.clock = 0.0
+			"chase":
+				w.pos = target.lerp(st.start, minf(1.0, st.clock / 8.0))
+				if not g.is_empty():
+					g.visual_state = "pursuing"
+					g.visual_tile = Vector2(g.post).move_toward(Vector2(w.pos), st.clock * 3.0)
+				if st.clock >= 8.0:
+					st.phase = "fight" if r.has("fight") else "return"
+					st.clock = 0.0
+			"fight":
+				var events: Array = r.fight.events
+				while st.next < events.size() and float(events[st.next].time) <= st.clock:
+					var e: Dictionary = events[st.next]
+					if e.t == "strike" and e.hit: st.pops.append({"text": str(roundi(e.dmg)), "born": Time.get_ticks_msec(), "side": 1 - int(e.i)})
+					st.next += 1
+				if st.next >= events.size():
+					st.phase = "return"
+					st.clock = 0.0
+			"return":
+				w.pos = Vector2(w.pos).move_toward(st.start, elapsed * 3.0)
+				if not g.is_empty() and g.state not in ["frozen", "broken"]:
+					g.visual_tile = Vector2(g.get("visual_tile", g.tile)).move_toward(Vector2(g.post), elapsed * 3.0)
+				if not g.is_empty() and g.state in ["frozen", "broken"]:
+					g.visual_state = g.state
+					g.visual_tile = Vector2(g.tile)
+				if st.clock >= 12.0: _finish_law(st)
+	law_stages = law_stages.filter(func(st: Dictionary) -> bool: return st.phase != "done")
+
+func _finish_law(st: Dictionary) -> void:
+	st.phase = "done"
+	st.walker.erase("law_scene")
+	st.walker.erase("fighting")
+	st.walker.pos = st.start
+	if not population.society.alive[int(st.r.person)]: st.walker.fallen = true
+	if int(st.r.guardian) >= 0:
+		var g: Dictionary = population.society.law.guardians[int(st.r.guardian)]
+		g.erase("visual_state")
+		g.erase("visual_tile")
+	last_minute = -1
+
+
+func _draw_law_harm(area: Rect2) -> void:
+	var font := UiTheme.body()
+	for st: Dictionary in law_stages:
+		if st.phase != "fight": continue
+		for pop: Dictionary in st.pops:
+			var age := (Time.get_ticks_msec() - int(pop.born)) / 1000.0
+			if age > 1.4: continue
+			var at := point(st.walker)
+			if int(pop.side) == 0 and int(st.r.guardian) >= 0:
+				var g: Dictionary = population.society.law.guardians[int(st.r.guardian)]
+				at = point({"pos": Vector2(g.get("visual_tile", g.tile))})
+			if not area.has_point(at): continue
+			at -= Vector2(0, 54 + age * 18)
+			draw_string_outline(font, at, pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, 3, Palette.PAPER_LIGHT)
+			draw_string(font, at, pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, Palette.RED)
