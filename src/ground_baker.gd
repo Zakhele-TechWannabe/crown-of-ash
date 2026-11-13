@@ -21,6 +21,7 @@ var noise := FastNoiseLite.new()
 var woodland := FastNoiseLite.new()
 var covers := ["deep water", "shallow water", "river", "sand", "bare rock", "snow", "tundra", "marsh", "desert", "steppe", "grass", "tufts", "flowers", "tree", "autumn tree", "spirit tree", "bamboo", "rock", "bush", "stump"]
 const Palette = preload("res://src/palette.gd")
+const GroundPaint = preload("res://src/ground_paint.gd")
 
 
 func _hash(x: int, y: int) -> int:
@@ -201,41 +202,25 @@ func _bake_row(key: Vector2i, y: int) -> void:
 	var image: Image = pending.image
 	for x in SIDE:
 		var tile := key * SIDE + Vector2i(x, y)
-		var info := sample(tile)
+		var info := GroundPaint.info(self, tile)
 		var level: int = info.level
 		var top := y * 16 + int(pending.overflow) - roundi(level * exaggeration / 2.0)
-		var south := terrace_level(tile + Vector2i.DOWN)
+		var south: int = GroundPaint.info(self, tile + Vector2i.DOWN).level
 		var drop := roundi((level - south) * exaggeration / 2.0) if info.kind > 2 else 0
 		pending.min_y = mini(pending.min_y, top)
 		pending.max_y = maxi(pending.max_y, top + 16 + maxi(0, drop))
 		if drop > 0:
 			# Natural banks are earth and turf; built terraces (below) are faced with stone; a ramp is a flight of earth steps.
 			var face := Palette.EARTH.darkened(0.38).lerp(Palette.GRASS.darkened(0.42), 0.45).lerp(Palette.GREEN.darkened(0.5), sect.hunting.cached_weight(tile)).darkened(minf(0.2, drop * 0.006))
-			image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), face)
-			image.fill_rect(Rect2i(x * 16, top + 16, 16, 1), face.lightened(0.18))
-			for stripe in range(3, drop, 4) if sect.hunting.cached_weight(tile) < 0.1 else []:
-				image.fill_rect(Rect2i(x * 16 + stripe % 3, top + 16 + stripe, 12, 1), face.darkened(0.12))
+			GroundPaint.bank(self, image, tile, Vector2i(x * 16, top + 16), drop, face)
 			if sect.ramps.has(tile) and sect.ramps.has(tile + Vector2i.DOWN):
-				var tread := Palette.EARTH.darkened(0.08)
-				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), tread)
-				for riser in range(3, drop, 4):
-					image.fill_rect(Rect2i(x * 16, top + 16 + riser, 16, 1), tread.darkened(0.25))
+				GroundPaint.steps(image, Vector2i(x * 16, top + 16), drop, not sect.ramps.has(tile + Vector2i.LEFT), not sect.ramps.has(tile + Vector2i.RIGHT))
 			if sect.level_at(tile) >= 0:
-				var steps: bool = sect.surface_at(tile) == "stairs"
-				var stone := Palette.STONE.darkened(0.3)
-				image.fill_rect(Rect2i(x * 16, top + 16, 16, drop), stone)
-				for seam in range(0, drop, 3 if steps else 6):
-					image.fill_rect(Rect2i(x * 16, top + 16 + seam, 16, 1), stone.darkened(0.22))
-					image.fill_rect(Rect2i(x * 16, top + 17 + seam, 16, 1), stone.lightened(0.12))
-					if not steps:
-						image.fill_rect(Rect2i(x * 16 + (4 if seam % 12 == 0 else 12), top + 16 + seam, 1, mini(6, drop - seam)), stone.darkened(0.22))
+				GroundPaint.wall(self, image, tile, Vector2i(x * 16, top + 16), drop, sect.surface_at(tile) == "stairs")
 		var source := Rect2i(int(info.kind) * 16, (int(info.shade) + int(info.band) * SHADES) * 16, 16, 16)
 		image.blit_rect(atlas_image, source, Vector2i(x * 16, top))
-		if info.kind > 2 and level > terrace_level(tile + Vector2i.RIGHT):
-			image.fill_rect(Rect2i(x * 16 + 15, top, 1, 16), Palette.EARTH.darkened(0.45))
-		if info.kind > 2 and level > terrace_level(tile + Vector2i.LEFT):
-			image.fill_rect(Rect2i(x * 16, top, 1, 16), Palette.EARTH.darkened(0.45))
 		sect.draw_tile(image, tile, Vector2i(x * 16, top))
+		GroundPaint.ground(self, image, tile, Vector2i(x * 16, top))
 		hunting.draw(image, tile, Vector2i(x * 16, top), sect.has_tile(tile))
 		# Trees (13–16) stand up as sprites (see trees_in_block); only low things are painted on the ground.
 		if info.decoration >= 0 and not info.decoration in [13, 14, 15, 16] and sect.hunting.cached_weight(tile) < 0.25:

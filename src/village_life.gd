@@ -80,7 +80,7 @@ func setup(map: Node2D) -> void:
 						walk = false
 			grid.set_point_solid(at, not walk)
 	# Terrace faces and natural banks are cliffs: nobody walks up them. Stairs join the built terraces;
-	# where a lane crosses a one-step bank, a ramp of earth steps is cut into it.
+	# where a lane crosses a one-step bank (lane on both sides), a ramp of earth steps is cut into it.
 	var pairs: Array = []
 	for y in range(grid.region.position.y, grid.region.end.y):
 		for x in range(grid.region.position.x, grid.region.end.x):
@@ -92,7 +92,7 @@ func setup(map: Node2D) -> void:
 				if not grid.is_in_boundsv(other) or grid.is_point_solid(other) or sect.surface_at(other) == "stairs": continue
 				var step := absi(heights[sect.index_at(at)] - heights[sect.index_at(other)])
 				if step == 0: continue
-				if step == 1 and sect.level_at(at) < 0 and sect.level_at(other) < 0 and (sect.surface_at(at) in LANES or sect.surface_at(other) in LANES):
+				if step == 1 and sect.level_at(at) < 0 and sect.level_at(other) < 0 and sect.surface_at(at) in LANES and sect.surface_at(other) in LANES:
 					sect.ramps[at] = true
 					sect.ramps[other] = true
 				else:

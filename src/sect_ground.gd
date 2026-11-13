@@ -344,12 +344,15 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 	elif surface == "cave":
 		image.fill_rect(rect, Palette.STONE.darkened(0.3))
 	else:
-		# Paving stays under the stalls: faint seams only.
-		var steps := surface == "stairs"
+		# Paving stays under the stalls: faint seams only. A stair tread is plain stone with a lit nosing
+		# at its front edge; the riser below it is drawn with the bank (ground_paint.wall).
 		image.fill_rect(rect, Palette.STONE)
-		for y in range(0, 16, 4 if steps else 8):
-			image.fill_rect(Rect2i(pos + Vector2i(0, y), Vector2i(16, 1)), Palette.STONE.darkened(0.16 if steps else 0.07))
-			if not steps:
+		if surface == "stairs":
+			image.fill_rect(Rect2i(pos + Vector2i(0, 15), Vector2i(16, 1)), Palette.STONE.lightened(0.18))
+			image.fill_rect(Rect2i(pos + Vector2i(0, 8), Vector2i(16, 1)), Palette.STONE.darkened(0.05))
+		else:
+			for y in range(0, 16, 8):
+				image.fill_rect(Rect2i(pos + Vector2i(0, y), Vector2i(16, 1)), Palette.STONE.darkened(0.07))
 				image.fill_rect(Rect2i(pos + Vector2i(4 if y == 0 else 12, y), Vector2i(1, 8)), Palette.STONE.darkened(0.07))
 	# A standing building is drawn as a sprite over this ground; its old roof tiles stay unpainted.
 	if standing_tiles.has(tile): return
