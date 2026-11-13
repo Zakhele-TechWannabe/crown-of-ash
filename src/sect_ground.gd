@@ -95,6 +95,13 @@ func setup(is_dry: Callable) -> void:
 		_paint(surface.rect, str(surface.kind))
 	for field: Dictionary in data.get("fields", []):
 		_paint(field.rect, "field")
+		# Each paddy is one flat terrace: the hillside steps at field edges, never through the crop.
+		var r: Array = field.rect
+		var anchor := center + Vector2i(int(r[0]) + int(r[2]) / 2, int(r[1]) + int(r[3]) / 2)
+		for yy in range(int(r[1]), int(r[1]) + int(r[3])):
+			for xx in range(int(r[0]), int(r[0]) + int(r[2])):
+				var tile := center + Vector2i(xx, yy)
+				if index_at(tile) >= 0 and levels[index_at(tile)] < 0: plinth[tile] = anchor
 	if data.has("road"):
 		_path(data.road)
 	for path: Dictionary in data.get("paths", []):
