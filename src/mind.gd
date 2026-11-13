@@ -3,6 +3,7 @@ extends RefCounted
 ## the heart, a tiny inherited network that is never trained, pushes those scores with urges nobody designed.
 ## Emotions carry momentum between decisions, life goals bias choices for years, and every decision keeps its reasons.
 ## Cost: one decision per person every few weeks (staggered), or at once when a strong feeling interrupts.
+const Combat = preload("res://src/combat.gd")
 const INPUTS := 16
 const HIDDEN := 8
 const URGES := 8
@@ -424,17 +425,20 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 			feel(p, JOY, 0.1)
 			return "came back with nothing but stories"
 		Option.CONFRONT:
+			var anger: float = emotion[p * 4 + ANGER]
 			emotion[p * 4 + ANGER] *= 0.4
 			var target_urges := urges(t)
 			if target_urges[SPITE] > 0.6 or target_urges[PRIDE] > 0.7:
 				ties.event(p, t, "festival_insult", on_day)
 				ties.event(t, p, "festival_insult", on_day)
 				feel(t, ANGER, 0.4)
+				# Angry enough, a bitter quarrel comes to blows.
+				if store.rng.randf() < float(Combat.config.bitter_blows) * (0.5 + anger):
+					Combat.between(society, p, t, "brawl")
+					return "came to blows" if society.alive[p] else "was killed"
 				society.note(p, "confrontation", "%s confronted %s and it turned bitter" % [store.names[p], store.names[t]])
 				return "it turned bitter"
-			ties.event(p, t, "duel", on_day)
-			ties.event(t, p, "duel", on_day)
-			society.note(p, "confrontation", "%s confronted %s and they settled it in a duel" % [store.names[p], store.names[t]])
+			Combat.between(society, p, t, "spar")
 			return "settled in a duel"
 		Option.RECONCILE:
 			ties.event(p, t, "apology", on_day)
@@ -466,7 +470,14 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 			society.reputation[t] = maxf(-100.0, society.reputation[t] - 0.5)
 			return "spread a rumour"
 		Option.TRAIN:
-			return society.temper.start_regimen(p, int(chosen.get("hours", 2)), on_day)
+			var regimen: String = society.temper.start_regimen(p, int(chosen.get("hours", 2)), on_day)
+			# Now and then the drills end in a spar with a friend or rival: it stops at hurt, and builds the tie.
+			if store.rng.randf() < float(Combat.config.training_spar):
+				var partner := _sparring_partner(p, on_day)
+				if partner >= 0:
+					Combat.between(society, p, partner, "spar")
+					return regimen + ", then sparred"
+			return regimen
 		Option.GATHER:
 			var temper: RefCounted = society.temper
 			if chosen.get("medicine", "") == "seven_leaf":
@@ -485,14 +496,13 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 			return "gathered %d iron-bark roots at %s" % [trip.taken, trip.place]
 		Option.HUNT:
 			var hunt: Dictionary = society.temper.wild.hunt(p)
+			if hunt.dead: return "was killed hunting"
 			if hunt.hurt:
-				var days: Array = society.temper.wild.config.beasts.injury_days
-				society.injury_until[p] = on_day + store.rng.randi_range(int(days[0]), int(days[1]))
-				society.note(p, "injury", "%s was gored hunting a forest beast and must rest" % store.names[p])
-				return "was gored"
+				society.note(p, "injury", "%s was hurt by %s while hunting and must rest" % [store.names[p], hunt.names[1]])
+				return "was hurt hunting"
 			if hunt.kill:
 				society.temper.medicine["beast_marrow"][p] += 1
-				society.note(p, "hunt", "%s brought down a forest beast for marrow broth" % store.names[p])
+				society.note(p, "hunt", "%s brought down %s for marrow broth" % [store.names[p], hunt.names[1]])
 				feel(p, JOY, 0.2)
 				return "brought down a beast"
 			return "came back empty-handed"
@@ -535,6 +545,24 @@ func _review_goal(p: int, urge: PackedFloat32Array, on_day: int) -> void:
 	goal_since[p] = on_day
 	goal_target[p] = society.realm[p] * 10 + society.layer[p] if pick == Goal.ASCEND else (mini(50, store.best_level[p] + 5) if pick == Goal.MASTER_CRAFT else -1)
 	if pick == Goal.TEMPER: goal_target[p] = society.temper.body_layer[p]
+
+## Someone p knows well enough to spar with: grown enough, alive, not resting an injury. Rivals first.
+func _sparring_partner(p: int, on_day: int) -> int:
+	var society: RefCounted = society_ref.get_ref()
+	var store: RefCounted = society.population
+	var ties: RefCounted = society.ties
+	var best := -1
+	var best_score := 0.0
+	var e: int = ties.head[p]
+	while e >= 0:
+		var q: int = ties.target[e]
+		if society.alive[q] and store.age(q) >= 12 and society.injury_until[q] <= on_day and ties.familiarity[e] >= 30:
+			var score: float = ties.familiarity[e] + (60.0 if ties.bonds[e] & ties.RIVAL else 0.0) + store.rng.randf() * 20.0
+			if score > best_score:
+				best_score = score
+				best = q
+		e = ties.next[e]
+	return best
 
 func _max_grudge(p: int) -> float:
 	var ties: RefCounted = society_ref.get_ref().ties

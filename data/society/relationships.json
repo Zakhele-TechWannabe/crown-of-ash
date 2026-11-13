@@ -96,6 +96,13 @@
     "kindness": {
       "opinion": 7,
       "trust": 4
+    },
+    "beaten": {
+      "opinion": -15
+    },
+    "killed_kin": {
+      "opinion": -100,
+      "trust": -100
     }
   }
 }

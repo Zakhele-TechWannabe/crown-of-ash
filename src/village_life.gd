@@ -45,6 +45,13 @@ var material_patches: Array[Dictionary] = []
 var material_places: Dictionary = {}
 var shrine: Vector2i
 const Palette = preload("res://src/palette.gd")
+const Combat = preload("res://src/combat.gd")
+const UiTheme = preload("res://src/ui_theme.gd")
+## Fights between villagers, played on the map. The society decides them at dawn; in daylight the two meet, stand
+## and trade blows (harm floats up, a bar fills over each head), then whoever breaks runs home with the other on
+## their heels, yields and limps off, or falls. Staged fights hold their walkers until the scene has played.
+var stages: Array[Dictionary] = []
+var fights_seen := 0
 
 
 func setup(map: Node2D) -> void:
@@ -261,6 +268,9 @@ func _refresh(initial: bool = false) -> void:
 			target = nearest(sect.center + Vector2i(80 + n % 5 * 2, 245))
 			activity = "foraging along the forest edge"
 			p.carrying = false
+		var scene := _scene_for(p, target, activity)
+		target = scene[0]
+		activity = scene[1]
 		p.activity = activity
 		if speed >= 64:
 			p.destination = target
@@ -303,12 +313,14 @@ func _process(dt: float) -> void:
 			if population.society.faction_pending: break
 	if economy.pause_on_crisis and economy.crisis and not was_crisis:
 		paused = true
+	_watch_fights()
+	_advance_stages(elapsed)
 	var schedule_tick := int(minutes / 720.0) if speed >= 64 else int(minutes)
 	if schedule_tick != last_minute:
 		last_minute = schedule_tick
 		_refresh()
 	for p: Dictionary in people:
-		var distance: float = elapsed * 1.5 * economy.EFFECT[int(p.hunger)] if speed < 64 else 0.0
+		var distance: float = elapsed * 1.5 * economy.EFFECT[int(p.hunger)] * float(p.get("rush", 1.0)) if speed < 64 else 0.0
 		var path: PackedVector2Array = p.path
 		while distance > 0 and int(p.step) < path.size():
 			var next: Vector2 = path[int(p.step)]
@@ -390,14 +402,20 @@ func _draw() -> void:
 		if int(p.get("id", -1)) == selected:
 			draw_arc(at - Vector2(0, 2), 15, 0, TAU, 24, Palette.OUTLINE, 5)
 			draw_arc(at - Vector2(0, 2), 15, 0, TAU, 24, Palette.GOLD, 3)
-		at.y -= roundf(absf(sin(phase)))
-		var frame := 0 if sin(phase * 0.3) > 0 else 1
+		if p.get("fallen", false):
+			draw_set_transform(at - Vector2(0, 6), PI / 2.0)
+			draw_texture_rect((child_art if child else person_art)[0], Rect2(Vector2(-18, -18), Vector2(36, 36)), false, Color(p.tint).darkened(0.35))
+			draw_set_transform(Vector2.ZERO)
+			continue
+		if not p.has("fighting"): at.y -= roundf(absf(sin(phase)))
+		var frame := 0 if sin(phase * 0.3) > 0 or p.has("fighting") else 1
 		draw_texture_rect((child_art if child else person_art)[frame], Rect2(at - Vector2(18, 34), Vector2(36, 36)), false, p.tint)
 		if p.get("carrying", false):
 			draw_texture_rect_region(atlas, Rect2(at - Vector2(16, (28 if child else 34) + 26), Vector2(32, 32)), Rect2(0, 128, 16, 16))
 	while next_tree < trees.size():
 		_tree(trees[next_tree])
 		next_tree += 1
+	_draw_fights(area)
 
 
 ## The trees the ground has placed around the view, sorted by their feet.
@@ -466,8 +484,10 @@ func pick(at: Vector2) -> int:
 func _tend_the_dead() -> void:
 	var society: RefCounted = population.society
 	var changed := false
+	stages = stages.filter(func(st: Dictionary) -> bool: return st.phase != "fallen")
+	var staged := _staged_ids()
 	for n in range(people.size() - 1, -1, -1):
-		if not society.alive[int(people[n].id)]:
+		if not society.alive[int(people[n].id)] and not staged.has(int(people[n].id)):
 			people.remove_at(n)
 			changed = true
 	if society.alive.count(1) == 0:
@@ -658,6 +678,9 @@ func _headless_sim() -> void:
 				var mix: Dictionary = {}
 				for i in mind.OPTION_NAMES.size(): mix[mind.OPTION_NAMES[i]] = mind.choice_counts[i]
 				print("DECADE %d MIND decisions=%d ms=%d %s" % [y + 1, mind.decisions, mind.decide_usec / 1000, JSON.stringify(mix)])
+			var kinds: Dictionary = {}
+			for fight: Dictionary in population.society.fights: kinds[fight.kind + ":" + fight.how] = int(kinds.get(fight.kind + ":" + fight.how, 0)) + 1
+			print("DECADE %d FIGHTS total=%d recent=%s" % [y + 1, population.society.fight_count, JSON.stringify(kinds)])
 			var records: Array = population.society.top_events(maxi(0, (y - 9) * 365))
 			for event: Dictionary in records:
 				print("CHRONICLE day=%d %s" % [event.day, event.text])
@@ -890,3 +913,175 @@ func _close_archive() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_PREDELETE: _close_archive()
+
+
+# ---------- fights on the map ----------
+
+func _staged_ids() -> Dictionary:
+	var ids := {}
+	for st: Dictionary in stages:
+		for id: int in st.r.ids: ids[id] = st
+	return ids
+
+
+## New fights between two villagers who are both walking here become scenes; fights while skipping are not shown.
+func _watch_fights() -> void:
+	var society: RefCounted = population.society
+	var fights: Array = society.fights
+	if fights_seen > society.fight_count or speed >= 64:
+		fights_seen = society.fight_count
+		return
+	while fights_seen < society.fight_count:
+		var back: int = society.fight_count - fights_seen
+		fights_seen += 1
+		if back > fights.size(): continue
+		var r: Dictionary = fights[fights.size() - back]
+		if r.kind == "hunt" or walker_of(int(r.ids[0])) < 0 or walker_of(int(r.ids[1])) < 0: continue
+		stages.append({"r": r, "phase": "wait", "clock": 0.0, "next": 0, "pops": [], "spot": Vector2i.ZERO, "met": 0.0})
+
+
+func _advance_stages(elapsed: float) -> void:
+	var time := fmod(minutes, 1440.0)
+	for st: Dictionary in stages:
+		var a: Dictionary = people[walker_of(int(st.r.ids[0]))] if walker_of(int(st.r.ids[0])) >= 0 else {}
+		var b: Dictionary = people[walker_of(int(st.r.ids[1]))] if walker_of(int(st.r.ids[1])) >= 0 else {}
+		if a.is_empty() or b.is_empty():
+			st.phase = "done"
+			continue
+		match st.phase:
+			"wait":
+				if time >= 450 and time < 1080:
+					st.phase = "meet"
+					st.spot = nearest(Vector2i(((Vector2(a.pos) + Vector2(b.pos)) / 2.0).round()))
+					last_minute = -1
+			"meet":
+				st.met += elapsed
+				var here := Vector2(st.spot)
+				if (Vector2(a.pos).distance_to(here) < 1.5 and Vector2(b.pos).distance_to(here) < 1.5) or st.met > 40.0:
+					st.phase = "fight"
+					a.fighting = 0
+					b.fighting = 1
+					last_minute = -1
+			"fight":
+				st.clock += elapsed
+				var events: Array = st.r.events
+				while st.next < events.size() and float(events[st.next].time) <= st.clock:
+					_show_blow(st, events[st.next], [a, b])
+					st.next += 1
+				if st.next >= events.size(): _end_scene(st, [a, b])
+			"chase":
+				st.clock += elapsed
+				if st.clock > st.until:
+					st.phase = "done"
+		if st.phase == "done":
+			for w: Dictionary in [a, b]:
+				w.erase("fighting")
+				w.erase("rush")
+				w.erase("harm")
+			last_minute = -1
+	stages = stages.filter(func(st: Dictionary) -> bool: return st.phase != "done")
+
+
+func _show_blow(st: Dictionary, e: Dictionary, sides: Array) -> void:
+	if e.has("harm"):
+		sides[0].harm = float(e.harm[0])
+		sides[1].harm = float(e.harm[1])
+	var text := ""
+	var at := 0
+	match e.t:
+		"strike":
+			at = 1 - int(e.i)
+			text = "all in!" if e.allin else ("-%d" % roundi(e.dmg) if e.hit else "miss")
+			if e.hit and e.stagger and not e.allin: text += " staggers"
+		"flee":
+			at = int(e.i)
+			text = "runs!"
+		"yield":
+			at = int(e.i)
+			text = "yields"
+	if text != "": st.pops.append({"at": at, "text": text, "hit": e.t != "strike" or e.hit, "born": Time.get_ticks_msec()})
+
+
+func _end_scene(st: Dictionary, sides: Array) -> void:
+	var r: Dictionary = st.r
+	for w: Dictionary in sides: w.erase("fighting")
+	st.clock = 0.0
+	if r.loser < 0:
+		st.phase = "done"
+		return
+	var loser: Dictionary = sides[r.loser]
+	var winner: Dictionary = sides[r.winner]
+	if r.fates[r.loser] == "dead":
+		loser.fallen = true
+		st.phase = "fallen"
+	elif r.how == "escape":
+		loser.rush = 2.2
+		winner.rush = 2.0
+		st.phase = "chase"
+		st.until = 4.0
+	elif r.how == "yield":
+		st.phase = "chase"
+		st.until = 2.0
+	else:
+		st.phase = "done"
+	last_minute = -1
+
+
+## Where a walker in a fight scene goes, and what they are doing, instead of their day.
+func _scene_for(p: Dictionary, target: Vector2i, activity: String) -> Array:
+	var id := int(p.get("id", -1))
+	for st: Dictionary in stages:
+		var side: int = st.r.ids.find(id)
+		if side < 0: continue
+		var other: String = st.r.names[1 - side]
+		var sparring: bool = st.r.kind == "spar"
+		match st.phase:
+			"meet": return [st.spot, ("meeting %s to spar" if sparring else "squaring up to %s") % other]
+			"fight": return [Vector2i(Vector2(p.pos).round()), ("sparring with %s" if sparring else "fighting %s") % other]
+			"chase":
+				if side == st.r.loser:
+					return [p.home, ("running from %s" if st.r.how == "escape" else "limping home from %s") % other]
+				if st.r.how == "escape":
+					var runner: Dictionary = people[walker_of(int(st.r.ids[st.r.loser]))]
+					return [nearest(Vector2i(Vector2(runner.pos).round())), "chasing %s" % other]
+				return [Vector2i(Vector2(p.pos).round()), "watching %s go" % other]
+			"fallen":
+				if side == st.r.loser: return [Vector2i(Vector2(p.pos).round()), "lying still"]
+	return [target, activity]
+
+
+func _draw_fights(area: Rect2) -> void:
+	var font := UiTheme.body()
+	var now := Time.get_ticks_msec()
+	for st: Dictionary in stages:
+		if st.phase != "fight" and st.pops.is_empty(): continue
+		var sides: Array = []
+		for id: int in st.r.ids:
+			var n := walker_of(id)
+			sides.append(people[n] if n >= 0 else {})
+		for side in 2:
+			var w: Dictionary = sides[side]
+			if w.is_empty(): continue
+			var at := point(w)
+			if not area.has_point(at): continue
+			if st.phase == "fight":
+				var bar := Rect2(at - Vector2(13, 48), Vector2(26, 4))
+				draw_rect(bar.grow(1), Palette.OUTLINE)
+				draw_rect(bar, Palette.PAPER_LIGHT)
+				draw_rect(Rect2(bar.position, Vector2(bar.size.x * clampf(float(w.get("harm", 0.0)) / 100.0, 0.0, 1.0), bar.size.y)), Palette.RED)
+		var kept: Array = []
+		for pop: Dictionary in st.pops:
+			var age := (now - int(pop.born)) / 1000.0
+			if age > 1.4: continue
+			kept.append(pop)
+			var w: Dictionary = sides[int(pop.at)]
+			if w.is_empty(): continue
+			var at := point(w) - Vector2(0, 54 + age * 18)
+			var width := font.get_string_size(pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL).x
+			var colour := Palette.RED if pop.hit else Palette.INK_SOFT
+			colour.a = clampf(1.4 - age, 0.0, 1.0)
+			var outline := Palette.PAPER_LIGHT
+			outline.a = colour.a
+			draw_string_outline(font, at - Vector2(width / 2.0, 0), pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, 3, outline)
+			draw_string(font, at - Vector2(width / 2.0, 0), pop.text, HORIZONTAL_ALIGNMENT_LEFT, -1, Palette.SMALL, colour)
+		st.pops = kept

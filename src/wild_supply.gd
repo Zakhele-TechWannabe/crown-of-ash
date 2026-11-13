@@ -1,6 +1,7 @@
 extends RefCounted
 ## What the forest and the spring can give to tempering bodies: iron-bark patches, a beast herd, seven-leaf herbs.
 ## Everything regrows slowly and the valley's richness scales it all, so ambition can outrun supply.
+const Combat = preload("res://src/combat.gd")
 var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/wild.json"))
 var society_ref: WeakRef
 var richness := 0.5
@@ -65,22 +66,27 @@ func gather_bark(p: int) -> Dictionary:
 	year_stats.roots_taken += taken
 	return {"taken": taken, "place": place, "stripped_by": -1, "emptied": patch_stock[patch] < 1.0}
 
-## A hunt: stronger, better-tempered hunters do better, and a thinned herd is harder to find.
+## A hunt: first find a beast (a thinned herd is harder to find), then fight it (see combat.gd). Deer run,
+## boars and bears fight back, and stronger, better-tempered, more skilled hunters do better.
 func hunt(p: int) -> Dictionary:
 	var society: RefCounted = society_ref.get_ref()
 	var store: RefCounted = society.population
-	var beasts: Dictionary = config.beasts
 	year_stats.hunts += 1
 	var found := herd / maxf(1.0, herd_cap)
-	var skill: float = 0.6 + store.attributes[p * 8] / 20.0 + society.temper.body_layer[p] * 0.05
-	if store.rng.randf() < float(beasts.hunt_injury) / (1.0 + society.temper.body_layer[p] * 0.15):
-		year_stats.hunt_injuries += 1
-		return {"kill": false, "hurt": true}
-	if herd >= 1.0 and store.rng.randf() < float(beasts.hunt_success) * skill * found:
+	if herd < 1.0 or store.rng.randf() >= float(Combat.config.hunt_find) * found:
+		return {"kill": false, "hurt": false, "dead": false}
+	var roll: float = store.rng.randf()
+	var kind := ""
+	for name: String in Combat.config.beasts:
+		kind = name
+		roll -= float(Combat.config.beasts[name].weight)
+		if roll < 0.0: break
+	var fight: Dictionary = Combat.hunt(society, p, kind)
+	if fight.kill:
 		herd -= 1.0
 		year_stats.kills += 1
-		return {"kill": true, "hurt": false}
-	return {"kill": false, "hurt": false}
+	if fight.hurt or fight.dead: year_stats.hunt_injuries += 1
+	return fight
 
 func gather_herb(p: int) -> bool:
 	if herbs >= 1.0:

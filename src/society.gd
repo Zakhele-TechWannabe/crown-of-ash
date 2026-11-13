@@ -21,6 +21,8 @@ var technique := PackedByteArray()
 var technique_element := PackedInt32Array()
 var site := PackedByteArray()
 var injury_until := PackedInt32Array()
+var fights: Array[Dictionary] = []
+var fight_count := 0
 var bottleneck_since := PackedInt32Array()
 var damage := PackedFloat32Array()
 var last_birth := PackedInt32Array()
@@ -121,6 +123,31 @@ func _feel_event(person: int, kind: String) -> void:
 		"old_age":
 			for kin: int in children(person): mind.feel(kin, Mind.GRIEF, .8)
 			if spouse[person] >= 0: mind.feel(spouse[person], Mind.GRIEF, 1.0)
+
+## Recent fights, newest last, for the stories and the village to show.
+func record_fight(fight: Dictionary) -> void:
+	fights.append(fight)
+	fight_count += 1
+	if fights.size() > 64: fights.pop_front()
+
+## Death by violence or accident. The family grieves; a killer becomes their enemy, a grudge their children inherit.
+func die(person: int, kind: String, words: String, killer: int = -1) -> void:
+	var store: RefCounted = store_ref.get_ref()
+	if not alive[person]: return
+	alive[person] = 0
+	note(person, kind, words)
+	var family: Array[int] = []
+	for kin: int in children(person): family.append(kin)
+	for kin: int in parents(person): family.append(kin)
+	if spouse[person] >= 0: family.append(spouse[person])
+	for kin: int in family:
+		if kin < 0 or not alive[kin]: continue
+		if mind:
+			mind.feel(kin, Mind.GRIEF, 1.0)
+			if killer >= 0: mind.scar(kin, Mind.SPITE, .3)
+		if killer >= 0 and kin != killer: ties.event(kin, killer, "killed_kin", store.day)
+	var heirs := children(person)
+	if not heirs.is_empty(): pass_legacy(person, heirs[0])
 
 func root_count(person: int) -> int:
 	var store: RefCounted = store_ref.get_ref()

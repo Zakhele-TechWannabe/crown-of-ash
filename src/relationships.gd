@@ -94,7 +94,7 @@ func event(a: int, b: int, kind: String, day: int) -> void:
 	if absf(float(r.opinion)) >= 8: remember(e, kind, float(r.opinion), day)
 	if opinion[e] <= -60 and float(r.opinion) < 0:
 		bonds[e] |= ENEMY
-		set_grudge(e, absf(opinion[e]), kind, kind == "betrayal")
+		set_grudge(e, absf(opinion[e]), kind, kind in ["betrayal", "killed_kin"])
 	if kind in ["apology", "mediation", "duel", "revenge"] and has_grudge(e):
 		var slot: int = grudge_index[e]
 		grudge_weight[slot] *= .5

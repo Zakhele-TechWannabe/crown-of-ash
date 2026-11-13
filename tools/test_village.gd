@@ -110,6 +110,27 @@ func _run() -> void:
 	var society: RefCounted = pop.society
 	assert(pop.household[0] == pop.household[1] and pop.household_name(0).contains("cottage"))
 	assert(not society.related(0, 1) and society.ties.bonds[society.ties.find(0, 1)] & 1)
+	# A fight between two villagers plays on the map: they meet, stand and trade blows, then go their ways.
+	var fa := int(life.people[2].id)
+	var fb := int(life.people[3].id)
+	preload("res://src/combat.gd").between(society, fa, fb, "spar")
+	life.minutes = floorf(life.minutes / 1440.0) * 1440.0 + 500.0
+	life.paused = false
+	life.speed = 8.0
+	var seen := {}
+	var sparring := false
+	var pops := 0
+	for frame in 4000:
+		life._process(0.1)
+		for st: Dictionary in life.stages:
+			seen[st.phase] = true
+			pops = maxi(pops, st.pops.size())
+		if str(life.people[2].activity).begins_with("sparring with"): sparring = true
+		if seen.has("fight") and life.stages.is_empty(): break
+	assert(seen.has("meet") and seen.has("fight") and life.stages.is_empty() and sparring and pops > 0, "Fight scene: %s, sparring %s, pops %d" % [seen, sparring, pops])
+	assert(not life.people[2].has("fighting") and not life.people[3].has("fighting"))
+	print("fight scene phases: %s" % [seen.keys()])
+	life.speed = 1.0
 	# The dead stop walking and eating; an empty valley gets twenty new twelve-year-olds.
 	society.alive[0] = 0
 	life._tend_the_dead()
