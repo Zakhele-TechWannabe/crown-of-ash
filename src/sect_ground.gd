@@ -16,6 +16,7 @@ var ramps: Dictionary = {}
 ## Houses and halls drawn standing (BuildingArt), sorted with people and trees: {origin, w, h, kind, variant}.
 var standing: Array[Dictionary] = []
 var standing_tiles: Dictionary = {}
+var boundary_art: Dictionary = {}
 var heights := PackedFloat32Array()
 var art := PackedInt32Array()
 var labels: Array[Dictionary] = []
@@ -155,6 +156,7 @@ func setup(is_dry: Callable) -> void:
 					heights[i] = 0.5 + levels[i] * 0.02
 	for stamp: Dictionary in data.get("stamps", []):
 		_stamp(center + Vector2i(int(stamp.at[0]), int(stamp.at[1])), int(stamp.tile))
+	_register_props()
 	for i in count:
 		no_trees[i] = int(surfaces[i] != 0)
 	var soil := Palette.BRASS.darkened(0.3)
@@ -262,6 +264,7 @@ func _building(b: Dictionary) -> void:
 			for x in w:
 				if x == 0 or x == w - 1 or y == 0 or (y == h - 1 and x != w / 2):
 					_stamp(origin + Vector2i(x, y), 80 if y == 0 or y == h - 1 else 59)
+					if str(b.name) == "Hunters' Lodge": boundary_art[origin + Vector2i(x, y)] = "fence" if y == 0 or y == h - 1 else "fence_side"
 		_paint([int(r[0]) + 2, int(r[1]) + 7, w - 4, h - 9], "garden")
 		_building({"name": "", "rect": [int(r[0]) + 2, int(r[1]) + 2, 6, 4], "kind": "house"})
 		_building({"name": "", "rect": [int(r[0]) + 10, int(r[1]) + 2, 5, 4], "kind": "house"})
@@ -272,7 +275,7 @@ func _building(b: Dictionary) -> void:
 		for y in h:
 			for x in w: standing_tiles[origin + Vector2i(x, y)] = true
 		return
-	if kind in ["house", "hall"]:
+	if kind in ["house", "hall", "gate"]:
 		standing.append({"origin": origin, "w": w, "h": h, "kind": kind, "variant": absi(origin.x * 31 + origin.y * 17) % 3})
 		for y in h:
 			for x in w: standing_tiles[origin + Vector2i(x, y)] = true
@@ -298,6 +301,42 @@ func _building(b: Dictionary) -> void:
 				_stamp(origin + Vector2i(x, y), index)
 
 
+## Keep the original atlas indices for collision; only replace their presentation.
+func _register_props() -> void:
+	for y in bounds.size.y:
+		var x := 0
+		while x < bounds.size.x:
+			var tile := center + bounds.position + Vector2i(x, y)
+			var i := index_at(tile)
+			if standing_tiles.has(tile) or art[i] < 0:
+				x += 1
+				continue
+			var value: int = art[i]
+			var kind := ""
+			if value in [80, 96, 97]: kind = "wall"
+			elif value == 59: kind = "fence_side"
+			elif value in [132, 133, 134, 135]: kind = "stall"
+			elif value == 137: kind = "tent"
+			elif value == 138: kind = "smith"
+			elif value == 136: kind = "boat"
+			elif value == 83: kind = "sign"
+			elif value == 116: kind = "tool"
+			elif value == 95: kind = "prop"
+			if boundary_art.has(tile): kind = boundary_art[tile]
+			if kind.is_empty():
+				x += 1
+				continue
+			var run := 1
+			if kind in ["wall", "fence"]:
+				while x + run < bounds.size.x:
+					var next := tile + Vector2i(run, 0)
+					if standing_tiles.has(next) or art[index_at(next)] != value: break
+					run += 1
+			standing.append({"origin": tile, "w": run, "h": 1, "kind": kind, "variant": posmod(value, 4)})
+			for dx in run: standing_tiles[tile + Vector2i(dx, 0)] = true
+			x += run
+
+
 func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 	if not has_tile(tile):
 		return
@@ -312,7 +351,7 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 		if tuft < 3:
 			image.fill_rect(Rect2i(pos + Vector2i(3 + tuft * 4, 5 + tuft * 3), Vector2i(2, 1)), Palette.GRASS.darkened(0.08))
 		if surface == "garden" and tile.x % 3 == 0 and tile.y % 3 == 0:
-			_blit(image, things, 4, pos)
+			image.fill_rect(Rect2i(pos + Vector2i(5, 6), Vector2i(5, 2)), Palette.GREEN)
 	elif surface == "bridge":
 		image.fill_rect(rect, Palette.BRASS.darkened(0.15))
 		for yy in range(0, 16, 4):
@@ -328,7 +367,6 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 		image.fill_rect(rect, soil)
 		for row in [2, 7, 12]:
 			image.fill_rect(Rect2i(pos + Vector2i(0, row), Vector2i(16, 2)), soil.darkened(0.12))
-		_blit(image, farm, 64 if tile.y % 2 == 0 else 65, pos)
 		for field: Dictionary in data.get("fields", []):
 			var r: Array = field.rect
 			if Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[3])).has_point(tile - center):

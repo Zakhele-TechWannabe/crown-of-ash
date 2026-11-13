@@ -29,6 +29,9 @@ var selected := -1
 ## The first twenty as they arrived; a fresh twenty is sent from these if the valley ever empties.
 var founders: Array[Dictionary] = []
 const TreeArt = preload("res://src/tree_art.gd")
+const WorkplaceArt = preload("res://src/workplace_art.gd")
+var workplace_sprites: Array[Dictionary] = []
+
 const BuildingArt = preload("res://src/building_art.gd")
 var tree_view: Array = []
 var tree_view_key := Rect2i()
@@ -371,7 +374,7 @@ func _draw() -> void:
 				var tile: Vector2i = sect.center + Vector2i(x, y)
 				var at := (Vector2(tile) + Vector2.ONE * 0.5) * 32 - Vector2(0, world.ground.terrace_level(tile) * world.ground.exaggeration)
 				if area.has_point(at):
-					draw_circle(at, 4, Color(0.3, 0.95, 0.85, 0.18 + 0.08 * sin(minutes + x + y)))
+					draw_circle(at, 4, Color(Palette.JADE, 0.18 + 0.08 * sin(minutes + x + y)))
 	_draw_food_places(area)
 	_draw_material_places(area)
 	draw_order = people.duplicate()
@@ -383,7 +386,7 @@ func _draw() -> void:
 	var shade := Color(Palette.INK, 0.22)
 	for tree: Array in trees:
 		if tree[1] >= 0: _shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
-		else: draw_rect(Rect2(tree[0] + Vector2(10, -10), Vector2(tree[2].w * 32.0, 14)), shade)
+		else: _standing_shadow(tree[0], tree[2].w)
 	for p: Dictionary in draw_order:
 		if not p.hidden: _shadow(point(p) + Vector2(3, -1), 11.0, shade)
 	var next_tree := 0
@@ -432,7 +435,7 @@ func _trees_in(area: Rect2) -> Array:
 				tree_view.append(tree)
 	# Houses and halls stand in the same order as trees and people.
 	var bounds := Rect2(Vector2(first) * 512.0, Vector2(last - first + Vector2i.ONE) * 512.0)
-	for b: Dictionary in sect.standing:
+	for b: Dictionary in sect.standing + workplace_sprites:
 		var anchor: Vector2i = b.origin + Vector2i(b.w / 2, b.h - 1)
 		var foot := Vector2(b.origin.x, b.origin.y + b.h) * 32.0 - Vector2(0, world.ground.terrace_level(anchor) * world.ground.exaggeration)
 		if bounds.grow(b.w * 32.0).has_point(foot): tree_view.append([foot, -1, b])
@@ -443,8 +446,14 @@ func _trees_in(area: Rect2) -> Array:
 func _tree(tree: Array) -> void:
 	if tree[1] < 0:
 		var b: Dictionary = tree[2]
-		var texture := BuildingArt.texture(b.kind, b.w, b.h, b.variant)
-		draw_texture_rect(texture, Rect2(tree[0] - BuildingArt.anchor(b.kind, b.h) * 2.0, texture.get_size() * 2.0), false)
+		if b.kind == "orchard":
+			var region := TreeArt.region(TreeArt.OAK, b.variant)
+			draw_texture_rect_region(TreeArt.texture(), Rect2(tree[0] + Vector2(16, 0) - Vector2(TreeArt.FOOT), region.size), region)
+			return
+		var building: bool = b.kind in ["house", "hall", "cave"]
+		var texture: ImageTexture = BuildingArt.texture(b.kind, b.w, b.h, b.variant) if building else WorkplaceArt.texture(b.kind, b.w, b.h, b.variant)
+		var anchor: Vector2 = BuildingArt.anchor(b.kind, b.h) if building else WorkplaceArt.anchor(b.h)
+		draw_texture_rect(texture, Rect2(tree[0] - anchor * 2.0, texture.get_size() * 2.0), false)
 		return
 	var region := TreeArt.region(tree[1], tree[2])
 	draw_texture_rect_region(TreeArt.texture(), Rect2(tree[0] - Vector2(TreeArt.FOOT) * 2.0, region.size * 2.0), region)
@@ -453,6 +462,12 @@ func _tree(tree: Array) -> void:
 func _shadow(at: Vector2, radius: float, colour: Color) -> void:
 	draw_set_transform(at, 0.0, Vector2(1.0, 0.38))
 	draw_circle(Vector2.ZERO, radius, colour)
+	draw_set_transform(Vector2.ZERO)
+
+
+func _standing_shadow(at: Vector2, w: int) -> void:
+	draw_set_transform(at + Vector2(w * 16.0 + 6, -3), 0.0, Vector2(w * 16.0 + 8, clampf(w * 3.0, 8, 22)))
+	for radius in [1.0, 0.8, 0.6]: draw_circle(Vector2.ZERO, radius, Color(Palette.INK, 0.075))
 	draw_set_transform(Vector2.ZERO)
 
 
@@ -740,73 +755,10 @@ func _food_footprint(origin: Vector2i, size: Vector2i, occupied: Dictionary, max
 func _food_point(tile: Vector2i) -> Vector2:
 	return (Vector2(tile) + Vector2.ONE * 0.5) * 32 - Vector2(0, heights[sect.index_at(tile)] * world.ground.exaggeration)
 
+## Ground-only beds and ponds; upright worksite pieces join the walkers' draw order.
 func _draw_food_places(area: Rect2) -> void:
 	for patch: Dictionary in food_patches:
-		var at := (_food_point(patch.tiles[0]) + _food_point(patch.tiles[-1])) * 0.5 if not patch.tiles.is_empty() else _food_point(patch.tile)
-		if not area.grow(500).has_point(at):
-			continue
-		var brown := Palette.BRASS.darkened(0.3)
-		match str(patch.kind):
-			"garden":
-				for tile: Vector2i in patch.tiles:
-					var pos := _food_point(tile)
-					draw_rect(Rect2(pos - Vector2(16, 16), Vector2(32, 32)), Palette.BRASS.darkened(0.2))
-					for row in 3:
-						for col in 3:
-							var crop := Color(["78a64c", "c1b476", "c68d43", "598745"][posmod(tile.x + tile.y, 4)])
-							draw_rect(Rect2(pos + Vector2(col * 10 - 13, row * 10 - 12), Vector2(7, 5)), crop if economy.season() != 3 else Palette.EARTH.darkened(0.05))
-			"orchard":
-				for i in patch.tiles.size():
-					if i % 12 % 2 != 0 or i / 12 % 2 != 0:
-						continue
-					var pos := _food_point(patch.tiles[i]) + Vector2(1, 32)
-					draw_rect(Rect2(pos - Vector2(3, 20), Vector2(6, 24)), brown)
-					draw_circle(pos - Vector2(0, 29), 17, Palette.GREEN.darkened(0.05) if economy.season() != 3 else Palette.PAPER.darkened(0.45))
-					if economy.season() != 3:
-						for j in 5:
-							draw_circle(pos + Vector2(j * 6 - 12, -28 + j % 2 * 7), 3, Palette.RED.lightened(0.7) if economy.season() == 0 else Palette.GOLD.lightened(0.2))
-			"herd", "fishery":
-				for tile: Vector2i in patch.tiles:
-					var pos := _food_point(tile)
-					draw_rect(Rect2(pos - Vector2(15, 15), Vector2(30, 30)), Palette.BLUE.lightened(0.05) if patch.kind == "fishery" else Palette.BRASS.darkened(0.15))
-					draw_line(pos - Vector2(15, 14), pos + Vector2(15, -14), brown, 2)
-					draw_line(pos - Vector2(14, 15), pos + Vector2(-14, 15), brown, 2)
-					if patch.kind == "herd":
-						draw_circle(pos, 5, Palette.RED.lightened(0.5) if tile.x % 2 == 0 else Palette.PAPER.lightened(0.1))
-					else:
-						draw_line(pos - Vector2(12, 12), pos + Vector2(12, 12), Palette.GRASS.lightened(0.3), 1)
-				draw_rect(Rect2(at - Vector2(26, 18), Vector2(52, 36)), Palette.BLUE.lightened(0.05) if patch.kind == "fishery" else Palette.BRASS.darkened(0.15))
-				for i in 5:
-					var pos := at + Vector2(i * 10 - 22, -16)
-					draw_line(pos, pos + Vector2(0, 32), brown if patch.kind == "herd" else Palette.GRASS.lightened(0.3), 2)
-				if patch.kind == "herd":
-					draw_rect(Rect2(at + Vector2(-18, -5), Vector2(15, 9)), Palette.RED.lightened(0.5))
-					draw_rect(Rect2(at + Vector2(8, -4), Vector2(7, 6)), Palette.PAPER.lightened(0.1))
-					draw_rect(Rect2(at + Vector2(28, -5), Vector2(25, 18)), Palette.BLUE.lightened(0.05))
-					draw_rect(Rect2(at + Vector2(33, 0), Vector2(8, 5)), Palette.PAPER.lightened(0.15))
-					draw_rect(Rect2(at + Vector2(-18, -33), Vector2(22, 13)), brown)
-				else:
-					for i in 3:
-						draw_line(at + Vector2(-24, i * 10 - 12), at + Vector2(24, i * 10 - 12), Palette.GRASS.lightened(0.3), 1)
-			"logs":
-				for i in 4:
-					var pos := at + Vector2(i % 2 * 24, i / 2 * 16)
-					draw_rect(Rect2(pos, Vector2(20, 7)), brown)
-					draw_rect(Rect2(pos + Vector2(5, -4), Vector2(7, 5)), Palette.PAPER.darkened(0.2))
-			"kitchen":
-				draw_rect(Rect2(at - Vector2(22, 25), Vector2(44, 25)), Palette.EARTH.darkened(0.05))
-				draw_rect(Rect2(at - Vector2(26, 32), Vector2(52, 9)), Palette.INK_SOFT.lightened(0.05))
-				for i in 5:
-					draw_rect(Rect2(at + Vector2(i * 9 - 20, 4), Vector2(6, 9)), Palette.BRASS.darkened(0.05))
-
-			"hunt":
-				# A game drying rack beside the existing lodge destination.
-				for x in [-20, 20]:
-					draw_rect(Rect2(at + Vector2(x, -28), Vector2(3, 32)), brown)
-				draw_line(at + Vector2(-20, -26), at + Vector2(23, -26), brown, 3)
-				for i in 4:
-					draw_line(at + Vector2(i * 10 - 14, -26), at + Vector2(i * 10 - 14, -19), Palette.PAPER.darkened(0.2), 1)
-					draw_rect(Rect2(at + Vector2(i * 10 - 17, -19), Vector2(6, 11)), Palette.RED.lightened(0.25))
+		if patch.kind in ["garden", "herd", "fishery"]: _draw_workplace_ground(patch, area)
 
 func _setup_material_places() -> void:
 	var occupied: Dictionary = {}
@@ -830,65 +782,55 @@ func _setup_material_places() -> void:
 		sect.labels.append({"name": plan.name, "tile": tiles[0]})
 		print("MATERIAL SITE %s: %s levels %d..%d dry tiles %d" % [plan.id, tiles[0] - sect.center, low, high, tiles.size()])
 
-func _draw_material_places(area: Rect2) -> void:
-	for patch: Dictionary in material_patches:
-		var at := (_food_point(patch.tiles[0]) + _food_point(patch.tiles[-1])) * 0.5
-		if not area.grow(500).has_point(at): continue
-		var timber := Palette.BRASS.darkened(0.35)
-		var rock := Palette.STONE.darkened(0.15)
-		for tile: Vector2i in patch.tiles:
-			draw_rect(Rect2(_food_point(tile) - Vector2(16, 16), Vector2(32, 32)), Palette.INK_SOFT.lightened(0.2))
-		match str(patch.kind):
-			"woodcutting":
-				for x in [-65, 65]:
-					draw_rect(Rect2(at + Vector2(x - 8, -30), Vector2(16, 14)), timber)
-					draw_circle(at + Vector2(x, -30), 9, Palette.BRASS.lightened(0.15))
-					draw_arc(at + Vector2(x, -30), 5, 0, TAU, 12, timber, 1)
-				for i in 5:
-					var pos := at + Vector2(i * 24 - 50, i % 2 * 24)
-					draw_rect(Rect2(pos, Vector2(25, 10)), timber)
-					draw_circle(pos, 6, Palette.BRASS.lightened(0.15))
-				draw_line(at + Vector2(-20, -25), at + Vector2(20, -25), timber, 6)
-				for x in [-15, 15]: draw_line(at + Vector2(x, -25), at + Vector2(x * 1.5, 0), timber, 4)
-			"quarry", "mine":
-				draw_rect(Rect2(at + Vector2(-60, -45), Vector2(120, 30)), rock)
-				for i in 4: draw_rect(Rect2(at + Vector2(i * 26 - 50, 10), Vector2(22, 16)), rock.lightened(0.15))
-				if patch.kind == "mine":
-					draw_rect(Rect2(at + Vector2(-18, -42), Vector2(36, 32)), Palette.PLUM.darkened(0.65))
-					for x in [-40, 20]:
-						draw_rect(Rect2(at + Vector2(x, 0), Vector2(25, 14)), timber)
-						draw_circle(at + Vector2(x + 5, 16), 4, Palette.STONE.darkened(0.6))
-						draw_circle(at + Vector2(x + 20, 16), 4, Palette.STONE.darkened(0.6))
-						draw_circle(at + Vector2(x + 12, 1), 6, rock.darkened(0.25))
-				else:
-					draw_line(at + Vector2(35, -65), at + Vector2(15, 5), timber, 4)
-					draw_line(at + Vector2(35, -65), at + Vector2(60, 5), timber, 4)
-					draw_line(at + Vector2(35, -65), at + Vector2(35, -5), Palette.PAPER.darkened(0.1), 2)
-			"clay":
-				_draw_material_pit(at, Palette.BRASS.darkened(0.05))
-			"kiln", "smith":
-				for x in [-35, 25]:
-					draw_circle(at + Vector2(x, 0), 22, Palette.STONE.darkened(0.55) if x < 0 and patch.kind == "kiln" else Palette.BRASS.darkened(0.05))
-					draw_rect(Rect2(at + Vector2(x - 7, -8), Vector2(14, 18)), Palette.STONE.darkened(0.7))
-					draw_rect(Rect2(at + Vector2(x - 3, 0), Vector2(6, 8)), Palette.GOLD)
-			"weaver":
-				draw_rect(Rect2(at + Vector2(-32, -60), Vector2(64, 30)), timber)
-				draw_rect(Rect2(at + Vector2(-37, -65), Vector2(74, 8)), Palette.BRASS.darkened(0.2))
-				for i in 12:
-					var pos := at + Vector2(i % 6 * 20 - 60, i / 6 * 24)
-					draw_line(pos, pos - Vector2(0, 26), Palette.GREEN.lightened(0.05), 3)
-					draw_line(pos - Vector2(8, 15), pos + Vector2(8, -22), Palette.GREEN.lightened(0.15), 3)
-				draw_rect(Rect2(at + Vector2(-25, -58), Vector2(50, 22)), timber)
-				for i in 10: draw_line(at + Vector2(i * 4 - 18, -55), at + Vector2(i * 4 - 18, -37), Palette.PAPER.darkened(0.05), 1)
-			"tanner":
-				for x in [-40, 0, 40]:
-					draw_rect(Rect2(at + Vector2(x - 12, -30), Vector2(24, 38)), timber, false, 3)
-					draw_rect(Rect2(at + Vector2(x - 8, -25), Vector2(16, 26)), Palette.EARTH.darkened(0.1))
+	_setup_workplace_sprites()
 
-func _draw_material_pit(at: Vector2, colour: Color) -> void:
-	draw_set_transform(at, 0, Vector2(2, 1))
-	draw_circle(Vector2.ZERO, 25, colour)
-	draw_set_transform(Vector2.ZERO)
+func _draw_material_places(area: Rect2) -> void:
+	for patch: Dictionary in material_patches: _draw_workplace_ground(patch, area)
+
+func _draw_workplace_ground(patch: Dictionary, area: Rect2) -> void:
+	for i in patch.tiles.size():
+		var tile: Vector2i = patch.tiles[i]
+		var pos := _food_point(tile)
+		if not area.has_point(pos): continue
+		var tex := WorkplaceArt.ground_texture(patch.kind, patch.edges[i], posmod(tile.x + tile.y, 4), economy.season() == 3)
+		draw_texture_rect(tex, Rect2(pos - Vector2(16, 16), Vector2(32, 32)), false)
+
+## Art registrations never touch footprints, destinations or the walking grid.
+func _setup_workplace_sprites() -> void:
+	for patch: Dictionary in food_patches + material_patches:
+		var claimed: Dictionary = {}
+		for at: Vector2i in patch.tiles: claimed[at] = true
+		patch.edges = []
+		for at: Vector2i in patch.tiles:
+			var edges := 0
+			var directions := [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
+			for i in 4:
+				if not claimed.has(at + directions[i]): edges |= 1 << i
+			patch.edges.append(edges)
+		if patch.tiles.is_empty(): continue
+		var tile: Vector2i = patch.tiles[patch.tiles.size() / 2]
+		var kind := str(patch.kind)
+		if kind == "garden" or kind == "clay": continue
+		if kind == "orchard":
+			for i in patch.tiles.size():
+				if i % 12 % 3 == 0 and i / 12 % 3 == 0: _workplace(patch.tiles[i], "orchard", 1)
+			for i in [8, 10]: _workplace(patch.tiles[i], "hive", 2)
+		elif kind == "herd":
+			var first: Vector2i = patch.tiles[0]
+			var last: Vector2i = patch.tiles[-1]
+			_workplace(first, "fence", last.x - first.x + 1)
+			_workplace(Vector2i(first.x, last.y), "fence", last.x - first.x + 1)
+			for y in range(first.y + 1, last.y):
+				_workplace(Vector2i(first.x, y), "fence_side", 1)
+				_workplace(Vector2i(last.x, y), "fence_side", 1)
+			_workplace(tile, "kitchen", 2)
+			for i in [5, 7, 9]: _workplace(patch.tiles[i], "pig" if i == 5 else "chicken", 1)
+		else:
+			_workplace(tile, kind, 3 if kind in ["mine", "quarry", "weaver", "tanner", "hunt", "woodcutting", "logs"] else 2)
+	tree_view_key = Rect2i()
+
+func _workplace(tile: Vector2i, kind: String, w: int) -> void:
+	workplace_sprites.append({"origin": tile, "w": w, "h": 1, "kind": kind, "variant": posmod(tile.x + tile.y, 4)})
 
 func _refresh_population_views() -> void:
 	var camera: Camera2D = world.ground_view.cam
