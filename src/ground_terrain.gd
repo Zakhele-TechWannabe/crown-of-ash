@@ -237,11 +237,11 @@ func trees_in_block(block: Vector2i) -> Array:
 	return found
 
 
-## A crown reaches about four tiles up from its foot: keep it off roofs and out of doorways.
+## A crown reaches four or five tiles up from its foot: no tree grows right in front of a building.
 func _near_building(tile: Vector2i) -> bool:
-	for dy in range(-3, 2):
+	for dy in range(-5, 2):
 		for dx in range(-1, 2):
-			if sect.plinth.has(tile + Vector2i(dx, dy)): return true
+			if sect.plinth.has(tile + Vector2i(dx, dy)) or sect.standing_tiles.has(tile + Vector2i(dx, dy)): return true
 	return false
 
 

@@ -19,6 +19,10 @@ func setup(is_dry: Callable) -> void:
 		site.setup(is_dry)
 		sites.append(site)
 		labels.append_array(site.labels)
+		# Site buildings stand, level their ground and keep trees off, like the sect's own.
+		standing.append_array(site.standing)
+		plinth.merge(site.plinth)
+		standing_tiles.merge(site.standing_tiles)
 		var rect: Rect2i = Rect2i(site.center + site.bounds.position, site.bounds.size)
 		for y in range(floori(rect.position.y / 64.0), floori((rect.end.y - 1) / 64.0) + 1):
 			for x in range(floori(rect.position.x / 64.0), floori((rect.end.x - 1) / 64.0) + 1):

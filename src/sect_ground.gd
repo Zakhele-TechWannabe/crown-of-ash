@@ -13,6 +13,9 @@ var levels := PackedInt32Array()
 var plinth: Dictionary = {}
 ## Tiles on either side of a bank where a ramp of earth steps is cut, so walkers can change level there.
 var ramps: Dictionary = {}
+## Houses and halls drawn standing (BuildingArt), sorted with people and trees: {origin, w, h, kind, variant}.
+var standing: Array[Dictionary] = []
+var standing_tiles: Dictionary = {}
 var heights := PackedFloat32Array()
 var art := PackedInt32Array()
 var labels: Array[Dictionary] = []
@@ -266,6 +269,10 @@ func _building(b: Dictionary) -> void:
 	if kind == "cave":
 		_paint(r, "cave")
 		return
+	if kind in ["house", "hall"]:
+		standing.append({"origin": origin, "w": w, "h": h, "kind": kind, "variant": absi(origin.x * 31 + origin.y * 17) % 3})
+		for y in h:
+			for x in w: standing_tiles[origin + Vector2i(x, y)] = true
 	# A path across each terrace joins its buildings to the central ascent.
 	if level_at(origin) >= 0:
 		_paint([mini(0, int(r[0])), int(r[1]) + h, maxi(0, int(r[0]) + w) - mini(0, int(r[0])), 1], "paving")
@@ -342,6 +349,8 @@ func draw_tile(image: Image, tile: Vector2i, pos: Vector2i) -> void:
 			image.fill_rect(Rect2i(pos + Vector2i(0, y), Vector2i(16, 1)), Palette.STONE.darkened(0.16 if steps else 0.07))
 			if not steps:
 				image.fill_rect(Rect2i(pos + Vector2i(4 if y == 0 else 12, y), Vector2i(1, 8)), Palette.STONE.darkened(0.07))
+	# A standing building is drawn as a sprite over this ground; its old roof tiles stay unpainted.
+	if standing_tiles.has(tile): return
 	# Things: full contrast and an ink outline.
 	if art[i] >= 132:
 		var value := art[i]

@@ -29,6 +29,7 @@ var selected := -1
 ## The first twenty as they arrived; a fresh twenty is sent from these if the valley ever empties.
 var founders: Array[Dictionary] = []
 const TreeArt = preload("res://src/tree_art.gd")
+const BuildingArt = preload("res://src/building_art.gd")
 var tree_view: Array = []
 var tree_view_key := Rect2i()
 const LANES := ["earth", "paving", "bridge"]
@@ -369,7 +370,8 @@ func _draw() -> void:
 	var trees := _trees_in(area.grow(256))
 	var shade := Color(Palette.INK, 0.22)
 	for tree: Array in trees:
-		_shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
+		if tree[1] >= 0: _shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
+		else: draw_rect(Rect2(tree[0] + Vector2(10, -10), Vector2(tree[2].w * 32.0, 14)), shade)
 	for p: Dictionary in draw_order:
 		if not p.hidden: _shadow(point(p) + Vector2(3, -1), 11.0, shade)
 	var next_tree := 0
@@ -410,11 +412,22 @@ func _trees_in(area: Rect2) -> Array:
 		for bx in range(first.x, last.x + 1):
 			for tree: Array in world.ground.trees_in_block(Vector2i(bx, by)):
 				tree_view.append(tree)
+	# Houses and halls stand in the same order as trees and people.
+	var bounds := Rect2(Vector2(first) * 512.0, Vector2(last - first + Vector2i.ONE) * 512.0)
+	for b: Dictionary in sect.standing:
+		var anchor: Vector2i = b.origin + Vector2i(b.w / 2, b.h - 1)
+		var foot := Vector2(b.origin.x, b.origin.y + b.h) * 32.0 - Vector2(0, world.ground.terrace_level(anchor) * world.ground.exaggeration)
+		if bounds.grow(b.w * 32.0).has_point(foot): tree_view.append([foot, -1, b])
 	tree_view.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
 	return tree_view
 
 
 func _tree(tree: Array) -> void:
+	if tree[1] < 0:
+		var b: Dictionary = tree[2]
+		var texture := BuildingArt.texture(b.kind, b.w, b.h, b.variant)
+		draw_texture_rect(texture, Rect2(tree[0] - BuildingArt.anchor(b.kind, b.h) * 2.0, texture.get_size() * 2.0), false)
+		return
 	var region := TreeArt.region(tree[1], tree[2])
 	draw_texture_rect_region(TreeArt.texture(), Rect2(tree[0] - Vector2(TreeArt.FOOT) * 2.0, region.size * 2.0), region)
 
