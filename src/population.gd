@@ -667,15 +667,21 @@ func household_name(person: int) -> String:
 		household_names.clear()
 		var heads: Dictionary = {}
 		var surname_counts: Dictionary = {}
+		var mixed: Dictionary = {}
 		for p in size():
-			if heads.has(household[p]): continue
+			if not society.alive[p]: continue
+			if heads.has(household[p]):
+				# Unrelated housemates (the orphans who arrived together) share a cottage, not a family name.
+				if names[p].get_slice(" ", 0) != names[heads[household[p]]].get_slice(" ", 0): mixed[household[p]] = true
+				continue
 			heads[household[p]] = p
 			var surname := names[p].get_slice(" ", 0)
 			surname_counts[surname] = int(surname_counts.get(surname, 0)) + 1
 		for home: int in heads:
 			var p: int = heads[home]
 			var surname := names[p].get_slice(" ", 0)
-			household_names[home] = (names[p] if int(surname_counts[surname]) > 1 else surname) + " household"
+			if mixed.has(home): household_names[home] = "%s cottage %d" % [district_name(p), home + 1]
+			else: household_names[home] = (names[p] if int(surname_counts[surname]) > 1 else surname) + " household"
 		household_names_day = day
 		household_names_size = size()
 	return str(household_names.get(household[person], names[person] + " household"))

@@ -17,4 +17,4 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 
 [simulation]
-lifespan_death_enabled=false
+lifespan_death_enabled=true

@@ -418,9 +418,16 @@ func seed() -> void:
 			store.prepare_person(child)
 	# Seed acquaintance from actual homes and work; no preassigned sect or romance.
 	for a in store.size():
+		if not alive[a]: continue
 		for b in store.size():
-			if a == b: continue
-			if store.household[a] == store.household[b] or store.shared_work(a, b) or store.locations[a].distance_squared_to(store.locations[b]) < 4096:
+			if a == b or not alive[b] or ties.find(a, b) >= 0: continue
+			if store.household[a] == store.household[b]:
+				# Orphans raised under one roof start as friends.
+				var e := ties.tie(a, b, 40)
+				ties.familiarity[e] = 70
+				ties.trust[e] = 45
+				ties.bonds[e] |= Relationships.FRIEND
+			elif store.shared_work(a, b) or store.locations[a].distance_squared_to(store.locations[b]) < 4096:
 				var e := ties.tie(a, b, 25)
 				ties.familiarity[e] = 40
 				ties.trust[e] = 30
@@ -546,20 +553,18 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		elif years >= 6 and years < 19 and wanderer_present and on_day % 365 < 7: awaken(p, "a wandering cultivator tested youths on the West Road")
 		elif in_hunting_grounds and store.rng.randf() < days * float(events.spirit_fruit_find_per_day): awaken(p, "a spirit fruit found in the Eastern Hunting Grounds")
 	if years >= 12 and store.rng.randf() < days * float(events.qi_site_visit_per_day): site[p] = store.rng.randi_range(1, 2)
-	if technique[p] < 2 and in_hunting_grounds and store.rng.randf() < days * float(events.ruin_manual_find_per_day):
-		technique[p] = 2 if store.rng.randf() < float(events.complete_manual_share) else 1
-		technique_element[p] = store.rng.randi_range(0, 9)
-		note(p, "manual", "%s found %s in hunting-ground ruins" % [store.names[p], "a complete Profound cultivation manual" if technique[p] == 2 else "a damaged Yellow breathing manual"])
-		awaken(p, "qi stirring while studying a broken manual")
+	# No manuals lie waiting in the wild: an awakened mind works out its first breathing method by watching nature.
+	if revealed[p] and technique[p] == 0 and store.rng.randf() < days * float(events.nature_breathing_per_day) * store.comprehension[p] * (1.5 if outdoors(p) else 1.0):
+		technique[p] = 1
+		technique_element[p] = 0
+		while (store.spirit_root[p] & (1 << technique_element[p])) == 0 and technique_element[p] < 9: technique_element[p] += 1
+		var sights: Array = events.breathing_sights
+		note(p, "manual", "%s worked out a breathing method from watching %s" % [store.names[p], sights[store.rng.randi_range(0, sights.size() - 1)]])
 	if realm[p] >= 3 and store.comprehension[p] >= 1.5 and store.rng.randf() < days * float(events.technique_creation_per_day):
 		technique[p] = 2
 		technique_element[p] = 0
 		while (store.spirit_root[p] & (1 << technique_element[p])) == 0: technique_element[p] += 1
 		note(p, "technique", "%s created a complete lineage technique through insight" % store.names[p])
-	if revealed[p] and technique[p] < 2 and wanderer_present and on_day % 365 < 7 and store.rng.randf() < float(events.wanderer_manual_gift):
-		technique[p] = 2 if store.rng.randf() < float(events.complete_manual_share) else 1
-		technique_element[p] = store.rng.randi_range(0, 9)
-		note(p, "manual", "%s received %s from the West Road wanderer" % [store.names[p], "a complete Profound method" if technique[p] == 2 else "a Yellow breathing fragment"])
 	cultivate(p, days)
 	if temper: temper.weekly(p, days, on_day)
 	if mind: mind.weekly(p, days, on_day, n)
@@ -606,6 +611,13 @@ func deliver(mother: int, on_day: int) -> void:
 	last_birth[mother] = on_day
 	due_day[mother] = -1
 	twins[mother] = 0
+
+## Works under the open sky: fields, forest, hunting, herds or water.
+func outdoors(p: int) -> bool:
+	var store: RefCounted = store_ref.get_ref()
+	for duty: String in store.schedules[store.job[p]]:
+		if duty in ["fields", "hunt", "logs", "herd", "fishery", "orchard", "garden"]: return true
+	return false
 
 func faction(kind: String, key: String, title: String, members: PackedInt32Array, leader: int) -> int:
 	var id: int = faction_keys.get(key, -1)

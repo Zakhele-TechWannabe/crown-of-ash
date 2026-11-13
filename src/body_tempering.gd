@@ -202,7 +202,7 @@ func break_through(p: int, on_day: int) -> int:
 	society.note(p, "tempering", words)
 	return g
 
-## Methods spread: worked out by hunters and fighters, taught by better-tempered friends, given by wanderers.
+## Methods spread: worked out by hunters and fighters, taught by better-tempered friends, and written down from watching nature.
 func _learn(p: int, days: int, on_day: int) -> void:
 	var society: RefCounted = society_ref.get_ref()
 	var store: RefCounted = society.population
@@ -221,9 +221,10 @@ func _learn(p: int, days: int, on_day: int) -> void:
 			method[p] = 1
 			society.note(p, "tempering_method", "%s worked out a set of folk drills from %s" % [store.names[p], "years of hunting" if hunter else "stubborn practice"])
 			return
-	if society.wanderer_present and on_day % 365 < days and method[p] < 2 and store.rng.randf() < float(config.wanderer_teaches):
-		method[p] = 2 if store.rng.randf() < float(config.wanderer_manual_share) else maxi(method[p], 1)
-		society.note(p, "tempering_method", "%s was taught %s by a wandering martial artist on the West Road" % [store.names[p], config.method_names[method[p]]])
+	if method[p] == 1 and body_layer[p] >= 3 and store.rng.randf() < days * float(config.nature_manual_per_day) * store.comprehension[p] * (2.0 if society.outdoors(p) else 1.0):
+		method[p] = 2
+		var sights: Array = config.tempering_sights
+		society.note(p, "tempering_method", "%s wrote a tempering manual after watching %s" % [store.names[p], sights[store.rng.randi_range(0, sights.size() - 1)]])
 		return
 	if body_layer[p] >= 7 and method[p] < 3 and store.comprehension[p] >= 1.5 and store.rng.randf() < days * float(config.complete_method_per_day):
 		method[p] = 3

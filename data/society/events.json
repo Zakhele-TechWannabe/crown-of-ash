@@ -3,9 +3,9 @@
   "qi_site_visit_per_day": 0.00025,
   "meditation_insight_per_day": 2e-05,
   "spirit_fruit_find_per_day": 1e-05,
-  "ruin_manual_find_per_day": 1e-05,
+  "ruin_manual_find_per_day": 0,
   "wanderer_per_year": 0.08,
-  "wanderer_manual_gift": 0.4,
+  "wanderer_manual_gift": 0,
   "technique_creation_per_day": 1e-05,
   "birth_per_day": 0.00045,
   "birth_spacing_days": 730,
@@ -19,5 +19,15 @@
   "extended_kin_exclusion": false,
   "gestation_days": 273,
   "twin_gestation_days": 243,
-  "twin_chance": 0.03
+  "twin_chance": 0.03,
+  "nature_breathing_per_day": 0.0002,
+  "breathing_sights": [
+    "the spirit spring rise and fall like a sleeping chest",
+    "wind move through the pines without ever stopping",
+    "a crane stand still in the shallows for a whole morning",
+    "mist gather in the valley at dawn and leave at noon",
+    "the seasons turn, slow on the way in and slow on the way out",
+    "a cat breathe as it watched a mousehole",
+    "frost form on the paddies and melt again"
+  ]
 }

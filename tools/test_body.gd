@@ -20,6 +20,8 @@ func _init() -> void:
 	assert(t.body_layer[25] == 0, "No drills and no labour, no tempering")
 	# Drills with folk drills reach Steel Sinew but stop at the Iron Bone gate without a manual and medicine.
 	t.method[1] = 1
+	var observe: float = t.config.nature_manual_per_day
+	t.config.nature_manual_per_day = 0.0
 	var day := 1
 	for w in 1500:
 		day = 7 * w + 1
@@ -29,7 +31,11 @@ func _init() -> void:
 	assert(t.body_layer[1] == 3, "Folk drills reach Steel Sinew (got %d)" % t.body_layer[1])
 	assert(t.gate_need(1) == "a tempering manual", "Iron Bone needs a manual: %s" % t.gate_need(1))
 	for l in 3: assert(t.grade(1, l + 1) <= t.MIDDLE, "Folk drills cap the grade at Middle")
-	t.method[1] = 2
+	# Nobody hands out manuals: one is written from watching nature.
+	t.config.nature_manual_per_day = 1.0
+	t.weekly(1, 7, day + 7)
+	assert(t.method[1] == 2, "Watching nature writes a tempering manual")
+	t.config.nature_manual_per_day = observe
 	assert(t.gate_need(1) == "iron-bark baths", "Then it needs medicine: %s" % t.gate_need(1))
 	t.medicine["iron_bark"][1] = 3
 	assert(t.gate_need(1) == "iron-bark baths", "A bath takes four roots")

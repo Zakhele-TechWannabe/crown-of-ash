@@ -304,13 +304,21 @@ func _graph(page: VBoxContainer, modes: Array, height: float) -> void:
 
 
 func _family(page: VBoxContainer) -> void:
-	_graph(page, ["Family", "Lineage"], 320)
+	var kin: bool = society.spouse[person] >= 0 or society.master[person] >= 0 or not (society.children(person).is_empty() and society.siblings(person).is_empty() and society.disciples(person).is_empty())
+	for parent: int in society.parents(person): kin = kin or parent >= 0
+	# Orphans of the first generation have no one yet; an empty graph says less than a sentence.
+	if kin: _graph(page, ["Family", "Lineage"], 320)
+	else: small(page, "No family yet: %s came to the valley as an orphan. Marriage, children and a master will appear here." % population.names[person].get_slice(" ", 1))
 	var lists := VBoxContainer.new()
 	page.add_child(lists)
 	_links(lists, "Parents", society.parents(person))
 	_links(lists, "Spouse", PackedInt32Array([society.spouse[person]]))
 	_links(lists, "Children", society.children(person))
 	_links(lists, "Brothers and sisters", society.siblings(person))
+	var housemates := PackedInt32Array()
+	for other in population.size():
+		if other != person and society.alive[other] and population.household[other] == population.household[person] and not society.related(person, other) and society.spouse[person] != other: housemates.append(other)
+	_links(lists, "Shares a home with", housemates)
 	_links(lists, "Master", PackedInt32Array([society.master[person]]))
 	_links(lists, "Disciples", society.disciples(person))
 	if lists.get_child_count() == 0:

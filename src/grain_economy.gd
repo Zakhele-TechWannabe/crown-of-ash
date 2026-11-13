@@ -72,6 +72,8 @@ var coarse_population := false
 var population: RefCounted
 var skill_event_cursor := 0
 var order: Array[int] = []
+## Population ids that walk the map; everyone else is fed and counted from the population.
+var walker_ids: Dictionary = {}
 var chronicle: Array[String] = []
 var summaries: Array[String] = []
 var year := 1
@@ -108,7 +110,8 @@ func daily_need() -> float:
 	for p: Dictionary in people:
 		total += 0.5 if int(p.kind) == 8 else 1.0
 	if population != null:
-		for id in range(people.size(), population.size()):
+		for id in population.size():
+			if walker_ids.has(id): continue
 			if population.society.alive[id]: total += .5 if population.age(id) < 18 else 1.0
 	return total
 
@@ -176,7 +179,19 @@ func setup(data: Dictionary, residents: Array[Dictionary], world_seed: int) -> v
 		adults[i] = adults[j]
 		adults[j] = old
 	order.append_array(adults)
+	for p: Dictionary in people: walker_ids[int(p.get("id", -1))] = true
 	_weather()
+
+## Walkers died or arrived: rebuild who eats in which order.
+func walkers_changed() -> void:
+	order.clear()
+	walker_ids.clear()
+	var adults: Array[int] = []
+	for n in people.size():
+		walker_ids[int(people[n].id)] = true
+		if int(people[n].kind) == 8: order.append(n)
+		else: adults.append(n)
+	order.append_array(adults)
 
 func season() -> int:
 	return 0 if day <= 91 else (1 if day <= 182 else (2 if day <= 273 else 3))
@@ -292,7 +307,8 @@ func _meal() -> void:
 		if int(p.hunger) > 0:
 			hungry += 1
 	if population != null:
-		for id in range(people.size(), population.size()):
+		for id in population.size():
+			if walker_ids.has(id): continue
 			if not population.society.alive[id]: continue
 			var need := .5 if population.age(id) < 18 else 1.0
 			var eaten := _eat_group("food", need * share, "children" if population.age(id) < 18 else "adults")
@@ -342,7 +358,8 @@ func _finish_day() -> void:
 				# Hungry villagers of any trade join the harvest.
 				labor += 0.5
 	if population != null and not no_farmers:
-		for id in range(people.size(), population.size()):
+		for id in population.size():
+			if walker_ids.has(id): continue
 			if population.age(id) < 12 or not population.society.alive[id]: continue
 			if "fields" in population.schedules[population.job[id]]: labor += EFFECT[population.hunger[id]] * population.output(id, "fields") * (.5 if population.age(id) < 18 else 1)
 	if day <= 182:

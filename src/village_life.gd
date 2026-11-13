@@ -26,6 +26,9 @@ var person_art: Array[ImageTexture] = []
 var child_art: Array[ImageTexture] = []
 ## Population id of the villager the card is showing, ringed on the map.
 var selected := -1
+## The first twenty as they arrived; a fresh twenty is sent from these if the valley ever empties.
+var founders: Array[Dictionary] = []
+var tended_day := -1
 var heights := PackedInt32Array()
 var square: Vector2i
 var well: Vector2i
@@ -95,7 +98,8 @@ func setup(map: Node2D) -> void:
 	_setup_material_places()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = int(sect.data.seed)
-	var families := ["Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Zhao", "Huang"]
+	# Twenty orphans from twenty families: housemates are friends, not kin.
+	var families := ["Wang", "Li", "Zhang", "Liu", "Chen", "Yang", "Zhao", "Huang", "Zhou", "Wu", "Xu", "Sun", "Hu", "Zhu", "Gao", "Lin", "He", "Guo", "Ma", "Luo"]
 	var given := ["Erniu", "Cuihua", "Dazhi", "Xiaolan", "Shan", "Mei", "Yong", "Lian", "Bao", "Qing", "An", "Xiu", "Fu", "Lan", "Ping", "Hua", "Song", "Yun", "Xiaohu", "Xiaoyu"]
 	var jobs := ["field hand", "canteen cook", "plaza sweeper", "barracks attendant", "water carrier", "market vendor", "shrine keeper", "woodcutter", "child"]
 	for n in 20:
@@ -115,7 +119,7 @@ func setup(map: Node2D) -> void:
 			work = nearest(sect.center + Vector2i(80 + n % 2 * 8, 245))
 		else:
 			work = nearest(square + Vector2i(n % 4 * 2 - 3, n % 3 * 2))
-		people.append({"name": families[household] + " " + given[n], "sex": "female" if n % 2 else "male", "age": 12, "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.1, 0.28), rng.randf_range(0.85, 1.0))})
+		people.append({"name": families[n] + " " + given[n], "sex": "female" if n % 2 else "male", "age": 12, "home_cottage": household * 8, "home": home, "job": jobs[job], "kind": job, "work": work, "pos": Vector2(home), "destination": Vector2i(-999, -999), "path": PackedVector2Array(), "step": 0, "hidden": true, "activity": "sleeping at home", "tint": Color.from_hsv(rng.randf_range(0.05, 0.65), rng.randf_range(0.1, 0.28), rng.randf_range(0.85, 1.0))})
 	var trades := ["gardener", "gardener", "orchard keeper", "herder", "herder", "fisher", "hunter", "cook / pickler", "mushroom grower", "cook / pickler"]
 	# Keep the first eight adults on rice, and the two children at home.
 	var facilities := ["garden", "garden", "orchard", "herd", "herd", "fishery", "hunt", "kitchen", "logs", "kitchen"]
@@ -130,6 +134,7 @@ func setup(map: Node2D) -> void:
 		people[n].job = str(assignment.job)
 	economy.no_farmers = "--no-farmers" in OS.get_cmdline_user_args()
 	economy.bad_harvest = "--bad-harvest" in OS.get_cmdline_user_args()
+	for p: Dictionary in people: founders.append(p.duplicate(true))
 	population.seed_residents(people)
 	var archive_settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))
 	if archive_settings.enabled and not "--no-archive" in OS.get_cmdline_user_args():
@@ -171,6 +176,9 @@ func nearest(at: Vector2i) -> Vector2i:
 
 func _refresh(initial: bool = false) -> void:
 	var day := int(minutes / 1440)
+	if day != tended_day:
+		tended_day = day
+		_tend_the_dead()
 	var time := fmod(minutes, 1440.0)
 	for n in people.size():
 		var p: Dictionary = people[n]
@@ -194,7 +202,7 @@ func _refresh(initial: bool = false) -> void:
 					target = p.work
 					activity = {"garden": "tending seasonal vegetables", "orchard": "tending orchard and beehives", "herd": "feeding pigs, chickens and ducks", "fishery": "checking pond nets", "hunt": "bringing game from the Eastern Hunting Grounds to the lodge", "logs": "gathering mushrooms from the forest logs", "kitchen": "cooking, drying and pickling in the village kitchen"}[p.food_work]
 				elif p.kind == 4:
-					target = well if cycle % 2 == 0 else (p.home if cycle % 4 == 1 else people[n % 8].work)
+					target = well if cycle % 2 == 0 else (p.home if cycle % 4 == 1 else people[n % mini(8, people.size())].work)
 				elif p.kind == 7 and cycle % 2:
 					target = p.home
 					activity = "bringing logs home"
@@ -363,6 +371,41 @@ func pick(at: Vector2) -> int:
 			feet = here.y
 			best = int(p.get("id", -1))
 	return best
+
+
+## The dead stop walking and eating. If nobody is left, twenty new twelve-year-olds are sent down to the valley.
+func _tend_the_dead() -> void:
+	var society: RefCounted = population.society
+	var changed := false
+	for n in range(people.size() - 1, -1, -1):
+		if not society.alive[int(people[n].id)]:
+			people.remove_at(n)
+			changed = true
+	if society.alive.count(1) == 0:
+		var rng := RandomNumberGenerator.new()
+		rng.seed = int(sect.data.seed) + population.day
+		var names: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/names.json"))
+		var arrivals: Array[Dictionary] = []
+		for founder: Dictionary in founders:
+			var p: Dictionary = founder.duplicate(true)
+			var pool: Array = names.female if p.sex == "female" else names.male
+			p.name = str(p.name).get_slice(" ", 0) + " " + str(pool[rng.randi_range(0, pool.size() - 1)])
+			p.erase("id")
+			p.hunger = 0
+			p.diet_variety = 0
+			p.contentment = 0.6
+			p.mood = "content"
+			p.foraged = 0.0
+			p.rice_today = 0.0
+			arrivals.append(p)
+		population.seed_residents(arrivals)
+		people.append_array(arrivals)
+		society.note(int(arrivals[0].id), "arrival", "The valley stood empty; twenty new servants, all twelve years old, were sent down to it")
+		changed = true
+	if changed:
+		if followed >= people.size(): followed = -1
+		economy.walkers_changed()
+		routes.clear()
 
 
 func walker_of(id: int) -> int:
@@ -688,7 +731,7 @@ func _refresh_population_views() -> void:
 	var extent := get_viewport_rect().size / camera.zoom / 32.0
 	var area := Rect2(camera.position / 32.0 - extent / 2.0, extent).grow(16)
 	for person: int in population.nearby(area, WALKER_LIMIT):
-		if person < people.size(): continue
+		if walker_of(person) >= 0 or not population.society.alive[person]: continue
 		if nearby_views.size() + people.size() >= WALKER_LIMIT: break
 		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Palette.PAPER, "carrying": false}
 

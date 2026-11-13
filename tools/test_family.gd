@@ -20,7 +20,7 @@ func _initialize() -> void:
 	assert(s.related(child, sibling))
 	assert(s.children(0).size() == 2)
 	assert(not s.marry(child, sibling))
-	assert(not s.lifespan_death_enabled)
+	assert(s.lifespan_death_enabled)
 	# A pregnancy comes to term after nine months; twins a month early, both born.
 	var before: int = s.children(0).size()
 	s.twins[0] = 1
@@ -49,6 +49,6 @@ func _initialize() -> void:
 
 	p.day = 36500
 	s.tick(p.day)
-	assert(s.alive[0] == 1, "No lifespan deaths by default")
+	assert(s.alive[0] == 0, "Lifespan deaths are on: a 125-year-old mortal has died")
 	print("PASS family: mutual marriage, matchmaker, household split, two parents, kin, birth, pregnancy and twins, frail elders")
 	quit()

@@ -92,5 +92,21 @@ func _run() -> void:
 			assert(life.sect.art[life.sect.index_at(tile)] < 0)
 			assert(life.sect.dry.call(tile))
 			claimed[tile] = true
+	# Housemates are unrelated friends living in a named cottage.
+	var pop: RefCounted = life.population
+	var society: RefCounted = pop.society
+	assert(pop.household[0] == pop.household[1] and pop.household_name(0).contains("cottage"))
+	assert(not society.related(0, 1) and society.ties.bonds[society.ties.find(0, 1)] & 1)
+	# The dead stop walking and eating; an empty valley gets twenty new twelve-year-olds.
+	society.alive[0] = 0
+	life._tend_the_dead()
+	assert(life.people.size() == 19 and life.walker_of(0) < 0 and not life.economy.walker_ids.has(0))
+	for id in pop.size(): society.alive[id] = 0
+	life._tend_the_dead()
+	assert(life.people.size() == 20 and pop.size() == 40)
+	for p: Dictionary in life.people:
+		assert(int(p.id) >= 20 and society.alive[int(p.id)] and pop.age(int(p.id)) == 12)
+	assert(life.economy.walker_ids.size() == 20 and is_equal_approx(life.economy.daily_need(), 20.0))
+	print("PASS village: dead walkers leave, an empty valley is resettled;")
 	print("PASS village: jobs, reachable workplaces, schedules, sleep, travel, zoom coverage and clock in both views")
 	quit()
