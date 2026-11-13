@@ -29,5 +29,29 @@ func _initialize() -> void:
 		s.cultivate(0, 7)
 	assert(s.realm[0] == 3, "A rare complete found manual must allow the first Foundation before technique creation exists")
 	assert(s.awakenings == 1)
+	# The rule: Qi Condensation waits for a Perfected Body, whatever the qi.
+	var unready: int = p.add_person("Liu Unready", 16, j)
+	p.spirit_root[unready] = 1
+	p.root_purity[unready] = 100
+	assert(s.awaken(unready, "test"))
+	s.technique[unready] = 2
+	s.temper.body_layer[unready] = 2
+	for attempt in 200:
+		s.injury_until[unready] = 0
+		s.qi[unready] = 1000000.0
+		s.cultivate(unready, 7)
+	assert(s.realm[unready] < 2, "No Qi Condensation before the ninth layer of Body Tempering")
+	s.temper.body_layer[unready] = 9
+	for attempt in 200:
+		s.injury_until[unready] = 0
+		s.qi[unready] = 1000000.0
+		s.cultivate(unready, 7)
+		if s.realm[unready] >= 2: break
+	assert(s.realm[unready] >= 2, "A Perfected Body may condense qi")
+	# An older world's unready qi cultivator is set right on their next day.
+	s.temper.body_layer[unready] = 3
+	s.realm[unready] = 2
+	s._tick_person(unready, 1, p.day, p.size())
+	assert(s.realm[unready] == 1 and s.layer[unready] == 3, "Unready qi scatters back to Body Tempering")
 	print("PASS cultivation: hidden roots, unique awakening, qi formula, site density, technique cap, lifespan")
 	quit()

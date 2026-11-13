@@ -248,6 +248,10 @@ func cultivate(person: int, days: int) -> void:
 	qi[person] += qi_rate(person) * days
 	var cost := qi_cost(person)
 	if qi[person] < cost or realm[person] >= 5: return
+	# Qi gathers, but the realm above waits for a Perfected Body: all nine layers of tempering first.
+	if realm[person] < 2 and not body_ready(person):
+		qi[person] = minf(qi[person], cost)
+		return
 	store.mood[person] = maxf(0, store.mood[person] - .001 * days)
 	if bottleneck_since[person] == 0: bottleneck_since[person] = store.day
 	var major: bool = realm[person] >= 2 and layer[person] >= layer_cap(person)
@@ -274,6 +278,18 @@ func cultivate(person: int, days: int) -> void:
 		injury_until[person] = store.day + store.rng.randi_range(21, 365)
 		if store.rng.randf() < .05: damage[person] *= .95
 		note(person, "setback", "%s suffered a cultivation injury; recovery remains possible" % store.names[person])
+
+## Qi Condensation needs a Perfected Body: every layer of Body Tempering forged.
+func body_ready(person: int) -> bool:
+	return temper == null or temper.body_layer[person] >= temper.LAYERS
+
+## Anyone standing in a qi realm without a Perfected Body (older worlds allowed it) loses that footing.
+func _scatter_qi(person: int) -> void:
+	var store: RefCounted = store_ref.get_ref()
+	realm[person] = 1 if temper and temper.body_layer[person] > 0 else 0
+	layer[person] = temper.body_layer[person] if temper else 0
+	qi[person] = 0.0
+	note(person, "setback", "%s's qi could not settle in an unready body and scattered; the body must be perfected first" % store.names[person])
 
 func parents(person: int) -> PackedInt32Array:
 	var store: RefCounted = store_ref.get_ref()
@@ -572,6 +588,7 @@ func tick(on_day: int) -> void:
 func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
 	if not alive[p]: return
+	if realm[p] >= 2 and not body_ready(p): _scatter_qi(p)
 	var social_flags: int = ties.drift_person(p, store, days)
 	rivalry[p] = 1 if social_flags & 4 else 0
 	var years: int = store.age(p)
