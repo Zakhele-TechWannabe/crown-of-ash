@@ -221,7 +221,7 @@ func _learn(p: int, days: int, on_day: int) -> void:
 			method[p] = 1
 			society.note(p, "tempering_method", "%s worked out a set of folk drills from %s" % [store.names[p], "years of hunting" if hunter else "stubborn practice"])
 			return
-	if method[p] == 1 and body_layer[p] >= 3 and store.rng.randf() < days * float(config.nature_manual_per_day) * store.comprehension[p] * (2.0 if society.outdoors(p) else 1.0):
+	if method[p] == 1 and body_layer[p] >= 3 and store.rng.randf() < days * float(config.nature_manual_per_day) * store.comprehension[p] * (2.0 if society.outdoors(p) else 1.0) * society.nature.insight(p):
 		method[p] = 2
 		var sights: Array = config.tempering_sights
 		society.note(p, "tempering_method", "%s wrote a tempering manual after watching %s" % [store.names[p], sights[store.rng.randi_range(0, sights.size() - 1)]])

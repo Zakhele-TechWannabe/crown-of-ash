@@ -1,0 +1,3518 @@
+{
+ "note": "Starting traits by taxon, most specific wins (family > order > class > phylum > kingdom). Mass in kg. months = when it is active, flowering or fruiting (1-12). danger: 0 none, 1 stings or bites, 2 venom or a heavy animal, 3 can kill. These are broad, honest defaults to tune; species with field numbers live in curated.json.",
+ "default": {
+  "group": "creature",
+  "diet": "detritivore",
+  "mass": 0.0001,
+  "active": "day",
+  "habitat": [
+   "forest",
+   "meadow"
+  ],
+  "months": [
+   4,
+   10
+  ],
+  "danger": 0,
+  "use": ""
+ },
+ "kingdom": {
+  "Plantae": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Fungi": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Animalia": {
+   "group": "creature",
+   "diet": "detritivore",
+   "mass": 0.0001,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Chromista": {
+   "group": "alga",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Protozoa": {
+   "group": "microbe",
+   "diet": "detritivore",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bacteria": {
+   "group": "microbe",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  }
+ },
+ "phylum": {
+  "Arthropoda": {
+   "group": "insect",
+   "diet": "herbivore",
+   "mass": 0.0002,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Mollusca": {
+   "group": "snail",
+   "diet": "herbivore",
+   "mass": 0.005,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Annelida": {
+   "group": "worm",
+   "diet": "detritivore",
+   "mass": 0.002,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Chordata": {
+   "group": "animal",
+   "diet": "omnivore",
+   "mass": 0.5,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bryophyta": {
+   "group": "moss",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    3,
+    11
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Marchantiophyta": {
+   "group": "moss",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    3,
+    11
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Ascomycota": {
+   "group": "fungus",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Basidiomycota": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  }
+ },
+ "class": {
+  "Mammalia": {
+   "group": "mammal",
+   "diet": "omnivore",
+   "mass": 1.0,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Aves": {
+   "group": "bird",
+   "diet": "insectivore",
+   "mass": 0.03,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Amphibia": {
+   "group": "frog",
+   "diet": "insectivore",
+   "mass": 0.03,
+   "active": "night",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Squamata": {
+   "group": "lizard",
+   "diet": "insectivore",
+   "mass": 0.05,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Testudines": {
+   "group": "turtle",
+   "diet": "omnivore",
+   "mass": 0.8,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Actinopterygii": {
+   "group": "fish",
+   "diet": "omnivore",
+   "mass": 0.1,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Insecta": {
+   "group": "insect",
+   "diet": "herbivore",
+   "mass": 0.0002,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Arachnida": {
+   "group": "spider",
+   "diet": "insectivore",
+   "mass": 0.0005,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Gastropoda": {
+   "group": "snail",
+   "diet": "herbivore",
+   "mass": 0.005,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bivalvia": {
+   "group": "mussel",
+   "diet": "filter feeder",
+   "mass": 0.02,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Malacostraca": {
+   "group": "crayfish",
+   "diet": "omnivore",
+   "mass": 0.03,
+   "active": "night",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    3,
+    11
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Chilopoda": {
+   "group": "centipede",
+   "diet": "insectivore",
+   "mass": 0.003,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Diplopoda": {
+   "group": "millipede",
+   "diet": "detritivore",
+   "mass": 0.002,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Collembola": {
+   "group": "springtail",
+   "diet": "detritivore",
+   "mass": 1e-06,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Magnoliopsida": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Liliopsida": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Pinopsida": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Ginkgoopsida": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Polypodiopsida": {
+   "group": "fern",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lycopodiopsida": {
+   "group": "clubmoss",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bryopsida": {
+   "group": "moss",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    3,
+    11
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lecanoromycetes": {
+   "group": "lichen",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "rock",
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Agaricomycetes": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  }
+ },
+ "order": {
+  "Carnivora": {
+   "group": "mammal",
+   "diet": "carnivore",
+   "mass": 4,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Artiodactyla": {
+   "group": "mammal",
+   "diet": "grazer",
+   "mass": 40,
+   "active": "dusk",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Rodentia": {
+   "group": "rodent",
+   "diet": "granivore",
+   "mass": 0.1,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "field",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lagomorpha": {
+   "group": "hare",
+   "diet": "grazer",
+   "mass": 1.5,
+   "active": "night",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Chiroptera": {
+   "group": "bat",
+   "diet": "insectivore",
+   "mass": 0.015,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Soricomorpha": {
+   "group": "shrew",
+   "diet": "insectivore",
+   "mass": 0.01,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Eulipotyphla": {
+   "group": "shrew",
+   "diet": "insectivore",
+   "mass": 0.01,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Primates": {
+   "group": "monkey",
+   "diet": "omnivore",
+   "mass": 12,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Pholidota": {
+   "group": "pangolin",
+   "diet": "insectivore",
+   "mass": 5,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Accipitriformes": {
+   "group": "hawk",
+   "diet": "carnivore",
+   "mass": 1.2,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Falconiformes": {
+   "group": "falcon",
+   "diet": "carnivore",
+   "mass": 0.3,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Strigiformes": {
+   "group": "owl",
+   "diet": "carnivore",
+   "mass": 0.6,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Galliformes": {
+   "group": "gamebird",
+   "diet": "omnivore",
+   "mass": 1.0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Anseriformes": {
+   "group": "duck",
+   "diet": "omnivore",
+   "mass": 1.0,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Pelecaniformes": {
+   "group": "heron",
+   "diet": "piscivore",
+   "mass": 1.2,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Ciconiiformes": {
+   "group": "stork",
+   "diet": "piscivore",
+   "mass": 3,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Gruiformes": {
+   "group": "crane",
+   "diet": "omnivore",
+   "mass": 1.0,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Charadriiformes": {
+   "group": "wader",
+   "diet": "insectivore",
+   "mass": 0.1,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Columbiformes": {
+   "group": "dove",
+   "diet": "granivore",
+   "mass": 0.2,
+   "active": "day",
+   "habitat": [
+    "field",
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cuculiformes": {
+   "group": "cuckoo",
+   "diet": "insectivore",
+   "mass": 0.1,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Piciformes": {
+   "group": "woodpecker",
+   "diet": "insectivore",
+   "mass": 0.08,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Coraciiformes": {
+   "group": "kingfisher",
+   "diet": "piscivore",
+   "mass": 0.05,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Apodiformes": {
+   "group": "swift",
+   "diet": "insectivore",
+   "mass": 0.03,
+   "active": "day",
+   "habitat": [
+    "rock",
+    "meadow"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Passeriformes": {
+   "group": "songbird",
+   "diet": "insectivore",
+   "mass": 0.02,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "field"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Testudines": {
+   "group": "turtle",
+   "diet": "omnivore",
+   "mass": 0.8,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cypriniformes": {
+   "group": "fish",
+   "diet": "omnivore",
+   "mass": 0.2,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Salmoniformes": {
+   "group": "fish",
+   "diet": "insectivore",
+   "mass": 0.5,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Siluriformes": {
+   "group": "catfish",
+   "diet": "omnivore",
+   "mass": 0.5,
+   "active": "night",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Caudata": {
+   "group": "salamander",
+   "diet": "insectivore",
+   "mass": 0.02,
+   "active": "night",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Anura": {
+   "group": "frog",
+   "diet": "insectivore",
+   "mass": 0.03,
+   "active": "night",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lepidoptera": {
+   "group": "moth",
+   "diet": "nectarivore",
+   "mass": 0.0003,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    5,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Coleoptera": {
+   "group": "beetle",
+   "diet": "herbivore",
+   "mass": 0.0005,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Hymenoptera": {
+   "group": "wasp",
+   "diet": "nectarivore",
+   "mass": 0.0001,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Diptera": {
+   "group": "fly",
+   "diet": "detritivore",
+   "mass": 2e-05,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Hemiptera": {
+   "group": "bug",
+   "diet": "herbivore",
+   "mass": 0.0001,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "field"
+   ],
+   "months": [
+    5,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Orthoptera": {
+   "group": "grasshopper",
+   "diet": "grazer",
+   "mass": 0.0008,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    6,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Odonata": {
+   "group": "dragonfly",
+   "diet": "insectivore",
+   "mass": 0.0007,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "meadow"
+   ],
+   "months": [
+    5,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Ephemeroptera": {
+   "group": "mayfly",
+   "diet": "detritivore",
+   "mass": 2e-05,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    6
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Trichoptera": {
+   "group": "caddisfly",
+   "diet": "detritivore",
+   "mass": 5e-05,
+   "active": "night",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Plecoptera": {
+   "group": "stonefly",
+   "diet": "detritivore",
+   "mass": 5e-05,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    3,
+    6
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Neuroptera": {
+   "group": "lacewing",
+   "diet": "insectivore",
+   "mass": 2e-05,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Mantodea": {
+   "group": "mantis",
+   "diet": "insectivore",
+   "mass": 0.003,
+   "active": "day",
+   "habitat": [
+    "meadow"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Blattodea": {
+   "group": "cockroach",
+   "diet": "detritivore",
+   "mass": 0.001,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "village"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Phasmida": {
+   "group": "stick insect",
+   "diet": "herbivore",
+   "mass": 0.002,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Araneae": {
+   "group": "spider",
+   "diet": "insectivore",
+   "mass": 0.0005,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "meadow",
+    "village"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Opiliones": {
+   "group": "harvestman",
+   "diet": "detritivore",
+   "mass": 0.0002,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Ixodida": {
+   "group": "tick",
+   "diet": "parasite",
+   "mass": 1e-05,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Scorpiones": {
+   "group": "scorpion",
+   "diet": "insectivore",
+   "mass": 0.002,
+   "active": "night",
+   "habitat": [
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 2,
+   "use": "medicine"
+  },
+  "Stylommatophora": {
+   "group": "snail",
+   "diet": "herbivore",
+   "mass": 0.005,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Decapoda": {
+   "group": "crab",
+   "diet": "omnivore",
+   "mass": 0.05,
+   "active": "night",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Fagales": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    9,
+    10
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Pinales": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Poales": {
+   "group": "grass",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Rosales": {
+   "group": "shrub",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    6
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Sapindales": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    6
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Malpighiales": {
+   "group": "shrub",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    4,
+    6
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Asparagales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lamiales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Asterales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Apiales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Ranunculales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    7
+   ],
+   "danger": 2,
+   "use": "poison"
+  },
+  "Ericales": {
+   "group": "shrub",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    6
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Gentianales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Liliales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    7
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Dipsacales": {
+   "group": "shrub",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    7
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cornales": {
+   "group": "shrub",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    6
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Saxifragales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "rock",
+    "forest"
+   ],
+   "months": [
+    5,
+    7
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Fabales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Caryophyllales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Magnoliales": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Laurales": {
+   "group": "tree",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Celastrales": {
+   "group": "shrub",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    6
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Vitales": {
+   "group": "vine",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Myrtales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "meadow"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Brassicales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "field",
+    "meadow"
+   ],
+   "months": [
+    3,
+    6
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Geraniales": {
+   "group": "herb",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Polypodiales": {
+   "group": "fern",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Agaricales": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Polyporales": {
+   "group": "bracket fungus",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Boletales": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Russulales": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Hypocreales": {
+   "group": "fungus",
+   "diet": "parasite",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine"
+  }
+ },
+ "family": {
+  "Ursidae": {
+   "group": "bear",
+   "diet": "omnivore",
+   "mass": 90,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 3,
+   "use": ""
+  },
+  "Felidae": {
+   "group": "cat",
+   "diet": "carnivore",
+   "mass": 4,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Canidae": {
+   "group": "dog-kin",
+   "diet": "carnivore",
+   "mass": 8,
+   "active": "dusk",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Mustelidae": {
+   "group": "weasel",
+   "diet": "carnivore",
+   "mass": 1.0,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Viverridae": {
+   "group": "civet",
+   "diet": "omnivore",
+   "mass": 3,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Ailuridae": {
+   "group": "red panda",
+   "diet": "herbivore",
+   "mass": 5,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cervidae": {
+   "group": "deer",
+   "diet": "browser",
+   "mass": 40,
+   "active": "dusk",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bovidae": {
+   "group": "goat-antelope",
+   "diet": "grazer",
+   "mass": 40,
+   "active": "day",
+   "habitat": [
+    "rock",
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Suidae": {
+   "group": "pig",
+   "diet": "omnivore",
+   "mass": 75,
+   "active": "dusk",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 2,
+   "use": ""
+  },
+  "Sciuridae": {
+   "group": "squirrel",
+   "diet": "granivore",
+   "mass": 0.4,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Muridae": {
+   "group": "mouse",
+   "diet": "granivore",
+   "mass": 0.03,
+   "active": "night",
+   "habitat": [
+    "field",
+    "forest",
+    "village"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cricetidae": {
+   "group": "vole",
+   "diet": "grazer",
+   "mass": 0.04,
+   "active": "night",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Hystricidae": {
+   "group": "porcupine",
+   "diet": "herbivore",
+   "mass": 12,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Cercopithecidae": {
+   "group": "monkey",
+   "diet": "omnivore",
+   "mass": 12,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Manidae": {
+   "group": "pangolin",
+   "diet": "insectivore",
+   "mass": 5,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Accipitridae": {
+   "group": "hawk",
+   "diet": "carnivore",
+   "mass": 1.2,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Phasianidae": {
+   "group": "pheasant",
+   "diet": "omnivore",
+   "mass": 1.0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Ardeidae": {
+   "group": "heron",
+   "diet": "piscivore",
+   "mass": 1.0,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Corvidae": {
+   "group": "crow",
+   "diet": "omnivore",
+   "mass": 0.4,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "field",
+    "village"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Hirundinidae": {
+   "group": "swallow",
+   "diet": "insectivore",
+   "mass": 0.02,
+   "active": "day",
+   "habitat": [
+    "village",
+    "field"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Paridae": {
+   "group": "tit",
+   "diet": "insectivore",
+   "mass": 0.012,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Fringillidae": {
+   "group": "finch",
+   "diet": "granivore",
+   "mass": 0.02,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "field"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Emberizidae": {
+   "group": "bunting",
+   "diet": "granivore",
+   "mass": 0.02,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Passeridae": {
+   "group": "sparrow",
+   "diet": "granivore",
+   "mass": 0.025,
+   "active": "day",
+   "habitat": [
+    "village",
+    "field"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Columbidae": {
+   "group": "dove",
+   "diet": "granivore",
+   "mass": 0.2,
+   "active": "day",
+   "habitat": [
+    "field",
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Picidae": {
+   "group": "woodpecker",
+   "diet": "insectivore",
+   "mass": 0.08,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Alcedinidae": {
+   "group": "kingfisher",
+   "diet": "piscivore",
+   "mass": 0.04,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Viperidae": {
+   "group": "viper",
+   "diet": "carnivore",
+   "mass": 0.15,
+   "active": "night",
+   "habitat": [
+    "rock",
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 3,
+   "use": "medicine"
+  },
+  "Elapidae": {
+   "group": "cobra",
+   "diet": "carnivore",
+   "mass": 0.5,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 3,
+   "use": "medicine"
+  },
+  "Colubridae": {
+   "group": "snake",
+   "diet": "carnivore",
+   "mass": 0.2,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field",
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Natricidae": {
+   "group": "water snake",
+   "diet": "carnivore",
+   "mass": 0.15,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lacertidae": {
+   "group": "lizard",
+   "diet": "insectivore",
+   "mass": 0.01,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Scincidae": {
+   "group": "skink",
+   "diet": "insectivore",
+   "mass": 0.01,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Gekkonidae": {
+   "group": "gecko",
+   "diet": "insectivore",
+   "mass": 0.005,
+   "active": "night",
+   "habitat": [
+    "village",
+    "rock"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cryptobranchidae": {
+   "group": "giant salamander",
+   "diet": "piscivore",
+   "mass": 20,
+   "active": "night",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 1,
+   "use": "medicine"
+  },
+  "Ranidae": {
+   "group": "frog",
+   "diet": "insectivore",
+   "mass": 0.04,
+   "active": "night",
+   "habitat": [
+    "stream",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bufonidae": {
+   "group": "toad",
+   "diet": "insectivore",
+   "mass": 0.08,
+   "active": "night",
+   "habitat": [
+    "field",
+    "forest"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Cyprinidae": {
+   "group": "carp",
+   "diet": "omnivore",
+   "mass": 0.3,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Salmonidae": {
+   "group": "trout",
+   "diet": "insectivore",
+   "mass": 0.6,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Apidae": {
+   "group": "bee",
+   "diet": "nectarivore",
+   "mass": 0.0001,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest",
+    "field"
+   ],
+   "months": [
+    3,
+    10
+   ],
+   "danger": 1,
+   "use": "food"
+  },
+  "Vespidae": {
+   "group": "hornet",
+   "diet": "insectivore",
+   "mass": 0.0005,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "village"
+   ],
+   "months": [
+    5,
+    10
+   ],
+   "danger": 2,
+   "use": ""
+  },
+  "Formicidae": {
+   "group": "ant",
+   "diet": "omnivore",
+   "mass": 5e-06,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "village"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Papilionidae": {
+   "group": "swallowtail",
+   "diet": "nectarivore",
+   "mass": 0.0005,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Nymphalidae": {
+   "group": "butterfly",
+   "diet": "nectarivore",
+   "mass": 0.0004,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Pieridae": {
+   "group": "white butterfly",
+   "diet": "nectarivore",
+   "mass": 0.0003,
+   "active": "day",
+   "habitat": [
+    "field",
+    "meadow"
+   ],
+   "months": [
+    3,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lycaenidae": {
+   "group": "blue butterfly",
+   "diet": "nectarivore",
+   "mass": 0.0001,
+   "active": "day",
+   "habitat": [
+    "meadow"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Hesperiidae": {
+   "group": "skipper",
+   "diet": "nectarivore",
+   "mass": 0.0002,
+   "active": "day",
+   "habitat": [
+    "meadow"
+   ],
+   "months": [
+    5,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Bombycidae": {
+   "group": "silkmoth",
+   "diet": "herbivore",
+   "mass": 0.002,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": "fibre"
+  },
+  "Saturniidae": {
+   "group": "giant moth",
+   "diet": "herbivore",
+   "mass": 0.004,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": "fibre"
+  },
+  "Carabidae": {
+   "group": "ground beetle",
+   "diet": "insectivore",
+   "mass": 0.0005,
+   "active": "night",
+   "habitat": [
+    "forest",
+    "field"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Scarabaeidae": {
+   "group": "scarab",
+   "diet": "detritivore",
+   "mass": 0.002,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cerambycidae": {
+   "group": "longhorn beetle",
+   "diet": "herbivore",
+   "mass": 0.002,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Curculionidae": {
+   "group": "weevil",
+   "diet": "herbivore",
+   "mass": 5e-05,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "field"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Coccinellidae": {
+   "group": "ladybird",
+   "diet": "insectivore",
+   "mass": 2e-05,
+   "active": "day",
+   "habitat": [
+    "field",
+    "meadow"
+   ],
+   "months": [
+    4,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lampyridae": {
+   "group": "firefly",
+   "diet": "insectivore",
+   "mass": 5e-05,
+   "active": "night",
+   "habitat": [
+    "meadow",
+    "stream"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Lucanidae": {
+   "group": "stag beetle",
+   "diet": "detritivore",
+   "mass": 0.004,
+   "active": "night",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Culicidae": {
+   "group": "mosquito",
+   "diet": "parasite",
+   "mass": 2e-06,
+   "active": "dusk",
+   "habitat": [
+    "stream",
+    "field",
+    "village"
+   ],
+   "months": [
+    5,
+    9
+   ],
+   "danger": 1,
+   "use": ""
+  },
+  "Acrididae": {
+   "group": "grasshopper",
+   "diet": "grazer",
+   "mass": 0.001,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    6,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Gryllidae": {
+   "group": "cricket",
+   "diet": "omnivore",
+   "mass": 0.0005,
+   "active": "night",
+   "habitat": [
+    "meadow",
+    "field",
+    "village"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cicadidae": {
+   "group": "cicada",
+   "diet": "herbivore",
+   "mass": 0.002,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Aphididae": {
+   "group": "aphid",
+   "diet": "herbivore",
+   "mass": 5e-07,
+   "active": "day",
+   "habitat": [
+    "field",
+    "forest"
+   ],
+   "months": [
+    4,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Pinaceae": {
+   "group": "conifer",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Cupressaceae": {
+   "group": "cypress",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    3,
+    4
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Taxaceae": {
+   "group": "yew",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    3,
+    4
+   ],
+   "danger": 2,
+   "use": "poison"
+  },
+  "Fagaceae": {
+   "group": "oak",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    9,
+    10
+   ],
+   "danger": 0,
+   "use": "timber",
+   "mast": true
+  },
+  "Betulaceae": {
+   "group": "birch",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    3,
+    5
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Juglandaceae": {
+   "group": "walnut",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    9,
+    10
+   ],
+   "danger": 0,
+   "use": "food",
+   "mast": true
+  },
+  "Salicaceae": {
+   "group": "willow",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "stream"
+   ],
+   "months": [
+    3,
+    4
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Ulmaceae": {
+   "group": "elm",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "village"
+   ],
+   "months": [
+    3,
+    4
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Moraceae": {
+   "group": "mulberry",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "village"
+   ],
+   "months": [
+    5,
+    6
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Sapindaceae": {
+   "group": "maple",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "timber"
+  },
+  "Rosaceae": {
+   "group": "rose-kin",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow",
+    "village"
+   ],
+   "months": [
+    4,
+    6
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Ericaceae": {
+   "group": "rhododendron",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "rock"
+   ],
+   "months": [
+    4,
+    6
+   ],
+   "danger": 1,
+   "use": "poison"
+  },
+  "Poaceae": {
+   "group": "grass",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Cyperaceae": {
+   "group": "sedge",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "stream",
+    "meadow"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": ""
+  },
+  "Asteraceae": {
+   "group": "daisy",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    7,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Lamiaceae": {
+   "group": "mint",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Fabaceae": {
+   "group": "legume",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Apiaceae": {
+   "group": "umbellifer",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Araliaceae": {
+   "group": "ginseng-kin",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine",
+   "spirit_candidate": true
+  },
+  "Ranunculaceae": {
+   "group": "buttercup",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "forest"
+   ],
+   "months": [
+    4,
+    7
+   ],
+   "danger": 2,
+   "use": "poison"
+  },
+  "Orchidaceae": {
+   "group": "orchid",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    7
+   ],
+   "danger": 0,
+   "use": "medicine",
+   "spirit_candidate": true
+  },
+  "Liliaceae": {
+   "group": "lily",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "meadow"
+   ],
+   "months": [
+    6,
+    7
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Asparagaceae": {
+   "group": "solomon's seal",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    6
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Paeoniaceae": {
+   "group": "peony",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    4,
+    5
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Gentianaceae": {
+   "group": "gentian",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow"
+   ],
+   "months": [
+    8,
+    9
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Polygonaceae": {
+   "group": "knotweed",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "field"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Urticaceae": {
+   "group": "nettle",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "stream"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 1,
+   "use": "fibre"
+  },
+  "Solanaceae": {
+   "group": "nightshade",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "field",
+    "meadow"
+   ],
+   "months": [
+    6,
+    9
+   ],
+   "danger": 2,
+   "use": "poison"
+  },
+  "Theaceae": {
+   "group": "tea",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    3,
+    5
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Actinidiaceae": {
+   "group": "kiwi vine",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    9,
+    10
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Vitaceae": {
+   "group": "grape vine",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    8,
+    9
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Dioscoreaceae": {
+   "group": "yam",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    9,
+    11
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Zingiberaceae": {
+   "group": "ginger",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Ginkgoaceae": {
+   "group": "ginkgo",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest",
+    "village"
+   ],
+   "months": [
+    9,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine",
+   "spirit_candidate": true
+  },
+  "Amanitaceae": {
+   "group": "amanita",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 3,
+   "use": "poison"
+  },
+  "Boletaceae": {
+   "group": "bolete",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    7,
+    9
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Ganodermataceae": {
+   "group": "lingzhi",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    6,
+    10
+   ],
+   "danger": 0,
+   "use": "medicine",
+   "spirit_candidate": true
+  },
+  "Ophiocordycipitaceae": {
+   "group": "cordyceps",
+   "diet": "parasite",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "meadow",
+    "rock"
+   ],
+   "months": [
+    5,
+    6
+   ],
+   "danger": 0,
+   "use": "medicine",
+   "spirit_candidate": true
+  },
+  "Cordycipitaceae": {
+   "group": "cordyceps",
+   "diet": "parasite",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    8
+   ],
+   "danger": 0,
+   "use": "medicine",
+   "spirit_candidate": true
+  },
+  "Tricholomataceae": {
+   "group": "mushroom",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    8,
+    10
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Polyporaceae": {
+   "group": "bracket fungus",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "medicine"
+  },
+  "Auriculariaceae": {
+   "group": "wood ear",
+   "diet": "decomposer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "forest"
+   ],
+   "months": [
+    5,
+    10
+   ],
+   "danger": 0,
+   "use": "food"
+  },
+  "Parmeliaceae": {
+   "group": "lichen",
+   "diet": "producer",
+   "mass": 0,
+   "active": "day",
+   "habitat": [
+    "rock",
+    "forest"
+   ],
+   "months": [
+    1,
+    12
+   ],
+   "danger": 0,
+   "use": "medicine"
+  }
+ }
+}

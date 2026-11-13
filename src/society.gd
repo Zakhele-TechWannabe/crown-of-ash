@@ -3,6 +3,7 @@ extends RefCounted
 const Relationships = preload("res://src/relationships.gd")
 const Mind = preload("res://src/mind.gd")
 const BodyTempering = preload("res://src/body_tempering.gd")
+const Nature = preload("res://src/nature.gd")
 var ties := Relationships.new()
 var store_ref: WeakRef
 var population: RefCounted:
@@ -54,6 +55,7 @@ var memberships: Dictionary = {}
 var archive: RefCounted = null
 var mind: RefCounted = null
 var temper: RefCounted = null
+var nature: RefCounted = null
 var archived_year := -1
 
 func _init(store: RefCounted) -> void:
@@ -63,11 +65,13 @@ func _init(store: RefCounted) -> void:
 	if body_probe.config.enabled: temper = body_probe
 	var probe: RefCounted = Mind.new(self)
 	if probe.config.enabled: mind = probe
+	nature = Nature.new(self)
 
 func add_person() -> void:
 	ties.add_person()
 	if mind: mind.add_person()
 	if temper: temper.add_person()
+	nature.add_person()
 	father.append(-1)
 	spouse.append(-1)
 	master.append(-1)
@@ -554,7 +558,7 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		elif in_hunting_grounds and store.rng.randf() < days * float(events.spirit_fruit_find_per_day): awaken(p, "a spirit fruit found in the Eastern Hunting Grounds")
 	if years >= 12 and store.rng.randf() < days * float(events.qi_site_visit_per_day): site[p] = store.rng.randi_range(1, 2)
 	# No manuals lie waiting in the wild: an awakened mind works out its first breathing method by watching nature.
-	if revealed[p] and technique[p] == 0 and store.rng.randf() < days * float(events.nature_breathing_per_day) * store.comprehension[p] * (1.5 if outdoors(p) else 1.0):
+	if revealed[p] and technique[p] == 0 and store.rng.randf() < days * float(events.nature_breathing_per_day) * store.comprehension[p] * (1.5 if outdoors(p) else 1.0) * nature.insight(p):
 		technique[p] = 1
 		technique_element[p] = 0
 		while (store.spirit_root[p] & (1 << technique_element[p])) == 0 and technique_element[p] < 9: technique_element[p] += 1
@@ -566,6 +570,7 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		while (store.spirit_root[p] & (1 << technique_element[p])) == 0: technique_element[p] += 1
 		note(p, "technique", "%s created a complete lineage technique through insight" % store.names[p])
 	cultivate(p, days)
+	nature.observe(p, days, on_day)
 	if temper: temper.weekly(p, days, on_day)
 	if mind: mind.weekly(p, days, on_day, n)
 	if master[p] >= 0 and on_day % 30 < 7:

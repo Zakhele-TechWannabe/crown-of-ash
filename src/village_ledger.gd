@@ -12,7 +12,7 @@ class LedgerButton extends Button:
 
 const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
-const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "tempering": "Tempering", "forest": "Forest", "society": "Society", "work": "Work", "chronicle": "Chronicle"}
+const TABS := {"overview": "Overview", "food": "Food", "materials": "Materials", "people": "People", "tempering": "Tempering", "forest": "Forest", "society": "Society", "work": "Work", "chronicle": "Chronicle", "bestiary": "Bestiary"}
 const INK := Palette.INK
 const GOLD := Palette.BRASS
 const MAX_WIDTH := 1320.0
@@ -401,7 +401,7 @@ func refresh() -> void:
 	refresh_values()
 
 func refresh_values() -> void:
-	if current in ["society", "tempering", "forest", "chronicle"] and page_day == life.population.day: return
+	if current in ["society", "tempering", "forest", "chronicle", "bestiary"] and page_day == life.population.day: return
 	if current == "people" and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
 	# Keep filter controls and scroll position stable while replacing only data.
 	for child: Node in content.get_children():
@@ -423,6 +423,7 @@ func refresh_values() -> void:
 		"society": _society(data)
 		"work": _work(data, e)
 		"chronicle": _chronicle(data, e)
+		"bestiary": _bestiary(data)
 
 func stage() -> String:
 	return ["Planting", "Tending", "Harvest", "Fallow"][life.economy.season()]
@@ -955,6 +956,52 @@ func _forest(parent: Node) -> void:
 	if not last.is_empty():
 		section(parent, "Last year in the forest")
 		label(parent, "%d iron-bark roots taken in %d stripping trips. %d hunts brought down %d beasts; %d hunters were hurt. %d seven-leaf herbs found, %d searches came back empty." % [int(last.get("roots_taken", 0)), int(last.get("stripped_trips", 0)), int(last.get("hunts", 0)), int(last.get("kills", 0)), int(last.get("hunt_injuries", 0)), int(last.get("herbs_taken", 0)), int(last.get("herb_misses", 0))])
+
+## What the valley has seen of the thousands of species that live in it.
+func _bestiary(parent: Node) -> void:
+	page_day = life.population.day
+	var nature: RefCounted = life.population.society.nature
+	if nature.species.is_empty():
+		label(parent, "No species catalogue yet: run tools/build_species_catalogue.py.")
+		return
+	label(parent, "Every species recorded in a real temperate mountain range lives somewhere in this valley: %s in all. Nobody knows one until they see it at work, and the people who watch nature most closely are the ones who work out new methods." % _thousands(nature.species.size()))
+	section(parent, "Seen so far")
+	var tally: Dictionary = nature.tally()
+	for row: Array in [["individual", "Large animals"], ["population", "Birds, small animals, frogs and fish"], ["guild", "Plants, fungi and insects"]]:
+		var counts: Array = tally[row[0]]
+		meter(parent, row[1], counts[0], maxf(1, counts[1]), "%s of %s" % [_thousands(counts[0]), _thousands(counts[1])], Palette.JADE)
+	if nature.known_order.is_empty():
+		small(parent, "Nothing seen yet. Sightings come as people work in the fields, the forest, the meadows and the streams.")
+	else:
+		section(parent, "Latest sightings")
+		var grid := GridContainer.new()
+		grid.columns = maxi(1, int(content_width() / 320))
+		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		parent.add_child(grid)
+		for i in range(nature.known_order.size() - 1, maxi(-1, nature.known_order.size() - 25), -1):
+			var id: int = nature.known_order[i]
+			var entry: Dictionary = nature.get_species(id)
+			var seen: Dictionary = nature.known[id]
+			var panel := PanelContainer.new()
+			panel.theme_type_variation = "CardPanel"
+			panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			panel.tooltip_text = "%s · %s · %s" % [entry.sci, entry.get("family", ""), entry.get("order", "")]
+			grid.add_child(panel)
+			var box := VBoxContainer.new()
+			panel.add_child(box)
+			label(box, str(entry.name))
+			var notes: Array[String] = [str(entry.group), " and ".join(entry.get("habitat", []))]
+			if not str(entry.get("use", "")).is_empty(): notes.append("used for " + str(entry.use))
+			if int(entry.get("danger", 0)) >= 2: notes.append("dangerous")
+			small(box, " · ".join(notes))
+			person_link(box, int(seen.person), "first seen by %s, Y%d" % [life.population.names[int(seen.person)], int(seen.day) / 365 + 1])
+	small(parent, "Species list: " + str(nature.load_catalogue().get("citation", "")))
+
+
+func _thousands(n: int) -> String:
+	var text := str(n)
+	return text if n < 1000 else "%s,%s" % [text.substr(0, text.length() - 3), text.substr(text.length() - 3)]
+
 
 func _work(parent: Node, e: RefCounted) -> void:
 	label(parent, "Y%d · Day %d · %s · %s" % [e.year, e.day, e.SEASONS[e.season()], stage()])

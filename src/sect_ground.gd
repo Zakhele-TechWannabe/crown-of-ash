@@ -9,6 +9,8 @@ var data: Dictionary
 var center: Vector2i
 var surfaces := PackedByteArray()
 var levels := PackedInt32Array()
+## Footprint (plus a one-tile margin and doorstep) of every building on natural ground → the tile whose level it is built at.
+var plinth: Dictionary = {}
 var heights := PackedFloat32Array()
 var art := PackedInt32Array()
 var labels: Array[Dictionary] = []
@@ -118,6 +120,11 @@ func setup(is_dry: Callable) -> void:
 			continue
 		var bx := int(r[0]) + int(r[2]) / 2
 		var by := int(r[1]) + int(r[3])
+		# Houses stand on level ground: no terrace face may cut through a roof or a doorway.
+		for yy in range(int(r[1]) - 1, by + 1):
+			for xx in range(int(r[0]) - 1, int(r[0]) + int(r[2]) + 1):
+				var tile := center + Vector2i(xx, yy)
+				if index_at(tile) >= 0 and levels[index_at(tile)] < 0: plinth[tile] = center + Vector2i(bx, by)
 		if by < 156:
 			_paint([mini(0, bx), by, absi(bx) + 1, 2], "paving")
 		else:
