@@ -1,0 +1,47 @@
+{
+  "capacity": 50,
+  "initial_age": 12,
+  "settlement": 50,
+  "site": "heaven.json",
+  "tournament_years": 5,
+  "top_count": 10,
+  "training_bonus": 1.3,
+  "qi_bonus": 1.25,
+  "basic_doses": 1,
+  "top_doses": 2,
+  "drill_hours": 3,
+  "teacher_rate": 1.5,
+  "teacher_grade": 1.5,
+  "training_rate": 1.6,
+  "grade_bonus": 0.85,
+  "seats": 5,
+  "restore_years": 10,
+  "restore_stone": 10,
+  "restore_will": 30,
+  "stone_per_year": 1,
+  "will_per_year": 6,
+  "call_days": 365,
+  "search_days": [
+    30,
+    365
+  ],
+  "road_death": 0.015,
+  "find_rate": 0.22,
+  "invite_threshold": 0.48,
+  "call_threshold": 0.57,
+  "travel_tiles_per_day": 200,
+  "challenge_threshold": 0.45,
+  "admission": {
+    "id": "dao",
+    "age_min": 10,
+    "age_max": 30,
+    "threshold": 52,
+    "weights": {
+      "talent": 0.3,
+      "body": 0.2,
+      "will": 0.3,
+      "character": 0.2
+    }
+  },
+  "perfect_polish_days": 365
+}

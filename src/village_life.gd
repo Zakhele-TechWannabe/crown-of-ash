@@ -170,6 +170,7 @@ func setup(map: Node2D) -> void:
 	for p: Dictionary in people: founders.append(p.duplicate(true))
 	_link_levels()
 	population.seed_residents(people)
+	population.society.fifty.seed()
 	population.society.law = preload("res://src/law.gd").new()
 	population.society.law.setup(sect, grid, people, world.ground)
 	var archive_settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))
@@ -573,10 +574,13 @@ func _tend_the_dead() -> void:
 	stages = stages.filter(func(st: Dictionary) -> bool: return st.phase != "fallen")
 	var staged := _staged_ids()
 	for n in range(people.size() - 1, -1, -1):
-		if not society.alive[int(people[n].id)] and not staged.has(int(people[n].id)):
+		if (not society.alive[int(people[n].id)] or population.settlement[int(people[n].id)] != 0) and not staged.has(int(people[n].id)):
 			people.remove_at(n)
 			changed = true
-	if society.alive.count(1) == 0:
+	var village_alive := 0
+	for id in population.size():
+		if society.alive[id] and (population.settlement[id] == 0 or society.fifty.away(id)): village_alive += 1
+	if village_alive == 0:
 		var rng := RandomNumberGenerator.new()
 		rng.seed = int(sect.data.seed) + population.day
 		var names: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/names.json"))
@@ -599,7 +603,7 @@ func _tend_the_dead() -> void:
 		changed = true
 	for id in population.size():
 		if people.size() >= WALKER_LIMIT: break
-		if not society.alive[id] or population.age(id) < 3 or walker_of(id) >= 0: continue
+		if population.settlement[id] != 0 or not society.alive[id] or population.age(id) < 3 or walker_of(id) >= 0: continue
 		var parent: int = society.childhood.carer(id)
 		var model := walker_of(parent) if parent >= 0 else -1
 		if model < 0 and people.is_empty(): continue
@@ -783,6 +787,7 @@ func _headless_sim() -> void:
 		else: economy.advance_to(target_day * 1440.0)
 		if (y + 1) % 10 == 0 or y == years - 1:
 			print("DECADE %d SKILLS %s" % [y + 1, population.tier_distribution()])
+			print("FIFTY %d %s" % [y + 1, JSON.stringify(population.society.fifty.summary())])
 			print("WILDLIFE " + JSON.stringify(population.society.wildlife.summary()))
 			print("DECADE %d SOCIETY %s" % [y + 1, JSON.stringify(population.society.summary())])
 			var mind: RefCounted = population.society.mind
@@ -954,7 +959,7 @@ func _refresh_population_views() -> void:
 	var extent := get_viewport_rect().size / camera.zoom / 32.0
 	var area := Rect2(camera.position / 32.0 - extent / 2.0, extent).grow(16)
 	for person: int in population.nearby(area, WALKER_LIMIT):
-		if population.age(person) < 3 or walker_of(person) >= 0 or not population.society.alive[person]: continue
+		if population.settlement[person] != 0 or population.age(person) < 3 or walker_of(person) >= 0 or not population.society.alive[person]: continue
 		if nearby_views.size() + people.size() >= WALKER_LIMIT: break
 		nearby_views[person] = {"id": person, "name": population.names[person], "pos": population.locations[person], "kind": 8 if population.age(person) < 18 else 0, "age": population.age(person), "hidden": false, "tint": Palette.PAPER, "carrying": false}
 

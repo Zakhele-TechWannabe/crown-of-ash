@@ -78,7 +78,7 @@ func setup(is_dry: Callable) -> void:
 	edge.seed = int(data.get("seed", 718))
 	edge.frequency = 0.048
 	# Evaluate each tile against seven terrace envelopes, rather than expanding every tile.
-	for y in range(bounds.position.y, 160 if data.has("tiers") else bounds.position.y):
+	for y in range(bounds.position.y, mini(160, bounds.end.y) if data.has("tiers") else bounds.position.y):
 		for x in range(bounds.position.x, bounds.end.x):
 			var at := center + Vector2i(x, y)
 			var i := index_at(at)
@@ -238,6 +238,10 @@ func _building(b: Dictionary) -> void:
 	var kind := str(b.kind)
 	if not str(b.name).is_empty():
 		labels.append({"name": str(b.name), "tile": origin + Vector2i(w / 2, 0)})
+	if kind == "pedestal":
+		_paint(r, "paving")
+		_stamp(origin + Vector2i(w / 2, h / 2), 95)
+		return
 	if kind == "tent":
 		_stamp(origin, 137)
 		return

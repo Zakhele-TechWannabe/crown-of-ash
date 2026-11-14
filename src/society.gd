@@ -63,6 +63,7 @@ var temper: RefCounted = null
 var wildlife: RefCounted
 var nature: RefCounted = null
 var archived_year := -1
+var fifty: RefCounted
 var childhood: RefCounted
 
 func _init(store: RefCounted) -> void:
@@ -76,6 +77,7 @@ func _init(store: RefCounted) -> void:
 	wildlife = preload("res://src/wildlife.gd").new(self)
 	if temper: temper.wild.refresh_herd()
 	childhood = preload("res://src/childhood.gd").new(self)
+	fifty = preload("res://src/fifty.gd").new(self)
 
 func add_person() -> void:
 	ties.add_person()
@@ -158,6 +160,7 @@ func die(person: int, kind: String, words: String, killer: int = -1) -> void:
 	var store: RefCounted = store_ref.get_ref()
 	if not alive[person]: return
 	alive[person] = 0
+	if fifty: fifty.on_death(person)
 	note(person, kind, words)
 	var family: Array[int] = []
 	for kin: int in children(person): family.append(kin)
@@ -345,6 +348,7 @@ func approval(person: int, candidate: int) -> bool:
 func marry(a: int, b: int) -> bool:
 	var store: RefCounted = store_ref.get_ref()
 	if not alive[a] or not alive[b]: return false
+	if store.settlement[a] != store.settlement[b]: return false
 	if a == b or spouse[a] >= 0 or spouse[b] >= 0: return false
 	if store.age(a) < 18 or store.age(b) < 18 or marriage_related(a, b): return false
 	if absi(store.age(a) - store.age(b)) > int(events.marriage_age_gap): return false
@@ -494,7 +498,7 @@ func seed() -> void:
 	for a in store.size():
 		if not alive[a]: continue
 		for b in store.size():
-			if a == b or not alive[b] or ties.find(a, b) >= 0: continue
+			if a == b or not alive[b] or store.settlement[a] != store.settlement[b] or ties.find(a, b) >= 0: continue
 			if store.household[a] == store.household[b]:
 				# Orphans raised under one roof start as friends.
 				var e := ties.tie(a, b, 40)
@@ -527,6 +531,7 @@ var faction_pending := false
 
 func begin_tick(on_day: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
+	if fifty: fifty.advance(on_day)
 	if law: law.advance(self, on_day)
 	if on_day - last_week < int(events.week_days) or social_pending: return
 	# Resolve ecology and village contacts at the same society boundary in both
@@ -595,6 +600,7 @@ func tick(on_day: int) -> void:
 func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
 	if not alive[p]: return
+	if fifty and fifty.away(p): return
 	if realm[p] >= 2 and not body_ready(p): _scatter_qi(p)
 	var social_flags: int = ties.drift_person(p, store, days)
 	rivalry[p] = 1 if social_flags & 4 else 0
@@ -603,6 +609,7 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		store.mood[p] = minf(.5, store.mood[p])
 		if lifespan_death_enabled:
 			alive[p] = 0
+			if fifty: fifty.on_death(p)
 			note(p, "old_age", "%s died of old age" % store.names[p])
 			var heirs := children(p)
 			if not heirs.is_empty(): pass_legacy(p, heirs[0])
@@ -644,7 +651,9 @@ func _tick_person(p: int, days: int, on_day: int, n: int) -> void:
 		note(p, "technique", "%s created a complete lineage technique through insight" % store.names[p])
 	cultivate(p, days)
 	nature.observe(p, days, on_day)
+	if fifty: fifty.provision(p, on_day)
 	if temper: temper.weekly(p, days, on_day)
+	if fifty: fifty.peak(p, on_day)
 	if mind: mind.weekly(p, days, on_day, n)
 	if master[p] >= 0 and on_day % 30 < 7:
 		ties.event(p, master[p], "teaching", on_day)

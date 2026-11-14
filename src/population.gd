@@ -336,7 +336,7 @@ func has_trait(person: int, id: String) -> bool:
 	return trait_indices.has(id) and (traits[person] & (1 << int(trait_indices[id]))) != 0
 
 func _tick_person(person: int) -> void:
-	if not society.alive[person]: return
+	if not society.alive[person] or society.fifty.away(person): return
 	stuck[person] = 0
 	var years := age(person, pending_day)
 	if years < 12:
@@ -618,6 +618,7 @@ func add_child(name_text: String, mother: int, father: int) -> int:
 		root_purity[child] = rng.randi_range(10, 100)
 		root_grade[child] = mini(4, 5 - _bit_count(inherited) + (1 if inherited & 992 else 0))
 	society.inherit(child, mother, father)
+	settlement[child] = settlement[mother]
 	set_location(child, locations[mother])
 	return child
 

@@ -45,6 +45,7 @@ var people_button: Button
 var tour_button: Button
 var map_button: Button
 var pause_button: Button
+var fifty_sort := "Rank"
 var page_day := -1
 var society_offset := 0
 var skip_progress: ProgressBar
@@ -426,7 +427,7 @@ func refresh() -> void:
 	refresh_values()
 
 func refresh_values() -> void:
-	if current in ["society", "tempering", "forest", "chronicle", "bestiary", "laws"] and page_day == life.population.day: return
+	if current in ["society", "tempering", "forest", "chronicle", "bestiary", "laws", "fifty"] and page_day == life.population.day: return
 	if current in ["people", "cultivators"] and is_instance_valid(people_browser) and people_browser.is_inside_tree(): return
 	# Keep filter controls and scroll position stable while replacing only data.
 	for child: Node in content.get_children():
@@ -449,7 +450,7 @@ func refresh_values() -> void:
 		"people", "cultivators": _people(data)
 		"tempering": _tempering(data)
 		"medicine": _medicine(data)
-		"fifty": label(data, "Raising the Fifty: coming soon")
+		"fifty": _fifty(data)
 		"forest": _forest(data)
 		"society": _society(data)
 		"work": _work(data, e)
@@ -1283,6 +1284,9 @@ func _summary(parent: Node) -> void:
 	elif current == "laws" and society.law:
 		var law: RefCounted = society.law
 		values = [[law.guardians.filter(func(g: Dictionary) -> bool: return g.state != "broken").size(), "swordsmen"], [law.hunt_list.size(), "warm trails"], [law.totals.breaches, "breaches"], [law.totals.broken, "broken"]]
+	elif current == "fifty":
+		var dao: RefCounted = society.fifty
+		values = [[int(dao.will), "Heaven’s Will"], [int(dao.stone), "heaven-stone"], [dao.open_places(), "open places"], ["Y%d · spring" % (dao.next_tournament / 365 + 1), "next tournament · %d days" % maxi(0, dao.next_tournament - store.day)]]
 	elif current == "food":
 		values = [[floori(life.economy.days_left()), "days of food"], [life.economy.hungry_count, "hungry"], [living, "mouths to feed"]]
 	else:
@@ -1337,3 +1341,97 @@ func _beast_record(box: Node, wildlife: RefCounted, beast: Dictionary) -> void:
 	small(box, wildlife.description(beast))
 	meter(box, "Age", float(beast.age), wildlife.lifespan(beast), "%.1f of ~%.1f years · %.1f× lifespan" % [beast.age, wildlife.lifespan(beast), wildlife.rules.lifespan[int(beast.layer)]], Palette.GREEN)
 	small(box, "Roams %s · %s" % [wildlife.place(beast), beast.state])
+
+
+func _fifty(parent: Node) -> void:
+	page_day = life.population.day
+	var store: RefCounted = life.population
+	var dao: RefCounted = store.society.fifty
+	section(parent, "Heaven's Terrace · hidden on Heavenly Ridge")
+	label(parent, "Fifty lives begin with nothing. Every layer can be Perfect; the first five flawless peaks hold the Apostle pedestals. Envoys serve one mortal life.")
+	var controls := HFlowContainer.new()
+	controls.add_theme_constant_override("h_separation", UiTheme.SPACE_12)
+	controls.add_theme_constant_override("v_separation", UiTheme.SPACE_8)
+	parent.add_child(controls)
+	var call := button(controls, "Call to heaven", func() -> void: dao.call_to_heaven(); life._tend_the_dead(); page_day = -1; refresh_values())
+	call.disabled = store.day - dao.last_call < int(dao.config.call_days)
+	small(parent, "%d pilgrims searching · %d days until the next call" % [dao.journeys.size(), maxi(0, int(dao.config.call_days) - (store.day - dao.last_call))])
+	var recruits := OptionButton.new()
+	recruits.add_item("Choose a mortal to invite", -1)
+	for p in store.size():
+		if dao.eligible(p): recruits.add_item("%s · age %d" % [store.names[p], store.age(p)], p)
+	controls.add_child(recruits)
+	var invite := button(controls, "Invite to the Dao", func() -> void:
+		if recruits.selected > 0:
+			dao.invite(recruits.get_item_id(recruits.selected))
+			life._tend_the_dead()
+			page_day = -1
+			refresh_values())
+	invite.disabled = dao.open_places() == 0
+	section(parent, "Five Apostle seats")
+	var seats_row := HFlowContainer.new()
+	seats_row.add_theme_constant_override("h_separation", UiTheme.SPACE_12)
+	seats_row.add_theme_constant_override("v_separation", UiTheme.SPACE_12)
+	parent.add_child(seats_row)
+	for i in dao.seats.size():
+		var card := PanelContainer.new()
+		card.theme_type_variation = "CardPanel"
+		card.custom_minimum_size.x = UiTheme.SPACE_24 * 8
+		seats_row.add_child(card)
+		var box := VBoxContainer.new()
+		box.add_theme_constant_override("separation", UiTheme.SPACE_8)
+		card.add_child(box)
+		label(box, "Pedestal %d" % (i + 1), true)
+		var p: int = dao.seats[i]
+		if p < 0: small(box, "Empty")
+		else:
+			person_link(box, p)
+			if dao.people[p].status == "restoring":
+				var left := maxi(0, int(dao.config.restore_years) * 365 - (store.day - int(dao.people[p].death_day)))
+				small(box, "Restoring · %.1f years left" % (left / 365.0))
+				small(box, "%d stone + %d Will%s" % [dao.config.restore_stone, dao.config.restore_will, " · waiting for materials" if left == 0 else ""])
+			else: small(box, "Divine Apostle")
+	section(parent, "The Fifty")
+	var sort_row := HFlowContainer.new()
+	parent.add_child(sort_row)
+	small(sort_row, "Sort")
+	for key: String in ["Rank", "Name", "Age", "Layer", "Status"]:
+		button(sort_row, key, func() -> void: fifty_sort = key; page_day = -1; refresh_values())
+	var ids: Array = dao.people.keys()
+	ids.sort_custom(func(a: int, b: int) -> bool:
+		match fifty_sort:
+			"Name": return store.names[a] < store.names[b]
+			"Age": return store.age(a) < store.age(b)
+			"Layer": return store.society.temper.body_layer[a] > store.society.temper.body_layer[b]
+			"Status": return str(dao.people[a].status) < str(dao.people[b].status)
+		return dao._seed_rank(a) < dao._seed_rank(b))
+	for p: int in ids:
+		var r: Dictionary = dao.people[p]
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", UiTheme.SPACE_12)
+		parent.add_child(row)
+		person_link(row, p)
+		var t: RefCounted = store.society.temper
+		var temperament := "quiet"
+		if store.society.mind:
+			var urges: PackedFloat32Array = store.society.mind.urges(p)
+			var strongest := 0
+			for u in urges.size():
+				if urges[u] > urges[strongest]: strongest = u
+			temperament = str(store.society.mind.URGE_NAMES[strongest])
+		var grades: PackedStringArray = []
+		for l in t.body_layer[p]: grades.append(str(t.config.grade_names[t.grade(p, l + 1)]))
+		label(row, "Age %d · layer %d · %s · rank %s · %s · %s · %s" % [store.age(p), t.body_layer[p], "/".join(grades) if not grades.is_empty() else "unforged", str(r.rank) if int(r.rank) else "—", "top 10" if dao.top(p, store.day) else "basic resources", str(r.status), temperament])
+	section(parent, "Last tournament · %d held" % dao.tournaments)
+	if dao.ranking.is_empty(): small(parent, "The first bracket awaits the fifth spring.")
+	for i in dao.ranking.size(): person_link(parent, dao.ranking[i], "%d · %s" % [i + 1, store.names[dao.ranking[i]]])
+	for r: Dictionary in dao.bouts:
+		small(parent, "Round of %d · %s beat %s%s · harm %.0f / %.0f" % [r.round, store.names[r.winner], store.names[r.loser], " · upset" if r.upset else "", r.harm[0], r.harm[1]])
+	section(parent, "Recent Dao stories")
+	var count := 0
+	for i in range(store.society.chronicle.size() - 1, -1, -1):
+		var event: Dictionary = store.society.chronicle[i]
+		if event.kind != "dao": continue
+		small(parent, "Day %d · %s" % [event.day, event.text])
+		count += 1
+		if count >= 12: break

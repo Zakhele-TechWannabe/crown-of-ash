@@ -23,6 +23,8 @@ func build(owner_browser: VBoxContainer) -> void:
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_theme_constant_override("separation", UiTheme.SPACE_8)
 	_header()
+	if society.fifty.open_places() > 0 and society.fifty.eligible(person):
+		ledger.button(self, "Invite to the Dao", func() -> void: society.fifty.invite(person); ledger.life._tend_the_dead(); browser.redraw())
 	var tab: String = browser.person_tab if browser.person_tab in TABS else str(OLD_TABS.get(browser.person_tab, "Overview"))
 	var page := VBoxContainer.new()
 	page.size_flags_horizontal = Control.SIZE_EXPAND_FILL

@@ -135,13 +135,16 @@ func _run() -> void:
 	society.alive[0] = 0
 	life._tend_the_dead()
 	assert(life.people.size() == 19 and life.walker_of(0) < 0 and not life.economy.walker_ids.has(0))
-	for id in pop.size(): society.alive[id] = 0
+	var before_resettlement: int = pop.size()
+	for id in pop.size():
+		if pop.settlement[id] == 0: society.alive[id] = 0
 	life._tend_the_dead()
-	assert(life.people.size() == 20 and pop.size() == 40)
+	assert(life.people.size() == 20 and pop.size() == before_resettlement + 20)
+	assert(society.fifty.open_places() == 0, "Village replenishment leaves the Fifty intact")
 	for p: Dictionary in life.people:
-		assert(int(p.id) >= 20 and society.alive[int(p.id)] and pop.age(int(p.id)) == 12)
+		assert(int(p.id) >= before_resettlement and society.alive[int(p.id)] and pop.age(int(p.id)) == 12)
 	assert(life.economy.walker_ids.size() == 20 and is_equal_approx(life.economy.daily_need(), 20.0))
-	var baby: int = pop.add_child("Young Child", 20, 21)
+	var baby: int = pop.add_child("Young Child", before_resettlement, before_resettlement + 1)
 	life._tend_the_dead()
 	assert(life.walker_of(baby) < 0, "Infants stay in arms at home")
 	pop.birth_day[baby] = pop.day - 3 * 365
@@ -153,11 +156,11 @@ func _run() -> void:
 	assert(young.kind == 8 and life.activity_text(young).contains("playing near home"))
 	assert(not young.has("food_work") and not young.has("material_work"))
 	pop.birth_day[baby] = pop.day - 7 * 365
-	society.childhood.tag_along(baby, 20, pop.day)
+	society.childhood.tag_along(baby, before_resettlement, pop.day)
 	life._refresh(true)
 	assert(life.activity_text(young).begins_with("watching "))
 	pop.birth_day[baby] = pop.day - 12 * 365
-	pop.job[baby] = pop.job[20]
+	pop.job[baby] = pop.job[before_resettlement]
 	pop.prepare_person(baby)
 	life._refresh(true)
 	assert(young.kind != 8 and young.job == pop.jobs[pop.job[baby]], "At twelve the walker follows the chosen trade")

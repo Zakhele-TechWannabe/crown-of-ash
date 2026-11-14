@@ -433,7 +433,7 @@ func encounter_near_work(b: Dictionary) -> void:
 	if store.size() == 0: return
 	var candidates: Array[int] = []
 	for id in store.size():
-		if not society.alive[id]: continue
+		if store.settlement[id] != 0 or not society.alive[id]: continue
 		var exposed: bool = society.nature.habitat_of(id) in ["forest", "meadow"] or int(store.hunger[id]) >= 3
 		for duty: String in store.schedules[store.job[id]]:
 			if duty in config.encounter_duties: exposed = true

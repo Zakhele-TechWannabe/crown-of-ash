@@ -93,7 +93,7 @@ static func motive(society: RefCounted, p: int, q: int) -> String:
 
 
 ## Run a fight between a and b. opt: spar (stops at hurt), ambush (0 or 1 strikes first from hiding, -1 none),
-## ground ("open" or "forest"). Returns {events, how, winner, loser, time, harm}; how is death, escape,
+## stop_at (2 = hurt, 3 = badly hurt; always non-lethal), ground ("open" or "forest"). Returns {events, how, winner, loser, time, harm}; how is death, escape,
 ## yield, spar or apart.
 static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumberGenerator) -> Dictionary:
 	var f: Array[Dictionary] = []
@@ -102,7 +102,8 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		f.append({"s": side, "h": 0.0, "next": 0.0, "last": -1.0, "lungs": float(side.breath) * float(config.breath_seconds),
 			"winded": false, "retry": 0.0, "allin": false, "will": will_for(int(side.will), str(side.motive))})
 	for i in 2: f[i].h = clampf(float(starting[i]), 0.0, 100.0)
-	var spar: bool = opt.get("spar", false)
+	var stop_at: int = clampi(int(opt.get("stop_at", 2 if opt.get("spar", false) else 0)), 0, 3)
+	var spar: bool = stop_at > 0
 	var forest: bool = opt.get("ground", "open") == "forest"
 	var events: Array[Dictionary] = []
 	var result := {}
@@ -136,7 +137,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		var stagger := false
 		if hit:
 			dmg = float(config.harm_per_blow) * pow(p / g, 0.8) * rng.randf_range(0.75, 1.25)
-			var cap := 100.0 if f[i].s.lethal or spar else float(config.brawl_cap)
+			var cap: float = HARM_AT[stop_at] if spar else (100.0 if f[i].s.lethal else float(config.brawl_cap))
 			if you.h < cap: you.h = minf(cap, you.h + dmg)
 			if dmg >= float(config.stagger_harm):
 				stagger = true
@@ -156,7 +157,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 			"stagger": stagger, "trade": trade, "winded": winded, "allin": allin, "harm": [f[0].h, f[1].h]})
 
 	var over := func(i: int, t: float) -> bool:
-		if spar and f[1 - i].h >= HARM_AT[2]:
+		if spar and f[1 - i].h >= HARM_AT[stop_at]:
 			finish.call(t, "spar", i, 1 - i)
 			return true
 		if f[1 - i].h >= 100.0:

@@ -242,7 +242,7 @@ func _alternatives(options: Array[Dictionary], chosen: Dictionary) -> Array:
 func _option(p: int, kind: int, target: int, questions: Array, push: Dictionary, urge: PackedFloat32Array) -> Dictionary:
 	var society: RefCounted = society_ref.get_ref()
 	var trip := "day"
-	if society.law and (kind == Option.CULTIVATE or (kind == Option.GATHER and society.temper.wanted_medicine(p) == "seven_leaf")):
+	if society.law and society.population.settlement[p] == 0 and (kind == Option.CULTIVATE or (kind == Option.GATHER and society.temper.wanted_medicine(p) == "seven_leaf")):
 		var law: RefCounted = society.law
 		var caution := clampf(float(law.config.caution_base) + float(law.config.caution_base) * emotion[p * 4 + AFRAID] - float(law.config.drive_discount) * (urge[AMBITION] + urge[SPITE] + urge[PRIDE] + minf(society.population.hunger[p], 1.0)), 0.0, 1.0)
 		trip = "night" if caution >= float(law.config.night_caution) else "day"
@@ -313,7 +313,7 @@ func _options(p: int, urge: PackedFloat32Array) -> Array[Dictionary]:
 	while e >= 0:
 		var other: int = ties.target[e]
 		var opinion: float = ties.opinion[e]
-		if society.alive[other]:
+		if society.alive[other] and store.settlement[other] == store.settlement[p]:
 			if years >= 16 and society.spouse[p] < 0 and society.spouse[other] < 0 and store.sex[other] != store.sex[p] and opinion > sweet_opinion \
 					and store.age(other) >= 16 and absi(store.age(other) - years) <= int(society.events.marriage_age_gap) and not society.marriage_related(p, other):
 				sweetheart = other
@@ -339,7 +339,7 @@ func _options(p: int, urge: PackedFloat32Array) -> Array[Dictionary]:
 			["what they could teach", _ramp(teacher_value, 0, 12)], ["youth", 1.0 if years < 25 else 0.5]], {"ambition": 1.0, "devotion": 0.5, "pride": -0.4}, urge))
 	options.append(_option(p, Option.CULTIVATE, -1, [["spirit root", 1.0 if society.revealed[p] else (0.1 if society.temper else 0.25)], ["health", 0.0 if society.injury_until[p] > store.day else 1.0],
 		["free time", 1.0 - minf(store.hunger[p] / 2.0, 1.0)]], {"ambition": 1.0, "pride": 0.4, "curiosity": 0.2}, urge))
-	if years >= 14 and years <= 60:
+	if years >= 14 and years <= 60 and not society.fifty.member(p):
 		options.append(_option(p, Option.EXPLORE, -1, [["daring", 1.0 - 0.7 * emotion[p * 4 + AFRAID]], ["fed", 1.0 if store.hunger[p] == 0 else 0.3],
 			["time away from work", float(config.explore_time_away)]],
 			{"curiosity": 1.0, "restlessness": 0.8, "fear": -1.0}, urge))
@@ -365,7 +365,7 @@ func _options(p: int, urge: PackedFloat32Array) -> Array[Dictionary]:
 		if at_gate and lacking in temper.config.medicine_names.values(): options[0].score *= float(config.routine_when_blocked)
 		# Ambitious, proud people lay in extra doses to forge a better grade, if their body can still reach High.
 		var drive: float = urge[AMBITION] + urge[PRIDE]
-		temper.aim_doses[p] = 1 if temper.grade_ceiling(p) < temper.HIGH else 1 + int(drive > 1.1) + int(drive > 1.4)
+		if not society.fifty.member(p): temper.aim_doses[p] = 1 if temper.grade_ceiling(p) < temper.HIGH else 1 + int(drive > 1.1) + int(drive > 1.4)
 		var want: String = temper.wanted_medicine(p)
 		var urgency := 1.0 if at_gate else 0.6
 		var away: float = float(config.gate_time_away) if at_gate else float(config.explore_time_away)
@@ -410,11 +410,12 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 			refused_until[p] = on_day + int(config.refusal_cooldown_days)
 			return "refused"
 		Option.CULTIVATE:
-			if society.law:
+			if society.law and store.settlement[p] == 0:
 				var breach: Dictionary = society.law.trespass(society, p, "spring" if society.realm[p] < 2 else "peak", chosen.get("trip", "night") == "night")
 				if breach.seen: return "guardians: " + str(breach.outcome)
 			society.site[p] = maxi(society.site[p], 1 if society.realm[p] < 2 else 2)
 			society.cultivate(p, 3)
+			if society.fifty.member(p): return "meditated at the terrace qi seat"
 			return "meditated at a qi spot" if society.revealed[p] else "sat in meditation"
 		Option.EXPLORE:
 			if store.rng.randf() < float(config.explore_injury):
@@ -493,7 +494,7 @@ func _act(p: int, chosen: Dictionary, on_day: int) -> String:
 		Option.GATHER:
 			var temper: RefCounted = society.temper
 			if chosen.get("medicine", "") == "seven_leaf":
-				if society.law:
+				if society.law and store.settlement[p] == 0:
 					var breach: Dictionary = society.law.trespass(society, p, "seven_leaf", chosen.get("trip", "night") == "night")
 					if breach.seen: return "guardians: " + str(breach.outcome)
 				if temper.wild.gather_herb(p):
@@ -571,7 +572,7 @@ func _sparring_partner(p: int, on_day: int) -> int:
 	var e: int = ties.head[p]
 	while e >= 0:
 		var q: int = ties.target[e]
-		if society.alive[q] and store.age(q) >= 12 and society.injury_until[q] <= on_day and ties.familiarity[e] >= 30:
+		if store.settlement[q] == store.settlement[p] and society.alive[q] and store.age(q) >= 12 and society.injury_until[q] <= on_day and ties.familiarity[e] >= 30:
 			var score: float = ties.familiarity[e] + (60.0 if ties.bonds[e] & ties.RIVAL else 0.0) + store.rng.randf() * 20.0
 			if score > best_score:
 				best_score = score

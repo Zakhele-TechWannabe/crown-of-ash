@@ -111,7 +111,7 @@ func daily_need() -> float:
 		total += 0.5 if int(p.kind) == 8 else 1.0
 	if population != null:
 		for id in population.size():
-			if walker_ids.has(id): continue
+			if walker_ids.has(id) or population.settlement[id] != 0: continue
 			if population.society.alive[id]: total += .5 if population.age(id) < 18 else 1.0
 	return total
 
@@ -312,7 +312,7 @@ func _meal() -> void:
 			hungry += 1
 	if population != null:
 		for id in population.size():
-			if walker_ids.has(id): continue
+			if walker_ids.has(id) or population.settlement[id] != 0: continue
 			if not population.society.alive[id]: continue
 			var need := .5 if population.age(id) < 18 else 1.0
 			var eaten := _eat_group("food", need * share, "children" if population.age(id) < 18 else "adults")
@@ -365,7 +365,7 @@ func _finish_day() -> void:
 				labor += 0.5 * (population.society.childhood.work_fraction(int(p.id)) if population else 1.0)
 	if population != null and not no_farmers:
 		for id in population.size():
-			if walker_ids.has(id): continue
+			if walker_ids.has(id) or population.settlement[id] != 0: continue
 			if population.age(id) < 12 or not population.society.alive[id]: continue
 			if "fields" in population.schedules[population.job[id]]: labor += EFFECT[population.hunger[id]] * population.output(id, "fields") * population.society.childhood.work_fraction(id) * (.5 if population.age(id) < 18 else 1)
 	if day <= 182:

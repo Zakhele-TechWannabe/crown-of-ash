@@ -206,7 +206,7 @@ func battle(society: RefCounted, g: Dictionary, p: int, kin: bool = false) -> Di
 	var defenders: Array[int] = [p]
 	if kin and society.temper:
 		for q in store.size():
-			if q != p and society.alive[q] and store.household[q] == store.household[p] and store.age(q) >= int(config.adult_age) and society.temper.body_layer[q] >= int(config.kin_layer): defenders.append(q)
+			if q != p and society.alive[q] and store.settlement[q] == store.settlement[p] and store.household[q] == store.household[p] and store.age(q) >= int(config.adult_age) and society.temper.body_layer[q] >= int(config.kin_layer): defenders.append(q)
 	var person := Combat.person(society, p)
 	person.lethal = true
 	for q: int in defenders.slice(1):
@@ -334,7 +334,8 @@ func advance(society: RefCounted, day: int) -> void:
 			hunt_list.erase(p)
 		else: hunt_list[p].priority = priority(hunt_list[p], day)
 	if hunt_list.is_empty(): return
-	var entries: Array = hunt_list.values()
+	var entries: Array = hunt_list.values().filter(func(entry: Dictionary) -> bool: return society.population.settlement[int(entry.person)] == 0)
+	if entries.is_empty(): return
 	entries.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.priority > b.priority)
 	var p: int = entries[0].person
 	var target: Vector2i = residents[p].home if residents.has(p) else Vector2i(society.population.locations[p].round())

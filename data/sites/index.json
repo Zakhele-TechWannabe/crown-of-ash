@@ -27,11 +27,16 @@
 		"Western Market City": [
 			630,
 			2220
+		],
+		"Heaven's Terrace \u00b7 heaven's": [
+			2625,
+			902
 		]
 	},
 	"sect": "res://data/sects/first_sect.json",
 	"sites": [
 		"city.json",
-		"../roads/west_road.json"
+		"../roads/west_road.json",
+		"heaven.json"
 	]
 }

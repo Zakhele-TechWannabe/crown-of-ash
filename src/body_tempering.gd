@@ -99,10 +99,11 @@ func rate(p: int, on_day: int) -> float:
 	var will: float = store.attributes[p * 8 + 6] / 10.0
 	var total := 0.0
 	if training(p, on_day):
-		var with_teacher := float(config.teacher_rate) if teacher[p] >= 0 else 1.0
+		var terrace: bool = society.fifty.member(p)
+		var with_teacher := float(society.fifty.config.teacher_rate) if terrace else (float(config.teacher_rate) if teacher[p] >= 0 else 1.0)
 		total += hours[p] * float(config.method_rate[method[p]]) * with_teacher
 	if body_layer[p] < int(config.labour_max_layer): total += _labour_hours(p) * float(config.labour_rate)
-	return total * will * age_factor(p) * spirit_root_factor(p)
+	return total * will * age_factor(p) * spirit_root_factor(p) * society.fifty.training_factor(p, on_day)
 
 ## Even a hidden root helps tempering; awakening guides qi through the body.
 func spirit_root_factor(p: int) -> float:
@@ -137,6 +138,8 @@ func polish_goal(p: int) -> int:
 	var goal: int = int(config.polish_days.default)
 	for id: String in config.polish_days:
 		if id != "default" and store.has_trait(p, id): goal = int(config.polish_days[id]) if id in ["impulsive", "restless"] else maxi(goal, int(config.polish_days[id]))
+	var society: RefCounted = society_ref.get_ref()
+	if society.fifty.member(p) and body_layer[p] > 0 and perfect_so_far(p): goal = maxi(goal, int(society.fifty.config.perfect_polish_days))
 	return goal
 
 func weekly(p: int, days: int, on_day: int) -> void:
@@ -146,7 +149,7 @@ func weekly(p: int, days: int, on_day: int) -> void:
 	if on_day % 365 < days: yearly(p)
 	var drilling := training(p, on_day)
 	if drilling:
-		var load := hours[p] * float(config.strain_per_hour_day) * (float(config.teacher_strain) if teacher[p] >= 0 else 1.0)
+		var load := hours[p] * float(config.strain_per_hour_day) * (float(config.teacher_strain) if teacher[p] >= 0 or society.fifty.member(p) else 1.0)
 		strain[p] = maxf(0.0, strain[p] + days * (load - float(config.strain_recovery_per_day)))
 		if strain[p] >= 1.0:
 			strain[p] = .3
@@ -188,6 +191,7 @@ func break_through(p: int, on_day: int) -> int:
 	var strong: bool = store.potential[p * 8] >= 17 and store.potential[p * 8 + 1] >= 17
 	if store.constitution[p] == 1: points += float(config.talent_physique)
 	elif strong: points += float(config.talent_strong)
+	if society.fifty.member(p): points += float(society.fifty.config.teacher_grade) + float(society.fifty.config.grade_bonus)
 	var t: int = teacher[p]
 	if t >= 0 and training(p, on_day) and body_layer[t] > l and grade(t, l + 1) >= HIGH: points += float(config.teacher_grade)
 	points += minf(float(config.polish_max), (on_day - gate_since[p]) / 365.0 * float(config.polish_per_year))
@@ -295,7 +299,7 @@ func describe(p: int) -> Dictionary:
 	var gate_reached := at_gate(p)
 	return {"layer": body_layer[p], "name": layer_name(body_layer[p]) if body_layer[p] else "untempered", "layers": layers,
 		"progress": tempering[p] / cost(mini(LAYERS, body_layer[p] + 1)), "method": config.method_names[method[p]],
-		"training": training(p, store.day), "hours": hours[p], "teacher": store.names[teacher[p]] if teacher[p] >= 0 and training(p, store.day) else "",
+		"training": training(p, store.day), "hours": hours[p], "teacher": "Heaven’s Terrace · master teacher" if society.fifty.member(p) else (store.names[teacher[p]] if teacher[p] >= 0 and training(p, store.day) else ""),
 		"strain": strain[p], "gate": gate_need(p) if gate_reached else "", "ceiling": config.grade_names[grade_ceiling(p)],
 		"grade": config.grade_names[roundi(body_grade(p))] if body_layer[p] else "", "holds": holds(p)}
 

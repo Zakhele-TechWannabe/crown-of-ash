@@ -4,7 +4,7 @@ const PATH := "user://saves/world.save"
 const VERSION := 1
 const CHILDREN := [
 	"population", "society", "ties", "mind", "temper", "nature", "wild",
-	"wildlife", "archive", "economy", "law", "modifiers", "childhood",
+	"wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
 ]
 const SKIP := [
 	"world", "sect", "grid", "catalogue", "config", "rules", "given_names",
@@ -124,6 +124,7 @@ static func read(map: Node2D, path: String = PATH) -> bool:
 		restore(map.life, state.life)
 		repair_wildlife(map.life.population.society, state.life.population.society, map.life.population.day)
 		repair_columns(map.life.population, defaults.population, map.life.population.size())
+		map.life.population.society.fifty.repair(state.life.population.society.get("fifty", {}))
 		map.life.economy.people = map.life.people
 		map.life.routes.clear()
 		map.life.nearby_views.clear()

@@ -35,6 +35,9 @@ func run() -> void:
 		ledger.tab_buttons[key].pressed.emit()
 		await process_frame
 		await process_frame
+		if key == "fifty":
+			var text := label_text(ledger.content)
+			for heading: String in ["Heaven’s Will", "heaven-stone", "Five Apostle seats", "Invite to the Dao", "Call to heaven", "Recent Dao stories"]: assert(heading in text, heading)
 		if key == "forest":
 			var text := label_text(ledger.content)
 			for heading: String in ["Iron-bark patches", "Beasts and herbs", "Populations"]: assert(heading in text)
@@ -468,6 +471,6 @@ func assert_text(condition: bool, message: String) -> void:
 	assert(condition, message)
 
 func label_text(node: Node) -> String:
-	var result := str(node.text) + "\n" if node is Label else ""
+	var result := str(node.text) + "\n" if node is Label or node is Button else ""
 	for child: Node in node.get_children(): result += label_text(child)
 	return result

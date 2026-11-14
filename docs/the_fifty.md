@@ -123,3 +123,9 @@ A "Heavenly Dao" tab in the valley book (or its own panel if the book is crowded
   - a call to heaven produces pilgrims, arrivals ≪ pilgrims, and admission fills only the open places.
 - Saves: the Dao state survives save and load (use the save system's hooks).
 - A 40-year headless sim: print candidates by layer, Apostles, envoys, deaths and tournaments. Report how many years the first Apostle took (expect decades). Tune dao.json so it's plausible: the first envoys in roughly 15–30 years and the first Apostle later.
+
+## Implementation notes
+
+The page is **The Fifty** in the Heaven group. The regression script is `tools/test_fifty.gd`; the regular headless simulation prints a `FIFTY` summary each decade. Numbers and admission policy live in `data/society/dao.json`; the terrace location and standing buildings live in `data/sites/heaven.json`.
+
+The owner will later want to play Divine Apostles as characters. Apostle identity, seat, restoration date and challenge history remain attached to each population person, preserving that person's body, memories and ties for this future work.

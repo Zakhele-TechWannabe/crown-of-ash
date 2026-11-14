@@ -45,6 +45,16 @@ func run() -> void:
 	var jump := preload("res://src/grain_economy.gd").new()
 	jump.population = preload("res://src/population.gd").new()
 	jump.population.seed_residents(residents)
+	jump.population.society.fifty.seed()
+	# Reuse immutable terrain, with independent guardian state and resident records.
+	var source_law: RefCounted = map.life.population.society.law
+	var jump_law: RefCounted = preload("res://src/law.gd").new()
+	jump_law.sect = source_law.sect
+	jump_law.grid = source_law.grid
+	jump_law.blocked = source_law.blocked
+	jump_law.guardians = source_law.guardians.duplicate(true)
+	for resident: Dictionary in residents: jump_law.residents[int(resident.id)] = resident
+	jump.population.society.law = jump_law
 	jump.setup(map.life.sect.data, residents, 718)
 	for d in 1095:
 		e.advance_to((d + 1) * 1440.0)
@@ -63,7 +73,8 @@ func run() -> void:
 			for group: String in ["wood", "earth", "metal", "fibre", "other_materials"]:
 				print("MATERIAL DAY200 Y%d %s %.2f" % [d / 365 + 1, group, e.quantity(group) * 2])
 	jump.advance_to(1095 * 1440.0)
-	assert(e.stocks == jump.stocks and e.flows == jump.flows and e.chronicle == jump.chronicle)
+	assert(e.stocks == jump.stocks and e.flows == jump.flows)
+	assert(e.chronicle == jump.chronicle, "Identical worlds retain identical event order")
 	assert(e.population.skill_level == jump.population.skill_level and e.population.skill_xp == jump.population.skill_xp and e.population.attributes == jump.population.attributes, "Daily stepping and time jumps preserve population growth")
 	for id: String in e.descendants("materials"):
 		assert(is_equal_approx(float(e.goods[id].starting_rations) + e.node_flow(id,"harvested")[3] - e.node_flow(id,"processed")[3], float(e.stocks[id])))
