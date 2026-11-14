@@ -4,7 +4,7 @@ const PATH := "user://saves/world.save"
 const VERSION := 1
 const CHILDREN := [
 	"population", "society", "ties", "mind", "temper", "nature", "wild",
-	"qi_field", "wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
+	"qi_field", "meridian_store", "wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
 ]
 const SKIP := [
 	"world", "sect", "grid", "palace", "contexts", "path_requests", "catalogue", "config", "rules", "given_names",
@@ -36,6 +36,7 @@ static func fields(object: Object) -> Array[String]:
 	return result
 
 static func capture(object: Object, ancestors: Array = []) -> Dictionary:
+	if object.get_script() and object.get_script().resource_path.ends_with("meridian_store.gd"): return object.save_state()
 	if object.get_script() and object.get_script().resource_path.ends_with("qi_field.gd"): return object.save_state()
 	var result := {}
 	var chain := ancestors + [object]
@@ -56,6 +57,9 @@ static func capture(object: Object, ancestors: Array = []) -> Dictionary:
 	return result
 
 static func restore(object: Object, state: Dictionary, ancestors: Array = []) -> void:
+	if object.get_script() and object.get_script().resource_path.ends_with("meridian_store.gd"):
+		object.load_state(state)
+		return
 	if object.get_script() and object.get_script().resource_path.ends_with("qi_field.gd"):
 		object.load_state(state, int(state.get("day", 0)))
 		return
@@ -75,6 +79,7 @@ static func restore(object: Object, state: Dictionary, ancestors: Array = []) ->
 
 ## Older saves seed wildlife at their date without replaying elapsed years or changing other state.
 static func repair_wildlife(society: RefCounted, saved: Dictionary, on_day: int) -> void:
+	repair_meridians(society, saved)
 	if not saved.has("wildlife"):
 		var economy_ref: WeakRef = society.wildlife.economy_ref
 		society.wildlife = preload("res://src/wildlife.gd").new(society)
@@ -83,6 +88,12 @@ static func repair_wildlife(society: RefCounted, saved: Dictionary, on_day: int)
 	society.wildlife.repair_names()
 	# The field starts at the saved date; historical cultivation remains abstract.
 	if not saved.has("qi_field"): society.qi_field.load_state({}, on_day)
+
+static func repair_meridians(society: RefCounted, saved: Dictionary) -> void:
+	# Missing legacy state must not retain rows from a previously loaded world.
+	if not saved.has("meridian_store"):
+		society.meridian_store = preload("res://src/meridian_store.gd").new()
+	while society.meridian_store.slot.size() < society.population.size(): society.meridian_store.add_person()
 
 static func write(map: Node2D, path: String = PATH) -> Error:
 	if path == PATH and not enabled(): return ERR_UNAVAILABLE
@@ -224,6 +235,8 @@ static func repair_columns(object: Object, defaults: Dictionary, count: int) -> 
 			var doses: PackedByteArray = object.medicine[key]
 			doses.resize(count)
 			object.medicine[key] = doses
+	if script_name == "society.gd":
+		while object.meridian_store.slot.size() < count: object.meridian_store.add_person()
 	for key: String in ["society", "ties", "mind", "temper", "nature", "childhood"]:
 		if key in object and object.get(key) != null:
 			repair_columns(object.get(key), defaults.get(key, {}), count)

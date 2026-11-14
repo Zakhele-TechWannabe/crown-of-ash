@@ -1422,6 +1422,11 @@ Expand to the bounded human graph, implement storage, integration, nine mileston
 
 Connect the body diagram to real execution reports.
 
+Implementation status: the sixteen-node definition and packed anatomy/save
+groundwork are present (`docs/qi_condensation.md`). Stage 3 is not complete:
+the production session compiler, live practice and certifications still need
+implementation and acceptance testing. The legacy cultivation ladder remains.
+
 ### Stage 4 — Physical martial techniques
 
 Activate detailed skills and equipment. Implement stance, steps, strikes, guards, parries, feints, recovery and bow actions.

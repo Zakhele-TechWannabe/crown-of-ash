@@ -4,6 +4,8 @@ const Relationships = preload("res://src/relationships.gd")
 const Mind = preload("res://src/mind.gd")
 const BodyTempering = preload("res://src/body_tempering.gd")
 const Nature = preload("res://src/nature.gd")
+const MeridianStore = preload("res://src/meridian_store.gd")
+var meridian_store := MeridianStore.new()
 var ties := Relationships.new()
 var store_ref: WeakRef
 var population: RefCounted:
@@ -82,6 +84,7 @@ func _init(store: RefCounted) -> void:
 	fifty = preload("res://src/fifty.gd").new(self)
 
 func add_person() -> void:
+	meridian_store.add_person()
 	ties.add_person()
 	if mind: mind.add_person()
 	if temper: temper.add_person()
@@ -110,6 +113,17 @@ func add_person() -> void:
 	resources.append(1)
 	reputation.append(20)
 	alive.append(1)
+
+## Anatomical state is allocated after qualification; no qi or achievement is granted.
+func prepare_meridians(person: int, on_day: int) -> int:
+	var store: RefCounted = store_ref.get_ref()
+	if temper == null or temper.body_layer[person] < 9 or not revealed[person] or store.spirit_root[person] == 0: return -1
+	if meridian_store.slot[person] >= 0: return meridian_store.slot[person]
+	var key := "%d:%d:%d:%d" % [store.rng.seed, person, store.birth_day[person], store.constitution[person]]
+	return meridian_store.create(person, temper.grades.slice(person * 9, (person + 1) * 9), store.spirit_root[person], store.root_purity[person], key, on_day)
+
+func meridian_report(person: int) -> Dictionary:
+	return meridian_store.report(person)
 
 func note(person: int, kind: String, words: String, on_day: int = -1) -> void:
 	var store: RefCounted = store_ref.get_ref()

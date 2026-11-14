@@ -1,0 +1,1171 @@
+{
+  "schema_version": 1,
+  "laws_version": 1,
+  "species_id": "human",
+  "nodes": [
+    {
+      "id": "breath",
+      "kind": "interface",
+      "body_region": "skin",
+      "diagram_position": [
+        0.5,
+        0.18
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Absorb",
+        "Release",
+        "Ground"
+      ]
+    },
+    {
+      "id": "left_palm",
+      "kind": "interface",
+      "body_region": "arm",
+      "diagram_position": [
+        0.12,
+        0.5
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Absorb",
+        "Release",
+        "Ground"
+      ]
+    },
+    {
+      "id": "right_palm",
+      "kind": "interface",
+      "body_region": "arm",
+      "diagram_position": [
+        0.88,
+        0.5
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Absorb",
+        "Release",
+        "Ground"
+      ]
+    },
+    {
+      "id": "left_sole",
+      "kind": "interface",
+      "body_region": "leg",
+      "diagram_position": [
+        0.35,
+        0.94
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Absorb",
+        "Ground"
+      ]
+    },
+    {
+      "id": "right_sole",
+      "kind": "interface",
+      "body_region": "leg",
+      "diagram_position": [
+        0.65,
+        0.94
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Absorb",
+        "Ground"
+      ]
+    },
+    {
+      "id": "lower",
+      "kind": "storage",
+      "body_region": "core",
+      "diagram_position": [
+        0.5,
+        0.58
+      ],
+      "volume_seed": 100,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Integrate",
+        "Compress",
+        "Hold"
+      ]
+    },
+    {
+      "id": "abdominal",
+      "kind": "refinement",
+      "body_region": "core",
+      "diagram_position": [
+        0.5,
+        0.46
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Filter",
+        "Convert",
+        "Stabilise"
+      ]
+    },
+    {
+      "id": "lumbar",
+      "kind": "junction",
+      "body_region": "core",
+      "diagram_position": [
+        0.54,
+        0.52
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Filter",
+        "Stabilise"
+      ]
+    },
+    {
+      "id": "chest",
+      "kind": "junction",
+      "body_region": "core",
+      "diagram_position": [
+        0.5,
+        0.3
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Filter",
+        "Stabilise"
+      ]
+    },
+    {
+      "id": "left_shoulder",
+      "kind": "junction",
+      "body_region": "arm",
+      "diagram_position": [
+        0.3,
+        0.3
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": []
+    },
+    {
+      "id": "right_shoulder",
+      "kind": "junction",
+      "body_region": "arm",
+      "diagram_position": [
+        0.7,
+        0.3
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": []
+    },
+    {
+      "id": "left_hip",
+      "kind": "junction",
+      "body_region": "leg",
+      "diagram_position": [
+        0.36,
+        0.62
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": []
+    },
+    {
+      "id": "right_hip",
+      "kind": "junction",
+      "body_region": "leg",
+      "diagram_position": [
+        0.64,
+        0.62
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": []
+    },
+    {
+      "id": "head",
+      "kind": "control",
+      "body_region": "head",
+      "diagram_position": [
+        0.5,
+        0.06
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": [
+        "Hold"
+      ]
+    },
+    {
+      "id": "middle",
+      "kind": "dormant",
+      "body_region": "core",
+      "diagram_position": [
+        0.5,
+        0.35
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": []
+    },
+    {
+      "id": "upper",
+      "kind": "dormant",
+      "body_region": "head",
+      "diagram_position": [
+        0.5,
+        0.12
+      ],
+      "volume_seed": 1,
+      "safe_pressure_seed": 1,
+      "terminal_capabilities": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "breath_chest",
+      "from_id": "breath",
+      "to_id": "chest",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.18
+        ],
+        [
+          0.5,
+          0.3
+        ]
+      ],
+      "seed_width": 1.4,
+      "seed_conductivity": 1.4,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_abdominal",
+      "from_id": "chest",
+      "to_id": "abdominal",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.46
+        ]
+      ],
+      "seed_width": 0.8,
+      "seed_conductivity": 0.8,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "abdominal_lower",
+      "from_id": "abdominal",
+      "to_id": "lower",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.46
+        ],
+        [
+          0.5,
+          0.58
+        ]
+      ],
+      "seed_width": 1.2,
+      "seed_conductivity": 1.2,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_lumbar",
+      "from_id": "chest",
+      "to_id": "lumbar",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.54,
+          0.52
+        ]
+      ],
+      "seed_width": 1.3,
+      "seed_conductivity": 1.3,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "lumbar_lower",
+      "from_id": "lumbar",
+      "to_id": "lower",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.54,
+          0.52
+        ],
+        [
+          0.5,
+          0.58
+        ]
+      ],
+      "seed_width": 1.3,
+      "seed_conductivity": 1.3,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "lower_abdominal",
+      "from_id": "lower",
+      "to_id": "abdominal",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.58
+        ],
+        [
+          0.5,
+          0.46
+        ]
+      ],
+      "seed_width": 1.2,
+      "seed_conductivity": 1.2,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "abdominal_lumbar",
+      "from_id": "abdominal",
+      "to_id": "lumbar",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.46
+        ],
+        [
+          0.54,
+          0.52
+        ]
+      ],
+      "seed_width": 1.0,
+      "seed_conductivity": 1.0,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "lumbar_chest",
+      "from_id": "lumbar",
+      "to_id": "chest",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.54,
+          0.52
+        ],
+        [
+          0.5,
+          0.3
+        ]
+      ],
+      "seed_width": 1.3,
+      "seed_conductivity": 1.3,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_breath",
+      "from_id": "chest",
+      "to_id": "breath",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.18
+        ]
+      ],
+      "seed_width": 1.4,
+      "seed_conductivity": 1.4,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        3,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_left_shoulder",
+      "from_id": "chest",
+      "to_id": "left_shoulder",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.3,
+          0.3
+        ]
+      ],
+      "seed_width": 1.1,
+      "seed_conductivity": 1.1,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "left_shoulder_palm",
+      "from_id": "left_shoulder",
+      "to_id": "left_palm",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.3,
+          0.3
+        ],
+        [
+          0.12,
+          0.5
+        ]
+      ],
+      "seed_width": 0.9,
+      "seed_conductivity": 0.9,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "left_palm_lumbar",
+      "from_id": "left_palm",
+      "to_id": "lumbar",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.12,
+          0.5
+        ],
+        [
+          0.54,
+          0.52
+        ]
+      ],
+      "seed_width": 0.8,
+      "seed_conductivity": 0.8,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_right_shoulder",
+      "from_id": "chest",
+      "to_id": "right_shoulder",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.7,
+          0.3
+        ]
+      ],
+      "seed_width": 1.1,
+      "seed_conductivity": 1.1,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "right_shoulder_palm",
+      "from_id": "right_shoulder",
+      "to_id": "right_palm",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.7,
+          0.3
+        ],
+        [
+          0.88,
+          0.5
+        ]
+      ],
+      "seed_width": 0.9,
+      "seed_conductivity": 0.9,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "right_palm_lumbar",
+      "from_id": "right_palm",
+      "to_id": "lumbar",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.88,
+          0.5
+        ],
+        [
+          0.54,
+          0.52
+        ]
+      ],
+      "seed_width": 0.8,
+      "seed_conductivity": 0.8,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "lower_left_hip",
+      "from_id": "lower",
+      "to_id": "left_hip",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.58
+        ],
+        [
+          0.36,
+          0.62
+        ]
+      ],
+      "seed_width": 1.2,
+      "seed_conductivity": 1.2,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        3,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "left_hip_sole",
+      "from_id": "left_hip",
+      "to_id": "left_sole",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.36,
+          0.62
+        ],
+        [
+          0.35,
+          0.94
+        ]
+      ],
+      "seed_width": 1,
+      "seed_conductivity": 1,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        3,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "left_sole_lumbar",
+      "from_id": "left_sole",
+      "to_id": "lumbar",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.35,
+          0.94
+        ],
+        [
+          0.54,
+          0.52
+        ]
+      ],
+      "seed_width": 0.9,
+      "seed_conductivity": 0.9,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "lower_right_hip",
+      "from_id": "lower",
+      "to_id": "right_hip",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.58
+        ],
+        [
+          0.64,
+          0.62
+        ]
+      ],
+      "seed_width": 1.2,
+      "seed_conductivity": 1.2,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        3,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "right_hip_sole",
+      "from_id": "right_hip",
+      "to_id": "right_sole",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.64,
+          0.62
+        ],
+        [
+          0.65,
+          0.94
+        ]
+      ],
+      "seed_width": 1,
+      "seed_conductivity": 1,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        1,
+        3,
+        3,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "right_sole_lumbar",
+      "from_id": "right_sole",
+      "to_id": "lumbar",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.65,
+          0.94
+        ],
+        [
+          0.54,
+          0.52
+        ]
+      ],
+      "seed_width": 0.9,
+      "seed_conductivity": 0.9,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_head",
+      "from_id": "chest",
+      "to_id": "head",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.06
+        ]
+      ],
+      "seed_width": 0.7,
+      "seed_conductivity": 0.7,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "dormant": false
+    },
+    {
+      "id": "chest_middle",
+      "from_id": "chest",
+      "to_id": "middle",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.35
+        ]
+      ],
+      "seed_width": 1,
+      "seed_conductivity": 1,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        2,
+        2
+      ],
+      "dormant": true
+    },
+    {
+      "id": "head_upper",
+      "from_id": "head",
+      "to_id": "upper",
+      "permitted_directions": [
+        "forward"
+      ],
+      "diagram_polyline": [
+        [
+          0.5,
+          0.06
+        ],
+        [
+          0.5,
+          0.12
+        ]
+      ],
+      "seed_width": 1,
+      "seed_conductivity": 1,
+      "affinity": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "relevant_tempering_weights": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "dormant": true
+    }
+  ]
+}
