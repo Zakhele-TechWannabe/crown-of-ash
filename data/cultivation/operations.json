@@ -1,0 +1,56 @@
+{
+  "Absorb": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "ground"
+  },
+  "Guide": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "ground"
+  },
+  "Split": {
+    "duration": 10,
+    "control_demand": 2,
+    "resource_cost": 0,
+    "abort": "ground"
+  },
+  "Merge": {
+    "duration": 10,
+    "control_demand": 2,
+    "resource_cost": 0,
+    "abort": "ground"
+  },
+  "Filter": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0.15,
+    "abort": "ground"
+  },
+  "Stabilise": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0.02,
+    "abort": "ground"
+  },
+  "Integrate": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "ground"
+  },
+  "Ground": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "ground"
+  },
+  "Hold": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "ground"
+  }
+}

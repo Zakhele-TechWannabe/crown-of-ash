@@ -11,6 +11,7 @@ import threading
 out = Path('out/phase2')
 out.mkdir(parents=True, exist_ok=True)
 results = []
+# Includes tools/test_cultivator_lab.gd; keep all Godot invocations serial.
 files = sys.argv[1:] or sorted(glob.glob('tools/test_*.gd'))
 for file in files:
     log = out / (Path(file).name + '.log')
