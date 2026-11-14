@@ -1,893 +1,1314 @@
 {
- "note": "Field numbers from docs/wildlife_research.md (Codex, 87 sources). These override the rule traits for the same scientific name; species GBIF has no record of in the box are added.",
- "species": [
-  {
-   "sci": "Canis lupus",
-   "name": "Grey wolf",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Canidae",
-   "tier": "individual",
-   "mass": 38,
-   "diet": "carnivore",
-   "food_kg": 3.5,
-   "group_size": 6,
-   "range_km2": 250,
-   "active": "dusk",
-   "gestation": 63,
-   "litter": 5,
-   "maturity_y": 2,
-   "lifespan_y": 7,
-   "start": 6,
-   "fasting_days": 10,
-   "burst_s": 180,
-   "speed_kmh": [
-    50,
-    8
-   ],
-   "kill_success": 0.15,
-   "marks": "urine, scrapes, howls",
-   "people": "avoids; takes livestock left out at night",
-   "danger": 2,
-   "eats": [
-    "deer",
-    "boar_young",
-    "hare",
-    "carrion",
-    "livestock"
-   ],
-   "fears": [
-    "Panthera tigris"
-   ],
-   "group": "wolf"
-  },
-  {
-   "sci": "Panthera tigris",
-   "name": "Tiger",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Felidae",
-   "tier": "individual",
-   "mass": 150,
-   "diet": "carnivore",
-   "food_kg": 7.5,
-   "group_size": 1,
-   "range_km2": 300,
-   "active": "dusk",
-   "gestation": 103,
-   "litter": 3,
-   "maturity_y": 4,
-   "lifespan_y": 12,
-   "start": 0,
-   "fasting_days": 10,
-   "burst_s": 20,
-   "speed_kmh": [
-    50,
-    4
-   ],
-   "kill_success": 0.1,
-   "marks": "spray, scrapes, scratched trees",
-   "people": "avoids; deadly near its kill, cubs, or when wounded",
-   "danger": 3,
-   "eats": [
-    "boar",
-    "deer",
-    "bear",
-    "wolf",
-    "dog",
-    "calf"
-   ],
-   "fears": [],
-   "group": "tiger"
-  },
-  {
-   "sci": "Ursus thibetanus",
-   "name": "Asiatic black bear",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Ursidae",
-   "tier": "individual",
-   "mass": 90,
-   "diet": "omnivore",
-   "food_kg": 6,
-   "group_size": 1,
-   "range_km2": 25,
-   "active": "day",
-   "gestation": 220,
-   "litter": 2,
-   "maturity_y": 4,
-   "lifespan_y": 20,
-   "start": 3,
-   "fasting_days": 20,
-   "burst_s": 30,
-   "speed_kmh": [
-    35,
-    3
-   ],
-   "dens": true,
-   "marks": "rubbed and clawed trees",
-   "people": "climbs or leaves; dangerous when surprised or with cubs",
-   "danger": 3,
-   "eats": [
-    "nuts",
-    "berries",
-    "shoots",
-    "insects",
-    "carrion",
-    "fawn"
-   ],
-   "fears": [
-    "Panthera tigris"
-   ],
-   "group": "bear"
-  },
-  {
-   "sci": "Ursus arctos",
-   "name": "Brown bear",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Ursidae",
-   "tier": "individual",
-   "mass": 200,
-   "diet": "omnivore",
-   "food_kg": 10,
-   "group_size": 1,
-   "range_km2": 150,
-   "active": "dusk",
-   "gestation": 220,
-   "litter": 2,
-   "maturity_y": 5,
-   "lifespan_y": 20,
-   "start": 0,
-   "fasting_days": 30,
-   "burst_s": 45,
-   "speed_kmh": [
-    45,
-    4
-   ],
-   "dens": true,
-   "people": "avoids; defends cubs and carcasses",
-   "danger": 3,
-   "eats": [
-    "roots",
-    "berries",
-    "nuts",
-    "carrion",
-    "fawn",
-    "livestock"
-   ],
-   "fears": [
-    "Panthera tigris"
-   ],
-   "group": "bear"
-  },
-  {
-   "sci": "Vulpes vulpes",
-   "name": "Red fox",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Canidae",
-   "tier": "individual",
-   "mass": 5,
-   "diet": "omnivore",
-   "food_kg": 0.65,
-   "group_size": 1,
-   "range_km2": 5,
-   "active": "night",
-   "gestation": 52,
-   "litter": 5,
-   "maturity_y": 0.8,
-   "lifespan_y": 3,
-   "start": 6,
-   "fasting_days": 5,
-   "burst_s": 30,
-   "speed_kmh": [
-    48,
-    7
-   ],
-   "kill_success": 0.25,
-   "people": "avoids; raids chicken coops",
-   "danger": 0,
-   "eats": [
-    "mice",
-    "hare",
-    "pheasant",
-    "eggs",
-    "fruit",
-    "carrion",
-    "chicken"
-   ],
-   "fears": [
-    "Canis lupus",
-    "Canis familiaris"
-   ],
-   "group": "fox"
-  },
-  {
-   "sci": "Panthera pardus",
-   "name": "Leopard",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Felidae",
-   "tier": "individual",
-   "mass": 40,
-   "diet": "carnivore",
-   "food_kg": 2.5,
-   "group_size": 1,
-   "range_km2": 60,
-   "active": "night",
-   "gestation": 96,
-   "litter": 2,
-   "maturity_y": 2.5,
-   "lifespan_y": 12,
-   "start": 0,
-   "fasting_days": 7,
-   "burst_s": 20,
-   "speed_kmh": [
-    50,
-    4
-   ],
-   "kill_success": 0.25,
-   "people": "avoids; takes goats and dogs",
-   "danger": 2,
-   "eats": [
-    "roe",
-    "musk_deer",
-    "piglet",
-    "hare",
-    "goat",
-    "dog"
-   ],
-   "fears": [
-    "Panthera tigris"
-   ],
-   "group": "leopard"
-  },
-  {
-   "sci": "Sus scrofa",
-   "name": "Wild boar",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Suidae",
-   "tier": "individual",
-   "mass": 75,
-   "diet": "omnivore",
-   "food_kg": 2,
-   "group_size": 8,
-   "range_km2": 5,
-   "active": "dusk",
-   "gestation": 115,
-   "litter": 5,
-   "maturity_y": 1,
-   "lifespan_y": 7,
-   "start": 25,
-   "fasting_days": 12,
-   "burst_s": 60,
-   "speed_kmh": [
-    35,
-    4
-   ],
-   "people": "flees; a sow with piglets or a cornered boar charges; digs up fields",
-   "danger": 2,
-   "eats": [
-    "nuts",
-    "roots",
-    "crops",
-    "grubs",
-    "eggs",
-    "carrion"
-   ],
-   "fears": [
-    "Panthera tigris",
-    "Canis lupus"
-   ],
-   "group": "boar"
-  },
-  {
-   "sci": "Cervus nippon",
-   "name": "Sika deer",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Cervidae",
-   "tier": "individual",
-   "mass": 65,
-   "diet": "grazer",
-   "food_kg": 1.8,
-   "group_size": 6,
-   "range_km2": 1,
-   "active": "dusk",
-   "gestation": 225,
-   "litter": 1,
-   "maturity_y": 2,
-   "lifespan_y": 10,
-   "start": 45,
-   "fasting_days": 14,
-   "burst_s": 120,
-   "speed_kmh": [
-    55,
-    10
-   ],
-   "people": "flees; grazes field edges; a rutting stag charges",
-   "danger": 1,
-   "eats": [
-    "grass",
-    "herbs",
-    "browse",
-    "crops"
-   ],
-   "fears": [
-    "Panthera tigris",
-    "Canis lupus",
-    "Panthera pardus"
-   ],
-   "group": "deer"
-  },
-  {
-   "sci": "Capreolus pygargus",
-   "name": "Siberian roe deer",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Cervidae",
-   "tier": "individual",
-   "mass": 35,
-   "diet": "browser",
-   "food_kg": 1,
-   "group_size": 2,
-   "range_km2": 0.8,
-   "active": "dusk",
-   "gestation": 290,
-   "litter": 2,
-   "maturity_y": 1.5,
-   "lifespan_y": 9,
-   "start": 35,
-   "fasting_days": 10,
-   "burst_s": 90,
-   "speed_kmh": [
-    50,
-    9
-   ],
-   "people": "flees with a bark of alarm",
-   "danger": 0,
-   "eats": [
-    "browse",
-    "herbs",
-    "crops"
-   ],
-   "fears": [
-    "Canis lupus",
-    "Panthera pardus"
-   ],
-   "group": "deer"
-  },
-  {
-   "sci": "Moschus berezovskii",
-   "name": "Forest musk deer",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Moschidae",
-   "tier": "individual",
-   "mass": 8,
-   "diet": "browser",
-   "food_kg": 0.3,
-   "group_size": 1,
-   "range_km2": 0.3,
-   "active": "night",
-   "gestation": 187,
-   "litter": 2,
-   "maturity_y": 1.5,
-   "lifespan_y": 7,
-   "start": 0,
-   "people": "hides; its musk is prized",
-   "danger": 0,
-   "eats": [
-    "lichen",
-    "leaves"
-   ],
-   "fears": [
-    "Panthera pardus",
-    "Canis lupus"
-   ],
-   "use": "medicine",
-   "group": "musk deer"
-  },
-  {
-   "sci": "Naemorhedus griseus",
-   "name": "Chinese goral",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Bovidae",
-   "tier": "individual",
-   "mass": 30,
-   "diet": "grazer",
-   "food_kg": 0.8,
-   "group_size": 4,
-   "range_km2": 0.4,
-   "active": "day",
-   "gestation": 220,
-   "litter": 1,
-   "maturity_y": 2.5,
-   "lifespan_y": 10,
-   "start": 0,
-   "people": "flees up the rock",
-   "danger": 0,
-   "eats": [
-    "grass",
-    "herbs"
-   ],
-   "fears": [
-    "Panthera pardus",
-    "Canis lupus"
-   ],
-   "group": "goral"
-  },
-  {
-   "sci": "Lepus capensis",
-   "name": "Hare",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Lagomorpha",
-   "family": "Leporidae",
-   "tier": "population",
-   "mass": 3,
-   "diet": "grazer",
-   "food_kg": 0.12,
-   "group_size": 1,
-   "active": "night",
-   "gestation": 50,
-   "litter": 2,
-   "maturity_y": 1,
-   "lifespan_y": 3,
-   "start": 60,
-   "people": "freezes, then zigzags to cover",
-   "danger": 0,
-   "eats": [
-    "grass",
-    "herbs",
-    "bark"
-   ],
-   "group": "hare"
-  },
-  {
-   "sci": "Phasianus colchicus",
-   "name": "Common pheasant",
-   "kingdom": "Animalia",
-   "class": "Aves",
-   "order": "Galliformes",
-   "family": "Phasianidae",
-   "tier": "population",
-   "mass": 1,
-   "diet": "omnivore",
-   "food_kg": 0.08,
-   "group_size": 8,
-   "active": "day",
-   "gestation": 25,
-   "litter": 10,
-   "maturity_y": 1,
-   "lifespan_y": 2,
-   "start": 40,
-   "people": "runs, then bursts up close; gleans the fields",
-   "danger": 0,
-   "eats": [
-    "seeds",
-    "grain",
-    "insects"
-   ],
-   "group": "pheasant"
-  },
-  {
-   "sci": "Ovis aries",
-   "name": "Sheep",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Bovidae",
-   "tier": "individual",
-   "domestic": true,
-   "mass": 45,
-   "diet": "grazer",
-   "food_kg": 1.2,
-   "group_size": 15,
-   "active": "day",
-   "gestation": 148,
-   "litter": 1,
-   "maturity_y": 0.75,
-   "lifespan_y": 10,
-   "start": 15,
-   "people": "follows the herder",
-   "danger": 0,
-   "eats": [
-    "grass",
-    "hay"
-   ],
-   "group": "sheep",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Capra hircus",
-   "name": "Goat",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Bovidae",
-   "tier": "individual",
-   "domestic": true,
-   "mass": 35,
-   "diet": "browser",
-   "food_kg": 0.9,
-   "group_size": 8,
-   "active": "day",
-   "gestation": 150,
-   "litter": 2,
-   "maturity_y": 0.75,
-   "lifespan_y": 12,
-   "start": 8,
-   "people": "climbs, escapes pens, eats the orchard",
-   "danger": 0,
-   "eats": [
-    "browse",
-    "hay"
-   ],
-   "group": "goat",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Bos taurus",
-   "name": "Cattle",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Bovidae",
-   "tier": "individual",
-   "domestic": true,
-   "mass": 350,
-   "diet": "grazer",
-   "food_kg": 8,
-   "group_size": 6,
-   "active": "day",
-   "gestation": 283,
-   "litter": 1,
-   "maturity_y": 1.25,
-   "lifespan_y": 16,
-   "start": 4,
-   "people": "calm; a bull or a cow with a calf can trample",
-   "danger": 1,
-   "eats": [
-    "grass",
-    "hay",
-    "straw"
-   ],
-   "group": "cattle",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Bubalus bubalis",
-   "name": "Water buffalo",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Bovidae",
-   "tier": "individual",
-   "domestic": true,
-   "mass": 450,
-   "diet": "grazer",
-   "food_kg": 10,
-   "group_size": 2,
-   "active": "day",
-   "gestation": 320,
-   "litter": 1,
-   "maturity_y": 3,
-   "lifespan_y": 20,
-   "start": 2,
-   "people": "ploughs the paddies; faces down wolves",
-   "danger": 1,
-   "eats": [
-    "grass",
-    "straw"
-   ],
-   "group": "buffalo",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Sus domesticus",
-   "name": "Pig",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Suidae",
-   "tier": "individual",
-   "domestic": true,
-   "mass": 90,
-   "diet": "omnivore",
-   "food_kg": 2.2,
-   "group_size": 5,
-   "active": "day",
-   "gestation": 114,
-   "litter": 6,
-   "maturity_y": 0.6,
-   "lifespan_y": 10,
-   "start": 5,
-   "people": "escapes for food",
-   "danger": 0,
-   "eats": [
-    "scraps",
-    "roots",
-    "bran"
-   ],
-   "group": "pig",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Gallus gallus domesticus",
-   "name": "Chicken",
-   "kingdom": "Animalia",
-   "class": "Aves",
-   "order": "Galliformes",
-   "family": "Phasianidae",
-   "tier": "population",
-   "domestic": true,
-   "mass": 1.7,
-   "diet": "omnivore",
-   "food_kg": 0.09,
-   "group_size": 12,
-   "active": "day",
-   "gestation": 21,
-   "litter": 8,
-   "maturity_y": 0.5,
-   "lifespan_y": 6,
-   "start": 20,
-   "danger": 0,
-   "eats": [
-    "grain",
-    "greens",
-    "insects"
-   ],
-   "group": "chicken",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Canis familiaris",
-   "name": "Village dog",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Canidae",
-   "tier": "individual",
-   "domestic": true,
-   "mass": 18,
-   "diet": "omnivore",
-   "food_kg": 0.7,
-   "group_size": 3,
-   "active": "day",
-   "gestation": 63,
-   "litter": 5,
-   "maturity_y": 1,
-   "lifespan_y": 11,
-   "start": 3,
-   "people": "guards its home and the flock",
-   "danger": 1,
-   "eats": [
-    "scraps",
-    "carrion"
-   ],
-   "fears": [
-    "Panthera tigris",
-    "Panthera pardus",
-    "Canis lupus"
-   ],
-   "group": "dog",
-   "habitat": [
-    "village",
-    "meadow"
-   ]
-  },
-  {
-   "sci": "Budorcas taxicolor",
-   "name": "Takin",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Bovidae",
-   "tier": "individual",
-   "group": "takin",
-   "mass": 300,
-   "diet": "browser",
-   "food_kg": 6,
-   "group_size": 10,
-   "range_km2": 20,
-   "active": "day",
-   "gestation": 210,
-   "litter": 1,
-   "maturity_y": 3,
-   "lifespan_y": 15,
-   "start": 8,
-   "habitat": [
-    "forest",
-    "rock",
-    "meadow"
-   ],
-   "people": "usually moves off; a startled bull charges",
-   "danger": 3,
-   "eats": [
-    "leaves",
-    "bamboo",
-    "herbs",
-    "bark"
-   ],
-   "fears": [
-    "Panthera tigris",
-    "Canis lupus"
-   ]
-  },
-  {
-   "sci": "Ailuropoda melanoleuca",
-   "name": "Giant panda",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Carnivora",
-   "family": "Ursidae",
-   "tier": "individual",
-   "group": "panda",
-   "mass": 100,
-   "diet": "herbivore",
-   "food_kg": 12,
-   "group_size": 1,
-   "range_km2": 6,
-   "active": "day",
-   "gestation": 135,
-   "litter": 1,
-   "maturity_y": 5,
-   "lifespan_y": 20,
-   "start": 2,
-   "habitat": [
-    "forest"
-   ],
-   "people": "shy and solitary; defends itself if cornered",
-   "danger": 2,
-   "eats": [
-    "bamboo"
-   ],
-   "fears": [
-    "Canis lupus",
-    "Panthera pardus"
-   ]
-  },
-  {
-   "sci": "Rhinopithecus roxellana",
-   "name": "Golden snub-nosed monkey",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Primates",
-   "family": "Cercopithecidae",
-   "tier": "individual",
-   "group": "monkey",
-   "mass": 15,
-   "diet": "browser",
-   "food_kg": 0.6,
-   "group_size": 40,
-   "range_km2": 20,
-   "active": "day",
-   "gestation": 200,
-   "litter": 1,
-   "maturity_y": 5,
-   "lifespan_y": 20,
-   "start": 40,
-   "habitat": [
-    "forest"
-   ],
-   "people": "watches from the canopy; troops raid orchards",
-   "danger": 1,
-   "eats": [
-    "leaves",
-    "lichen",
-    "buds",
-    "fruit",
-    "seeds"
-   ],
-   "fears": [
-    "Panthera pardus"
-   ]
-  },
-  {
-   "sci": "Muntiacus reevesi",
-   "name": "Reeves's muntjac",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Artiodactyla",
-   "family": "Cervidae",
-   "tier": "individual",
-   "group": "deer",
-   "mass": 13,
-   "diet": "browser",
-   "food_kg": 0.5,
-   "group_size": 1,
-   "range_km2": 0.2,
-   "active": "dusk",
-   "gestation": 210,
-   "litter": 1,
-   "maturity_y": 1,
-   "lifespan_y": 12,
-   "start": 20,
-   "habitat": [
-    "forest"
-   ],
-   "people": "barks and bolts",
-   "danger": 0,
-   "eats": [
-    "browse",
-    "herbs",
-    "fruit"
-   ],
-   "fears": [
-    "Panthera pardus",
-    "Canis lupus",
-    "Vulpes vulpes"
-   ]
-  },
-  {
-   "sci": "Hystrix brachyura",
-   "name": "Malayan porcupine",
-   "kingdom": "Animalia",
-   "class": "Mammalia",
-   "order": "Rodentia",
-   "family": "Hystricidae",
-   "tier": "individual",
-   "group": "porcupine",
-   "mass": 12,
-   "diet": "herbivore",
-   "food_kg": 0.5,
-   "group_size": 2,
-   "range_km2": 1,
-   "active": "night",
-   "gestation": 110,
-   "litter": 2,
-   "maturity_y": 1,
-   "lifespan_y": 15,
-   "start": 6,
-   "habitat": [
-    "forest",
-    "field"
-   ],
-   "people": "rattles its quills; raids root crops",
-   "danger": 1,
-   "eats": [
-    "roots",
-    "bark",
-    "fruit",
-    "crops"
-   ],
-   "fears": [
-    "Panthera pardus"
-   ]
-  }
- ],
- "note_general": "Takin, panda, golden monkey, muntjac and porcupine numbers are general zoological figures (not from the Codex research); tune freely."
+  "note": "Field numbers from docs/wildlife_research.md (Codex, 87 sources). These override the rule traits for the same scientific name; species GBIF has no record of in the box are added.",
+  "species": [
+    {
+      "sci": "Canis lupus",
+      "name": "Grey wolf",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "tier": "individual",
+      "mass": 38,
+      "diet": "carnivore",
+      "food_kg": 3.5,
+      "group_size": 6,
+      "range_km2": 250,
+      "active": "dusk",
+      "gestation": 63,
+      "litter": 5,
+      "maturity_y": 2,
+      "lifespan_y": 7,
+      "start": 6,
+      "fasting_days": 10,
+      "burst_s": 180,
+      "speed_kmh": [
+        50,
+        8
+      ],
+      "kill_success": 0.15,
+      "marks": "urine, scrapes, howls",
+      "people": "avoids; takes livestock left out at night",
+      "danger": 2,
+      "eats": [
+        "deer",
+        "boar_young",
+        "hare",
+        "carrion",
+        "livestock"
+      ],
+      "fears": [
+        "Panthera tigris"
+      ],
+      "group": "wolf",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "grey wolf",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Canis lupus:spirit",
+        "Canis lupus:demonic"
+      ]
+    },
+    {
+      "sci": "Panthera tigris",
+      "name": "Tiger",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "tier": "individual",
+      "mass": 150,
+      "diet": "carnivore",
+      "food_kg": 7.5,
+      "group_size": 1,
+      "range_km2": 300,
+      "active": "dusk",
+      "gestation": 103,
+      "litter": 3,
+      "maturity_y": 4,
+      "lifespan_y": 12,
+      "start": 0,
+      "fasting_days": 10,
+      "burst_s": 20,
+      "speed_kmh": [
+        50,
+        4
+      ],
+      "kill_success": 0.1,
+      "marks": "spray, scrapes, scratched trees",
+      "people": "avoids; deadly near its kill, cubs, or when wounded",
+      "danger": 3,
+      "eats": [
+        "boar",
+        "deer",
+        "bear",
+        "wolf",
+        "dog",
+        "calf"
+      ],
+      "fears": [],
+      "group": "tiger",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1.2,
+      "combat_profile_id": "tiger",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Panthera tigris:spirit",
+        "Panthera tigris:demonic"
+      ]
+    },
+    {
+      "sci": "Ursus thibetanus",
+      "name": "Asiatic black bear",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "tier": "individual",
+      "mass": 90,
+      "diet": "omnivore",
+      "food_kg": 6,
+      "group_size": 1,
+      "range_km2": 25,
+      "active": "day",
+      "gestation": 220,
+      "litter": 2,
+      "maturity_y": 4,
+      "lifespan_y": 20,
+      "start": 3,
+      "fasting_days": 20,
+      "burst_s": 30,
+      "speed_kmh": [
+        35,
+        3
+      ],
+      "dens": true,
+      "marks": "rubbed and clawed trees",
+      "people": "climbs or leaves; dangerous when surprised or with cubs",
+      "danger": 3,
+      "eats": [
+        "nuts",
+        "berries",
+        "shoots",
+        "insects",
+        "carrion",
+        "fawn"
+      ],
+      "fears": [
+        "Panthera tigris"
+      ],
+      "group": "bear",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "black bear",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Ursus thibetanus:spirit",
+        "Ursus thibetanus:demonic"
+      ]
+    },
+    {
+      "sci": "Ursus arctos",
+      "name": "Brown bear",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "tier": "individual",
+      "mass": 200,
+      "diet": "omnivore",
+      "food_kg": 10,
+      "group_size": 1,
+      "range_km2": 150,
+      "active": "dusk",
+      "gestation": 220,
+      "litter": 2,
+      "maturity_y": 5,
+      "lifespan_y": 20,
+      "start": 0,
+      "fasting_days": 30,
+      "burst_s": 45,
+      "speed_kmh": [
+        45,
+        4
+      ],
+      "dens": true,
+      "people": "avoids; defends cubs and carcasses",
+      "danger": 3,
+      "eats": [
+        "roots",
+        "berries",
+        "nuts",
+        "carrion",
+        "fawn",
+        "livestock"
+      ],
+      "fears": [
+        "Panthera tigris"
+      ],
+      "group": "bear",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "brown bear",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Ursus arctos:spirit",
+        "Ursus arctos:demonic"
+      ]
+    },
+    {
+      "sci": "Vulpes vulpes",
+      "name": "Red fox",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "tier": "individual",
+      "mass": 5,
+      "diet": "omnivore",
+      "food_kg": 0.65,
+      "group_size": 1,
+      "range_km2": 5,
+      "active": "night",
+      "gestation": 52,
+      "litter": 5,
+      "maturity_y": 0.8,
+      "lifespan_y": 3,
+      "start": 6,
+      "fasting_days": 5,
+      "burst_s": 30,
+      "speed_kmh": [
+        48,
+        7
+      ],
+      "kill_success": 0.25,
+      "people": "avoids; raids chicken coops",
+      "danger": 0,
+      "eats": [
+        "mice",
+        "hare",
+        "pheasant",
+        "eggs",
+        "fruit",
+        "carrion",
+        "chicken"
+      ],
+      "fears": [
+        "Canis lupus",
+        "Canis familiaris"
+      ],
+      "group": "fox",
+      "cultivation_eligible": true,
+      "awakening_affinity": 2,
+      "combat_profile_id": "red fox",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Vulpes vulpes:spirit",
+        "Vulpes vulpes:demonic"
+      ]
+    },
+    {
+      "sci": "Panthera pardus",
+      "name": "Leopard",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "tier": "individual",
+      "mass": 40,
+      "diet": "carnivore",
+      "food_kg": 2.5,
+      "group_size": 1,
+      "range_km2": 60,
+      "active": "night",
+      "gestation": 96,
+      "litter": 2,
+      "maturity_y": 2.5,
+      "lifespan_y": 12,
+      "start": 0,
+      "fasting_days": 7,
+      "burst_s": 20,
+      "speed_kmh": [
+        50,
+        4
+      ],
+      "kill_success": 0.25,
+      "people": "avoids; takes goats and dogs",
+      "danger": 2,
+      "eats": [
+        "roe",
+        "musk_deer",
+        "piglet",
+        "hare",
+        "goat",
+        "dog"
+      ],
+      "fears": [
+        "Panthera tigris"
+      ],
+      "group": "leopard",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "leopard",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Panthera pardus:spirit",
+        "Panthera pardus:demonic"
+      ]
+    },
+    {
+      "sci": "Sus scrofa",
+      "name": "Wild boar",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Suidae",
+      "tier": "individual",
+      "mass": 75,
+      "diet": "omnivore",
+      "food_kg": 2,
+      "group_size": 8,
+      "range_km2": 5,
+      "active": "dusk",
+      "gestation": 115,
+      "litter": 5,
+      "maturity_y": 1,
+      "lifespan_y": 7,
+      "start": 25,
+      "fasting_days": 12,
+      "burst_s": 60,
+      "speed_kmh": [
+        35,
+        4
+      ],
+      "people": "flees; a sow with piglets or a cornered boar charges; digs up fields",
+      "danger": 2,
+      "eats": [
+        "nuts",
+        "roots",
+        "crops",
+        "grubs",
+        "eggs",
+        "carrion"
+      ],
+      "fears": [
+        "Panthera tigris",
+        "Canis lupus"
+      ],
+      "group": "boar",
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.8,
+      "combat_profile_id": "wild boar",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Sus scrofa:spirit",
+        "Sus scrofa:demonic"
+      ]
+    },
+    {
+      "sci": "Cervus nippon",
+      "name": "Sika deer",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Cervidae",
+      "tier": "individual",
+      "mass": 65,
+      "diet": "grazer",
+      "food_kg": 1.8,
+      "group_size": 6,
+      "range_km2": 1,
+      "active": "dusk",
+      "gestation": 225,
+      "litter": 1,
+      "maturity_y": 2,
+      "lifespan_y": 10,
+      "start": 45,
+      "fasting_days": 14,
+      "burst_s": 120,
+      "speed_kmh": [
+        55,
+        10
+      ],
+      "people": "flees; grazes field edges; a rutting stag charges",
+      "danger": 1,
+      "eats": [
+        "grass",
+        "herbs",
+        "browse",
+        "crops"
+      ],
+      "fears": [
+        "Panthera tigris",
+        "Canis lupus",
+        "Panthera pardus"
+      ],
+      "group": "deer",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1.6,
+      "combat_profile_id": "sika deer",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Cervus nippon:spirit",
+        "Cervus nippon:demonic"
+      ]
+    },
+    {
+      "sci": "Capreolus pygargus",
+      "name": "Siberian roe deer",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Cervidae",
+      "tier": "individual",
+      "mass": 35,
+      "diet": "browser",
+      "food_kg": 1,
+      "group_size": 2,
+      "range_km2": 0.8,
+      "active": "dusk",
+      "gestation": 290,
+      "litter": 2,
+      "maturity_y": 1.5,
+      "lifespan_y": 9,
+      "start": 35,
+      "fasting_days": 10,
+      "burst_s": 90,
+      "speed_kmh": [
+        50,
+        9
+      ],
+      "people": "flees with a bark of alarm",
+      "danger": 0,
+      "eats": [
+        "browse",
+        "herbs",
+        "crops"
+      ],
+      "fears": [
+        "Canis lupus",
+        "Panthera pardus"
+      ],
+      "group": "deer",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "siberian roe deer",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Capreolus pygargus:spirit",
+        "Capreolus pygargus:demonic"
+      ]
+    },
+    {
+      "sci": "Moschus berezovskii",
+      "name": "Forest musk deer",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Moschidae",
+      "tier": "individual",
+      "mass": 8,
+      "diet": "browser",
+      "food_kg": 0.3,
+      "group_size": 1,
+      "range_km2": 0.3,
+      "active": "night",
+      "gestation": 187,
+      "litter": 2,
+      "maturity_y": 1.5,
+      "lifespan_y": 7,
+      "start": 0,
+      "people": "hides; its musk is prized",
+      "danger": 0,
+      "eats": [
+        "lichen",
+        "leaves"
+      ],
+      "fears": [
+        "Panthera pardus",
+        "Canis lupus"
+      ],
+      "use": "medicine",
+      "group": "musk deer",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1.4,
+      "combat_profile_id": "forest musk deer",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Moschus berezovskii:spirit",
+        "Moschus berezovskii:demonic"
+      ]
+    },
+    {
+      "sci": "Naemorhedus griseus",
+      "name": "Chinese goral",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "tier": "individual",
+      "mass": 30,
+      "diet": "grazer",
+      "food_kg": 0.8,
+      "group_size": 4,
+      "range_km2": 0.4,
+      "active": "day",
+      "gestation": 220,
+      "litter": 1,
+      "maturity_y": 2.5,
+      "lifespan_y": 10,
+      "start": 0,
+      "people": "flees up the rock",
+      "danger": 0,
+      "eats": [
+        "grass",
+        "herbs"
+      ],
+      "fears": [
+        "Panthera pardus",
+        "Canis lupus"
+      ],
+      "group": "goral",
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "chinese goral",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Naemorhedus griseus:spirit",
+        "Naemorhedus griseus:demonic"
+      ]
+    },
+    {
+      "sci": "Lepus capensis",
+      "name": "Hare",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Lagomorpha",
+      "family": "Leporidae",
+      "tier": "population",
+      "mass": 3,
+      "diet": "grazer",
+      "food_kg": 0.12,
+      "group_size": 1,
+      "active": "night",
+      "gestation": 50,
+      "litter": 2,
+      "maturity_y": 1,
+      "lifespan_y": 3,
+      "start": 60,
+      "people": "freezes, then zigzags to cover",
+      "danger": 0,
+      "eats": [
+        "grass",
+        "herbs",
+        "bark"
+      ],
+      "group": "hare",
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.5,
+      "combat_profile_id": "hare",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Lepus capensis:spirit",
+        "Lepus capensis:demonic"
+      ]
+    },
+    {
+      "sci": "Phasianus colchicus",
+      "name": "Common pheasant",
+      "kingdom": "Animalia",
+      "class": "Aves",
+      "order": "Galliformes",
+      "family": "Phasianidae",
+      "tier": "population",
+      "mass": 1,
+      "diet": "omnivore",
+      "food_kg": 0.08,
+      "group_size": 8,
+      "active": "day",
+      "gestation": 25,
+      "litter": 10,
+      "maturity_y": 1,
+      "lifespan_y": 2,
+      "start": 40,
+      "people": "runs, then bursts up close; gleans the fields",
+      "danger": 0,
+      "eats": [
+        "seeds",
+        "grain",
+        "insects"
+      ],
+      "group": "pheasant",
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.5,
+      "combat_profile_id": "common pheasant",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "feathers"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Phasianus colchicus:spirit",
+        "Phasianus colchicus:demonic"
+      ]
+    },
+    {
+      "sci": "Ovis aries",
+      "name": "Sheep",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "tier": "individual",
+      "domestic": true,
+      "mass": 45,
+      "diet": "grazer",
+      "food_kg": 1.2,
+      "group_size": 15,
+      "active": "day",
+      "gestation": 148,
+      "litter": 1,
+      "maturity_y": 0.75,
+      "lifespan_y": 10,
+      "start": 15,
+      "people": "follows the herder",
+      "danger": 0,
+      "eats": [
+        "grass",
+        "hay"
+      ],
+      "group": "sheep",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.4,
+      "combat_profile_id": "sheep",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Ovis aries:spirit",
+        "Ovis aries:demonic"
+      ]
+    },
+    {
+      "sci": "Capra hircus",
+      "name": "Goat",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "tier": "individual",
+      "domestic": true,
+      "mass": 35,
+      "diet": "browser",
+      "food_kg": 0.9,
+      "group_size": 8,
+      "active": "day",
+      "gestation": 150,
+      "litter": 2,
+      "maturity_y": 0.75,
+      "lifespan_y": 12,
+      "start": 8,
+      "people": "climbs, escapes pens, eats the orchard",
+      "danger": 0,
+      "eats": [
+        "browse",
+        "hay"
+      ],
+      "group": "goat",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.6,
+      "combat_profile_id": "goat",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Capra hircus:spirit",
+        "Capra hircus:demonic"
+      ]
+    },
+    {
+      "sci": "Bos taurus",
+      "name": "Cattle",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "tier": "individual",
+      "domestic": true,
+      "mass": 350,
+      "diet": "grazer",
+      "food_kg": 8,
+      "group_size": 6,
+      "active": "day",
+      "gestation": 283,
+      "litter": 1,
+      "maturity_y": 1.25,
+      "lifespan_y": 16,
+      "start": 4,
+      "people": "calm; a bull or a cow with a calf can trample",
+      "danger": 1,
+      "eats": [
+        "grass",
+        "hay",
+        "straw"
+      ],
+      "group": "cattle",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.5,
+      "combat_profile_id": "cattle",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Bos taurus:spirit",
+        "Bos taurus:demonic"
+      ]
+    },
+    {
+      "sci": "Bubalus bubalis",
+      "name": "Water buffalo",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "tier": "individual",
+      "domestic": true,
+      "mass": 450,
+      "diet": "grazer",
+      "food_kg": 10,
+      "group_size": 2,
+      "active": "day",
+      "gestation": 320,
+      "litter": 1,
+      "maturity_y": 3,
+      "lifespan_y": 20,
+      "start": 2,
+      "people": "ploughs the paddies; faces down wolves",
+      "danger": 1,
+      "eats": [
+        "grass",
+        "straw"
+      ],
+      "group": "buffalo",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.6,
+      "combat_profile_id": "water buffalo",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Bubalus bubalis:spirit",
+        "Bubalus bubalis:demonic"
+      ]
+    },
+    {
+      "sci": "Sus domesticus",
+      "name": "Pig",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Suidae",
+      "tier": "individual",
+      "domestic": true,
+      "mass": 90,
+      "diet": "omnivore",
+      "food_kg": 2.2,
+      "group_size": 5,
+      "active": "day",
+      "gestation": 114,
+      "litter": 6,
+      "maturity_y": 0.6,
+      "lifespan_y": 10,
+      "start": 5,
+      "people": "escapes for food",
+      "danger": 0,
+      "eats": [
+        "scraps",
+        "roots",
+        "bran"
+      ],
+      "group": "pig",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.4,
+      "combat_profile_id": "pig",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Sus domesticus:spirit",
+        "Sus domesticus:demonic"
+      ]
+    },
+    {
+      "sci": "Gallus gallus domesticus",
+      "name": "Chicken",
+      "kingdom": "Animalia",
+      "class": "Aves",
+      "order": "Galliformes",
+      "family": "Phasianidae",
+      "tier": "population",
+      "domestic": true,
+      "mass": 1.7,
+      "diet": "omnivore",
+      "food_kg": 0.09,
+      "group_size": 12,
+      "active": "day",
+      "gestation": 21,
+      "litter": 8,
+      "maturity_y": 0.5,
+      "lifespan_y": 6,
+      "start": 20,
+      "danger": 0,
+      "eats": [
+        "grain",
+        "greens",
+        "insects"
+      ],
+      "group": "chicken",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.3,
+      "combat_profile_id": "chicken",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "feathers"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Gallus gallus domesticus:spirit",
+        "Gallus gallus domesticus:demonic"
+      ]
+    },
+    {
+      "sci": "Canis familiaris",
+      "name": "Village dog",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "tier": "individual",
+      "domestic": true,
+      "mass": 18,
+      "diet": "omnivore",
+      "food_kg": 0.7,
+      "group_size": 3,
+      "active": "day",
+      "gestation": 63,
+      "litter": 5,
+      "maturity_y": 1,
+      "lifespan_y": 11,
+      "start": 3,
+      "people": "guards its home and the flock",
+      "danger": 1,
+      "eats": [
+        "scraps",
+        "carrion"
+      ],
+      "fears": [
+        "Panthera tigris",
+        "Panthera pardus",
+        "Canis lupus"
+      ],
+      "group": "dog",
+      "habitat": [
+        "village",
+        "meadow"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 1,
+      "combat_profile_id": "village dog",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Canis familiaris:spirit",
+        "Canis familiaris:demonic"
+      ]
+    },
+    {
+      "sci": "Budorcas taxicolor",
+      "name": "Takin",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "tier": "individual",
+      "group": "takin",
+      "mass": 300,
+      "diet": "browser",
+      "food_kg": 6,
+      "group_size": 10,
+      "range_km2": 20,
+      "active": "day",
+      "gestation": 210,
+      "litter": 1,
+      "maturity_y": 3,
+      "lifespan_y": 15,
+      "start": 8,
+      "habitat": [
+        "forest",
+        "rock",
+        "meadow"
+      ],
+      "people": "usually moves off; a startled bull charges",
+      "danger": 3,
+      "eats": [
+        "leaves",
+        "bamboo",
+        "herbs",
+        "bark"
+      ],
+      "fears": [
+        "Panthera tigris",
+        "Canis lupus"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 1.4,
+      "combat_profile_id": "takin",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Budorcas taxicolor:spirit",
+        "Budorcas taxicolor:demonic"
+      ]
+    },
+    {
+      "sci": "Ailuropoda melanoleuca",
+      "name": "Giant panda",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "tier": "individual",
+      "group": "panda",
+      "mass": 100,
+      "diet": "herbivore",
+      "food_kg": 12,
+      "group_size": 1,
+      "range_km2": 6,
+      "active": "day",
+      "gestation": 135,
+      "litter": 1,
+      "maturity_y": 5,
+      "lifespan_y": 20,
+      "start": 2,
+      "habitat": [
+        "forest"
+      ],
+      "people": "shy and solitary; defends itself if cornered",
+      "danger": 2,
+      "eats": [
+        "bamboo"
+      ],
+      "fears": [
+        "Canis lupus",
+        "Panthera pardus"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.8,
+      "combat_profile_id": "giant panda",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Ailuropoda melanoleuca:spirit",
+        "Ailuropoda melanoleuca:demonic"
+      ]
+    },
+    {
+      "sci": "Rhinopithecus roxellana",
+      "name": "Golden snub-nosed monkey",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Cercopithecidae",
+      "tier": "individual",
+      "group": "monkey",
+      "mass": 15,
+      "diet": "browser",
+      "food_kg": 0.6,
+      "group_size": 40,
+      "range_km2": 20,
+      "active": "day",
+      "gestation": 200,
+      "litter": 1,
+      "maturity_y": 5,
+      "lifespan_y": 20,
+      "start": 40,
+      "habitat": [
+        "forest"
+      ],
+      "people": "watches from the canopy; troops raid orchards",
+      "danger": 1,
+      "eats": [
+        "leaves",
+        "lichen",
+        "buds",
+        "fruit",
+        "seeds"
+      ],
+      "fears": [
+        "Panthera pardus"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 2,
+      "combat_profile_id": "golden snub-nosed monkey",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Rhinopithecus roxellana:spirit",
+        "Rhinopithecus roxellana:demonic"
+      ]
+    },
+    {
+      "sci": "Muntiacus reevesi",
+      "name": "Reeves's muntjac",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Cervidae",
+      "tier": "individual",
+      "group": "deer",
+      "mass": 13,
+      "diet": "browser",
+      "food_kg": 0.5,
+      "group_size": 1,
+      "range_km2": 0.2,
+      "active": "dusk",
+      "gestation": 210,
+      "litter": 1,
+      "maturity_y": 1,
+      "lifespan_y": 12,
+      "start": 20,
+      "habitat": [
+        "forest"
+      ],
+      "people": "barks and bolts",
+      "danger": 0,
+      "eats": [
+        "browse",
+        "herbs",
+        "fruit"
+      ],
+      "fears": [
+        "Panthera pardus",
+        "Canis lupus",
+        "Vulpes vulpes"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.8,
+      "combat_profile_id": "reeves's muntjac",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Muntiacus reevesi:spirit",
+        "Muntiacus reevesi:demonic"
+      ]
+    },
+    {
+      "sci": "Hystrix brachyura",
+      "name": "Malayan porcupine",
+      "kingdom": "Animalia",
+      "class": "Mammalia",
+      "order": "Rodentia",
+      "family": "Hystricidae",
+      "tier": "individual",
+      "group": "porcupine",
+      "mass": 12,
+      "diet": "herbivore",
+      "food_kg": 0.5,
+      "group_size": 2,
+      "range_km2": 1,
+      "active": "night",
+      "gestation": 110,
+      "litter": 2,
+      "maturity_y": 1,
+      "lifespan_y": 15,
+      "start": 6,
+      "habitat": [
+        "forest",
+        "field"
+      ],
+      "people": "rattles its quills; raids root crops",
+      "danger": 1,
+      "eats": [
+        "roots",
+        "bark",
+        "fruit",
+        "crops"
+      ],
+      "fears": [
+        "Panthera pardus"
+      ],
+      "cultivation_eligible": true,
+      "awakening_affinity": 0.6,
+      "combat_profile_id": "malayan porcupine",
+      "instinct_method_cap": 1,
+      "qi_food_tags": [
+        "herbs"
+      ],
+      "anatomy_tags": [
+        "bone",
+        "marrow",
+        "hide"
+      ],
+      "cultivation_growth_cap": 1.36,
+      "form_ids": [
+        "Hystrix brachyura:spirit",
+        "Hystrix brachyura:demonic"
+      ]
+    }
+  ],
+  "note_general": "Takin, panda, golden monkey, muntjac and porcupine numbers are general zoological figures (not from the Codex research); tune freely."
 }

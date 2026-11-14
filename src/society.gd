@@ -60,6 +60,7 @@ var memberships: Dictionary = {}
 var archive: RefCounted = null
 var mind: RefCounted = null
 var temper: RefCounted = null
+var wildlife: RefCounted
 var nature: RefCounted = null
 var archived_year := -1
 var childhood: RefCounted
@@ -72,6 +73,8 @@ func _init(store: RefCounted) -> void:
 	var probe: RefCounted = Mind.new(self)
 	if probe.config.enabled: mind = probe
 	nature = Nature.new(self)
+	wildlife = preload("res://src/wildlife.gd").new(self)
+	if temper: temper.wild.refresh_herd()
 	childhood = preload("res://src/childhood.gd").new(self)
 
 func add_person() -> void:
@@ -526,6 +529,9 @@ func begin_tick(on_day: int) -> void:
 	var store: RefCounted = store_ref.get_ref()
 	if law: law.advance(self, on_day)
 	if on_day - last_week < int(events.week_days) or social_pending: return
+	# Resolve ecology and village contacts at the same society boundary in both
+	# daily and span ticks, before any person takes their weekly turn.
+	wildlife.advance(on_day)
 	social_days = on_day - last_week
 	last_week = on_day
 	social_day = on_day

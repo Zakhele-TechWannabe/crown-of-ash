@@ -3,6 +3,7 @@ extends PanelContainer
 const Palette = preload("res://src/palette.gd")
 const FILTERS := {
 	"All": [],
+	"Wild": ["wild", "hunt", "sighting"],
 	"Tempering": ["tempering_method", "tempering_gate", "tempering", "gathering", "hunt", "injury"],
 	"Family": ["talent", "childhood", "pregnancy", "birth", "marriage", "old_age", "legacy", "apprenticeship"],
 	"Cultivation": ["awakening", "breakthrough", "technique", "manual", "setback", "absorption", "formation", "harvested"],

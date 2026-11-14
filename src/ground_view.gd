@@ -6,6 +6,7 @@ const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
 const TILE := 32.0
 const MAJOR_NAMES := ["Unnamed Sect", "Leader's Hall", "Main Hall", "Great Plaza", "Mountain Gate", "Servants' Village", "Spirit Fields"]
+var beast_card: PanelContainer
 var guardian_card: PanelContainer
 var ledger: PanelContainer
 var villager: PanelContainer
@@ -71,6 +72,8 @@ func setup_panels() -> void:
 	ledger.setup(self)
 	guardian_card = preload("res://src/guardian_card.gd").new()
 	guardian_card.setup(self)
+	beast_card = preload("res://src/beast_card.gd").new()
+	beast_card.setup(self)
 	tour.setup(self)
 
 
@@ -207,6 +210,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			beast_card.hide()
+			var beast := pick_beast(get_global_mouse_position())
+			if not beast.is_empty():
+				guardian_card.hide()
+				beast_card.open(beast)
+				return
 			var stone := pick_guardian(get_global_mouse_position())
 			if not stone.is_empty():
 				guardian_card.open(stone)
@@ -271,4 +280,12 @@ func pick_guardian(at: Vector2) -> Dictionary:
 		var tile := Vector2(g.get("visual_tile", g.tile))
 		var foot := (tile + Vector2.ONE * .5) * 32.0 - Vector2(0, map.ground.terrace_level(Vector2i(tile)) * map.ground.exaggeration)
 		if Rect2(foot - Vector2(20, 64), Vector2(44, 68)).has_point(at): return g
+	return {}
+
+func pick_beast(at: Vector2) -> Dictionary:
+	for beast: Dictionary in map.life.population.society.wildlife.individuals:
+		if not beast.alive or not (beast.awakened or beast.get("notable",false)): continue
+		var tile: Vector2 = beast.position
+		var foot := (tile + Vector2.ONE * .5) * 32.0 - Vector2(0,map.ground.terrace_level(Vector2i(tile))*map.ground.exaggeration)
+		if Rect2(foot-Vector2(16,28),Vector2(32,32)).has_point(at): return beast
 	return {}

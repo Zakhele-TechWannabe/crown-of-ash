@@ -35,6 +35,15 @@ func run() -> void:
 		ledger.tab_buttons[key].pressed.emit()
 		await process_frame
 		await process_frame
+		if key == "forest":
+			var text := label_text(ledger.content)
+			for heading: String in ["Iron-bark patches", "Beasts and herbs", "Populations"]: assert(heading in text)
+			assert("Awakened beasts" not in text)
+		if key == "bestiary":
+			var text := label_text(ledger.content)
+			assert(text.find("Species catalogue") < text.find("Awakened beasts"))
+			assert("No awakened beasts have been seen." in text)
+			assert("Last seen day" not in text and "LIFESPAN" not in text and "%" not in text)
 		assert(ledger.visible and ledger.dim.visible)
 		assert(is_equal_approx(ledger.size.x, book_width), "Book is centred at reading width: %s" % ledger.size)
 		assert(absf(ledger.get_global_rect().get_center().x - 960) <= 1, "Book is centred")
@@ -43,6 +52,34 @@ func run() -> void:
 		ledger.toggle_tab(key)
 		await settle(ledger)
 		assert(not ledger.visible and not ledger.dim.visible)
+	var wildlife: RefCounted = world.life.population.society.wildlife
+	var animal: Dictionary = wildlife.individuals[0]
+	var animal_tile: Vector2 = animal.position
+	var animal_foot := (animal_tile+Vector2.ONE*.5)*32.0-Vector2(0,world.ground.terrace_level(Vector2i(animal_tile))*world.ground.exaggeration)
+	assert(world.ground_view.pick_beast(animal_foot-Vector2(0,10)).get("id",-1) == animal.id)
+	world.ground_view.beast_card.open(animal)
+	await process_frame
+	assert(world.ground_view.beast_card.visible)
+	var beast_text := label_text(world.ground_view.beast_card)
+	assert("Roams " in beast_text and "of ~" in beast_text and "%" not in beast_text)
+	world.ground_view.beast_card.hide()
+	animal.awakened = true
+	animal.notable = false
+	animal.layer = 4
+	animal.grades = [0,1,1,2]
+	animal.path = "spirit"
+	assert(world.ground_view.pick_beast(animal_foot-Vector2(0,10)).get("id",-1) == animal.id)
+	ledger.open_tab("bestiary")
+	await settle(ledger)
+	var awakened_text := label_text(ledger.content)
+	assert("layer 4" in awakened_text and "of ~" in awakened_text and "%" not in awakened_text)
+	ledger.close()
+	await settle(ledger)
+	animal.awakened = false
+	animal.notable = true
+	animal.layer = 0
+	animal.grades = []
+	animal.path = "latent"
 	for width: int in [1920, 1366]:
 		root.content_scale_size = Vector2i(width, 1080)
 		root.size = Vector2i(width, 1080)
@@ -429,3 +466,8 @@ func assert_text(condition: bool, message: String) -> void:
 		push_error(message)
 		quit(1)
 	assert(condition, message)
+
+func label_text(node: Node) -> String:
+	var result := str(node.text) + "\n" if node is Label else ""
+	for child: Node in node.get_children(): result += label_text(child)
+	return result

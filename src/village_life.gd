@@ -178,6 +178,11 @@ func setup(map: Node2D) -> void:
 		society.archive = preload("res://src/archive.gd").new(population, int(sect.data.seed))
 		for record: Dictionary in society.chronicle: society.archive.event(record.day, record.person, record.kind, record.text)
 	economy.population = population
+	population.society.wildlife.economy_ref = weakref(economy)
+	population.society.wildlife.encounter_places = food_places.merged(material_places, true)
+	population.society.wildlife.encounter_places.forest_edge = nearest(sect.center + Vector2i(80,245))
+	# Keep headless economy reconstructions on the same fixed contact map.
+	if not people.is_empty(): people[0].wildlife_places = population.society.wildlife.encounter_places.duplicate()
 	economy.setup(sect.data, people, int(world.data.get("seed", sect.data.seed)))
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--day="):
@@ -419,6 +424,12 @@ func _draw() -> void:
 				var foot := (tile + Vector2.ONE * 0.5) * 32.0 - Vector2(0, world.ground.terrace_level(Vector2i(tile)) * world.ground.exaggeration)
 				if area.grow(64).has_point(foot): trees.append([foot, -1, {"kind": "guardian", "state": state, "harm": g.get("harm", 0.0), "facing": g.facing, "w": 1}])
 		trees.sort_custom(func(a: Array, b: Array) -> bool: return a[0].y < b[0].y)
+	var wildlife: RefCounted = population.society.wildlife
+	for beast: Dictionary in wildlife.visuals(area, minutes):
+		var tile: Vector2 = beast.position
+		var foot := (tile + Vector2.ONE * .5) * 32.0 - Vector2(0,world.ground.terrace_level(Vector2i(tile))*world.ground.exaggeration)
+		if area.has_point(foot): trees.append([foot,-1,{"kind":"beast","beast":beast,"w":1}])
+	trees.sort_custom(func(a: Array,b: Array) -> bool: return a[0].y < b[0].y)
 	var shade := Color(Palette.INK, 0.22)
 	for tree: Array in trees:
 		if tree[1] >= 0: _shadow(tree[0] + Vector2(10, -2), TreeArt.SHADOW[tree[1]] * 2.0, shade)
@@ -494,6 +505,14 @@ func _trees_in(area: Rect2) -> Array:
 func _tree(tree: Array) -> void:
 	if tree[1] < 0:
 		var b: Dictionary = tree[2]
+		if b.kind == "beast":
+			var animal: Dictionary = b.beast
+			var group: String = population.society.wildlife.entry(animal.species).group
+			var sprite: Texture2D = preload("res://src/beast_art.gd").texture(group,int(minutes*2)%2)
+			var tint := Palette.PAPER
+			if animal.get("awakened",false): tint = Palette.JADE.lightened(.5) if animal.path != "demonic" else Palette.RED.lightened(.2)
+			draw_texture_rect(sprite,Rect2(tree[0]-Vector2(16,28),Vector2(32,32)),false,tint)
+			return
 		if b.kind == "guardian":
 			var sprite := GuardianArt.texture(b.state, b.get("facing", "south"), float(b.get("harm", 0.0)))
 			draw_texture_rect(sprite, Rect2(tree[0] - Vector2(20, 64), sprite.get_size() * 2.0), false)
@@ -764,6 +783,7 @@ func _headless_sim() -> void:
 		else: economy.advance_to(target_day * 1440.0)
 		if (y + 1) % 10 == 0 or y == years - 1:
 			print("DECADE %d SKILLS %s" % [y + 1, population.tier_distribution()])
+			print("WILDLIFE " + JSON.stringify(population.society.wildlife.summary()))
 			print("DECADE %d SOCIETY %s" % [y + 1, JSON.stringify(population.society.summary())])
 			var mind: RefCounted = population.society.mind
 			if mind:
@@ -972,6 +992,13 @@ func _watch_fights() -> void:
 		fights_seen += 1
 		if back > fights.size(): continue
 		var r: Dictionary = fights[fights.size() - back]
+		if r.kind == "wildlife":
+			var n := walker_of(int(r.ids[0]))
+			if n < 0: continue
+			var meeting := nearest(Vector2i(Vector2(r.spot).round()))
+			var animal := {"pos":Vector2(meeting)+Vector2(1,0),"harm":0.0}
+			stages.append({"r":r,"animal":animal,"phase":"wait","clock":0.0,"next":0,"pops":[],"spot":Vector2i(people[n].pos),"met":0.0})
+			continue
 		if r.kind in ["hunt", "guardian"] or walker_of(int(r.ids[0])) < 0 or walker_of(int(r.ids[1])) < 0: continue
 		stages.append({"r": r, "phase": "wait", "clock": 0.0, "next": 0, "pops": [], "spot": Vector2i.ZERO, "met": 0.0})
 
@@ -981,6 +1008,7 @@ func _advance_stages(elapsed: float) -> void:
 	for st: Dictionary in stages:
 		var a: Dictionary = people[walker_of(int(st.r.ids[0]))] if walker_of(int(st.r.ids[0])) >= 0 else {}
 		var b: Dictionary = people[walker_of(int(st.r.ids[1]))] if walker_of(int(st.r.ids[1])) >= 0 else {}
+		if st.has("animal"): b = st.animal
 		if a.is_empty() or b.is_empty():
 			st.phase = "done"
 			continue
@@ -988,7 +1016,7 @@ func _advance_stages(elapsed: float) -> void:
 			"wait":
 				if time >= 450 and time < 1080:
 					st.phase = "meet"
-					st.spot = nearest(Vector2i(((Vector2(a.pos) + Vector2(b.pos)) / 2.0).round()))
+					st.spot = nearest(Vector2i(Vector2(st.r.spot).round())) if st.has("animal") else nearest(Vector2i(((Vector2(a.pos) + Vector2(b.pos)) / 2.0).round()))
 					last_minute = -1
 			"meet":
 				st.met += elapsed
@@ -1006,6 +1034,7 @@ func _advance_stages(elapsed: float) -> void:
 					st.next += 1
 				if st.next >= events.size(): _end_scene(st, [a, b])
 			"chase":
+				if st.has("animal"): b.pos += Vector2(elapsed * 2.0,0)
 				st.clock += elapsed
 				if st.clock > st.until:
 					st.phase = "done"
@@ -1078,6 +1107,7 @@ func _scene_for(p: Dictionary, target: Vector2i, activity: String) -> Array:
 				if side == st.r.loser:
 					return [p.home, ("running from %s" if st.r.how == "escape" else "limping home from %s") % other]
 				if st.r.how == "escape":
+					if st.has("animal"): return [Vector2i(Vector2(p.pos).round()), "watching %s leave" % other]
 					var runner: Dictionary = people[walker_of(int(st.r.ids[st.r.loser]))]
 					return [nearest(Vector2i(Vector2(runner.pos).round())), "chasing %s" % other]
 				return [Vector2i(Vector2(p.pos).round()), "watching %s go" % other]
@@ -1095,6 +1125,11 @@ func _draw_fights(area: Rect2) -> void:
 		for id: int in st.r.ids:
 			var n := walker_of(id)
 			sides.append(people[n] if n >= 0 else {})
+		if st.has("animal"):
+			sides[1] = st.animal
+			var wildlife: RefCounted = population.society.wildlife
+			var sprite: Texture2D = preload("res://src/beast_art.gd").texture(wildlife.entry(st.r.beast_species).group)
+			draw_texture_rect(sprite,Rect2(point(st.animal)-Vector2(16,28),Vector2(32,32)),false)
 		for side in 2:
 			var w: Dictionary = sides[side]
 			if w.is_empty(): continue

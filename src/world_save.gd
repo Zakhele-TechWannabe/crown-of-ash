@@ -4,7 +4,7 @@ const PATH := "user://saves/world.save"
 const VERSION := 1
 const CHILDREN := [
 	"population", "society", "ties", "mind", "temper", "nature", "wild",
-	"archive", "economy", "law", "modifiers", "childhood",
+	"wildlife", "archive", "economy", "law", "modifiers", "childhood",
 ]
 const SKIP := [
 	"world", "sect", "grid", "catalogue", "config", "rules", "given_names",
@@ -69,6 +69,15 @@ static func restore(object: Object, state: Dictionary, ancestors: Array = []) ->
 		elif not (key in CHILDREN and value == null):
 			object.set(key, state[key])
 
+## Older saves seed wildlife at their date without replaying elapsed years or changing other state.
+static func repair_wildlife(society: RefCounted, saved: Dictionary, on_day: int) -> void:
+	if not saved.has("wildlife"):
+		var economy_ref: WeakRef = society.wildlife.economy_ref
+		society.wildlife = preload("res://src/wildlife.gd").new(society)
+		society.wildlife.economy_ref = economy_ref
+		society.wildlife.seed(on_day)
+	society.wildlife.repair_names()
+
 static func write(map: Node2D, path: String = PATH) -> Error:
 	if path == PATH and not enabled(): return ERR_UNAVAILABLE
 	if not is_instance_valid(map.life): return ERR_UNAVAILABLE
@@ -113,6 +122,7 @@ static func read(map: Node2D, path: String = PATH) -> bool:
 		var state: Dictionary = envelope.state
 		var defaults := capture(map.life)
 		restore(map.life, state.life)
+		repair_wildlife(map.life.population.society, state.life.population.society, map.life.population.day)
 		repair_columns(map.life.population, defaults.population, map.life.population.size())
 		map.life.economy.people = map.life.people
 		map.life.routes.clear()

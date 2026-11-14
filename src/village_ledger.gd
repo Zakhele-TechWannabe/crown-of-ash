@@ -996,8 +996,9 @@ func _forest(parent: Node) -> void:
 		var state := "stripped" if stock < 1 else ("thinning" if stock < cap * 0.4 else ("healthy" if stock < cap * 0.85 else "thick with bark"))
 		meter(parent, str(config.iron_bark.patches[i]).capitalize(), stock, cap, "%s · %.0f of %.0f roots" % [state, stock, cap], Palette.signal_colour(0 if stock >= cap * 0.4 else (1 if stock >= 1 else 2)))
 	section(parent, "Beasts and herbs")
+	wild.refresh_herd()
 	var herd: float = wild.herd
-	meter(parent, "The herd", herd, maxf(1, wild.herd_cap), "%.0f beasts of %.0f the hills hold" % [herd, wild.herd_cap], Palette.signal_colour(0 if herd >= wild.herd_cap * 0.5 else 1))
+	meter(parent, "Huntable deer and boar", herd, maxf(1, wild.herd_cap), "%.0f in the hills" % herd, Palette.signal_colour(0 if herd >= wild.herd_cap * 0.5 else 1))
 	var herb_cap := float(config.seven_leaf.cap)
 	meter(parent, "Seven-leaf at %s" % config.seven_leaf.place, wild.herbs, herb_cap, "%.0f of %.0f herbs" % [floorf(wild.herbs), herb_cap], Palette.JADE)
 	var wanting: Dictionary = summary.wanting
@@ -1005,52 +1006,20 @@ func _forest(parent: Node) -> void:
 		section(parent, "Wanted now")
 		for id: String in wanting:
 			label(parent, "%d %s preparing for a gate with %s." % [wanting[id], "person is" if int(wanting[id]) == 1 else "people are", temper.config.medicine_names[id]])
+	section(parent, "This year in the forest")
+	var year: Dictionary = wild.year_stats
+	label(parent, "%d hunts · %d beasts taken · %d hunters hurt · %d iron-bark roots gathered · %d herbs found" % [year.get("hunts",0),year.get("kills",0),year.get("hunt_injuries",0),year.get("roots_taken",0),year.get("herbs_taken",0)])
 	var last: Dictionary = summary.wild.last_year
 	if not last.is_empty():
 		section(parent, "Last year in the forest")
 		label(parent, "%d iron-bark roots taken in %d stripping trips. %d hunts brought down %d beasts; %d hunters were hurt. %d seven-leaf herbs found, %d searches came back empty." % [int(last.get("roots_taken", 0)), int(last.get("stripped_trips", 0)), int(last.get("hunts", 0)), int(last.get("kills", 0)), int(last.get("hunt_injuries", 0)), int(last.get("herbs_taken", 0)), int(last.get("herb_misses", 0))])
 
+	_wildlife_page(parent, false)
+
 ## What the valley has seen of the thousands of species that live in it.
 func _bestiary(parent: Node) -> void:
+	_wildlife_page(parent, true)
 	page_day = life.population.day
-	var nature: RefCounted = life.population.society.nature
-	if nature.species.is_empty():
-		label(parent, "No species catalogue yet: run tools/build_species_catalogue.py.")
-		return
-	label(parent, "Every species recorded in a real temperate mountain range lives somewhere in this valley: %s in all. Nobody knows one until they see it at work, and the people who watch nature most closely are the ones who work out new methods." % _thousands(nature.species.size()))
-	section(parent, "Seen so far")
-	var tally: Dictionary = nature.tally()
-	for row: Array in [["individual", "Large animals"], ["population", "Birds, small animals, frogs and fish"], ["guild", "Plants, fungi and insects"]]:
-		var counts: Array = tally[row[0]]
-		meter(parent, row[1], counts[0], maxf(1, counts[1]), "%s of %s" % [_thousands(counts[0]), _thousands(counts[1])], Palette.JADE)
-	if nature.known_order.is_empty():
-		small(parent, "Nothing seen yet. Sightings come as people work in the fields, the forest, the meadows and the streams.")
-	else:
-		section(parent, "Latest sightings")
-		var grid := GridContainer.new()
-		grid.columns = maxi(1, int(content_width() / 320))
-		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		parent.add_child(grid)
-		for i in range(nature.known_order.size() - 1, maxi(-1, nature.known_order.size() - 25), -1):
-			var id: int = nature.known_order[i]
-			var entry: Dictionary = nature.get_species(id)
-			var seen: Dictionary = nature.known[id]
-			var panel := PanelContainer.new()
-			panel.theme_type_variation = "CardPanel"
-			panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			panel.tooltip_text = "%s · %s · %s" % [entry.sci, entry.get("family", ""), entry.get("order", "")]
-			grid.add_child(panel)
-			var box := VBoxContainer.new()
-			panel.add_child(box)
-			label(box, str(entry.name))
-			var places: Array = entry.get("habitat", [])
-			var where := ", ".join(places.slice(0, -1)) + " and " + str(places[-1]) if places.size() > 1 else ("".join(places))
-			var notes: Array[String] = [str(entry.group), where]
-			if not str(entry.get("use", "")).is_empty(): notes.append("used for " + str(entry.use))
-			if int(entry.get("danger", 0)) >= 2: notes.append("dangerous")
-			small(box, " · ".join(notes))
-			person_link(box, int(seen.person), "first seen by %s, Y%d" % [life.population.names[int(seen.person)], int(seen.day) / 365 + 1])
-	small(parent, "Species list: " + str(nature.load_catalogue().get("citation", "")))
 
 
 func _thousands(n: int) -> String:
@@ -1308,6 +1277,9 @@ func _summary(parent: Node) -> void:
 			roots += int(society.revealed[p] > 0)
 			qi += int(society.realm[p] >= 2 or society.qi[p] > 0)
 		values = [[tempering, "tempering"], [gates, "at a gate"], [roots, "roots revealed"], [society.rules.realms[highest_qi].name if highest_qi >= 2 else str(highest), "highest realm" if highest_qi >= 2 else "highest body layer"], [qi, "qi cultivators"]]
+	elif current in ["forest", "bestiary"]:
+		var wildlife: Dictionary = society.wildlife.summary()
+		values = [[wildlife.total,"wild animals"],[wildlife.awakened,"awakened beasts"],[wildlife.events.births,"births"],[wildlife.events.predation,"prey taken"]]
 	elif current == "laws" and society.law:
 		var law: RefCounted = society.law
 		values = [[law.guardians.filter(func(g: Dictionary) -> bool: return g.state != "broken").size(), "swordsmen"], [law.hunt_list.size(), "warm trails"], [law.totals.breaches, "breaches"], [law.totals.broken, "broken"]]
@@ -1326,3 +1298,42 @@ func _summary(parent: Node) -> void:
 		panel.add_child(box)
 		label(box, str(value[0]), true)
 		small(box, str(value[1]))
+
+
+## Same book rhythm as people: summary, population cards, and persistent individual cards.
+func _wildlife_page(parent: Node, notable_only: bool) -> void:
+	var wildlife: RefCounted = life.population.society.wildlife
+	wildlife.seed(life.population.day)
+	section(parent, "Species catalogue" if notable_only else "Populations")
+	var catalogue := parent
+	for species: Dictionary in wildlife.species:
+		var count: int = wildlife.count(species.sci)
+		if count <= 0: continue
+		var role: String = wildlife.role(species)
+		if notable_only:
+			label(catalogue, "%s · %d" % [Law.title(species.name), count], true)
+			small(catalogue, "Typical lifespan ~%.1f years · %s · danger to villagers: %s" % [species.lifespan_y, species.diet, ("high" if float(species.get("danger",0)) >= 2 else ("defensive" if float(species.get("danger",0)) > 0 else "low"))])
+		else:
+			label(catalogue, "%s · %d · %s · %s" % [Law.title(species.name), count, wildlife.trend(species.sci), role])
+	if not notable_only: return
+	section(parent, "Awakened beasts")
+	var box := parent
+	var found := false
+	for beast: Dictionary in wildlife.individuals:
+		if not beast.alive or not beast.awakened: continue
+		found = true
+		_beast_record(box, wildlife, beast)
+	if not found: small(box, "No awakened beasts have been seen.")
+	var notable := 0
+	for beast: Dictionary in wildlife.individuals:
+		if not beast.alive or beast.awakened or not beast.get("notable", false): continue
+		if notable == 0: section(parent, "Notable ordinary animals")
+		_beast_record(parent, wildlife, beast)
+		notable += 1
+		if notable >= 5: break
+
+func _beast_record(box: Node, wildlife: RefCounted, beast: Dictionary) -> void:
+	label(box, Law.title(beast.name), true)
+	small(box, wildlife.description(beast))
+	meter(box, "Age", float(beast.age), wildlife.lifespan(beast), "%.1f of ~%.1f years · %.1f× lifespan" % [beast.age, wildlife.lifespan(beast), wildlife.rules.lifespan[int(beast.layer)]], Palette.GREEN)
+	small(box, "Roams %s · %s" % [wildlife.place(beast), beast.state])

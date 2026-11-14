@@ -22,8 +22,7 @@ func _init(society: RefCounted) -> void:
 	for patch in bark.patches.size():
 		patch_stock.append(float(bark.cap_per_patch) * richness)
 		patch_last_taker.append(-1)
-	herd_cap = float(config.beasts.herd) * richness
-	herd = herd_cap
+	refresh_herd()
 	herbs = float(config.seven_leaf.cap) * richness
 	_reset_stats()
 
@@ -44,8 +43,7 @@ func week(days: int, on_day: int) -> void:
 	var cap := float(bark.cap_per_patch) * richness
 	for patch in patch_stock.size():
 		patch_stock[patch] = minf(cap, patch_stock[patch] + float(bark.regrow_per_patch_year) * richness * years)
-	var beasts: Dictionary = config.beasts
-	herd = clampf(herd + (float(beasts.growth_per_year) * herd * (1.0 - herd / herd_cap) + float(beasts.drift_in_per_year)) * years, 0.0, herd_cap)
+	refresh_herd()
 	var leaf: Dictionary = config.seven_leaf
 	herbs = minf(float(leaf.cap) * richness, herbs + float(leaf.per_year) * richness * years)
 
@@ -72,16 +70,14 @@ func hunt(p: int) -> Dictionary:
 	var society: RefCounted = society_ref.get_ref()
 	var store: RefCounted = society.population
 	year_stats.hunts += 1
-	var found := herd / maxf(1.0, herd_cap)
-	if herd < 1.0 or store.rng.randf() >= float(Combat.config.hunt_find) * found:
-		return {"kill": false, "hurt": false, "dead": false}
-	var roll: float = store.rng.randf()
-	var kind := ""
-	for name: String in Combat.config.beasts:
-		kind = name
-		roll -= float(Combat.config.beasts[name].weight)
-		if roll < 0.0: break
-	var fight: Dictionary = Combat.hunt(society, p, kind)
+	var wildlife: RefCounted = society.wildlife
+	wildlife.seed(store.day)
+	herd = wildlife.count("Cervus nippon") + wildlife.count("Sus scrofa")
+	var target: Dictionary = wildlife.hunting_target()
+	if target.is_empty(): return {"kill":false,"hurt":false,"dead":false}
+	var kind: String = wildlife.entry(target.species).combat_profile_id
+	var fight: Dictionary = Combat.hunt(society, p, kind, wildlife.profile(target) if target.has("id") else {}, float(target.get("harm",0)), bool(target.get("awakened",false)))
+	wildlife.resolve_hunt(target, fight)
 	if fight.kill:
 		herd -= 1.0
 		year_stats.kills += 1
@@ -104,3 +100,12 @@ func bark_total() -> float:
 func summary() -> Dictionary:
 	return {"bark_in_patches": snappedf(bark_total(), .1), "herd": snappedf(herd, .1), "herd_cap": herd_cap, "herbs": snappedf(herbs, .1),
 		"last_year": last_year}
+
+## Read the huntable population directly, including before the first society week.
+func refresh_herd() -> void:
+	var wildlife: RefCounted = society_ref.get_ref().wildlife
+	if wildlife == null: return
+	wildlife.seed(society_ref.get_ref().population.day)
+	herd_cap = wildlife.hunting_capacity()
+	herd = 0.0
+	for sci: String in wildlife.config.hunt_species: herd += wildlife.count(sci)

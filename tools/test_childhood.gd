@@ -4,6 +4,8 @@ const Save = preload("res://src/world_save.gd")
 
 func _initialize() -> void:
 	var p := Population.new()
+	# Keep the talent peer cohort intact; encounters have their own seeded-decade test.
+	p.society.wildlife.enabled = false
 	var farm := p.register_job("paddies", ["fields"])
 	var smith := p.register_job("smithy", ["chores"])
 	var mother := p.add_person("Mother", 25, farm)

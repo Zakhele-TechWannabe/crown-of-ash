@@ -147,6 +147,10 @@ var next_event := 720.0
 
 func setup(data: Dictionary, residents: Array[Dictionary], world_seed: int) -> void:
 	people = residents
+	if population != null:
+		population.society.wildlife.economy_ref = weakref(self)
+		if not residents.is_empty() and residents[0].has("wildlife_places"):
+			population.society.wildlife.encounter_places = residents[0].wildlife_places.duplicate()
 	for good: Dictionary in catalogue.goods:
 		goods[good.id] = good
 		stocks[good.id] = float(good.starting_rations)

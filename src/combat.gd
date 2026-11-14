@@ -241,7 +241,7 @@ static func between(society: RefCounted, a: int, b: int, kind: String) -> Dictio
 
 
 ## A hunter meets a beast in the forest. The hunter strikes from cover when skilled enough; the beast may win.
-static func hunt(society: RefCounted, p: int, kind: String) -> Dictionary:
+static func hunt(society: RefCounted, p: int, kind: String, persistent_profile: Dictionary = {}, harm: float = 0.0, awakened: bool = false) -> Dictionary:
 	var store: RefCounted = society.population
 	var hunter := person(society, p)
 	hunter.power *= float(config.person.hunter_weapon)
@@ -250,11 +250,11 @@ static func hunt(society: RefCounted, p: int, kind: String) -> Dictionary:
 	hunter.lethal = true
 	# A hunter backs off once hurt; nobody is paid to die for marrow.
 	hunter.will = mini(int(hunter.will), int(config.hunter_will))
-	var prey := beast(kind)
+	var prey := beast(kind) if persistent_profile.is_empty() else persistent_profile
 	var ambush := 0 if store.rng.randf() < float(config.hunt_ambush) + martial_level(store, p) / 50.0 else -1
-	var r := fight(hunter, prey, {"ground": "forest", "ambush": ambush, "ambush_power": config.hunt_ambush_power}, store.rng)
+	var r := fight(hunter, prey, {"ground": "forest", "ambush": ambush, "ambush_power": config.hunt_ambush_power, "start_harm":[0.0,harm]}, store.rng)
 	# Badly wounded prey leaves a blood trail; the hunter follows it to the kill.
-	if r.how == "escape" and r.loser == 1 and r.harm[1] >= float(config.tracked_harm):
+	if not awakened and r.how == "escape" and r.loser == 1 and r.harm[1] >= float(config.tracked_harm):
 		r.how = "death"
 		r.tracked = true
 	r.merge({"kind": "hunt", "day": store.day, "ids": [p, -1], "names": [hunter.name, prey.name], "motives": [hunter.motive, "own"]})
