@@ -1,0 +1,13 @@
+{
+  "grades": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    0
+  ],
+  "region": 3,
+  "theft_limit": 128,
+  "throttle_multiplier": 0.5
+}

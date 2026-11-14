@@ -158,6 +158,14 @@ Small chambers carve volume and mass out of their parent cell. They do not overl
 
 The field’s earlier root-speed absorption formula and realm-based intake caps are retired. Density provides pressure and available energy; the body determines admission.
 
+### Heavenly Dao decrees
+
+The Dao may open, throttle (75%, 50%, or 25%), or seal a vein node or a region of atlas cells. Vein decrees scale ambient emission; withheld qi remains in the finite, regenerating reserve. Direct outlet requests with `tap = true` can still withdraw that reserve. They share by priority and proportional elemental demand, and record consumer, day, quantity, and node in a bounded theft log. Region decrees scale ambient consumer demands; reserves and other stores are unaffected.
+
+`set_decree(target, level)` accepts a node index/name or `{id, cells}` region and a level of 1, .75, .5, .25, or 0. `decrees()` and `thefts()` return copies. Decrees, payment anniversaries, auto-pay preference, and theft records persist in saves. Payment is due every 365 days after enactment, using the existing Fifty Heaven's Will account and dated annual income. Unpaid decrees reopen with a dated story note. Seals cost Faint/Lesser/Established/Superior/Great 1/2/4/8/16 Will yearly; Peerless and Heavenly Origin cost zero; regions cost 3. Throttles cost half. Authoritative costs and the theft-log bound live in `data/qi/decrees.json`.
+
+At world formation, geological source regeneration explicitly pays for the initial ambient footprints and replenishes reserves before play begins. That endowment is separate from today's operating flows. Taps appear separately from ambient emission in the conservation ledger.
+
 ## 5. Spiritual anatomy
 
 ### First production graph

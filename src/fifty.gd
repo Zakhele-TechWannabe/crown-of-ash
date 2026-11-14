@@ -254,11 +254,7 @@ func advance(day: int) -> void:
 	if not seeded or day == last_day: return
 	last_day = day
 	var s: RefCounted = society_ref.get_ref()
-	var years := day / 365 - last_income
-	if years > 0:
-		stone += years * float(config.stone_per_year)
-		will += years * float(config.will_per_year)
-		last_income = day / 365
+	income_until(day)
 	for p: int in people:
 		var r: Dictionary = people[p]
 		if not s.alive[p] and r.status not in ["dead", "restoring"]: on_death(p)
@@ -413,3 +409,12 @@ func summary() -> Dictionary:
 			candidate_layers[s.temper.body_layer[p]] += 1
 		layers[s.temper.body_layer[p]] += 1
 	return {"alive": alive, "layers": layers, "candidate_layers": candidate_layers, "restoring": restoring, "candidates": candidates, "tournaments": tournaments, "apostles": apostles, "envoys": envoys, "deaths": deaths, "first_apostle_year": first_apostle_day / 365.0 if first_apostle_day >= 0 else -1, "first_envoy_year": first_envoy_day / 365.0 if first_envoy_day >= 0 else -1}
+
+## Dated income shared with qi decree upkeep; repeated calls never pay twice.
+func income_until(day: int) -> void:
+	if not seeded: return
+	var years := day / 365 - last_income
+	if years > 0:
+		stone += years * float(config.stone_per_year)
+		will += years * float(config.will_per_year)
+		last_income = day / 365

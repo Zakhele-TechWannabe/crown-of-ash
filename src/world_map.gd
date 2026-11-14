@@ -125,6 +125,26 @@ func _ready() -> void:
 		qi_element = index - 1
 		qi_texture_day = -1)
 	overlay.add_child(qi_filter)
+	var legend := PanelContainer.new()
+	legend.position = Vector2(18,86)
+	legend.theme = preload("res://src/ui_theme.gd").build()
+	legend.theme_type_variation = "Tag"
+	var rows := VBoxContainer.new()
+	legend.add_child(rows)
+	for entry: Array in [[Palette.INK,"Thin"],[Palette.JADE,"Rich land / ley lines"],[Palette.GOLD,"Abundant / Heavenly Origin"],[Palette.RED,"Alarm: reserve below 25%"]]:
+		var row := HBoxContainer.new()
+		var swatch := ColorRect.new()
+		swatch.color = entry[0]
+		swatch.custom_minimum_size = Vector2(18,12)
+		row.add_child(swatch)
+		var caption := Label.new()
+		caption.theme_type_variation = "Small"
+		caption.text = entry[1]
+		row.add_child(caption)
+		rows.add_child(row)
+	legend.visible = false
+	qi_toggle.toggled.connect(func(value: bool) -> void: legend.visible = value)
+	overlay.add_child(legend)
 	var reset := Button.new()
 	reset.text = "World [Home]"
 	reset.position = Vector2(550, 7)
@@ -591,8 +611,14 @@ func _refresh_qi_texture() -> void:
 	var accent: Color = Palette.JADE if qi_element < 0 else accents[qi_element]
 	for cell in w * h:
 		var density: float = field.density_at_cell(cell, qi_element)
-		var intensity := clampf(log(1.0 + density) / log(129.0), 0.0, 1.0)
-		image.set_pixel(cell % w, cell / w, Color(Palette.INK.lerp(accent, intensity).lerp(Palette.GOLD, intensity * intensity), 0.75))
+		# Separate log bands keep terrain differences visible without clipping the Palace.
+		var value := density * (5.0 if qi_element >= 0 else 1.0)
+		var low := clampf(log(1.0 + value) / log(4.0),0.0,1.0)
+		var high := clampf(log(maxf(3.0,value) / 3.0) / log(128.0 / 3.0),0.0,1.0)
+		var colour := Palette.INK.lerp(accent,low)
+		if value > 3.0:
+			colour = accent.lerp(Palette.PAPER_LIGHT,high) if qi_element >= 0 else accent.lerp(Palette.GOLD,minf(1.0,high * 2.0)).lerp(Palette.PAPER_LIGHT,maxf(0.0,high * 2.0 - 1.0))
+		image.set_pixel(cell % w,cell / w,Color(colour,0.85))
 	qi_texture.texture = ImageTexture.create_from_image(image)
 	qi_texture.visible = qi_visible
 	qi_texture_day = field.day
@@ -612,7 +638,6 @@ func _draw_qi_graph(transform: Transform2D) -> void:
 		var at: Vector2 = transform * (node.position * CELL / 16.0)
 		if node.heavenly:
 			overlay.draw_arc(at,8.0,0,TAU,24,Palette.GOLD,2.0,true)
-			overlay.draw_string(font,at + Vector2(10,Palette.TITLE),"Heavenly Origin",HORIZONTAL_ALIGNMENT_LEFT,-1,Palette.TITLE,Palette.GOLD)
+			overlay.draw_string(font,at + Vector2(12,-30),"Heavenly Origin",HORIZONTAL_ALIGNMENT_LEFT,-1,Palette.TITLE,Palette.GOLD)
 		elif int(node.reserve) < int(node.capacity) / 4:
 			overlay.draw_circle(at,4.0,Palette.RED)
-	overlay.draw_string(font,Vector2(18,105),"Qi · logarithmic density · jade: ley lines · gold: Heavenly Origin · red: depleted",HORIZONTAL_ALIGNMENT_LEFT,-1,Palette.SMALL,Palette.INK)

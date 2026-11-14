@@ -111,16 +111,17 @@ func add_person() -> void:
 	reputation.append(20)
 	alive.append(1)
 
-func note(person: int, kind: String, words: String) -> void:
+func note(person: int, kind: String, words: String, on_day: int = -1) -> void:
 	var store: RefCounted = store_ref.get_ref()
+	var event_day: int = store.day if on_day < 0 else on_day
 	if kind == "confrontation": childhood.parent_fight(person)
-	chronicle.append({"day": store.day, "person": person, "kind": kind, "text": words})
+	chronicle.append({"day": event_day, "person": person, "kind": kind, "text": words})
 	if chronicle.size() > 2048: chronicle.pop_front()
-	if archive: archive.event(store.day, person, kind, words)
+	if archive: archive.event(event_day, person, kind, words)
 	if mind and person >= 0: _feel_event(person, kind)
 	# Keep the shared event stream, but mark its origin so economy does not chronicle it again.
 	if store.retain_events and store.events.size() < 8192:
-		store.events.append({"day": store.day, "person": person, "kind": kind, "text": words, "source": "society"})
+		store.events.append({"day": event_day, "person": person, "kind": kind, "text": words, "source": "society"})
 
 # Feelings that follow what happens to someone; strong ones interrupt their routine and force a fresh decision.
 func _feel_event(person: int, kind: String) -> void:
@@ -532,6 +533,7 @@ var social_pending := false
 var faction_pending := false
 
 func begin_tick(on_day: int) -> void:
+	qi_field.heaven = fifty
 	qi_field.advance(on_day)
 	var store: RefCounted = store_ref.get_ref()
 	if fifty: fifty.advance(on_day)

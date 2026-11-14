@@ -1448,6 +1448,16 @@ func _qi_page(parent: Node) -> void:
 		label(parent, field.describe(field.landmarks[name]))
 		var sample: Dictionary = field.sample(field.landmarks[name])
 		small(parent, "Purity %.1f%% · yin–yang %+.2f · corruption %.1f%% · %.1f QU stored in this atlas cell" % [sample.purity * 100.0,sample.polarity,sample.corruption * 100.0,sample.quantity / 1000.0])
-	label(parent, "Local supply and use", true)
+	label(parent, "World total", true)
+	var totals: Dictionary = field.world_totals()
+	label(parent,"%.1f QU in all: %.1f in the land and %.1f held in veins." % [totals.total / 1000.0,totals.land / 1000.0,totals.veins / 1000.0])
+	var shares: Array[String] = []
+	for e in 5: shares.append("%s %.1f%%" % [["Metal","Wood","Water","Fire","Earth"][e],100.0 * totals.elements[e] / maxi(1,totals.total)])
+	label(parent,", ".join(shares))
+	label(parent, "Today's flows" if field.day > 0 else "How the world began", true)
 	var ledger: Dictionary = field.ledger
-	label(parent, "%s · world day %d · vein output %.1f QU · reserve regeneration %.1f QU · background recovery %.1f QU · withdrawals %.1f QU · dispersion %.1f QU" % [str(ledger.get("phase", "daily")).capitalize(),field.day,ledger.source_output / 1000.0,ledger.regeneration / 1000.0,ledger.background_recovery / 1000.0,ledger.withdrawals / 1000.0,ledger.dispersion / 1000.0])
+	label(parent, "Veins poured out %.1f QU; reserves restored %.1f; land restored %.1f; dispersed %.1f; drawn by living things and other consumers %.1f; unaccounted = %d QU." % [ledger.source_output / 1000.0,ledger.regeneration / 1000.0,ledger.background_recovery / 1000.0,ledger.dispersion / 1000.0,ledger.withdrawals / 1000.0,ledger.residual])
+	if field.day == 0: label(parent,"Over geological time, veins filled the surrounding land and replenished their underground reserves before play began.")
+	var active: Array[String] = []
+	for decree: Dictionary in field.decrees(): active.append("%s: %s (%.1f Will/year)" % [decree.id,"sealed" if int(decree.level) == 0 else "%d%% open" % decree.level,decree.upkeep])
+	label(parent,"Decrees: " + ("none" if active.is_empty() else "; ".join(active)))

@@ -2,6 +2,12 @@ extends SceneTree
 const Field = preload("res://src/qi_field.gd")
 const Save = preload("res://src/world_save.gd")
 
+class Account extends RefCounted:
+	var will := 100.0
+	var society_ref: WeakRef
+	var notes: Array = []
+	func note(_person: int, _kind: String, text: String, _day: int = -1) -> void: notes.append({"day":_day,"text":text})
+
 func _initialize() -> void:
 	var memory_before := OS.get_static_memory_usage()
 	var a := Field.new()
@@ -17,7 +23,7 @@ func _initialize() -> void:
 	for amount: int in a._mass: assert(amount >= 0)
 	assert(a.ledger.residual == 0)
 	for source: Dictionary in a.ledger.sources:
-		assert(int(source.opening) - int(source.emitted) == int(source.closing))
+		assert(int(source.opening) + int(source.regeneration) - int(source.emitted) - int(source.get("tapped",0)) == int(source.closing))
 	print("QI tracked allocation delta %d bytes (%.3f MiB)" % [tracked_memory,tracked_memory / 1048576.0])
 	print("QI memory %d bytes (%.3f MiB), generation %.3f ms" % [a.memory_bytes(),a.memory_bytes() / 1048576.0,a.generation_usec / 1000.0])
 	for name: String in a.landmarks: print("QI %s: %s" % [name,a.describe(a.landmarks[name])])
@@ -133,6 +139,7 @@ func _initialize() -> void:
 	cycle_jump.advance(1000)
 	assert(cycle_daily.save_state() == cycle_jump.save_state(), "Exact witnessed-cycle jumps")
 	assert(cycle_daily.ledger == cycle_jump.ledger)
+	check_decrees()
 	print("SKIP compartments: no chambers or carved volumes in Stage 1")
 	print("PASS qi field: generation, inventories, ledger, allocation, spans, saves, sources")
 	quit()
@@ -141,9 +148,84 @@ func check_ledger(field: RefCounted) -> void:
 	var l: Dictionary = field.ledger
 	assert(l.residual == 0)
 	for residual: int in l.element_residuals: assert(residual == 0)
+	var withdrawn := 0
+	for amount: int in l.withdrawal_elements: withdrawn += amount
+	assert(withdrawn == int(l.withdrawals))
 	for source: Dictionary in l.sources:
-		assert(int(source.opening) + int(source.regeneration) - int(source.emitted) == int(source.closing))
+		assert(int(source.opening) + int(source.regeneration) - int(source.emitted) - int(source.get("tapped",0)) == int(source.closing))
 		for e in 5:
-			assert(source.opening_elements[e] + source.regenerated_elements[e] - source.emitted_elements[e] == source.closing_elements[e])
-	assert(int(l.opening_reserves) + int(l.regeneration) - int(l.source_output) == int(l.closing_reserves))
-	assert(int(l.opening_field) + int(l.source_output) + int(l.background_recovery) - int(l.withdrawals) - int(l.dispersion) == int(l.closing_field))
+			assert(source.opening_elements[e] + source.regenerated_elements[e] - source.emitted_elements[e] - source.tapped_elements[e] == source.closing_elements[e])
+	assert(int(l.opening_reserves) + int(l.regeneration) - int(l.source_output) - int(l.tap_withdrawals) == int(l.closing_reserves))
+	assert(int(l.opening_field) + int(l.source_output) + int(l.background_recovery) - int(l.withdrawals) + int(l.tap_withdrawals) - int(l.dispersion) == int(l.closing_field))
+
+func check_decrees() -> void:
+	var a := Field.new()
+	a.seed()
+	for node: Dictionary in a.graph().nodes: assert(node.reserve == node.capacity,"Fresh reserves full")
+	var account := Account.new()
+	account.society_ref = weakref(account)
+	a.heaven = account
+	a.set_decree(1,0.0)
+	var at: Vector2 = a.position_of(a.graph().outlets[1].cell)
+	a.request("formation tap",at,PackedInt64Array([100000,100000,100000,100000,100000]),0,true)
+	a.advance(1)
+	assert(a.ledger.sources[1].emitted == 0 and a.ledger.sources[1].tapped == 500000)
+	assert(a.thefts().size() == 1 and a.thefts()[0].consumer_id == "formation tap")
+	check_ledger(a)
+	var reserve: int = a.graph().nodes[1].reserve
+	a.advance(2)
+	assert(a.ledger.sources[1].emitted == 0,"Sealed ambient emission")
+	assert(a.graph().nodes[1].reserve > reserve,"Sealed reserve regenerates")
+	check_ledger(a)
+	var b := Field.new()
+	b.load_state(a.save_state(),a.day)
+	var second := Account.new()
+	second.society_ref = weakref(second)
+	b.heaven = second
+	for d in range(3,366): a.advance(d)
+	b.advance(365)
+	assert(account.will == 96.0 and second.will == 96.0)
+	assert(a.save_state() == b.save_state(),"Decrees span invariant")
+	account.will = 0.0
+	second.will = 0.0
+	for d in range(366,731): a.advance(d)
+	b.advance(730)
+	assert(a.save_state() == b.save_state() and account.notes == second.notes,"Unpaid lapse spans and dated notes")
+	assert(a.decrees().is_empty() and not account.notes.is_empty(),"Unpaid decree lapses with story")
+	var open := Field.new()
+	var throttled := Field.new()
+	open.seed()
+	throttled.seed()
+	throttled.set_decree(0,0.5)
+	open.advance(1)
+	throttled.advance(1)
+	assert(throttled.ledger.sources[0].emitted <= open.ledger.sources[0].emitted / 2 + 5,"Throttle scales actual emission")
+	check_ledger(throttled)
+	var tap_a := Field.new()
+	var tap_b := Field.new()
+	for f: RefCounted in [tap_a,tap_b]:
+		f.seed()
+		f.set_decree(1,0.0)
+	for id: String in ["a","b"]: tap_a.request(id,at,PackedInt64Array([999999999,999999999,999999999,999999999,999999999]),0,true)
+	for id: String in ["b","a"]: tap_b.request(id,at,PackedInt64Array([999999999,999999999,999999999,999999999,999999999]),0,true)
+	tap_a.advance(1)
+	tap_b.advance(1)
+	assert(tap_a.save_state() == tap_b.save_state(),"Competing taps ignore insertion order")
+	check_ledger(tap_a)
+	for d in range(2,132):
+		tap_a.request("miner",at,PackedInt64Array([1,1,1,1,1]),0,true)
+		tap_a.advance(d)
+	assert(tap_a.thefts().size() == 128 and tap_a.thefts()[0].day == 4,"Bounded theft history")
+	assert(tap_a.thefts()[-1].day == 131)
+	tap_b.load_state(tap_a.save_state(),tap_a.day)
+	assert(tap_b.thefts() == tap_a.thefts(),"Thefts saved")
+	var region := Field.new()
+	region.seed()
+	var pos: Vector2 = region.landmarks.Village
+	region.set_decree({"id":"village","cells":[region.cell_at(pos)]},0.25)
+	region.request("living",pos,PackedInt64Array([400,400,400,400,400]),0)
+	region.advance(1)
+	assert(region.allocations.living == PackedInt64Array([100,100,100,100,100]))
+	check_ledger(region)
+	assert(region.decrees()[0].upkeep == 1.5)
+	print("PASS qi decrees: reserves, taps, regions, yearly Will, lapse, save and spans")
