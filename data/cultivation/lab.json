@@ -380,5 +380,7 @@
     "fear": 0.4,
     "ambition": 0.5,
     "pride": 0.2
-  }
+  },
+  "residue_purge_per_day": 0.01,
+  "residue_wall": 0.1
 }

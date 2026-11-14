@@ -513,6 +513,7 @@ danger =
     + corruption × exposure
     + max(0, local_instability - 0.20)²
     + control_error² × forced_commitment
+    + (residue / capacity)²  # lower dantian, while residue remains lodged
 
 strain_next =
     max(0, strain + danger × exposure_hours - recovery)
@@ -527,6 +528,38 @@ scar_gain =
 Exposure hours are actual exposure, not the entire day around a short session. Integrate dangerous changes on fixed short slices so stopping after a pressure spike matters.
 
 Control error alone in an ordinary regulated method usually reduces output or triggers a stop. It becomes damaging when combined with unsafe pressure, contamination or a forced instruction.
+
+### Impurity — owner decision 14 Nov 2026
+
+Only the pure fraction of settled qi performs permanent work. Every opening,
+volume, edge or reserve integration expenditure partitions its quantity into
+`quantity × purity` work and an impure remainder lodged in the lower dantian as
+integer `residue`. A saved arithmetic remainder prevents repeated rounding loss.
+Residue is a conserved inventory, occupies dantian volume, raises pressure and
+reduces admission and reserve headroom. It cannot be spent again as work.
+
+Residue purges into dissipated energy at `residue_purge_per_day = 0.01`, with a
+saved remainder. A treatment multiplier defaults to one; later pills and
+seclusion may accelerate this explicitly funded treatment. During actual
+exposure, add `(residue / capacity)²` to dantian danger. Lodged residue remains
+in living tissue between sessions, so this term also applies during those
+hours; with no transfers its constant danger is integrated analytically. Existing strain,
+recovery, integrity, injury and death rules apply without random rolls.
+
+Layer 1 cannot certify while `residue / capacity > residue_wall = 0.10`;
+once opening work and settling-day requirements are complete, dates above the
+wall count as wall days (recovery may also prevent certification). Layers 3 and 6 retain their
+purity walls of 0.75 and 0.90. Meeting a purity check alone does not certify a
+layer's other required tests.
+
+Martial techniques draw reserve with purity squared efficiency:
+`technique power = reserve × purity²`. Impurity leaks on projection and must
+enter the future martial engine's outflow ledger; the cultivation lab reports
+potential power without executing or charging a projection.
+
+Autonomous experiments value permanent work gained, subtract residue added
+weighted by personality fear, and subtract current strain. Greed can accept
+contamination and recovery costs; low filtering is never free development.
 
 ### Safety behaviour
 
@@ -650,7 +683,7 @@ delivered =
     actual terminal qi available and consumed during action
 
 useful_qi =
-    delivered × stability × compatibility × execution_quality
+    delivered × purity² × stability × compatibility × execution_quality
 
 reinforcement_harm =
     min(1,000 × useful_qi,
@@ -671,7 +704,7 @@ A practitioner with an empty reserve receives no realm-based qi power or speed. 
 
 ```text
 controlled_packet =
-    released_QU × stability × execution_quality
+    released_QU × purity² × stability × execution_quality
 
 delivered_packet_at_distance =
     controlled_packet × exp(-distance / coherence_length)
@@ -680,6 +713,8 @@ initial coherence_length =
     1 + 4 × release_mastery tiles
 ```
 
+Under the owner decision of 14 Nov 2026, impurity leaks on projection; the
+portion lost to purity squared efficiency enters the dissipation ledger.
 Projection costs the released packet whether it hits or misses. It has preparation, direction, travel and interception. Broad projection divides energy over a larger target area.
 
 Weapon coatings are short-range terminal reinforcement. They are not simultaneously free projectiles.
