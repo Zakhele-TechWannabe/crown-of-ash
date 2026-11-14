@@ -1,6 +1,8 @@
 extends Node2D
 ## Deterministic mortals. Routes are planned only when a schedule destination changes.
 var draw_order: Array[Dictionary] = []
+var palace := preload("res://src/palace_walkers.gd").new()
+var contexts: Dictionary = {}
 var world: Node2D
 var sect: RefCounted
 var grid := AStarGrid2D.new()
@@ -10,6 +12,7 @@ const WALKER_LIMIT := 100
 var nearby_views: Dictionary = {}
 var view_cell := Vector2i(-999999, -999999)
 var routes: Dictionary = {}
+var path_requests := 0
 var minutes := 300.0
 var economy := preload("res://src/grain_economy.gd").new()
 var granary: Vector2i
@@ -200,6 +203,10 @@ func setup(map: Node2D) -> void:
 			start_skip(maxi(1, int(arg.trim_prefix("--skip-years="))))
 	if "--headless-sim" in OS.get_cmdline_user_args() or (skip_requested and DisplayServer.get_name() == "headless"):
 		call_deferred("_headless_sim")
+	for site: RefCounted in sect.sites:
+		if site.data.name == "Heavenly Dao Palace": palace.setup(site)
+	contexts = {0: {"settlement": 0, "quota": 100, "grid": grid, "routes": routes, "people": people, "ground": sect}, 50: palace}
+	palace.sync(population)
 	draw_order = people.duplicate()
 	_refresh(true)
 
@@ -309,7 +316,7 @@ func _refresh(initial: bool = false) -> void:
 		target = scene[0]
 		activity = scene[1]
 		p.activity = activity
-		if speed >= 64:
+		if speed >= 64 or initial:
 			p.destination = target
 			p.pos = Vector2(target)
 			p.path = PackedVector2Array()
@@ -317,12 +324,14 @@ func _refresh(initial: bool = false) -> void:
 			p.hidden = activity == "sleeping at home"
 			continue
 		if initial or target != p.destination or (p.path.is_empty() and Vector2(p.pos) != Vector2(target)):
+			if path_requests >= 2: continue
 			p.destination = target
 			var start := nearest(Vector2i(Vector2(p.pos).round()))
 			var key := Vector4i(start.x, start.y, target.x, target.y)
 			if not routes.has(key):
-				if routes.size() >= 512:
-					routes.clear()
+				if routes.size() >= 128:
+					routes.erase(routes.keys()[0])
+				path_requests += 1
 				routes[key] = grid.get_point_path(start, target)
 			p.path = routes[key]
 			p.step = 0
@@ -333,6 +342,7 @@ func _refresh(initial: bool = false) -> void:
 
 
 func _process(dt: float) -> void:
+	path_requests = 0
 	if skip_target > 0:
 		_process_skip()
 		return
@@ -353,6 +363,10 @@ func _process(dt: float) -> void:
 	_watch_fights()
 	_advance_stages(elapsed)
 	_advance_law(elapsed)
+	if palace.site != null:
+		palace.sync(population)
+		palace.update(minutes, elapsed, speed)
+		path_requests = palace.requests
 	var schedule_tick := int(minutes / 720.0) if speed >= 64 else int(minutes)
 	if schedule_tick != last_minute:
 		last_minute = schedule_tick
@@ -378,6 +392,8 @@ func _process(dt: float) -> void:
 
 
 func point(p: Dictionary) -> Vector2:
+	if palace.site != null and palace.grid.region.has_point(Vector2i(p.pos)):
+		return (Vector2(p.pos) + Vector2.ONE * 0.5) * 32.0 - Vector2(0, world.ground.terrace_level(Vector2i(p.pos)) * world.ground.exaggeration)
 	# Height blends between neighbouring tiles, so a walker climbs a ramp instead of popping up a level.
 	var pos := Vector2(p.pos)
 	var base := Vector2i(pos.floor())
@@ -410,9 +426,16 @@ func _draw() -> void:
 				var at := (Vector2(tile) + Vector2.ONE * 0.5) * 32 - Vector2(0, world.ground.terrace_level(tile) * world.ground.exaggeration)
 				if area.has_point(at):
 					draw_circle(at, 4, Color(Palette.JADE, 0.18 + 0.08 * sin(minutes + x + y)))
+	if palace.site != null:
+		for zone: Dictionary in palace.site.data.zones:
+			if not zone.has("reserve_rect"): continue
+			var r: Array = zone.reserve_rect
+			var rect := Rect2(Vector2(palace.site.center + Vector2i(r[0], r[1])) * 32.0, Vector2(r[2], r[3]) * 32.0)
+			if area.intersects(rect): draw_rect(rect, Color(Palette.GOLD, 0.45), false, 4.0)
 	_draw_food_places(area)
 	_draw_material_places(area)
 	draw_order = people.duplicate()
+	draw_order.append_array(palace.people)
 	for p: Dictionary in nearby_views.values(): draw_order.append(p)
 	draw_order.sort_custom(_feet_before)
 	# Trees stand up off the ground: shadows first, then trees and people in order of their feet,
@@ -448,7 +471,7 @@ func _draw() -> void:
 		while next_tree < trees.size() and trees[next_tree][0].y <= at.y:
 			_tree(trees[next_tree])
 			next_tree += 1
-		if drawn >= WALKER_LIMIT: break
+		if drawn >= WALKER_LIMIT + 50: break
 		drawn += 1
 		var child: bool = p.kind == 8 or population.age(int(p.get("id", 0))) < 16
 		var phase := minutes * 5 + int(p.age)
@@ -558,7 +581,7 @@ func hover(at: Vector2) -> int:
 func pick(at: Vector2) -> int:
 	var best := -1
 	var feet := -INF
-	for p: Dictionary in people + nearby_views.values():
+	for p: Dictionary in people + palace.people + nearby_views.values():
 		if p.hidden: continue
 		var here := point(p)
 		if Rect2(here - Vector2(18, 36), Vector2(36, 42)).has_point(at) and here.y > feet:
@@ -569,6 +592,7 @@ func pick(at: Vector2) -> int:
 
 ## The dead stop walking and eating. If nobody is left, twenty new twelve-year-olds are sent down to the valley.
 func _tend_the_dead() -> void:
+	if palace.site != null: palace.sync(population)
 	var society: RefCounted = population.society
 	var changed := false
 	stages = stages.filter(func(st: Dictionary) -> bool: return st.phase != "fallen")
@@ -684,14 +708,17 @@ func _link_levels() -> void:
 	if carved > 0 or not sect.ramps.is_empty(): world.ground.set_exaggeration(world.ground.exaggeration)
 
 
-func walker_of(id: int) -> int:
-	for n in people.size():
-		if int(people[n].id) == id: return n
+func walker_of(id: int, settlement: int = 0) -> int:
+	var walkers: Array = palace.people if settlement == 50 else people
+	for n in walkers.size():
+		if int(walkers[n].id) == id: return n
 	return -1
 
 
 ## Where a person stands in the world, whether or not they are being drawn.
 func place_of(id: int) -> Vector2:
+	var resident := walker_of(id, 50)
+	if resident >= 0: return point(palace.people[resident])
 	var walker := walker_of(id)
 	if walker >= 0: return point(people[walker])
 	return point({"pos": population.locations[id]})

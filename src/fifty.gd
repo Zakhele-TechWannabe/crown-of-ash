@@ -51,7 +51,7 @@ func seed() -> void:
 	var store: RefCounted = s.population
 	last_income = store.day / 365
 	next_tournament = ((store.day / 365 + 1) / int(config.tournament_years) + 1) * 365 * int(config.tournament_years) - 365
-	var job: int = store.register_job("heaven's disciple", [])
+	var job: int = store.register_job("Heavenly Dao Palace disciple", [])
 	for i in int(config.capacity):
 		var sex: int = store.rng.randi_range(0, 1)
 		var surname: String = SURNAMES[store.rng.randi_range(0, SURNAMES.size() - 1)]
@@ -59,23 +59,32 @@ func seed() -> void:
 		store.sex[p] = sex
 		if s.mind: s.mind._found_heart(p)
 		join(p)
-	s.note(-1, "dao", "Fifty youths began from nothing in Heaven's Terrace, hidden on Heavenly Ridge")
+	s.note(-1, "dao", "Fifty youths began from nothing in Heavenly Dao Palace, hidden on Heavenly Ridge")
 
 func join(p: int) -> bool:
 	if open_places() <= 0 or member(p): return false
 	var s: RefCounted = society_ref.get_ref()
 	var store: RefCounted = s.population
-	people[p] = {"status": "candidate", "rank": 0, "bonus_until": 0, "seat": -1, "death_day": -1, "challenge_day": -365, "joined": store.day}
+	people[p] = {"status": "candidate", "rank": 0, "bonus_until": 0, "seat": -1, "death_day": -1, "challenge_day": -365, "joined": store.day, "dorm_bed": free_bed()}
 	store.settlement[p] = int(config.settlement)
 	s.household_serial += 1
 	store.household[p] = s.household_serial
 	store.household_names_day = -1
-	store.job[p] = store.register_job("heaven's disciple", [])
+	store.job[p] = store.register_job("Heavenly Dao Palace disciple", [])
 	var site: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/sites/" + str(config.site)))
 	store.set_location(p, Vector2(float(site.center[0]), float(site.center[1])))
 	store.hunger[p] = 0
 	provision(p, store.day)
 	return true
+
+func free_bed() -> int:
+	var used: Dictionary = {}
+	for record: Dictionary in people.values():
+		if record.status != "dead" and record.has("dorm_bed"): used[int(record.dorm_bed)] = true
+	for bed in 60:
+		if not used.has(bed): return bed
+	return 0
+
 
 func top(p: int, day: int) -> bool:
 	return member(p) and int(people[p].bonus_until) > day
@@ -280,7 +289,7 @@ func invite(p: int) -> bool:
 	if open_places() == 0 or not eligible(p): return false
 	var s: RefCounted = society_ref.get_ref()
 	if willingness(p) < float(config.invite_threshold):
-		s.note(p, "dao", "%s refused Heaven's invitation" % s.population.names[p])
+		s.note(p, "dao", "%s refused the Heavenly Dao Palace invitation" % s.population.names[p])
 		return false
 	_depart(p, false)
 	return true
@@ -295,7 +304,7 @@ func call_to_heaven() -> int:
 		if eligible(p) and willingness(p) >= float(config.call_threshold):
 			_depart(p, true)
 			count += 1
-	s.note(-1, "dao", "Heaven called; %d pilgrims set out to find the hidden terrace" % count)
+	s.note(-1, "dao", "Heaven called; %d pilgrims set out to find the hidden Heavenly Dao Palace" % count)
 	return count
 
 func _depart(p: int, pilgrimage: bool) -> void:
@@ -308,7 +317,7 @@ func _depart(p: int, pilgrimage: bool) -> void:
 	journeys[p] = {"due": store.day + duration, "pilgrimage": pilgrimage, "settlement": store.settlement[p], "home": store.household[p], "job": store.job[p], "location": store.locations[p]}
 	store.settlement[p] = -int(config.settlement)
 	if pilgrimage: pilgrims += 1
-	s.note(p, "dao", "%s left a note at home and set out for heaven" % store.names[p])
+	s.note(p, "dao", "%s left a note at home and set out for the Heavenly Dao Palace" % store.names[p])
 	if s.mind:
 		for kin: int in s.children(p): s.mind.feel(kin, s.mind.GRIEF, .25)
 		for kin: int in s.parents(p):
@@ -326,23 +335,23 @@ func _process_journeys(day: int) -> void:
 		finished.append(p)
 		if not s.alive[p]: continue
 		if j.pilgrimage and store.rng.randf() < float(config.road_death):
-			s.die(p, "dao", "%s died on the pilgrimage to heaven" % store.names[p])
+			s.die(p, "dao", "%s died on the pilgrimage to the Heavenly Dao Palace" % store.names[p])
 			continue
 		var chance: float = float(config.find_rate) * float(fate[p]) * (store.attributes[p * 8 + 4] + store.attributes[p * 8 + 6]) / 20 * store.luck[p]
 		if j.pilgrimage and store.rng.randf() >= chance:
-			_home(p, "turned back without finding heaven")
+			_home(p, "turned back without finding the Heavenly Dao Palace")
 			continue
 		if j.pilgrimage: arrivals += 1
 		var record: Dictionary = admission.test(s, p, config.admission)
 		if record.passed: passed.append({"person": p, "score": record.total})
-		else: _home(p, "returned with the story of Heaven's admission trials")
+		else: _home(p, "returned with the story of the Heavenly Dao Palace admission trials")
 	passed.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.score > b.score)
 	for result: Dictionary in passed:
 		var p: int = result.person
 		if open_places() > 0:
 			join(p)
 			s.note(p, "dao", "%s passed the trials and joined the Fifty" % store.names[p])
-		else: _home(p, "returned honoured: heaven saw them, but every place was full")
+		else: _home(p, "returned honoured: the Heavenly Dao Palace saw them, but every place was full")
 	for p: int in finished: journeys.erase(p)
 
 func _home(p: int, story: String) -> void:
@@ -355,7 +364,10 @@ func _home(p: int, story: String) -> void:
 	s.note(p, "dao", "%s %s" % [s.population.names[p], story])
 
 func repair(saved: Dictionary) -> void:
-	if not saved.is_empty(): return
+	if not saved.is_empty():
+		for record: Dictionary in people.values():
+			if not record.has("dorm_bed") and record.status != "dead": record.dorm_bed = free_bed()
+		return
 	# Old saves have no terrace people. Seed only after population columns have been repaired.
 	people.clear()
 	journeys.clear()

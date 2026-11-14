@@ -1,125 +1,516 @@
 {
-  "name": "Heaven's Terrace",
+  "name": "Heavenly Dao Palace",
   "center": [
     2625,
     902
   ],
   "bounds": [
-    -44,
-    -44,
-    88,
-    88
+    -992,
+    -500,
+    1984,
+    1000
   ],
   "seed": 750,
   "base_level": 12,
   "tiers": [
     {
-      "y0": -40,
-      "y1": 40,
-      "hw": 40,
+      "y0": -170,
+      "y1": -103,
+      "hw": 145,
+      "lvl": 4
+    },
+    {
+      "y0": -102,
+      "y1": -35,
+      "hw": 145,
+      "lvl": 3
+    },
+    {
+      "y0": -34,
+      "y1": 33,
+      "hw": 145,
+      "lvl": 2
+    },
+    {
+      "y0": 34,
+      "y1": 101,
+      "hw": 145,
+      "lvl": 1
+    },
+    {
+      "y0": 102,
+      "y1": 169,
+      "hw": 145,
       "lvl": 0
     }
   ],
   "surfaces": [
     {
-      "kind": "paving",
+      "zone": "dormitory",
       "rect": [
-        -20,
-        -12,
-        40,
-        24
-      ]
+        -90,
+        -10,
+        65,
+        45
+      ],
+      "kind": "earth"
     },
     {
-      "kind": "cave",
+      "zone": "kitchen",
       "rect": [
+        35,
+        40,
+        45,
+        30
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "baths",
+      "rect": [
+        -90,
+        45,
+        35,
+        25
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "stores",
+      "rect": [
+        90,
+        40,
+        35,
+        25
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "library",
+      "rect": [
+        -85,
+        -85,
+        60,
+        40
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "mentoring",
+      "rect": [
+        -40,
+        -165,
+        80,
+        40
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "fields",
+      "rect": [
+        80,
+        85,
+        65,
+        65
+      ],
+      "kind": "garden"
+    },
+    {
+      "zone": "orchard",
+      "rect": [
+        25,
+        90,
+        45,
+        55
+      ],
+      "kind": "garden"
+    },
+    {
+      "zone": "ranch",
+      "rect": [
+        85,
+        155,
+        50,
+        20
+      ],
+      "kind": "garden"
+    },
+    {
+      "zone": "ponds",
+      "rect": [
+        145,
+        80,
+        10,
+        80
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "training",
+      "rect": [
+        -140,
+        -75,
+        45,
+        45
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "arena",
+      "rect": [
+        -75,
+        100,
+        75,
+        50
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "seclusion",
+      "rect": [
+        80,
+        -160,
+        50,
+        40
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "gate",
+      "rect": [
+        -15,
+        155,
         30,
-        -30,
-        4,
-        4
-      ]
+        20
+      ],
+      "kind": "earth"
+    },
+    {
+      "zone": "pilgrimage",
+      "rect": [
+        -150,
+        130,
+        60,
+        45
+      ],
+      "kind": "earth"
     }
   ],
   "buildings": [
     {
-      "kind": "training",
-      "name": "Training ground",
+      "zone": "dormitory",
+      "kind": "marker",
+      "name": "Dormitory",
       "rect": [
-        -12,
-        -28,
-        24,
-        10
+        -90,
+        -10,
+        65,
+        45
       ]
     },
     {
-      "kind": "house",
-      "name": "East dormitory",
+      "zone": "kitchen",
+      "kind": "marker",
+      "name": "Kitchen",
       "rect": [
-        22,
-        0,
+        35,
+        40,
+        45,
+        30
+      ]
+    },
+    {
+      "zone": "baths",
+      "kind": "marker",
+      "name": "Baths",
+      "rect": [
+        -90,
+        45,
+        35,
+        25
+      ]
+    },
+    {
+      "zone": "stores",
+      "kind": "marker",
+      "name": "Stores",
+      "rect": [
+        90,
+        40,
+        35,
+        25
+      ]
+    },
+    {
+      "zone": "library",
+      "kind": "marker",
+      "name": "Library \u00b7 reserved",
+      "rect": [
+        -85,
+        -85,
+        60,
+        40
+      ]
+    },
+    {
+      "zone": "mentoring",
+      "kind": "marker",
+      "name": "Mentoring \u00b7 reserved",
+      "rect": [
+        -40,
+        -165,
+        80,
+        40
+      ]
+    },
+    {
+      "zone": "fields",
+      "kind": "marker",
+      "name": "Fields \u00b7 reserved",
+      "rect": [
+        80,
+        85,
+        65,
+        65
+      ]
+    },
+    {
+      "zone": "orchard",
+      "kind": "marker",
+      "name": "Orchard \u00b7 reserved",
+      "rect": [
+        25,
+        90,
+        45,
+        55
+      ]
+    },
+    {
+      "zone": "ranch",
+      "kind": "marker",
+      "name": "Ranch \u00b7 reserved",
+      "rect": [
+        85,
+        155,
+        50,
+        20
+      ]
+    },
+    {
+      "zone": "ponds",
+      "kind": "marker",
+      "name": "Ponds \u00b7 reserved",
+      "rect": [
+        145,
+        80,
         10,
-        8
+        80
       ]
     },
     {
-      "kind": "house",
-      "name": "West dormitory",
+      "zone": "training",
+      "kind": "marker",
+      "name": "Training \u00b7 reserved",
       "rect": [
-        -32,
-        0,
-        10,
-        8
+        -140,
+        -75,
+        45,
+        45
       ]
     },
     {
+      "zone": "arena",
+      "kind": "marker",
+      "name": "Arena \u00b7 reserved",
+      "rect": [
+        -75,
+        100,
+        75,
+        50
+      ]
+    },
+    {
+      "zone": "seclusion",
+      "kind": "marker",
+      "name": "Seclusion \u00b7 reserved",
+      "rect": [
+        80,
+        -160,
+        50,
+        40
+      ]
+    },
+    {
+      "zone": "gate",
+      "kind": "marker",
+      "name": "Gate",
+      "rect": [
+        -15,
+        155,
+        30,
+        20
+      ]
+    },
+    {
+      "zone": "pilgrimage",
+      "kind": "marker",
+      "name": "Pilgrimage \u00b7 reserved",
+      "rect": [
+        -150,
+        130,
+        60,
+        45
+      ]
+    },
+    {
+      "zone": "dormitory",
+      "kind": "house",
+      "name": "Dormitory",
+      "rect": [
+        -85,
+        0,
+        12,
+        8
+      ],
+      "beds": 20
+    },
+    {
+      "zone": "dormitory",
+      "kind": "house",
+      "name": "Dormitory",
+      "rect": [
+        -65,
+        0,
+        12,
+        8
+      ],
+      "beds": 20
+    },
+    {
+      "zone": "dormitory",
+      "kind": "house",
+      "name": "Dormitory",
+      "rect": [
+        -45,
+        0,
+        12,
+        8
+      ],
+      "beds": 20
+    },
+    {
+      "zone": "kitchen",
+      "kind": "hall",
+      "name": "Kitchen",
+      "rect": [
+        40,
+        45,
+        12,
+        8
+      ],
+      "beds": 0
+    },
+    {
+      "zone": "baths",
+      "kind": "hall",
+      "name": "Baths",
+      "rect": [
+        -85,
+        50,
+        12,
+        8
+      ],
+      "beds": 0
+    },
+    {
+      "zone": "stores",
+      "kind": "hall",
+      "name": "Stores",
+      "rect": [
+        95,
+        45,
+        12,
+        8
+      ],
+      "beds": 0
+    },
+    {
+      "zone": "library",
+      "kind": "hall",
+      "name": "Library",
+      "rect": [
+        -75,
+        -75,
+        12,
+        8
+      ],
+      "beds": 0
+    },
+    {
+      "zone": "mentoring",
       "kind": "pedestal",
       "name": "Apostle pedestal 1",
       "rect": [
-        -30,
-        24,
-        8,
-        8
+        -34,
+        -150,
+        6,
+        6
       ]
     },
     {
+      "zone": "mentoring",
       "kind": "pedestal",
       "name": "Apostle pedestal 2",
       "rect": [
-        -17,
-        24,
-        8,
-        8
+        -20,
+        -150,
+        6,
+        6
       ]
     },
     {
+      "zone": "mentoring",
       "kind": "pedestal",
       "name": "Apostle pedestal 3",
       "rect": [
-        -4,
-        24,
-        8,
-        8
+        -6,
+        -150,
+        6,
+        6
       ]
     },
     {
+      "zone": "mentoring",
       "kind": "pedestal",
       "name": "Apostle pedestal 4",
       "rect": [
-        9,
-        24,
         8,
-        8
+        -150,
+        6,
+        6
       ]
     },
     {
+      "zone": "mentoring",
       "kind": "pedestal",
       "name": "Apostle pedestal 5",
       "rect": [
         22,
-        24,
-        8,
-        8
+        -150,
+        6,
+        6
       ]
+    },
+    {
+      "kind": "marker",
+      "name": "Heavenly Dao Palace \u00b7 summit core",
+      "rect": [
+        -44,
+        -44,
+        88,
+        88
+      ],
+      "zone": "summit"
     },
     {
       "kind": "cave",
@@ -129,7 +520,1042 @@
         -34,
         8,
         6
+      ],
+      "zone": "mentoring"
+    },
+    {
+      "kind": "cave",
+      "name": "Seclusion chambers \u00b7 reserved",
+      "rect": [
+        80,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        85,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        90,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        95,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        100,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        105,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        110,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        115,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        120,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        125,
+        -160,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        80,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        85,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        90,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        95,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        100,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        105,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        110,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        115,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        120,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        125,
+        -154,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        80,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        85,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        90,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        95,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        100,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        105,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        110,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        115,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        120,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        125,
+        -148,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        80,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        85,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        90,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        95,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        100,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        105,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        110,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        115,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        120,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        125,
+        -142,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        80,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        85,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        90,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        95,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        100,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        105,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        110,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        115,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        120,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "cave",
+      "name": "",
+      "rect": [
+        125,
+        -136,
+        3,
+        2
+      ],
+      "zone": "seclusion"
+    },
+    {
+      "kind": "gate",
+      "name": "Heavenly Dao Palace \u00b7 concealed gate",
+      "rect": [
+        -6,
+        160,
+        12,
+        3
+      ],
+      "zone": "gate"
+    }
+  ],
+  "storage_bounds": [
+    -160,
+    -180,
+    320,
+    360
+  ],
+  "tier_end": 180,
+  "relocate_from_y": 10000,
+  "preserve_water": true,
+  "zones": [
+    {
+      "zone": "dormitory",
+      "rect": [
+        -90,
+        -10,
+        65,
+        45
+      ],
+      "anchor": [
+        -58,
+        33
+      ],
+      "reserved": false
+    },
+    {
+      "zone": "kitchen",
+      "rect": [
+        35,
+        40,
+        45,
+        30
+      ],
+      "anchor": [
+        57,
+        68
+      ],
+      "reserved": false
+    },
+    {
+      "zone": "baths",
+      "rect": [
+        -90,
+        45,
+        35,
+        25
+      ],
+      "anchor": [
+        -73,
+        68
+      ],
+      "reserved": false
+    },
+    {
+      "zone": "stores",
+      "rect": [
+        90,
+        40,
+        35,
+        25
+      ],
+      "anchor": [
+        107,
+        63
+      ],
+      "reserved": false
+    },
+    {
+      "zone": "library",
+      "rect": [
+        -85,
+        -85,
+        60,
+        40
+      ],
+      "anchor": [
+        -55,
+        -47
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "mentoring",
+      "rect": [
+        -40,
+        -165,
+        80,
+        40
+      ],
+      "anchor": [
+        0,
+        -127
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "fields",
+      "rect": [
+        80,
+        85,
+        65,
+        65
+      ],
+      "anchor": [
+        112,
+        148
+      ],
+      "reserved": true,
+      "reserve_rect": [
+        160,
+        0,
+        400,
+        250
+      ]
+    },
+    {
+      "zone": "orchard",
+      "rect": [
+        25,
+        90,
+        45,
+        55
+      ],
+      "anchor": [
+        47,
+        143
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "ranch",
+      "rect": [
+        85,
+        155,
+        50,
+        20
+      ],
+      "anchor": [
+        110,
+        173
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "ponds",
+      "rect": [
+        145,
+        80,
+        10,
+        80
+      ],
+      "anchor": [
+        150,
+        158
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "training",
+      "rect": [
+        -140,
+        -75,
+        45,
+        45
+      ],
+      "anchor": [
+        -118,
+        -32
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "arena",
+      "rect": [
+        -75,
+        100,
+        75,
+        50
+      ],
+      "anchor": [
+        -38,
+        148
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "seclusion",
+      "rect": [
+        80,
+        -160,
+        50,
+        40
+      ],
+      "anchor": [
+        105,
+        -122
+      ],
+      "reserved": true
+    },
+    {
+      "zone": "gate",
+      "rect": [
+        -15,
+        155,
+        30,
+        20
+      ],
+      "anchor": [
+        0,
+        173
+      ],
+      "reserved": false
+    },
+    {
+      "zone": "pilgrimage",
+      "rect": [
+        -150,
+        130,
+        60,
+        45
+      ],
+      "anchor": [
+        -120,
+        173
+      ],
+      "reserved": true,
+      "reserve_rect": [
+        -650,
+        180,
+        500,
+        200
       ]
     }
-  ]
+  ],
+  "stairs": [
+    {
+      "rect": [
+        -3,
+        -175,
+        6,
+        350
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          33
+        ],
+        [
+          -58,
+          33
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          68
+        ],
+        [
+          57,
+          68
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          68
+        ],
+        [
+          -73,
+          68
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          63
+        ],
+        [
+          107,
+          63
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          -47
+        ],
+        [
+          -55,
+          -47
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          -127
+        ],
+        [
+          0,
+          -127
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          148
+        ],
+        [
+          112,
+          148
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          143
+        ],
+        [
+          47,
+          143
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          173
+        ],
+        [
+          110,
+          173
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          158
+        ],
+        [
+          150,
+          158
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          -32
+        ],
+        [
+          -118,
+          -32
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          148
+        ],
+        [
+          -38,
+          148
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          -122
+        ],
+        [
+          105,
+          -122
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          173
+        ],
+        [
+          0,
+          173
+        ]
+      ]
+    },
+    {
+      "kind": "paving",
+      "width": 3,
+      "points": [
+        [
+          0,
+          173
+        ],
+        [
+          -120,
+          173
+        ]
+      ]
+    }
+  ],
+  "summit_core": [
+    -44,
+    -44,
+    88,
+    88
+  ],
+  "zone_budgets": {
+    "core": 80000,
+    "library": 15000,
+    "mentoring": 15000,
+    "food": 100000,
+    "training": 35000,
+    "arena": 25000,
+    "seclusion": 30000,
+    "service": 100000,
+    "pilgrimage": 100000,
+    "landscape": 1484000
+  }
 }

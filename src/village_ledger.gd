@@ -14,7 +14,7 @@ const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
 const Law = preload("res://src/law.gd")
 const TABS := {"cultivators": "Cultivators", "tempering": "Paths & realms", "medicine": "Medicine & methods", "fifty": "The Fifty", "laws": "Laws & guardians", "people": "Everyone", "society": "Families & factions", "chronicle": "Chronicle", "overview": "Overview", "food": "Food", "materials": "Materials & work", "forest": "Forest & beasts", "bestiary": "Bestiary"}
-const GROUPS := {"Cultivation": ["cultivators", "tempering", "medicine"], "Heaven": ["fifty", "laws"], "People": ["people", "society", "chronicle"], "The valley": ["overview", "food", "materials"], "The wild": ["forest", "bestiary"]}
+const GROUPS := {"Cultivation": ["cultivators", "tempering", "medicine"], "Heavenly Dao Palace": ["fifty", "laws"], "People": ["people", "society", "chronicle"], "The valley": ["overview", "food", "materials"], "The wild": ["forest", "bestiary"]}
 var sidebar: VBoxContainer
 var sections_button: MenuButton
 
@@ -1347,13 +1347,13 @@ func _fifty(parent: Node) -> void:
 	page_day = life.population.day
 	var store: RefCounted = life.population
 	var dao: RefCounted = store.society.fifty
-	section(parent, "Heaven's Terrace · hidden on Heavenly Ridge")
+	section(parent, "Heavenly Dao Palace · hidden on Heavenly Ridge")
 	label(parent, "Fifty lives begin with nothing. Every layer can be Perfect; the first five flawless peaks hold the Apostle pedestals. Envoys serve one mortal life.")
 	var controls := HFlowContainer.new()
 	controls.add_theme_constant_override("h_separation", UiTheme.SPACE_12)
 	controls.add_theme_constant_override("v_separation", UiTheme.SPACE_8)
 	parent.add_child(controls)
-	var call := button(controls, "Call to heaven", func() -> void: dao.call_to_heaven(); life._tend_the_dead(); page_day = -1; refresh_values())
+	var call := button(controls, "Call to the Heavenly Dao Palace", func() -> void: dao.call_to_heaven(); life._tend_the_dead(); page_day = -1; refresh_values())
 	call.disabled = store.day - dao.last_call < int(dao.config.call_days)
 	small(parent, "%d pilgrims searching · %d days until the next call" % [dao.journeys.size(), maxi(0, int(dao.config.call_days) - (store.day - dao.last_call))])
 	var recruits := OptionButton.new()

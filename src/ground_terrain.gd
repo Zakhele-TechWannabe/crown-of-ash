@@ -376,7 +376,7 @@ func _far_image(key: Vector2i) -> Image:
 	var image: Image = baker._far_image(key)
 	far_cache[key] = image
 	far_lru.append(key)
-	while far_lru.size() > 400:
+	while far_lru.size() > 128:
 		far_cache.erase(far_lru.pop_front())
 	return image
 
@@ -396,7 +396,9 @@ func update_chunks(camera: Camera2D, budget: int) -> bool:
 			wanted.append(Vector2i(x, y))
 	var center := camera.position / (SIDE * TILE) - Vector2.ONE * 0.5
 	wanted.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return Vector2(a).distance_squared_to(center) < Vector2(b).distance_squared_to(center))
+	wanted.resize(mini(wanted.size(), 128))
 	var near := camera.zoom.x >= 0.45
+	if near: wanted.resize(mini(wanted.size(), 16))
 	for key: Vector2i in chunks.keys():
 		if key not in wanted or (not near and detailed.has(key)):
 			chunks[key].free()
@@ -412,12 +414,14 @@ func update_chunks(camera: Camera2D, budget: int) -> bool:
 		if job.generation == generation and not job.cancelled:
 			var result: Dictionary = job.baker.pending
 			if job.detail:
-				if chunks.has(key):
+				var retained_bytes := 0
+				for bytes: int in detailed.values(): retained_bytes += bytes
+				if chunks.has(key) and retained_bytes + result.image.get_data_size() <= 96 * 1024 * 1024:
 					var sprite: Sprite2D = chunks[key]
 					sprite.texture = ImageTexture.create_from_image(result.image)
 					sprite.position = Vector2(key) * SIDE * TILE - Vector2(0, (int(result.overflow) - int(result.min_y)) * 2)
 					sprite.scale = Vector2.ONE * 2.0
-					detailed[key] = true
+					detailed[key] = result.image.get_data_size()
 					last_bake_ms = result.elapsed
 			else:
 				var sprite := Sprite2D.new()
@@ -435,14 +439,17 @@ func update_chunks(camera: Camera2D, budget: int) -> bool:
 		return false
 	# Both LODs rasterize on workers. Never synchronously bake a panning frame.
 	for key: Vector2i in wanted:
-		if jobs.size() >= 2:
+		if jobs.size() >= 1:
 			break
 		if not chunks.has(key) and not jobs.has(key):
 			var baker := _new_baker()
 			jobs[key] = {"baker": baker, "id": WorkerThreadPool.add_task(baker.bake_far.bind(key)), "generation": generation, "cancelled": false, "detail": false}
 	if near:
 		for key: Vector2i in wanted:
-			if jobs.size() >= 2:
+			var detail_bytes := 0
+			for bytes: int in detailed.values(): detail_bytes += bytes
+			if detailed.size() >= 16 or detail_bytes >= 88 * 1024 * 1024: break
+			if jobs.size() >= 1:
 				break
 			if not detailed.has(key) and not jobs.has(key) and chunks.has(key):
 				var baker := _new_baker()

@@ -299,7 +299,7 @@ func describe(p: int) -> Dictionary:
 	var gate_reached := at_gate(p)
 	return {"layer": body_layer[p], "name": layer_name(body_layer[p]) if body_layer[p] else "untempered", "layers": layers,
 		"progress": tempering[p] / cost(mini(LAYERS, body_layer[p] + 1)), "method": config.method_names[method[p]],
-		"training": training(p, store.day), "hours": hours[p], "teacher": "Heaven’s Terrace · master teacher" if society.fifty.member(p) else (store.names[teacher[p]] if teacher[p] >= 0 and training(p, store.day) else ""),
+		"training": training(p, store.day), "hours": hours[p], "teacher": "Heavenly Dao Palace · master teacher" if society.fifty.member(p) else (store.names[teacher[p]] if teacher[p] >= 0 and training(p, store.day) else ""),
 		"strain": strain[p], "gate": gate_need(p) if gate_reached else "", "ceiling": config.grade_names[grade_ceiling(p)],
 		"grade": config.grade_names[roundi(body_grade(p))] if body_layer[p] else "", "holds": holds(p)}
 

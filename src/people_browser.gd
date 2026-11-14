@@ -176,7 +176,7 @@ func _breadcrumb() -> void:
 
 func _keys(p: int) -> Array[String]:
 	match group_mode:
-		"Place": return ["Servants' Village" if population.settlement[p] == 0 else "Settlement %d" % population.settlement[p], population.district_name(p), population.household_name(p)]
+		"Place": return ["Servants' Village" if population.settlement[p] == 0 else ("Heavenly Dao Palace" if population.settlement[p] == 50 else "Settlement %d" % population.settlement[p]), population.district_name(p), population.household_name(p)]
 		"Work":
 			if population.best_skill[p] < 0: return ["Untrained", "No domain", "No discipline"]
 			var id: String = population.catalogue.ids[population.best_skill[p]]

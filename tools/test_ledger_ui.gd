@@ -37,7 +37,7 @@ func run() -> void:
 		await process_frame
 		if key == "fifty":
 			var text := label_text(ledger.content)
-			for heading: String in ["Heaven’s Will", "heaven-stone", "Five Apostle seats", "Invite to the Dao", "Call to heaven", "Recent Dao stories"]: assert(heading in text, heading)
+			for heading: String in ["Heaven’s Will", "heaven-stone", "Five Apostle seats", "Invite to the Dao", "Call to the Heavenly Dao Palace", "Recent Dao stories"]: assert(heading in text, heading)
 		if key == "forest":
 			var text := label_text(ledger.content)
 			for heading: String in ["Iron-bark patches", "Beasts and herbs", "Populations"]: assert(heading in text)

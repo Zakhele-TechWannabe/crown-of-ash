@@ -385,7 +385,7 @@ func _draw_overlay() -> void:
 		overlay.draw_string_outline(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, 4, Color(Palette.PAPER.lightened(0.45), 0.85))
 		overlay.draw_string(serif, offset, text, HORIZONTAL_ALIGNMENT_LEFT, -1, px, BLUE if kind in ["Rivers", "Lakes"] else INK)
 	overlay.draw_set_transform(Vector2.ZERO)
-	for name: String in ["Western Market City", "Eastern Hunting Grounds", "Heaven's Terrace · heaven's"]:
+	for name: String in ["Western Market City", "Eastern Hunting Grounds", "Heavenly Dao Palace"]:
 		if not ground.sect.destinations.has(name):
 			continue
 		var at: Vector2 = transform * (Vector2(ground.sect.destinations[name]) * CELL / 16.0)

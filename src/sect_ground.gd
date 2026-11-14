@@ -2,6 +2,7 @@ extends RefCounted
 ## Dense, bounded overrides: no per-tile dictionaries in storage or drawing.
 const BOUNDS := Rect2i(-160, -210, 320, 620)
 var bounds := BOUNDS
+var storage_bounds := BOUNDS
 var source := "res://data/sects/first_sect.json"
 var no_trees := PackedByteArray()
 const SURFACES := ["", "grass", "earth", "paving", "stairs", "field", "spring", "cave", "garden", "bridge", "boundary"]
@@ -32,8 +33,8 @@ const Palette = preload("res://src/palette.gd")
 
 
 func index_at(at: Vector2i) -> int:
-	var p := at - center - bounds.position
-	return p.y * bounds.size.x + p.x if p.x >= 0 and p.y >= 0 and p.x < bounds.size.x and p.y < bounds.size.y else -1
+	var p := at - center - storage_bounds.position
+	return p.y * storage_bounds.size.x + p.x if p.x >= 0 and p.y >= 0 and p.x < storage_bounds.size.x and p.y < storage_bounds.size.y else -1
 
 
 func has_tile(at: Vector2i) -> bool:
@@ -63,7 +64,11 @@ func setup(is_dry: Callable) -> void:
 	center = Vector2i(int(data.center[0]), int(data.center[1]))
 	if data.has("bounds"):
 		bounds = Rect2i(int(data.bounds[0]), int(data.bounds[1]), int(data.bounds[2]), int(data.bounds[3]))
-	var count := bounds.size.x * bounds.size.y
+	storage_bounds = bounds
+	if data.has("storage_bounds"):
+		var r: Array = data.storage_bounds
+		storage_bounds = Rect2i(r[0], r[1], r[2], r[3])
+	var count := storage_bounds.size.x * storage_bounds.size.y
 	no_trees.resize(count)
 	surfaces.resize(count)
 	levels.resize(count)
@@ -78,10 +83,11 @@ func setup(is_dry: Callable) -> void:
 	edge.seed = int(data.get("seed", 718))
 	edge.frequency = 0.048
 	# Evaluate each tile against seven terrace envelopes, rather than expanding every tile.
-	for y in range(bounds.position.y, mini(160, bounds.end.y) if data.has("tiers") else bounds.position.y):
-		for x in range(bounds.position.x, bounds.end.x):
+	for y in range(storage_bounds.position.y, mini(int(data.get("tier_end", 160)), storage_bounds.end.y) if data.has("tiers") else bounds.position.y):
+		for x in range(storage_bounds.position.x, storage_bounds.end.x):
 			var at := center + Vector2i(x, y)
 			var i := index_at(at)
+			if data.get("preserve_water", false) and not dry.call(at): continue
 			var envelope := 0.0
 			for tier: Dictionary in data.tiers:
 				var yy := clampi(y, int(tier.y0), int(tier.y1))
@@ -95,7 +101,7 @@ func setup(is_dry: Callable) -> void:
 				if distance < 55.0:
 					var ravine := maxf(0.0, 0.15 - absf(edge.get_noise_2d(x * 2, y))) * minf(distance, 20.0) * 0.7
 					envelope = maxf(envelope, 0.5 + (level - distance * 0.36 - ravine + edge.get_noise_2d(x, y) * 2.0) * 0.02)
-			if y < 156:
+			if y < int(data.get("tier_end", 156)):
 				heights[i] = envelope
 			if levels[i] >= 0:
 				heights[i] = 0.5 + levels[i] * 0.02
@@ -118,7 +124,11 @@ func setup(is_dry: Callable) -> void:
 	for building: Dictionary in data.get("buildings", []) + data.get("village", []):
 		# Relocate whole footprints inland; never disguise river water with a cottage.
 		var r: Array = building.rect.duplicate()
-		if data.has("tiers") and int(r[1]) >= 156:
+		if data.get("preserve_water", false) and building.kind != "marker":
+			r = _dry_building(r, occupied)
+			building.rect = r
+			occupied.append(Rect2i(r[0], r[1], r[2], r[3]))
+		if data.has("tiers") and int(r[1]) >= int(data.get("relocate_from_y", 156)):
 			var attempts := 0
 			while not _dry_rect(r) or _overlaps(r, occupied):
 				r[0] = int(r[0]) - 1
@@ -140,7 +150,7 @@ func setup(is_dry: Callable) -> void:
 			for xx in range(int(r[0]) - 1, int(r[0]) + int(r[2]) + 1):
 				var tile := center + Vector2i(xx, yy)
 				if index_at(tile) >= 0 and levels[index_at(tile)] < 0: plinth[tile] = center + Vector2i(bx, by)
-		if by < 156:
+		if by < int(data.get("relocate_from_y", 156)):
 			_paint([mini(0, bx), by, absi(bx) + 1, 2], "paving")
 		else:
 			_paint([int(r[0]) - 2, by - 1, int(r[2]) + 4, 2], "earth")
@@ -183,6 +193,19 @@ func setup(is_dry: Callable) -> void:
 		far_colors[i] = col
 
 
+func _dry_building(r: Array, occupied: Array[Rect2i]) -> Array:
+	for radius in range(150):
+		for y in range(-radius, radius + 1):
+			for x in range(-radius, radius + 1):
+				if maxi(absi(x), absi(y)) != radius: continue
+				var candidate: Array = [int(r[0]) + x, int(r[1]) + y, r[2], r[3]]
+				var rect := Rect2i(candidate[0], candidate[1], candidate[2], candidate[3]).grow(2)
+				if not storage_bounds.encloses(rect) or _overlaps(candidate, occupied): continue
+				if _dry_rect([rect.position.x, rect.position.y, rect.size.x, rect.size.y]): return candidate
+	assert(false, "No dry Palace building footprint")
+	return r
+
+
 func _overlaps(r: Array, occupied: Array[Rect2i]) -> bool:
 	var rect := Rect2i(int(r[0]), int(r[1]), int(r[2]), int(r[3])).grow(1)
 	for other: Rect2i in occupied:
@@ -216,14 +239,14 @@ func _paint(rect: Array, surface: String) -> void:
 			var i := index_at(at)
 			if surface == "field" and (x < int(rect[0]) + absi(y % 5 - 2) or x >= int(rect[0]) + int(rect[2]) - absi(y % 7 - 3)):
 				continue
-			if i >= 0 and (data.has("tiers") and y < 156 or dry.call(at) or surface == "bridge"):
+			if i >= 0 and (data.has("tiers") and y < int(data.get("tier_end", 156)) and not data.get("preserve_water", false) or dry.call(at) or surface == "bridge"):
 				surfaces[i] = SURFACES.find(surface)
 
 
 func _stamp(at: Vector2i, value: int) -> void:
 	var i := index_at(at)
 	if i >= 0:
-		if not data.has("tiers") and not dry.call(at) and value != 136:
+		if (not data.has("tiers") or data.get("preserve_water", false)) and not dry.call(at) and value != 136:
 			return
 		if surfaces[i] == 0:
 			surfaces[i] = 9 if value == 136 else 1
@@ -248,7 +271,7 @@ func _building(b: Dictionary) -> void:
 	if kind == "marker":
 		return
 	if kind == "prop":
-		if data.has("tiers") and int(r[1]) >= 156:
+		if data.has("tiers") and int(r[1]) >= int(data.get("relocate_from_y", 156)):
 			standing.append({"origin": origin, "w": w, "h": h, "kind": "well", "variant": 0})
 			for y in h:
 				for x in w: standing_tiles[origin + Vector2i(x, y)] = true
@@ -314,10 +337,10 @@ func _building(b: Dictionary) -> void:
 
 ## Keep the original atlas indices for collision; only replace their presentation.
 func _register_props() -> void:
-	for y in bounds.size.y:
+	for y in storage_bounds.size.y:
 		var x := 0
-		while x < bounds.size.x:
-			var tile := center + bounds.position + Vector2i(x, y)
+		while x < storage_bounds.size.x:
+			var tile := center + storage_bounds.position + Vector2i(x, y)
 			var i := index_at(tile)
 			if standing_tiles.has(tile) or art[i] < 0:
 				x += 1
@@ -339,7 +362,7 @@ func _register_props() -> void:
 				continue
 			var run := 1
 			if kind in ["wall", "fence"]:
-				while x + run < bounds.size.x:
+				while x + run < storage_bounds.size.x:
 					var next := tile + Vector2i(run, 0)
 					if standing_tiles.has(next) or art[index_at(next)] != value: break
 					run += 1
@@ -465,16 +488,16 @@ func far_color(tile: Vector2i) -> Color:
 ## The built terraces, including their stairs and the lateral gate approaches.
 func _build_grounds() -> void:
 	grounds.clear()
-	if not data.has("tiers"): return
+	if not data.has("tiers") or data.get("preserve_water", false): return
 	var north := bounds.end.y
 	var south := bounds.position.y
 	for tier: Dictionary in data.tiers:
 		north = mini(north, int(tier.y0))
 		south = maxi(south, int(tier.y1))
 	var edges: Dictionary = {}
-	for y in bounds.size.y:
+	for y in storage_bounds.size.y:
 		for x in bounds.size.x:
-			var at := center + bounds.position + Vector2i(x, y)
+			var at := center + storage_bounds.position + Vector2i(x, y)
 			var i := index_at(at)
 			if at.y - center.y <= south and levels[i] >= 0:
 				grounds[at] = true
@@ -513,4 +536,4 @@ func _build_grounds() -> void:
 
 
 func inside_grounds(at: Vector2i) -> bool:
-	return grounds.has(at)
+	return Rect2i(center + bounds.position, bounds.size).has_point(at) if data.get("preserve_water", false) else grounds.has(at)

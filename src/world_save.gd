@@ -7,7 +7,7 @@ const CHILDREN := [
 	"wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
 ]
 const SKIP := [
-	"world", "sect", "grid", "catalogue", "config", "rules", "given_names",
+	"world", "sect", "grid", "palace", "contexts", "path_requests", "catalogue", "config", "rules", "given_names",
 	"goods", "species", "stock", "draw_order", "nearby_views", "view_cell", "routes",
 	"tree_view", "tree_view_key", "workplace_sprites", "person_art", "child_art", "atlas", "cliffs",
 	"heights", "food_places", "food_patches", "material_places", "material_patches", "square", "well",
@@ -125,6 +125,17 @@ static func read(map: Node2D, path: String = PATH) -> bool:
 		repair_wildlife(map.life.population.society, state.life.population.society, map.life.population.day)
 		repair_columns(map.life.population, defaults.population, map.life.population.size())
 		map.life.population.society.fifty.repair(state.life.population.society.get("fifty", {}))
+		for n in map.life.population.jobs.size():
+			if map.life.population.jobs[n] == "heaven's disciple":
+				map.life.population.jobs[n] = "Heavenly Dao Palace disciple"
+		for walker: Dictionary in map.life.people:
+			if walker.get("job", "") == "heaven's disciple": walker.job = "Heavenly Dao Palace disciple"
+		for event: Dictionary in map.life.population.society.chronicle:
+			event.text = str(event.text).replace("Heaven's Terrace", "Heavenly Dao Palace").replace("Heaven’s Terrace", "Heavenly Dao Palace")
+		map.life.palace.people.clear()
+		map.life.palace.routes.clear()
+		map.life.palace.sync(map.life.population)
+		map.life.contexts[0].people = map.life.people
 		map.life.economy.people = map.life.people
 		map.life.routes.clear()
 		map.life.nearby_views.clear()
