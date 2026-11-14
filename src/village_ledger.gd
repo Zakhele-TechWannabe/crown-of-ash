@@ -13,8 +13,8 @@ class LedgerButton extends Button:
 const Palette = preload("res://src/palette.gd")
 const UiTheme = preload("res://src/ui_theme.gd")
 const Law = preload("res://src/law.gd")
-const TABS := {"cultivators": "Cultivators", "tempering": "Paths & realms", "medicine": "Medicine & methods", "fifty": "The Fifty", "laws": "Laws & guardians", "people": "Everyone", "society": "Families & factions", "chronicle": "Chronicle", "overview": "Overview", "food": "Food", "materials": "Materials & work", "forest": "Forest & beasts", "bestiary": "Bestiary"}
-const GROUPS := {"Cultivation": ["cultivators", "tempering", "medicine"], "Heavenly Dao Palace": ["fifty", "laws"], "People": ["people", "society", "chronicle"], "The valley": ["overview", "food", "materials"], "The wild": ["forest", "bestiary"]}
+const TABS := {"cultivators": "Cultivators", "tempering": "Paths & realms", "medicine": "Medicine & methods", "fifty": "The Fifty", "laws": "Laws & guardians", "people": "Everyone", "society": "Families & factions", "chronicle": "Chronicle", "qi": "Qi", "overview": "Overview", "food": "Food", "materials": "Materials & work", "forest": "Forest & beasts", "bestiary": "Bestiary"}
+const GROUPS := {"Cultivation": ["cultivators", "tempering", "medicine"], "Heavenly Dao Palace": ["fifty", "laws"], "People": ["people", "society", "chronicle"], "The valley": ["qi", "overview", "food", "materials"], "The wild": ["forest", "bestiary"]}
 var sidebar: VBoxContainer
 var sections_button: MenuButton
 
@@ -442,6 +442,7 @@ func refresh_values() -> void:
 	var e: RefCounted = life.economy
 	_summary(data)
 	match current:
+		"qi": _qi_page(data)
 		"overview": _overview(data, e)
 		"food": _food(data, e)
 		"materials":
@@ -1435,3 +1436,18 @@ func _fifty(parent: Node) -> void:
 		small(parent, "Day %d · %s" % [event.day, event.text])
 		count += 1
 		if count >= 12: break
+
+func _qi_page(parent: Node) -> void:
+	label(parent, "Qi · the living world's spiritual resource", true)
+	label(parent, "Spiritual qi gathers in the land. Metal, Wood, Water, Fire and Earth are its five conserved elements. Purity measures refinable qi; yin and yang describe its character, independently of corruption.")
+	label(parent, "Density is concentration, not daily production. Each atlas cell holds 2,000 standard volumes. Finite underground veins feed their outlets; depleted backgrounds recover slowly, and excess qi disperses. The Palace's balanced Heavenly Origin has the finest purity and supply. A body must still learn to admit and refine what it can safely hold.")
+	var field: RefCounted = life.population.society.qi_field
+	field.seed(life.population.day)
+	for name: String in ["Sect", "Village", "Palace"]:
+		label(parent, name, true)
+		label(parent, field.describe(field.landmarks[name]))
+		var sample: Dictionary = field.sample(field.landmarks[name])
+		small(parent, "Purity %.1f%% · yin–yang %+.2f · corruption %.1f%% · %.1f QU stored in this atlas cell" % [sample.purity * 100.0,sample.polarity,sample.corruption * 100.0,sample.quantity / 1000.0])
+	label(parent, "Local supply and use", true)
+	var ledger: Dictionary = field.ledger
+	label(parent, "%s · world day %d · vein output %.1f QU · reserve regeneration %.1f QU · background recovery %.1f QU · withdrawals %.1f QU · dispersion %.1f QU" % [str(ledger.get("phase", "daily")).capitalize(),field.day,ledger.source_output / 1000.0,ledger.regeneration / 1000.0,ledger.background_recovery / 1000.0,ledger.withdrawals / 1000.0,ledger.dispersion / 1000.0])

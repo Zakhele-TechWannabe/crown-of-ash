@@ -50,6 +50,10 @@ var shot_path := ""
 var shot_frames := 0
 var frame := 0
 var taking_shot := false
+var qi_visible := false
+var qi_element := -1
+var qi_texture: Sprite2D
+var qi_texture_day := -1
 
 
 func _ready() -> void:
@@ -106,6 +110,21 @@ func _ready() -> void:
 		if index > 0:
 			_go_to(places.get_item_text(index), true))
 	overlay.add_child(places)
+	var qi_toggle := CheckButton.new()
+	qi_toggle.text = "Qi · log density"
+	qi_toggle.position = Vector2(18, 45)
+	qi_toggle.toggled.connect(func(value: bool) -> void:
+		qi_visible = value
+		qi_texture_day = -1
+		if qi_texture: qi_texture.visible = value)
+	overlay.add_child(qi_toggle)
+	var qi_filter := OptionButton.new()
+	qi_filter.position = Vector2(205, 45)
+	for element: String in ["All elements", "Metal", "Wood", "Water", "Fire", "Earth"]: qi_filter.add_item(element)
+	qi_filter.item_selected.connect(func(index: int) -> void:
+		qi_element = index - 1
+		qi_texture_day = -1)
+	overlay.add_child(qi_filter)
 	var reset := Button.new()
 	reset.text = "World [Home]"
 	reset.position = Vector2(550, 7)
@@ -268,6 +287,8 @@ func _clamp_camera() -> void:
 
 
 func _process(dt: float) -> void:
+	if qi_texture: qi_texture.visible = qi_visible and not on_ground
+	if qi_visible and not on_ground: _refresh_qi_texture()
 	quit_poll += dt
 	if quit_poll >= 1.0:
 		quit_poll = 0.0
@@ -358,6 +379,7 @@ func _info(cell: Vector2i, tile := Vector2i(-1, -1)) -> String:
 			nearest = feature
 	if not nearest.is_empty():
 		result += " · near the %s" % nearest.name
+	if qi_visible: result = life.population.society.qi_field.describe(Vector2(tile) if tile.x >= 0 else Vector2(cell) * 16.0)
 	return result
 
 
@@ -391,6 +413,7 @@ func _draw_overlay() -> void:
 		var at: Vector2 = transform * (Vector2(ground.sect.destinations[name]) * CELL / 16.0)
 		overlay.draw_circle(at, 5, Palette.RED.lightened(0.05))
 		overlay.draw_string(serif, at + Vector2(9, -8), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, INK)
+	if qi_visible: _draw_qi_graph(transform)
 	var sect_at: Vector2 = transform * (Vector2(ground.sect.center) * CELL / 16.0)
 	overlay.draw_circle(sect_at, 5, Palette.RED)
 	var sect_name: String = ground.sect.data.name
@@ -552,3 +575,44 @@ func poll_quit_request() -> bool:
 	if not FileAccess.file_exists(quit_request_path): return false
 	_quit_world()
 	return true
+
+func _refresh_qi_texture() -> void:
+	var field: RefCounted = life.population.society.qi_field
+	field.seed(life.population.day)
+	if qi_texture_day == field.day: return
+	if not qi_texture:
+		qi_texture = Sprite2D.new()
+		qi_texture.centered = false
+		qi_texture.scale = Vector2.ONE * CELL
+		qi_texture.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		add_child(qi_texture)
+	var image := Image.create(w, h, false, Image.FORMAT_RGBA8)
+	var accents := [Palette.STONE,Palette.GREEN,Palette.BLUE,Palette.RED,Palette.EARTH]
+	var accent: Color = Palette.JADE if qi_element < 0 else accents[qi_element]
+	for cell in w * h:
+		var density: float = field.density_at_cell(cell, qi_element)
+		var intensity := clampf(log(1.0 + density) / log(129.0), 0.0, 1.0)
+		image.set_pixel(cell % w, cell / w, Color(Palette.INK.lerp(accent, intensity).lerp(Palette.GOLD, intensity * intensity), 0.75))
+	qi_texture.texture = ImageTexture.create_from_image(image)
+	qi_texture.visible = qi_visible
+	qi_texture_day = field.day
+
+func _draw_qi_graph(transform: Transform2D) -> void:
+	var field: RefCounted = life.population.society.qi_field
+	var graph: Dictionary = field.graph()
+	for edge: Dictionary in graph.edges:
+		var outlet: Dictionary = graph.outlets[int(edge.to)]
+		var node: Dictionary = graph.nodes[int(edge.node)]
+		var start: Vector2 = node.position if int(edge.from) < 0 else field.position_of(graph.outlets[int(edge.from)].cell)
+		var a: Vector2 = transform * (start * CELL / 16.0)
+		var b: Vector2 = transform * (field.position_of(outlet.cell) * CELL / 16.0)
+		overlay.draw_line(a,b,Palette.JADE if int(edge.integrity) > 0 else Palette.RED,2.0,true)
+		overlay.draw_circle(b,3.0,Palette.GOLD if node.heavenly else Palette.JADE)
+	for node: Dictionary in graph.nodes:
+		var at: Vector2 = transform * (node.position * CELL / 16.0)
+		if node.heavenly:
+			overlay.draw_arc(at,8.0,0,TAU,24,Palette.GOLD,2.0,true)
+			overlay.draw_string(font,at + Vector2(10,Palette.TITLE),"Heavenly Origin",HORIZONTAL_ALIGNMENT_LEFT,-1,Palette.TITLE,Palette.GOLD)
+		elif int(node.reserve) < int(node.capacity) / 4:
+			overlay.draw_circle(at,4.0,Palette.RED)
+	overlay.draw_string(font,Vector2(18,105),"Qi · logarithmic density · jade: ley lines · gold: Heavenly Origin · red: depleted",HORIZONTAL_ALIGNMENT_LEFT,-1,Palette.SMALL,Palette.INK)

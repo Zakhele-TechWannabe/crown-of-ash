@@ -1,0 +1,252 @@
+{
+  "elements": [
+    "Metal",
+    "Wood",
+    "Water",
+    "Fire",
+    "Earth"
+  ],
+  "biomes": [
+    {
+      "name": "Deep sea",
+      "density": 0.5,
+      "weights": [
+        1,
+        1,
+        6,
+        1,
+        1
+      ],
+      "purity": 0.65,
+      "polarity": -0.2,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Shallow sea",
+      "density": 0.7,
+      "weights": [
+        1,
+        1,
+        6,
+        1,
+        1
+      ],
+      "purity": 0.65,
+      "polarity": -0.15,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Lake",
+      "density": 1.2,
+      "weights": [
+        1,
+        1,
+        6,
+        1,
+        1
+      ],
+      "purity": 0.75,
+      "polarity": -0.25,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Sand shore",
+      "density": 0.5,
+      "weights": [
+        1,
+        1,
+        3,
+        1,
+        4
+      ],
+      "purity": 0.65,
+      "polarity": 0,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Grassland",
+      "density": 1,
+      "weights": [
+        1,
+        3,
+        1,
+        1,
+        3
+      ],
+      "purity": 0.7,
+      "polarity": 0,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Forest",
+      "density": 1.3,
+      "weights": [
+        1,
+        6,
+        1,
+        1,
+        1
+      ],
+      "purity": 0.75,
+      "polarity": 0,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Spirit forest",
+      "density": 3,
+      "weights": [
+        1,
+        6,
+        1,
+        1,
+        1
+      ],
+      "purity": 0.9,
+      "polarity": -0.1,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Bamboo grove",
+      "density": 1.6,
+      "weights": [
+        1,
+        6,
+        1,
+        1,
+        1
+      ],
+      "purity": 0.8,
+      "polarity": 0,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Desert",
+      "density": 0.25,
+      "weights": [
+        1,
+        1,
+        1,
+        4,
+        4
+      ],
+      "purity": 0.6,
+      "polarity": 0.5,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Steppe",
+      "density": 0.7,
+      "weights": [
+        1,
+        3,
+        1,
+        1,
+        3
+      ],
+      "purity": 0.65,
+      "polarity": 0.1,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Marsh",
+      "density": 1.2,
+      "weights": [
+        1,
+        1,
+        6,
+        1,
+        1
+      ],
+      "purity": 0.7,
+      "polarity": -0.4,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Highlands",
+      "density": 1.2,
+      "weights": [
+        3,
+        1,
+        1,
+        1,
+        4
+      ],
+      "purity": 0.75,
+      "polarity": 0,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Bare rock",
+      "density": 0.6,
+      "weights": [
+        5,
+        1,
+        1,
+        1,
+        3
+      ],
+      "purity": 0.65,
+      "polarity": 0,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Snow peaks",
+      "density": 0.6,
+      "weights": [
+        3,
+        1,
+        5,
+        1,
+        1
+      ],
+      "purity": 0.75,
+      "polarity": -0.5,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Tundra",
+      "density": 0.4,
+      "weights": [
+        3,
+        1,
+        5,
+        1,
+        1
+      ],
+      "purity": 0.65,
+      "polarity": -0.4,
+      "stability": 1,
+      "corruption": 0
+    },
+    {
+      "name": "Frozen sea",
+      "density": 0.4,
+      "weights": [
+        3,
+        1,
+        5,
+        1,
+        1
+      ],
+      "purity": 0.7,
+      "polarity": -0.6,
+      "stability": 1,
+      "corruption": 0
+    }
+  ],
+  "river_water_weight": 5
+}

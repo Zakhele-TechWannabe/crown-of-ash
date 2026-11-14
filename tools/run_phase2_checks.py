@@ -19,7 +19,9 @@ for file in files:
         process = subprocess.Popen(['godot', '--headless', '--path', '.', '-s', file],
                                    env={**os.environ, 'XDG_DATA_HOME': '/tmp/crown-godot'},
                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-        deadline = threading.Timer(300, process.kill)
+        # The century-long kinship fixture now also replays 36,500 authoritative qi dates.
+        timeout = 900 if Path(file).name == "test_family.gd" else 300
+        deadline = threading.Timer(timeout, process.kill)
         deadline.start()
         for line in process.stdout:
             stream.write(line)

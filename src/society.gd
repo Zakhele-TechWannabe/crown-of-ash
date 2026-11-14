@@ -60,6 +60,7 @@ var memberships: Dictionary = {}
 var archive: RefCounted = null
 var mind: RefCounted = null
 var temper: RefCounted = null
+var qi_field: RefCounted
 var wildlife: RefCounted
 var nature: RefCounted = null
 var archived_year := -1
@@ -74,6 +75,7 @@ func _init(store: RefCounted) -> void:
 	var probe: RefCounted = Mind.new(self)
 	if probe.config.enabled: mind = probe
 	nature = Nature.new(self)
+	qi_field = preload("res://src/qi_field.gd").new()
 	wildlife = preload("res://src/wildlife.gd").new(self)
 	if temper: temper.wild.refresh_herd()
 	childhood = preload("res://src/childhood.gd").new(self)
@@ -530,6 +532,7 @@ var social_pending := false
 var faction_pending := false
 
 func begin_tick(on_day: int) -> void:
+	qi_field.advance(on_day)
 	var store: RefCounted = store_ref.get_ref()
 	if fifty: fifty.advance(on_day)
 	if law: law.advance(self, on_day)

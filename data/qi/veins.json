@@ -1,0 +1,70 @@
+{
+  "grades": [
+    {
+      "name": "Faint",
+      "output": 20,
+      "reserve": 7300,
+      "bonus": 1
+    },
+    {
+      "name": "Lesser",
+      "output": 80,
+      "reserve": 29200,
+      "bonus": 2
+    },
+    {
+      "name": "Established",
+      "output": 320,
+      "reserve": 116800,
+      "bonus": 4
+    },
+    {
+      "name": "Superior",
+      "output": 1280,
+      "reserve": 467200,
+      "bonus": 8
+    },
+    {
+      "name": "Great",
+      "output": 5120,
+      "reserve": 1868800,
+      "bonus": 16
+    },
+    {
+      "name": "Peerless",
+      "output": 20480,
+      "reserve": 7475200,
+      "bonus": 64
+    }
+  ],
+  "generated_count": 48,
+  "grade_weights": [
+    40,
+    30,
+    20,
+    8,
+    2,
+    0
+  ],
+  "placement_biomes": [
+    2,
+    6,
+    7,
+    10,
+    11,
+    12,
+    13
+  ],
+  "mountain_weight": 4,
+  "other_weight": 1,
+  "kernel_radius": 2,
+  "branch_offset_cells": [
+    2,
+    1
+  ],
+  "hunting_grades": [
+    1,
+    2
+  ],
+  "kernel_weight_scale": 1000000
+}

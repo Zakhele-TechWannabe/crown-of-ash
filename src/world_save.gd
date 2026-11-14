@@ -4,7 +4,7 @@ const PATH := "user://saves/world.save"
 const VERSION := 1
 const CHILDREN := [
 	"population", "society", "ties", "mind", "temper", "nature", "wild",
-	"wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
+	"qi_field", "wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
 ]
 const SKIP := [
 	"world", "sect", "grid", "palace", "contexts", "path_requests", "catalogue", "config", "rules", "given_names",
@@ -36,6 +36,7 @@ static func fields(object: Object) -> Array[String]:
 	return result
 
 static func capture(object: Object, ancestors: Array = []) -> Dictionary:
+	if object.get_script() and object.get_script().resource_path.ends_with("qi_field.gd"): return object.save_state()
 	var result := {}
 	var chain := ancestors + [object]
 	for key: String in fields(object):
@@ -55,6 +56,9 @@ static func capture(object: Object, ancestors: Array = []) -> Dictionary:
 	return result
 
 static func restore(object: Object, state: Dictionary, ancestors: Array = []) -> void:
+	if object.get_script() and object.get_script().resource_path.ends_with("qi_field.gd"):
+		object.load_state(state, int(state.get("day", 0)))
+		return
 	var chain := ancestors + [object]
 	for key: String in fields(object):
 		if not state.has(key): continue
@@ -77,6 +81,8 @@ static func repair_wildlife(society: RefCounted, saved: Dictionary, on_day: int)
 		society.wildlife.economy_ref = economy_ref
 		society.wildlife.seed(on_day)
 	society.wildlife.repair_names()
+	# The field starts at the saved date; historical cultivation remains abstract.
+	if not saved.has("qi_field"): society.qi_field.load_state({}, on_day)
 
 static func write(map: Node2D, path: String = PATH) -> Error:
 	if path == PATH and not enabled(): return ERR_UNAVAILABLE

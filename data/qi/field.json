@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "width": 360,
+  "height": 240,
+  "ground_scale": 16,
+  "volume": 2000,
+  "quanta_per_qu": 1000,
+  "quality_scale": 1000,
+  "recovery_numerator": 1,
+  "recovery_denominator": 100,
+  "dispersion_numerator": 1,
+  "dispersion_denominator": 200,
+  "emergency_multiplier": 2,
+  "heaven_site": "res://data/sites/heaven.json",
+  "sect_site": "res://data/sects/first_sect.json",
+  "spring_name": "Spirit Spring",
+  "hunting_site": "hunt",
+  "village_site": "kitchen",
+  "density_thresholds": [
+    0.25,
+    1,
+    2,
+    8,
+    32,
+    128
+  ],
+  "density_names": [
+    "Spiritually barren",
+    "Thin qi",
+    "Ordinary ambient qi",
+    "Qi-rich",
+    "Abundant spiritual qi",
+    "A spiritual sanctuary",
+    "Immortal-estate concentration"
+  ],
+  "site_manifest": "res://data/sites/index.json",
+  "hunting_destination": "Eastern Hunting Grounds",
+  "seed_salt": ":qi",
+  "heaven_grade": 6,
+  "sect_grade": 3
+}
