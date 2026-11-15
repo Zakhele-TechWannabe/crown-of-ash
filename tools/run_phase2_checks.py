@@ -13,7 +13,7 @@ out.mkdir(parents=True, exist_ok=True)
 results = []
 # Includes tools/test_session_compiler.gd, tools/test_cultivator_lab.gd
 # and tools/test_qi_condensation.gd;
-# keep all Godot invocations serial. The latter currently checks anatomy/state only.
+# keep all Godot invocations serial, including the full-world prepared cohort.
 files = sys.argv[1:] or sorted(glob.glob('tools/test_*.gd'))
 for file in files:
     log = out / (Path(file).name + '.log')
@@ -23,7 +23,7 @@ for file in files:
                                    env={**os.environ, 'XDG_DATA_HOME': '/tmp/crown-godot'},
                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
         # The century-long kinship fixture now also replays 36,500 authoritative qi dates.
-        timeout = 900 if Path(file).name in {"test_family.gd", "test_session_compiler.gd"} else 300
+        timeout = 900 if Path(file).name in {"test_family.gd", "test_fifty.gd", "test_session_compiler.gd", "bench_qi_live.gd", "test_qi_condensation.gd"} else 300
         deadline = threading.Timer(timeout, process.kill)
         deadline.start()
         for line in process.stdout:

@@ -324,9 +324,8 @@ func process_batch(max_people: int = 256) -> bool:
 	return false
 
 func tick_span(next_day: int) -> void:
-	tick_days = maxi(1, next_day - day)
-	tick_day(next_day)
-	tick_days = 1
+	# Revisit the same world boundaries as daily play, including practice policy.
+	while day < next_day: tick_day(day + 1)
 
 func tick_day(next_day: int) -> void:
 	if not begin_day(next_day): return

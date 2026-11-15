@@ -62,6 +62,7 @@ var memberships: Dictionary = {}
 var archive: RefCounted = null
 var mind: RefCounted = null
 var temper: RefCounted = null
+var qi_practice := preload("res://src/qi_practice.gd").new()
 var qi_field: RefCounted
 var wildlife: RefCounted
 var nature: RefCounted = null
@@ -123,7 +124,9 @@ func prepare_meridians(person: int, on_day: int) -> int:
 	return meridian_store.create(person, temper.grades.slice(person * 9, (person + 1) * 9), store.spirit_root[person], store.root_purity[person], key, on_day)
 
 func meridian_report(person: int) -> Dictionary:
-	return meridian_store.report(person)
+	var result: Dictionary = meridian_store.report(person)
+	if not result.is_empty(): result.merge(qi_practice.policy_report(person))
+	return result
 
 func note(person: int, kind: String, words: String, on_day: int = -1) -> void:
 	var store: RefCounted = store_ref.get_ref()
@@ -222,14 +225,15 @@ func root_label(person: int) -> String:
 	return "%s · purity %d" % [" / ".join(elements), store.root_purity[person]]
 
 func realm_label(person: int) -> String:
+	var row: int = meridian_store.slot[person]
+	if row >= 0 and realm[person] < 3:
+		return "Qi Condensation layer %d" % meridian_store.integers[row * meridian_store.PERSON_INTS + meridian_store.PersonInt.LAYER]
+	if realm[person] == 2: return "Qi Condensation layer 0"
 	if realm[person] >= 3: return str(rules.realms[realm[person]].name) + " · " + ["early", "middle", "late", "peak"][clampi(layer[person] - 1, 0, 3)]
 	return str(rules.realms[realm[person]].name) + (" %d" % layer[person] if layer[person] else "")
 
 func layer_cap(person: int) -> int:
-	var store: RefCounted = store_ref.get_ref()
-	if realm[person] >= 3: return 4
-	if realm[person] == 2 and store.root_grade[person] >= 4 and store.root_purity[person] >= 95 and technique[person] >= 2: return 13
-	return 9
+	return 4 if realm[person] >= 3 else 9
 
 func lifespan(person: int) -> int:
 	if realm[person] < 2 and temper: return temper.lifespan(person)
@@ -243,65 +247,9 @@ func heart_demons(person: int) -> float:
 		e = ties.next[e]
 	return minf(.7, total * .1)
 
-func qi_rate(person: int) -> float:
-	var store: RefCounted = store_ref.get_ref()
-	if not revealed[person] or root_count(person) == 0: return 0
-	var effective_count := maxi(1, root_count(person) - (1 if store.spirit_root[person] & 992 else 0))
-	var speed: float = rules.root_speed[mini(5, effective_count) - 1]
-	var purity: float = .5 + .7 * store.root_purity[person] / 100.0
-	var age_factor := maxf(.2, 1.0 - .02 * maxi(0, awakening_age[person] - 16))
-	var method: float = rules.techniques[technique[person]].rate
-	var teacher := 1.5 if master[person] >= 0 and realm[master[person]] >= 2 else 1.0
-	var companion := 1.1 if spouse[person] >= 0 and realm[spouse[person]] >= 2 else 1.0
-	var element: int = technique_element[person] if technique_element[person] >= 0 else rules.techniques[technique[person]].get("element", -1)
-	var match_rate := 1.0 if element < 0 or store.spirit_root[person] & (1 << element) else .6
-	var physique := 1.15 if store.constitution[person] in [3, 5] else 1.0
-	var modifier: float = store.modifiers.value(person, "cultivation", "qi_multiplier", store.day)
-	return physique * resources[person] * match_rate * modifier * 2.0 * speed * purity * float(rules.density[site[person]]) * method * store.comprehension[person] * age_factor * damage[person] * teacher * companion
-
-func qi_cost(person: int) -> float:
-	if realm[person] < 2: return 2000
-	if layer[person] >= layer_cap(person): return float(rules.realms[mini(5, realm[person] + 1)].cost)
-	if realm[person] == 2: return 2000 * pow(1.2, layer[person])
-	return float(rules.realms[realm[person]].cost) / 4.0
-
 func cultivate(person: int, days: int) -> void:
-	var store: RefCounted = store_ref.get_ref()
-	if store.age(person) < 12 or injury_until[person] > store.day: return
-	if not revealed[person]: return
-	qi[person] += qi_rate(person) * days
-	var cost := qi_cost(person)
-	if qi[person] < cost or realm[person] >= 5: return
-	# Qi gathers, but the realm above waits for a Perfected Body: all nine layers of tempering first.
-	if realm[person] < 2 and not body_ready(person):
-		qi[person] = minf(qi[person], cost)
-		return
-	store.mood[person] = maxf(0, store.mood[person] - .001 * days)
-	if bottleneck_since[person] == 0: bottleneck_since[person] = store.day
-	var major: bool = realm[person] >= 2 and layer[person] >= layer_cap(person)
-	if major and int(rules.techniques[technique[person]].cap) <= realm[person]: return
-	var base: float = float(rules.realms[realm[person] + 1].chance) if major else .8
-	# A tempered body steadies the first step onto the qi road; a Perfect one most of all.
-	if realm[person] < 2 and temper: base += temper.qi_bonus(person)
-	var chance := minf(.95, base + store.attributes[person * 8 + 6] / 200.0 - heart_demons(person) + (store.day - bottleneck_since[person]) / 36500.0)
-	if store.rng.randf() < chance:
-		qi[person] -= cost
-		if realm[person] < 2:
-			realm[person] = 2
-			layer[person] = 1
-		elif major:
-			realm[person] += 1
-			layer[person] = 1
-		else: layer[person] += 1
-		bottleneck_since[person] = 0
-		note(person, "breakthrough", "%s reached %s" % [store.names[person], realm_label(person)])
-		if realm[person] == 2 and layer[person] == 1:
-			for row: Dictionary in ties.rows(person): ties.event(row.person, person, "competition" if store.has_trait(row.person, "ambitious") else "first_cultivator", store.day)
-	else:
-		qi[person] *= store.rng.randf_range(.6, .9)
-		injury_until[person] = store.day + store.rng.randi_range(21, 365)
-		if store.rng.randf() < .05: damage[person] *= .95
-		note(person, "setback", "%s suffered a cultivation injury; recovery remains possible" % store.names[person])
+	# Compatibility entry point: daily physical practice is coordinated by begin_tick.
+	pass
 
 ## Qi Condensation needs a Perfected Body: every layer of Body Tempering forged.
 func body_ready(person: int) -> bool:
@@ -548,7 +496,7 @@ var faction_pending := false
 
 func begin_tick(on_day: int) -> void:
 	qi_field.heaven = fifty
-	qi_field.advance(on_day)
+	qi_practice.advance(self, on_day)
 	var store: RefCounted = store_ref.get_ref()
 	if fifty: fifty.advance(on_day)
 	if law: law.advance(self, on_day)

@@ -1,10 +1,13 @@
 extends SceneTree
-## Anatomy/state checks only. This does not assert Stage 3 session acceptance.
+## Anatomy contracts and prepared-cohort live integration checks.
 const Store = preload("res://src/meridian_store.gd")
 const Population = preload("res://src/population.gd")
 const Save = preload("res://src/world_save.gd")
 
 func _initialize() -> void:
+	call_deferred("run")
+
+func run() -> void:
 	var config := Store.definition()
 	var identifiers := {}
 	for node: Dictionary in config.nodes:
@@ -81,6 +84,7 @@ func _initialize() -> void:
 	assert(copy.society.meridian_store.save_state() == society.meridian_store.save_state(), "Society-side save recursion includes the packed store")
 	var legacy := Save.capture(population)
 	legacy.society.erase("meridian_store")
+	legacy.society.erase("qi_practice")
 	legacy.society.qi[person] = 99999
 	var old_copy := Population.new()
 	var defaults := Save.capture(old_copy)
@@ -91,5 +95,131 @@ func _initialize() -> void:
 	assert(old_copy.society.meridian_report(person).reserve == 0 and old_copy.society.meridian_report(person).layer == 0, "Legacy abstract qi creates no reserve or certification")
 	Save.repair_meridians(old_copy.society, legacy.society)
 	assert(old_copy.society.meridian_store.people.is_empty() and old_copy.society.meridian_store.slot == PackedInt32Array([-1]), "Loading legacy data into an already used world clears its previous anatomy")
-	print("PASS Qi Condensation anatomy/state groundwork; %d bytes for 250 bodies. Session/progression acceptance is still pending." % bulk.memory_bytes())
+	deviation_handling()
+	live_cohort()
+	await world_cohort()
+	print("PASS Qi Condensation anatomy, live cohort, deviation, save and world daily/jump; %d packed bytes for 250 bodies." % bulk.memory_bytes())
 	quit()
+
+func live_cohort() -> void:
+	var pop := Population.new()
+	var ids: Array[int] = preload("res://tools/qi_cohort_fixture.gd").prepare(pop)
+	pop.async_factions=false
+	var initial: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var s: RefCounted=pop.society
+	var absorbed := 0
+	for day in range(1,731):
+		pop.tick_day(day)
+		var total := 0
+		for p in ids: total+=s.qi_practice.body(s,p).absorbed
+		assert(total-absorbed==int(s.qi_field.ledger.withdrawals),"Net field withdrawals equal actual body intake")
+		absorbed=total
+	for i in ids.size():
+		var state: RefCounted=s.qi_practice.body(s,ids[i])
+		assert(s.qi_practice._compiler.residual(state)==0)
+		print("COHORT region=%s careful=%s achieved=%s residue=%d strain=%.6f" % [["Palace","Sect","Village"][i%3],i%2==0,s.meridian_report(ids[i]).achieved,state.residue,state.max_strain])
+	var greedy: RefCounted=s.qi_practice.body(s,ids[1])
+	var careful: RefCounted=s.qi_practice.body(s,ids[4])
+	assert(greedy.residue>careful.residue and greedy.max_strain>careful.max_strain,"Greedy sect practice accumulates more residue and strain")
+	var palace_day: int=s.meridian_report(ids[0]).achieved[0]
+	var village_day: int=s.meridian_report(ids[2]).achieved[0]
+	assert(palace_day>=0 and (village_day<0 or palace_day<village_day),"Palace physical source certifies retention sooner")
+	var saved: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var copy := Population.new()
+	Save.restore(copy,saved)
+	assert(Save.capture(copy)==saved,"Physical state survives cache-free round trip")
+	for p in ids: copy.society.qi_practice.body(copy.society,p)
+	assert(Save.capture(copy)==saved,"Rebuilding body objects grants no qi or evidence")
+	for day in range(731,738): pop.tick_day(day)
+	copy.tick_span(737)
+	difference(Save.capture(copy),Save.capture(pop))
+	assert(Save.capture(copy)==Save.capture(pop),"Live daily/jump and cold-cache continuation agree")
+
+	var sealed := Population.new()
+	Save.restore(sealed,initial)
+	sealed.society.qi_field.set_decree("Heavenly Origin",0)
+	for day in range(1,731): sealed.tick_day(day)
+	var sealed_day: int=sealed.society.meridian_report(ids[0]).achieved[0]
+	print("COHORT sealing palace layer1 open=%d sealed=%d" % [palace_day,sealed_day])
+	var open_work: int=s.qi_practice.body(s,ids[0]).work
+	var sealed_work: int=sealed.society.qi_practice.body(sealed.society,ids[0]).work
+	print("COHORT sealing Palace work open=%d sealed=%d" % [open_work,sealed_work])
+	assert(sealed_work<open_work,"Sealing slows Palace permanent development; existing ambient qi remains available")
+
+func world_cohort() -> void:
+	var world: Node2D=load("res://world_map.tscn").instantiate()
+	root.add_child(world)
+	world.set_process(false)
+	var life: Node2D=world.life
+	life.set_process(false)
+	life.paused=true
+	var pop: RefCounted=life.population
+	pop.async_factions=false
+	preload("res://tools/qi_cohort_fixture.gd").prepare(pop)
+	var initial_pop: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var initial_economy: Dictionary=bytes_to_var(var_to_bytes(Save.capture(life.economy)))
+	for day in range(1,731):
+		life.economy.advance_to(day*1440.0)
+		pop.tick_day(day)
+		if day%30==0: await process_frame
+	var daily_pop: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var daily_economy: Dictionary=bytes_to_var(var_to_bytes(Save.capture(life.economy)))
+	Save.restore(pop,initial_pop)
+	Save.restore(life.economy,initial_economy)
+	pop.society.law.rebuild_sight()
+	life.economy.coarse_population=true
+	while pop.day<730:
+		life._skip_week(730)
+		if pop.day%70==0: await process_frame
+	life.economy.coarse_population=false
+	difference(Save.capture(pop),daily_pop)
+	assert(Save.capture(pop)==daily_pop,"Full running world daily equals jump")
+	assert(Save.capture(life.economy)==daily_economy,"Daily and jump economy agree")
+	print("PASS full running world prepared-cohort daily/jump, two years")
+	world.queue_free()
+
+func difference(a: Variant, b: Variant, path: String = "state") -> bool:
+	if a==b: return false
+	if a is Dictionary and b is Dictionary:
+		for key: Variant in a:
+			if not b.has(key):
+				print("MISMATCH missing %s.%s" % [path,key])
+				return true
+			if difference(a[key],b[key],path+"."+str(key)): return true
+	elif a is Array and b is Array and a.size()==b.size():
+		for i in a.size():
+			if difference(a[i],b[i],path+"["+str(i)+"]"): return true
+	else: print("MISMATCH %s: %s / %s" % [path,str(a).left(160),str(b).left(160)])
+	return true
+
+func deviation_handling() -> void:
+	var pop := Population.new()
+	var ids: Array[int]=preload("res://tools/qi_cohort_fixture.gd").prepare(pop,2)
+	var s: RefCounted=pop.society
+	var p: int=ids[0]
+	s.prepare_meridians(p,0)
+	var state: RefCounted=s.qi_practice.body(s,p)
+	# Explicit fixture charge, accounted as prior intake; no production endowment.
+	state.absorbed=500000
+	state.residue=500000
+	state.nodes[4].residue_quanta=500000
+	var traveller: int=ids[1]
+	s.prepare_meridians(traveller,0)
+	var resting: RefCounted=s.qi_practice.body(s,traveller)
+	resting.absorbed=50000
+	resting.reserve=50000
+	resting.reserve_moments=[50000.0,0.0,50000.0,0.0]
+	resting.nodes[4].stored_quanta=50000
+	s.fifty.journeys[traveller]={"due":99999}
+	pop.tick_day(1)
+	resting=s.qi_practice.body(s,traveller)
+	assert(resting.absorbed==50000 and resting.work>0,"Travel allows funded internal upkeep without ambient intake")
+	assert(s.qi_practice._compiler.residual(resting)==0)
+	state=s.qi_practice.body(s,p)
+	assert(state.deaths>0 and not s.alive[p],"Compiler deviation uses Society death handling")
+	var injury := false
+	var death := false
+	for event: Dictionary in s.chronicle:
+		injury=injury or (event.person==p and "qi deviation injury" in event.text)
+		death=death or (event.person==p and "died by qi deviation" in event.text)
+	assert(injury and death and s.injury_until[p]>1,"Deviation injury and death are dated and chronicled")

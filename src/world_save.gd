@@ -4,7 +4,7 @@ const PATH := "user://saves/world.save"
 const VERSION := 1
 const CHILDREN := [
 	"population", "society", "ties", "mind", "temper", "nature", "wild",
-	"qi_field", "meridian_store", "wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
+	"qi_field", "qi_practice", "meridian_store", "wildlife", "archive", "economy", "law", "modifiers", "childhood", "fifty", "admission",
 ]
 const SKIP := [
 	"world", "sect", "grid", "palace", "contexts", "path_requests", "catalogue", "config", "rules", "given_names",
@@ -14,7 +14,7 @@ const SKIP := [
 	"shrine", "granary", "blocked", "residents", "walk_paths", "household_names", "household_names_day",
 	"household_names_size", "spatial_cells", "cached_domains", "cached_skills", "statistics_day", "statistics_entries", "learning_rates",
 	"level_rates", "practice_floors", "base_xp_hour", "green_thumb_mask", "trait_indices", "prepared_tasks", "compatibility_a",
-	"compatibility_b", "compatibility_weight",
+	"compatibility_b", "compatibility_weight", "decide_usec",
 ]
 
 static func enabled() -> bool:
@@ -36,6 +36,7 @@ static func fields(object: Object) -> Array[String]:
 	return result
 
 static func capture(object: Object, ancestors: Array = []) -> Dictionary:
+	if object.get_script() and object.get_script().resource_path.ends_with("qi_practice.gd"): return object.save_state()
 	if object.get_script() and object.get_script().resource_path.ends_with("meridian_store.gd"): return object.save_state()
 	if object.get_script() and object.get_script().resource_path.ends_with("qi_field.gd"): return object.save_state()
 	var result := {}
@@ -57,6 +58,9 @@ static func capture(object: Object, ancestors: Array = []) -> Dictionary:
 	return result
 
 static func restore(object: Object, state: Dictionary, ancestors: Array = []) -> void:
+	if object.get_script() and object.get_script().resource_path.ends_with("qi_practice.gd"):
+		object.load_state(state)
+		return
 	if object.get_script() and object.get_script().resource_path.ends_with("meridian_store.gd"):
 		object.load_state(state)
 		return
@@ -77,6 +81,16 @@ static func restore(object: Object, state: Dictionary, ancestors: Array = []) ->
 		elif not (key in CHILDREN and value == null):
 			object.set(key, state[key])
 
+	# Rebuild derived execution tables for recursive headless round trips too.
+	if object.get_script() and object.get_script().resource_path.ends_with("population.gd"):
+		object.prepared_tasks.clear()
+		for duties: Array in object.active_duties:
+			var tasks: Array = []
+			for duty: String in duties: tasks.append(object.catalogue.activities[duty])
+			object.prepared_tasks.append(tasks)
+	if object.get_script() and object.get_script().resource_path.ends_with("law.gd"):
+		object.rebuild_sight()
+
 ## Older saves seed wildlife at their date without replaying elapsed years or changing other state.
 static func repair_wildlife(society: RefCounted, saved: Dictionary, on_day: int) -> void:
 	repair_meridians(society, saved)
@@ -90,10 +104,18 @@ static func repair_wildlife(society: RefCounted, saved: Dictionary, on_day: int)
 	if not saved.has("qi_field"): society.qi_field.load_state({}, on_day)
 
 static func repair_meridians(society: RefCounted, saved: Dictionary) -> void:
+	if not saved.has("qi_practice"): society.qi_practice.load_state({})
 	# Missing legacy state must not retain rows from a previously loaded world.
 	if not saved.has("meridian_store"):
 		society.meridian_store = preload("res://src/meridian_store.gd").new()
 	while society.meridian_store.slot.size() < society.population.size(): society.meridian_store.add_person()
+	# Old abstract Qi Condensation layer/qi values are presentation only and
+	# cannot manufacture physical reserve or certifications during migration.
+	for p in society.population.size():
+		if society.realm[p]!=2: continue
+		var report: Dictionary=society.meridian_store.report(p)
+		society.layer[p]=int(report.get("layer",0))
+		society.qi[p]=float(report.get("reserve",0))/1000.0
 
 static func write(map: Node2D, path: String = PATH) -> Error:
 	if path == PATH and not enabled(): return ERR_UNAVAILABLE
@@ -184,7 +206,7 @@ static func read(map: Node2D, path: String = PATH) -> bool:
 		map.life.population.household_names_day = -1
 		map.life.population.statistics_day = -1
 		map.life.population.prepared_tasks.clear()
-		for duties: Array in map.life.population.schedules:
+		for duties: Array in map.life.population.active_duties:
 			var tasks: Array = []
 			for duty: String in duties: tasks.append(map.life.population.catalogue.activities[duty])
 			map.life.population.prepared_tasks.append(tasks)

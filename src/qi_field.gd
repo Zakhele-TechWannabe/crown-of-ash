@@ -888,3 +888,30 @@ func world_totals() -> Dictionary:
 	for node: Dictionary in _nodes:
 		for e in 5: elements[e] += int(node.reserve_elements[e])
 	return {"land":_field_total,"veins":_reserve_total,"total":_field_total + _reserve_total,"elements":elements}
+
+## Return unused ordinary allocations at their reservation position and quality.
+## The receipt is consumed once; net withdrawals remain the actual body intake.
+func settle_reservation(id: String, position: Vector2, used: int, quality: Dictionary) -> void:
+	var receipt: PackedInt64Array = allocations.get(id, PackedInt64Array([0,0,0,0,0]))
+	var total := 0
+	for part in receipt: total += part
+	assert(used >= 0 and used <= total)
+	var consumed := PackedInt64Array([0,0,0,0,0])
+	var left := used
+	if total>0:
+		for e in 5:
+			consumed[e]=proportional(receipt[e],used,total)[0]
+			left-=consumed[e]
+		for e in 5:
+			if left>0 and consumed[e]<receipt[e]:
+				consumed[e]+=1
+				left-=1
+	var moments := PackedInt64Array()
+	for key: String in ["purity","polarity","stability","corruption"]: moments.append(roundi(float(quality[key])*float(_config.quality_scale)))
+	for e in 5:
+		var returned := receipt[e]-consumed[e]
+		_add(cell_at(position),e,returned,moments)
+		ledger.withdrawals -= returned
+		ledger.withdrawal_elements[e] -= returned
+	allocations.erase(id)
+	_close_ledger()

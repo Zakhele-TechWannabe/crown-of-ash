@@ -104,6 +104,7 @@ func nearest(at: Vector2i) -> Vector2i:
 	return at
 
 func walk_path(a: Vector2i, b: Vector2i) -> Array:
+	if not grid.is_in_boundsv(a) or not grid.is_in_boundsv(b): return []
 	var key := Vector4i(a.x, a.y, b.x, b.y)
 	if not walk_paths.has(key): walk_paths[key] = grid.get_id_path(a, b)
 	return walk_paths[key]

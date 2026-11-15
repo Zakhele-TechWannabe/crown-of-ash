@@ -1,0 +1,5 @@
+{
+  "default_route": "A",
+  "palace_route": "B",
+  "names": {"A": "Still Basin", "B": "Returning River"}
+}

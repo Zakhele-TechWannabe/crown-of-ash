@@ -252,14 +252,16 @@ func _body(page: VBoxContainer) -> void:
 	if society.revealed[person] or society.realm[person] > 0:
 		text(info, "Cultivation", true)
 		text(info, "%s. Spirit root: %s." % [society.realm_label(person), society.root_label(person)])
-		text(info, "Practises %s; may live to about %d." % [society.rules.techniques[society.technique[person]].name, society.lifespan(person)])
-		var qi := ProgressBar.new()
-		qi.max_value = maxf(0.001, society.qi_cost(person))
-		qi.value = society.qi[person]
-		UiTheme.thin(qi, Palette.JADE, 8)
-		qi.tooltip_text = "%.1f of %.1f qi toward the next step" % [society.qi[person], society.qi_cost(person)]
-		info.add_child(qi)
-		small(info, qi.tooltip_text)
+		var physical: Dictionary = society.meridian_report(person)
+		text(info, "Practises %s; may live to about %d." % [physical.get("route",society.rules.techniques[society.technique[person]].name), society.lifespan(person)])
+		if not physical.is_empty():
+			var qi := ProgressBar.new()
+			qi.max_value = maxf(1,physical.capacity/1000.0)
+			qi.value = physical.reserve/1000.0
+			UiTheme.thin(qi, Palette.JADE, 8)
+			qi.tooltip_text = "%.1f / %.1f QU stored; %.1f QU residue" % [physical.reserve/1000.0,physical.capacity/1000.0,physical.residue/1000.0]
+			info.add_child(qi)
+			small(info, qi.tooltip_text)
 	text(page, "Body and gifts", true)
 	var grid := GridContainer.new()
 	grid.columns = 2

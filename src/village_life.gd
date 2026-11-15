@@ -756,7 +756,7 @@ func start_skip(years: int) -> void:
 	skip_start = population.day
 	skip_target = skip_start + years * 365
 	skip_was_paused = paused
-	economy.coarse_population = true
+	economy.coarse_population = false
 
 func cancel_skip() -> void:
 	if skip_next_day > 0:
@@ -772,16 +772,21 @@ func cancel_skip() -> void:
 
 func _skip_week(target_day: int) -> void:
 	var next_day := mini(target_day, population.day + 7)
-	economy.advance_to(next_day * 1440.0)
-	population.tick_span(next_day)
-	minutes = next_day * 1440.0
+	var was_coarse: bool = economy.coarse_population
+	economy.coarse_population = false
+	while population.day < next_day:
+		var dated_day: int = population.day + 1
+		economy.advance_to(dated_day * 1440.0)
+		population.tick_day(dated_day)
+		minutes = dated_day * 1440.0
+	economy.coarse_population = was_coarse
 
 func _process_skip() -> void:
 	population.async_factions = population.size() > 1000
 	var began := Time.get_ticks_usec()
 	while skip_target > 0 and Time.get_ticks_usec() - began < 2000:
 		if population.pending_day < 0:
-			if skip_next_day == 0: skip_next_day = mini(skip_target, population.day + 7)
+			if skip_next_day == 0: skip_next_day = mini(skip_target, population.day + 1)
 			var target_minutes := skip_next_day * 1440.0
 			if economy.next_event <= target_minutes:
 				economy.advance_to(economy.next_event)
@@ -805,7 +810,7 @@ func _headless_sim() -> void:
 		if arg.begins_with("--skip-years="):
 			years = maxi(1, int(arg.trim_prefix("--skip-years=")))
 			coarse = true
-	economy.coarse_population = coarse
+	economy.coarse_population = false
 	print("SKILLS Start: %s" % population.tier_distribution())
 	for y in years:
 		var target_day := (y + 1) * 365

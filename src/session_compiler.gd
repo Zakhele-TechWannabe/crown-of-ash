@@ -1,5 +1,5 @@
 extends RefCounted
-## Experimental lumped periodic-network executor. Not connected to Society.
+## Lumped periodic-network executor, also used by live Society practice.
 ## Energy boundaries use integer quanta; the periodic flow solve uses floats.
 const Anatomy = preload("res://src/meridians.gd")
 const Reference = preload("res://src/circulation.gd")
@@ -99,6 +99,7 @@ class EdgeDelta extends RefCounted:
 	var scar: float
 
 class DayMemo extends RefCounted:
+	var execution_evidence: Dictionary = {}
 	var network: Network
 	var signature: Array
 	var age := 0
@@ -194,6 +195,7 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		before_edges.append([edge.daily_flow,edge.peak_rate,edge.practice,edge.work,edge.adaptation,edge.strain,edge.integrity,edge.scar])
 
 	solve_day(state,effective,budget)
+	memo.execution_evidence = state.milestones.get("daily_execution",{}).duplicate(true)
 
 	if state.injuries>0 and node.integrity!=before_node[1]: invalidate(state)
 	memo.d_absorbed = state.absorbed-before[0]
@@ -255,6 +257,7 @@ func set_horizon(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 			memo.horizon = mini(memo.horizon,maxi(0,floori((next-adaptation)/change.adaptation)))
 
 func replay_day(state: Anatomy.Cultivator, memo: DayMemo) -> void:
+	state.milestones["daily_execution"] = memo.execution_evidence.duplicate(true)
 	state.day += 1
 	state.absorbed += memo.d_absorbed
 	state.circulated += memo.d_circulated
@@ -320,6 +323,7 @@ func replay_day(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	state.day += 1
 	var opening_refined := state.refined
+	state.milestones["daily_execution"] = {"fill":0,"draw":0,"pressure":0.0,"purity":0.0,"instability":1.0}
 	state.pending_work = 0
 	state.strain = 0
 	var remaining_budget := budget
@@ -364,6 +368,11 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var config := Anatomy.definition()
 	# The manual pays daily integration from its actual refined reserve. Stored
 	# qi shares the dantian's volume and backpressure with incoming packets.
+	var evidence: Dictionary = state.milestones.daily_execution
+	evidence.draw = floori(state.reserve*float(config.daily_reserve_integration_fraction))
+	evidence.pressure = state.reserve/1000.0/state.nodes[4].volume
+	evidence.purity = state.reserve_moments[0]/maxi(1,state.reserve)
+	evidence.instability = 1-state.reserve_moments[2]/maxi(1,state.reserve)
 	var assigned_from_reserve := floori(state.reserve*float(config.daily_reserve_integration_fraction))
 	var reserve_purity: float = state.reserve_moments[0]/maxi(1,int(state.reserve))
 	for q in 4: state.reserve_moments[q] *= float(state.reserve-assigned_from_reserve)/maxi(1,int(state.reserve))
@@ -453,7 +462,8 @@ func advance(state: Anatomy.Cultivator, net: Network, sample: Dictionary, until:
 func residual(state: Anatomy.Cultivator) -> int:
 	return accounting.residual_model(state)
 
-## Detached 16-node body adapter; Stage 3b will own packed-column writeback.
+## Build a 16-node body from its packed foundation. The live coordinator owns
+## execution persistence and packed inspection writeback.
 ## Internal ordering keeps the lower dantian in the reference accounting slot.
 func production_body(store: RefCounted, row: int) -> Anatomy.Cultivator:
 	var state := Anatomy.Cultivator.new()
@@ -520,6 +530,13 @@ func production_program(route: String) -> Dictionary:
 			if op.operation=="Guide" and op.targets==[2,5]: copy.targets=[2,4]
 		if op.operation=="Guide" and op.targets==[7]: copy.targets=[8]
 		if op.operation=="Ground": continue # Production graph has no external earth sink edge.
+		if op.operation=="Integrate":
+			# Actual lower-dantian return path, before remaining mobile qi settles.
+			for return_edge in [5,6,7]:
+				var guide: Dictionary = accounting.vocabulary.Guide.duplicate(true)
+				guide.operation = "Guide"
+				guide.targets = [return_edge]
+				operations.append(guide)
 		operations.append(copy)
 	program.operations = operations
 	return program
@@ -735,6 +752,7 @@ func settle_lumped(state: Anatomy.Cultivator, quantity: int, purity: float, stab
 	var remaining := quantity-opening_budget
 	var stored := mini(remaining,maxi(0,state.capacity-state.reserve-state.residue))
 	state.reserve += stored
+	if state.milestones.has("daily_execution"): state.milestones.daily_execution.fill += stored
 	state.reserve_moments[0] += stored*purity
 	state.reserve_moments[2] += stored*stability
 	state.reserve_moments[3] += stored*corruption
