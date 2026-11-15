@@ -1433,10 +1433,23 @@ Expand to the bounded human graph, implement storage, integration, nine mileston
 
 Connect the body diagram to real execution reports.
 
-Implementation status: the sixteen-node definition and packed anatomy/save
-groundwork are present (`docs/qi_condensation.md`). Stage 3 is not complete:
-the production session compiler, live practice and certifications still need
-implementation and acceptance testing. The legacy cultivation ladder remains.
+Implementation status: Stage 3c is implemented: layers 4–9 have execution-evidence
+checks and dated trials; the practice coordinator appends distribution and split
+drills; paid release assays and the plain-text person-book evidence readout are
+present. Stage 3 acceptance remains incomplete: the ten-year Perfect Palace
+fixture does not reach layers 2–3 (or their successors), and performance and
+verification findings are recorded in `docs/qi_condensation.md`. The legacy
+random ladder is removed. No certification law was relaxed to claim reachability.
+
+The live `Release` operation is available from certified layer 1. Its bounded
+transient sends a paid 0.10-QU mobile pulse along the real lower-to-palm route,
+with normal capacity/conductance/headroom limits. At one tile, purity squared, stability, execution quality and the section-11
+coherence attenuation reduce controlled delivery. Release uses the current
+shared operation mastery until detailed per-operation skills are integrated. All spent pulse energy is recorded
+as dissipated, including delivery and the remaining diffuse pulse; it is not
+usable qi returned to a field cell. This closes the body energy ledger without
+inventing recoverable ambient emission. Layer 8 measures ten reliable tests,
+not first access to release.
 
 ### Stage 4 — Physical martial techniques
 

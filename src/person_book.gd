@@ -251,17 +251,11 @@ func _body(page: VBoxContainer) -> void:
 		row.add_child(info)
 	if society.revealed[person] or society.realm[person] > 0:
 		text(info, "Cultivation", true)
-		text(info, "%s. Spirit root: %s." % [society.realm_label(person), society.root_label(person)])
+		text(info, "Spirit root: %s." % society.root_label(person))
 		var physical: Dictionary = society.meridian_report(person)
 		text(info, "Practises %s; may live to about %d." % [physical.get("route",society.rules.techniques[society.technique[person]].name), society.lifespan(person)])
 		if not physical.is_empty():
-			var qi := ProgressBar.new()
-			qi.max_value = maxf(1,physical.capacity/1000.0)
-			qi.value = physical.reserve/1000.0
-			UiTheme.thin(qi, Palette.JADE, 8)
-			qi.tooltip_text = "%.1f / %.1f QU stored; %.1f QU residue" % [physical.reserve/1000.0,physical.capacity/1000.0,physical.residue/1000.0]
-			info.add_child(qi)
-			small(info, qi.tooltip_text)
+			text(info, cultivation_readout(physical))
 	text(page, "Body and gifts", true)
 	var grid := GridContainer.new()
 	grid.columns = 2
@@ -498,3 +492,13 @@ func _skills(page: VBoxContainer) -> void:
 			leaf.set_text(0, "%s · unlocks at %d" % [spec.name, spec.unlock_level])
 			leaf.set_custom_color(0, Palette.INK_SOFT)
 			leaf.set_tooltip_text(0, str(spec.condition) if spec.locked else str(spec.attribute_requirements))
+
+static func cultivation_readout(physical: Dictionary) -> String:
+	var layer: int=physical.layer
+	var day: int=physical.achieved[layer-1] if layer>0 else -1
+	var lines: Array[String]=["Qi Condensation layer %d%s" % [layer," · day %d" % day if day>=0 else " · uncertified"],"Purity %.2f · reserve %.1f/%.1f QU" % [physical.purity,physical.reserve/1000.0,physical.capacity/1000.0],"Residue %.1f%% · strain %.3f" % [100.0*physical.residue/maxi(1,physical.capacity),physical.strain],"Danger sense: %s" % physical.get("danger_sense","quiet")]
+	if layer<9:
+		lines.append("Toward layer %d" % (layer+1))
+		for evidence: String in physical.get("next_evidence",[]):
+			lines.append("- "+evidence)
+	return "\n".join(lines)

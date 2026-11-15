@@ -1,5 +1,11 @@
 # Qi Condensation implementation status
 
+Stage 3c evaluators, live drills, release assays and person-book readout are
+implemented. **Stage 3 acceptance remains incomplete**: the ten-year Perfect
+Palace fixture fails to reach layers 2–3; successors are blocked upstream.
+See the Stage 3c section for measured reachability, verification and timings.
+Earlier status sections below are historical.
+
 Stage 3b functional integration and its requested checks **PASS**. Live practice
 is wired and the random ladder is removed. Measurements and material limitations
 appear in the Stage 3b section below. The earlier
@@ -831,3 +837,237 @@ integration is excluded from that snapshot. Changed by this task:
 `src/qi_practice.gd`, `src/session_compiler.gd`, `tools/qi_cohort_fixture.gd`,
 `tools/test_qi_condensation.gd`, `tools/bench_qi_live.gd`, and both qi/laws documents.
 Unfinished: <=5 ms/day performance and full verification with the concurrent UI.
+
+## Stage 3c — implementation in progress (15 November 2026)
+
+Certifications 4–9 now have recorded-execution evaluators in
+`src/qi_certification.gd`; dates continue to use the meridian store's nine
+achievement columns. Live drills append limb routes and concurrent split work
+on keyed weekly dates after layer 3. Mixed-source declarations copy the actual
+local elemental sample. The compiler measures simultaneous committed transfers,
+not the sum of serial edge flows. Trials consume their executed practice date;
+failed trials are recorded and add 0.005 strain without random rolls.
+
+Reachability concern under investigation: Perfect storage has safe pressure
+exactly 1.5, so a strict 1.5-pressure fill/draw test may remain unattainable under
+ordinary admission/backpressure and paid daily draws. No threshold, anatomy seed,
+conductivity or growth law is being adjusted to hide this.
+
+Release is a paid 100-integer-quantum pulse through the actual lower-to-palm
+route, available from certified layer 1; autonomous reliability drills start at
+layer 7. The bounded transient uses existing pressure, conductance, capacity and
+integer packet transfer. Controlled delivery uses purity squared, stability, execution quality and
+`exp(-1 / (1 + 4 × release_mastery))` attenuation at one tile. The assay uses
+the existing shared operation mastery (0.75) for Release mastery; it does not
+grant a separate skill level. All spent qi enters `dissipated`, including the
+controlled target delivery: a short projected pulse disperses as unusable energy,
+not recoverable ambient field inventory. Leftover pulse energy also dissipates;
+no field deposit or extra ambient emission is claimed. Layer 8 requires ten
+successful recorded tests and no overpressure. This is a cultivation assay, not
+a new combat engine.
+
+First ten-year fixture result (two Perfect Palace people, ordinary coordinator,
+initial A/B manuals): layer 1 on days **147 / 135**; layers 2–9 unachieved.
+Maximum qualifying core rate **0 QU/hour** (at least one required return edge
+never transfers), maximum recorded fill pressure **0.159544**, ending capacities
+**1355.2 / 1177.5 QU**, reserve **7.4 / 6.4 QU**, purity **1.00**. Thus capacity
+alone reaches realm-completion size but does not buy the missing circulation
+capability. This does **not** establish plausible layer-2/3 reachability; it
+records their physical bottleneck rather than tuning seed laws or granting dates.
+
+
+Pre-change benchmark from a separate immutable copy of the initial workspace,
+using independent saved initial worlds and `tools/bench_qi_live.gd`:
+
+| Mode | Before, ms/day | After, ms/day | Difference |
+|---|---:|---:|---:|
+| Baseline | 30.107 | pending | pending |
+| Unaware control | 49.583 | pending | pending |
+| Normal cohort | 50.623 | pending | pending |
+| Sealed cohort | 90.206 | pending | pending |
+
+Raw baseline output: `/tmp/qi_3c_before_clean.txt` (to be copied into `out/`).
+The full phase-2 suite is running serially. No Godot processes overlap.
+
+“Unreached” is a result for this seeded fixture, not a proof that every legal
+manual/anatomy fails. All-Perfect is the highest ordinary foundation grade;
+there is no out-of-range grade, free reserve, widened edge or lowered threshold.
+The two people retain the ordinary autonomous policy after their initial A/B
+assignments. The current manuals and pressure/headroom law fail the return
+circuit gate before any later certification can be attempted naturally. The
+new evaluator boundary tests and explicitly charged release assay must not be
+read as natural progression results. Layer 7 also retains the declared Split
+control demand: the current shared control/understanding/mastery coefficients
+produce error **0.1325**, above its **0.08** certification ceiling. Neither that
+coefficient nor the threshold has been changed.
+
+The release assay follows section 11's full projection loss, including stability
+and coherence attenuation. Its bounded transient also executes section 10's
+pulse corruption/instability/pressure exposure and commits resulting health;
+ordinary safety stops at excessive strain. The daily kernel has already charged
+24 hours of background residue exposure, so the extra transient adds pulse
+exposure without charging those background hours twice. The actual route's
+transferred integer quantities are recorded separately from four-hour circuit
+flow, so a release cannot inflate sustained-output evidence.
+
+The charged release boundary assay is **not a reachability success**. From a
+full, pure, stable Perfect dantian it spends exactly 100 quanta; the five route
+edges transfer **100 / 87 / 76 / 68 / 62** quanta during the bounded 100-minute
+assay. Projection at one tile leaves **46 controlled quanta (46%)**, below the
+70% certification requirement. With purity 0.50 it delivers **11** controlled
+quanta. Both have zero overpressure and zero integer residual. This separately
+exposes a layer-8 transport/coherence bottleneck for that seeded body, in
+addition to the upstream layer-2 block. The protocol has not been lengthened,
+and no conductance, mastery or certification threshold was tuned to turn this
+failed assay into a pass.
+
+
+### Stage 3c reachability, final functional fixture
+
+The expanded Qi test passes, including the running-world two-year daily/jump
+comparison, cold-cache continuation, save/load, failed-trial determinism and
+purity/residue walls. Normal/sealed worlds retain 0 careful / 5 greedy sect
+deaths and all 17 Palace and 16 village survivors. Raw functional evidence:
+`out/qi_3c_checks.txt`. Run only the ten-year fixture with
+`godot --headless --path . -s tools/test_qi_condensation.gd -- --long-only`.
+
+| Layer | First fixture day reached, or recorded bottleneck by day 3650 |
+|---|---|
+| 1 | **135** (the other person: 147) |
+| 2 | Unreached: qualifying core **0/30 QU/hour**; lower→abdominal, lumbar→chest and chest→breath each record zero transfer throughout the fixture (section 6 pressure/gate law, section 9 circuit test). |
+| 3 | Unreached: upstream layer 2; peak pre-draw retained pressure **0.159544/1.5**. The fixed 50% daily reserve integration and existing inlet/manual throughput do not fill the safe reservoir to the condensation wall. |
+| 4 | Unreached: layers 2–3 block entry; live terminal drills start at layer 3, so no natural four-terminal test records exist. |
+| 5 | Unreached: upstream block; recorded core **0/90 QU/hour**, despite capacities eventually exceeding 400 QU. |
+| 6 | Unreached: upstream layer 5; no layer-6 date is inferred from pure reserve or processing totals alone. |
+| 7 | Unreached: upstream block; the current Split instruction's error **0.1325** also exceeds **0.08** (shared mastery/control plus the declared coordination demand). |
+| 8 | Unreached: upstream block; separately charged full/pure assay delivers **46/70 required controlled quanta** at one tile under actual transport and section-11 coherence loss. |
+| 9 | Unreached: upstream functions; core **0/150 QU/hour**, **0/90** integrated days. Capacity alone is sufficient (**1355.2 / 1177.5 QU** at ten years). |
+
+Peak inlet delivery is 9.606 QU per four-hour session. These are measured limits
+of the two seeded bodies and present manuals, not an exhaustive impossibility
+proof across all legal programs. Layers 2–3 have **not** been established within
+a plausible span, even in this favourable ten-year fixture. Natural progression
+acceptance therefore remains **FAIL**; no laws or seed coefficients were tuned.
+
+The person book uses its existing text styles, with no new screen or diagram.
+An actual fixture readout is:
+
+```text
+Qi Condensation layer 1 · day 135
+Purity 1.00 · reserve 6.4/1177.5 QU
+Residue 0.0% · strain 0.000
+Danger sense: quiet
+Toward layer 2
+- [missing] circuit sustains 30 QU/hour: 0.0/30.0 days
+- [met] no injury through the span: clean
+```
+
+
+The first full serial phase-2 invocation completed **39/39 PASS**. After the
+additional active-coordinator replay and release-strain cache bookkeeping,
+Qi Condensation plus both affected compiler suites are being rerun. The focused
+assay already passes: a completely unstable pulse produces **0** controlled
+quanta, stops safely at **0.350222** non-dantian strain, conserves all integer
+energy, and recovers through exactly **two** invalid practice days. Its saved
+limb-strain marker refreshes the memo as those nodes heal; certification also
+checks the recorded pre-recovery stable-execution flag. This prevents an old
+recovery-day journal from being replayed after the arm is healthy. Ordinary
+bodies incur no additional node scan for this bookkeeping.
+
+Layer 9 checks current integrated fill/draw, filtering and simultaneous branch
+execution alongside the recorded earlier proofs and sound routes/storage.
+The existing 1.5-pressure certification remains valid as capacity grows while
+safe pressure and structure remain sound; spending reserve preserves that
+capability, as section 9 requires. The latest release assay must still be a
+success for integrated-day credit. No certification thresholds changed.
+
+
+Final affected reruns: **Qi Condensation, session compiler, and session sources
+all PASS** (`out/qi_3c_affected_checks.json`). The expanded Qi test additionally
+runs a separate, explicitly injected layer-3/layer-7 coordinator fixture in the
+actual world: **10 drill-days**, **five release records with at least 400 quanta
+spent**, and exact population/economy daily-versus-jump equality after restoring
+the day-18 checkpoint through day 35. Prior opening work and reserve charges
+are included in its intake ledger. These injected flags and charges are solely
+integration-test witnesses, excluded from the natural reachability table.
+
+The final benchmark is now running serially. Its ordinary 50-person cohort
+remains at layers 0–1; its regression result cannot establish a performance
+bound for a naturally mature layer-3+ population, which the fixture has not
+produced. No absolute two-/five-millisecond live-performance claim is made.
+
+
+The first unpinned after-run measured baseline/unaware/normal/sealed at
+**35.607 / 58.014 / 58.671 / 97.553 ms/day**, versus
+**30.107 / 49.583 / 50.623 / 90.206** initially. It **fails** the raw +1 ms/day
+comparison. Even the unchanged unprepared baseline slowed by 5.500 ms/day;
+field and policy timings also shifted, so that separated pair is not a clean
+estimate of patch cost. Raw output is `out/qi_3c_bench_uncontrolled.txt`.
+A fresh, consecutive before/after pair will pin both processes to CPU 15;
+all world, foundation, source and numerical parameters remain unchanged.
+
+Layer 5 now records complete one-hour circuit windows from actual committed
+phase transfers, retaining the best single complete circuit instead of adding
+branches or combining incompatible hours. The adversarial window checks pass:
+a genuine qualifying hour counts despite a low daily mean; transfers on
+different hours cannot be combined; partial hours fail; the alternative complete
+circuit qualifies; two 45-QU/hour branches cannot claim one 90-QU/hour circuit.
+Hourly recording begins with output trials at layer 4. Immutable source
+mix declarations are shared per occupied cell/day, and early certifications
+avoid constructing irrelevant later trial state while preserving common
+processing, coordination and release evidence. No physical solver constants or
+certification thresholds changed. Final affected checks are rerunning.
+
+
+Terminal distribution now has finite funded execution as well as the appended
+limb operations: periodic warmup alone cannot certify a dead-end terminal's
+initial fill. Each declared drill sends a 100-quantum mobile pulse along the
+actual selected lower-to-palm/sole path, records terminal arrival, and requires
+at least 20 quanta delivered with stable, injury-free execution. Terminal qi and
+remaining assay qi disperse as dissipated energy, with no field deposit or
+permanent work granted. These are internal deliveries, so projection losses
+apply only to the separate one-tile release test. All pulse transfers and health
+exposure use the same bounded executor and stay outside sustained circuit
+counters. Autonomous assays respect practice pauses and the two-hour minimum.
+
+Certification scheduling now requires the recorded quota to be complete before
+its physical trial; actual changed conditions can still fail a quota-ready
+attempt. It no longer knowingly retries an impossible 25/30-day or 3/4-terminal
+quota. The deterministic failed-attempt boundary fixture uses complete historical
+terminal evidence with a currently blocked route. The active coordinator replay
+uses the explicitly labelled danger-unaware physical control so safety-policy
+pauses do not hide the paths it is intended to verify; natural-cohort danger
+behaviour remains separately checked.
+
+
+Finite transport uses the reference's ordinary candidate/commit primitives,
+without its laboratory-only node-7 grounding rule: node 7 is a sole in the
+production anatomy. The standalone accounted-charge assay now verifies all
+four actual terminal deliveries. The final active-world replay records healthy
+actor deliveries of **68 / 38 / 100 / 99** quanta to the four terminals (31 on
+the repeated first terminal), certifies its fourth layer from those records,
+and matches daily/jump physical state after cold restoration. The reckless
+actor executes every terminal route too, but its existing injury recovery date
+123 excludes 28 practice days; no certification evidence is granted for those
+invalid dates. This component fixture remains excluded from natural reachability.
+
+`WorldSave` now applies the qi coordinator's existing custom codec through its
+script inheritance chain. The explicit unaware-control subclass previously
+fell through generic serialization, losing body/memo snapshots and including
+wall-clock profile fields. The corrected control replay passes using the same
+physical codec as the production coordinator (`out/qi_3c_active.txt`). Default
+Qi and whole-save checks are being rerun after this adapter correction.
+
+
+The first CPU-15 pair measured baseline/unaware/normal/sealed at
+**20.545 / 33.163 / 33.667 / 55.228** before and
+**20.473 / 33.883 / 34.195 / 56.457** after. Normal passes (+0.528 ms/day), but
+sealed **fails** at +1.229 ms/day. Raw data are retained in
+`out/qi_3c_bench_paired_before.txt` and `out/qi_3c_bench_paired_first_after.txt`.
+The sealed profile identified redundant health scans and repeated instruction
+error calculation. Immutable instruction error is now cached independently of
+source density. A matching body-revision execution health proof avoids a second
+whole-body scan; pulses and external anatomical invalidation require a fresh
+check. The focused proof-invalidation test passes. Physical constants, source
+precision, kernel cycles, thresholds and fixture settings are unchanged; final
+correctness reruns and the final same-CPU after-measurement are pending.

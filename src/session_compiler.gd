@@ -9,6 +9,7 @@ var signature_usec := 0
 var accounting := Reference.new()
 var routes: Dictionary = {}
 var kernels: Dictionary = {}
+var _control_errors: Dictionary = {}
 const DENSITY_GRID := 1.05
 var cache_hits := 0
 var cache_misses := 0
@@ -45,6 +46,7 @@ class Network extends RefCounted:
 	var pressure_limit: float
 	var seconds: float
 	var session_seconds: float
+	var control_error: float
 
 ## A revision is scoped to one body; route content and sample are also keyed.
 ## Caller must invalidate/revise after structural changes or sample changes.
@@ -91,6 +93,13 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 	var config := Anatomy.definition()
 	var error: float = .25*(1.0-float(config.operation_mastery))+.20*(1.0-float(config.understanding))+.15*float(config.emotional_disruption)-.10*float(config.control)
 	net.instructions = accounting.compile_program(program,error)
+	# Instructions are immutable and shared independently of source density.
+	if not _control_errors.has(net.instructions):
+		var coordination_error := 0.0
+		for op: Reference.Instruction in net.instructions:
+			if op.code==2 or (op.code==1 and op.targets.size()>1): coordination_error=maxf(coordination_error,op.error)
+		_control_errors[net.instructions]=coordination_error
+	net.control_error=float(_control_errors[net.instructions])
 	for op: Reference.Instruction in net.instructions:
 		if op.code in [1,2,3]:
 			for index: int in op.targets:
@@ -316,7 +325,7 @@ func input_signature(state: Anatomy.Cultivator, net: Network, budget: int, memo:
 	if absf(residue_ratio-memo.residue_anchor)>.001:
 		memo.residue_anchor = residue_ratio
 		memo.residue_bucket += 1
-	return [net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(state.nodes[4].strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve))]
+	return [net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(state.nodes[4].strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve)),floori(float(state.milestones.get("release_strain",0))*500)]
 
 func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var memo: DayMemo = state.session_cache if state.session_cache_owner==identity else null
@@ -516,6 +525,12 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		daily.pressure=0.0
 		daily.purity=0.0
 		daily.instability=1.0
+	state.milestones.daily_execution["processed"]=0
+	state.milestones.daily_execution["qualified_mixed"]=0
+	state.milestones.daily_execution["simultaneous"]=0
+	state.milestones.daily_execution["control_error"]=net.control_error
+	state.milestones.daily_execution["seconds"]=net.session_seconds
+	state.milestones.daily_execution["hourly_core"]=0.0
 	state.pending_work = 0
 	if diagnose:
 		state.milestones["danger_terms"] = {"overpressure":0.0,"residue_session":0.0,"residue_rest":0.0,"opening_strain":state.nodes[4].strain,"capacity":state.capacity,"residue":state.residue}
@@ -523,10 +538,25 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var remaining_budget := budget
 	# Refine time only where lodged residue can approach the recovery threshold.
 	var phases := STEPS if float(state.residue)/state.capacity>.025 or state.nodes[4].strain>0 else 1
+	# One-hour test windows retain actual committed phase transfers. They are
+	# requested for output certification, not allocated for early-layer bodies.
+	var record_hourly: bool=state.milestones.get("hourly_trial",false)
+	var hourly: Array=[]
+	if record_hourly:
+		for hour in 4:
+			var row: Array=[]
+			row.resize(9)
+			row.fill(0)
+			hourly.append(row)
 	for edge: Anatomy.Edge in state.edges:
 		edge.daily_flow = 0
 		edge.peak_rate = 0
 	for phase in phases:
+		var hour_weights: Array=[]
+		if record_hourly:
+			var duration := net.session_seconds/phases
+			for hour in 4:
+				hour_weights.append(maxf(0,minf((phase+1)*duration,(hour+1)*3600.0)-maxf(phase*duration,hour*3600.0))/maxf(1,duration))
 		var opening_residue := state.residue
 		# With no funded intake every transport delta is zero. Retain exposure
 		# and all end-of-day upkeep, without building unused fluid tables.
@@ -550,6 +580,10 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		var purity := (a[2]*(1-weight)+b[2]*weight)/maxf(1e-30,a[1]*(1-weight)+b[1]*weight)
 		var settled_stability := (a[3]*(1-weight)+b[3]*weight)/maxf(1e-30,a[1]*(1-weight)+b[1]*weight)
 		var corruption := (a[4]*(1-weight)+b[4]*weight)/maxf(1e-30,a[1]*(1-weight)+b[1]*weight)
+		state.milestones.daily_execution.processed += admitted
+		if purity>=.90 and corruption<=.02:
+			state.milestones.daily_execution.qualified_mixed += mini(admitted,floori((a[8+2*net.source.size()]*(1-weight)+b[8+2*net.source.size()]*weight)*net.cycles*1000/phases*factor))
+		state.milestones.daily_execution.simultaneous += floori((a[7+2*net.source.size()]*(1-weight)+b[7+2*net.source.size()]*weight)*net.cycles*1000/phases*factor)
 		remaining_budget -= admitted
 		state.absorbed += admitted
 		var grounded := mini(admitted-settled,floori((a[6]*(1-weight)+b[6]*weight)*net.cycles*1000/phases*factor))
@@ -560,10 +594,13 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 			var edge: Anatomy.Edge = state.edges[e]
 			var moved := floori((a[7+e]*(1-weight)+b[7+e]*weight)*net.cycles*1000/phases*factor)
 			edge.daily_flow += moved
+			if record_hourly and e<9:
+				for hour in 4: hourly[hour][e]+=floori(moved*float(hour_weights[hour]))
 			edge.practice += moved/1000.0
 			edge.peak_rate = maxf(edge.peak_rate,(a[7+net.source.size()+e]*(1-weight)+b[7+net.source.size()+e]*weight)*factor)
 			state.circulated += moved
 		expose_storage(state,net.session_seconds/phases/3600,opening_residue)
+	if record_hourly: state.milestones.daily_execution.hourly_core=hourly_core_rate(hourly,net.session_seconds)
 	var config := Anatomy.definition()
 	# The manual pays daily integration from its actual refined reserve. Stored
 	# qi shares the dantian's volume and backpressure with incoming packets.
@@ -642,6 +679,14 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		if node.strain>.20 or node.integrity<.85: healthy=false
 		node.strain = maxf(0,node.strain-.10)
 		node.integrity = minf(1,node.integrity+.001)
+	if state.milestones.has("release_strain_nodes"):
+		var outside_strain := 0.0
+		for index: int in state.milestones.release_strain_nodes:
+			outside_strain=maxf(outside_strain,state.nodes[index].strain)
+		state.milestones.release_strain=outside_strain
+		if outside_strain==0: state.milestones.erase("release_strain_nodes")
+	state.milestones.daily_execution["stable"]=healthy
+	state.milestones.daily_execution["health_revision"]=state.session_revision
 	if not healthy: state.recovery_days += 1
 	if healthy and state.refined>opening_refined: state.settling_days += 1
 	if state.opening_work>=500000 and state.settling_days>=30 and not state.milestones.has("retention"):
@@ -660,6 +705,16 @@ func simulate_day_model(state: Anatomy.Cultivator, program: Dictionary, sample: 
 
 func advance(state: Anatomy.Cultivator, net: Network, sample: Dictionary, until: int) -> void:
 	while state.day<until: step(state,net,int(sample.quantity))
+
+static func hourly_core_rate(hourly: Array, seconds: float) -> float:
+	var best := 0.0
+	for hour in hourly.size():
+		if (hour+1)*3600>seconds: continue
+		var common := INF
+		for e in [0,5,6,7,8]: common=minf(common,float(hourly[hour][e]))
+		var circuit := maxf(minf(float(hourly[hour][1]),float(hourly[hour][2])),minf(float(hourly[hour][3]),float(hourly[hour][4])))
+		best=maxf(best,minf(common,circuit)/1000.0)
+	return best
 
 func residual(state: Anatomy.Cultivator) -> int:
 	return accounting.residual_model(state)
@@ -788,7 +843,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	stabilise_rem.resize(count)
 	remainder.resize(edge_count)
 	var result := PackedFloat64Array()
-	result.resize(7+2*edge_count)
+	result.resize(7+2*edge_count+2)
 	var limits := PackedInt64Array()
 	limits.resize(count)
 	for i in count:
@@ -898,6 +953,9 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 						if not simple_quality:
 							qs[j] = stable[a]*q/maxi(1,amount[a])
 							qc[j] = corrupt[a]*q/maxi(1,amount[a])
+					# Only transfers committed in the same slice count as coordination.
+					if measure and targets==[2,4]:
+						result[7+2*edge_count] += mini(moved[0],moved[1])
 					# All moments are sampled before any lane commits.
 					for j in targets.size():
 						var e: int = targets[j]
@@ -927,6 +985,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 					for i: int in targets:
 						var q := mini(amount[i],limits[i])
 						if q==0: continue
+						if measure and code==4 and filter_intensity>0: result[8+2*edge_count] += q
 						var cost := q*(.15*filter_intensity if code==4 else .02)+(filter_rem[i] if code==4 else stabilise_rem[i])
 						var loss := floori(cost)
 						if code==4: filter_rem[i] = cost-loss
@@ -953,6 +1012,8 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 					pure[4] = 0
 					stable[4] = 0
 					corrupt[4] = 0
+	result[7+2*edge_count] /= measured*1000.0
+	result[8+2*edge_count] /= measured*1000.0
 	for i in 7+edge_count: result[i] /= measured*1000.0
 	return result
 

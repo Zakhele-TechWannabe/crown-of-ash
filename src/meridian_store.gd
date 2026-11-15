@@ -130,8 +130,10 @@ func report(person: int) -> Dictionary:
 	var row := slot[person]
 	var config := definition()
 	var node_report: Array = []
+	var strain := 0.0
 	for index in NODES:
 		var offset := (row * NODES + index) * NODE_FLOATS
+		strain=maxf(strain,nodes[offset+NodeFloat.STRAIN])
 		var quantity := 0
 		for element in 5: quantity += mass[(row * NODES + index) * 5 + element]
 		var occupied := quantity
@@ -140,9 +142,10 @@ func report(person: int) -> Dictionary:
 	var edge_report: Array = []
 	for index in EDGES:
 		var offset := (row * EDGES + index) * EDGE_FLOATS
+		strain=maxf(strain,edges[offset+EdgeFloat.STRAIN])
 		edge_report.append({"id":config.edges[index].id,"flow_quanta":edge_energy[(row * EDGES + index) * EDGE_INTS + EdgeInt.FLOW],"capacity_qu_per_second":capacity(row,index),"conductance":conductance(row,index),"strain":edges[offset + EdgeFloat.STRAIN],"integrity":edges[offset + EdgeFloat.INTEGRITY],"scar":edges[offset + EdgeFloat.SCAR]})
 	var reserve := integers[row * PERSON_INTS + PersonInt.RESERVE]
-	return {"person_id":person,"day":integers[row * PERSON_INTS + PersonInt.DAY],"anatomy_revision":integers[row * PERSON_INTS + PersonInt.REVISION],"laws_version":int(config.laws_version),"nodes":node_report,"edges":edge_report,"reserve":reserve,"capacity":integers[row * PERSON_INTS + PersonInt.CAPACITY],"residue":integers[row * PERSON_INTS + PersonInt.RESIDUE],"purity":fractions[row * PERSON_FLOATS + PersonFloat.RESERVE_PURITY] / maxi(1,reserve),"layer":integers[row * PERSON_INTS + PersonInt.LAYER],"achieved":achieved.slice(row * 9, (row + 1) * 9)}
+	return {"person_id":person,"day":integers[row * PERSON_INTS + PersonInt.DAY],"anatomy_revision":integers[row * PERSON_INTS + PersonInt.REVISION],"laws_version":int(config.laws_version),"nodes":node_report,"edges":edge_report,"reserve":reserve,"capacity":integers[row * PERSON_INTS + PersonInt.CAPACITY],"residue":integers[row * PERSON_INTS + PersonInt.RESIDUE],"strain":strain,"purity":fractions[row * PERSON_FLOATS + PersonFloat.RESERVE_PURITY] / maxi(1,reserve),"layer":integers[row * PERSON_INTS + PersonInt.LAYER],"achieved":achieved.slice(row * 9, (row + 1) * 9)}
 
 func save_state() -> Dictionary:
 	return {"expected_intake":expected_intake.duplicate(),"schema_version":1,"slot":slot.duplicate(),"people":people.duplicate(),"nodes":nodes.duplicate(),"mass":mass.duplicate(),"edges":edges.duplicate(),"edge_energy":edge_energy.duplicate(),"reserve_mass":reserve_mass.duplicate(),"integers":integers.duplicate(),"fractions":fractions.duplicate(),"achieved":achieved.duplicate()}

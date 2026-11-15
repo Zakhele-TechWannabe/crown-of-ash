@@ -35,8 +35,16 @@ static func fields(object: Object) -> Array[String]:
 		result.append(key)
 	return result
 
+## Custom codecs also apply to derived coordinators used by controlled fixtures.
+static func uses_codec(object: Object, filename: String) -> bool:
+	var script: Script=object.get_script()
+	while script!=null:
+		if script.resource_path.ends_with(filename): return true
+		script=script.get_base_script()
+	return false
+
 static func capture(object: Object, ancestors: Array = []) -> Dictionary:
-	if object.get_script() and object.get_script().resource_path.ends_with("qi_practice.gd"): return object.save_state()
+	if uses_codec(object,"qi_practice.gd"): return object.save_state()
 	if object.get_script() and object.get_script().resource_path.ends_with("meridian_store.gd"): return object.save_state()
 	if object.get_script() and object.get_script().resource_path.ends_with("qi_field.gd"): return object.save_state()
 	var result := {}
@@ -58,7 +66,7 @@ static func capture(object: Object, ancestors: Array = []) -> Dictionary:
 	return result
 
 static func restore(object: Object, state: Dictionary, ancestors: Array = []) -> void:
-	if object.get_script() and object.get_script().resource_path.ends_with("qi_practice.gd"):
+	if uses_codec(object,"qi_practice.gd"):
 		object.load_state(state)
 		return
 	if object.get_script() and object.get_script().resource_path.ends_with("meridian_store.gd"):

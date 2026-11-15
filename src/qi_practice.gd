@@ -3,6 +3,7 @@ extends RefCounted
 ## saves contain physical execution state and policy/evidence, never compiler caches.
 const Compiler = preload("res://src/session_compiler.gd")
 const Anatomy = preload("res://src/meridians.gd")
+const Certification = preload("res://src/qi_certification.gd")
 const Store = preload("res://src/meridian_store.gd")
 var profile := PackedInt64Array([0,0,0,0,0,0,0,0,0]) # execution, request, field, mismatch, writeback, certification/notes, preparation/sample, policy, settlement
 var _compiler := Compiler.new()
@@ -160,6 +161,7 @@ func advance(s: RefCounted, until: int) -> void:
 		# One source sample per occupied cell, not per body. The elemental
 		# allocator retains individual stable IDs for its exact tie rules.
 		var samples: Dictionary = {}
+		var declarations: Dictionary = {}
 		var cells := PackedInt32Array()
 		var positions := PackedVector2Array()
 		var prepare_timer := Time.get_ticks_usec()
@@ -215,7 +217,8 @@ func advance(s: RefCounted, until: int) -> void:
 			var injuries := state.injuries
 			var deaths := state.deaths
 			var timer := Time.get_ticks_usec()
-			var net := _compiler.live_network(state,state.retained_program,sample)
+			var active := drill_program(s,p,state)
+			var net := _compiler.live_network(state,active,sample)
 			# Replay only a valid, funded transition; otherwise solve once with
 			# the actual grant. Saved arithmetic preserves cold continuation.
 			_compiler.step(state,net,budget)
@@ -226,10 +229,27 @@ func advance(s: RefCounted, until: int) -> void:
 			assert(_compiler.residual(state)==0,"Production integer conservation")
 			profile[8]+=Time.get_ticks_usec()-timer
 			timer=Time.get_ticks_usec()
-			writeback(s,p,state)
-			profile[4]+=Time.get_ticks_usec()-timer
-			timer=Time.get_ticks_usec()
+			if not declarations.has(cells[i]):
+				var components := 0
+				for value: float in sample.elements:
+					if value>0: components+=1
+				declarations[cells[i]]={"elements":sample.elements.duplicate(),"purity":sample.purity,"corruption":sample.corruption,"mixed":components>=2}
+			# A cell declaration is immutable and shared by today's recipients.
+			records[p]["declared_source"]=declarations[cells[i]]
+			var certified: int=s.meridian_store.integers[s.meridian_store.slot[p]*Store.PERSON_INTS+Store.PersonInt.LAYER]
+			var can_trial: bool=field.day>int(records[p].get("pause_until",-1)) and float(state.milestones.get("daily_execution",{}).get("seconds",0))>=7200
+			if can_trial and int(records[p].get("distribution_drill",-1))>=0:
+				distribution(s,p,state,field.day,int(records[p].distribution_drill))
+				assert(_compiler.residual(state)==0,"Distribution integer conservation")
+			if can_trial and certified>=7 and (field.day+Certification.phase(s,p,records[p]))%7==0:
+				release(s,p,state,field.day)
+				assert(_compiler.residual(state)==0,"Release integer conservation")
 			certify(s,p,state,field.day,injuries)
+			var writeback_started := Time.get_ticks_usec()
+			writeback(s,p,state)
+			var writeback_elapsed := Time.get_ticks_usec()-writeback_started
+			profile[4]+=writeback_elapsed
+			timer+=writeback_elapsed
 			if state.injuries>injuries:
 				s.injury_until[p]=maxi(s.injury_until[p],field.day+21)
 				s.note(p,"injury","%s suffered a qi deviation injury" % s.population.names[p],field.day)
@@ -239,39 +259,7 @@ func advance(s: RefCounted, until: int) -> void:
 		field._close_ledger()
 
 func certify(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, opening_injuries: int) -> void:
-	var row: int = s.meridian_store.slot[p]
-	var base := row*Store.PERSON_INTS
-	var layer: int = s.meridian_store.integers[base+Store.PersonInt.LAYER]
-	var valid: bool = state.injuries==opening_injuries and state.deaths==0 and state.strain<=.20 and s.damage[p]>=.85 and s.injury_until[p]<=day
-	for edge: Anatomy.Edge in state.edges:
-		if edge.integrity<.85: valid=false
-	for node: Anatomy.Compartment in state.nodes:
-		if node.integrity<.85: valid=false
-	var evidence: Dictionary = records[p]
-	# The same four-hour core circuit must meet the threshold on every edge.
-	var throughput := INF
-	for e in [0,1,2,5,6,7,8]: throughput=minf(throughput,state.edges[e].daily_flow/4000.0)
-	if valid and throughput>=30: evidence.return_days+=1
-	var eligible: bool = layer==0 and valid and state.capacity>=100000 and state.opening_work>=500000 and state.settling_days>=30 and state.reserve>0 and float(state.residue)/state.capacity<=.10
-	if layer==1: eligible=valid and evidence.return_days>=30
-	# Layers 4–9 intentionally have no evaluator in Stage 3b.
-	if layer==2:
-		var daily: Dictionary = state.milestones.get("daily_execution",{})
-		# One recorded session fill followed by its funded reserve-integration draw.
-		if valid and float(daily.get("pressure",0))>=1.5 and float(daily.get("purity",0))>=.75 and float(daily.get("instability",1))<=.10 and int(daily.get("draw",0))>0 and int(daily.get("fill",0))>=int(daily.get("draw",0)):
-			evidence.cycles+=1
-		eligible=valid and evidence.cycles>=10
-	evidence.last_reserve=state.reserve
-	if eligible:
-		layer+=1
-		s.meridian_store.integers[base+Store.PersonInt.LAYER]=layer
-		s.meridian_store.achieved[row*9+layer-1]=day
-		s.note(p,"breakthrough","%s certified Qi Condensation layer %d" % [s.population.names[p],layer],day)
-	# Legacy presentation columns are projections of certified physical state.
-	if s.realm[p]<3:
-		s.realm[p]=2
-		s.layer[p]=layer
-		s.qi[p]=state.reserve/1000.0
+	Certification.observe(s,p,state,day,opening_injuries,records[p])
 
 func writeback(s: RefCounted, p: int, state: Anatomy.Cultivator) -> void:
 	s.meridian_store.writeback(s.meridian_store.slot[p],state,false)
@@ -280,5 +268,164 @@ func policy_report(p: int) -> Dictionary:
 	var retained: Dictionary = {}
 	if _bodies.has(p): retained=_bodies[p].retained_program
 	elif records.has(p) and records[p].has("body"): retained=records[p].body.get("retained_program",{})
-	if retained.is_empty(): return {}
-	return {"route":_policy.names.get(retained.id,retained.id),"filter":retained.filter}
+	var r: Dictionary=records.get(p,{})
+	var result := {"danger_sense":"resting after warning" if int(r.get("pause_until",0))>int(r.get("evidence_day",0)) else ("seeking purer qi" if r.get("wants_purer_qi",false) else "quiet"),"evidence":r.duplicate(true)}
+	# Keep reports compact: execution bodies and memo are persistence details.
+	result.evidence.erase("body")
+	result.evidence.erase("memo")
+	if not retained.is_empty(): result.merge({"route":_policy.names.get(retained.id,retained.id),"filter":retained.filter})
+	return result
+
+## Drills are immutable day programs; the selected personal manual is retained.
+func drill_program(s: RefCounted, p: int, state: Anatomy.Cultivator) -> Dictionary:
+	var r: Dictionary=records[p]
+	r.distribution_drill=-1
+	var layer: int=s.meridian_store.integers[s.meridian_store.slot[p]*Store.PERSON_INTS+Store.PersonInt.LAYER]
+	var record_hourly := layer>=4
+	if bool(state.milestones.get("hourly_trial",false))!=record_hourly:
+		state.milestones["hourly_trial"]=record_hourly
+		_compiler.invalidate(state)
+	var offset := Certification.phase(s,p,r)
+	if layer<3 or (state.day+offset)%7!=0: return state.retained_program
+	if _compiler.accounting.vocabulary.is_empty(): _compiler.accounting.manual("A")
+	var active: Dictionary=state.retained_program.duplicate(true)
+	var terminal: int=((state.day+offset)/7)%4
+	r.distribution_drill=terminal
+	var ops: Array=[]
+	for op: Dictionary in active.operations:
+		var copy := op.duplicate(true)
+		if copy.operation=="Guide" and copy.targets==[1]:
+			copy.operation="Split"
+			copy.targets=[1,3]
+			copy.control_demand=2
+		if copy.operation=="Guide" and copy.targets==[2]: copy.targets=[2,4]
+		if copy.operation=="Integrate":
+			for edge: int in [4]+Certification.LIMBS[terminal]:
+				var guide: Dictionary=_compiler.accounting.vocabulary.Guide.duplicate(true)
+				guide.operation="Guide"
+				guide.targets=[edge]
+				ops.append(guide)
+		ops.append(copy)
+	active.operations=ops
+	return active
+
+## A bounded, paid pulse through the actual lower-to-palm path. Projection is
+## dissipated (including controlled delivery) rather than usable ambient qi.
+func release(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int) -> Dictionary:
+	return _pulse(s,p,state,day,[5,6,7,9,10],true)
+
+func distribution(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, terminal: int) -> Dictionary:
+	var paths := [[5,6,7,9,10],[5,6,7,12,13],[15,16],[18,19]]
+	var result := _pulse(s,p,state,day,paths[terminal],false)
+	if not result.has("terminal"): result["terminal"]=terminal
+	return result
+
+func _pulse(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, path: Array, projected: bool) -> Dictionary:
+	var r: Dictionary=records[p]
+	if _compiler.accounting.vocabulary.is_empty(): _compiler.accounting.manual("A")
+	var operation: Dictionary=_compiler.accounting.vocabulary.Release
+	var today_key := "release_today" if projected else "distribution_today"
+	var history_key := "release_history" if projected else "distribution_history"
+	var note_key := "last_release_note" if projected else "last_distribution_note"
+	var opening_injuries := state.injuries
+	var result := {"operation":"Release" if projected else "Distribute","day":day,"requested":int(operation.quantity_quanta),"spent":0,"delivered":0,"distance_tiles":int(operation.distance_tiles) if projected else 0,"overpressure":false,"success":false}
+	var origin: Vector2=s.population.locations[p]+r.get("practice_offset",Vector2.ZERO)
+	result["origin"]=origin
+	result["target"]=origin+Vector2.RIGHT*float(result.distance_tiles)
+	result.distance_tiles=origin.distance_to(result.target)
+	var layer: int=s.meridian_store.integers[s.meridian_store.slot[p]*Store.PERSON_INTS+Store.PersonInt.LAYER]
+	if layer<1: return result
+	if r.get(today_key,{}).get("day",-1)==day: return r[today_key]
+	var settled: bool=not (s.fifty and s.fifty.away(p))
+	for node: Anatomy.Compartment in state.nodes:
+		state.strain=maxf(state.strain,node.strain)
+		if _compiler.accounting.total(node)>0: settled=false
+		if _compiler.accounting.pressure(node)>node.safe_pressure:
+			result.overpressure=true
+			settled=false
+	if settled and s.alive[p] and state.deaths==0 and state.reserve>=100 and Certification.usable(state,path) and state.strain<=.20:
+		var purity: float=state.reserve_moments[0]/maxi(1,state.reserve)
+		var stability: float=clampf(state.reserve_moments[2]/maxi(1,state.reserve),0,1)
+		var coherence := 1+4*clampf(float(Anatomy.definition().operation_mastery),0,1)
+		var moments: Array=[]
+		for q in 4:
+			moments.append(state.reserve_moments[q]*100.0/state.reserve)
+			state.reserve_moments[q]-=moments[q]
+		state.reserve-=100
+		state.nodes[4].stored_quanta=state.reserve
+		# Detached mobile packets retain the live body's geometry, pressure and
+		# damage. Only the funded pulse is mobile; reserve cannot be drawn twice.
+		var trial := _compiler.production_trial(state)
+		# The daily kernel already paid 24h of background residue exposure.
+		# Preserve its pressure occupancy, adding only pulse-specific danger.
+		trial.residue=0
+		for node: Anatomy.Compartment in trial.nodes:
+			node.mass=node.mass.duplicate()
+			node.moments=node.moments.duplicate()
+		_compiler.accounting.add(trial.nodes[4],{"mass":[100,0,0,0,0],"moments":moments})
+		var delivered := 0
+		var base_error: float=clampf(.25*(1-float(Anatomy.definition().operation_mastery))+.20*(1-float(Anatomy.definition().understanding))+.15*float(Anatomy.definition().emotional_disruption)-.10*float(Anatomy.definition().control),0,.60)
+		var error := clampf(base_error+.10*clampf(state.strain/.20,0,1),0,.60)
+		for step in int(operation.assay_cycles):
+			if trial.strain>.35 or trial.deaths>0: break
+			for edge: int in path:
+				error=maxf(error,clampf(base_error+.10*clampf(trial.strain/.20,0,1),0,.60))
+				var channel: Anatomy.Edge=trial.edges[edge]
+				var candidate := _compiler.accounting.flow_candidate(trial,channel,10,1-error)
+				_compiler.accounting.commit_candidate(trial,channel,candidate,candidate,10)
+				_compiler.accounting.exposure_model(trial,10,false)
+				for index: int in [trial.edges[edge].source,trial.edges[edge].destination]:
+					if _compiler.accounting.pressure(trial.nodes[index])>trial.nodes[index].safe_pressure: result.overpressure=true
+				if trial.strain>.35 or trial.deaths>0: break
+			var terminal: Anatomy.Compartment=trial.nodes[trial.edges[path[-1]].destination]
+			delivered+=_compiler.accounting.total(terminal)
+			terminal.mass=[0,0,0,0,0]
+			terminal.moments=[0.0,0.0,0.0,0.0]
+			terminal.quantity=-1
+			terminal.hazard_valid=false
+		var strained_nodes: Array[int]=[]
+		var outside_strain := 0.0
+		for i in state.nodes.size():
+			state.nodes[i].strain=trial.nodes[i].strain
+			state.nodes[i].integrity=trial.nodes[i].integrity
+			state.nodes[i].scar=trial.nodes[i].scar
+			state.nodes[i].hazard_valid=false
+			if i!=4 and state.nodes[i].strain>0:
+				strained_nodes.append(i)
+				outside_strain=maxf(outside_strain,state.nodes[i].strain)
+		state.milestones["release_strain_nodes"]=strained_nodes
+		state.milestones["release_strain"]=outside_strain
+		state.injuries=trial.injuries
+		state.deaths=trial.deaths
+		state.strain=maxf(state.strain,trial.strain)
+		state.max_strain=maxf(state.max_strain,trial.max_strain)
+		var route_flows: Array[int]=[]
+		for edge: int in path:
+			var moved: int=trial.edges[edge].daily_flow-state.edges[edge].daily_flow
+			route_flows.append(moved)
+			state.circulated+=moved
+			state.edges[edge].practice+=moved/1000.0
+		result["route_flow_quanta"]=route_flows
+		state.dissipated+=100
+		state.nodes[4].hazard_valid=false
+		state.session_revision+=1
+		result.spent=100
+		result["stability"]=stability
+		result["purity"]=purity
+		result["control_error"]=error
+		result["coherence_length"]=coherence
+		result.delivered=floori(delivered*purity*purity*stability*(1-error)*exp(-float(result.distance_tiles)/coherence)) if projected else delivered
+		result.success=result.delivered>=(70 if projected else 20) and not result.overpressure and state.injuries==opening_injuries and state.deaths==0 and state.strain<=.20
+	if not result.success:
+		state.nodes[4].strain+=.005
+		state.strain=maxf(state.strain,state.nodes[4].strain)
+		state.max_strain=maxf(state.max_strain,state.strain)
+		state.session_revision+=1
+	r[today_key]=result
+	var tests: Array=r.get(history_key,[])
+	tests.append(result)
+	r[history_key]=tests
+	if not result.success and int(r.get(note_key,-90))+90<=day:
+		r[note_key]=day
+		s.note(p,"cultivation_trial",("%s failed the discharge trial" if projected else "%s failed the distribution trial") % s.population.names[p],day)
+	return result

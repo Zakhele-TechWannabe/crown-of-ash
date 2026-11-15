@@ -52,5 +52,16 @@
     "control_demand": 1,
     "resource_cost": 0,
     "abort": "ground"
+  },
+  "Release": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "stop",
+    "executor": "live bounded transient assay",
+    "minimum_certified_layer": 1,
+    "quantity_quanta": 100,
+    "distance_tiles": 1,
+    "assay_cycles": 120
   }
 }

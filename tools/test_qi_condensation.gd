@@ -8,6 +8,24 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
+	health_proofs()
+	hourly_windows()
+	if "--assay-only" in OS.get_cmdline_user_args():
+		release_contracts()
+		certification_contracts()
+		quit()
+		return
+	if "--active-only" in OS.get_cmdline_user_args():
+		await active_world_replay()
+		quit()
+		return
+	if "--long-only" in OS.get_cmdline_user_args():
+		long_reachability()
+		quit()
+		return
+	release_contracts()
+	certification_contracts()
+	long_reachability()
 	var config := Store.definition()
 	var identifiers := {}
 	for node: Dictionary in config.nodes:
@@ -99,6 +117,7 @@ func run() -> void:
 	deviation_handling()
 	live_cohort()
 	await world_cohort()
+	await active_world_replay()
 	print("PASS Qi Condensation anatomy, live cohort, deviation, save and world daily/jump; %d packed bytes for 250 bodies." % bulk.memory_bytes())
 	quit()
 
@@ -273,3 +292,265 @@ func danger_sense() -> void:
 	assert(pop.rng.state==rng,"Danger sense does not consume shared randomness")
 	assert(s.qi_practice.records[ids[0]].danger_decisions[0].action=="pause")
 	assert(s.qi_practice.records[ids[1]].danger_decisions[0].action=="ignore")
+
+func long_reachability() -> void:
+	var pop := Population.new()
+	var result: Dictionary=preload("res://tools/qi_cohort_fixture.gd").long_run(pop)
+	print("LONG FIXTURE ",result)
+	assert(result.fixture and result.days==3650)
+	if result.achieved[1]<0:
+		assert(result.peak_core<30,"Recorded bottleneck: qualifying core never reaches 30 QU/hour")
+		for layer in range(1,9): assert(result.achieved[layer]<0,"Later layers cannot skip the recorded return-circuit bottleneck")
+	if result.achieved[2]<0:
+		assert(result.peak_pressure<1.5,"Recorded bottleneck: safe storage/backpressure prevents 1.5 retained pressure")
+	for p: int in result.ids:
+		var s: RefCounted=pop.society
+		assert(s.qi_practice._compiler.residual(s.qi_practice.body(s,p))==0)
+		print("LONG READOUT ",preload("res://src/person_book.gd").cultivation_readout(s.meridian_report(p)))
+	var saved: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var copy := Population.new()
+	Save.restore(copy,saved)
+	assert(Save.capture(copy)==saved,"Long fixture new evidence and dated certifications round-trip")
+
+func certification_contracts() -> void:
+	var pop := Population.new()
+	var ids: Array[int]=preload("res://tools/qi_cohort_fixture.gd").long_prepare(pop)
+	var s: RefCounted=pop.society
+	var p: int=ids[0]
+	var state: RefCounted=s.qi_practice.body(s,p)
+	var r: Dictionary=s.qi_practice.records[p]
+	# Four historical terminal records suggest readiness, but the current route
+	# is blocked. This explicit evidence fixture exercises a scheduled failure.
+	var trial_row: int=s.meridian_store.slot[p]
+	s.meridian_store.integers[trial_row*Store.PERSON_INTS+Store.PersonInt.LAYER]=3
+	r.terminals={"0":{"day":0,"quanta":20},"1":{"day":0,"quanta":20},"2":{"day":0,"quanta":20},"3":{"day":0,"quanta":20}}
+	state.edges[10].openness=0
+	var trial_day: int=7-preload("res://src/qi_certification.gd").phase(s,p,r)
+	var snapshot: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var copy := Population.new()
+	Save.restore(copy,snapshot)
+	var rng: int=pop.rng.state
+	preload("res://src/qi_certification.gd").observe(s,p,state,trial_day,0,r)
+	preload("res://src/qi_certification.gd").observe(copy.society,p,copy.society.qi_practice.body(copy.society,p),trial_day,0,copy.society.qi_practice.records[p])
+	assert(Save.capture(pop)==Save.capture(copy),"Failed trial deterministic, saved and costs strain")
+	assert(pop.rng.state==rng and state.strain>=.005 and r.attempts.size()==1)
+	preload("res://src/qi_certification.gd").observe(s,p,state,trial_day,0,r)
+	assert(r.attempts.size()==1,"A date cannot be attempted twice")
+	var row: int=s.meridian_store.slot[p]
+	var base := row*Store.PERSON_INTS
+	# Negative boundary contracts use explicit evidence fixtures, not claimed
+	# physical reachability. High historic counters cannot bypass purity walls.
+	for layer in [2,5]:
+		s.meridian_store.integers[base+Store.PersonInt.LAYER]=layer
+		state.reserve=1000
+		state.reserve_moments=[500.0,0.0,1000.0,0.0]
+		r.cycles=10
+		r.mixed_processed=1000000
+		r.evidence_day=-1
+		r.attempt_day=-1
+		state.strain=0
+		preload("res://src/qi_certification.gd").observe(s,p,state,trial_day,0,r)
+		assert(s.meridian_store.integers[base+Store.PersonInt.LAYER]==layer,"Purity walls remain binding")
+	# Retention residue wall cannot be bypassed by paid work or settling.
+	s.meridian_store.integers[base+Store.PersonInt.LAYER]=0
+	state.opening_work=500000
+	state.settling_days=30
+	state.residue=11000
+	r.evidence_day=-1
+	preload("res://src/qi_certification.gd").observe(s,p,state,10,0,r)
+	assert(s.meridian_store.integers[base+Store.PersonInt.LAYER]==0)
+	# Non-default persistence boundary fixture. These are storage witnesses,
+	# not natural certifications or part of the reachability report.
+	r.terminals={"0":{"day":4,"quanta":20}}
+	r.output_days=17
+	r.coordination_days=19
+	r.release_tests=3
+	r.integrated_days=27
+	var saved: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var restored := Population.new()
+	Save.restore(restored,saved)
+	assert(Save.capture(restored)==saved,"All new non-default evidence fields survive save/load")
+
+func release_contracts() -> void:
+	var pop := Population.new()
+	var ids: Array[int]=preload("res://tools/qi_cohort_fixture.gd").long_prepare(pop)
+	var s: RefCounted=pop.society
+	var p: int=ids[0]
+	var state: RefCounted=s.qi_practice.body(s,p)
+	var row: int=s.meridian_store.slot[p]
+	assert(s.qi_practice.release(s,p,state,1).spent==0,"Release cannot create qi in an uncharged uncertified body")
+	# Explicitly charged transient assay, separate from reachability fixture.
+	s.meridian_store.integers[row*Store.PERSON_INTS+Store.PersonInt.LAYER]=1
+	state.reserve=100000
+	state.absorbed=100000
+	state.reserve_moments=[100000.0,0.0,100000.0,0.0]
+	state.nodes[4].stored_quanta=100000
+	var saved: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var copy := Population.new()
+	Save.restore(copy,saved)
+	s.qi_practice._compiler.accounting.vocabulary={} # fresh-process vocabulary cache
+	var result: Dictionary=s.qi_practice.release(s,p,state,2)
+	assert(result==copy.society.qi_practice.release(copy.society,p,copy.society.qi_practice.body(copy.society,p),2),"Transient assay reproduces from cold save")
+	assert(Save.capture(pop)==Save.capture(copy),"Release histories and physical state round-trip deterministically")
+	assert(result.spent==100 and result.delivered<=100 and state.reserve==99900)
+	assert(s.qi_practice._compiler.residual(state)==0 and state.dissipated==100,"All released energy is paid and dissipated exactly once")
+	state.reserve_moments=[state.reserve*.5,0.0,float(state.reserve),0.0]
+	var impure: Dictionary=s.qi_practice.release(s,p,state,3)
+	assert(not impure.success and impure.delivered<=25 and state.strain>=.005,"Impurity squared and failed-release strain apply")
+	assert(s.qi_practice._compiler.residual(state)==0)
+	state.reserve_moments=[float(state.reserve),0.0,0.0,0.0]
+	var unstable: Dictionary=s.qi_practice.release(s,p,state,4)
+	assert(not unstable.success and float(state.milestones.get("release_strain",0))>0,"Unstable pulse commits real limb strain")
+	var opening_outside: float=state.milestones.release_strain
+	var opening_recovery: int=state.recovery_days
+	s.meridian_store.integers[row*Store.PERSON_INTS+Store.PersonInt.LAYER]=3
+	var phase: int=preload("res://src/qi_certification.gd").phase(s,p,s.qi_practice.records[p])
+	state.day=7-phase
+	var drill: Dictionary=s.qi_practice.drill_program(s,p,state)
+	assert(drill!=state.retained_program and drill.operations.size()<=32,"Drill appends within the bounded vocabulary")
+	assert(s.qi_practice.records[p].distribution_drill>=0)
+	var sample: Dictionary=s.qi_field.sample(pop.locations[p])
+	# Restore pure quality for the separate charged transport fixture.
+	state.reserve_moments[0]=float(state.reserve)
+	state.reserve_moments[2]=float(state.reserve)
+	for terminal in 4:
+		state.day=(terminal+4)*7-phase
+		drill=s.qi_practice.drill_program(s,p,state)
+		assert(s.qi_practice.records[p].distribution_drill==terminal)
+		s.qi_practice._compiler.step(state,s.qi_practice._compiler.live_network(state,drill,sample),int(sample.quantity))
+		assert(s.qi_practice._compiler.residual(state)==0,"Every appended limb drill executes with conserved integer energy")
+	for day in 3:
+		s.qi_practice._compiler.step(state,s.qi_practice._compiler.live_network(state,state.retained_program,sample),int(sample.quantity))
+	assert(float(state.milestones.get("release_strain",0))==0,"Pulse strain heals through normal nightly recovery")
+	assert(state.recovery_days-opening_recovery==ceili(maxf(0,opening_outside-.20)/.10),"Memo refresh preserves the actual recovery span")
+	# Fully accounted charge for independent four-terminal transport assays.
+	state.absorbed+=100000-state.reserve
+	state.reserve=100000
+	state.nodes[4].stored_quanta=100000
+	state.reserve_moments=[100000.0,0.0,100000.0,0.0]
+	for terminal in 4:
+		var delivery: Dictionary=s.qi_practice.distribution(s,p,state,100+terminal,terminal)
+		assert(delivery.success and delivery.delivered>=20,"Every anatomical terminal receives a real finite pulse")
+		assert(s.qi_practice._compiler.residual(state)==0)
+	print("RELEASE ASSAY ",result," impure=",impure," unstable=",unstable," outside_strain=",opening_outside)
+
+## Explicit injected layer flags exercise future coordinator paths; these are
+## never included in the natural-reachability fixture or its achievement table.
+func active_world_replay() -> void:
+	await process_frame
+	var world: Node2D=load("res://world_map.tscn").instantiate()
+	root.add_child(world)
+	world.set_process(false)
+	var life: Node2D=world.life
+	life.set_process(false)
+	life.paused=true
+	var pop: RefCounted=life.population
+	pop.async_factions=false
+	var s: RefCounted=pop.society
+	s.qi_practice=preload("res://tools/qi_cohort_fixture.gd").UnawarePractice.new()
+	var ids: Array[int]=preload("res://tools/qi_cohort_fixture.gd").prepare_palace(pop)
+	var active: Array[int]=[ids[0],ids[3]]
+	for i in active.size():
+		var p: int=active[i]
+		s.prepare_meridians(p,0)
+		var state: RefCounted=s.qi_practice.body(s,p)
+		s.qi_practice.records[p]={"return_days":0,"cycles":0,"last_policy_day":0,"fixture":"injected layer flag for active replay only"}
+		s.meridian_store.integers[s.meridian_store.slot[p]*Store.PERSON_INTS+Store.PersonInt.LAYER]=3 if i==0 else 7
+		state.reserve=100000
+		state.absorbed=600000
+		state.work=500000
+		state.opening_work=500000
+		state.settling_days=30
+		state.nodes[4].stored_quanta=100000
+		state.reserve_moments=[100000.0,0.0,100000.0,0.0]
+		state.retained_program=s.qi_practice.program("A" if i==0 else "B",1.0)
+		assert(s.qi_practice._compiler.residual(state)==0,"Explicit prior opening work and reserve are fully accounted")
+	var checkpoint: Dictionary
+	var checkpoint_economy: Dictionary
+	var drills := 0
+	var invalid_days := {active[0]:0,active[1]:0}
+	for day in range(1,36):
+		life.economy.advance_to(day*1440.0)
+		pop.tick_day(day)
+		for p in active:
+			drills+=int(s.qi_practice.records[p].get("distribution_drill",-1)>=0)
+			invalid_days[p]+=int(not s.qi_practice.records[p].get("clean",false))
+			assert(s.qi_practice._compiler.residual(s.qi_practice.body(s,p))==0)
+		if day==18:
+			checkpoint=bytes_to_var(var_to_bytes(Save.capture(pop)))
+			checkpoint_economy=bytes_to_var(var_to_bytes(Save.capture(life.economy)))
+		await process_frame
+	var paid := 0
+	for event: Dictionary in s.qi_practice.records[active[1]].release_history: paid+=int(event.spent)
+	assert(drills>=8 and paid>=400,"Future drills and paid releases actually execute")
+	for p in active:
+		var deliveries: Array=[]
+		var delivered_targets := {}
+		for event: Dictionary in s.qi_practice.records[p].get("distribution_history",[]):
+			deliveries.append([event.terminal,event.spent,event.delivered,event.success])
+			if event.success: delivered_targets[event.terminal]=true
+		var terminals: int=s.qi_practice.records[p].get("terminals",{}).size()
+		print("ACTIVE DISTRIBUTION ",p," ",deliveries," certified_terminal_records=",terminals," invalid_days=",invalid_days[p]," damage=",s.damage[p]," injury_until=",s.injury_until[p])
+		assert(delivered_targets.size()==4,"Finite recorded pulses exercise all four terminals")
+		assert(terminals==4 or invalid_days[p]>0,"Missing certification records require recorded invalid practice days")
+	assert(s.meridian_report(active[0]).achieved[3]>=0,"Healthy injected layer-3 actor certifies actual fourth-layer evidence")
+
+	var daily: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var daily_economy: Dictionary=bytes_to_var(var_to_bytes(Save.capture(life.economy)))
+	Save.restore(pop,bytes_to_var(var_to_bytes(checkpoint)))
+	Save.restore(life.economy,bytes_to_var(var_to_bytes(checkpoint_economy)))
+	s.law.rebuild_sight()
+	life.economy.coarse_population=true
+	while pop.day<35:
+		life._skip_week(35)
+		await process_frame
+	life.economy.coarse_population=false
+	difference(Save.capture(pop),daily)
+	assert(Save.capture(pop)==daily,"Active distribution/split/release world daily equals jump after cold restore")
+	assert(Save.capture(life.economy)==daily_economy)
+	print("PASS active coordinator world replay: injected flags, %d drill-days, %d paid release records; not reachability evidence" % [drills,s.qi_practice.records[active[1]].release_history.size()])
+	world.queue_free()
+
+func hourly_windows() -> void:
+	var compiler = preload("res://src/session_compiler.gd")
+	var bins: Array=[]
+	for hour in 4:
+		var row: Array=[]
+		row.resize(9)
+		row.fill(0)
+		bins.append(row)
+	# One complete qualifying hour counts even when the daily average is low.
+	for e in [0,1,2,5,6,7,8]: bins[0][e]=90000
+	assert(compiler.hourly_core_rate(bins,14400)==90)
+	assert(compiler.hourly_core_rate(bins,1800)==0,"A partial hour cannot certify output")
+	# Equal day totals on different hours are not a sustained circuit.
+	for e in [0,1,2,6,7,8]: bins[0][e]=360000
+	bins[0][5]=0
+	bins[1][5]=360000
+	assert(compiler.hourly_core_rate(bins,14400)==0)
+	for hour in bins: hour.fill(0)
+	for e in [0,3,4,5,6,7,8]: bins[0][e]=90000
+	assert(compiler.hourly_core_rate(bins,14400)==90,"The alternative complete circuit also qualifies")
+	for e in [1,2,3,4]: bins[0][e]=45000
+	assert(compiler.hourly_core_rate(bins,14400)==45,"Two partial circuits cannot be summed")
+
+func health_proofs() -> void:
+	var pop := Population.new()
+	var ids: Array[int]=preload("res://tools/qi_cohort_fixture.gd").long_prepare(pop)
+	var s: RefCounted=pop.society
+	var p: int=ids[0]
+	var state: RefCounted=s.qi_practice.body(s,p)
+	state.absorbed=600000
+	state.reserve=100000
+	state.nodes[4].stored_quanta=100000
+	state.reserve_moments=[100000.0,0.0,100000.0,0.0]
+	state.work=500000
+	state.opening_work=500000
+	state.settling_days=30
+	var sample: Dictionary=s.qi_field.sample(pop.locations[p])
+	s.qi_practice._compiler.step(state,s.qi_practice._compiler.live_network(state,state.retained_program,sample),int(sample.quantity))
+	assert(state.milestones.daily_execution.stable and state.milestones.daily_execution.has("health_revision"))
+	state.nodes[1].integrity=.5
+	s.qi_practice._compiler.invalidate(state)
+	s.qi_practice.certify(s,p,state,state.day,0)
+	assert(s.meridian_report(p).layer==0,"An anatomical revision invalidates the execution health proof")
