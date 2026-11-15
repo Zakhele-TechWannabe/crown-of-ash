@@ -18,6 +18,7 @@ var _baseline_moments := PackedInt64Array()
 var _active_flags := PackedByteArray()
 var _source_flags := PackedByteArray()
 var _requests: Dictionary = {}
+var _request_pool: Dictionary = {}
 var _nodes: Array[Dictionary] = []
 var _outlets: Array[Dictionary] = []
 var _edges: Array[Dictionary] = []
@@ -447,7 +448,13 @@ func request(consumer_id: String, position: Vector2, elemental_demand: PackedInt
 	assert(elemental_demand.size() == 5)
 	assert(not _requests.has(consumer_id), "One request per stable consumer ID per step")
 	for amount in elemental_demand: assert(amount >= 0)
-	_requests[consumer_id] = {"cell":cell_at(position),"demand":elemental_demand.duplicate(),"priority":priority,"tap":tap}
+	if not _request_pool.has(consumer_id): _request_pool[consumer_id]={}
+	var entry: Dictionary = _request_pool[consumer_id]
+	entry.cell=cell_at(position)
+	entry.demand=elemental_demand.duplicate()
+	entry.priority=priority
+	entry.tap=tap
+	_requests[consumer_id]=entry
 
 func _settle() -> void:
 	allocations = {}
@@ -488,12 +495,12 @@ func _settle() -> void:
 				var fraction := proportional(int(_requests[id].demand[e]),available,demand)
 				allocations[id][e] = fraction[0]
 				left -= fraction[0]
-				ranked.append({"id":id,"remainder":fraction[1],"tie":stable_key("%s:%d:tap:%d:%d:%s" % [_seed,day,n,e,id])})
-			ranked.sort_custom(func(a: Dictionary,b: Dictionary) -> bool:
-				if a.remainder != b.remainder: return int(a.remainder) > int(b.remainder)
-				if a.tie != b.tie: return int(a.tie) < int(b.tie)
-				return str(a.id) < str(b.id))
-			for i in left: allocations[ranked[i].id][e] += 1
+				ranked.append([id,fraction[1],stable_key("%s:%d:tap:%d:%d:%s" % [_seed,day,n,e,id])])
+			ranked.sort_custom(func(a: Array,b: Array) -> bool:
+				if a[1] != b[1]: return int(a[1]) > int(b[1])
+				if a[2] != b[2]: return int(a[2]) < int(b[2])
+				return str(a[0]) < str(b[0]))
+			for i in left: allocations[ranked[i][0]][e] += 1
 			parts[e] -= available
 			ledger.sources[n].tapped_elements[e] += available
 			ledger.tap_elements[e] += available
@@ -539,6 +546,13 @@ func _settle() -> void:
 			demand = scaled
 			if demand == 0: continue
 			var available := mini(demand, _mass[int(first.cell) * 5 + e])
+			if available==demand:
+				# Co-located, fully funded batch: no proportional ranking or ties.
+				for i in range(cursor,end): allocations[ids[i]][e]=_requests[ids[i]].demand[e]
+				_remove(int(first.cell),e,available)
+				ledger.withdrawals+=available
+				ledger.withdrawal_elements[e]+=available
+				continue
 			var left := available
 			var ranked: Array = []
 			for i in range(cursor,end):
@@ -547,12 +561,12 @@ func _settle() -> void:
 				var share: int = fraction[0]
 				allocations[id][e] = share
 				left -= share
-				ranked.append({"id":id,"remainder":fraction[1],"tie":stable_key("%s:%d:%d:%d:%s" % [_seed,day,first.cell,e,id])})
-			ranked.sort_custom(func(a: Dictionary,b: Dictionary) -> bool:
-				if a.remainder != b.remainder: return int(a.remainder) > int(b.remainder)
-				if a.tie != b.tie: return int(a.tie) < int(b.tie)
-				return str(a.id) < str(b.id))
-			for i in left: allocations[ranked[i].id][e] += 1
+				ranked.append([id,fraction[1],stable_key("%s:%d:%d:%d:%s" % [_seed,day,first.cell,e,id])])
+			ranked.sort_custom(func(a: Array,b: Array) -> bool:
+				if a[1] != b[1]: return int(a[1]) > int(b[1])
+				if a[2] != b[2]: return int(a[2]) < int(b[2])
+				return str(a[0]) < str(b[0]))
+			for i in left: allocations[ranked[i][0]][e] += 1
 			_remove(int(first.cell), e, available)
 			ledger.withdrawals += available
 			ledger.withdrawal_elements[e] += available
@@ -891,7 +905,7 @@ func world_totals() -> Dictionary:
 
 ## Return unused ordinary allocations at their reservation position and quality.
 ## The receipt is consumed once; net withdrawals remain the actual body intake.
-func settle_reservation(id: String, position: Vector2, used: int, quality: Dictionary) -> void:
+func settle_reservation(id: String, position: Vector2, used: int, quality: Dictionary, close: bool = true) -> void:
 	var receipt: PackedInt64Array = allocations.get(id, PackedInt64Array([0,0,0,0,0]))
 	var total := 0
 	for part in receipt: total += part
@@ -914,4 +928,4 @@ func settle_reservation(id: String, position: Vector2, used: int, quality: Dicti
 		ledger.withdrawals -= returned
 		ledger.withdrawal_elements[e] -= returned
 	allocations.erase(id)
-	_close_ledger()
+	if close: _close_ledger()

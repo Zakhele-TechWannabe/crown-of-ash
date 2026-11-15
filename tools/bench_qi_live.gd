@@ -39,6 +39,7 @@ func run() -> void:
 				s.mind._set_weight(p,s.mind.B2+s.mind.AMBITION,-3 if i%2==0 else 3)
 				s.mind._set_weight(p,s.mind.B2+s.mind.PRIDE,-3 if i%2==0 else 3)
 		if mode=="sealed": s.qi_field.set_decree("Heavenly Origin",0)
+		s.qi_practice.profile.fill(0)
 		var elapsed := 0
 		for day in range(1,731):
 			var start := Time.get_ticks_usec()
@@ -48,6 +49,7 @@ func run() -> void:
 			if day%30==0: await process_frame
 			if day%365==0: print("LIVE progress %s day=%d" % [mode,day])
 		print("LIVE %s ms/day %.3f" % [mode,elapsed/730000.0])
+		print("LIVE PROFILE %s phases_usec=%s signatures=%d coefficients=%d day_hits=%d day_misses=%d network_hits=%d network_misses=%d" % [mode,s.qi_practice.profile,s.qi_practice._compiler.signature_usec,s.qi_practice._compiler.coefficient_usec,s.qi_practice._compiler.day_hits,s.qi_practice._compiler.day_misses,s.qi_practice._compiler.cache_hits,s.qi_practice._compiler.cache_misses])
 		for i in mini(6,prepared.size()):
 			var p := prepared[i]
 			if s.meridian_report(p).is_empty():

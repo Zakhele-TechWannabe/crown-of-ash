@@ -4,6 +4,7 @@ extends RefCounted
 const Compiler = preload("res://src/session_compiler.gd")
 const Anatomy = preload("res://src/meridians.gd")
 const Store = preload("res://src/meridian_store.gd")
+var profile := PackedInt64Array([0,0,0,0,0,0,0,0,0]) # execution, request, field, mismatch, writeback, certification/notes, preparation/sample, policy, settlement
 var _compiler := Compiler.new()
 var _bodies: Dictionary = {}
 var records: Dictionary = {}
@@ -12,6 +13,7 @@ var _policy: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res:/
 func save_state() -> Dictionary:
 	var saved := records.duplicate(true)
 	for p: int in _bodies:
+		saved[p]["memo"]=_compiler.save_memo(_bodies[p])
 		saved[p].body = _compiler.accounting.serializable_state(_bodies[p].as_dictionary()).duplicate(true)
 	return {"records":saved}
 
@@ -32,6 +34,8 @@ func body(s: RefCounted, p: int) -> Anatomy.Cultivator:
 			values.edges=restored_edges
 			_bodies[p] = Anatomy.Cultivator.from_dictionary(values)
 			records[p].erase("body")
+			_compiler.restore_memo(_bodies[p],records[p].get("memo",{}))
+			records[p].erase("memo")
 		else:
 			_bodies[p] = _compiler.production_body(s.meridian_store,s.meridian_store.slot[p])
 	return _bodies[p]
@@ -45,6 +49,7 @@ func program(route: String, filter_level: float) -> Dictionary:
 	return result
 
 func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Dictionary, budget: int) -> void:
+	if not state.retained_program.is_empty() and state.day-int(records[p].get("last_policy_day",state.day-90))<90: return
 	var u := traits(s,p)
 	if state.retained_program.is_empty():
 		var route: String = _policy.palace_route if s.fifty and s.fifty.member(p) else _policy.default_route
@@ -60,12 +65,15 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	var best := -INF
 	for candidate: Dictionary in [current,program("A",1),program("B",.25),program(current.id,clampf(current.filter-step,0,1)),program(current.id,clampf(current.filter+step,0,1))]:
 		var trial := _compiler.accounting.clone_model(state)
-		_compiler.simulate_day_model(trial,candidate,sample,budget)
+		trial.milestones=state.milestones.duplicate(true)
+		_compiler.solve_day(trial,_compiler.compile(trial,candidate,sample,0,true),budget)
 		if trial.strain>accepted or trial.injuries>state.injuries: continue
 		var score: float = trial.work-state.work-(trial.residue_added-state.residue_added)*u[2]-trial.strain*1000
 		if score>best:
 			best=score
 			chosen=candidate
+	if chosen!=current:
+		s.meridian_store.expected_intake[s.meridian_store.slot[p]]=-1
 	state.retained_program=chosen
 	state.choices.append({"day":state.day,"route":chosen.id,"filter":chosen.filter})
 	if state.choices.size()>16: state.choices.pop_front()
@@ -74,10 +82,13 @@ func advance(s: RefCounted, until: int) -> void:
 	var field: RefCounted = s.qi_field
 	field.seed(field.day)
 	while field.day<until:
-		var participants: Array[int] = []
+		var participants := PackedInt32Array()
+		# One source sample per occupied cell, not per body. The elemental
+		# allocator retains individual stable IDs for its exact tie rules.
 		var samples: Dictionary = {}
-		var positions: Dictionary = {}
-		var predictions: Dictionary = {}
+		var cells := PackedInt32Array()
+		var positions := PackedVector2Array()
+		var prepare_timer := Time.get_ticks_usec()
 		for p in s.population.size():
 			if not s.alive[p]: continue
 			if s.prepare_meridians(p,field.day)<0: continue
@@ -85,50 +96,65 @@ func advance(s: RefCounted, until: int) -> void:
 			state.day=field.day
 			if not records.has(p): records[p]={"return_days":0,"cycles":0,"last_reserve":0}
 			var position: Vector2 = s.population.locations[p]
-			var sample: Dictionary = field.sample(position)
-			# Solve a detached day to reserve only feasible intake and headroom.
-			# A fully funded prediction is committed directly; crowding forces a
-			# replay from the unchanged opening body with its actual allocation.
+			var cell: int = field.cell_at(position)
+			if not samples.has(cell): samples[cell]=field.sample(position)
+			var sample: Dictionary = samples[cell]
 			var limit := mini(int(sample.quantity),ceili(Anatomy.capacity(state.edges[0])*14400*1000))
-			# Travel has no authoritative ambient location until arrival. Stored qi
-			# still pays integration, leakage, purge and deviation exposure daily.
 			if s.fifty and s.fifty.away(p): limit=0
+			profile[6]+=Time.get_ticks_usec()-prepare_timer
+			var policy_timer := Time.get_ticks_usec()
 			select_program(s,p,state,sample,limit)
-			var predicted := _compiler.accounting.clone_model(state)
-			_compiler.simulate_day_model(predicted,state.retained_program,sample,limit)
-			predictions[p]=predicted
-			var demand := predicted.absorbed-state.absorbed
-			positions[p]=position
-			samples[p]=sample
+			profile[7]+=Time.get_ticks_usec()-policy_timer
+			var timer := Time.get_ticks_usec()
+			var row: int = s.meridian_store.slot[p]
+			var expected: int = s.meridian_store.expected_intake[row]
+			# Request the last observed absorption plus one 2% allocation bucket.
+			# This permits rising throughput without predicting or solving twice.
+			var demand := limit if expected<=0 else mini(limit,expected+maxi(2,ceili(expected*.02)))
 			field.request("practice:%d" % p,position,field.split_mass(demand,Array(sample.elements)) if int(sample.quantity)>0 else PackedInt64Array([0,0,0,0,0]),1)
 			participants.append(p)
+			cells.append(cell)
+			positions.append(position)
+			profile[1]+=Time.get_ticks_usec()-timer
+			prepare_timer=Time.get_ticks_usec()
 		if participants.is_empty():
 			field.advance(until)
 			break
+		var field_timer := Time.get_ticks_usec()
 		field.advance(field.day+1)
-		for p in participants:
+		profile[2]+=Time.get_ticks_usec()-field_timer
+		for i in participants.size():
+			var p: int = participants[i]
 			var state := body(s,p)
-			var sample: Dictionary = samples[p]
+			var sample: Dictionary = samples[cells[i]]
 			var budget := 0
 			for part: int in field.allocations.get("practice:%d" % p,[]): budget+=part
 			var absorbed := state.absorbed
 			var injuries := state.injuries
 			var deaths := state.deaths
-			var predicted: Anatomy.Cultivator=predictions[p]
-			if budget==predicted.absorbed-absorbed:
-				state=predicted
-				_bodies[p]=state
-			else:
-				_compiler.simulate_day_model(state,state.retained_program,sample,budget)
-			field.settle_reservation("practice:%d" % p,positions[p],state.absorbed-absorbed,sample)
+			var timer := Time.get_ticks_usec()
+			var net := _compiler.live_network(state,state.retained_program,sample)
+			# Replay only a valid, funded transition; otherwise solve once with
+			# the actual grant. Saved arithmetic preserves cold continuation.
+			_compiler.step(state,net,budget)
+			profile[0]+=Time.get_ticks_usec()-timer
+			s.meridian_store.expected_intake[s.meridian_store.slot[p]]=state.absorbed-absorbed
+			timer=Time.get_ticks_usec()
+			field.settle_reservation("practice:%d" % p,positions[i],state.absorbed-absorbed,sample,false)
 			assert(_compiler.residual(state)==0,"Production integer conservation")
+			profile[8]+=Time.get_ticks_usec()-timer
+			timer=Time.get_ticks_usec()
 			writeback(s,p,state)
+			profile[4]+=Time.get_ticks_usec()-timer
+			timer=Time.get_ticks_usec()
 			certify(s,p,state,field.day,injuries)
 			if state.injuries>injuries:
 				s.injury_until[p]=maxi(s.injury_until[p],field.day+21)
 				s.note(p,"injury","%s suffered a qi deviation injury" % s.population.names[p],field.day)
 			if state.deaths>deaths:
 				s.die(p,"cultivation_death","%s died by qi deviation" % s.population.names[p])
+			profile[5]+=Time.get_ticks_usec()-timer
+		field._close_ledger()
 
 func certify(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, opening_injuries: int) -> void:
 	var row: int = s.meridian_store.slot[p]
@@ -166,32 +192,7 @@ func certify(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, opening
 		s.qi[p]=state.reserve/1000.0
 
 func writeback(s: RefCounted, p: int, state: Anatomy.Cultivator) -> void:
-	var store: RefCounted = s.meridian_store
-	var row: int = store.slot[p]
-	var base := row*Store.PERSON_INTS
-	for pair: Array in [[Store.PersonInt.DAY,state.day],[Store.PersonInt.RESERVE,state.reserve],[Store.PersonInt.RESIDUE,state.residue],[Store.PersonInt.CAPACITY,state.capacity],[Store.PersonInt.OPENING_WORK,state.opening_work],[Store.PersonInt.VOLUME_WORK,state.volume_work],[Store.PersonInt.WORK,state.work],[Store.PersonInt.ABSORBED,state.absorbed],[Store.PersonInt.DISSIPATED,state.dissipated],[Store.PersonInt.GROUNDED,state.grounded],[Store.PersonInt.SETTLING_DAYS,state.settling_days],[Store.PersonInt.INJURIES,state.injuries],[Store.PersonInt.DEATHS,state.deaths]]: store.integers[base+pair[0]]=pair[1]
-	for q in 4: store.fractions[row*Store.PERSON_FLOATS+q]=state.reserve_moments[q]
-	for pair: Array in [[Store.PersonFloat.INTAKE_REMAINDER,state.intake_remainder],[Store.PersonFloat.LEAK_REMAINDER,state.leak_remainder],[Store.PersonFloat.RESIDUE_REMAINDER,state.residue_remainder],[Store.PersonFloat.PURGE_REMAINDER,state.purge_remainder]]:
-		store.fractions[row*Store.PERSON_FLOATS+pair[0]]=pair[1]
-	for e in Store.EDGES:
-		var edge: Anatomy.Edge=state.edges[e]
-		var offset := (row*Store.EDGES+e)*Store.EDGE_FLOATS
-		for pair: Array in [[Store.EdgeFloat.ADAPTATION,edge.adaptation],[Store.EdgeFloat.STRAIN,edge.strain],[Store.EdgeFloat.INTEGRITY,edge.integrity],[Store.EdgeFloat.SCAR,edge.scar],[Store.EdgeFloat.PRACTICE,edge.practice],[Store.EdgeFloat.PEAK_RATE,edge.peak_rate]]: store.edges[offset+pair[0]]=pair[1]
-		store.edge_energy[(row*Store.EDGES+e)*Store.EDGE_INTS+Store.EdgeInt.FLOW]=edge.daily_flow
-		store.edge_energy[(row*Store.EDGES+e)*Store.EDGE_INTS+Store.EdgeInt.INTEGRATION_WORK]=edge.work
-	for i in Store.NODES:
-		var id: String = Store.definition().nodes[i].id
-		for node: Anatomy.Compartment in state.nodes:
-			if node.id!=("dantian" if id=="lower" else id): continue
-			var offset := (row*Store.NODES+i)*Store.NODE_FLOATS
-			for q in 4: store.nodes[offset+q]=node.moments[q]
-			for element in 5: store.mass[(row*Store.NODES+i)*5+element]=node.mass[element]
-			store.nodes[offset+Store.NodeFloat.FILTER_REMAINDER]=node.filter_remainder
-			store.nodes[offset+Store.NodeFloat.STABILISE_REMAINDER]=node.stabilise_remainder
-			store.nodes[offset+Store.NodeFloat.VOLUME]=node.volume
-			store.nodes[offset+Store.NodeFloat.INTEGRITY]=node.integrity
-			store.nodes[offset+Store.NodeFloat.SCAR]=node.scar
-			store.nodes[offset+Store.NodeFloat.STRAIN]=node.strain
+	s.meridian_store.writeback(s.meridian_store.slot[p],state)
 
 func policy_report(p: int) -> Dictionary:
 	var retained: Dictionary = {}

@@ -4,6 +4,7 @@ extends RefCounted
 const Anatomy = preload("res://src/meridians.gd")
 const Reference = preload("res://src/circulation.gd")
 const Store = preload("res://src/meridian_store.gd")
+var signature_usec := 0
 var accounting := Reference.new()
 var routes: Dictionary = {}
 var cache_hits := 0
@@ -20,6 +21,9 @@ const RELAX := 96
 const STEPS := 4
 
 class Network extends RefCounted:
+	var source_key := PackedFloat64Array()
+	var canonical := false
+	var fingerprint := 0
 	var build_usec := 0
 	var healthy := true
 	var instructions: Array = []
@@ -39,17 +43,37 @@ class Network extends RefCounted:
 
 ## A revision is scoped to one body; route content and sample are also keyed.
 ## Caller must invalidate/revise after structural changes or sample changes.
-func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary, revision: int = 0) -> Network:
-	var signature: Array = [program, sample, revision+state.session_revision]
+func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary, revision: int = 0, coarse: bool = false) -> Network:
+	var started := Time.get_ticks_usec()
+	# Live samples contain dates, inventory and descriptive metadata that do not
+	# affect the periodic kernel. Canonical coefficients make cold and warm
+	# compilation identical, rather than anchoring approximation to cache history.
+	var source_key := PackedFloat64Array([exp(roundf(log(maxf(.000001,float(sample.density)))/log(1.01))*log(1.01)),snappedf(float(sample.purity),.005),snappedf(float(sample.stability),.005),snappedf(float(sample.corruption),.005)]) if coarse else PackedFloat64Array()
+	var signature: Array = [program, source_key if coarse else sample, 0 if coarse else revision+state.session_revision]
+	var capacities := PackedFloat64Array()
+	var conductances := PackedFloat64Array()
 	for edge: Anatomy.Edge in state.edges:
-		signature.append([edge.source,edge.destination,edge.capacity,edge.conductivity,edge.openness,edge.integrity,edge.scar,edge.adaptation])
+		if coarse:
+			var integrity := floorf(edge.integrity*100)/100.0
+			var scar := floorf(edge.scar*100)/100.0
+			capacities.append(edge.capacity*edge.openness*integrity*(1-.60*scar)*(1+floorf(edge.adaptation*20)/20.0))
+			conductances.append(edge.conductivity*edge.openness*edge.openness*integrity*(1-.50*scar)*1.15)
+			signature.append([edge.source,edge.destination,capacities[-1],conductances[-1]])
+		else:
+			signature.append([edge.source,edge.destination,edge.capacity,edge.conductivity,edge.openness,edge.integrity,edge.scar,edge.adaptation])
 	for node: Anatomy.Compartment in state.nodes: signature.append([node.volume if node.id!="dantian" else 0.0,node.safe_pressure])
-	var key := JSON.stringify(signature)
+	var key: Variant = signature if coarse else JSON.stringify(signature)
+	signature_usec += Time.get_ticks_usec()-started
 	if routes.has(key):
 		cache_hits += 1
 		return routes[key]
 	cache_misses += 1
+	if coarse:
+		sample = {"density":source_key[0],"purity":source_key[1],"stability":source_key[2],"corruption":source_key[3]}
 	var net := Network.new()
+	net.source_key=source_key
+	net.canonical=coarse
+	net.fingerprint=hash(key)
 	net.program = program.duplicate(true)
 	net.sample = sample.duplicate(true)
 	var config := Anatomy.definition()
@@ -62,22 +86,31 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 	net.used_edges.sort()
 	for edge: Anatomy.Edge in state.edges:
 		if edge.strain>0 or edge.integrity<1: net.healthy = false
-		net.capacity.append(Anatomy.capacity(edge))
-		net.conductance.append(Anatomy.conductance(edge))
+		net.capacity.append(capacities[net.capacity.size()] if coarse else Anatomy.capacity(edge))
+		net.conductance.append(conductances[net.conductance.size()] if coarse else Anatomy.conductance(edge))
 		net.source.append(edge.source)
 		net.destination.append(edge.destination)
 	for node: Anatomy.Compartment in state.nodes:
 		if node.strain>0 or node.integrity<1: net.healthy = false
-		net.volume.append(node.volume)
+		net.volume.append(initial_capacity/1000.0/node.safe_pressure if coarse and node.id=="dantian" else node.volume)
 		net.safe.append(node.safe_pressure)
 	for op: Reference.Instruction in net.instructions: net.seconds += op.slices*10.0
 	net.cycles = int(config.session_seconds/net.seconds)
 	net.pressure_limit = minf(net.safe[4],float(sample.density)/8.0)
 
 	# Keep compilation memory bounded. Networks already held by callers survive eviction.
-	if routes.size()>=128: routes.clear()
+	if routes.size()>=2048: routes.clear()
 	routes[key] = net
 	return net
+
+func live_network(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary) -> Network:
+	var memo: DayMemo = state.session_cache if state.session_cache_owner==identity else null
+	if memo!=null and memo.network!=null and memo.network.canonical and memo.revision==state.session_revision and memo.network.program==program:
+		var source := PackedFloat64Array([exp(roundf(log(maxf(.000001,float(sample.density)))/log(1.01))*log(1.01)),snappedf(float(sample.purity),.005),snappedf(float(sample.stability),.005),snappedf(float(sample.corruption),.005)])
+		if memo.network.source_key==source:
+			cache_hits+=1
+			return memo.network
+	return compile(state,program,sample,0,true)
 
 func table(net: Network, bin: int) -> PackedFloat64Array:
 	if not net.tables.has(bin):
@@ -137,6 +170,34 @@ class DayMemo extends RefCounted:
 	var residue_bucket := 0
 	var indices := PackedInt32Array()
 
+const MEMO_FIELDS = ["execution_evidence", "signature", "age", "horizon", "d_absorbed", "d_circulated", "d_refined", "d_usable", "d_dissipated", "d_grounded", "d_work", "d_opening_work", "d_volume_work", "d_residue", "d_residue_added", "d_reserve", "d_purity_moment", "d_instability_moment", "d_recovery_days", "d_settling_days", "d_wall_days", "remainders", "moments", "node_delta", "strain", "pressure", "initial_strain", "revision", "check_events", "reserve_anchor", "residue_anchor", "reserve_bucket", "residue_bucket", "indices"]
+const DELTA_FIELDS = ["flow", "peak", "practice", "work", "adaptation", "strain", "integrity", "scar"]
+
+## Replay deltas are execution state: persist them to keep cold continuations
+## identical. Topology networks and expensive periodic tables stay transient.
+func save_memo(state: Anatomy.Cultivator) -> Dictionary:
+	if state.session_cache_owner!=identity or state.session_cache==null: return {}
+	var memo: DayMemo = state.session_cache
+	var saved := {"body_revision":state.session_revision,"edges":[]}
+	for key: String in MEMO_FIELDS: saved[key]=memo.get(key)
+	for delta: EdgeDelta in memo.edges:
+		var values := []
+		for key: String in DELTA_FIELDS: values.append(delta.get(key))
+		saved.edges.append(values)
+	return saved.duplicate(true)
+
+func restore_memo(state: Anatomy.Cultivator, saved: Dictionary) -> void:
+	if saved.is_empty(): return
+	var memo := DayMemo.new()
+	for key: String in MEMO_FIELDS: memo.set(key,saved[key])
+	for values: Array in saved.edges:
+		var delta := EdgeDelta.new()
+		for i in DELTA_FIELDS.size(): delta.set(DELTA_FIELDS[i],values[i])
+		memo.edges.append(delta)
+	state.session_revision=saved.body_revision
+	state.session_cache=memo
+	state.session_cache_owner=identity
+
 # External anatomical edits must call invalidate (or use set_edge_capacity).
 # Injury and 0.05 adaptation thresholds invalidate automatically. Storage growth
 # is continuous bookkeeping; its pressure is included in the input buckets.
@@ -157,7 +218,7 @@ func input_signature(state: Anatomy.Cultivator, net: Network, budget: int, memo:
 	if absf(residue_ratio-memo.residue_anchor)>.001:
 		memo.residue_anchor = residue_ratio
 		memo.residue_bucket += 1
-	return [net.get_instance_id(),state.session_revision,budget,memo.residue_bucket,memo.reserve_bucket,floori(state.nodes[4].strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve))]
+	return [net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(state.nodes[4].strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve))]
 
 func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var memo: DayMemo = state.session_cache if state.session_cache_owner==identity else null
@@ -171,12 +232,12 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		memo.network = net
 		memo.revision = state.session_revision
 	elif memo.revision!=state.session_revision:
-		memo.network = compile(state,net.program,net.sample,state.session_revision)
+		memo.network = net if net.canonical else compile(state,net.program,net.sample,state.session_revision)
 		memo.revision = state.session_revision
 	var effective := memo.network
 	var signature := input_signature(state,net,budget,memo)
 
-	if memo.signature==signature and memo.age<memo.horizon:
+	if memo.signature==signature and memo.age<memo.horizon and (not net.canonical or memo.d_absorbed<=budget):
 		day_hits += 1
 		memo.age += 1
 		replay_day(state,memo)
@@ -197,7 +258,7 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	solve_day(state,effective,budget)
 	memo.execution_evidence = state.milestones.get("daily_execution",{}).duplicate(true)
 
-	if state.injuries>0 and node.integrity!=before_node[1]: invalidate(state)
+	if floori(node.integrity*100)!=floori(float(before_node[1])*100): invalidate(state)
 	memo.d_absorbed = state.absorbed-before[0]
 	memo.d_circulated = state.circulated-before[1]
 	memo.d_refined = state.refined-before[2]
@@ -227,7 +288,7 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		var edge: Anatomy.Edge = state.edges[memo.indices[i]]
 		var previous: Array = before_edges[i]
 		var change := EdgeDelta.new()
-		if (edge.adaptation!=previous[4] and floori(edge.adaptation*20)!=floori(float(previous[4])*20)) or edge.integrity!=previous[6]: invalidate(state)
+		if (edge.adaptation!=previous[4] and floori(edge.adaptation*20)!=floori(float(previous[4])*20)) or floori(edge.integrity*100)!=floori(float(previous[6])*100): invalidate(state)
 		change.flow = edge.daily_flow
 		change.peak = edge.peak_rate
 		change.practice = edge.practice-previous[2]
@@ -239,7 +300,12 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		memo.edges.append(change)
 	set_horizon(state,memo)
 	# A damaged inactive compartment must heal through the solver, too.
-	if not effective.healthy or state.injuries>0: memo.horizon = 0
+	if not effective.healthy and not net.canonical or state.injuries>0: memo.horizon = 0
+	if net.canonical:
+		for part: Anatomy.Edge in state.edges:
+			if part.strain>0 or part.integrity<1: memo.horizon=0
+		for part: Anatomy.Compartment in state.nodes:
+			if part.strain>0 or part.integrity<1: memo.horizon=0
 
 func set_horizon(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 	memo.horizon = REFRESH_DAYS-1
@@ -257,7 +323,7 @@ func set_horizon(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 			memo.horizon = mini(memo.horizon,maxi(0,floori((next-adaptation)/change.adaptation)))
 
 func replay_day(state: Anatomy.Cultivator, memo: DayMemo) -> void:
-	state.milestones["daily_execution"] = memo.execution_evidence.duplicate(true)
+	state.milestones["daily_execution"] = memo.execution_evidence if memo.network.canonical else memo.execution_evidence.duplicate(true)
 	state.day += 1
 	state.absorbed += memo.d_absorbed
 	state.circulated += memo.d_circulated
@@ -323,7 +389,15 @@ func replay_day(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	state.day += 1
 	var opening_refined := state.refined
-	state.milestones["daily_execution"] = {"fill":0,"draw":0,"pressure":0.0,"purity":0.0,"instability":1.0}
+	if not state.milestones.has("daily_execution"):
+		state.milestones["daily_execution"] = {"fill":0,"draw":0,"pressure":0.0,"purity":0.0,"instability":1.0}
+	else:
+		var daily: Dictionary = state.milestones.daily_execution
+		daily.fill=0
+		daily.draw=0
+		daily.pressure=0.0
+		daily.purity=0.0
+		daily.instability=1.0
 	state.pending_work = 0
 	state.strain = 0
 	var remaining_budget := budget

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Production anatomy storage. Rows are allocated only for qualified people.
 ## This is a state contract, not a cultivation session executor.
+const Anatomy = preload("res://src/meridians.gd")
 const NODES := 16
 const EDGES := 24
 const NODE_FLOATS := 12
@@ -24,6 +25,7 @@ var edge_energy := PackedInt64Array()
 var reserve_mass := PackedInt64Array()
 var integers := PackedInt64Array()
 var fractions := PackedFloat64Array()
+var expected_intake := PackedInt64Array()
 var achieved := PackedInt32Array()
 
 static func definition() -> Dictionary:
@@ -56,6 +58,7 @@ func create(person: int, grades: PackedByteArray, root_bits: int, root_purity: i
 	reserve_mass.resize((row + 1) * 5)
 	integers.resize((row + 1) * PERSON_INTS)
 	fractions.resize((row + 1) * PERSON_FLOATS)
+	expected_intake.append(-1)
 	achieved.resize((row + 1) * 9)
 	for layer in 9: achieved[row * 9 + layer] = -1
 	var config := definition()
@@ -142,7 +145,7 @@ func report(person: int) -> Dictionary:
 	return {"person_id":person,"day":integers[row * PERSON_INTS + PersonInt.DAY],"anatomy_revision":integers[row * PERSON_INTS + PersonInt.REVISION],"laws_version":int(config.laws_version),"nodes":node_report,"edges":edge_report,"reserve":reserve,"capacity":integers[row * PERSON_INTS + PersonInt.CAPACITY],"residue":integers[row * PERSON_INTS + PersonInt.RESIDUE],"purity":fractions[row * PERSON_FLOATS + PersonFloat.RESERVE_PURITY] / maxi(1,reserve),"layer":integers[row * PERSON_INTS + PersonInt.LAYER],"achieved":achieved.slice(row * 9, (row + 1) * 9)}
 
 func save_state() -> Dictionary:
-	return {"schema_version":1,"slot":slot.duplicate(),"people":people.duplicate(),"nodes":nodes.duplicate(),"mass":mass.duplicate(),"edges":edges.duplicate(),"edge_energy":edge_energy.duplicate(),"reserve_mass":reserve_mass.duplicate(),"integers":integers.duplicate(),"fractions":fractions.duplicate(),"achieved":achieved.duplicate()}
+	return {"expected_intake":expected_intake.duplicate(),"schema_version":1,"slot":slot.duplicate(),"people":people.duplicate(),"nodes":nodes.duplicate(),"mass":mass.duplicate(),"edges":edges.duplicate(),"edge_energy":edge_energy.duplicate(),"reserve_mass":reserve_mass.duplicate(),"integers":integers.duplicate(),"fractions":fractions.duplicate(),"achieved":achieved.duplicate()}
 
 ## Validate the complete shape before changing any authoritative column.
 func load_state(state: Dictionary) -> bool:
@@ -158,6 +161,9 @@ func load_state(state: Dictionary) -> bool:
 	for row in count:
 		var person: int = state.people[row]
 		if person < 0 or person >= state.slot.size() or state.slot[person] != row: return false
+	var expected: Variant = state.get("expected_intake",PackedInt64Array())
+	if not expected is PackedInt64Array: return false
+	if state.has("expected_intake") and expected.size()!=count: return false
 	for key: String in ["nodes","edges","fractions"]:
 		for value: float in state[key]:
 			if not is_finite(value): return false
@@ -165,7 +171,56 @@ func load_state(state: Dictionary) -> bool:
 		for value: int in state[key]:
 			if value < 0: return false
 	for key: String in ["slot","people","nodes","mass","edges","edge_energy","reserve_mass","integers","fractions","achieved"]: set(key, state[key].duplicate())
+	expected_intake = expected.duplicate()
+	if not state.has("expected_intake"):
+		expected_intake.resize(count)
+		expected_intake.fill(-1)
 	return true
 
 func memory_bytes() -> int:
-	return slot.size() * 4 + people.size() * 4 + (nodes.size() + mass.size() + edges.size() + edge_energy.size() + reserve_mass.size() + integers.size() + fractions.size()) * 8 + achieved.size() * 4
+	return expected_intake.size()*8 + slot.size() * 4 + people.size() * 4 + (nodes.size() + mass.size() + edges.size() + edge_energy.size() + reserve_mass.size() + integers.size() + fractions.size()) * 8 + achieved.size() * 4
+
+## Mutate owned packed columns directly, avoiding property copy/writeback per cell.
+func writeback(row: int, state: Anatomy.Cultivator) -> void:
+	var base := row*PERSON_INTS
+	integers[base+PersonInt.DAY]=state.day
+	integers[base+PersonInt.RESERVE]=state.reserve
+	integers[base+PersonInt.RESIDUE]=state.residue
+	integers[base+PersonInt.CAPACITY]=state.capacity
+	integers[base+PersonInt.OPENING_WORK]=state.opening_work
+	integers[base+PersonInt.VOLUME_WORK]=state.volume_work
+	integers[base+PersonInt.WORK]=state.work
+	integers[base+PersonInt.ABSORBED]=state.absorbed
+	integers[base+PersonInt.DISSIPATED]=state.dissipated
+	integers[base+PersonInt.GROUNDED]=state.grounded
+	integers[base+PersonInt.SETTLING_DAYS]=state.settling_days
+	integers[base+PersonInt.INJURIES]=state.injuries
+	integers[base+PersonInt.DEATHS]=state.deaths
+	for q in 4: fractions[row*PERSON_FLOATS+q]=state.reserve_moments[q]
+	fractions[row*PERSON_FLOATS+PersonFloat.INTAKE_REMAINDER]=state.intake_remainder
+	fractions[row*PERSON_FLOATS+PersonFloat.LEAK_REMAINDER]=state.leak_remainder
+	fractions[row*PERSON_FLOATS+PersonFloat.RESIDUE_REMAINDER]=state.residue_remainder
+	fractions[row*PERSON_FLOATS+PersonFloat.PURGE_REMAINDER]=state.purge_remainder
+	for e in EDGES:
+		var edge: Anatomy.Edge=state.edges[e]
+		var offset := (row*EDGES+e)*EDGE_FLOATS
+		edges[offset+EdgeFloat.ADAPTATION]=edge.adaptation
+		edges[offset+EdgeFloat.STRAIN]=edge.strain
+		edges[offset+EdgeFloat.INTEGRITY]=edge.integrity
+		edges[offset+EdgeFloat.SCAR]=edge.scar
+		edges[offset+EdgeFloat.PRACTICE]=edge.practice
+		edges[offset+EdgeFloat.PEAK_RATE]=edge.peak_rate
+		edge_energy[(row*EDGES+e)*EDGE_INTS+EdgeInt.FLOW]=edge.daily_flow
+		edge_energy[(row*EDGES+e)*EDGE_INTS+EdgeInt.INTEGRATION_WORK]=edge.work
+	const NODE_ORDER = [0,5,6,7,8,4,2,3,1,9,10,11,12,13,14,15]
+	for i in NODES:
+		var node: Anatomy.Compartment = state.nodes[NODE_ORDER[i]]
+		var offset := (row*NODES+i)*NODE_FLOATS
+		for q in 4: nodes[offset+q]=node.moments[q]
+		for element in 5: mass[(row*NODES+i)*5+element]=node.mass[element]
+		nodes[offset+NodeFloat.FILTER_REMAINDER]=node.filter_remainder
+		nodes[offset+NodeFloat.STABILISE_REMAINDER]=node.stabilise_remainder
+		nodes[offset+NodeFloat.VOLUME]=node.volume
+		nodes[offset+NodeFloat.INTEGRITY]=node.integrity
+		nodes[offset+NodeFloat.SCAR]=node.scar
+		nodes[offset+NodeFloat.STRAIN]=node.strain

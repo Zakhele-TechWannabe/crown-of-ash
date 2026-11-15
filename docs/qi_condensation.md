@@ -336,3 +336,85 @@ Raw final evidence: `out/phase2/tests.json`, `out/phase2/selected_tests.json`,
 `out/phase2/test_qi_condensation.gd.log`, `out/phase2/test_session_compiler.gd.log`,
 and `out/phase2/bench_qi_live.gd.log`. The earlier exploratory benchmark is saved
 separately in `out/qi_live_exploratory.txt` and is not acceptance evidence.
+
+## Stage 3b performance investigation — 15 November 2026 (in progress)
+
+Baseline instrumentation was added before changing execution: coordinator timers
+separate detached prediction (including cloning), request submission, field advance/
+allocation, allocation-mismatch execution, packed writeback, and certification/
+notes. Compiler counters separately measure signature construction, lazy periodic
+coefficient construction, network misses and day-memo misses. Compiler timings
+are nested within coordinator timings and must not be added twice. The same
+730-day full-world benchmark is running serially; results will be recorded here
+before optimization. Inspection found exact sample `day`, `quantity`, `elements`
+and body adaptation in JSON network keys; cloned predictions have no DayMemo.
+
+### Measured pre-optimization profile (recorded before optimization)
+
+Instrumented baseline: **23.776 ms/day**; 50-person cohort: **263.601 ms/day**;
+added cost **239.825 ms/day**. Timers over 730 days (ms/day):
+
+| Phase | ms/day |
+|---|---:|
+| Detached prediction, cloning and solve | 203.665 |
+| Field request submission | 0.641 |
+| Field advance/allocation (includes baseline field work) | 8.030 |
+| Recompute after allocation mismatch | 0.000 |
+| Packed writeback | 7.538 |
+| Certifications and chronicle notes | 0.504 |
+| Other full-world work, policy trials, sampling and preparation | 43.223 |
+
+Nested compiler costs: signature construction **12.319 ms/day**; periodic
+coefficient construction **154.963 ms/day**. There were **32,797 day misses,
+zero day hits**, and **32,219 network misses / 578 hits (1.76% hits)**.
+No allocation-mismatch recomputation occurred in this workload: the principal
+problem is the cold cloned prediction and coefficient rebuilding, rather than
+an observed second solve. The pre-change cohort still has Palace layer-1 dates
+82–721, 17 certifications, nine sect deaths, and no layers 2/3. Raw evidence:
+`out/qi_live_profile_before.txt` (captured after the open cohort).
+
+### First structural pass (measurement pending)
+
+Removed detached prediction from the live coordinator: expected intake is a
+saved packed `expected_intake` column, with a 2% request allowance; actual grants
+fund one scalar solve. No approximate integer delta is scaled across a nonlinear
+pressure or injury boundary. Networks use canonical 1% density, 0.005 quality,
+0.05 adaptation and 0.01 integrity/scar buckets, excluding sample dates, quantity
+and metadata. Canonical values also build the coefficients, making cold-cache
+continuation independent of the cache's history. Daily pressure/residue and
+health are still solved every day (a stronger refresh bound than 30 days).
+
+Co-located people share one field sample. Individual elemental requests remain
+in the field's existing per-cell batch allocator to preserve priority and stable
+remainder ties; replacing them by one aggregate consumer would change those
+rules. Request dictionaries are reused, allocation ranking uses arrays, refunds
+close the ledger once per batch, and writeback directly addresses packed columns
+with a fixed production-node mapping. These are implementation notes, not yet a
+performance or accuracy acceptance claim.
+
+First-pass measurement: baseline **23.762**, cohort **49.468**, added
+**25.706 ms/day**. Network hits **32,125 / 33,177 = 96.83%**. Daily solves remain
+31,472, with no day replays. Coordinator solve/compile 11.546 ms/day, requests
+0.458, field 7.664, direct packed writeback 3.036, certification/notes 0.495;
+nested signature construction 1.945 and total coefficients (including policy
+trials) 5.487 ms/day. This is a useful reduction but **fails the 5 ms target**.
+Palace layer-1 dates shift from 82–721 to 81–721, still 17 certifications;
+nine sect deaths and no layers 2/3 remain. Further work is in progress.
+
+The expanded first-pass profile isolates policy at **6.007 ms/day**, preparation/
+sampling at **0.712**, and settlement/conservation at **1.332**. Policy was
+running `mind.urges` before its 90-day due-date guard. The next pass moves that
+guard first, mutates packed columns inside their owning store, reuses held
+canonical networks until source/revision changes, and restores bounded day
+replay. Replay arithmetic is now saved as execution state; periodic tables remain
+transient. This is required for exact warm/cold continuation once live replay
+is enabled. Canonical lower-dantian kernel volume is fixed at initial capacity,
+with actual daily storage pressure handled by the existing interpolation.
+
+An exploratory 16-cycle production kernel failed its coefficient accuracy gate;
+it was **not** adopted. A 32-cycle candidate is being checked against the original
+48-cycle kernel. No laboratory kernel relaxation has been changed.
+
+The 32-cycle candidate also failed the coefficient gate, so the production
+kernel retains its original 48 cycles. The exploratory test was removed; no
+shorter-kernel optimization is part of the final implementation.
