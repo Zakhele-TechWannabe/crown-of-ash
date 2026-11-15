@@ -63,6 +63,10 @@ class Edge extends RefCounted:
 		return result
 
 class Cultivator extends RefCounted:
+	# Detached session compiler invalidation contract; not serialized/reference state.
+	var session_revision := 0
+	var session_cache: RefCounted
+	var session_cache_owner := 0
 	var exposure_nodes: Array[Compartment] = []
 	var nodes: Array[Compartment] = []
 	var day: int
