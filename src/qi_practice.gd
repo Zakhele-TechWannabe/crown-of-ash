@@ -50,6 +50,9 @@ func program(route: String, filter_level: float) -> Dictionary:
 
 func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Dictionary, budget: int) -> void:
 	if not state.retained_program.is_empty() and state.day-int(records[p].get("last_policy_day",state.day-90))<90: return
+	if records[p].get("wants_purer_qi",false) and not state.retained_program.is_empty():
+		records[p]["last_policy_day"]=state.day
+		return
 	var u := traits(s,p)
 	if state.retained_program.is_empty():
 		var route: String = _policy.palace_route if s.fifty and s.fifty.member(p) else _policy.default_route
@@ -85,6 +88,66 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	state.choices.append({"day":state.day,"route":chosen.id,"filter":chosen.filter})
 	if state.choices.size()>16: state.choices.pop_front()
 
+## Only observations of this body enter the warning; no trial of future days.
+func danger_response(s: RefCounted, p: int, state: Anatomy.Cultivator, position: Vector2) -> Vector2:
+	var r: Dictionary = records[p]
+	if r.get("practice_origin",position)!=position:
+		r.erase("practice_offset")
+	var load := float(state.residue)/maxi(1,state.capacity)
+	var trend := state.nodes[4].strain-float(r.get("observed_strain",0.0))
+	r.observed_strain=state.nodes[4].strain
+	var hurt := state.injuries>int(r.get("observed_injuries",0))
+	r.observed_injuries=state.injuries
+	if state.day<int(r.get("pause_until",0)): return position
+	if load<.045 and trend<=.002 and not hurt: return position
+	if state.day<int(r.get("review_after",0)): return position
+	# Heart founding belongs to the existing mind lifecycle, never to sensing.
+	var u := traits(s,p) if s.mind and s.mind.heart_ready[p] else PackedFloat32Array([0,0,.5,.5,.5,.5,.5,.5])
+	var diligent: bool = s.population.has_trait(p,"diligent")
+	# Keyed noise models imperfect perception without consuming anyone's RNG.
+	var noise := Store.variation(str(p),str(state.day),"danger")-1.0
+	var perceived := load*(1+noise*.12)
+	var threshold := .061-.012*u[2]+.006*u[6]+.004*u[3]
+	if perceived<threshold and trend<=.003 and not hurt: return position
+	r.review_after=state.day+7
+	var action := "ignore"
+	var reason := "residue load feels unsafe"
+	if trend>.002: reason="strain rising despite nightly recovery"
+	if hurt: reason="recent qi injury"
+	var caution: float = u[2]+(.15 if diligent else 0)-.55*u[6]-.40*u[3]
+	if caution+noise*.15>0 or noise>.20-.04*u[7]+.02*u[4]:
+		r.wants_purer_qi=true
+		r.session_fraction=.5 if u[4]+u[7]>.9 else .25
+		r.pause_until=state.day+(14 if load>.06 or hurt else 7)
+		action="pause"
+		# Practice within walking distance of today's site only. No relocation.
+		var best: Dictionary=s.qi_field.sample(position)
+		var spot := position
+		for offset in [Vector2(24,0),Vector2(-24,0),Vector2(0,24),Vector2(0,-24)]:
+			if s.law==null or s.law.grid==null: continue
+			if s.law.walk_path(Vector2i(position.round()),Vector2i((position+offset).round())).is_empty(): continue
+			var sample: Dictionary=s.qi_field.sample(position+offset)
+			if float(sample.purity)>float(best.purity)+.01:
+				best=sample
+				spot=position+offset
+		r.practice_offset=spot-position
+		r.practice_origin=position
+		s.meridian_store.expected_intake[s.meridian_store.slot[p]]=-1
+	var counts: Dictionary=r.get("responses",{})
+	counts[action]=int(counts.get(action,0))+1
+	if action=="pause":
+		for response in ["filter","shorten","seek_purer"]: counts[response]=int(counts.get(response,0))+1
+		if r.get("practice_offset",Vector2.ZERO)!=Vector2.ZERO: counts["local_spot"]=int(counts.get("local_spot",0))+1
+	r.responses=counts
+	var history: Array=r.get("danger_decisions",[])
+	history.append({"day":state.day,"action":action,"reason":reason,"residue_fraction":load,"strain_trend":trend})
+	if history.size()>16: history.pop_front()
+	r.danger_decisions=history
+	if state.day-int(r.get("last_warning_note",-90))>=90:
+		r.last_warning_note=state.day
+		s.note(p,"cultivation_warning",("%s stopped cultivating, feeling their dantian clog" if action=="pause" else "%s ignored the warning signs") % s.population.names[p],state.day)
+	return position
+
 func unavoidable_strain(state: Anatomy.Cultivator) -> float:
 	var ceiling := maxi(state.capacity,int(Anatomy.definition().initial_capacity_quanta)+(state.volume_work+floori(state.capacity*.005*20.0))/20)
 	return state.nodes[4].strain+24.0*pow(float(state.residue)/ceiling,2)
@@ -107,6 +170,8 @@ func advance(s: RefCounted, until: int) -> void:
 			state.day=field.day
 			if not records.has(p): records[p]={"return_days":0,"cycles":0,"last_reserve":0}
 			var position: Vector2 = s.population.locations[p]
+			position=danger_response(s,p,state,position)
+			position+=records[p].get("practice_offset",Vector2.ZERO)
 			var cell: int = field.cell_at(position)
 			if not samples.has(cell): samples[cell]=field.sample(position)
 			var sample: Dictionary = samples[cell]
@@ -115,6 +180,12 @@ func advance(s: RefCounted, until: int) -> void:
 			profile[6]+=Time.get_ticks_usec()-prepare_timer
 			var policy_timer := Time.get_ticks_usec()
 			select_program(s,p,state,sample,limit)
+			if records[p].get("wants_purer_qi",false) and (float(state.retained_program.filter)<.95 or state.retained_program.get("session_fraction",1.0)!=records[p].session_fraction):
+				# Programs are compiler cache keys: replace, never mutate a held key.
+				state.retained_program=state.retained_program.duplicate(true)
+				state.retained_program.filter=maxf(float(state.retained_program.filter),.95)
+				state.retained_program["session_fraction"]=records[p].session_fraction
+			if state.day<int(records[p].get("pause_until",0)): limit=0
 			profile[7]+=Time.get_ticks_usec()-policy_timer
 			var timer := Time.get_ticks_usec()
 			var row: int = s.meridian_store.slot[p]

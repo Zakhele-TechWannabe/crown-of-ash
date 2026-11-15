@@ -95,6 +95,7 @@ func run() -> void:
 	assert(old_copy.society.meridian_report(person).reserve == 0 and old_copy.society.meridian_report(person).layer == 0, "Legacy abstract qi creates no reserve or certification")
 	Save.repair_meridians(old_copy.society, legacy.society)
 	assert(old_copy.society.meridian_store.people.is_empty() and old_copy.society.meridian_store.slot == PackedInt32Array([-1]), "Loading legacy data into an already used world clears its previous anatomy")
+	danger_sense()
 	deviation_handling()
 	live_cohort()
 	await world_cohort()
@@ -120,7 +121,11 @@ func live_cohort() -> void:
 		print("COHORT region=%s careful=%s achieved=%s residue=%d strain=%.6f" % [["Palace","Sect","Village"][i%3],i%2==0,s.meridian_report(ids[i]).achieved,state.residue,state.max_strain])
 	var greedy: RefCounted=s.qi_practice.body(s,ids[1])
 	var careful: RefCounted=s.qi_practice.body(s,ids[4])
-	assert(greedy.residue>careful.residue and greedy.max_strain>careful.max_strain,"Greedy sect practice accumulates more residue and strain")
+	# A late frightened response can reverse final residue ordering. Historical
+	# danger must still distinguish the reckless policy from early caution.
+	assert(greedy.max_strain>careful.max_strain and careful.max_strain<.20,"Early caution limits peak danger")
+	assert(s.qi_practice.records[ids[1]].responses.get("pause",0)>0,"Even a greedy person can eventually heed danger")
+	assert(float(greedy.residue)/greedy.capacity<.045 and float(careful.residue)/careful.capacity<.045,"Pausing and safer sessions lower both ending loads")
 	var palace_day: int=s.meridian_report(ids[0]).achieved[0]
 	var village_day: int=s.meridian_report(ids[2]).achieved[0]
 	assert(palace_day>=0 and (village_day<0 or palace_day<village_day),"Palace physical source certifies retention sooner")
@@ -155,17 +160,25 @@ func world_cohort() -> void:
 	life.paused=true
 	var pop: RefCounted=life.population
 	pop.async_factions=false
-	preload("res://tools/qi_cohort_fixture.gd").prepare(pop)
+	var cohort: Array[int]=preload("res://tools/qi_cohort_fixture.gd").prepare_palace(pop)
 	var initial_pop: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
 	var initial_economy: Dictionary=bytes_to_var(var_to_bytes(Save.capture(life.economy)))
 	for day in range(1,731):
 		life.economy.advance_to(day*1440.0)
 		pop.tick_day(day)
 		if day%30==0: await process_frame
+	var outcomes: Dictionary=preload("res://tools/qi_cohort_fixture.gd").danger_summary(pop.society,cohort)
+	print("DANGER ACCEPTANCE ",outcomes)
+	# At least 7/8 careful sect people survive; reckless deaths remain permitted.
+	assert(outcomes.sect_careful_deaths<=1,"Careful sect survival >=87.5%")
+	assert(outcomes.sect_careful_deaths+outcomes.sect_greedy_deaths<8,"Sect deaths improve on baseline eight")
+	assert(outcomes.palace_living==17 and outcomes.village_living==16,"No Palace/village survival regression")
+	assert(outcomes.palace_certified==17 and outcomes.palace_last<=730,"All Palace certifications within baseline last day 721 + nine days")
+	assert(outcomes.responses.get("pause",0)>0 and outcomes.responses.get("ignore",0)>0,"Personality produces caution and ignored warnings")
 	var daily_pop: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
 	var daily_economy: Dictionary=bytes_to_var(var_to_bytes(Save.capture(life.economy)))
-	Save.restore(pop,initial_pop)
-	Save.restore(life.economy,initial_economy)
+	Save.restore(pop,bytes_to_var(var_to_bytes(initial_pop)))
+	Save.restore(life.economy,bytes_to_var(var_to_bytes(initial_economy)))
 	pop.society.law.rebuild_sight()
 	life.economy.coarse_population=true
 	while pop.day<730:
@@ -176,6 +189,19 @@ func world_cohort() -> void:
 	assert(Save.capture(pop)==daily_pop,"Full running world daily equals jump")
 	assert(Save.capture(life.economy)==daily_economy,"Daily and jump economy agree")
 	print("PASS full running world prepared-cohort daily/jump, two years")
+	Save.restore(pop,bytes_to_var(var_to_bytes(initial_pop)))
+	Save.restore(life.economy,bytes_to_var(var_to_bytes(initial_economy)))
+	pop.society.law.rebuild_sight()
+	pop.society.qi_field.set_decree("Heavenly Origin",0)
+	for day in range(1,731):
+		life.economy.advance_to(day*1440.0)
+		pop.tick_day(day)
+		if day%30==0: await process_frame
+	var sealed: Dictionary=preload("res://tools/qi_cohort_fixture.gd").danger_summary(pop.society,cohort)
+	print("DANGER SEALED ACCEPTANCE ",sealed)
+	assert(sealed.sect_careful_deaths<=1 and sealed.sect_careful_deaths+sealed.sect_greedy_deaths<8)
+	assert(sealed.palace_living==17 and sealed.village_living==16)
+	assert(sealed.palace_certified==17 and sealed.palace_last<=730)
 	world.queue_free()
 
 func difference(a: Variant, b: Variant, path: String = "state") -> bool:
@@ -223,3 +249,27 @@ func deviation_handling() -> void:
 		injury=injury or (event.person==p and "qi deviation injury" in event.text)
 		death=death or (event.person==p and "died by qi deviation" in event.text)
 	assert(injury and death and s.injury_until[p]>1,"Deviation injury and death are dated and chronicled")
+
+func danger_sense() -> void:
+	var pop := Population.new()
+	var ids: Array[int]=preload("res://tools/qi_cohort_fixture.gd").prepare(pop,2)
+	var s: RefCounted=pop.society
+	for p in ids:
+		s.prepare_meridians(p,0)
+		var state: RefCounted=s.qi_practice.body(s,p)
+		s.qi_practice.records[p]={"return_days":0,"cycles":0,"last_reserve":0}
+		state.day=50
+		state.residue=6200
+		state.nodes[4].strain=.02
+		state.retained_program=s.qi_practice.program("B",.25)
+	var snapshot: Dictionary=bytes_to_var(var_to_bytes(Save.capture(pop)))
+	var copy := Population.new()
+	Save.restore(copy,snapshot)
+	var rng: int=pop.rng.state
+	for p in ids:
+		s.qi_practice.danger_response(s,p,s.qi_practice.body(s,p),pop.locations[p])
+		copy.society.qi_practice.danger_response(copy.society,p,copy.society.qi_practice.body(copy.society,p),copy.locations[p])
+		assert(s.qi_practice.records[p]==copy.society.qi_practice.records[p],"Danger decisions reproduce from cold save")
+	assert(pop.rng.state==rng,"Danger sense does not consume shared randomness")
+	assert(s.qi_practice.records[ids[0]].danger_decisions[0].action=="pause")
+	assert(s.qi_practice.records[ids[1]].danger_decisions[0].action=="ignore")

@@ -15,30 +15,16 @@ func run() -> void:
 	s.qi_field.seed(0)
 	var initial: Dictionary = bytes_to_var(var_to_bytes(Save.capture(pop)))
 	var economy_initial: Dictionary = bytes_to_var(var_to_bytes(Save.capture(life.economy)))
-	for mode in ["baseline","cohort","sealed"]:
+	for mode in ["baseline","unaware","cohort","sealed"]:
 		if "--cohort-only" in OS.get_cmdline_user_args() and mode!="cohort": continue
-		Save.restore(pop,initial)
-		Save.restore(life.economy,economy_initial)
+		Save.restore(pop,bytes_to_var(var_to_bytes(initial)))
+		Save.restore(life.economy,bytes_to_var(var_to_bytes(economy_initial)))
 		s.law.rebuild_sight()
+		if mode=="unaware": s.qi_practice=preload("res://tools/qi_cohort_fixture.gd").UnawarePractice.new()
+		else: s.qi_practice=preload("res://src/qi_practice.gd").new()
 		prepared.clear()
 		if mode!="baseline":
-			var palace: Array = s.fifty.people.keys()
-			for i in 50:
-				var p: int = palace[i]
-				prepared.append(p)
-				s.temper.body_layer[p]=9
-				for grade in 9: s.temper.grades[p*9+grade]=3
-				pop.spirit_root[p]=1
-				pop.root_purity[p]=100
-				s.revealed[p]=1
-				var region: String = ["Palace","Sect","Village"][i%3]
-				pop.set_location(p,s.qi_field.landmarks[region])
-				# Fix the heart's output biases, while keeping production policy intact.
-				for weight in s.mind.WEIGHTS: s.mind._set_weight(p,weight,0)
-				s.mind.heart_ready[p]=1
-				s.mind._set_weight(p,s.mind.B2+s.mind.FEAR,3 if i%2==0 else -3)
-				s.mind._set_weight(p,s.mind.B2+s.mind.AMBITION,-3 if i%2==0 else 3)
-				s.mind._set_weight(p,s.mind.B2+s.mind.PRIDE,-3 if i%2==0 else 3)
+			prepared=preload("res://tools/qi_cohort_fixture.gd").prepare_palace(pop)
 		if mode=="sealed": s.qi_field.set_decree("Heavenly Origin",0)
 		s.qi_practice.profile.fill(0)
 		s.qi_practice._compiler.diagnose = "--diagnose" in OS.get_cmdline_user_args()
@@ -68,6 +54,7 @@ func run() -> void:
 			var state: RefCounted=s.qi_practice.body(s,p)
 			print("LIVE %s person=%d region=%s careful=%s achieved=%s residue=%d strain=%.6f opening=%d reserve=%d choices=%s" % [mode,p,["Palace","Sect","Village"][i%3],i%2==0,s.meridian_report(p).achieved,state.residue,state.max_strain,state.opening_work,state.reserve,state.choices])
 		print("LIVE DANGER %s %s" % [mode,peaks])
+		print("LIVE RESPONSES %s %s" % [mode,preload("res://tools/qi_cohort_fixture.gd").danger_summary(s,prepared)])
 		summarise(s,mode)
 	world.queue_free()
 	quit()

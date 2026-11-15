@@ -44,6 +44,7 @@ class Network extends RefCounted:
 	var cycles: int
 	var pressure_limit: float
 	var seconds: float
+	var session_seconds: float
 
 ## A revision is scoped to one body; route content and sample are also keyed.
 ## Caller must invalidate/revise after structural changes or sample changes.
@@ -106,7 +107,8 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 		net.volume.append(initial_capacity/1000.0/node.safe_pressure if coarse and node.id=="dantian" else node.volume)
 		net.safe.append(node.safe_pressure)
 	for op: Reference.Instruction in net.instructions: net.seconds += op.slices*10.0
-	net.cycles = int(config.session_seconds/net.seconds)
+	net.session_seconds = float(config.session_seconds)*clampf(float(program.get("session_fraction",1.0)),0,1)
+	net.cycles = int(net.session_seconds/net.seconds)
 	net.pressure_limit = minf(net.safe[4],float(sample.density)/8.0)
 
 	# Keep compilation memory bounded. Networks already held by callers survive eviction.
@@ -526,6 +528,11 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		edge.peak_rate = 0
 	for phase in phases:
 		var opening_residue := state.residue
+		# With no funded intake every transport delta is zero. Retain exposure
+		# and all end-of-day upkeep, without building unused fluid tables.
+		if remaining_budget<=0 or state.deaths>0 or state.strain>.35:
+			expose_storage(state,net.session_seconds/phases/3600,opening_residue)
+			continue
 		var pressure_ratio := clampf(float(state.reserve+state.residue)/maxi(1,state.capacity),0,1)
 		var position := clampf(pressure_ratio*net.safe[4]/maxf(1e-30,net.pressure_limit),0,1)*BINS
 		var lo := mini(BINS-1,floori(position))
@@ -556,7 +563,7 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 			edge.practice += moved/1000.0
 			edge.peak_rate = maxf(edge.peak_rate,(a[7+net.source.size()+e]*(1-weight)+b[7+net.source.size()+e]*weight)*factor)
 			state.circulated += moved
-		expose_storage(state,float(Anatomy.definition().session_seconds)/phases/3600,opening_residue)
+		expose_storage(state,net.session_seconds/phases/3600,opening_residue)
 	var config := Anatomy.definition()
 	# The manual pays daily integration from its actual refined reserve. Stored
 	# qi shares the dantian's volume and backpressure with incoming packets.
@@ -600,7 +607,7 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	# practice session. With no transfers, its danger is constant: integrate the
 	# linear strain and the positive part of integrity loss analytically.
 	var dantian: Anatomy.Compartment = state.nodes[4]
-	var rest_hours := maxf(0,24.0-float(config.session_seconds)/3600.0)
+	var rest_hours := maxf(0,24.0-net.session_seconds/3600.0)
 	var residue_danger := pow(float(state.residue)/state.capacity,2)
 	if diagnose:
 		state.milestones.danger_terms.residue_rest=residue_danger*rest_hours
@@ -828,6 +835,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 					var desired := rate*10000+intake_rem
 					intake_rem = desired-floori(desired)
 					var q := mini(floori(desired),maxi(0,floori((safe_pressures[0]*.9-p)*volumes[0]*1000)))
+					if q==0: continue
 					amount[0] += q
 					pure[0] += q*sample_purity
 					if not simple_quality:
@@ -844,6 +852,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 						var q := floori(ideal)
 						remainder[e] = ideal-q
 						q = mini(q,mini(amount[a],maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])))
+						if q==0: continue
 						var p := pure[a]*q/maxi(1,amount[a])
 						var st := 0.0 if simple_quality else stable[a]*q/maxi(1,amount[a])
 						var c := 0.0 if simple_quality else corrupt[a]*q/maxi(1,amount[a])
@@ -894,6 +903,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 						var e: int = targets[j]
 						var a := sources[e]
 						var b := destinations[e]
+						if moved[j]==0: continue
 						amount[a] -= moved[j]
 						pure[a] -= qp[j]
 						if not simple_quality:

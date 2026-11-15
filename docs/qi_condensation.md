@@ -651,3 +651,183 @@ Final changed files:
 - `docs/qi_condensation.md`: diagnosis, rejected candidates, corrections and final evidence.
 
 Unfinished: the **<=5 ms/day added** performance requirement in both modes.
+
+## Danger sense — owner decision 15 November 2026 (implementation in progress)
+
+Daily personal observations now precede allocation: lodged residue fraction,
+change in recovered dantian strain, and injuries since the last observation.
+Keyed person/day perception noise consumes no world RNG. The inherited fear,
+ambition, pride, curiosity and restlessness urges, plus the diligent trait,
+choose caution or ignoring the warning. No future source or physical trial is
+used by danger sense. Careful people pause 7–14 days, retain strong filtering,
+shorten subsequent sessions to a quarter or half, and record a wish for purer qi.
+They inspect four cells within 24 world units of their current site; a strictly
+purer cell can change the practice position without relocating the person.
+Decisions retain day, reason and observed signals; aggregate response counters
+persist, recent explanations are bounded to 16, and notes are at least 90 days
+apart. Existing danger, residue purge and recovery laws remain unchanged.
+
+Acceptance added for the actual 50 Palace-member fixture over 730 days: careful
+sect deaths <=1 of eight (>=87.5% survive), total sect deaths <8, Palace/village
+survival 17/17 and 16/16, all 17 Palace layer-1 certifications by day 730
+(baseline latest 721, allowance nine days), and both caution and ignoring observed.
+These thresholds are stated before final measurement. The existing six-person
+ordering, conservation, daily/jump and cold-save checks remain in place.
+
+Performance work so far skips fluid coefficient construction when funded intake
+is zero, while still executing all session/rest exposure and reserve upkeep.
+A danger-driven retained recovery policy also suppresses conflicting 90-day route
+experiments. Full accuracy, suite and timing results follow below when available.
+
+First exploratory benchmark (before the final decision refinement/reachability
+check) completed: baseline 20.255, cohort 33.371, sealed 55.469 ms/day. It kept
+all eight careful sect people alive, with unchanged Palace/village survival and
+Palace dates, but all nine greedy sect people died. Total deaths therefore rose
+from eight to nine through the changed shared-field trajectory. That candidate
+is not claimed as acceptance. Greedy people now retain a small keyed chance to
+heed a warning, influenced by curiosity/restlessness, rather than invariably
+ignoring it. Final measurement must establish the resulting deaths and cost.
+The local-spot selector now requires an actual available walking path; where
+there is no navigation context it records the desire without assuming reachability.
+
+Shortened sessions now scale the actual number of paid route cycles and the
+session exposure duration; all remaining hours still expose lodged residue.
+Local practice offsets expire when the person's authoritative location changes.
+Compiler-key dictionaries are replaced before policy edits rather than mutated
+in place. The periodic kernel also skips zero-quantity moment updates after
+preserving the transfer remainder; cycle count, nonzero arithmetic and source
+quantization remain unchanged. The benchmark includes an `unaware` control from
+the identical initial world, overriding danger behaviour only, to measure the
+historical personality death split directly. The suite additionally checks the
+sealed 50-person cohort against the same survival/certification thresholds.
+
+Verification is running serially via the requested full phase-2 command. Early
+body/childhood/clan/combat/continuous/cultivation/lab/faction checks pass; the
+century-long family check is still running at this point. No second Godot
+process has been launched alongside it. Final results below supersede this
+progress note; no performance acceptance is inferred from partial checks.
+
+The full-suite qi test exposed a missing-context error in local-spot search:
+standalone Population fixtures have no law/navigation service. The search now
+checks the service as well as its grid, retaining `wants_purer_qi` without
+inventing reachability. The suite continues serially; qi will be rerun after it.
+
+The requested complete serial invocation finished with **38/39 PASS**; its only
+failure is the missing-navigation-service qi error described above (fixed).
+All four three-year compiler comparisons and `test_session_sources` passed with
+unchanged accuracy tolerances. The initial full-run JSON is preserved in
+`out/phase2/danger_first_full_suite.json`; the qi failure log is preserved in
+`out/danger_navigation_failure.txt`. The corrected complete qi test is rerunning
+serially before the final benchmark. Do not read the partial result as all-pass.
+
+The corrected qi rerun exposed an obsolete autonomous-policy assumption, rather
+than a physical accuracy failure: the six-person greedy sect person now eventually
+heeds danger and ends with **1,206 residue / 0.278371 peak strain**, versus the
+careful person's **1,906 / 0.061133**. Final residue ordering can legitimately
+reverse after late caution. That assertion is replaced with stronger relevant
+behaviour checks: greedy peak strain exceeds careful, careful peak stays <0.20,
+the greedy pause is recorded, and both ending residue fractions are <0.045.
+No compiler/reference tolerance is changed. The failed assertion and values are
+preserved in `out/danger_old_ordering_failure.txt`.
+
+A subsequent world-loading attempt was blocked by concurrent unrelated edits:
+`ground_view.gd` began loading a new `daos_eye.gd`, whose inferred `left` and
+`key` variables fail parsing (lines 214/235 at the time of inspection). Those
+files and `data/laws.json` were not changed by this task. To continue without
+reverting another task's work, `/tmp/crown-danger-verification` snapshots this
+task's sources/resources and restores only `ground_view.gd` from HEAD. Corrected
+qi and final benchmark evidence from that snapshot is explicitly isolated;
+it does not certify integration with the concurrent unfinished UI changes.
+
+### Corrected qi verification — PASS in isolated snapshot
+
+The complete qi test passes, including keyed/cold-save danger decisions with no
+shared RNG consumption, six-person physics/conservation and cold continuation,
+50-person two-year daily/jump equality, and both normal/sealed acceptance gates.
+Normal: **0 careful / 5 greedy sect deaths**, Palace **17/17 living and certified**,
+village **16/16 living**; **13 pauses/filter increases/shortened sessions/purer-qi
+wishes** and **39 ignored warnings**. Sealed: the same survival/certification
+counts, **12 cautious responses** and **8 ignored warnings**. No reachable purer
+spot was selected in this fixture's navigation context. Certification dates vary
+between separately constructed worlds; final benchmark uses one saved initial
+world for control/normal/sealed comparison. Raw corrected test:
+`out/danger_qi_final.txt`; result: `out/phase2/danger_qi_isolated_final.json`.
+Thus all 39 checks have passing affected/latest evidence, with the full-invocation
+failure and isolated-rerun limitation preserved above. This is not a clean full
+39/39 rerun against the concurrently edited UI.
+
+The first control-inclusive benchmark is rejected: `WorldSave.restore` assigns
+supplied dictionaries, so repeated restoration from the same mutable snapshot
+allowed an earlier mode to alter later modes' Fifty/person context. The added
+unaware control made this visible (dead-before-qualification reports). Benchmark
+and world-cohort fixtures now deep-copy each input snapshot per restoration,
+including economy, outside timing. Production save semantics are unchanged.
+The contaminated log is retained in `out/danger_rejected_aliased_bench.txt`;
+its 8/8 death comparison and timings are not final evidence. Both affected qi
+and benchmark fixtures are being rerun with independent snapshot inputs.
+
+The independent-snapshot qi rerun passes completely. Normal and sealed each
+have **0 careful / 5 greedy sect deaths**, Palace **17/17 living and layer 1**,
+village **16/16 living**, **13 pauses/filter increases/shortened sessions/purer
+qi wishes**, **39 ignored warnings**, and no selected local spot. Latest Palace
+certification is day **151 normal / 153 sealed** in this test world. The previous
+sealed day 495 and 12/8 response counts above came from the aliased initial
+snapshot and are superseded. `out/danger_qi_final.txt` now contains the corrected
+independent-input run. Two-year full-world daily/jump equality still passes.
+
+### Final independent-snapshot benchmark — behaviour PASS, performance FAIL
+
+All modes now restore independent deep copies of the same saved initial world.
+The unaware control disables danger behaviour only; it reproduces the owner's
+baseline eight sect deaths. Normal and sealed danger-aware runs agree on the
+personality split and response counts:
+
+| Sect personality | Before | After normal | After sealed |
+|---|---:|---:|---:|
+| Careful (8 people) | 0 deaths | 0 deaths | 0 deaths |
+| Greedy/proud (9 people) | 8 deaths | 5 deaths | 5 deaths |
+
+Each aware run records **13 pauses, 13 stronger-filter decisions, 13 shortened
+sessions, 13 purer-qi wishes, 39 ignored warnings, zero local-spot changes**.
+Palace remains **17/17 living and certified**; village remains **16/16 living**.
+Normal Palace layer-1 dates are **87–151 in both control and aware runs**;
+sealed dates are **88–153**. Palace normal permanent work is unchanged at
+**69,886,059**, village at **5,113,404**. Sect work changes from **4,337,305**
+to **3,439,735** as safer people practise less and three more survive.
+Sealed Palace work is **25,344,606**. No layer-2/3 certifications are granted.
+The old day-721 latest date was an artefact of reused mutable fixture snapshots;
+this correction changes measurement isolation, not certification law.
+
+| Run | ms/day | Added over baseline |
+|---|---:|---:|
+| Baseline | 24.631 | — |
+| Unaware control, same optimized physical executor | 41.373 | 16.742 |
+| Danger-aware normal | 40.692 | **16.061** |
+| Danger-aware sealed | 67.626 | **42.995** |
+
+Both aware runs **FAIL the <=5 ms/day target**. No overall speed acceptance or
+improvement over the owner's +15.0/+40.5 measurement is claimed: initial-world
+isolation was corrected and more people now survive. The exact zero-transfer
+shortcuts preserve the accuracy gates but do not remove the remaining bottleneck.
+Normal/sealed nested coefficients cost **4.274 / 25.027 ms/day**, with **1,032 /
+9,920 network misses**; policy costs **3.075 / 4.416 ms/day**. Moving-source fluid
+coefficients and policy trials remain unfinished optimization work. Kernel cycles,
+source precision and physical laws were not relaxed to manufacture a timing pass.
+
+Verification: the complete requested serial invocation had **38/39 PASS**, with
+the documented missing-navigation qi defect. Corrected qi (including all new
+normal/sealed acceptance, conservation, save/cold continuation and two-year
+50-person daily/jump checks) and the completed benchmark both pass in the isolated
+snapshot. All **39 checks have latest passing evidence**, but there was **no clean
+full-suite rerun against the concurrently edited UI**, which introduced unrelated
+Dao's Eye parse errors. Both compiler tests passed their unchanged accuracy gates
+in the full invocation. No Godot processes launched by this task overlapped.
+`git diff --check` passes; no commit was made.
+
+Final evidence: `out/danger_qi_final.txt`, `out/danger_bench_final.txt`, and
+`out/phase2/danger_final_checks.json`. Source files in the snapshot match this
+task's final workspace sources byte-for-byte; only concurrent ground-view UI
+integration is excluded from that snapshot. Changed by this task:
+`src/qi_practice.gd`, `src/session_compiler.gd`, `tools/qi_cohort_fixture.gd`,
+`tools/test_qi_condensation.gd`, `tools/bench_qi_live.gd`, and both qi/laws documents.
+Unfinished: <=5 ms/day performance and full verification with the concurrent UI.

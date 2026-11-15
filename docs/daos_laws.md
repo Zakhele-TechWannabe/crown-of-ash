@@ -819,6 +819,17 @@ Practising a technique awards skill learning only for actual time. Preserve the 
 
 Characters are the optimisers. Their bodies are the experimental environments.
 
+### Cultivators sense danger — owner decision 15 Nov 2026
+
+Cultivators perceive their own residue load, strain trend and recent injuries.
+Fear, ambition, pride, curiosity, restlessness and diligence shape their response:
+pause, filter more strongly, shorten intake, or seek a purer reachable local
+practice cell. Proud or greedy people may ignore warnings. Decisions are keyed
+per person/day, recorded with a reason and day, and notable warnings are chronicled
+sparingly. A wish for purer qi persists for future Envoy/Dao features; this does
+not authorize travel between sites. These are autonomous behaviours, not changes
+to section 10: lodged residue still strains resting tissue and purges normally.
+
 ### Choosing an experiment
 
 Use existing mind urges, emotions, traits and goals. Do not train or replace the inherited heart network.
