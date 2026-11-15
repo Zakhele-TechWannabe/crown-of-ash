@@ -181,7 +181,7 @@ func memory_bytes() -> int:
 	return expected_intake.size()*8 + slot.size() * 4 + people.size() * 4 + (nodes.size() + mass.size() + edges.size() + edge_energy.size() + reserve_mass.size() + integers.size() + fractions.size()) * 8 + achieved.size() * 4
 
 ## Mutate owned packed columns directly, avoiding property copy/writeback per cell.
-func writeback(row: int, state: Anatomy.Cultivator) -> void:
+func writeback(row: int, state: Anatomy.Cultivator, inventory_changed: bool = true) -> void:
 	var base := row*PERSON_INTS
 	integers[base+PersonInt.DAY]=state.day
 	integers[base+PersonInt.RESERVE]=state.reserve
@@ -216,10 +216,13 @@ func writeback(row: int, state: Anatomy.Cultivator) -> void:
 	for i in NODES:
 		var node: Anatomy.Compartment = state.nodes[NODE_ORDER[i]]
 		var offset := (row*NODES+i)*NODE_FLOATS
-		for q in 4: nodes[offset+q]=node.moments[q]
-		for element in 5: mass[(row*NODES+i)*5+element]=node.mass[element]
-		nodes[offset+NodeFloat.FILTER_REMAINDER]=node.filter_remainder
-		nodes[offset+NodeFloat.STABILISE_REMAINDER]=node.stabilise_remainder
+		# The lumped live executor changes storage and health, never node
+		# packets/filter remainders. Full writeback remains the default API.
+		if inventory_changed:
+			for q in 4: nodes[offset+q]=node.moments[q]
+			for element in 5: mass[(row*NODES+i)*5+element]=node.mass[element]
+			nodes[offset+NodeFloat.FILTER_REMAINDER]=node.filter_remainder
+			nodes[offset+NodeFloat.STABILISE_REMAINDER]=node.stabilise_remainder
 		nodes[offset+NodeFloat.VOLUME]=node.volume
 		nodes[offset+NodeFloat.INTEGRITY]=node.integrity
 		nodes[offset+NodeFloat.SCAR]=node.scar

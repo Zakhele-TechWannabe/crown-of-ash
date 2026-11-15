@@ -4,9 +4,12 @@ extends RefCounted
 const Anatomy = preload("res://src/meridians.gd")
 const Reference = preload("res://src/circulation.gd")
 const Store = preload("res://src/meridian_store.gd")
+var diagnose := false
 var signature_usec := 0
 var accounting := Reference.new()
 var routes: Dictionary = {}
+var kernels: Dictionary = {}
+const DENSITY_GRID := 1.05
 var cache_hits := 0
 var cache_misses := 0
 var day_hits := 0
@@ -34,6 +37,7 @@ class Network extends RefCounted:
 	var source := PackedInt32Array()
 	var destination := PackedInt32Array()
 	var tables: Dictionary = {}
+	var kernel_tables: Dictionary = {}
 	var program: Dictionary
 	var sample: Dictionary
 	var used_edges := PackedInt32Array()
@@ -73,6 +77,13 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 	var net := Network.new()
 	net.source_key=source_key
 	net.canonical=coarse
+	if coarse:
+		var shape := signature.duplicate()
+		shape[1]=[] # Quality moments are affine in their source values.
+		if not kernels.has(shape):
+			if kernels.size()>=512: kernels.clear()
+			kernels[shape]={}
+		net.kernel_tables=kernels[shape]
 	net.fingerprint=hash(key)
 	net.program = program.duplicate(true)
 	net.sample = sample.duplicate(true)
@@ -103,6 +114,54 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 	routes[key] = net
 	return net
 
+## Policy trials use the lumped solver, which never mutates node packet arrays.
+## Copy mutable anatomy directly; the general reference clone remains available
+## for slice-based circulation, which does mutate those arrays.
+func production_trial(state: Anatomy.Cultivator) -> Anatomy.Cultivator:
+	var values := state.as_dictionary()
+	values.nodes=[]
+	values.edges=[]
+	values.reserve_moments=state.reserve_moments.duplicate()
+	values.milestones=state.milestones.duplicate(true)
+	values.purity_checks=state.purity_checks.duplicate()
+	for node: Anatomy.Compartment in state.nodes:
+		var copy := Anatomy.Compartment.new()
+		copy.id=node.id
+		copy.mass=node.mass
+		copy.moments=node.moments
+		copy.volume=node.volume
+		copy.safe_pressure=node.safe_pressure
+		copy.integrity=node.integrity
+		copy.scar=node.scar
+		copy.strain=node.strain
+		copy.instability_moment=node.instability_moment
+		copy.exposure_hours=node.exposure_hours
+		copy.filter_remainder=node.filter_remainder
+		copy.stabilise_remainder=node.stabilise_remainder
+		copy.stored_quanta=node.stored_quanta
+		copy.residue_quanta=node.residue_quanta
+		copy.quantity=node.quantity
+		values.nodes.append(copy)
+	for edge: Anatomy.Edge in state.edges:
+		var copy := Anatomy.Edge.new()
+		copy.id=edge.id
+		copy.source=edge.source
+		copy.destination=edge.destination
+		copy.capacity=edge.capacity
+		copy.conductivity=edge.conductivity
+		copy.openness=edge.openness
+		copy.integrity=edge.integrity
+		copy.scar=edge.scar
+		copy.adaptation=edge.adaptation
+		copy.strain=edge.strain
+		copy.practice=edge.practice
+		copy.work=edge.work
+		copy.remainder=edge.remainder
+		copy.daily_flow=edge.daily_flow
+		copy.peak_rate=edge.peak_rate
+		values.edges.append(copy)
+	return Anatomy.Cultivator.from_dictionary(values)
+
 func live_network(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary) -> Network:
 	var memo: DayMemo = state.session_cache if state.session_cache_owner==identity else null
 	if memo!=null and memo.network!=null and memo.network.canonical and memo.revision==state.session_revision and memo.network.program==program:
@@ -112,14 +171,51 @@ func live_network(state: Anatomy.Cultivator, program: Dictionary, sample: Dictio
 			return memo.network
 	return compile(state,program,sample,0,true)
 
+## Fluid coefficients depend on density/geometry, not source quality. Carry
+## basis moments (purity=0, stability=0, corruption=1) once, then reconstruct
+## the affine quality response. Interpolate adjacent fixed density grid points;
+## canonical 1% source keys and daily pressure/injury integration remain intact.
 func table(net: Network, bin: int) -> PackedFloat64Array:
 	if not net.tables.has(bin):
 		var started := Time.get_ticks_usec()
-		net.tables[bin] = periodic(net,net.program,net.sample,net.pressure_limit*float(bin)/BINS)
+		if not net.canonical:
+			net.tables[bin] = periodic(net,net.program,net.sample,net.pressure_limit*float(bin)/BINS)
+		else:
+			var density: float = net.sample.density
+			var result := PackedFloat64Array()
+			# At low source pressure, integer flow thresholds and residue/recovery
+			# recurrence amplify even small density interpolation errors. Keep
+			# the original exact canonical kernel there, sharing quality only.
+			if density<=8.0:
+				result=basis_table(net,bin,density).duplicate()
+			else:
+				var index := floori(log(density)/log(DENSITY_GRID))
+				var low := pow(DENSITY_GRID,index)
+				var high := low*DENSITY_GRID
+				var weight := clampf((density-low)/(high-low),0,1)
+				var a := basis_table(net,bin,low)
+				var b := basis_table(net,bin,high)
+				result.resize(a.size())
+				for i in result.size(): result[i]=lerpf(a[i],b[i],weight)
+			var delivered := result[1]
+			result[2]=delivered-(delivered-result[2])*(1-float(net.sample.purity))
+			result[3]=delivered if float(net.sample.stability)==1 and float(net.sample.corruption)==0 else delivered-(delivered-result[3])*(1-float(net.sample.stability))
+			result[4]*=float(net.sample.corruption)
+			net.tables[bin]=result
 		var elapsed := Time.get_ticks_usec()-started
 		net.build_usec += elapsed
 		coefficient_usec += elapsed
 	return net.tables[bin]
+
+func basis_table(net: Network, bin: int, density: float) -> PackedFloat64Array:
+	var simple: bool = float(net.sample.stability)==1 and float(net.sample.corruption)==0
+	var key: Array = [density,bin,simple]
+	if not net.kernel_tables.has(key):
+		# Bound transient storage even for sources traversing many density bands.
+		if net.kernel_tables.size()>=256: net.kernel_tables.clear()
+		var basis := {"density":density,"purity":0.0,"stability":1.0 if simple else 0.0,"corruption":0.0 if simple else 1.0}
+		net.kernel_tables[key]=periodic(net,net.program,basis,minf(net.safe[4],density/8)*float(bin)/BINS)
+	return net.kernel_tables[key]
 
 class EdgeDelta extends RefCounted:
 	var flow: int
@@ -235,6 +331,26 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		memo.network = net if net.canonical else compile(state,net.program,net.sample,state.session_revision)
 		memo.revision = state.session_revision
 	var effective := memo.network
+	# Injury history permanently forbids replay. Avoid constructing an unusable
+	# journal there. Transient strain can recover today and MUST retain its
+	# journal, so the following healthy day can replay the same transition.
+	if net.canonical and state.injuries>0:
+		day_misses+=1
+		var bands := PackedInt32Array()
+		for index: int in effective.used_edges:
+			var edge: Anatomy.Edge=state.edges[index]
+			bands.append(floori(edge.adaptation*20))
+			bands.append(floori(edge.integrity*100))
+		var integrity_band := floori(state.nodes[4].integrity*100)
+		solve_day(state,effective,budget)
+		if floori(state.nodes[4].integrity*100)!=integrity_band: invalidate(state)
+		for i in effective.used_edges.size():
+			var edge: Anatomy.Edge=state.edges[effective.used_edges[i]]
+			if floori(edge.adaptation*20)!=bands[i*2] or floori(edge.integrity*100)!=bands[i*2+1]: invalidate(state)
+		memo.signature=[]
+		memo.horizon=0
+		memo.age=0
+		return
 	var signature := input_signature(state,net,budget,memo)
 
 	if memo.signature==signature and memo.age<memo.horizon and (not net.canonical or memo.d_absorbed<=budget):
@@ -399,6 +515,8 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		daily.purity=0.0
 		daily.instability=1.0
 	state.pending_work = 0
+	if diagnose:
+		state.milestones["danger_terms"] = {"overpressure":0.0,"residue_session":0.0,"residue_rest":0.0,"opening_strain":state.nodes[4].strain,"capacity":state.capacity,"residue":state.residue}
 	state.strain = 0
 	var remaining_budget := budget
 	# Refine time only where lodged residue can approach the recovery threshold.
@@ -484,6 +602,9 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var dantian: Anatomy.Compartment = state.nodes[4]
 	var rest_hours := maxf(0,24.0-float(config.session_seconds)/3600.0)
 	var residue_danger := pow(float(state.residue)/state.capacity,2)
+	if diagnose:
+		state.milestones.danger_terms.residue_rest=residue_danger*rest_hours
+		state.milestones.danger_terms.residue_before_purge=state.residue
 	var initial_strain: float = dantian.strain
 	var final_strain := initial_strain+residue_danger*rest_hours
 	var damaging_hours := rest_hours if initial_strain>=.50 else maxf(0,rest_hours-(.50-initial_strain)/maxf(1e-30,residue_danger))
@@ -634,7 +755,17 @@ func safety(kind: String) -> Dictionary:
 func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressure: float) -> PackedFloat64Array:
 	# Scalar moments suffice for transport/refinement. Concurrent lanes read one
 	# opening inventory and share source/destination headroom before committing.
-	var count := net.volume.size()
+	# Bind immutable packed geometry once; inner slices avoid repeated object
+	# property lookups. These arrays are read-only throughout the kernel.
+	var capacities := net.capacity
+	var conductances := net.conductance
+	var sources := net.source
+	var destinations := net.destination
+	var volumes := net.volume
+	var safe_pressures := net.safe
+	var instructions := net.instructions
+	var edge_count := sources.size()
+	var count := volumes.size()
 	var amount := PackedInt64Array()
 	var pure := PackedFloat64Array()
 	var stable := PackedFloat64Array()
@@ -648,15 +779,15 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	corrupt.resize(count)
 	filter_rem.resize(count)
 	stabilise_rem.resize(count)
-	remainder.resize(net.source.size())
+	remainder.resize(edge_count)
 	var result := PackedFloat64Array()
-	result.resize(7+2*net.source.size())
+	result.resize(7+2*edge_count)
 	var limits := PackedInt64Array()
 	limits.resize(count)
 	for i in count:
 		var connected := 0.0
-		for e in net.source.size():
-			if net.source[e]==i or net.destination[e]==i: connected += net.capacity[e]
+		for e in edge_count:
+			if sources[e]==i or destinations[e]==i: connected += capacities[e]
 		limits[i] = floori(connected*.7*10000)
 	var outgoing := PackedInt64Array()
 	var incoming := PackedInt64Array()
@@ -681,36 +812,38 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	var intake_rem := 0.0
 	# The production bypass is two edges shorter than the laboratory bypass.
 	# Retain 32 warmup cycles there; the longer laboratory pipe needs 64.
-	var measured := 16 if net.volume.size()>8 else 32
-	var relaxation := 48 if net.volume.size()>8 else (RELAX if net.instructions.size()>=12 else 64)
+	var measured := 16 if volumes.size()>8 else 32
+	var relaxation := 48 if volumes.size()>8 else (RELAX if instructions.size()>=12 else 64)
 	for iteration in relaxation:
 		var measure := iteration>=relaxation-measured
-		for op: Reference.Instruction in net.instructions:
+		for op: Reference.Instruction in instructions:
+			var targets := op.targets
+			var code := op.code
+			var gate := 1-clampf(op.error,0,.60)
 			for slice in op.slices:
-				if op.code==0:
-					var p := amount[0]/1000.0/net.volume[0]
-					if p>=net.safe[0]*.9: continue
-					var rate := minf(net.capacity[0],net.conductance[0]*maxf(0,density/8-p))
+				if code==0:
+					var p := amount[0]/1000.0/volumes[0]
+					if p>=safe_pressures[0]*.9: continue
+					var rate := minf(capacities[0],conductances[0]*maxf(0,density/8-p))
 					var desired := rate*10000+intake_rem
 					intake_rem = desired-floori(desired)
-					var q := mini(floori(desired),maxi(0,floori((net.safe[0]*.9-p)*net.volume[0]*1000)))
+					var q := mini(floori(desired),maxi(0,floori((safe_pressures[0]*.9-p)*volumes[0]*1000)))
 					amount[0] += q
 					pure[0] += q*sample_purity
 					if not simple_quality:
 						stable[0] += q*sample_stability
 						corrupt[0] += q*sample_corruption
 					if measure: result[0] += q
-				elif op.code in [1,2,3]:
-					if op.targets.size()==1:
-						var e: int = op.targets[0]
-						var a := net.source[e]
-						var b := net.destination[e]
-						var difference := amount[a]/1000.0/net.volume[a]+(backpressure if a==4 else 0.0)-amount[b]/1000.0/net.volume[b]-(backpressure if b==4 else 0.0)
-						var gate := 1-clampf(op.error,0,.60)
-						var ideal := minf(net.capacity[e],net.conductance[e]*gate*maxf(0,difference))*10000+remainder[e]
+				elif code>=1 and code<=3:
+					if targets.size()==1:
+						var e: int = targets[0]
+						var a := sources[e]
+						var b := destinations[e]
+						var difference := amount[a]/1000.0/volumes[a]+(backpressure if a==4 else 0.0)-amount[b]/1000.0/volumes[b]-(backpressure if b==4 else 0.0)
+						var ideal := minf(capacities[e],conductances[e]*gate*maxf(0,difference))*10000+remainder[e]
 						var q := floori(ideal)
 						remainder[e] = ideal-q
-						q = mini(q,mini(amount[a],maxi(0,floori(net.volume[b]*(net.safe[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])))
+						q = mini(q,mini(amount[a],maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])))
 						var p := pure[a]*q/maxi(1,amount[a])
 						var st := 0.0 if simple_quality else stable[a]*q/maxi(1,amount[a])
 						var c := 0.0 if simple_quality else corrupt[a]*q/maxi(1,amount[a])
@@ -729,27 +862,26 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 								corrupt[b] += c
 						if measure:
 							result[7+e] += q
-							result[7+net.source.size()+e] = maxf(result[7+net.source.size()+e],q/10000.0)
+							result[7+edge_count+e] = maxf(result[7+edge_count+e],q/10000.0)
 						continue
 					outgoing.fill(0)
 					incoming.fill(0)
-					var gate := 1-clampf(op.error,0,.60)
-					for j in op.targets.size():
-						var e: int = op.targets[j]
-						var source := net.source[e]
-						var destination := net.destination[e]
-						var difference := amount[source]/1000.0/net.volume[source]+(backpressure if source==4 else 0.0)-amount[destination]/1000.0/net.volume[destination]-(backpressure if destination==4 else 0.0)
-						var ideal := minf(net.capacity[e],net.conductance[e]*gate*maxf(0,difference))*10000+remainder[e]
+					for j in targets.size():
+						var e: int = targets[j]
+						var source := sources[e]
+						var destination := destinations[e]
+						var difference := amount[source]/1000.0/volumes[source]+(backpressure if source==4 else 0.0)-amount[destination]/1000.0/volumes[destination]-(backpressure if destination==4 else 0.0)
+						var ideal := minf(capacities[e],conductances[e]*gate*maxf(0,difference))*10000+remainder[e]
 						var q := floori(ideal)
 						remainder[e] = ideal-q
 						candidates[j] = q
-						outgoing[net.source[e]] += q
-						incoming[net.destination[e]] += q
-					for j in op.targets.size():
-						var e: int = op.targets[j]
-						var a := net.source[e]
-						var b := net.destination[e]
-						var headroom := maxi(0,floori(net.volume[b]*(net.safe[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])
+						outgoing[sources[e]] += q
+						incoming[destinations[e]] += q
+					for j in targets.size():
+						var e: int = targets[j]
+						var a := sources[e]
+						var b := destinations[e]
+						var headroom := maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])
 						var scale := minf(1,minf(float(amount[a])/maxi(1,outgoing[a]),float(headroom)/maxi(1,incoming[b])))
 						var q := floori(candidates[j]*scale)
 						moved[j] = q
@@ -758,10 +890,10 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							qs[j] = stable[a]*q/maxi(1,amount[a])
 							qc[j] = corrupt[a]*q/maxi(1,amount[a])
 					# All moments are sampled before any lane commits.
-					for j in op.targets.size():
-						var e: int = op.targets[j]
-						var a := net.source[e]
-						var b := net.destination[e]
+					for j in targets.size():
+						var e: int = targets[j]
+						var a := sources[e]
+						var b := destinations[e]
 						amount[a] -= moved[j]
 						pure[a] -= qp[j]
 						if not simple_quality:
@@ -774,25 +906,25 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							corrupt[b] += qc[j]
 						if measure:
 							result[7+e] += moved[j]
-							result[7+net.source.size()+e] = maxf(result[7+net.source.size()+e],moved[j]/10000.0)
+							result[7+edge_count+e] = maxf(result[7+edge_count+e],moved[j]/10000.0)
 					if count==8:
 						if measure: result[6] += amount[7]
 						amount[7] = 0
 						pure[7] = 0
 						stable[7] = 0
 						corrupt[7] = 0
-				elif op.code in [4,5]:
-					for i: int in op.targets:
+				elif code==4 or code==5:
+					for i: int in targets:
 						var q := mini(amount[i],limits[i])
 						if q==0: continue
-						var cost := q*(.15*filter_intensity if op.code==4 else .02)+(filter_rem[i] if op.code==4 else stabilise_rem[i])
+						var cost := q*(.15*filter_intensity if code==4 else .02)+(filter_rem[i] if code==4 else stabilise_rem[i])
 						var loss := floori(cost)
-						if op.code==4: filter_rem[i] = cost-loss
+						if code==4: filter_rem[i] = cost-loss
 						else: stabilise_rem[i] = cost-loss
 						var p := pure[i]/amount[i]
 						var st := 1.0 if simple_quality else stable[i]/amount[i]
 						var c := 0.0 if simple_quality else corrupt[i]/amount[i]
-						if op.code==4:
+						if code==4:
 							pure[i] += (q-loss)*(p+.60*filter_intensity*(1-p))-q*p
 							corrupt[i] += (q-loss)*c*(1-.70*filter_intensity)-q*c
 							stable[i] -= loss*st
@@ -801,7 +933,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							pure[i] -= loss*p
 							corrupt[i] -= loss*c
 						amount[i] -= loss
-				elif op.code==6:
+				elif code==6:
 					if measure:
 						result[1] += amount[4]
 						result[2] += pure[4]
@@ -811,7 +943,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 					pure[4] = 0
 					stable[4] = 0
 					corrupt[4] = 0
-	for i in 7+net.source.size(): result[i] /= measured*1000.0
+	for i in 7+edge_count: result[i] /= measured*1000.0
 	return result
 
 func settle_lumped(state: Anatomy.Cultivator, quantity: int, purity: float, stability: float, corruption: float) -> void:
@@ -842,6 +974,9 @@ func expose_storage(state: Anatomy.Cultivator, hours: float, opening_residue: in
 	var finish := float(state.residue)/state.capacity
 	# Integrate the quadratic danger of the linear lodged-residue ramp exactly.
 	var danger := pow(maxf(0,pressure/node.safe_pressure-1),2)+(start*start+start*finish+finish*finish)/3
+	if diagnose:
+		state.milestones.danger_terms.overpressure += pow(maxf(0,pressure/node.safe_pressure-1),2)*hours
+		state.milestones.danger_terms.residue_session += (start*start+start*finish+finish*finish)/3*hours
 	var initial := node.strain
 	var damaging_hours := hours if initial>=.5 else maxf(0,hours-(.5-initial)/maxf(1e-30,danger))
 	var loss := .02*(maxf(0,initial-.5)*damaging_hours+.5*danger*damaging_hours*damaging_hours)

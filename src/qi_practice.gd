@@ -56,16 +56,23 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 		state.retained_program = program(route,clampf(.75+.5*u[2]-.4*u[6]-.25*u[3],0,1))
 		records[p]["last_policy_day"]=state.day
 		return
-	if state.day-int(records[p].get("last_policy_day",state.day-90))<90: return
 	records[p]["last_policy_day"]=state.day
 	var step := clampf(.02+.12*u[7]+.10*u[4]-.08*u[2],.01,.20)
 	var accepted := clampf(.10+.35*u[6]+.25*u[3]-.30*u[2],.05,.60)
 	var current: Dictionary = state.retained_program
 	var chosen := current
 	var best := -INF
-	for candidate: Dictionary in [current,program("A",1),program("B",.25),program(current.id,clampf(current.filter-step,0,1)),program(current.id,clampf(current.filter+step,0,1))]:
-		var trial := _compiler.accounting.clone_model(state)
-		trial.milestones=state.milestones.duplicate(true)
+	var evaluated: Array = []
+	var candidates: Array = []
+	# Residue cannot purge before today's exposure; storage can grow at most
+	# its funded 0.5% daily ceiling. If even this best case exceeds accepted
+	# strain, every candidate is rejected, so retain the policy without trials.
+	if unavoidable_strain(state)<=accepted:
+		candidates=[current,program("A",1),program("B",.25),program(current.id,clampf(current.filter-step,0,1)),program(current.id,clampf(current.filter+step,0,1))]
+	for candidate: Dictionary in candidates:
+		if evaluated.has(candidate): continue
+		evaluated.append(candidate)
+		var trial := _compiler.production_trial(state)
 		_compiler.solve_day(trial,_compiler.compile(trial,candidate,sample,0,true),budget)
 		if trial.strain>accepted or trial.injuries>state.injuries: continue
 		var score: float = trial.work-state.work-(trial.residue_added-state.residue_added)*u[2]-trial.strain*1000
@@ -77,6 +84,10 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	state.retained_program=chosen
 	state.choices.append({"day":state.day,"route":chosen.id,"filter":chosen.filter})
 	if state.choices.size()>16: state.choices.pop_front()
+
+func unavoidable_strain(state: Anatomy.Cultivator) -> float:
+	var ceiling := maxi(state.capacity,int(Anatomy.definition().initial_capacity_quanta)+(state.volume_work+floori(state.capacity*.005*20.0))/20)
+	return state.nodes[4].strain+24.0*pow(float(state.residue)/ceiling,2)
 
 func advance(s: RefCounted, until: int) -> void:
 	var field: RefCounted = s.qi_field
@@ -192,7 +203,7 @@ func certify(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, opening
 		s.qi[p]=state.reserve/1000.0
 
 func writeback(s: RefCounted, p: int, state: Anatomy.Cultivator) -> void:
-	s.meridian_store.writeback(s.meridian_store.slot[p],state)
+	s.meridian_store.writeback(s.meridian_store.slot[p],state,false)
 
 func policy_report(p: int) -> Dictionary:
 	var retained: Dictionary = {}

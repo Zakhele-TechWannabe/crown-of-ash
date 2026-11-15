@@ -910,6 +910,10 @@ func settle_reservation(id: String, position: Vector2, used: int, quality: Dicti
 	var total := 0
 	for part in receipt: total += part
 	assert(used >= 0 and used <= total)
+	if used==total:
+		allocations.erase(id)
+		if close: _close_ledger()
+		return
 	var consumed := PackedInt64Array([0,0,0,0,0])
 	var left := used
 	if total>0:
@@ -922,9 +926,11 @@ func settle_reservation(id: String, position: Vector2, used: int, quality: Dicti
 				left-=1
 	var moments := PackedInt64Array()
 	for key: String in ["purity","polarity","stability","corruption"]: moments.append(roundi(float(quality[key])*float(_config.quality_scale)))
+	var cell := cell_at(position)
 	for e in 5:
 		var returned := receipt[e]-consumed[e]
-		_add(cell_at(position),e,returned,moments)
+		if returned==0: continue
+		_add(cell,e,returned,moments)
 		ledger.withdrawals -= returned
 		ledger.withdrawal_elements[e] -= returned
 	allocations.erase(id)

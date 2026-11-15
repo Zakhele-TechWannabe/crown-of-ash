@@ -418,3 +418,236 @@ it was **not** adopted. A 32-cycle candidate is being checked against the origin
 The 32-cycle candidate also failed the coefficient gate, so the production
 kernel retains its original 48 cycles. The exploratory test was removed; no
 shorter-kernel optimization is part of the final implementation.
+
+### Stage 3b follow-up — diagnosis in progress
+
+The committed policy guard, owning-store packed mutation, held canonical networks
+and bounded replay are already present in `51e0ab3`; they are not pending edits.
+Inspection of the executed danger path finds only dantian overpressure and lodged
+residue exposure in `session_compiler`: regulated network transfers cap flows,
+and the compiler does not feed elemental interference into its storage hazard.
+Thus Wood composition cannot explain these deaths in the current executor.
+Numerical day-level exposure tracing is being added to the live benchmark before
+any change to the physical laws. No law or difficulty parameter has been changed.
+
+Measured committed-state rerun: baseline **24.027 ms/day**, cohort **42.815**
+(**+18.788**), sealed **89.743** (**+65.716**). The sealed run has **10,026
+network misses** versus **1,053** normally; nested coefficient construction is
+**48.141 ms/day** sealed versus **5.594** normal. Allocation-mismatch time is
+zero. Sealing changes the source trajectory, repeatedly invalidating density/
+quality-keyed periodic tables; this is not an allocator second solve.
+Raw profile: `out/qi_followup_profile_before.txt`.
+
+This rerun's committed-state outcomes are eight sect deaths (nine survivors),
+careful person 24 peak strain **0.495818**, greedy person 21 **0.785138**;
+Palace 17/17 certifications, dates 81–721 (sealed 82–721), village 16/16 living.
+These differ from the owner's nine deaths / 0.53 peak, so before/after evidence
+will use the locally reproduced fixture and will not silently claim identity
+with the owner's earlier run.
+
+### Sect death diagnosis — completed before performance edits
+
+Trace at each representative's peak-strain day (strain increments, before the
+fixed 0.10 daily recovery):
+
+| Person | Day | Opening strain | Residue, 4h session | Residue, 20h rest | Overpressure | Peak strain |
+|---|---:|---:|---:|---:|---:|---:|
+| 21, greedy sect | 75 | 0.678196259 | 0.017803600 | 0.089137952 | 0 | 0.785137811 |
+| 24, careful sect | 172 | 0.395710004 | 0.016670702 | 0.083437362 | 0 | 0.495818067 |
+| 22, careful village | 685 | 0 | 0.008444304 | 0.042651848 | 0 | 0.051096152 |
+
+All have capacity 100,000. Residue just before purge: **6,676 / 6,459 /
+4,618** quanta respectively. Overload, corruption×exposure, instability beyond
+0.20, and forced-commitment terms contribute **zero** in this executed path:
+periodic transfers are capped, corruption is zero, sampled stability is 1.0,
+and the program is regulated. The production compiler currently transports
+scalar quality rather than explicit elemental interference; Wood 60% therefore
+cannot be the cause of these deaths. This is a limitation of that approximation,
+not evidence that elemental interference was measured and found harmless.
+
+Both sect representatives are at **(1415, 2250), cell 50488**, correctly sampling
+**Sect spring**, Established, density **5.28294 / 5.29196**, purity **0.75**,
+stability **1**, corruption **0**, and ~60% Wood. Village person 22 samples cell
+56247 at density **2.20167**, purity **0.90**, stability **1**, corruption **0**.
+All are still Palace members and start route **B / Returning River**; region
+placement does not assign sect membership or route A. Careful sect policy picks
+filter 0.25 at its 90-day review, and remains there. The greedy person dies before
+that first review. There is no location sampling bug or allocation mismatch.
+
+The spring supplies enough impure work expenditure to maintain residue near the
+recovery balance **sqrt(0.10/24) = 6.45497% of capacity**. Above that balance,
+small daily excesses accumulate strain; above strain 0.50 integrity erodes.
+Stopping intake does not remove existing lodged residue. The village load stays
+below the balance and fully recovers each day. The careful sect person remains
+just below damaging strain in this local rerun; greedy person 21 exhausts
+integrity. **These deaths follow the existing residue/recovery law; no law or
+difficulty changes were made.** Raw trace: `out/qi_followup_diagnosis.txt`.
+
+Diagnostic rerun physical totals exactly match the timed cohort (including eight
+sect deaths). Palace certification dates vary between separately constructed
+worlds, despite equal cultivation work; these also depend on society health and
+injury eligibility. Do not compare different-world dates as a compiler-only
+accuracy measurement.
+
+### Moving-source coefficient reuse (under verification)
+
+The next implementation keeps canonical 1% source identity and body revisions,
+but shares fluid-response tables across source qualities and neighbouring density
+bands. Source purity/stability/corruption have affine responses because packet
+transport and filter losses do not depend on those moments. Basis moments
+(purity 0, stability 0, corruption 1) reconstruct actual qualities. Density
+interpolation uses a fixed 10% geometric grid; the original 48-cycle kernel
+builds every endpoint. Tables remain transient and bounded. This is a compiler
+approximation, not a change to the physical laws, and requires both direct
+coefficient checks and the full three-year accuracy gate.
+
+Policy candidates now skip exact duplicates and use a direct anatomy clone for
+the lumped solver. Packed writeback skips unchanged packet columns on this path;
+the generic full-writeback API remains available. Strained storage never allowed
+replay already; it now bypasses construction of unusable replay journals while
+preserving adaptation/integrity revision boundaries. Verification pending.
+
+The first 10% interpolation candidate passed `test_session_compiler.gd`, including
+all four three-year reference comparisons, but the additional moving-source
+coefficient sweep found **5.83% admission error** at density 15. It is rejected
+as an acceptance candidate. The grid is narrowed to **5%** for the next pass.
+The new sweep checks main coefficients within 5%; negligible side flows use an
+absolute 0.00025 qu/cycle floor rather than unstable relative error at zero.
+
+The 5% grid passes the moving-source sweep (**2.6636%** worst normalized error).
+Its intermediate full-world measurement is baseline **23.931**, cohort **40.847**
+(**+16.916**), sealed **56.182 ms/day** (**+32.251**). Sealed coefficient cost is
+**16.457 ms/day**, down from **48.141**, but this still fails the 5 ms/day target.
+Raw intermediate evidence: `out/qi_followup_grid5.txt`. This is before the final
+policy rejection guard and local kernel geometry bindings, so is not final.
+
+A conservative policy guard now proves when all trials must fail: lodged residue
+cannot purge before today's exposure, storage can grow by at most the funded
+0.5% daily ceiling, and all other danger terms are nonnegative. Therefore
+`opening_dantian_strain + 24*(opening_residue / maximum_today_capacity)^2`
+is a lower bound on every candidate's peak strain. When it already exceeds the
+person's accepted strain, skip trials but record the same retained choice/review
+date. A test checks this lower bound against both routes and three filters, as
+well as trial clone isolation/conservation. No physical execution is skipped.
+The kernel also binds read-only geometry arrays once outside its inner slices;
+its cycle count and arithmetic are unchanged.
+
+Operational note: a duplicate diagnostic benchmark was briefly launched while
+an earlier benchmark still ran, then immediately interrupted. Subsequent Godot
+runs are serial. This was a process-overlap mistake, not an accepted workflow.
+
+For completeness, the reference interference function also gives **~0.040** for
+the observed 60/10/10/10/10 mixture (`0.40 * largest opposing minimum / total`),
+below the danger formula's **0.20** threshold even before Stabilise. Thus the
+sample's Wood share does not hide a positive instability term in this diagnosis.
+
+Source snapshots in the diagnostic log are sampled after that day's field
+settlement; the solve uses the preceding field sample with canonical density/
+quality buckets. The reported strain contributions are instrumented inside the
+actual solve, not inferred from that post-settlement snapshot. Cell/source,
+purity 0.75/0.90, stability 1 and corruption 0 are unchanged across this boundary.
+
+### Full-suite regression and correction
+
+The full suite exposed a regression in `test_qi_condensation.gd`: the six-person
+fixture's greedy sect residue became 6,533 versus careful 6,669, violating its
+existing ordering check (strain ordering still held). The direct coefficient
+and three-year aggregate gates did not detect this nonlinear threshold effect.
+The assertion is retained. At canonical density <=8 (source pressure <=1), the
+compiler now uses the original exact-density kernel and shares only its affine
+quality response; interpolation remains restricted to higher densities. This
+sacrifices some speed to preserve low-density integer-flow/residue behaviour.
+Verification and final timing are pending this correction.
+
+After the low-density correction, the full three-year `test_session_compiler.gd`
+passes all four reference comparisons, including strain/recovery/retention and
+warm/cold integer replay. The moving-source/clone/rejection-bound check also
+passes. Reversed-B canonical peak strain is **0.373488**, versus reference
+**0.310664**, within the existing 25% gate; no gate was loosened. Main work,
+usable/refined qi and residue checks retain their original 5%/10% tolerances.
+
+The first low-density corrective rerun still failed the six-person ordering.
+A direct committed/current executor comparison isolated the remaining cause:
+the journal shortcut incorrectly assumed opening strain forbids the following
+day's replay. A person can recover to zero *today*, leaving a valid journal for
+tomorrow. Discarding that journal changed the bounded approximation trajectory.
+The shortcut is now limited to `injuries > 0`, which permanently forbade replay
+already. A transient-strain journal regression check is added.
+
+With this correction, the independent six-person comparison matches committed
+execution exactly at printed precision: greedy **6,533 residue / 0.761116 peak
+strain**, careful **5,661 / 0.339680**. Raw comparisons:
+`out/qi_bisect_committed.txt`, `out/qi_bisect_journal.txt`. Temporary baseline
+scripts were removed. All physical laws and existing assertions remain intact.
+
+Final corrective checks pass: `test_qi_condensation.gd` (including two-year full
+running-world daily/jump, physical save/load, cold continuation and conservation),
+`test_session_compiler.gd`, and `test_session_sources.gd` (including the transient
+strain journal regression). Latest status is **39/39 PASS**: the full suite had
+38 passes and the one ordering failure, then that failing test and both compiler
+checks were rerun successfully after correction. No existing assertion was
+weakened. The first full-run results are preserved separately in
+`out/phase2/qi_followup_first_suite.json`; latest per-test results and rerun
+provenance are in `out/phase2/qi_followup_final_checks.json`. Final live benchmark
+is running serially after these checks.
+
+### Final follow-up result — correctness PASS, performance FAIL
+
+| Run | Local before, ms/day | Final, ms/day | Final added over baseline |
+|---|---:|---:|---:|
+| Baseline | 24.027 | 23.410 | — |
+| 50-person cohort | 42.815 | 38.445 | **15.035** |
+| Cohort, Heavenly Origin sealed | 89.743 | 63.909 | **40.499** |
+
+Added cost before was **18.788 / 65.716 ms/day** locally; the owner's before
+measurement was **17.9 / 65.6**. Both final cases **FAIL the <=5 ms/day target**.
+The sealed pathology is reduced, not fully resolved. Canonical network misses
+remain **1,036 normal / 9,903 sealed**. Nested coefficient time is **4.185 /
+24.205 ms/day** (sealed previously 48.141). There are no allocation-mismatch
+re-solves. Daily replay hits/misses are **24,160 / 7,513** normal and **14,985 /
+15,675** sealed. Remaining moving-source coefficients and policy trial work need
+further optimization; this pass must not be described as performance acceptance.
+
+Coordinator phases, ms/day (coefficient/signature timings are nested):
+
+| Phase | Normal | Sealed |
+|---|---:|---:|
+| Execution/compilation | 6.464 | 30.481 |
+| Policy | 3.025 | 4.251 |
+| Packed writeback | 1.301 | 1.243 |
+| Settlement/conservation | 1.270 | 1.290 |
+
+**Outcome comparison:** normal regional permanent work totals match the local
+committed benchmark exactly: Palace **69,886,059**, sect **4,337,305**, village
+**5,113,404**. Sealed sect/village work also match exactly; sealed Palace work is
+**25,344,606**, versus **25,344,804** before (198 quanta less, **0.000781%**).
+All regional survival/certification counts and first/last certification dates
+match the local before-run in both modes: Palace **17/17 living and layer 1**,
+normal dates **81–721**, sealed **82–721**; sect **9/17 living**, no certifications;
+village **16/16 living**, no certifications. Thus there remain **eight local sect
+deaths**, already present before this follow-up, versus nine in the owner's
+measurement. No layer 2/3 certifications were obtained. No difficulty law changed.
+
+Verification: **39/39 latest checks PASS**, including all 38 original checks and
+the new source/journal/clone/bound check, after the documented corrective reruns.
+`tools/bench_qi_live.gd` completes successfully; its timing target still fails.
+`git diff --check` passes. No commit was made. Final raw benchmark:
+`out/qi_followup_final.txt`; complete check/rerun provenance:
+`out/phase2/qi_followup_final_checks.json` (the initial failed full-run record is
+preserved, not overwritten with a fabricated passing run).
+
+Final changed files:
+
+- `src/session_compiler.gd`: shared affine-quality fluid kernels, bounded high-density
+  interpolation, exact low-density coefficients, direct policy-body cloning,
+  safe injury-only journal shortcut, local geometry/opcode dispatch, diagnostic trace.
+- `src/qi_practice.gd`: duplicate trial elimination, proven rejection bound,
+  specialized clone and unchanged-packet writeback path.
+- `src/meridian_store.gd`: optional unchanged-packet writeback fast path.
+- `src/qi_field.gd`: full-consumption refund shortcut, zero-return/duplicate-cell work removal.
+- `tools/bench_qi_live.gd`: opt-in per-person danger tracing and cohort-only diagnosis.
+- `tools/test_session_sources.gd`: moving-source coefficient accuracy, policy clone
+  isolation, rejection-bound conservation and transient-strain journal regression.
+- `docs/qi_condensation.md`: diagnosis, rejected candidates, corrections and final evidence.
+
+Unfinished: the **<=5 ms/day added** performance requirement in both modes.

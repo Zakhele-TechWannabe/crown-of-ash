@@ -16,6 +16,7 @@ func run() -> void:
 	var initial: Dictionary = bytes_to_var(var_to_bytes(Save.capture(pop)))
 	var economy_initial: Dictionary = bytes_to_var(var_to_bytes(Save.capture(life.economy)))
 	for mode in ["baseline","cohort","sealed"]:
+		if "--cohort-only" in OS.get_cmdline_user_args() and mode!="cohort": continue
 		Save.restore(pop,initial)
 		Save.restore(life.economy,economy_initial)
 		s.law.rebuild_sight()
@@ -40,12 +41,21 @@ func run() -> void:
 				s.mind._set_weight(p,s.mind.B2+s.mind.PRIDE,-3 if i%2==0 else 3)
 		if mode=="sealed": s.qi_field.set_decree("Heavenly Origin",0)
 		s.qi_practice.profile.fill(0)
+		s.qi_practice._compiler.diagnose = "--diagnose" in OS.get_cmdline_user_args()
+		var peaks: Dictionary = {}
 		var elapsed := 0
 		for day in range(1,731):
 			var start := Time.get_ticks_usec()
 			life.economy.advance_to(day*1440.0)
 			pop.tick_day(day)
 			elapsed+=Time.get_ticks_usec()-start
+			if s.qi_practice._compiler.diagnose:
+				for index in [1,2,4]:
+					if prepared.is_empty(): continue
+					var person: int=prepared[index]
+					var state: RefCounted=s.qi_practice.body(s,person)
+					if not peaks.has(person) or state.strain>peaks[person].strain:
+						peaks[person]={"day":day,"strain":state.strain,"terms":state.milestones.get("danger_terms",{}).duplicate(true),"reserve":state.reserve,"capacity":state.capacity,"residue":state.residue,"integrity":state.nodes[4].integrity,"program":state.retained_program.duplicate(true),"location":pop.locations[person],"sample":s.qi_field.sample(pop.locations[person])}
 			if day%30==0: await process_frame
 			if day%365==0: print("LIVE progress %s day=%d" % [mode,day])
 		print("LIVE %s ms/day %.3f" % [mode,elapsed/730000.0])
@@ -57,6 +67,7 @@ func run() -> void:
 				continue
 			var state: RefCounted=s.qi_practice.body(s,p)
 			print("LIVE %s person=%d region=%s careful=%s achieved=%s residue=%d strain=%.6f opening=%d reserve=%d choices=%s" % [mode,p,["Palace","Sect","Village"][i%3],i%2==0,s.meridian_report(p).achieved,state.residue,state.max_strain,state.opening_work,state.reserve,state.choices])
+		print("LIVE DANGER %s %s" % [mode,peaks])
 		summarise(s,mode)
 	world.queue_free()
 	quit()
