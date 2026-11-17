@@ -79,7 +79,77 @@ func check_live_reuse() -> void:
 		check(compiler.residual(state)==0 and fresh.residual(clone)==0,"live replay integer conservation")
 	check(compiler.day_hits>0,"live canonical memo reuse exercised")
 
+func check_residue_tail() -> void:
+	var compiler := Compiler.new()
+	var cold_compiler := Compiler.new()
+	var reference := Reference.new()
+	var sample := {"density":0.0,"quantity":0,"elements":[1,0,0,0,0],"purity":1.0,"polarity":0.0,"stability":1.0,"corruption":0.0}
+	var state := Anatomy.Cultivator.from_dictionary(Anatomy.create())
+	state.opening_work=500000
+	state.work=500000
+	state.residue=500
+	state.absorbed=500500
+	state.nodes[4].residue_quanta=500
+	var cold := reference.clone_model(state)
+	var program := reference.manual("A",0)
+	var net := compiler.compile(state,program,sample,0,true)
+	var cold_net := cold_compiler.compile(cold,program,sample,0,true)
+	for day in 200:
+		compiler.step(state,net,0)
+		cold_compiler.solve_day(cold,cold_net,0)
+		check(state.residue==cold.residue and state.purge_remainder==cold.purge_remainder and state.dissipated==cold.dissipated,"fractional residue tail matches uncached execution")
+		check(compiler.residual(state)==0,"residue tail conservation")
+
+func check_fill_gate() -> void:
+	var reference := Reference.new()
+	var compiler := Compiler.new()
+	var sample := {"density":0.0,"quantity":0,"elements":[1,0,0,0,0],"purity":1.0,"polarity":0.0,"stability":1.0,"corruption":0.0}
+	for case: Array in [[.59,0,19500],[.60,0,20000],[.75,5000,32500],[.90,10000,45000],[1.0,10000,50000]]:
+		var fill: float=case[0]
+		var state := Anatomy.Cultivator.from_dictionary(Anatomy.create())
+		state.opening_work=500000
+		state.work=500000
+		state.reserve=roundi(state.capacity*fill)
+		state.absorbed=state.work+state.reserve
+		state.reserve_moments=[float(state.reserve),0.0,float(state.reserve),0.0]
+		state.nodes[4].stored_quanta=state.reserve
+		var clone := reference.clone_model(state)
+		var expected_work: int=case[1]
+		var draw: int=case[2]
+		var reserve := state.reserve
+		var program := reference.manual("A",0)
+		reference.simulate_day_model(state,program,sample,0)
+		compiler.solve_day(clone,compiler.compile(clone,program,sample),0)
+		for body: Anatomy.Cultivator in [state,clone]:
+			check(body.volume_work==expected_work,"fill gate exact storage work at %.2f" % fill)
+			check(body.reserve==reserve-draw,"blocked allocation remains in reserve at %.2f" % fill)
+			check(compiler.residual(body)==0,"fill gate integer conservation")
+		if fill>=.90: check(expected_work==10000,"full enlargement rate from 90%")
+		if fill<=.60: check(expected_work==0,"no enlargement through 60%")
+	var underfunded := Anatomy.Cultivator.from_dictionary(Anatomy.create())
+	underfunded.reserve=2000
+	underfunded.reserve_moments=[2000.0,0.0,2000.0,0.0]
+	underfunded.residue=73000
+	check(reference.integration_draw(underfunded,.75)==1000,"funding below gated ceiling is not withheld")
+	check(reference.storage_work_limit(underfunded,float(underfunded.reserve+underfunded.residue)/underfunded.capacity)==5000,"residue counts toward fill")
+	underfunded.reserve=20000
+	underfunded.residue=55000
+	underfunded.reserve_moments=[14000.0,0.0,20000.0,0.0]
+	underfunded.residue_remainder=.9
+	var mixed_draw := reference.integration_draw(underfunded,.75)
+	check(floori(mixed_draw*.7+.9)==5000,"mixed reserve funds the exact partial gate with saved remainder")
+	# An external fill change within the old one-percent hysteresis must miss.
+	var body := Anatomy.Cultivator.from_dictionary(Anatomy.create())
+	body.reserve=59900
+	var memo := Compiler.DayMemo.new()
+	var net := compiler.compile(body,reference.manual("A"),sample)
+	var before := compiler.input_signature(body,net,0,memo)
+	body.reserve=60100
+	check(before!=compiler.input_signature(body,net,0,memo),"changing g invalidates daily reuse")
+
 func _initialize() -> void:
+	check_fill_gate()
+	check_residue_tail()
 	check_reuse_contracts()
 	check_live_reuse()
 	if "--reuse-only" in OS.get_cmdline_user_args():

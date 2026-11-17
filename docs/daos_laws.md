@@ -447,7 +447,9 @@ An edge can eventually reach three times its seeded throughput through this adap
 
 Flow below useful loading teaches control but yields little enlargement. Repeated overload injures rather than automatically accelerating growth.
 
-Dantian enlargement costs 20 QU of integration work per additional QU of uncompressed storage capacity, with a maximum addition of 0.5% capacity per valid practice day. Scarring and constitution constrain its ceiling.
+**Owner decision 2026-11-16 — a vessel is tempered only when it is filled.** Measure `fill = (reserve + residue) / capacity` at the day's peak pressure point. The enlargement factor is `g = clamp((fill - 0.60) / 0.30, 0, 1)`. Daily addition is bounded by `g × 0.5% × capacity` and costs 20 QU of integration work per additional QU of uncompressed storage capacity. Below 60% fill there is no enlargement; at or above 90% the full existing rate is available. Integration qi allocated to enlargement but blocked by this gate stays in reserve, unspent and with its qualities retained. The existing daily 50% reserve integration assignment otherwise remains unchanged. Scarring and constitution constrain the ceiling.
+
+Overfill beyond safe pressure still injures under section 6. Pressure, gates, conductance, certification thresholds, edge adaptation, purity and residue laws are unchanged.
 
 These limits make time, foundation and route choice consequential even at the Palace.
 

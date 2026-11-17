@@ -101,7 +101,7 @@ func _initialize() -> void:
 	reserve_work.nodes[4].stored_quanta = 1000
 	var empty_sample := {"density":0.0,"quantity":0,"elements":[0,0,0,0,0],"purity":1.0,"polarity":0.0,"stability":1.0,"corruption":0.0}
 	Lab.simulate_day(reserve_work,Lab.manual("A"),empty_sample,0)
-	assert(reserve_work.work==500250 and reserve_work.reserve==500 and reserve_work.residue==248,"Reserve integration also partitions pure work and residue before purge")
+	assert(reserve_work.work==500000 and reserve_work.reserve==1000 and reserve_work.residue==0,"Blocked enlargement retains the original impure reserve before refinement")
 	assert(Lab.residual(reserve_work)==0)
 	for day in 4:
 		if blocked.injuries>0: break

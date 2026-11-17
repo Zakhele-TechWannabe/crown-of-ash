@@ -13,6 +13,7 @@ func run() -> void:
 	var pop: RefCounted=life.population
 	var s: RefCounted=pop.society
 	s.qi_field.seed(0)
+	var ordinary_palace: Array=s.fifty.people.keys()
 	var initial: Dictionary = bytes_to_var(var_to_bytes(Save.capture(pop)))
 	var economy_initial: Dictionary = bytes_to_var(var_to_bytes(Save.capture(life.economy)))
 	for mode in ["baseline","unaware","cohort","sealed"]:
@@ -55,6 +56,15 @@ func run() -> void:
 			print("LIVE %s person=%d region=%s careful=%s achieved=%s residue=%d strain=%.6f opening=%d reserve=%d choices=%s" % [mode,p,["Palace","Sect","Village"][i%3],i%2==0,s.meridian_report(p).achieved,state.residue,state.max_strain,state.opening_work,state.reserve,state.choices])
 		print("LIVE DANGER %s %s" % [mode,peaks])
 		print("LIVE RESPONSES %s %s" % [mode,preload("res://tools/qi_cohort_fixture.gd").danger_summary(s,prepared)])
+		if mode=="baseline":
+			var counts := PackedInt32Array([0,0,0])
+			var eligible := 0
+			for p: int in ordinary_palace:
+				var report: Dictionary=s.meridian_report(p)
+				if report.is_empty(): continue
+				eligible+=1
+				for layer in 3: counts[layer]+=int(report.achieved[layer]>=0)
+			print("LIVE ORDINARY Palace day=730 members=%d qualified=%d layer_1_2_3_count=%s" % [ordinary_palace.size(),eligible,counts])
 		summarise(s,mode)
 	world.queue_free()
 	quit()

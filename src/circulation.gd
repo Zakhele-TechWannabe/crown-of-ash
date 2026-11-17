@@ -472,9 +472,36 @@ func finish_quiescent(state: Anatomy.Cultivator, instructions: Array, cycles: in
 	quiescent_cycles += cycles
 	return true
 
+# Owner decision 2026-11-16: only a filled vessel is tempered.
+# Keep the blocked storage allocation in its original reserve composition;
+# it never enters refinement, residue production or irreversible work.
+func enlargement_factor(fill: float) -> float:
+	return clampf((fill-.60)/.30,0,1)
+
+func storage_work_limit(state: Anatomy.Cultivator, peak_fill: float) -> int:
+	return floori(state.capacity*.005*20.0*enlargement_factor(peak_fill))
+
+func integration_draw(state: Anatomy.Cultivator, peak_fill: float) -> int:
+	var draw := floori(state.reserve*float(Anatomy.definition().daily_reserve_integration_fraction))
+	var old_limit := floori(state.capacity*.005*20.0)
+	var purity := clampf(float(state.reserve_moments[0])/maxi(1,state.reserve),0,1)
+	var pure := mini(draw,floori(draw*purity+state.residue_remainder))
+	var available := state.pending_work+pure
+	var blocked := mini(available,old_limit)-mini(available,storage_work_limit(state,peak_fill))
+	# Retain the original mixed qi that would fund the rejected pure work.
+	# Low funding below the gated ceiling is still fully usable. Choose the
+	# integer draw producing the remaining pure work, using the saved remainder.
+	if blocked<=0 or purity<=0: return draw
+	var target := maxi(0,pure-blocked)
+	var spent := clampi(ceili((target-state.residue_remainder)/purity),0,draw)
+	if spent<draw and floori(spent*purity+state.residue_remainder)<target: spent+=1
+	return spent
+
 func simulate_day_model(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary, budget: int) -> void:
 	state.day += 1
 	var opening_refined: int = state.refined
+	var peak_fill := float(state.reserve+state.residue)/maxi(1,state.capacity)
+	var daily_peak_pressure := pressure(state.nodes[4])
 	state.pending_work = 0
 	state.strain = 0.0
 	for edge: Anatomy.Edge in state.edges:
@@ -541,15 +568,19 @@ func simulate_day_model(state: Anatomy.Cultivator, program: Dictionary, sample: 
 						else: flow_model(state,op.targets,false,DT,gate)
 					4,5: process_model(state,op.targets,op.name,filter_intensity)
 					6: settle_model(state)
+				var current_pressure := pressure(state.nodes[4])
+				if current_pressure>=daily_peak_pressure:
+					daily_peak_pressure = current_pressure
+					peak_fill = float(state.reserve+state.residue)/maxi(1,state.capacity)
 				exposure_model(state,DT,false)
 	# The manual pays daily integration from its actual refined reserve. Stored
 	# qi shares the dantian's volume and backpressure with incoming packets.
-	var assigned_from_reserve := floori(state.reserve*float(config.daily_reserve_integration_fraction))
+	var assigned_from_reserve := integration_draw(state,peak_fill)
 	var reserve_purity: float = state.reserve_moments[0]/maxi(1,int(state.reserve))
 	for q in 4: state.reserve_moments[q] *= float(state.reserve-assigned_from_reserve)/maxi(1,int(state.reserve))
 	state.reserve -= assigned_from_reserve
 	var remaining := int(state.pending_work)+refined_work_model(state,assigned_from_reserve,reserve_purity)
-	var storage_work := mini(remaining, floori(state.capacity*.005*20.0))
+	var storage_work := mini(remaining,storage_work_limit(state,peak_fill))
 	state.volume_work += storage_work
 	state.work += storage_work
 	state.capacity = int(config.initial_capacity_quanta)+int(state.volume_work)/20

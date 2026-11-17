@@ -22,8 +22,8 @@ for file in files:
         process = subprocess.Popen(['godot', '--headless', '--path', '.', '-s', file],
                                    env={**os.environ, 'XDG_DATA_HOME': '/tmp/crown-godot'},
                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-        # The century-long kinship fixture now also replays 36,500 authoritative qi dates.
-        timeout = 900 if Path(file).name in {"test_family.gd", "test_fifty.gd", "test_session_compiler.gd", "bench_qi_live.gd", "test_qi_condensation.gd"} else 300
+        # Century qi replay and the large terrain-export fixture need the longer budget on low-RAM machines.
+        timeout = 900 if Path(file).name in {"test_family.gd", "test_fifty.gd", "test_session_compiler.gd", "bench_qi_live.gd", "test_qi_condensation.gd", "test_sites.gd"} else 300
         deadline = threading.Timer(timeout, process.kill)
         deadline.start()
         for line in process.stdout:

@@ -21,12 +21,16 @@ var initial_capacity := int(Anatomy.definition().initial_capacity_quanta)
 const REFRESH_DAYS := 30
 
 const BINS := 24
-const RELAX := 96
+const RELAX := 384
 const STEPS := 4
+const STRAIN_BINS := 16
 
 class Network extends RefCounted:
 	var source_key := PackedFloat64Array()
 	var canonical := false
+	var intake_scale := 1.0
+	var strain_gate := 0.0
+	var health_profiles: Dictionary = {}
 	var fingerprint := 0
 	var build_usec := 0
 	var healthy := true
@@ -182,6 +186,22 @@ func live_network(state: Anatomy.Cultivator, program: Dictionary, sample: Dictio
 			return memo.network
 	return compile(state,program,sample,0,true)
 
+# Geometry and instructions are immutable. Health profiles share their source
+# basis cache, with intake/gate context included in each coefficient key.
+const FLOW_PROFILE_FIELDS = ["source_key","canonical","healthy","instructions","capacity","conductance","volume","safe","source","destination","program","sample","used_edges","cycles","pressure_limit","seconds","session_seconds","control_error"]
+func flow_profile(net: Network, gate_mode: int, half_intake: bool) -> Network:
+	var key := gate_mode+(STRAIN_BINS+1)*int(half_intake)
+	if key==0: return net
+	if net.health_profiles.has(key): return net.health_profiles[key]
+	var profile := Network.new()
+	for field: String in FLOW_PROFILE_FIELDS: profile.set(field,net.get(field))
+	profile.intake_scale=.5 if half_intake else 1.0
+	profile.strain_gate=.10*gate_mode/STRAIN_BINS
+	profile.fingerprint=hash([net.fingerprint,key])
+	profile.kernel_tables=net.kernel_tables
+	net.health_profiles[key]=profile
+	return profile
+
 ## Fluid coefficients depend on density/geometry, not source quality. Carry
 ## basis moments (purity=0, stability=0, corruption=1) once, then reconstruct
 ## the affine quality response. Interpolate adjacent fixed density grid points;
@@ -220,7 +240,7 @@ func table(net: Network, bin: int) -> PackedFloat64Array:
 
 func basis_table(net: Network, bin: int, density: float) -> PackedFloat64Array:
 	var simple: bool = float(net.sample.stability)==1 and float(net.sample.corruption)==0
-	var key: Array = [density,bin,simple]
+	var key: Array = [density,bin,simple,net.intake_scale,net.strain_gate]
 	if not net.kernel_tables.has(key):
 		# Bound transient storage even for sources traversing many density bands.
 		if net.kernel_tables.size()>=256: net.kernel_tables.clear()
@@ -318,6 +338,7 @@ func set_edge_capacity(state: Anatomy.Cultivator, index: int, capacity: float) -
 
 func input_signature(state: Anatomy.Cultivator, net: Network, budget: int, memo: DayMemo) -> Array:
 	var reserve_ratio := float(state.reserve)/state.capacity
+	var carried_strain := state.nodes[4].strain
 	var residue_ratio := float(state.residue)/state.capacity
 	if absf(reserve_ratio-memo.reserve_anchor)>.01:
 		memo.reserve_anchor = reserve_ratio
@@ -325,7 +346,7 @@ func input_signature(state: Anatomy.Cultivator, net: Network, budget: int, memo:
 	if absf(residue_ratio-memo.residue_anchor)>.001:
 		memo.residue_anchor = residue_ratio
 		memo.residue_bucket += 1
-	return [net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(state.nodes[4].strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve)),floori(float(state.milestones.get("release_strain",0))*500)]
+	return [accounting.enlargement_factor(reserve_ratio+residue_ratio),carried_strain>0,carried_strain>.20,carried_strain>.35,net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(carried_strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve)),floori(float(state.milestones.get("release_strain",0))*500)]
 
 func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var memo: DayMemo = state.session_cache if state.session_cache_owner==identity else null
@@ -364,7 +385,10 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		return
 	var signature := input_signature(state,net,budget,memo)
 
-	if memo.signature==signature and memo.age<memo.horizon and (not net.canonical or memo.d_absorbed<=budget):
+	# A reused low-fill day must not cross into a different enlargement factor.
+	var next_fill_bound := float(state.reserve+state.residue+maxi(0,memo.d_absorbed)+maxi(0,memo.d_reserve)+maxi(0,memo.d_residue)+100)/maxi(1,state.capacity)
+	var resolve_residue_tail := state.residue>0 and state.residue<1000
+	if not resolve_residue_tail and memo.signature==signature and memo.age<memo.horizon and next_fill_bound<.60 and (not net.canonical or memo.d_absorbed<=budget):
 		day_hits += 1
 		memo.age += 1
 		replay_day(state,memo)
@@ -436,6 +460,13 @@ func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 
 func set_horizon(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 	memo.horizon = REFRESH_DAYS-1
+	# Once fill-gating stops reserve expenditure, residue can decay to just a
+	# few quanta. Replaying a rounded daily purge would erase that tail faster
+	# than its saved fractional accumulator permits. Resolve those dates.
+	if state.residue>0 and state.residue<1000: memo.horizon = 0
+	var fill := float(state.reserve+state.residue)/maxi(1,state.capacity)
+	if fill>=.60 or memo.d_volume_work!=0 or float(state.reserve+state.residue+maxi(0,memo.d_absorbed)+maxi(0,memo.d_reserve)+maxi(0,memo.d_residue)+100)/maxi(1,state.capacity)>=.60:
+		memo.horizon = 0
 	if absf(memo.d_reserve)>maxi(2,state.reserve/600) or absf(memo.strain-.10)<=.005 or absf(memo.strain-.20)<=.005:
 		memo.horizon = 0
 	if state.opening_work<500000 and memo.d_opening_work>0:
@@ -516,6 +547,7 @@ func replay_day(state: Anatomy.Cultivator, memo: DayMemo) -> void:
 func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	state.day += 1
 	var opening_refined := state.refined
+	var peak_fill := float(state.reserve+state.residue)/maxi(1,state.capacity)
 	if not state.milestones.has("daily_execution"):
 		state.milestones["daily_execution"] = {"fill":0,"draw":0,"pressure":0.0,"purity":0.0,"instability":1.0}
 	else:
@@ -558,22 +590,29 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 			for hour in 4:
 				hour_weights.append(maxf(0,minf((phase+1)*duration,(hour+1)*3600.0)-maxf(phase*duration,hour*3600.0))/maxf(1,duration))
 		var opening_residue := state.residue
+		# Daily peak bookkeeping resets, but retained tissue strain still gates
+		# intake from the first phase, as the reference's first exposure does.
+		var practice_strain := maxf(state.strain,state.nodes[4].strain)
 		# With no funded intake every transport delta is zero. Retain exposure
 		# and all end-of-day upkeep, without building unused fluid tables.
-		if remaining_budget<=0 or state.deaths>0 or state.strain>.35:
+		if remaining_budget<=0 or state.deaths>0 or practice_strain>.35:
 			expose_storage(state,net.session_seconds/phases/3600,opening_residue)
 			continue
+		# Apply the reference's existing strain guidance error and half admission
+		# inside the kernel. Scaling all transfers would also halve refinement.
+		var midpoint_strain := practice_strain+pow(float(state.residue)/state.capacity,2)*net.session_seconds/phases/7200.0
+		var gate_mode := clampi(roundi(STRAIN_BINS*midpoint_strain/.20),0,STRAIN_BINS)
+		var flow_net := flow_profile(net,gate_mode,practice_strain>.20)
 		var pressure_ratio := clampf(float(state.reserve+state.residue)/maxi(1,state.capacity),0,1)
 		var position := clampf(pressure_ratio*net.safe[4]/maxf(1e-30,net.pressure_limit),0,1)*BINS
 		var lo := mini(BINS-1,floori(position))
 		var weight := position-lo
-		var a := table(net,lo)
-		var b := table(net,lo+1)
+		var a := table(flow_net,lo)
+		var b := table(flow_net,lo+1)
 		var delivery := (a[1]*(1-weight)+b[1]*weight)*net.cycles*1000/phases
 		var admission := (a[0]*(1-weight)+b[0]*weight)*net.cycles*1000/phases
 		var factor := minf(1,float(maxi(0,remaining_budget))/maxf(1,admission))
-		if state.deaths>0 or state.strain>.35: factor = 0
-		elif state.strain>.20: factor *= .5
+		if state.deaths>0 or practice_strain>.35: factor = 0
 		var admitted := floori(admission*factor+state.intake_remainder)
 		state.intake_remainder = admission*factor+state.intake_remainder-admitted
 		var settled := mini(admitted,floori(delivery*factor))
@@ -590,6 +629,7 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		state.grounded += grounded
 		state.dissipated += admitted-settled-grounded
 		settle_lumped(state,settled,purity,settled_stability,corruption)
+		peak_fill = maxf(peak_fill,float(state.reserve+state.residue)/maxi(1,state.capacity))
 		for e: int in net.used_edges:
 			var edge: Anatomy.Edge = state.edges[e]
 			var moved := floori((a[7+e]*(1-weight)+b[7+e]*weight)*net.cycles*1000/phases*factor)
@@ -605,16 +645,16 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	# The manual pays daily integration from its actual refined reserve. Stored
 	# qi shares the dantian's volume and backpressure with incoming packets.
 	var evidence: Dictionary = state.milestones.daily_execution
-	evidence.draw = floori(state.reserve*float(config.daily_reserve_integration_fraction))
+	evidence.draw = accounting.integration_draw(state,peak_fill)
 	evidence.pressure = state.reserve/1000.0/state.nodes[4].volume
 	evidence.purity = state.reserve_moments[0]/maxi(1,state.reserve)
 	evidence.instability = 1-state.reserve_moments[2]/maxi(1,state.reserve)
-	var assigned_from_reserve := floori(state.reserve*float(config.daily_reserve_integration_fraction))
+	var assigned_from_reserve := accounting.integration_draw(state,peak_fill)
 	var reserve_purity: float = state.reserve_moments[0]/maxi(1,int(state.reserve))
 	for q in 4: state.reserve_moments[q] *= float(state.reserve-assigned_from_reserve)/maxi(1,int(state.reserve))
 	state.reserve -= assigned_from_reserve
 	var remaining := int(state.pending_work)+accounting.refined_work_model(state,assigned_from_reserve,reserve_purity)
-	var storage_work := mini(remaining, floori(state.capacity*.005*20.0))
+	var storage_work := mini(remaining,accounting.storage_work_limit(state,peak_fill))
 	state.volume_work += storage_work
 	state.work += storage_work
 	state.capacity = int(config.initial_capacity_quanta)+int(state.volume_work)/20
@@ -865,6 +905,8 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	qp.resize(4)
 	qs.resize(4)
 	qc.resize(4)
+	var intake_scale := net.intake_scale
+	var strain_gate := net.strain_gate
 	var density: float = sample.density
 	var sample_purity: float = sample.purity
 	var sample_stability: float = sample.stability
@@ -873,7 +915,8 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	var filter_intensity: float = program.filter
 	var intake_rem := 0.0
 	# The production bypass is two edges shorter than the laboratory bypass.
-	# Retain 32 warmup cycles there; the longer laboratory pipe needs 64.
+	# Keep its 32 warmup cycles. The longer lab pipe needs 352: mass settles
+	# earlier than quality moments, whose error dominates a tiny residue tail.
 	var measured := 16 if volumes.size()>8 else 32
 	var relaxation := 48 if volumes.size()>8 else (RELAX if instructions.size()>=12 else 64)
 	for iteration in relaxation:
@@ -881,12 +924,12 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 		for op: Reference.Instruction in instructions:
 			var targets := op.targets
 			var code := op.code
-			var gate := 1-clampf(op.error,0,.60)
+			var gate := 1-clampf(op.error+strain_gate,0,.60)
 			for slice in op.slices:
 				if code==0:
 					var p := amount[0]/1000.0/volumes[0]
 					if p>=safe_pressures[0]*.9: continue
-					var rate := minf(capacities[0],conductances[0]*maxf(0,density/8-p))
+					var rate := minf(capacities[0],conductances[0]*maxf(0,density/8-p))*intake_scale
 					var desired := rate*10000+intake_rem
 					intake_rem = desired-floori(desired)
 					var q := mini(floori(desired),maxi(0,floori((safe_pressures[0]*.9-p)*volumes[0]*1000)))

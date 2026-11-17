@@ -84,6 +84,9 @@ static func long_run(pop: RefCounted, days: int = 3650) -> Dictionary:
 	var ids := long_prepare(pop)
 	var peak_core := 0.0
 	var peak_pressure := 0.0
+	var peak_draw := 0
+	var peak_fill := 0.0
+	var peak_growth := 0.0
 	var peak_edges := PackedInt64Array()
 	peak_edges.resize(24)
 	for day in range(1,days+1):
@@ -93,10 +96,19 @@ static func long_run(pop: RefCounted, days: int = 3650) -> Dictionary:
 			peak_core=maxf(peak_core,float(r.get("core_rate",0)))
 			var state: RefCounted=pop.society.qi_practice.body(pop.society,p)
 			for e in 24: peak_edges[e]=maxi(peak_edges[e],state.edges[e].daily_flow)
+			var execution: Dictionary=state.milestones.get("daily_execution",{})
+			peak_draw=maxi(peak_draw,int(execution.get("draw",0)))
+			var fill := float(state.reserve+int(execution.get("draw",0))+state.residue)/maxi(1,state.capacity)
+			peak_fill=maxf(peak_fill,fill)
+			peak_growth=maxf(peak_growth,pop.society.qi_practice._compiler.accounting.enlargement_factor(fill))
 			peak_pressure=maxf(peak_pressure,float(pop.society.qi_practice.body(pop.society,p).milestones.get("daily_execution",{}).get("pressure",0)))
 	var reached := PackedInt32Array([-1,-1,-1,-1,-1,-1,-1,-1,-1])
 	for p in ids:
 		var report: Dictionary=pop.society.meridian_report(p)
 		for layer in 9:
 			if report.achieved[layer]>=0 and (reached[layer]<0 or report.achieved[layer]<reached[layer]): reached[layer]=report.achieved[layer]
-	return {"fixture":true,"days":days,"ids":ids,"achieved":reached,"peak_edges":peak_edges,"peak_core":peak_core,"peak_pressure":peak_pressure,"bottleneck":"measured core circuit below 30 QU/hour" if reached[1]<0 else "retained pressure below 1.5" if reached[2]<0 else "see per-layer evidence"}
+	var ending: Array=[]
+	for p in ids:
+		var state: RefCounted=pop.society.qi_practice.body(pop.society,p)
+		ending.append({"capacity":state.capacity,"reserve":state.reserve,"residue":state.residue,"draw":state.milestones.daily_execution.draw,"residual":pop.society.qi_practice._compiler.residual(state)})
+	return {"fixture":true,"days":days,"ids":ids,"peak_draw":peak_draw,"peak_fill":peak_fill,"peak_growth":peak_growth,"ending":ending,"achieved":reached,"peak_edges":peak_edges,"peak_core":peak_core,"peak_pressure":peak_pressure,"bottleneck":"measured core circuit below 30 QU/hour" if reached[1]<0 else "retained pressure below 1.5" if reached[2]<0 else "see per-layer evidence"}

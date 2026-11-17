@@ -1071,3 +1071,111 @@ whole-body scan; pulses and external anatomical invalidation require a fresh
 check. The focused proof-invalidation test passes. Physical constants, source
 precision, kernel cycles, thresholds and fixture settings are unchanged; final
 correctness reruns and the final same-CPU after-measurement are pending.
+
+
+## Fill-gated enlargement — owner decision 2026-11-16
+
+The owner-approved rule is recorded in `docs/daos_laws.md`, Adaptation and
+integration: `fill = (reserve + residue) / capacity` at the day's peak dantian
+pressure; `g = clamp((fill - 0.60) / 0.30, 0, 1)`. Funded enlargement is bounded
+by `g × 0.5% × capacity`, still at 20 QU integration work per QU of capacity.
+Both solvers share the factor, work ceiling and reserve-allocation helper.
+Blocked storage work retains the corresponding original mixed qi before
+refinement, preserving its qualities. Funding already below the new ceiling
+is usable; the difference between ceilings alone is not a withheld payment.
+The ordinary 50% reserve assignment otherwise remains unchanged.
+
+The reference samples the current day's pressure, rather than the lifetime
+maximum. Production samples its storage-pressure trajectory. Growing days and
+days within the fill ramp resolve normally; low-fill memo reuse has a bound
+against crossing 60%, including the existing 100-quantum budget bucket margin.
+The exact opening factor and retained-strain mode are part of memo signatures.
+No new persistent body columns or save migration are required.
+
+### Ten-year reachability
+
+The requested `--long-only` run passes its integer accounting and save round
+trip (`out/fill_long.txt`). The final post-accuracy rerun is queued behind the
+clean full suite. Both capacities stay **100 QU**. Ending reserves are
+**24.126 / 24.363 QU**, residue **0 / 0**, purity **1.00**, strain **0**, integer
+residual **0 / 0**. Peak recorded retained pressure increases from **0.159544**
+to **0.446775**; core circulation stays **0 QU/hour**. All three required return
+edges remain dry. Peak inlet admission remains **9.606 QU/session**.
+
+| Layer | Before | After fill-gated enlargement |
+|---|---|---|
+| 1 | Day 135 (other 147) | Day 135 (other 147) |
+| 2 | Core 0/30 QU/hour; lower→abdominal, lumbar→chest, chest→breath dry | Same circuit bottleneck; same three dry edges |
+| 3 | Upstream layer 2; pressure 0.159544/1.5 | Upstream layer 2; pressure 0.446775/1.5 |
+| 4 | Upstream layers 2–3; no natural terminal trial | Same upstream block |
+| 5 | Upstream block; core 0/90 | Same; capacity now also 100/400 QU |
+| 6 | Upstream layer 5 | Same upstream block |
+| 7 | Upstream block; Split error 0.1325 > 0.08 | Same upstream block; control law unchanged |
+| 8 | Upstream block; separate charged assay 46/70 quanta | Same; full/pure charged assay still 46/70 |
+| 9 | Core 0/150; 0/90 integrated days; capacity 1355.2/1177.5 QU | Same functional block; capacity now also 100/1000 QU |
+
+Measured **g = 0 throughout**. Reconstructed pre-draw fill peaks at **29.876%**;
+effective daily draw peaks at **4.892 QU**. Last recorded draws are
+**4.486 / 3.763 QU**. Reconstructed fill uses retained reserve plus recorded
+draw; the existing memo's pressure and reconstructed-fill extrema need not
+refer to the same exact replay state.
+
+**Next bottleneck:** at 100 QU capacity, the old storage allocation is 10 QU of
+work per day. Below 60% fill this allocation stays in reserve, but the part of
+the existing 50% assignment above 10 QU still funds other integration work.
+Together with present inlet/manual throughput, it establishes a low-fill
+balance before return pressure can form a circuit. No integration fraction,
+intake coefficient, gate, conductance, seed or certification threshold was tuned.
+This is the result for these two bodies/manuals, not a universal impossibility
+proof. Ordinary, unprepared Palace and prepared live-cohort two-year counts
+will be recorded with the benchmark below.
+
+### Accuracy and verification
+
+The new low-work state exposed numerical approximations that the old larger
+residue inventory concealed. The existing accuracy tolerances are unchanged.
+
+- Resolve residue below 1 QU instead of replaying a rounded purge delta with
+  the old fractional remainder; the 200-day warm/cold regression checks exact
+  residue, remainder, dissipation and zero residual.
+- Converge quality moments in the longer eight-node laboratory bypass:
+  384 cycles (352 warmup + 32 measured). At pressure 0.082, purity converges
+  from 0.912205 at 96 cycles to 0.918007 at 384 and 0.918032 at 768.
+  Live sixteen-node kernels retain 48 cycles (32 warmup + 16 measured).
+- Apply retained tissue strain from phase one. Coefficient profiles execute
+  the reference's existing strain guidance error and half environmental
+  admission, keeping internal transfers/refinement active. Profiles share
+  immutable geometry and source-basis caches, keyed by their control context.
+  The original 24 pressure bins and four time phases remain unchanged.
+
+These implement existing rules more accurately; purity processing, residue
+hazards/purge, overpressure injury, adaptation and certification formulas retain
+their coefficients. Pressure-grid, allocation and extra-time-phase experiments
+were discarded. No new cultivation law was introduced beyond the fill gate.
+
+The complete four-case, three-year compiler comparison **PASS**. Maximum
+regular closing-residue error is **4.08%**; canonical residue also passes.
+Regular/reference residue is **83/83, 90/89, 9/9, 153/147 quanta** for normal
+A/B and reversed A/B; canonical values are **82, 88, 9, 151**. Regular/reference
+retention dates are **775/774, 676/674, 514/511, 735/729**. Intake, work,
+refinement, strain, recovery, ranking/reversal, conservation, daily/jump,
+warm/cold and saved reuse contracts pass. Evidence:
+`out/fill_accuracy_final.txt`, `out/fill_accuracy_results.json` and
+`out/fill_moment_probe.txt`.
+
+Only one existing numeric expectation changes: `test_cultivator_lab.gd`'s
+impure 1-QU reserve case now retains **1 QU instead of 0.5 QU**, with no new
+work/residue (previously **0.25 QU work / 0.248 QU post-purge residue**).
+Its opening work stays 500 QU. New compiler tests cover 59%, 60%, 75%, 90%,
+100% fill, full-rate work, retained reserve, residue-supported fill, underfunded
+partial enlargement, mixed purity with a saved remainder, and changing g inside
+the former one-percent reuse bucket. No accuracy bound was relaxed.
+
+The first full sweep passed 37/39: compiler residue accuracy and the unrelated
+site-export timeout were the two failures. Accuracy is now corrected as above.
+`test_sites.gd` now receives the runner's existing **900-second** allowance
+instead of 300 seconds on this low-RAM machine; all its assertions are unchanged.
+A clean `python3 tools/run_phase2_checks.py` invocation is running. The final
+long-only fixture and CPU-15 paired before/after `bench_qi_live.gd` runs follow
+serially; ordinary Palace measurement and the **+1 ms/day** regression result
+remain pending. No commit has been made.
