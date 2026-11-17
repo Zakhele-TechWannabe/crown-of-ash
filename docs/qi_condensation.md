@@ -1179,3 +1179,97 @@ A clean `python3 tools/run_phase2_checks.py` invocation is running. The final
 long-only fixture and CPU-15 paired before/after `bench_qi_live.gd` runs follow
 serially; ordinary Palace measurement and the **+1 ms/day** regression result
 remain pending. No commit has been made.
+
+## Fill first — owner task 2026-11-17: STOP at measurement
+
+**The conditional stop applies: there is no circuit-opening fill at or below
+0.80. No reserve floor F has been selected and no law/runtime change has been
+made.** In fact these retained manuals cannot meet the layer-2 hourly circuit
+threshold at any safe fill. Rounding/capping an absent opening value to 0.80
+would conceal the failed prerequisite.
+
+Reproduce with `XDG_DATA_HOME=/tmp/crown-godot godot --headless --path . -s
+tools/measure_qi_opening.gd`. Final successful output is saved in
+`out/fill_first_opening.txt`. This diagnostic uses `long_prepare`'s two actual
+Perfect Palace bodies and retained production A/B manuals (filter 1), the
+reference solver with fast paths disabled, and the actual Palace source sample.
+Each trial clones fresh anatomy, accounts 500 QU of prior opening work and a
+pure/stable reserve charge as prior absorption, then executes one ordinary day
+under the existing laws. This injected charge is an assay, not reachability.
+The reference's eight-entry scratch arrays require removing the unused tail
+nodes from the clone; both manuals use only core nodes 0–4. Nodes 5–7 remain
+empty, including the reference's legacy grounding slot. No graph coefficients,
+core nodes, instructions, pressure limits or transfer arithmetic are changed.
+
+The 0%, 5%, …, 100% opening-fill sweep corresponds to opening dantian pressures
+0, 0.075, …, 1.500. All 42 trials have integer residual zero. For A all three
+return edges transfer **0 quanta/day** throughout. For B, lower→abdominal
+transfers at most **267 quanta/day (0.267 QU)** (15% initial fill); lumbar→chest
+and chest→breath remain zero. At 80% (pressure 1.200) and 100% (pressure 1.500),
+all three edges transfer zero for both manuals. Since even whole-day totals
+are below 30 QU, no hour in those trials can qualify. The sweep alone is not
+an exhaustive continuous threshold search; the following bounds exclude the
+entire safe interval independently of sweep spacing.
+
+For a complete hour, overestimate each valve's active time as
+`(floor(3600 / cycle_seconds) + 1) × active_seconds_per_cycle`. Set gate=1,
+destination pressure=0 and source pressure=1.5, ignoring capacity, available
+inventory, control error and downstream competition. This deliberately generous
+upper bound still misses 30 QU/hour. Conversely, dividing 30 QU by conductance
+and that overestimated active time gives a necessary pressure-difference lower
+bound; it is **not** an achievable opening threshold.
+
+| Manual | Edge | Cycle / active seconds | Necessary pressure difference, lower bound | Equivalent fill lower bound at safe pressure 1.5 | Safe hourly transfer upper bound |
+|---|---|---:|---:|---:|---:|
+| A | lower→abdominal | 120 / 10 | 9.525505 | 635.034% | 4.724159 QU |
+| A | lumbar→chest | 120 / 10 | 10.117303 | 674.487% | 4.447826 QU |
+| A | chest→breath | 120 / **0** | No finite value | No finite value | **0 QU** |
+| B | lower→abdominal | 150 / 10 | 11.191502 | 746.100% | 4.020908 QU |
+| B | lumbar→chest | 150 / 10 | 12.409929 | 827.329% | 3.626129 QU |
+| B | chest→breath | 150 / **0** | No finite value | No finite value | **0 QU** |
+
+Thus the measured qualifying opening pressure/fill for **each** edge is
+**unreachable within safe pressure/fill** on both bodies/manuals; the circuit
+has no finite opening value because chest→breath is never scheduled. The
+lumbar/chest figures concern their own source pressure, not a claim that raising
+dantian pressure produces that pressure upstream. Actual gates and inventory
+limits can only reduce these generous bounds.
+
+### Binding executor/manual limits
+
+`production_program` inserts Guide edges 5, 6, 7 before Integrate. It only
+replaces an existing Guide [7] with [8]; neither underlying sequence contains
+that Guide, so neither resulting manual opens edge 8 (chest→breath). It removes
+the Ground operation instead. In addition, return-valve duty time and ordinary
+conductance/safe pressure already exclude 30 QU/hour on edges 5 and 7.
+
+Stored reserve contributes dantian backpressure but is not mobile node mass:
+`flow_model` bounds outflow by `total(source)`, whereas `pressure` also includes
+`stored_quanta`. `settle_model` removes the mobile dantian packet into opening
+work/reserve. Increasing retained reserve therefore does not by itself provide
+spendable return-flow inventory. These are independent obstacles to the proposed
+causal explanation; none has been tuned or repaired in this measurement task.
+
+### Conditional downstream work
+
+Per the explicit “if … exceeds 0.80, stop and report” instruction, steps 2–3
+were not executed. The 50% integration draw and enlargement constants 0.60/0.30
+remain unchanged; mortals/non-practising people are unaffected. There is no new
+floor to test, no changed test expectation, no after-law benchmark and no
+performance-regression claim. The full phase-2 suite and ten-year fixture were
+not rerun for this diagnostic-only stop. The reference assay above passed.
+
+| Layer | Before fill first (existing ten-year evidence above) | After fill first |
+|---|---|---|
+| 1 | Day 135 (other 147) | Not run: conditional stop |
+| 2 | Unreachable; core 0/30 QU/hour | Not run |
+| 3 | Upstream layer 2; pressure 0.446775/1.5 | Not run |
+| 4 | Upstream layers 2–3 | Not run |
+| 5 | Upstream block; core 0/90; capacity 100/400 QU | Not run |
+| 6 | Upstream layer 5 | Not run |
+| 7 | Upstream block; Split error 0.1325/0.08 | Not run |
+| 8 | Upstream block; charged assay 46/70 quanta | Not run |
+| 9 | Upstream block; core 0/150; capacity 100/1000 QU | Not run |
+
+No new ordinary Palace two-year measurement was run after this stop; no after-law
+layer-2/3 count or ms/day result exists. No commit was made.

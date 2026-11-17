@@ -174,6 +174,8 @@ func setup(map: Node2D) -> void:
 	_link_levels()
 	population.seed_residents(people)
 	population.society.fifty.seed()
+	# Genesis belongs to world setup; readers must never initialise the field.
+	population.society.qi_field.seed(population.day)
 	population.society.law = preload("res://src/law.gd").new()
 	population.society.law.setup(sect, grid, people, world.ground)
 	var archive_settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/archive.json"))

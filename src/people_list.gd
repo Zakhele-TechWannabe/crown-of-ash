@@ -6,6 +6,7 @@ const UiTheme = preload("res://src/ui_theme.gd")
 const Palette = preload("res://src/palette.gd")
 const PersonBook = preload("res://src/person_book.gd")
 const ROW_HEIGHT := 150
+var row_summary := Callable()
 var reason_source: VBoxContainer
 var population: RefCounted
 var ids := PackedInt32Array()
@@ -71,7 +72,7 @@ func build_page(force_first: int = -1) -> void:
 		box.add_child(name_label)
 		var subtitle := Label.new()
 		subtitle.theme_type_variation = "Small"
-		subtitle.text = "%d · %s · %s" % [population.age(person), population.jobs[population.job[person]], population.district_name(person)]
+		subtitle.text = row_summary.call(person) if row_summary.is_valid() else "%d · %s · %s" % [population.age(person), population.jobs[population.job[person]], population.district_name(person)]
 		box.add_child(subtitle)
 		var years: int = population.society.lifespan(person)
 		var life_label := Label.new()

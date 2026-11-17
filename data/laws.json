@@ -1,0 +1,16 @@
+{
+  "heaven": [
+    {"law": "Energy requires a source", "consequence": "Absorption withdraws environmental qi. Reinforcement withdraws personal qi. Formations withdraw supplied or stored qi.", "status": "in force"},
+    {"law": "Every transfer has a path", "consequence": "An unopened channel cannot deliver qi to a hand, leg, weapon or dantian.", "status": "in force"},
+    {"law": "Throughput and storage are different", "consequence": "A large reserve cannot pass instantly through a narrow wrist channel.", "status": "in force"},
+    {"law": "Pressure moves qi", "consequence": "Conductivity, direction, gates and pressure differences determine actual movement.", "status": "in force"},
+    {"law": "Work has a cost", "consequence": "Refinement, conversion, compression, reinforcement and permanent development consume energy or time.", "status": "in force"},
+    {"law": "Material foundations matter", "consequence": "Attributes, tempering grades, nutrition, injuries and equipment constrain execution.", "status": "in force"},
+    {"law": "Control is finite", "consequence": "More simultaneous branches, tighter timing and unfamiliar operations increase execution error.", "status": "in force"},
+    {"law": "Damage follows exposure", "consequence": "Overpressure, unstable mixtures, lodged impurity and physical overload cause injury through shared rules.", "status": "in force"},
+    {"law": "Development follows actual practice", "consequence": "Only the channels and tissues successfully exercised adapt.", "status": "in force"},
+    {"law": "Knowledge is situated", "consequence": "A successful method on one body is evidence, not universal truth.", "status": "awaiting the Forge"},
+    {"law": "Heaven changes conditions", "consequence": "Bestowal grants instructions. It does not open channels, fill reserves or guarantee survival.", "status": "awaiting bestowal"},
+    {"law": "Time has one authority", "consequence": "Rendering, call frequency and fast-forward never change authoritative outcomes.", "status": "in force"}
+  ]
+}

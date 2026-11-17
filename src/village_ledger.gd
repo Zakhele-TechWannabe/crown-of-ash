@@ -43,6 +43,7 @@ var food_chip: Button
 var alert_row: HBoxContainer
 var people_button: Button
 var tour_button: Button
+var eye_button: Button
 var map_button: Button
 var pause_button: Button
 var fifty_sort := "Rank"
@@ -254,6 +255,8 @@ func _build_hud() -> void:
 		else:
 			open_tab(current))
 	ledger_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	eye_button = button(row, "Dao's Eye [E]", func() -> void: view.eye.toggle())
+	eye_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	map_button = button(row, "World map [M]", view.map.show_map)
 	map_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_refresh_hud()
@@ -278,6 +281,7 @@ func toggle_tab(key: String) -> void:
 		open_tab(key)
 
 func open_tab(key: String) -> void:
+	if view.eye and view.eye.visible: view.eye.close()
 	key = "food" if key == "rice" else key
 	if not visible or closing:
 		closing = false
@@ -402,6 +406,7 @@ func _refresh_hud() -> void:
 	people_button.text = "%d people" % living
 	people_button.tooltip_text = "%d living · %d hungry · open the People page" % [living, e.hungry_count]
 	ledger_button.text = "Book [L]" if narrow else "Valley book [L]"
+	eye_button.text = "Eye [E]" if narrow else "Dao's Eye [E]"
 	map_button.text = "Map [M]" if narrow else "World map [M]"
 	clock.text = life.clock_text().get_slice(" · ", 1) + " · " + life.clock_text().get_slice(" · ", 2) if narrow else life.clock_text()
 	pause_button.text = "▶" if life.paused else "Ⅱ"

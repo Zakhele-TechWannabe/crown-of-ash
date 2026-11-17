@@ -11,7 +11,8 @@ import threading
 out = Path('out/phase2')
 out.mkdir(parents=True, exist_ok=True)
 results = []
-# Includes tools/test_session_compiler.gd, tools/test_cultivator_lab.gd
+# Includes tools/test_daos_eye.gd (discovered by test_*.gd),
+# tools/test_session_compiler.gd, tools/test_cultivator_lab.gd
 # and tools/test_qi_condensation.gd;
 # keep all Godot invocations serial, including the full-world prepared cohort.
 files = sys.argv[1:] or sorted(glob.glob('tools/test_*.gd'))

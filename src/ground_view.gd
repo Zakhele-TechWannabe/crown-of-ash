@@ -20,6 +20,7 @@ var ui: Control
 var place: Label
 var readout: Label
 var names: Control
+var eye: PanelContainer
 var active := false
 var dragging := false
 var entered_once := false
@@ -70,6 +71,8 @@ func setup_panels() -> void:
 	stories.setup(self)
 	villager.setup(self)
 	ledger.setup(self)
+	eye = preload("res://src/daos_eye.gd").new()
+	eye.setup(ledger)
 	guardian_card = preload("res://src/guardian_card.gd").new()
 	guardian_card.setup(self)
 	beast_card = preload("res://src/beast_card.gd").new()
@@ -132,14 +135,14 @@ func _process(dt: float) -> void:
 	if not active:
 		return
 	var motion := Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
-	if ledger.visible or (get_viewport().gui_get_focus_owner() is LineEdit):
+	if ledger.visible or (eye and eye.visible) or (get_viewport().gui_get_focus_owner() is LineEdit):
 		motion = Vector2.ZERO
 	if motion != Vector2.ZERO:
 		map.life.followed = -1
 	if map.life.followed >= 0 and map.life.followed < map.life.people.size():
 		cam.position = map.life.point(map.life.people[map.life.followed])
 	var mouse := get_viewport().get_mouse_position()
-	var hovered: int = -1 if ledger.visible or get_viewport().gui_get_hovered_control() != null else map.life.pick(get_global_mouse_position())
+	var hovered: int = -1 if ledger.visible or (eye and eye.visible) or get_viewport().gui_get_hovered_control() != null else map.life.pick(get_global_mouse_position())
 	card.visible = hovered >= 0
 	if hovered >= 0:
 		var walker: int = map.life.walker_of(hovered)
@@ -180,7 +183,7 @@ func _update_readout() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not active:
 		return
-	if ledger.owns_pointer(event):
+	if ledger.owns_pointer(event) or (eye and eye.owns_pointer(event)):
 		dragging = false
 		get_viewport().set_input_as_handled()
 		return
@@ -194,6 +197,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				ledger.close()
 			else:
 				ledger.open_tab(ledger.current)
+			get_viewport().set_input_as_handled()
+			return
+		if event.keycode == KEY_E or (event.keycode == KEY_ESCAPE and eye.visible):
+			eye.toggle()
 			get_viewport().set_input_as_handled()
 			return
 		if event.keycode in [KEY_BRACKETLEFT, KEY_BRACKETRIGHT]:
