@@ -168,7 +168,7 @@ func live_cohort() -> void:
 	var open_work: int=s.qi_practice.body(s,ids[0]).work
 	var sealed_work: int=sealed.society.qi_practice.body(sealed.society,ids[0]).work
 	print("COHORT sealing Palace work open=%d sealed=%d" % [open_work,sealed_work])
-	assert(sealed_work<open_work,"Sealing slows Palace permanent development; existing ambient qi remains available")
+	assert(sealed_day>palace_day and sealed_work<=open_work,"Sealing delays retention; protected reserve need not fund development")
 
 func world_cohort() -> void:
 	var world: Node2D=load("res://world_map.tscn").instantiate()
@@ -251,14 +251,14 @@ func deviation_handling() -> void:
 	var traveller: int=ids[1]
 	s.prepare_meridians(traveller,0)
 	var resting: RefCounted=s.qi_practice.body(s,traveller)
-	resting.absorbed=50000
-	resting.reserve=50000
-	resting.reserve_moments=[50000.0,0.0,50000.0,0.0]
-	resting.nodes[4].stored_quanta=50000
+	resting.absorbed=90000
+	resting.reserve=90000
+	resting.reserve_moments=[90000.0,0.0,90000.0,0.0]
+	resting.nodes[4].stored_quanta=90000
 	s.fifty.journeys[traveller]={"due":99999}
 	pop.tick_day(1)
 	resting=s.qi_practice.body(s,traveller)
-	assert(resting.absorbed==50000 and resting.work>0,"Travel allows funded internal upkeep without ambient intake")
+	assert(resting.absorbed==90000 and resting.work>0,"Travel allows funded internal upkeep without ambient intake")
 	assert(s.qi_practice._compiler.residual(resting)==0)
 	state=s.qi_practice.body(s,p)
 	assert(state.deaths>0 and not s.alive[p],"Compiler deviation uses Society death handling")

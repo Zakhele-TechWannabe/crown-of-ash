@@ -104,7 +104,7 @@ func check_fill_gate() -> void:
 	var reference := Reference.new()
 	var compiler := Compiler.new()
 	var sample := {"density":0.0,"quantity":0,"elements":[1,0,0,0,0],"purity":1.0,"polarity":0.0,"stability":1.0,"corruption":0.0}
-	for case: Array in [[.59,0,19500],[.60,0,20000],[.75,5000,32500],[.90,10000,45000],[1.0,10000,50000]]:
+	for case: Array in [[.59,0,0],[.60,0,0],[.70,0,0],[.75,2500,2500],[.90,10000,10000],[1.0,10000,15000]]:
 		var fill: float=case[0]
 		var state := Anatomy.Cultivator.from_dictionary(Anatomy.create())
 		state.opening_work=500000
@@ -130,14 +130,14 @@ func check_fill_gate() -> void:
 	underfunded.reserve=2000
 	underfunded.reserve_moments=[2000.0,0.0,2000.0,0.0]
 	underfunded.residue=73000
-	check(reference.integration_draw(underfunded,.75)==1000,"funding below gated ceiling is not withheld")
+	check(reference.integration_draw(underfunded,.75)==0,"residue cannot spend protected reserve")
 	check(reference.storage_work_limit(underfunded,float(underfunded.reserve+underfunded.residue)/underfunded.capacity)==5000,"residue counts toward fill")
-	underfunded.reserve=20000
-	underfunded.residue=55000
-	underfunded.reserve_moments=[14000.0,0.0,20000.0,0.0]
+	underfunded.reserve=95000
+	underfunded.residue=0
+	underfunded.reserve_moments=[66500.0,0.0,95000.0,0.0]
 	underfunded.residue_remainder=.9
-	var mixed_draw := reference.integration_draw(underfunded,.75)
-	check(floori(mixed_draw*.7+.9)==5000,"mixed reserve funds the exact partial gate with saved remainder")
+	var mixed_draw := reference.integration_draw(underfunded,.95)
+	check(mixed_draw==12500 and floori(mixed_draw*.7+.9)==8750,"mixed surplus preserves the saved purity remainder")
 	# An external fill change within the old one-percent hysteresis must miss.
 	var body := Anatomy.Cultivator.from_dictionary(Anatomy.create())
 	body.reserve=59900

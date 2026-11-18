@@ -39,6 +39,19 @@ func body(s: RefCounted, p: int) -> Anatomy.Cultivator:
 			records[p].erase("memo")
 		else:
 			_bodies[p] = _compiler.production_body(s.meridian_store,s.meridian_store.slot[p])
+		var state: Anatomy.Cultivator=_bodies[p]
+		if not state.retained_program.is_empty() and int(state.retained_program.get("manual_revision",1))<int(_policy.manual_revision):
+			# Rebuild authored schedules; retain personal filtering and all physical
+			# inventory, damage, adaptation and dated achievements. Old memos and
+			# predicted intake belong to the superseded instruction schedule.
+			state.retained_program=program(str(state.retained_program.id),float(state.retained_program.filter))
+			# This is a newly restored body: discard the obsolete execution
+			# journal and its transient revision, just like a cold compilation.
+			# A revision bump without a journal would be lost on the next save.
+			state.session_cache=null
+			state.session_cache_owner=0
+			state.session_revision=0
+			s.meridian_store.expected_intake[s.meridian_store.slot[p]]=-1
 	return _bodies[p]
 
 func traits(s: RefCounted, p: int) -> PackedFloat32Array:

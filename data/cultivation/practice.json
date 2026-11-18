@@ -1,5 +1,28 @@
 {
   "default_route": "A",
   "palace_route": "B",
-  "names": {"A": "Still Basin", "B": "Returning River"}
+  "names": {"A": "Still Basin", "B": "Returning River"},
+  "manual_revision": 2,
+  "sequences": {
+    "A": [
+      ["Absorb", [], 10],
+      ["Guide", [0], 10],
+      ["Guide", [1], 10],
+      ["Filter", [2], 10],
+      ["Stabilise", [2], 10],
+      ["Guide", [2], 10],
+      ["Guide", [5, 6, 7, 8], 40],
+      ["Integrate", [4], 10]
+    ],
+    "B": [
+      ["Absorb", [], 10],
+      ["Guide", [0], 10],
+      ["Guide", [1], 10],
+      ["Filter", [2, 3], 10],
+      ["Stabilise", [2, 3], 10],
+      ["Guide", [2], 10],
+      ["Guide", [5, 6, 7, 8], 40],
+      ["Integrate", [4], 10]
+    ]
+  }
 }

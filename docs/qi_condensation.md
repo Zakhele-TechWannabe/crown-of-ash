@@ -1273,3 +1273,359 @@ not rerun for this diagnostic-only stop. The reference assay above passed.
 
 No new ordinary Palace two-year measurement was run after this stop; no after-law
 layer-2/3 count or ms/day result exists. No commit was made.
+
+
+## Channels widened — owner recalibration 2026-11-17: opening targets FAIL
+
+**Opening-target acceptance: FAIL.** Complete manual data, save migration and the
+70% floor are implemented. No successful anatomy recalibration is selected.
+All 41 regression checks pass across the full sweep and affected reruns. The
+final CPU-15 benchmark passes +1 ms/day (normal +0.552, sealed +0.852).
+The 70%/85% layer-2 openings remain unmet; no anatomy multiplier is adopted.
+The records below distinguish final results, experiments and unimplemented proposals.
+
+Baseline: the retained A/B manuals omit chest→breath and have only ten seconds
+per cycle on each return valve. The existing Perfect assay finds no safe opening
+through 100% fill. Grade-specific and widened-clone assays and before/after live benchmarks are
+complete. No successful factor or opening at the requested fill is claimed.
+
+The critical distinction remains: pressure includes stored reserve, whereas
+transfer availability excludes it. Widening conductance cannot make unavailable
+reserve mobile. If this prevents the targets, the owner requested a proposed
+law repair only; the physical transfer law will stay unchanged.
+
+
+### First recalibration evidence
+
+The before-change live benchmark completed: baseline **30.537**, unaware
+**56.939**, normal prepared cohort **54.576**, sealed **86.573 ms/day**.
+Ordinary Palace: **0/50 qualified; 0 layer 2, 0 layer 3** by day 730.
+Prepared Palace subgroup: **17/17 layer 1; 0 layer 2/3**. These are distinct
+qualification workloads, not estimates from the injected opening assay.
+Raw evidence is `/tmp/channels_bench_before.txt` (to be copied to `out`).
+
+The complete-schedule, widened-clone assay gives each return valve 30 seconds
+per cycle (A 210 seconds, B 220 seconds). Multiplying both capacity and
+conductance by **1,000,000** on lower→abdominal, abdominal→lumbar,
+lumbar→chest and chest→breath still produces **zero complete core flow** for
+Perfect A and B throughout 0–100% fill, including 70% and 85%. Every trial has
+integer residual zero. This is an exclusion experiment, not a selected seed
+factor or proof that arbitrary manual schedules cannot work. Other binding
+edges and the mobile-inventory restriction are being checked next.
+
+
+### Final authored schedules and floor implementation
+
+The final production manual data gives A/B a complete primary core route,
+refinement before storage, and a four-lane 40-second return phase before
+Integrate. Both cycles are 110 seconds. B prioritises the qualifying abdominal
+core rather than splitting its inlet into an unfinished alternative; it retains
+its own default filtering and two-node processing instruction. No operation,
+flow, pressure, purity or adaptation equation changes. Reference assays and
+production consume the same compiled instruction dictionary. JSON target indices
+are explicitly normalised to integers instead of depending on float-array versus
+integer-array equality in the old graph-remapping code. The laboratory
+manuals retain their separate eight-node graph and schedules.
+
+The shared integration helper now assigns **half the surplus above 70% reserve
+capacity**, rounded in integer quanta. It does not assign half of the protected
+reserve, and residue cannot substitute for the protected reserve. The existing
+fill gate can withhold further spending. A floor value in memo signatures
+invalidates old accounting deltas; the existing conservative <60% reuse bound
+cannot cross the new 70% threshold. Old authored A/B schedules migrate lazily
+to manual revision 2, preserving personal filtering, physical state, adaptation
+and dated achievements, and invalidate both execution reuse and intake forecasts.
+Anatomy coefficients are unchanged, so no coefficient migration is necessary.
+The floor/migration test passes, including exact save round trip.
+
+**Target obstruction in the fully widened assay:** grade 2 has safe pressure
+4/3. After full-packet Filter and Stabilise, even an abdominal node initially
+filled to its full safe headroom
+retains at most `(4/3) × 0.85 × 0.98 = 1.110667 QU`. Its volume is one, so
+that is also its maximum refined pressure. At 85% lower fill, lower pressure
+is `0.85 × 4/3 = 1.133333`. No such fully refined packet can enter the lower dantian.
+Stored reserve supplies pressure but no transferable inventory. Further widening
+of these already-wide channels cannot change either constraint. The full-packet refined-pressure ceiling is
+83.3% of safe pressure, independently of grade; this is a pressure bound, not
+an opening threshold. At smaller coefficients partial processing must be measured
+separately; this is not a proof excluding every nonuniform coefficient choice. In the fully widened clone the fresh packet is smaller
+still: ordinary admission is limited to 90% of safe breath pressure, and its
+post-refinement ceiling corresponds to 74.97% lower fill. Accumulation can
+change that fresh-packet figure, so it is not a universal bound.
+These bounds concern the completed manuals' refinement order, not every possible
+data-authored sequence. A tested refinement-after-lower variant still failed
+grade 2 (peak 25.206/28.330 QU/hour with feed ×1000, lower return ×10,
+other returns ×1000). It is not adopted.
+
+**No permanent anatomy multiplier is selected:** there is no measured factor
+meeting both opening targets, so reporting a smallest successful factor would
+be false. Return-only ×1,000,000 and whole-core ×1,000,000 are diagnostic clone
+overrides, not seeded coefficients. Opening-target ±5-point acceptance remains
+failed; regression checks do not certify that acceptance.
+
+**Proposed law fix, NOT implemented:** an explicit return withdrawal must make
+stored reserve available to a guided lower-dantian outflow. Atomically debit
+reserve and its proportional elemental/quality moments as the packet becomes
+mobile or transfers; never count it twice in pressure or the energy ledger.
+Keep residue immobile and retain the existing gate, conductance, capacity,
+destination headroom, exposure and simultaneous-allocation constraints. Both
+executors would need the same funded withdrawal and compiler inventory model.
+The current execution body has reserve quality moments but no maintained
+five-bin reserve elemental inventory (`MeridianStore.reserve_mass` is currently
+unused by coordinator/compiler). A correct implementation must retain elemental
+composition on settlement and withdrawal and define old-save composition
+migration, not fabricate an element from the root. The compiler also currently
+short-circuits transport when ambient budget is exhausted: reserve-funded
+transport must have its own conserved funding path, rather than being scaled by
+ambient admission. This requires owner approval as a law change. Recalibrate only after its exact
+semantics are approved and measured; it is not claimed to guarantee the targets.
+
+
+### Changed expectations (quantities below in QU)
+
+`test_session_compiler.gd`, empty-source pure-reserve cases:
+
+| Starting fill | Old draw → new draw | Old storage work → new storage work |
+|---|---:|---:|
+| 59% | 19.5 → 0 | 0 → 0 |
+| 60% | 20 → 0 | 0 → 0 |
+| 75% | 32.5 → 2.5 | 5 → 2.5 |
+| 90% | 45 → 10 | 10 → 10 |
+| 100% | 50 → 15 | 10 → 10 |
+
+The 2-QU reserve + 73-QU residue case now expects **0 draw**, previously
+1 QU; residue still produces a 5-QU enlargement-work ceiling at 75% total fill.
+The mixed-purity fixture changes from 20 QU reserve + 55 QU residue to 95 QU
+reserve + zero residue so it exercises spending above the new floor: expected
+draw **12.5 QU**, pure work **8.750 QU** with the saved 0.9-quantum remainder,
+instead of the former 5-QU pure-work target. A new 70% no-draw case is added.
+These are law-dependent expectations; the 5%/10% accuracy bounds, strain and
+recovery tolerances, conservation and deterministic replay assertions are
+unchanged. `test_cultivator_lab.gd` needs no expectation change for this floor.
+
+
+### Per-grade opening sweep
+
+Each entry tests both actual A/B fixture individuals, fresh clones at
+0%, 5%, …, 100% reserve fill, with full prior opening work and an accounted
+pure/stable reserve charge. “None” means no qualifying daily core rate in the
+safe sweep, not a rounded or capped opening value. Average uses the laboratory's
+normal grade-2 foundation; grade 1 was also measured after the change.
+
+| Foundation | Before opening fill A/B | After opening fill A/B | After maximum core A/B (QU/hour) |
+|---|---|---|---:|
+| Poor, grade 0 | None / None | None / None | 0 / 0 |
+| Average fixture, grade 2 | None / None | None / None | 0 / 0 |
+| Perfect, grade 3 | None / None | None / None | 0 / 0 |
+
+The additional grade-1 after sweep also has no opening. Every trial conserves
+integer energy exactly. Raw before/after and extreme-width sweeps are retained
+under `out/channels_widened/`. In the final whole-core ×1,000,000 diagnostic,
+maximum daily core rates for grades 0/1/2/3 are approximately
+24.35 / 28.43 / 32.46 / 36.53 QU/hour; grade 2 nevertheless has zero lower
+return at 85% fill. These are capacity diagnostics, not natural achievements.
+
+
+### Fresh before-change ten-year fixture
+
+The requested serial `-- --long-only` baseline completed with exact integer
+accounting and save round trip. Layer 1 dates are A **147**, B **135**;
+layers 2–9 remain unachieved. Peak core **0 QU/hour**, retained pressure
+**0.443550**, reconstructed fill **29.639%**, draw **4.785 QU**. Both capacities
+are **100 QU**; ending reserves A/B **24.070 / 23.783 QU**, residue **0 / 0**,
+residual **0 / 0**. This fresh baseline supersedes the small numeric differences
+in the older historical runs above. Final after-change long-only and live
+benchmark results follow once the serial suite finishes.
+
+
+The first full suite reached a changed-law expectation in
+`test_qi_condensation.gd:deviation_handling`: travel with 50 QU reserve previously
+funded integration. That reserve is now protected. Its explicit accounted
+travel-upkeep charge is updated **50 → 90 QU**, preserving the assertion that
+funded upkeep can execute without ambient intake. Separate floor tests require
+no integration below 70%. No safety, conservation or accuracy assertion is
+removed. The first sweep is continuing to find any further affected expectations.
+
+
+### Accuracy after the floor
+
+Both compiler suites **PASS** with unchanged bounds. Four three-year regular
+compiler/reference cases have usable/refined errors below **0.3%**; maximum
+closing-residue error is **4.08%**, within 10%. Normal A/B residue is **83/83,
+90/89** quanta; reversed A/B **9/9, 153/147**. Retention dates regular/reference:
+**775/774, 676/674, 514/511, 735/729**. Reversed/B recovery **628/616** days
+and strain **0.318286/0.310664** remain within existing tolerances. Canonical
+comparisons, integer conservation, daily/jump, reuse and cold-save checks pass.
+Moving-source coefficient worst error is **2.9319%**, below the unchanged 5%
+bound. No additional solver approximation or tolerance change was necessary.
+
+
+The first affected rerun passed the corrected travel case and the six-person
+safety/save/daily-jump checks, then exposed the second floor-dependent expectation:
+open/sealed Palace work is now **500/500 QU**, rather than strictly less work
+under sealing. Neither body draws the protected reserve. Sealing still delays
+layer 1 **245 → 249 days**. The assertion now requires that strict retention delay
+and `sealed_work <= open_work`; it no longer assumes protected reserve must be
+spent. No source law, threshold or accuracy tolerance changed.
+
+
+### Ten-year before / after table
+
+The embedded after-run and final explicit `-- --long-only` invocation both
+confirm the following table, including integer conservation and save round trip. No later-layer tuning
+has been applied.
+
+| Layer | Fresh before | After complete manuals + F = 0.70 |
+|---|---|---|
+| 1 | A day 147; B day 135 | A day 245; B day 213 |
+| 2 | Core 0/30 QU/hour | Core 0/30 QU/hour |
+| 3 | Upstream layer 2; pressure 0.443550/1.5 | Upstream layer 2; pressure 0.437730/1.5 |
+| 4 | Upstream layers 2–3 | Same; no natural distribution trial |
+| 5 | Core 0/90; capacity 100/400 QU | Same |
+| 6 | Upstream layer 5 | Same |
+| 7 | Upstream block; Split error 0.1325 > 0.08 | Same untuned control limit |
+| 8 | Upstream block; charged assay 46/70 quanta | Same; current assay again delivers 46 |
+| 9 | Core 0/150; capacity 100/1000 QU; 0/90 integrated days | Same |
+
+After ending reserves A/B are **20.854 / 29.182 QU**, capacities **100 / 100 QU**,
+residue **0 / 0**, integer residual **0 / 0**. Peak fill **29.182%**, draw **0**,
+enlargement factor **0**. The floor is respected but never reached naturally.
+All three required return channels remain nonqualifying: peak daily lower return
+is only **8 quanta**, lumbar→chest and chest→breath remain dry. This is a failed
+recalibration result, not successful layer-2 reachability.
+
+
+### Final regression verification
+
+The default `python3 tools/run_phase2_checks.py` sweep completed **40/41 PASS**;
+its sole failure was the obsolete below-floor travel expectation. The affected
+Qi rerun then exposed the obsolete strict sealing-work comparison. Both
+expectations are corrected as listed above, and the full affected Qi suite now
+**PASS**, including two-year physical population/economy daily/jump replay,
+sealed safety, paid terminal/release trials, and cold continuation.
+
+A stronger old-save regression then caught a genuine transient-cache mismatch:
+revision 1 versus 0 after cold restoration when an obsolete manual had no
+execution journal. Migration now discards the obsolete journal **and resets its
+transient revision**, rather than bumping an otherwise unpersisted counter.
+It preserves the charged **75 QU** reserve, quality moments, **500 QU** opening
+work, **0.1** scar and **0.2** adaptation. Its saved daily/jump continuation is
+now exactly equal. The final `test_qi_fill_first.gd` rerun **PASS**.
+
+**All 41 regression checks pass across the full sweep and affected reruns**;
+this is not a claim that the first sweep was clean. Provenance and final results:
+`out/channels_widened/final_checks.json`, `initial_suite.json`, `qi_rerun.json`,
+`floor_rerun.json`, `qi_final.txt`, and `floor_contracts.txt`. No tolerance was
+relaxed. Opening-target acceptance remains FAIL independently of regression
+success. The explicit final long-only run also PASS; its numbers match the table above.
+The final live benchmark and grade sweeps are complete; final timings appear below.
+
+
+### Final unpinned live benchmark and ordinary cohort
+
+The final unpinned benchmark completed all four 730-day modes:
+
+| Mode | Before ms/day | After ms/day | Raw delta |
+|---|---:|---:|---:|
+| Unprepared baseline | 30.537 | 38.000 | +7.463 |
+| Prepared, danger-unaware control | 56.939 | 70.830 | +13.891 |
+| Prepared, ordinary danger response | 54.576 | 77.434 | +22.858 |
+| Prepared, sealed | 86.573 | 125.600 | +39.027 |
+
+This raw pair **fails +1 ms/day**. The no-qi baseline itself slowed **24.4%**;
+this does not isolate patch cost. A consecutive CPU-15 pinned pair was run,
+using an isolated `git archive HEAD` baseline under `/tmp` with a private copy
+of import caches, followed by the current workspace. No git/worktree mutation
+or parallel Godot process is used. Environmental sources, seeds, workloads, world dates,
+accuracy and fixture parameters are unchanged between those comparison modes.
+
+**Ordinary Palace at two world years: nobody reaches layer 2 or 3; 0/50 even
+qualify for a physical qi body**, before and after. This is the ordinary
+unprepared population, not the injected opening assay. In the separately
+prepared Palace subgroup **17/17 reach layer 1; 0 reach layer 2/3**, both normal
+and sealed. The current full-world normal run's last layer-1 date is **295**;
+sealed **364**. Raw output is `out/channels_widened/bench_after.txt` and
+`channels_bench_before.txt` in that directory. Final pinned timings follow.
+
+
+### Sealed performance investigation
+
+The first CPU-15 pair measured baseline/unaware/normal/sealed at
+**52.213 / 93.264 / 62.558 / 72.298** before and
+**24.319 / 46.363 / 46.711 / 74.492 ms/day** after. Normal is faster, but
+sealed **fails** the literal +1 bound at **+2.194 ms/day**. Baseline drift is
+large; sealed phase profiling nevertheless identifies coefficient solving as
+an actionable cost (19.836 → 22.558 seconds over 730 days).
+
+A geometry-proved one-to-one simultaneous-flow path now skips allocation-sum
+arrays when every lane has a unique source and destination. Cross-linked
+chains still sample every packet and moment before committing. Shared sources
+or destinations keep the original generic allocator. Crucially the fast path
+keeps the original divide/multiply/floor rounding, rather than substituting
+`min()`. No pressure, conductance, capacity, processing, time grid, warmup,
+quality or certification equation changes.
+
+`test_session_sources.gd` compares optimized and retained generic kernels in
+**288 bit-exact cases** across laboratory/production anatomies, A/B and an
+extra coordination instruction, regular/canonical compilation, simple/mixed
+qualities, low/high density, pressure endpoints/midpoints and health contexts.
+All comparisons pass; existing source accuracy remains **2.9319%**. The full
+three-year compiler and floor suites are rerunning before a final timed pair.
+This is an execution optimization only; it does not widen seeds or solve the
+opening-target failure.
+
+
+The optimized full three-year compiler, source and strengthened floor suites
+all **PASS**. Comparison metrics remain identical to the pre-optimization
+results quoted above; 288 generic/optimized kernel comparisons remain bit-exact.
+`optimized_checks.json` and the three `*.gd.final.log` files retain the rerun
+provenance, and `final_checks.json` now reflects those latest results. All 41
+checks pass across the full sweep and affected reruns. A final consecutive
+CPU-15 reference/current benchmark pair is running after these checks.
+
+
+### Final performance result — PASS
+
+The final consecutive CPU-15 pair uses the isolated original tracked source
+and current optimized workspace, with every Godot process serial:
+
+| Mode | Before ms/day | After ms/day | Delta |
+|---|---:|---:|---:|
+| Unprepared baseline | 25.433 | 24.849 | -0.584 |
+| Prepared, danger-unaware | 48.007 | 46.371 | -1.636 |
+| Prepared, ordinary danger response | 45.364 | 45.916 | +0.552 |
+| Prepared, sealed | 70.441 | 71.293 | +0.852 |
+
+All four measured deltas satisfy **≤ +1 ms/day**. The closer unprepared
+baselines make this final pair more useful than the earlier noisy pairs; no
+absolute performance guarantee beyond this workload/machine is claimed.
+Raw logs: `bench_pinned_final_before.txt`, `bench_pinned_final_after.txt`;
+structured results: `final_benchmark.json`, all under `out/channels_widened/`.
+The unoptimized and optimized runs' deterministic cohort summaries, ordinary
+Palace counts and danger-response summaries are **identical**. The optimization
+changes execution cost, not physical results.
+
+**Final verdict: FAIL for the owner's opening/reachability target.** Manuals,
+F=0.70 floor, old-save migration, conservation, determinism, accuracy and final
+performance checks are implemented/verified. No calibrated seeded widening is
+adopted, and natural layers 2–9 remain unreachable in the requested fixture.
+The proposed funded reserve withdrawal and elemental inventory change above
+is **not implemented**. Split error **0.1325 > 0.08** and release **46/70**
+remain untuned downstream limits. No commit was made.
+
+
+### Diagnostic duty-count correction
+
+The final before sweeps were reproduced against the isolated original source,
+using the updated read-only measurement tool. Duty counting now casts JSON
+numeric targets to integer indices, and equivalent fill divides by each grade's
+actual safe pressure. This exposes an instrumentation error in the historical
+bound table: legacy float-target Guide instructions were omitted from its duty
+count. Actual lumbar→chest duty is **20 seconds** for A/B, and B lower→abdominal
+also has **20 seconds** (A lower remains 10). Corrected Perfect necessary-pressure
+lower bounds are A/B lower **9.525505 / 5.595751**, lumbar **5.058651 / 6.204965**.
+Chest→breath remains unscheduled, with no finite opening. Thus the old 6–8×
+claim is overstated for those duplicated instructions; the failed safe circuit
+and zero opening-flow results are unchanged. Final raw before/after grade
+sweeps are error-free and every one of their 42 trials per grade has residual 0.
+The physical flow law and original before-state instructions were not changed.

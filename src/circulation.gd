@@ -4,6 +4,7 @@ extends RefCounted
 const Anatomy = preload("res://src/meridians.gd")
 const Field = preload("res://src/qi_field.gd")
 const DT := 10
+const RESERVE_FLOOR := .70
 
 class Instruction extends RefCounted:
 	var code: int
@@ -482,7 +483,9 @@ func storage_work_limit(state: Anatomy.Cultivator, peak_fill: float) -> int:
 	return floori(state.capacity*.005*20.0*enlargement_factor(peak_fill))
 
 func integration_draw(state: Anatomy.Cultivator, peak_fill: float) -> int:
-	var draw := floori(state.reserve*float(Anatomy.definition().daily_reserve_integration_fraction))
+	# Owner decision 2026-11-17: integrate half the reserve above the floor.
+	var reserve_surplus := maxi(0,state.reserve-ceili(state.capacity*RESERVE_FLOOR))
+	var draw := floori(reserve_surplus*float(Anatomy.definition().daily_reserve_integration_fraction))
 	var old_limit := floori(state.capacity*.005*20.0)
 	var purity := clampf(float(state.reserve_moments[0])/maxi(1,state.reserve),0,1)
 	var pure := mini(draw,floori(draw*purity+state.residue_remainder))

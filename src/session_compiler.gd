@@ -4,6 +4,8 @@ extends RefCounted
 const Anatomy = preload("res://src/meridians.gd")
 const Reference = preload("res://src/circulation.gd")
 const Store = preload("res://src/meridian_store.gd")
+static var production_definition: Dictionary = {}
+var optimize_independent_flows := true # Exact generic-kernel comparison switch.
 var diagnose := false
 var signature_usec := 0
 var accounting := Reference.new()
@@ -35,6 +37,7 @@ class Network extends RefCounted:
 	var build_usec := 0
 	var healthy := true
 	var instructions: Array = []
+	var independent_flows := PackedByteArray()
 	var capacity := PackedFloat64Array()
 	var conductance := PackedFloat64Array()
 	var volume := PackedFloat64Array()
@@ -115,6 +118,22 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 		net.conductance.append(conductances[net.conductance.size()] if coarse else Anatomy.conductance(edge))
 		net.source.append(edge.source)
 		net.destination.append(edge.destination)
+	# Geometry proof only: unique sources and destinations have no competing
+	# allocation sums. Cross-links still commit from one opening snapshot.
+	net.independent_flows.resize(net.instructions.size())
+	for i in net.instructions.size():
+		var instruction: Reference.Instruction=net.instructions[i]
+		if instruction.code<1 or instruction.code>3 or instruction.targets.size()<2: continue
+		var from_mask := 0
+		var to_mask := 0
+		var independent := true
+		for e: int in instruction.targets:
+			var from_bit := 1 << net.source[e]
+			var to_bit := 1 << net.destination[e]
+			if (from_mask & from_bit)!=0 or (to_mask & to_bit)!=0: independent=false
+			from_mask |= from_bit
+			to_mask |= to_bit
+		net.independent_flows[i]=int(independent)
 	for node: Anatomy.Compartment in state.nodes:
 		if node.strain>0 or node.integrity<1: net.healthy = false
 		net.volume.append(initial_capacity/1000.0/node.safe_pressure if coarse and node.id=="dantian" else node.volume)
@@ -188,7 +207,7 @@ func live_network(state: Anatomy.Cultivator, program: Dictionary, sample: Dictio
 
 # Geometry and instructions are immutable. Health profiles share their source
 # basis cache, with intake/gate context included in each coefficient key.
-const FLOW_PROFILE_FIELDS = ["source_key","canonical","healthy","instructions","capacity","conductance","volume","safe","source","destination","program","sample","used_edges","cycles","pressure_limit","seconds","session_seconds","control_error"]
+const FLOW_PROFILE_FIELDS = ["source_key","canonical","healthy","instructions","independent_flows","capacity","conductance","volume","safe","source","destination","program","sample","used_edges","cycles","pressure_limit","seconds","session_seconds","control_error"]
 func flow_profile(net: Network, gate_mode: int, half_intake: bool) -> Network:
 	var key := gate_mode+(STRAIN_BINS+1)*int(half_intake)
 	if key==0: return net
@@ -346,7 +365,7 @@ func input_signature(state: Anatomy.Cultivator, net: Network, budget: int, memo:
 	if absf(residue_ratio-memo.residue_anchor)>.001:
 		memo.residue_anchor = residue_ratio
 		memo.residue_bucket += 1
-	return [accounting.enlargement_factor(reserve_ratio+residue_ratio),carried_strain>0,carried_strain>.20,carried_strain>.35,net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(carried_strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve)),floori(float(state.milestones.get("release_strain",0))*500)]
+	return [Reference.RESERVE_FLOOR,accounting.enlargement_factor(reserve_ratio+residue_ratio),carried_strain>0,carried_strain>.20,carried_strain>.35,net.fingerprint if net.canonical else net.get_instance_id(),state.session_revision,budget/100 if net.canonical else budget,memo.residue_bucket,memo.reserve_bucket,floori(carried_strain*500),state.purge_multiplier,state.opening_work>=500000,floori(10000*state.reserve_moments[0]/maxi(1,state.reserve)),roundi(10000*state.reserve_moments[2]/maxi(1,state.reserve)),floori(float(state.milestones.get("release_strain",0))*500)]
 
 func step(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	var memo: DayMemo = state.session_cache if state.session_cache_owner==identity else null
@@ -817,24 +836,19 @@ func production_body(store: RefCounted, row: int) -> Anatomy.Cultivator:
 
 func production_program(route: String) -> Dictionary:
 	var program := accounting.manual(route).duplicate(true)
-	# The production lumbar path has two edges rather than four laboratory edges.
+	# Production instructions and duty times are seeded data, shared by both
+	# executors. The laboratory retains its independent eight-node manuals.
+	if production_definition.is_empty(): production_definition=JSON.parse_string(FileAccess.get_file_as_string("res://data/cultivation/practice.json"))
+	var config := production_definition
 	var operations: Array = []
-	for op: Dictionary in program.operations:
-		var copy := op.duplicate(true)
-		if route=="B":
-			if op.operation=="Guide" and op.targets==[4]: continue
-			if op.operation=="Guide" and op.targets==[6]: continue
-			if op.operation=="Guide" and op.targets==[2,5]: copy.targets=[2,4]
-		if op.operation=="Guide" and op.targets==[7]: copy.targets=[8]
-		if op.operation=="Ground": continue # Production graph has no external earth sink edge.
-		if op.operation=="Integrate":
-			# Actual lower-dantian return path, before remaining mobile qi settles.
-			for return_edge in [5,6,7]:
-				var guide: Dictionary = accounting.vocabulary.Guide.duplicate(true)
-				guide.operation = "Guide"
-				guide.targets = [return_edge]
-				operations.append(guide)
-		operations.append(copy)
+	for entry: Array in config.sequences[route]:
+		var op: Dictionary=accounting.vocabulary[entry[0]].duplicate(true)
+		op.operation=entry[0]
+		op.targets=[]
+		for target in entry[1]: op.targets.append(int(target))
+		op.duration=int(entry[2])
+		operations.append(op)
+	program["manual_revision"]=int(config.manual_revision)
 	program.operations = operations
 	return program
 
@@ -866,6 +880,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	var volumes := net.volume
 	var safe_pressures := net.safe
 	var instructions := net.instructions
+	var independent_flows := net.independent_flows
 	var edge_count := sources.size()
 	var count := volumes.size()
 	var amount := PackedInt64Array()
@@ -921,10 +936,13 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	var relaxation := 48 if volumes.size()>8 else (RELAX if instructions.size()>=12 else 64)
 	for iteration in relaxation:
 		var measure := iteration>=relaxation-measured
-		for op: Reference.Instruction in instructions:
+		for instruction_index in instructions.size():
+			var op: Reference.Instruction=instructions[instruction_index]
 			var targets := op.targets
 			var code := op.code
 			var gate := 1-clampf(op.error+strain_gate,0,.60)
+			var independent := optimize_independent_flows and independent_flows[instruction_index]!=0
+			var coordinated := measure and code>=1 and code<=3 and targets.size()>1 and targets==[2,4]
 			for slice in op.slices:
 				if code==0:
 					var p := amount[0]/1000.0/volumes[0]
@@ -971,33 +989,53 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							result[7+e] += q
 							result[7+edge_count+e] = maxf(result[7+edge_count+e],q/10000.0)
 						continue
-					outgoing.fill(0)
-					incoming.fill(0)
-					for j in targets.size():
-						var e: int = targets[j]
-						var source := sources[e]
-						var destination := destinations[e]
-						var difference := amount[source]/1000.0/volumes[source]+(backpressure if source==4 else 0.0)-amount[destination]/1000.0/volumes[destination]-(backpressure if destination==4 else 0.0)
-						var ideal := minf(capacities[e],conductances[e]*gate*maxf(0,difference))*10000+remainder[e]
-						var q := floori(ideal)
-						remainder[e] = ideal-q
-						candidates[j] = q
-						outgoing[sources[e]] += q
-						incoming[destinations[e]] += q
-					for j in targets.size():
-						var e: int = targets[j]
-						var a := sources[e]
-						var b := destinations[e]
-						var headroom := maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])
-						var scale := minf(1,minf(float(amount[a])/maxi(1,outgoing[a]),float(headroom)/maxi(1,incoming[b])))
-						var q := floori(candidates[j]*scale)
-						moved[j] = q
-						qp[j] = pure[a]*q/maxi(1,amount[a])
-						if not simple_quality:
-							qs[j] = stable[a]*q/maxi(1,amount[a])
-							qc[j] = corrupt[a]*q/maxi(1,amount[a])
+					if independent:
+						for j in targets.size():
+							var e: int=targets[j]
+							var a := sources[e]
+							var b := destinations[e]
+							var difference := amount[a]/1000.0/volumes[a]+(backpressure if a==4 else 0.0)-amount[b]/1000.0/volumes[b]-(backpressure if b==4 else 0.0)
+							var ideal := minf(capacities[e],conductances[e]*gate*maxf(0,difference))*10000+remainder[e]
+							var candidate := floori(ideal)
+							remainder[e]=ideal-candidate
+							var headroom := maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])
+							# Keep the original division/multiply/floor, including its
+							# floating rounding; replacing it with min() is not exact.
+							var scale := minf(1,minf(float(amount[a])/maxi(1,candidate),float(headroom)/maxi(1,candidate)))
+							var q := floori(candidate*scale)
+							moved[j]=q
+							qp[j]=pure[a]*q/maxi(1,amount[a])
+							if not simple_quality:
+								qs[j]=stable[a]*q/maxi(1,amount[a])
+								qc[j]=corrupt[a]*q/maxi(1,amount[a])
+					else:
+						outgoing.fill(0)
+						incoming.fill(0)
+						for j in targets.size():
+							var e: int = targets[j]
+							var source := sources[e]
+							var destination := destinations[e]
+							var difference := amount[source]/1000.0/volumes[source]+(backpressure if source==4 else 0.0)-amount[destination]/1000.0/volumes[destination]-(backpressure if destination==4 else 0.0)
+							var ideal := minf(capacities[e],conductances[e]*gate*maxf(0,difference))*10000+remainder[e]
+							var q := floori(ideal)
+							remainder[e] = ideal-q
+							candidates[j] = q
+							outgoing[sources[e]] += q
+							incoming[destinations[e]] += q
+						for j in targets.size():
+							var e: int = targets[j]
+							var a := sources[e]
+							var b := destinations[e]
+							var headroom := maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])
+							var scale := minf(1,minf(float(amount[a])/maxi(1,outgoing[a]),float(headroom)/maxi(1,incoming[b])))
+							var q := floori(candidates[j]*scale)
+							moved[j] = q
+							qp[j] = pure[a]*q/maxi(1,amount[a])
+							if not simple_quality:
+								qs[j] = stable[a]*q/maxi(1,amount[a])
+								qc[j] = corrupt[a]*q/maxi(1,amount[a])
 					# Only transfers committed in the same slice count as coordination.
-					if measure and targets==[2,4]:
+					if coordinated:
 						result[7+2*edge_count] += mini(moved[0],moved[1])
 					# All moments are sampled before any lane commits.
 					for j in targets.size():

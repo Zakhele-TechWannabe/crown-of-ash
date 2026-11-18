@@ -447,7 +447,16 @@ An edge can eventually reach three times its seeded throughput through this adap
 
 Flow below useful loading teaches control but yields little enlargement. Repeated overload injures rather than automatically accelerating growth.
 
-**Owner decision 2026-11-16 — a vessel is tempered only when it is filled.** Measure `fill = (reserve + residue) / capacity` at the day's peak pressure point. The enlargement factor is `g = clamp((fill - 0.60) / 0.30, 0, 1)`. Daily addition is bounded by `g × 0.5% × capacity` and costs 20 QU of integration work per additional QU of uncompressed storage capacity. Below 60% fill there is no enlargement; at or above 90% the full existing rate is available. Integration qi allocated to enlargement but blocked by this gate stays in reserve, unspent and with its qualities retained. The existing daily 50% reserve integration assignment otherwise remains unchanged. Scarring and constitution constrain the ceiling.
+**Owner decision 2026-11-16 — a vessel is tempered only when it is filled.** Measure `fill = (reserve + residue) / capacity` at the day's peak pressure point. The enlargement factor is `g = clamp((fill - 0.60) / 0.30, 0, 1)`. Daily addition is bounded by `g × 0.5% × capacity` and costs 20 QU of integration work per additional QU of uncompressed storage capacity. Below 60% fill there is no enlargement; at or above 90% the full existing rate is available. Integration qi allocated to enlargement but blocked by this gate stays in reserve, unspent and with its qualities retained. The daily reserve integration assignment is subject to the fill-first floor below. Scarring and constitution constrain the ceiling.
+
+**Owner decision 2026-11-17 — fill first.** Set `F = 0.70`. Daily
+reserve integration assigns `floor(0.50 × max(0, reserve - ceil(F × capacity)))`
+integer quanta. The protected reserve does not fund integration; residue does
+not substitute for that reserve floor. The existing fill-gated enlargement can
+withhold more of this assignment, never spend the protected reserve. Apply the
+same rule in reference and production practice. Mortals and non-practitioners
+have no reserve integration and are unaffected. Enlargement rates, costs,
+pressure/flow laws and certification thresholds remain unchanged.
 
 Overfill beyond safe pressure still injures under section 6. Pressure, gates, conductance, certification thresholds, edge adaptation, purity and residue laws are unchanged.
 
