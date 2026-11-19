@@ -1,0 +1,18 @@
+Project: Crown of Ash, Godot 4.7.2 GDScript (preload, no class_name, no autoloads).
+
+TASK: Owner-approved LAW change (2026-11-19): "guided circulation". Read docs/qi_condensation.md sections "Channels widened" (your obstruction proof and the "Proposed law fix" paragraph near line 1366) — that proposal is now approved, extended as below. Also read docs/daos_laws.md (sections 6, 9, 10, adaptation/integration, fill-gated enlargement, fill-first floor), src/circulation.gd, src/session_compiler.gd, src/qi_practice.gd, src/meridian_store.gd, data/cultivation/*.json, tools/measure_qi_opening.gd, tools/qi_cohort_fixture.gd, the qi tests.
+
+The law (write into docs/daos_laws.md, "owner decision 2026-11-19: guided circulation"):
+1. Funded withdrawal: during a guided circuit the cultivator draws stored reserve out of the dantian as mobile qi. Debit reserve and its proportional quality/elemental moments atomically as qi becomes mobile; never double-counted in pressure or the energy ledger. Residue stays immobile. Reserve-funded transport has its own conserved funding path (not scaled by ambient admission). Implement the reserve elemental inventory properly (MeridianStore.reserve_mass) with old-save migration that does not fabricate elements (state your migration rule).
+2. Guided return: the cultivator's intent can drive guided qi along an edge against an adverse pressure difference, up to a guidance head H = control-dependent (derive from the existing control/understanding/mastery coefficients; state the formula). Driving against pressure costs strain proportional to (head used × quantity), using the existing strain/injury machinery; overpressure, gates, conductance, capacity, destination headroom and safety stops unchanged. Danger sense / policy should treat that strain like other strain.
+3. Fill-first floor (F = 0.70) and fill-gated enlargement stay.
+
+Implement identically in reference (circulation.gd) and production (session_compiler.gd); integer conservation (residual 0), determinism (daily == jump), save/load, steady-state reuse invalidation, existing accuracy tolerances unrelaxed.
+
+Then calibrate DATA only (guidance-head scale, return-edge seeds if needed — smallest change) to the owner's targets: Perfect foundation opens the layer-2 circuit (>=30 QU/hour qualifying core, section 9) at ~70% fill; average ~85%; poor not at safe fill without improvement. Measure with tools/measure_qi_opening.gd; report factors.
+
+Then rerun the ten-year fixture (-- --long-only): per-layer table before/after. Report the ordinary Palace cohort over 2 world years (how many reach layer 2/3). Layers 7 (Split error 0.1325 > 0.08) and 8 (release 46/70): if still binding, report only, do not tune.
+
+Tests: withdrawal conservation (reserve debit == mobile credit, moments preserved), guided head limit and strain cost, residue immobile, old-save migration, opening fill per grade within ±5 points, daily==jump. Update only expectations changed by this law/data and list each. Verify `python3 tools/run_phase2_checks.py` (all pass) and tools/bench_qi_live.gd (report; no regression beyond +1 ms/day — if it regresses, report numbers rather than failing the law work). Low-RAM machine: never two Godot processes at once; do not start Godot while another godot process is running (check with pgrep -x godot and wait). Do not commit.
+
+Write findings into docs/qi_condensation.md ("Guided circulation" section) AS YOU GO. Final message: first line PASS or FAIL; files changed; head formula + factors; opening fill per grade; reachability table; Palace 2-year result; changed expectations; bench; next bottleneck.
