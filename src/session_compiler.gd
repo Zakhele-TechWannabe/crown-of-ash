@@ -697,7 +697,7 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	for q in 4: state.reserve_moments[q] *= float(state.reserve-assigned_from_reserve)/maxi(1,int(state.reserve))
 	state.reserve -= assigned_from_reserve
 	var remaining := int(state.pending_work)+accounting.refined_work_model(state,assigned_from_reserve,reserve_purity)
-	var storage_work := mini(remaining,accounting.storage_work_limit(state,peak_fill))
+	var storage_work := mini(mini(remaining,accounting.storage_work_limit(state,peak_fill)),accounting.vessel_room(state))
 	state.volume_work += storage_work
 	state.work += storage_work
 	state.capacity = int(config.initial_capacity_quanta)+int(state.volume_work)/20

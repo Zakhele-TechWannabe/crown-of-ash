@@ -13,7 +13,7 @@ const FULL_VESSEL := .975
 const VESSEL_TIERS = [[1.5,"heavenly-gifted"],[1.333,"genius"],[0.0,"ordinary"]]
 # Owner standards 2026-11-19 for ordinary foundations; the section-9 strict
 # numbers (90 QU/hour, error 0.08, 70% release) remain distinctions to record.
-const OUTPUT_RATE := 45.0
+const OUTPUT_RATE := 40.0
 const CONTROL_ERROR := .15
 const CORE_RATE := 75.0 # strict 150 QU/hour is the legendary distinction
 const NAMES = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"]
@@ -189,7 +189,7 @@ static func lines(layer: int, r: Dictionary, report: Dictionary) -> Array[String
 			for i in 4:
 				result.append(measured(["left palm","right palm","left sole","right sole"][i],int(r.get("terminals",{}).get(str(i),{}).get("quanta",0))/1000.0,.02," QU delivered"))
 		5:
-			result.append(measured("one hour at 45 QU/hour",int(r.get("output_days",0)),30," days"))
+			result.append(measured("one hour at 40 QU/hour",int(r.get("output_days",0)),30," days"))
 			result.append(measured("capacity",report.capacity/1000.0,400," QU"))
 		6:
 			result.append(measured("mixed source filtered to purity ≥0.90, corruption ≤0.02",float(r.get("mixed_processed",0))/1000,1000," QU"))

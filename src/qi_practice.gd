@@ -212,6 +212,7 @@ func advance(s: RefCounted, until: int) -> void:
 			profile[6]+=Time.get_ticks_usec()-prepare_timer
 			var policy_timer := Time.get_ticks_usec()
 			select_program(s,p,state,sample,limit)
+			vessel_policy(s,p,state)
 			if records[p].get("wants_purer_qi",false) and (float(state.retained_program.filter)<.95 or state.retained_program.get("session_fraction",1.0)!=records[p].session_fraction):
 				# Programs are compiler cache keys: replace, never mutate a held key.
 				state.retained_program=state.retained_program.duplicate(true)
@@ -287,6 +288,25 @@ func advance(s: RefCounted, until: int) -> void:
 				s.die(p,"cultivation_death","%s died by qi deviation" % s.population.names[p])
 			profile[5]+=Time.get_ticks_usec()-timer
 		field._close_ledger()
+
+## Owner decisions 2026-11-21. The dantian may grow only up to its realm ceiling, and before a full-vessel
+## layer (3 and 9) the cultivator chooses to stop enlarging until the vessel is full. Not before layer 5:
+## a full dantian pushes back on the returning circuit, so sustained output is best at a moderate fill.
+const FULL_VESSEL_LAYERS := [3, 9]
+static func vessel_ceiling(layer: int, safe_pressure: float, realm: int = 1) -> int:
+	var law: Dictionary=Anatomy.definition()
+	var rule: Dictionary=law.vessel_ceiling
+	return floori(float(law.initial_capacity_quanta)*safe_pressure*pow(float(rule.per_layer),mini(9,layer+1))*pow(float(rule.per_realm),realm-1))
+
+func vessel_policy(s: RefCounted, p: int, state: Anatomy.Cultivator) -> void:
+	var layer: int=s.meridian_store.integers[s.meridian_store.slot[p]*Store.PERSON_INTS+Store.PersonInt.LAYER]
+	var filling: float=Certification.FULL_VESSEL if layer+1 in FULL_VESSEL_LAYERS else 0.0
+	var ceiling := vessel_ceiling(layer,state.nodes[4].safe_pressure)
+	if float(state.milestones.get("filling",0.0))==filling and int(state.milestones.get("vessel_ceiling",0))==ceiling: return
+	state.milestones["filling"]=filling
+	state.milestones["vessel_ceiling"]=ceiling
+	# Policy changes are cache keys for the compiled sessions.
+	state.session_revision+=1
 
 func certify(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, opening_injuries: int) -> void:
 	Certification.observe(s,p,state,day,opening_injuries,records[p])

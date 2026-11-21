@@ -1667,3 +1667,16 @@ the daily integration draw above the floor keeps their vessel short of 97.5%.
 - **Layer 7, coordination error ≤0.08:** the shared control coefficients give 0.1325.
 - **Layer 8, release ≥70% at one tile:** a full, pure, Perfect release delivers 46%.
 - **Layer 9 requires safe pressure ≥1.5:** heavenly-gifted vessels only, as written.
+
+## Vessel ceiling and filling (owner decisions 2026-11-21)
+
+- Layer 5 standard: 40 QU/hour (best single hour on the core circuit, 30 days). 45 and above remain distinctions.
+- **Vessel ceiling:** `initial capacity × dantian safe pressure × 1.5^(layer pursued) × 10^(realm − 1)`
+  (`data/cultivation/lab.json` → `vessel_ceiling`, `QiPractice.vessel_ceiling`). Work the ceiling refuses
+  goes to the channels like any other surplus. An ordinary vessel tops out near 3,800 QU at peak Qi Condensation.
+- **Choosing to fill:** before layers 3 and 9 a cultivator stops enlarging until 97.5% full and draws only the
+  overflow (`milestones.filling`). Not before layer 5: a full dantian pushes back on the returning circuit,
+  and measured output fell from about 38 to 17–30 QU/hour.
+- Thirty-year Perfect fixture: layers 1–4 on days 213, 246, 273, 307; both vessels reach the 1,139-QU layer-4
+  ceiling. **Layer-5 wall:** the best hourly core output is about 39 QU/hour and channel adaptation (about ×2)
+  does not raise it; the drive, not channel width, is the limit. Proposed to the owner: 35 QU/hour.

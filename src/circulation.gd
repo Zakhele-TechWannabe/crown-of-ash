@@ -540,11 +540,21 @@ func enlargement_factor(fill: float) -> float:
 	return clampf((fill-.60)/.30,0,1)
 
 func storage_work_limit(state: Anatomy.Cultivator, peak_fill: float) -> int:
+	# Owner decision 2026-11-21: a cultivator filling for a full-vessel layer stops enlarging until full.
+	if peak_fill<float(state.milestones.get("filling",0.0)): return 0
 	return floori(state.capacity*.005*20.0*enlargement_factor(peak_fill))
+
+## Quanta of volume work still allowed under the realm's vessel ceiling (owner decision 2026-11-21).
+## Work the ceiling refuses goes on to the channels, like any other surplus.
+func vessel_room(state: Anatomy.Cultivator) -> int:
+	var ceiling := int(state.milestones.get("vessel_ceiling",0))
+	if ceiling<=0: return 1<<62
+	return maxi(0,(ceiling-int(Anatomy.definition().initial_capacity_quanta))*20-state.volume_work)
 
 func integration_draw(state: Anatomy.Cultivator, peak_fill: float) -> int:
 	# Owner decision 2026-11-17: integrate half the reserve above the floor.
-	var reserve_surplus := maxi(0,state.reserve-ceili(state.capacity*RESERVE_FLOOR))
+	# While filling for a full-vessel layer, only the overflow above the full mark is drawn.
+	var reserve_surplus := maxi(0,state.reserve-ceili(state.capacity*maxf(RESERVE_FLOOR,float(state.milestones.get("filling",0.0)))))
 	var draw := floori(reserve_surplus*float(Anatomy.definition().daily_reserve_integration_fraction))
 	var old_limit := floori(state.capacity*.005*20.0)
 	var purity := clampf(float(state.reserve_moments[0])/maxi(1,state.reserve),0,1)
@@ -648,7 +658,7 @@ func simulate_day_model(state: Anatomy.Cultivator, program: Dictionary, sample: 
 	for q in 4: state.reserve_moments[q] *= float(state.reserve-assigned_from_reserve)/maxi(1,int(state.reserve))
 	state.reserve -= assigned_from_reserve
 	var remaining := int(state.pending_work)+refined_work_model(state,assigned_from_reserve,reserve_purity)
-	var storage_work := mini(remaining,storage_work_limit(state,peak_fill))
+	var storage_work := mini(mini(remaining,storage_work_limit(state,peak_fill)),vessel_room(state))
 	state.volume_work += storage_work
 	state.work += storage_work
 	state.capacity = int(config.initial_capacity_quanta)+int(state.volume_work)/20

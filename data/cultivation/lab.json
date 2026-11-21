@@ -373,6 +373,11 @@
     }
   },
   "initial_capacity_quanta": 100000,
+  "vessel_ceiling": {
+    "_law": "owner decision 2026-11-21: ceiling = initial capacity x dantian safe pressure x per_layer^(layer pursued) x per_realm^(realm - 1)",
+    "per_layer": 1.5,
+    "per_realm": 10.0
+  },
   "daily_reserve_integration_fraction": 0.5,
   "personality": {
     "curiosity": 0.5,
