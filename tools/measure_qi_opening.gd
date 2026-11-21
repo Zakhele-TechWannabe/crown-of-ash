@@ -70,11 +70,14 @@ func _initialize() -> void:
 			state.reserve_moments=[float(state.reserve),0.0,float(state.reserve),0.0]
 			state.nodes[4].stored_quanta=state.reserve
 			var pressure := solver.pressure(state.nodes[4])
-			solver.simulate_day_model(state,original.retained_program,sample,int(sample.quantity))
+			solver.simulate_day_model(state,pop.society.qi_practice.program(str(original.retained_program.id),float(original.retained_program.filter),true),sample,int(sample.quantity))
 			var flows: Array=[]
-			for edge in [5,7,8]: flows.append(state.edges[edge].daily_flow)
-			var core := INF
-			for edge in [0,1,2,5,6,7,8]: core=minf(core,state.edges[edge].daily_flow/4000.0)
+			for edge in [0,1,2,3,4,5,6,7,8]: flows.append(state.edges[edge].daily_flow)
+			# Same rule as certification: shared core edges, then the better branch.
+			var shared := INF
+			for edge in [0,5,6,7,8]: shared=minf(shared,state.edges[edge].daily_flow/4000.0)
+			var core := 0.0
+			for branch in [[1,2],[3,4]]: core=maxf(core,minf(shared,minf(state.edges[branch[0]].daily_flow,state.edges[branch[1]].daily_flow)/4000.0))
 			max_core=maxf(max_core,core)
 			if core>=30 and opening<0: opening=percent
 			assert(solver.residual(state.as_dictionary())==0)

@@ -44,7 +44,7 @@ func body(s: RefCounted, p: int) -> Anatomy.Cultivator:
 			# Rebuild authored schedules; retain personal filtering and all physical
 			# inventory, damage, adaptation and dated achievements. Old memos and
 			# predicted intake belong to the superseded instruction schedule.
-			state.retained_program=program(str(state.retained_program.id),float(state.retained_program.filter))
+			state.retained_program=program(str(state.retained_program.id),float(state.retained_program.filter),state.milestones.has("retention"))
 			# This is a newly restored body: discard the obsolete execution
 			# journal and its transient revision, just like a cold compilation.
 			# A revision bump without a journal would be lost on the next save.
@@ -57,12 +57,17 @@ func body(s: RefCounted, p: int) -> Anatomy.Cultivator:
 func traits(s: RefCounted, p: int) -> PackedFloat32Array:
 	return s.mind.urges(p) if s.mind else PackedFloat32Array([0,0,.5,.5,.5,.5,.5,.5])
 
-func program(route: String, filter_level: float) -> Dictionary:
-	var result := _compiler.production_program(route)
+func program(route: String, filter_level: float, opened: bool = false) -> Dictionary:
+	var result := _compiler.production_program(route,opened)
 	result.filter = filter_level
 	return result
 
 func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Dictionary, budget: int) -> void:
+	var opened: bool = state.milestones.has("retention")
+	# An opened dantian unlocks guided circulation in the same manual.
+	if opened and not state.retained_program.is_empty() and not state.retained_program.get("opened",false):
+		state.retained_program=program(str(state.retained_program.id),float(state.retained_program.filter),true)
+		s.meridian_store.expected_intake[s.meridian_store.slot[p]]=-1
 	if not state.retained_program.is_empty() and state.day-int(records[p].get("last_policy_day",state.day-90))<90: return
 	if records[p].get("wants_purer_qi",false) and not state.retained_program.is_empty():
 		records[p]["last_policy_day"]=state.day
@@ -70,7 +75,7 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	var u := traits(s,p)
 	if state.retained_program.is_empty():
 		var route: String = _policy.palace_route if s.fifty and s.fifty.member(p) else _policy.default_route
-		state.retained_program = program(route,clampf(.75+.5*u[2]-.4*u[6]-.25*u[3],0,1))
+		state.retained_program = program(route,clampf(.75+.5*u[2]-.4*u[6]-.25*u[3],0,1),opened)
 		records[p]["last_policy_day"]=state.day
 		return
 	records[p]["last_policy_day"]=state.day
@@ -85,7 +90,7 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	# its funded 0.5% daily ceiling. If even this best case exceeds accepted
 	# strain, every candidate is rejected, so retain the policy without trials.
 	if unavoidable_strain(state)<=accepted:
-		candidates=[current,program("A",1),program("B",.25),program(current.id,clampf(current.filter-step,0,1)),program(current.id,clampf(current.filter+step,0,1))]
+		candidates=[current,program("A",1,opened),program("B",.25,opened),program(current.id,clampf(current.filter-step,0,1),opened),program(current.id,clampf(current.filter+step,0,1),opened)]
 	for candidate: Dictionary in candidates:
 		if evaluated.has(candidate): continue
 		evaluated.append(candidate)
@@ -108,8 +113,11 @@ func danger_response(s: RefCounted, p: int, state: Anatomy.Cultivator, position:
 	if r.get("practice_origin",position)!=position:
 		r.erase("practice_offset")
 	var load := float(state.residue)/maxi(1,state.capacity)
-	var trend := state.nodes[4].strain-float(r.get("observed_strain",0.0))
-	r.observed_strain=state.nodes[4].strain
+	# Guided circulation strains channels as well as the dantian: sense both.
+	var felt := state.nodes[4].strain
+	for edge: Anatomy.Edge in state.edges: felt=maxf(felt,edge.strain)
+	var trend := felt-float(r.get("observed_strain",0.0))
+	r.observed_strain=felt
 	var hurt := state.injuries>int(r.get("observed_injuries",0))
 	r.observed_injuries=state.injuries
 	if state.day<int(r.get("pause_until",0)): return position
@@ -428,7 +436,8 @@ func _pulse(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, path: Ar
 		result["control_error"]=error
 		result["coherence_length"]=coherence
 		result.delivered=floori(delivered*purity*purity*stability*(1-error)*exp(-float(result.distance_tiles)/coherence)) if projected else delivered
-		result.success=result.delivered>=(70 if projected else 20) and not result.overpressure and state.injuries==opening_injuries and state.deaths==0 and state.strain<=.20
+		# Owner standard 2026-11-19: 30% controlled delivery (strict 70% is a distinction).
+		result.success=result.delivered>=(30 if projected else 20) and not result.overpressure and state.injuries==opening_injuries and state.deaths==0 and state.strain<=.20
 	if not result.success:
 		state.nodes[4].strain+=.005
 		state.strain=maxf(state.strain,state.nodes[4].strain)

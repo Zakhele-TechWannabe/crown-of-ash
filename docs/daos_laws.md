@@ -460,6 +460,20 @@ pressure/flow laws and certification thresholds remain unchanged.
 
 Overfill beyond safe pressure still injures under section 6. Pressure, gates, conductance, certification thresholds, edge adaptation, purity and residue laws are unchanged.
 
+**Owner decision 2026-11-19 — guided circulation.** Ambient pressure alone can never fill the dantian past the surrounding qi, and refined return qi always sits below a full dantian, so no circuit could form (Stage 3c measurements). The new `Circulate` operation lets the cultivator use the dantian as a pump:
+
+```text
+head = h × p(dantian)            h = 2.8   (data/cultivation/operations.json)
+lane flow = min(capacity, conductance × gate × max(0, Δp + head))
+```
+
+- Every Circulate lane gains the head, so qi climbs back into a fuller dantian. A fuller dantian pumps harder: the circuit opens with fill.
+- Lanes leaving the dantian withdraw stored reserve as mobile qi. Reserve and its quality moments are debited atomically and never double-counted; residue never moves. Qi that returns keeps the reserve's own quality; only refinement losses on the way are dissipated.
+- Climbing against adverse pressure strains the channel: `edge strain += 0.0005 × adverse Δp × QU moved`. Overpressure, headroom, gates, conductance, capacity and safety stops are unchanged.
+- Calibration (reference solver, Returning River): the layer-2 circuit (30 QU/hour) opens at 65% fill for a Perfect foundation, 85% for an average one, and never at safe fill for a poor one without improvement.
+- Manuals are revision 3: the old serial return Guide becomes a Circulate ring (Still Basin `[0,1,2,5,6,7,8]`, Returning River `[0,3,4,5,6,7,8]`, 80 s per cycle). Still Basin's narrow chest–abdominal channel caps its circuit below 30 QU/hour on the fixture bodies; it remains the gentler village manual.
+- Practice only runs while ambient intake is funded, so a cultivator in a qi-dead place cannot circulate (known simplification).
+
 These limits make time, foundation and route choice consequential even at the Palace.
 
 ### Qi-assisted tempering

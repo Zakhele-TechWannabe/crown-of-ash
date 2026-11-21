@@ -56,7 +56,7 @@ func _initialize() -> void:
 		for edge in [5,6,7,8]:
 			var duty := 0
 			for op: Dictionary in body.retained_program.operations:
-				if op.operation=="Guide" and edge in op.targets: duty+=int(op.duration)
+				if op.operation in ["Guide","Circulate"] and edge in op.targets: duty+=int(op.duration)
 			assert(duty>=30,"Authored manual includes complete return duty")
 		# Accounted old-save reserve plus developed/damaged anatomy must survive.
 		body.opening_work=500000
@@ -75,7 +75,7 @@ func _initialize() -> void:
 	Save.restore(copy_pop,saved)
 	for p in ids:
 		var body: Anatomy.Cultivator=copy_pop.society.qi_practice.body(copy_pop.society,p)
-		assert(body.retained_program.manual_revision==2 and body.retained_program.filter==.43,"Old manual schedule migrates, personal filter survives")
+		assert(body.retained_program.manual_revision==3 and body.retained_program.filter==.43,"Old manual schedule migrates, personal filter survives")
 		assert(body.reserve==75000 and body.work==500000 and compiler.residual(body)==0)
 		assert(body.reserve_moments==[60000.0,0.0,75000.0,0.0] and body.edges[5].scar==.1 and body.edges[5].adaptation==.2,"Manual migration preserves charged physical state")
 	var migrated: Dictionary=bytes_to_var(var_to_bytes(Save.capture(copy_pop)))

@@ -1629,3 +1629,41 @@ claim is overstated for those duplicated instructions; the failed safe circuit
 and zero opening-flow results are unchanged. Final raw before/after grade
 sweeps are error-free and every one of their 42 trials per grade has residual 0.
 The physical flow law and original before-state instructions were not changed.
+
+## Guided circulation — implemented by Claude (19 November 2026)
+
+Owner-approved law (docs/daos_laws.md, "guided circulation"): a `Circulate`
+operation (code 8) pumps every lane with head `2.8 × p(dantian)`, draws stored
+reserve as mobile qi for lanes leaving the dantian, and charges channel strain
+for qi pushed against adverse pressure. Both executors implement it: the
+reference slice solver (`circulate_model`) and the production periodic kernel,
+which tracks withdrawn reserve as a tracer so returned qi keeps the reserve's
+own quality; only losses on the way leave the reserve. Integer residual is 0
+in every probe and fixture.
+
+- **Opened dantian first.** Circulation unlocks with layer 1 (`retention`);
+  beginners keep the revision-2 serial schedule (`practice.json` `sequences`),
+  opened cultivators switch to `opened_sequences`. Without this a greedy
+  beginner pumped impure Sect qi and died by day 14.
+- **Danger sense** now feels channel strain as well as dantian strain.
+- **Layer 3 standard (owner, 2026-11-19):** a full vessel is 97.5% of the
+  body's own safe pressure (`vessel_limit`, per person, default 0.975, for
+  future treasures). The pressure actually held is kept as a distinction:
+  ordinary < 1.33 ≤ genius < 1.5 ≤ heavenly-gifted.
+- Opening fill (reference, Returning River): Perfect 65%, average 85%, poor never.
+- Changed expectations: `test_qi_fill_first` (Circulate counts as return duty;
+  migrated manual revision 3); `test_session_sources` (uphill-work columns use a
+  10% gate; they only drive channel strain).
+
+Ten-year Perfect fixture: layer 1 day 213, 2 day 246, **3 day 421, 4 day 455**.
+The second fixture person reaches layer 2 (day 246) and holds about 70% fill:
+the daily integration draw above the floor keeps their vessel short of 97.5%.
+
+### Walls found (for the owner)
+- **Layer 5, one hour at 90 QU/hour:** the best circuit reaches about 44 QU/hour.
+  The narrowest core channels carry roughly 100 QU/hour even fully open, so this
+  needs a dedicated circulation hour plus channel growth (adaptation can triple
+  capacity). Average bodies cannot reach it without wider channels.
+- **Layer 7, coordination error ≤0.08:** the shared control coefficients give 0.1325.
+- **Layer 8, release ≥70% at one tile:** a full, pure, Perfect release delivers 46%.
+- **Layer 9 requires safe pressure ≥1.5:** heavenly-gifted vessels only, as written.

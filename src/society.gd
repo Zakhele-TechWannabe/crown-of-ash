@@ -131,6 +131,7 @@ func meridian_report(person: int) -> Dictionary:
 		result.evidence["opening_work"]=meridian_store.integers[row*MeridianStore.PERSON_INTS+MeridianStore.PersonInt.OPENING_WORK]
 		result.evidence["settling_days"]=meridian_store.integers[row*MeridianStore.PERSON_INTS+MeridianStore.PersonInt.SETTLING_DAYS]
 		result["next_evidence"]=preload("res://src/qi_certification.gd").lines(result.layer,result.evidence,result)
+		result["vessel"]=preload("res://src/qi_certification.gd").vessel_tier(result.evidence)
 	return result
 
 func note(person: int, kind: String, words: String, on_day: int = -1) -> void:

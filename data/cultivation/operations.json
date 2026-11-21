@@ -63,5 +63,15 @@
     "quantity_quanta": 100,
     "distance_tiles": 1,
     "assay_cycles": 120
+  },
+  "Circulate": {
+    "duration": 10,
+    "control_demand": 1,
+    "resource_cost": 0,
+    "abort": "ground",
+    "law": "owner decision 2026-11-19: guided circulation",
+    "head_per_dantian_pressure": 2.8,
+    "uphill_strain_per_QU": 0.0005,
+    "max_lanes": 8
   }
 }

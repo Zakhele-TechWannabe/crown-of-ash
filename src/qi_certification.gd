@@ -6,6 +6,16 @@ const CORE_SHARED = [0,5,6,7,8]
 const CORE_BRANCHES = [[1,2],[3,4]]
 const LIMBS = [[9,10],[12,13],[15,16],[18,19]]
 const EMPTY = {}
+# Owner decision 2026-11-19: the cultivation world's known "full vessel" is
+# 97.5% of a body's own safe pressure. Treasures may raise vessel_limit later.
+const FULL_VESSEL := .975
+# Foundation tiers by safe pressure: ordinary < 1.33 <= genius < 1.5 <= heavenly-gifted.
+const VESSEL_TIERS = [[1.5,"heavenly-gifted"],[1.333,"genius"],[0.0,"ordinary"]]
+# Owner standards 2026-11-19 for ordinary foundations; the section-9 strict
+# numbers (90 QU/hour, error 0.08, 70% release) remain distinctions to record.
+const OUTPUT_RATE := 45.0
+const CONTROL_ERROR := .15
+const CORE_RATE := 75.0 # strict 150 QU/hour is the legendary distinction
 const NAMES = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"]
 
 static func phase(s: RefCounted, p: int, r: Dictionary) -> int:
@@ -48,13 +58,16 @@ static func observe(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, 
 
 	r.core_rate=throughput
 	r.clean=valid
-	var cycle: bool=valid and hours>=2 and float(daily.get("pressure",0))>=1.5 and float(daily.get("purity",0))>=.75 and float(daily.get("instability",1))<=.10 and int(daily.get("draw",0))>0 and int(daily.get("fill",0))>=int(daily.get("draw",0))
+	var safe: float=state.nodes[4].safe_pressure
+	var full: bool=float(daily.get("pressure",0))>=safe*float(r.get("vessel_limit",FULL_VESSEL))-1e-9
+	if full: r.vessel_pressure=maxf(float(r.get("vessel_pressure",0)),float(daily.get("pressure",0)))
+	var cycle: bool=valid and hours>=2 and full and float(daily.get("purity",0))>=.75 and float(daily.get("instability",1))<=.10 and int(daily.get("draw",0))>0 and int(daily.get("fill",0))>=int(daily.get("draw",0))
 	if not valid: r.return_days=0
 	elif hours>=2 and throughput>=30: r.return_days=int(r.get("return_days",0))+1
 	if cycle: r.cycles=int(r.get("cycles",0))+1
 	var hourly_rate: float=daily.get("hourly_core",0.0)
 	r.output_rate=hourly_rate
-	if valid and hours>=2 and hourly_rate>=90 and state.capacity>=400000: r.output_days=int(r.get("output_days",0))+1
+	if valid and hours>=2 and hourly_rate>=OUTPUT_RATE and state.capacity>=400000: r.output_days=int(r.get("output_days",0))+1
 	# The declaration is the actual sampled source before filtering. A source
 	# has a mixed elemental recipe when two positive components are present.
 	var source: Dictionary=r.get("declared_source",EMPTY)
@@ -69,7 +82,7 @@ static func observe(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, 
 	var simultaneous: float=int(daily.get("simultaneous",0))/maxf(1,hours*1000)
 	r.branch_rate=simultaneous
 	r.control_error=float(daily.get("control_error",1))
-	if valid and hours>=2 and simultaneous>=25 and r.control_error<=.08: r.coordination_days=int(r.get("coordination_days",0))+1
+	if valid and hours>=2 and simultaneous>=25 and r.control_error<=CONTROL_ERROR: r.coordination_days=int(r.get("coordination_days",0))+1
 	var release: Dictionary=r.get("release_today",EMPTY)
 	if valid and release.get("day",-1)==day and release.get("success",false): r.release_tests=int(r.get("release_tests",0))+1
 	r.last_reserve=state.reserve
@@ -96,20 +109,20 @@ static func observe(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, 
 	# The dated 1.5-pressure proof remains an ability while storage and routes
 	# remain sound; a larger reservoir need not be filled to its rim each day.
 	var controlled_draw: bool=int(daily.get("draw",0))>0 and int(daily.get("fill",0))>=int(daily.get("draw",0)) and float(daily.get("instability",1))<=.10
-	var intact: bool=valid and hours>=2 and purity>=.90 and float(state.residue)/state.capacity<=.10 and state.opening_work>=500000 and state.settling_days>=30 and int(r.get("return_days",0))>=30 and int(r.get("cycles",0))>=10 and state.nodes[4].safe_pressure>=1.5 and controlled_draw and hourly_rate>=90 and int(daily.get("qualified_mixed",0))>0 and terminals.size()==4 and int(r.get("output_days",0))>=30 and int(r.get("mixed_processed",0))>=1000000 and int(r.get("coordination_days",0))>=30 and int(r.get("release_tests",0))>=10 and release.get("success",false) and simultaneous>=25 and r.control_error<=.08 and usable(state,[9,10,12,13,15,16,18,19])
+	var intact: bool=valid and hours>=2 and purity>=.90 and float(state.residue)/state.capacity<=.10 and state.opening_work>=500000 and state.settling_days>=30 and int(r.get("return_days",0))>=30 and int(r.get("cycles",0))>=10 and controlled_draw and hourly_rate>=OUTPUT_RATE and int(daily.get("qualified_mixed",0))>0 and terminals.size()==4 and int(r.get("output_days",0))>=30 and int(r.get("mixed_processed",0))>=1000000 and int(r.get("coordination_days",0))>=30 and int(r.get("release_tests",0))>=10 and release.get("success",false) and simultaneous>=25 and r.control_error<=CONTROL_ERROR and usable(state,[9,10,12,13,15,16,18,19])
 
-	if intact and throughput>=150 and state.capacity>=1000000: r.integrated_days=int(r.get("integrated_days",0))+1
+	if intact and throughput>=CORE_RATE and state.capacity>=1000000: r.integrated_days=int(r.get("integrated_days",0))+1
 	var ready := false
 	match layer:
 		0: ready=valid and state.capacity>=100000 and state.opening_work>=500000 and state.settling_days>=30 and state.reserve>0 and float(state.residue)/state.capacity<=.10
 		1: ready=int(r.get("return_days",0))>=30
 		2: ready=int(r.get("cycles",0))>=10 and purity>=.75
 		3: ready=terminals.size()==4 and usable(state,[9,10,12,13,15,16,18,19])
-		4: ready=int(r.get("output_days",0))>=30 and state.capacity>=400000 and hourly_rate>=90 and hours>=2
+		4: ready=int(r.get("output_days",0))>=30 and state.capacity>=400000 and hourly_rate>=OUTPUT_RATE and hours>=2
 		5: ready=int(r.get("mixed_processed",0))>=1000000 and purity>=.90
-		6: ready=int(r.get("coordination_days",0))>=30 and simultaneous>=25 and r.control_error<=.08 and hours>=2
+		6: ready=int(r.get("coordination_days",0))>=30 and simultaneous>=25 and r.control_error<=CONTROL_ERROR and hours>=2
 		7: ready=int(r.get("release_tests",0))>=10 and release.get("day",-1)==day and release.get("success",false)
-		8: ready=int(r.get("integrated_days",0))>=90 and intact and throughput>=150 and state.capacity>=1000000
+		8: ready=int(r.get("integrated_days",0))>=90 and intact and throughput>=CORE_RATE and state.capacity>=1000000
 
 	# Early layers retain their historical dates. Later trials use a keyed
 	# weekly slot; a completed record quota can still fail its current physical trial.
@@ -170,22 +183,30 @@ static func lines(layer: int, r: Dictionary, report: Dictionary) -> Array[String
 			result.append("[%s] residue wall: %.1f/10%%" % ["met" if float(report.residue)/maxi(1,report.capacity)<=.10 else "partial",100.0*report.residue/maxi(1,report.capacity)])
 		2: result.append(measured("circuit sustains 30 QU/hour",int(r.get("return_days",0)),30," days"))
 		3:
-			result.append(measured("controlled fill–draw at 1.5 pressure",int(r.get("cycles",0)),10," cycles"))
+			result.append(measured("controlled fill–draw, vessel ≥97.5% full",int(r.get("cycles",0)),10," cycles"))
 			result.append(measured("purity",report.purity,.75))
 		4:
 			for i in 4:
 				result.append(measured(["left palm","right palm","left sole","right sole"][i],int(r.get("terminals",{}).get(str(i),{}).get("quanta",0))/1000.0,.02," QU delivered"))
 		5:
-			result.append(measured("one hour at 90 QU/hour",int(r.get("output_days",0)),30," days"))
+			result.append(measured("one hour at 45 QU/hour",int(r.get("output_days",0)),30," days"))
 			result.append(measured("capacity",report.capacity/1000.0,400," QU"))
 		6:
 			result.append(measured("mixed source filtered to purity ≥0.90, corruption ≤0.02",float(r.get("mixed_processed",0))/1000,1000," QU"))
 			result.append(measured("reserve purity",report.purity,.90))
-		7: result.append(measured("simultaneous branches ≥25 QU/hour; error ≤0.08",int(r.get("coordination_days",0)),30," days"))
-		8: result.append(measured("controlled 0.10 QU release at one tile, ≥70%, no overpressure",int(r.get("release_tests",0)),10," tests"))
+		7: result.append(measured("simultaneous branches ≥25 QU/hour; error ≤0.15",int(r.get("coordination_days",0)),30," days"))
+		8: result.append(measured("controlled 0.10 QU release at one tile, ≥30%, no overpressure",int(r.get("release_tests",0)),10," tests"))
 		9:
 			result.append(measured("integrated practice, earlier functions intact",int(r.get("integrated_days",0)),90," days"))
 			result.append(measured("capacity",report.capacity/1000.0,1000," QU"))
-			result.append(measured("core circuit",float(r.get("core_rate",0)),150," QU/hour"))
+			result.append(measured("core circuit",float(r.get("core_rate",0)),75," QU/hour"))
 	result.append("[met] no injury through the span: clean" if r.get("clean",false) else "[missing] no injury through the span")
 	return result
+
+## The distinction a cultivator's vessel earned: tier by the pressure actually held.
+static func vessel_tier(r: Dictionary) -> String:
+	var held := float(r.get("vessel_pressure",0))
+	if held<=0: return ""
+	for tier: Array in VESSEL_TIERS:
+		if held>=float(tier[0])*FULL_VESSEL-1e-9: return "%s vessel (%.2f)" % [tier[1],held]
+	return ""

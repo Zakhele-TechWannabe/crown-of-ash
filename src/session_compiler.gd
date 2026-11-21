@@ -108,7 +108,7 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 		_control_errors[net.instructions]=coordination_error
 	net.control_error=float(_control_errors[net.instructions])
 	for op: Reference.Instruction in net.instructions:
-		if op.code in [1,2,3]:
+		if op.code in [1,2,3,8]:
 			for index: int in op.targets:
 				if not net.used_edges.has(index): net.used_edges.append(index)
 	net.used_edges.sort()
@@ -142,6 +142,9 @@ func compile(state: Anatomy.Cultivator, program: Dictionary, sample: Dictionary,
 	net.session_seconds = float(config.session_seconds)*clampf(float(program.get("session_fraction",1.0)),0,1)
 	net.cycles = int(net.session_seconds/net.seconds)
 	net.pressure_limit = minf(net.safe[4],float(sample.density)/8.0)
+	# Guided circulation compresses qi above ambient pressure: tabulate the full vessel.
+	for op: Reference.Instruction in net.instructions:
+		if op.code==8: net.pressure_limit = net.safe[4]
 
 	# Keep compilation memory bounded. Networks already held by callers survive eviction.
 	if routes.size()>=2048: routes.clear()
@@ -264,7 +267,8 @@ func basis_table(net: Network, bin: int, density: float) -> PackedFloat64Array:
 		# Bound transient storage even for sources traversing many density bands.
 		if net.kernel_tables.size()>=256: net.kernel_tables.clear()
 		var basis := {"density":density,"purity":0.0,"stability":1.0 if simple else 0.0,"corruption":0.0 if simple else 1.0}
-		net.kernel_tables[key]=periodic(net,net.program,basis,minf(net.safe[4],density/8)*float(bin)/BINS)
+		var limit := net.safe[4] if net.pressure_limit==net.safe[4] else minf(net.safe[4],density/8)
+		net.kernel_tables[key]=periodic(net,net.program,basis,limit*float(bin)/BINS)
 	return net.kernel_tables[key]
 
 class EdgeDelta extends RefCounted:
@@ -648,6 +652,26 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 		state.grounded += grounded
 		state.dissipated += admitted-settled-grounded
 		settle_lumped(state,settled,purity,settled_stability,corruption)
+		# Guided circulation: reserve drawn into the circuit returns with its own
+		# quality; only the refinement losses on the way leave the reserve.
+		var guided := 9+2*net.source.size()
+		var withdrawn := mini(state.reserve,floori((a[guided]*(1-weight)+b[guided]*weight)*net.cycles*1000/phases*factor))
+		var returned := mini(withdrawn,floori((a[guided+1]*(1-weight)+b[guided+1]*weight)*net.cycles*1000/phases*factor))
+		if withdrawn>returned:
+			var lost := withdrawn-returned
+			for q in 4: state.reserve_moments[q] *= float(state.reserve-lost)/maxi(1,state.reserve)
+			state.reserve -= lost
+			state.dissipated += lost
+			state.nodes[4].stored_quanta = state.reserve
+		if withdrawn>0:
+			var uphill_strain := float(Reference.circulation_law().uphill_strain_per_QU)
+			for e: int in net.used_edges:
+				var uphill: float = (a[guided+2+e]*(1-weight)+b[guided+2+e]*weight)*net.cycles/phases*factor
+				if uphill<=0: continue
+				var edge: Anatomy.Edge = state.edges[e]
+				edge.strain += uphill_strain*uphill
+				state.strain = maxf(state.strain,edge.strain)
+				state.max_strain = maxf(state.max_strain,edge.strain)
 		peak_fill = maxf(peak_fill,float(state.reserve+state.residue)/maxi(1,state.capacity))
 		for e: int in net.used_edges:
 			var edge: Anatomy.Edge = state.edges[e]
@@ -834,14 +858,15 @@ func production_body(store: RefCounted, row: int) -> Anatomy.Cultivator:
 	state.nodes[4].residue_quanta = state.residue
 	return state
 
-func production_program(route: String) -> Dictionary:
+func production_program(route: String, opened: bool = false) -> Dictionary:
 	var program := accounting.manual(route).duplicate(true)
 	# Production instructions and duty times are seeded data, shared by both
 	# executors. The laboratory retains its independent eight-node manuals.
 	if production_definition.is_empty(): production_definition=JSON.parse_string(FileAccess.get_file_as_string("res://data/cultivation/practice.json"))
 	var config := production_definition
 	var operations: Array = []
-	for entry: Array in config.sequences[route]:
+	# Guided circulation needs an opened dantian (certified layer 1).
+	for entry: Array in (config.opened_sequences if opened else config.sequences)[route]:
 		var op: Dictionary=accounting.vocabulary[entry[0]].duplicate(true)
 		op.operation=entry[0]
 		op.targets=[]
@@ -849,6 +874,7 @@ func production_program(route: String) -> Dictionary:
 		op.duration=int(entry[2])
 		operations.append(op)
 	program["manual_revision"]=int(config.manual_revision)
+	if opened: program["opened"]=true
 	program.operations = operations
 	return program
 
@@ -898,7 +924,17 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	stabilise_rem.resize(count)
 	remainder.resize(edge_count)
 	var result := PackedFloat64Array()
-	result.resize(7+2*edge_count+2)
+	# Guided circulation slots: withdrawn reserve, returned tracer, uphill work per edge.
+	var guided := 9+2*edge_count
+	result.resize(guided+2+edge_count)
+	var trace := PackedFloat64Array()
+	trace.resize(count)
+	var adverse := PackedFloat64Array()
+	adverse.resize(8)
+	var qt := PackedFloat64Array()
+	qt.resize(8)
+	var law := Reference.circulation_law()
+	var head_scale := float(law.head_per_dantian_pressure)
 	var limits := PackedInt64Array()
 	limits.resize(count)
 	for i in count:
@@ -915,11 +951,11 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	var qc := PackedFloat64Array()
 	outgoing.resize(count)
 	incoming.resize(count)
-	candidates.resize(4)
-	moved.resize(4)
-	qp.resize(4)
-	qs.resize(4)
-	qc.resize(4)
+	candidates.resize(8)
+	moved.resize(8)
+	qp.resize(8)
+	qs.resize(8)
+	qc.resize(8)
 	var intake_scale := net.intake_scale
 	var strain_gate := net.strain_gate
 	var density: float = sample.density
@@ -972,6 +1008,9 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 						var p := pure[a]*q/maxi(1,amount[a])
 						var st := 0.0 if simple_quality else stable[a]*q/maxi(1,amount[a])
 						var c := 0.0 if simple_quality else corrupt[a]*q/maxi(1,amount[a])
+						var t := trace[a]*q/maxi(1,amount[a])
+						trace[a] -= t
+						trace[b] += t
 						amount[a] -= q
 						pure[a] -= p
 						if not simple_quality:
@@ -1004,6 +1043,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							var scale := minf(1,minf(float(amount[a])/maxi(1,candidate),float(headroom)/maxi(1,candidate)))
 							var q := floori(candidate*scale)
 							moved[j]=q
+							qt[j]=trace[a]*q/maxi(1,amount[a])
 							qp[j]=pure[a]*q/maxi(1,amount[a])
 							if not simple_quality:
 								qs[j]=stable[a]*q/maxi(1,amount[a])
@@ -1030,6 +1070,7 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							var scale := minf(1,minf(float(amount[a])/maxi(1,outgoing[a]),float(headroom)/maxi(1,incoming[b])))
 							var q := floori(candidates[j]*scale)
 							moved[j] = q
+							qt[j] = trace[a]*q/maxi(1,amount[a])
 							qp[j] = pure[a]*q/maxi(1,amount[a])
 							if not simple_quality:
 								qs[j] = stable[a]*q/maxi(1,amount[a])
@@ -1043,6 +1084,8 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 						var a := sources[e]
 						var b := destinations[e]
 						if moved[j]==0: continue
+						trace[a] -= qt[j]
+						trace[b] += qt[j]
 						amount[a] -= moved[j]
 						pure[a] -= qp[j]
 						if not simple_quality:
@@ -1082,13 +1125,72 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 							stable[i] += (q-loss)*(1-(1-st)*.60)-q*st
 							pure[i] -= loss*p
 							corrupt[i] -= loss*c
+						trace[i] -= loss*trace[i]/amount[i]
 						amount[i] -= loss
+				elif code==8:
+					# Owner decision 2026-11-19: the dantian's pressure pumps every lane.
+					var head := head_scale*(amount[4]/1000.0/volumes[4]+backpressure)
+					outgoing.fill(0)
+					incoming.fill(0)
+					for j in targets.size():
+						var e: int = targets[j]
+						var source := sources[e]
+						var destination := destinations[e]
+						var difference := amount[source]/1000.0/volumes[source]+(backpressure if source==4 else 0.0)-amount[destination]/1000.0/volumes[destination]-(backpressure if destination==4 else 0.0)
+						var ideal := minf(capacities[e],conductances[e]*gate*maxf(0,difference+head))*10000+remainder[e]
+						var q := floori(ideal)
+						remainder[e] = ideal-q
+						candidates[j] = q
+						adverse[j] = maxf(0,-difference)
+						outgoing[source] += q
+						incoming[destination] += q
+					# Stored reserve becomes mobile only as dantian lanes draw it.
+					var withdrawal := maxi(0,outgoing[4]-amount[4])
+					if withdrawal>0:
+						amount[4] += withdrawal
+						pure[4] += withdrawal
+						stable[4] += withdrawal
+						trace[4] += withdrawal
+						if measure: result[guided] += withdrawal
+					for j in targets.size():
+						var e: int = targets[j]
+						var a := sources[e]
+						var b := destinations[e]
+						var headroom := maxi(0,floori(volumes[b]*(safe_pressures[b]-(backpressure if b==4 else 0.0))*1000)-amount[b])
+						var scale := minf(1,minf(float(amount[a])/maxi(1,outgoing[a]),float(headroom)/maxi(1,incoming[b])))
+						var q := floori(candidates[j]*scale)
+						moved[j] = q
+						qt[j] = trace[a]*q/maxi(1,amount[a])
+						qp[j] = pure[a]*q/maxi(1,amount[a])
+						qs[j] = stable[a]*q/maxi(1,amount[a])
+						qc[j] = corrupt[a]*q/maxi(1,amount[a])
+					for j in targets.size():
+						if moved[j]==0: continue
+						var e: int = targets[j]
+						var a := sources[e]
+						var b := destinations[e]
+						trace[a] -= qt[j]
+						trace[b] += qt[j]
+						amount[a] -= moved[j]
+						pure[a] -= qp[j]
+						stable[a] -= qs[j]
+						corrupt[a] -= qc[j]
+						amount[b] += moved[j]
+						pure[b] += qp[j]
+						stable[b] += qs[j]
+						corrupt[b] += qc[j]
+						if measure:
+							result[7+e] += moved[j]
+							result[7+edge_count+e] = maxf(result[7+edge_count+e],moved[j]/10000.0)
+							result[guided+2+e] += moved[j]*adverse[j]
 				elif code==6:
 					if measure:
 						result[1] += amount[4]
 						result[2] += pure[4]
 						result[3] += amount[4] if simple_quality else stable[4]
 						result[4] += corrupt[4]
+						result[guided+1] += trace[4]
+					trace[4] = 0
 					amount[4] = 0
 					pure[4] = 0
 					stable[4] = 0
@@ -1096,6 +1198,11 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 	result[7+2*edge_count] /= measured*1000.0
 	result[8+2*edge_count] /= measured*1000.0
 	for i in 7+edge_count: result[i] /= measured*1000.0
+	for i in range(guided,result.size()): result[i] /= measured*1000.0
+	# Returned reserve keeps its own quality: report intake delivery alone.
+	result[1] -= result[guided+1]
+	result[2] -= result[guided+1]
+	result[3] -= result[guided+1]
 	return result
 
 func settle_lumped(state: Anatomy.Cultivator, quantity: int, purity: float, stability: float, corruption: float) -> void:

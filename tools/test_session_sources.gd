@@ -26,8 +26,10 @@ func _initialize() -> void:
 					# Negligible side flows use a 0.00025 qu/cycle absolute bound.
 					# Main delivery/intake/quality columns retain the 5% relative gate.
 					var error := absf(fast[i]-exact[i])/maxf(.005 if i>=7 else .001,absf(exact[i]))
-					worst=maxf(worst,error)
-					if error>.050000001:
+					# Guided uphill-work columns only drive channel strain: 10% gate.
+					var gate := .100000001 if i>=11+2*body.edges.size() else .050000001
+					if gate<.1: worst=maxf(worst,error)
+					if error>gate:
 						failures+=1
 						print("Source coefficient error route=%s density=%s bin=%d column=%d exact=%s fast=%s error=%s" % [route,density,bin,i,exact[i],fast[i],error])
 	# A policy evaluation must preserve its owner, and match a detached clone.

@@ -22,10 +22,10 @@ func compile_program(program: Dictionary, base_error: float) -> Array:
 	var result: Array[Instruction] = []
 	for operation: Dictionary in program.operations:
 		assert(int(operation.duration)>=DT and int(operation.duration)%DT==0,"Operations use the fixed ten-second grid")
-		assert(operation.targets.size()<=4,"At most four concurrent lanes")
+		assert(operation.targets.size()<=int(operation.get("max_lanes",4)),"Too many concurrent lanes")
 		var op := Instruction.new()
 		op.name = str(operation.operation)
-		op.code = ["Absorb","Guide","Split","Ground","Filter","Stabilise","Integrate","Merge"].find(op.name)
+		op.code = ["Absorb","Guide","Split","Ground","Filter","Stabilise","Integrate","Merge","Circulate"].find(op.name)
 		assert(op.code>=0,"Unsupported operation")
 		op.slices = int(operation.duration)/DT
 		op.targets = operation.targets.duplicate()
@@ -301,6 +301,66 @@ func commit_candidate(state: Anatomy.Cultivator, edge: Anatomy.Edge, candidate: 
 	edge.daily_flow += quantity
 	edge.peak_rate = maxf(edge.peak_rate,quantity/1000.0/dt)
 
+# Owner decision 2026-11-19: guided circulation. The cultivator uses the
+# dantian's own pressure as a pump: every lane gains head h × p(dantian), so qi
+# can climb back into a fuller dantian. Lanes leaving the dantian draw stored
+# reserve as mobile qi (reserve and its moments debited atomically; residue
+# never moves). Climbing against adverse pressure strains the channel.
+static func circulation_law() -> Dictionary:
+	if vocabulary.is_empty(): vocabulary = JSON.parse_string(FileAccess.get_file_as_string("res://data/cultivation/operations.json"))
+	return vocabulary.Circulate
+
+func circulate_model(state: Anatomy.Cultivator, indices: Array, gate: float, elements: Array) -> void:
+	if state.strain>.35: return
+	var law := circulation_law()
+	var head := float(law.head_per_dantian_pressure)*pressure(state.nodes[4])
+	var uphill_strain := float(law.uphill_strain_per_QU)
+	var candidates: Array = []
+	var adverse: Array = []
+	var outflows := {}
+	var inflows := {}
+	for index: int in indices:
+		var edge: Anatomy.Edge = state.edges[index]
+		var difference := pressure(state.nodes[edge.source])-pressure(state.nodes[edge.destination])
+		var ideal := minf(Anatomy.conductance(edge)*gate*maxf(0,difference+head)*DT,Anatomy.capacity(edge)*DT)*1000.0+float(edge.remainder)
+		var quantity := floori(ideal)
+		edge.remainder = ideal-quantity
+		candidates.append(quantity)
+		adverse.append(maxf(0,-difference))
+		outflows[edge.source] = int(outflows.get(edge.source,0))+quantity
+		inflows[edge.destination] = int(inflows.get(edge.destination,0))+quantity
+	# Withdraw only what the dantian lanes ask beyond the mobile packet already there.
+	var dantian: Anatomy.Compartment = state.nodes[4]
+	var withdrawal := mini(maxi(0,int(outflows.get(4,0))-total(dantian)),state.reserve)
+	if withdrawal>0:
+		var moments := [0.0,0.0,0.0,0.0]
+		for q in 4:
+			moments[q] = state.reserve_moments[q]*float(withdrawal)/state.reserve
+			state.reserve_moments[q] -= moments[q]
+		state.reserve -= withdrawal
+		dantian.stored_quanta = state.reserve
+		add(dantian,{"mass":split(withdrawal,elements),"moments":moments,"instability_moment":0.0})
+	var packets: Array = []
+	for i in indices.size():
+		var edge: Anatomy.Edge = state.edges[int(indices[i])]
+		var source: Anatomy.Compartment = state.nodes[edge.source]
+		var destination: Anatomy.Compartment = state.nodes[edge.destination]
+		var headroom := maxi(0,floori(destination.volume*destination.safe_pressure*1000)-total(destination)-destination.stored_quanta-destination.residue_quanta)
+		var scale := minf(1,float(total(source))/maxi(1,int(outflows[edge.source])))
+		scale = minf(scale,float(headroom)/maxi(1,int(inflows[edge.destination])))
+		var quantity := floori(int(candidates[i])*scale)
+		if quantity==0: continue
+		packets.append({"destination":edge.destination,"packet":remove(source,quantity)})
+		state.circulated += quantity
+		edge.practice += quantity/1000.0
+		edge.daily_flow += quantity
+		edge.peak_rate = maxf(edge.peak_rate,quantity/1000.0/DT)
+		if adverse[i]>0:
+			edge.strain += uphill_strain*float(adverse[i])*quantity/1000.0
+			state.strain = maxf(state.strain,edge.strain)
+			state.max_strain = maxf(state.max_strain,edge.strain)
+	for packet: Dictionary in packets: add(state.nodes[int(packet.destination)],packet.packet)
+
 func process_model(state: Anatomy.Cultivator, indices: Array, operation: String, intensity: float) -> void:
 	for index: int in indices:
 		var node: Anatomy.Compartment = state.nodes[index]
@@ -524,10 +584,14 @@ func simulate_day_model(state: Anatomy.Cultivator, program: Dictionary, sample: 
 	var control: float = config.control
 	var base_error: float = .25*(1.0-float(config.operation_mastery))+.20*(1.0-float(config.understanding))+.15*float(config.emotional_disruption)-.10*control
 	var instructions := compile_program(program,base_error)
-	var used_nodes := [true,false,false,false,true,false,false,false]
+	var used_nodes := []
+	used_nodes.resize(state.nodes.size())
+	used_nodes.fill(false)
+	used_nodes[0] = true
+	used_nodes[4] = true
 	for op: Instruction in instructions:
 		for index: int in op.targets:
-			if op.code in [1,2,3]:
+			if op.code in [1,2,3,8]:
 				used_nodes[state.edges[index].source] = true
 				used_nodes[state.edges[index].destination] = true
 			else: used_nodes[index] = true
@@ -571,6 +635,7 @@ func simulate_day_model(state: Anatomy.Cultivator, program: Dictionary, sample: 
 						else: flow_model(state,op.targets,false,DT,gate)
 					4,5: process_model(state,op.targets,op.name,filter_intensity)
 					6: settle_model(state)
+					8: circulate_model(state,op.targets,1.0-clampf(op.error+.10*minf(1,state.strain/.20),0,.60),elements)
 				var current_pressure := pressure(state.nodes[4])
 				if current_pressure>=daily_peak_pressure:
 					daily_peak_pressure = current_pressure

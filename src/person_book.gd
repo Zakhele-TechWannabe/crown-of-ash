@@ -497,6 +497,7 @@ static func cultivation_readout(physical: Dictionary) -> String:
 	var layer: int=physical.layer
 	var day: int=physical.achieved[layer-1] if layer>0 else -1
 	var lines: Array[String]=["Qi Condensation layer %d%s" % [layer," · day %d" % day if day>=0 else " · uncertified"],"Purity %.2f · reserve %.1f/%.1f QU" % [physical.purity,physical.reserve/1000.0,physical.capacity/1000.0],"Residue %.1f%% · strain %.3f" % [100.0*physical.residue/maxi(1,physical.capacity),physical.strain],"Danger sense: %s" % physical.get("danger_sense","quiet")]
+	if layer>=3 and str(physical.get("vessel",""))!="": lines.insert(1,"Vessel: %s" % physical.vessel)
 	if layer<9:
 		lines.append("Toward layer %d" % (layer+1))
 		for evidence: String in physical.get("next_evidence",[]):
