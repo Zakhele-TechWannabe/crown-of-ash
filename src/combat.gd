@@ -8,6 +8,13 @@ const WOUNDS := ["unhurt", "bruised", "hurt", "badly hurt", "dying"]
 const HARM_AT := [0.0, 15.0, 35.0, 60.0, 100.0]
 const NEVER := 9
 const MARTIAL := ["weapons.", "unarmed_arts.", "game_and_hunting.", "archery."]
+const BLADES := ["weapons.straight_sword", "weapons.blade"]
+const Store = preload("res://src/meridian_store.gd")
+const Practice = preload("res://src/qi_practice.gd")
+const Anatomy = preload("res://src/meridians.gd")
+# Channels that carry qi to the right hand and the right foot (shoulder then limb).
+const PALM_ROUTE := [12, 13]
+const SOLE_ROUTE := [18, 19]
 
 static var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/society/combat.json"))
 
@@ -27,7 +34,8 @@ static func will_for(base: int, motive: String) -> int:
 	return base
 
 
-## A person as a fighter: body, tempering, qi, martial skill, age and injuries.
+## A person as a fighter: body, tempering, martial skill, age and injuries. Qi adds nothing by itself: the
+## "qi" block says what their certified layers and channels let them pay for during the fight.
 static func person(society: RefCounted, p: int) -> Dictionary:
 	var store: RefCounted = society.population
 	var rules: Dictionary = config.person
@@ -38,15 +46,12 @@ static func person(society: RefCounted, p: int) -> Dictionary:
 	var layers: int = temper.body_layer[p] if temper else 0
 	var grade: float = maxf(0.0, temper.body_grade(p)) if temper else 0.0
 	var body := 1.0 + layers * float(rules.tempering_per_layer) * (0.8 + 0.1 * grade)
-	var realm: int = mini(2, society.realm[p])
-	var qi: float = float(rules.qi_power[realm]) + (float(rules.qi_power_per_layer) * society.layer[p] if realm == 1 else 0.0)
-	var might := maxf(body, qi) + 0.2 * minf(body, qi)
+	var might := body
 	var skill := martial_level(store, p)
 	var power := float(rules.power) * (0.5 + strength / 20.0) * might * (1.0 + skill / float(rules.skill_power))
 	var guard := float(rules.guard) * (0.5 + endurance / 20.0) * might * (1.0 + skill / float(rules.skill_guard))
 	var speed := float(rules.speed) * (0.6 + agility / 25.0) * (1.0 + layers * float(rules.speed_per_layer))
-	speed += float(rules.qi_speed[realm]) + (float(rules.qi_speed_per_layer) * society.layer[p] if realm == 1 else 0.0)
-	var breath := float(rules.breath) * (0.5 + endurance / 20.0) * (1.0 + layers * float(rules.breath_per_layer)) * (1.0 + realm)
+	var breath := float(rules.breath) * (0.5 + endurance / 20.0) * (1.0 + layers * float(rules.breath_per_layer))
 	if store.age(p) < int(rules.child_age):
 		power *= float(rules.child_factor)
 		guard *= float(rules.child_factor)
@@ -55,7 +60,64 @@ static func person(society: RefCounted, p: int) -> Dictionary:
 		guard *= float(rules.injured_guard)
 	var will: int = int(rules.will) if store.attributes[p * 8 + 6] >= 8.0 else int(rules.fearful_will)
 	return {"name": store.names[p], "person": p, "power": power, "guard": guard, "speed": speed, "breath": breath,
-		"will": will, "motive": "own", "lethal": false, "verb": "strikes"}
+		"will": will, "motive": "own", "lethal": false, "verb": "strikes", "qi": qi_profile(society, p)}
+
+
+## What a cultivator can pay for in a fight: certified layer, reserve, purity, control and the channel widths
+## that limit how fast qi reaches the hand and foot. Empty for anyone without an opened dantian.
+static func qi_profile(society: RefCounted, p: int) -> Dictionary:
+	var ms: RefCounted = society.meridian_store
+	if p >= ms.slot.size() or ms.slot[p] < 0: return {}
+	var row: int = ms.slot[p]
+	var layer: int = ms.integers[row * Store.PERSON_INTS + Store.PersonInt.LAYER]
+	if layer < 1: return {}
+	var state: RefCounted = society.qi_practice.body(society, p)
+	var reserve: int = state.reserve
+	var rules: Dictionary = config.qi
+	var grade: float = maxf(0.0, society.temper.body_grade(p)) / 3.0 if society.temper else 0.0
+	var route := func(edges: Array) -> float:
+		var cap := INF
+		for e: int in edges: cap = minf(cap, ms.capacity(row, e))
+		return cap
+	var store: RefCounted = society.population
+	return {"layer": layer, "reserve": reserve / 1000.0,
+		"purity": state.reserve_moments[0] / maxi(1, reserve), "stability": clampf(state.reserve_moments[2] / maxi(1, reserve), 0, 1),
+		"error": Practice.control_error(state),
+		"tolerance": lerpf(float(rules.tolerance_ordinary), float(rules.tolerance_perfect), clampf(grade, 0, 1)),
+		"palm": route.call(PALM_ROUTE), "sole": route.call(SOLE_ROUTE),
+		"coherence": 1.0 + 4.0 * clampf(float(Anatomy.definition().operation_mastery), 0, 1),
+		"blade": BLADES.any(func(id: String) -> bool: return skill_level(store, p, id) > 0)}
+
+
+## A person's level in one skill, 0 if untouched.
+static func skill_level(store: RefCounted, p: int, id: String) -> int:
+	var e: int = store.head[p]
+	while e >= 0:
+		if store.catalogue.ids[store.skill_id[e]] == id: return store.skill_level[e]
+		e = store.skill_next[e]
+	return 0
+
+
+## Pay a fight's qi from a cultivator's reserve: it leaves the body as dissipated qi, so the ledger still closes.
+static func spend_qi(society: RefCounted, p: int, qu: float) -> void:
+	if p < 0 or qu <= 0.0: return
+	var ms: RefCounted = society.meridian_store
+	if p >= ms.slot.size() or ms.slot[p] < 0: return
+	var state: RefCounted = society.qi_practice.body(society, p)
+	var quanta: int = mini(state.reserve, roundi(qu * 1000.0))
+	if quanta <= 0: return
+	for q in 4: state.reserve_moments[q] -= state.reserve_moments[q] * quanta / state.reserve
+	state.reserve -= quanta
+	state.nodes[4].stored_quanta = state.reserve
+	state.nodes[4].hazard_valid = false
+	state.dissipated += quanta
+	state.session_revision += 1
+	ms.writeback(ms.slot[p], state)
+
+
+## Settle both sides' qi after Combat.fight.
+static func settle_qi(society: RefCounted, ids: Array, r: Dictionary) -> void:
+	for i in 2: spend_qi(society, int(ids[i]), float(r.qi_spent[i]))
 
 
 ## A beast from the table, by name.
@@ -100,7 +162,9 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 	var starting: Array = opt.get("start_harm", [0.0, 0.0])
 	for side: Dictionary in [worn(a, float(starting[0])), worn(b, float(starting[1]))]:
 		f.append({"s": side, "h": 0.0, "next": 0.0, "last": -1.0, "lungs": float(side.breath) * float(config.breath_seconds),
-			"winded": false, "retry": 0.0, "allin": false, "will": will_for(int(side.will), str(side.motive))})
+			"winded": false, "retry": 0.0, "allin": false, "will": will_for(int(side.will), str(side.motive)),
+			"q": side.get("qi", {}), "reserve": float(side.get("qi", {}).get("reserve", 0.0)), "spent": 0.0, "shell": 0.0,
+			"paid_to": 0.0, "upkeep": float(side.get("qi", {}).get("reserve", 0.0)) > 0.0, "second": false, "burst": false, "recast": false})
 	for i in 2: f[i].h = clampf(float(starting[i]), 0.0, 100.0)
 	var stop_at: int = clampi(int(opt.get("stop_at", 2 if opt.get("spar", false) else 0)), 0, 3)
 	var spar: bool = stop_at > 0
@@ -108,6 +172,39 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 	var events: Array[Dictionary] = []
 	var result := {}
 	var seconds := float(config.strike_seconds)
+	var qr: Dictionary = config.qi
+
+	# Qi is paid from a fight-local reserve; Combat.settle_qi debits the real one afterwards.
+	var layer := func(i: int) -> int: return int(f[i].q.get("layer", 0))
+	var pay := func(i: int, qu: float) -> float:
+		var paid := minf(qu, f[i].reserve)
+		f[i].reserve -= paid
+		f[i].spent += paid
+		return paid
+	var useful := func(i: int, qu: float) -> float:
+		var q: Dictionary = f[i].q
+		return qu * pow(float(q.purity), 2) * float(q.stability) * (1.0 - float(q.error))
+	# A hand can only take what its channel carries during the wind-up and what its buffer holds.
+	var reinforce := func(i: int, base: float, buffer: float) -> float:
+		if layer.call(i) < 1 or f[i].reserve <= 0.0: return 0.0
+		var qu: float = pay.call(i, minf(float(f[i].q.palm) * float(qr.windup_seconds), buffer))
+		return minf(float(qr.harm_per_qu) * useful.call(i, qu), base * float(f[i].q.tolerance))
+	# Armour (layer 5) and qi-step (layer 4) run on upkeep; the shell leaks. Paid up to time t.
+	var upkeep := func(i: int, t: float) -> void:
+		var dt: float = t - f[i].paid_to
+		if dt <= 0.0: return
+		f[i].paid_to = t
+		f[i].shell *= exp(-float(qr.shell_leak_per_second) * dt)
+		if not f[i].upkeep: return
+		var rate := (float(qr.armour_qu_per_second) if layer.call(i) >= 5 else 0.0) + (float(qr.step_qu_per_second) if layer.call(i) >= 4 else 0.0)
+		if rate > 0.0 and pay.call(i, rate * dt) < rate * dt - 1e-9:
+			f[i].upkeep = false
+			events.append({"t": "dry", "time": t, "i": i, "harm": [f[0].h, f[1].h]})
+	var stepping := func(i: int) -> bool: return layer.call(i) >= 4 and f[i].upkeep
+	var raise_shell := func(i: int, t: float) -> void:
+		if layer.call(i) < 7 or f[i].reserve < float(qr.shell_min_reserve_qu): return
+		f[i].shell = pay.call(i, float(qr.shell_max_qu) + float(qr.shell_raise_qu)) - float(qr.shell_raise_qu)
+		events.append({"t": "shell", "time": t, "i": i, "charge": f[i].shell, "harm": [f[0].h, f[1].h]})
 
 	var out := func(i: int, t: float) -> bool: return t >= f[i].lungs
 	var people := func(i: int) -> bool: return int(f[i].s.person) >= 0
@@ -118,8 +215,11 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		return p
 	var guard := func(i: int) -> float:
 		var g: float = float(f[i].s.guard) * (0.7 if f[i].allin else 1.0)
+		if layer.call(i) >= 5 and f[i].upkeep:
+			g += minf(float(qr.armour_score), float(f[i].s.guard) * float(f[i].q.tolerance) * float(qr.armour_share))
 		return g * (1.15 if forest else 1.0)
-	var speed := func(i: int, t: float) -> float: return float(f[i].s.speed) * (0.7 if out.call(i, t) else 1.0)
+	var speed := func(i: int, t: float) -> float:
+		return float(f[i].s.speed) * (0.7 if out.call(i, t) else 1.0) * (float(qr.step_speed) if stepping.call(i) else 1.0)
 	# Undergrowth slows people running, not striking.
 	var running := func(i: int, t: float) -> float: return speed.call(i, t) * (0.75 if forest and people.call(i) else 1.0)
 	var gap := func(i: int, t: float) -> float: return seconds / speed.call(i, t) * rng.randf_range(0.85, 1.15)
@@ -129,14 +229,43 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 
 	var strike := func(i: int, t: float, mult: float, why: String) -> void:
 		var you: Dictionary = f[1 - i]
+		for k in 2: upkeep.call(k, t)
+		# Second wind (layer 2): qi buys back the breath once.
+		if out.call(i, t) and layer.call(i) >= 2 and not f[i].second and pay.call(i, float(qr.second_wind_qu)) >= float(qr.second_wind_qu):
+			f[i].second = true
+			f[i].lungs = t + float(f[i].s.breath) * float(config.breath_seconds)
+			events.append({"t": "second wind", "time": t, "i": i, "harm": [f[0].h, f[1].h]})
+		# Before layer 7 qi goes to one place at a time: the one losing guards, the other strikes.
+		var guarding := func(k: int) -> bool: return layer.call(k) >= 7 or f[k].h > f[1 - k].h + 10.0
 		var p: float = power.call(i, t) * mult
+		var qi_hit := 0.0
+		if layer.call(i) >= 7 or not guarding.call(i):
+			var buffer := float(qr.hand_buffer_qu)
+			# All-in (layer 3): once a fight, when hurt, the hand buffer is drawn to its limit.
+			if layer.call(i) >= 3 and not f[i].burst and f[i].h >= HARM_AT[2]:
+				f[i].burst = true
+				buffer = float(qr.allin_buffer_qu)
+			qi_hit = reinforce.call(i, p, buffer)
+		p += qi_hit
 		var g: float = guard.call(1 - i)
+		if guarding.call(1 - i): g += reinforce.call(1 - i, g, float(qr.hand_buffer_qu))
 		var chance := p / (p + g)
 		var hit := rng.randf() < chance
 		var dmg := 0.0
 		var stagger := false
 		if hit:
 			dmg = float(config.harm_per_blow) * pow(p / g, 0.8) * rng.randf_range(0.75, 1.25)
+			if you.shell > 0.0:
+				var held := minf(dmg, you.shell / float(qr.shell_qu_per_harm))
+				you.shell -= held * float(qr.shell_qu_per_harm)
+				dmg -= held
+				if you.shell < 0.01:
+					you.shell = 0.0
+					events.append({"t": "shell broken", "time": t, "i": 1 - i, "harm": [f[0].h, f[1].h]})
+					# Layer 8 can project a new one mid-fight, once.
+					if layer.call(1 - i) >= 8 and not you.recast and not spar:
+						you.recast = true
+						raise_shell.call(1 - i, t)
 			var cap: float = HARM_AT[stop_at] if spar else (100.0 if f[i].s.lethal else float(config.brawl_cap))
 			if you.h < cap: you.h = minf(cap, you.h + dmg)
 			if dmg >= float(config.stagger_harm):
@@ -153,7 +282,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		var trade: bool = you.last >= 0.0 and absf(t - you.last) < 0.3
 		f[i].last = t
 		f[i].next = t + gap.call(i, t)
-		events.append({"t": "strike", "time": t, "i": i, "hit": hit, "dmg": dmg, "chance": chance, "why": why,
+		events.append({"t": "strike", "time": t, "i": i, "hit": hit, "dmg": dmg, "chance": chance, "why": why, "qi": qi_hit,
 			"stagger": stagger, "trade": trade, "winded": winded, "allin": allin, "harm": [f[0].h, f[1].h]})
 
 	var over := func(i: int, t: float) -> bool:
@@ -170,11 +299,26 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 
 	# Closing in takes a moment; whoever strikes from hiding lands first and the other reels.
 	for i in 2: f[i].next = 0.8 + rng.randf() * gap.call(i, 0.0) * 0.5
+	# Layer 7 holds a shell cast before the fight; nobody raises one for a friendly bout.
+	if not spar:
+		for i in 2: raise_shell.call(i, 0.0)
 	var ambush: int = opt.get("ambush", -1)
 	if ambush >= 0:
-		strike.call(ambush, 0.0, float(opt.get("ambush_power", 1.5)), "from hiding")
+		var hidden := float(opt.get("ambush_power", 1.5))
+		# Qi sense (layer 1) feels the hidden presence before the blow lands.
+		if layer.call(1 - ambush) >= 1: hidden = 1.0 + (hidden - 1.0) * float(qr.sense_ambush)
+		strike.call(ambush, 0.0, hidden, "from hiding")
 		f[1 - ambush].next += 1.2
 		if over.call(ambush, 0.0): return _done(events, result, f)
+	# Projection (layer 8): sword qi or palm wind crosses the opening gap before the closing blow.
+	if not spar:
+		for i in 2:
+			if layer.call(i) < 8 or f[i].reserve <= 0.0: continue
+			var packet: float = useful.call(i, pay.call(i, float(qr.projection_qu))) * exp(-float(qr.projection_tiles) / float(f[i].q.coherence))
+			var base: float = power.call(i, 0.4)
+			var mult := 1.0 + minf(float(qr.harm_per_qu) * packet, base) / base
+			strike.call(i, 0.4, mult, "with sword qi" if f[i].q.blade else "with palm wind")
+			if over.call(i, 0.4): return _done(events, result, f)
 	while true:
 		var i := 0 if f[0].next <= f[1].next else 1
 		var t: float = f[i].next
@@ -190,6 +334,8 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		var sp: float = running.call(j, t)
 		var chance: float = sp / (sp + running.call(i, t))
 		chance *= float(opt.get("escape_cover", 1.0))
+		# Sword pulse (layer 8, a blade): the tethered sword follows a runner within its reach.
+		if layer.call(i) >= 8 and f[i].q.blade and pay.call(i, float(qr.pulse_qu_per_second) * 2.0) > 0.0: chance *= float(qr.pulse_escape)
 		# People who can't outrun another person yield; so do the proud. Beasts and stone never do.
 		if people.call(j) and people.call(i) and (chance < 0.4 or them.s.motive == "pride"):
 			events.append({"t": "yield", "time": t + 0.2, "i": j, "chance": chance, "harm": [f[0].h, f[1].h]})
@@ -211,6 +357,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 static func _done(events: Array[Dictionary], result: Dictionary, f: Array[Dictionary]) -> Dictionary:
 	result.events = events
 	result.harm = [f[0].h, f[1].h]
+	result.qi_spent = [f[0].spent, f[1].spent]
 	return result
 
 
@@ -225,6 +372,7 @@ static func between(society: RefCounted, a: int, b: int, kind: String) -> Dictio
 	var r := fight(sides[0], sides[1], {"spar": kind == "spar"}, store.rng)
 	var ids := [a, b]
 	r.merge({"kind": kind, "day": store.day, "ids": ids, "names": [sides[0].name, sides[1].name], "motives": [sides[0].motive, sides[1].motive]})
+	settle_qi(society, ids, r)
 	var fates := [_hurt(society, a, r.harm[0], b, r), _hurt(society, b, r.harm[1], a, r)]
 	r.fates = fates
 	var ties: RefCounted = society.ties
@@ -259,6 +407,7 @@ static func hunt(society: RefCounted, p: int, kind: String, persistent_profile: 
 		r.how = "death"
 		r.tracked = true
 	r.merge({"kind": "hunt", "day": store.day, "ids": [p, -1], "names": [hunter.name, prey.name], "motives": [hunter.motive, "own"]})
+	spend_qi(society, p, float(r.qi_spent[0]))
 	var fate := _hurt(society, p, r.harm[0], -1, r)
 	r.fates = [fate, "dead" if r.how == "death" and r.loser == 1 else ""]
 	r.kill = r.fates[1] == "dead"

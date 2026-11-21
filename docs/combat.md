@@ -49,7 +49,7 @@ Each layer is something the body has *proven* (the certification evidence), not 
 
 ### Personal shell (layers 7–8)
 
-A thin sphere of projected qi. Layer 7 can hold one that was cast before the fight (5 QU to raise); layer 8 can raise it mid-fight. It absorbs harm score at 1,000 per QU from its own charge (at most 20 QU), leaks 2% a second, and breaks when empty. Small, short and expensive: real defence is **formation barriers**, which are external graphs fed by veins or spirit stones (`docs/qi_formations_research.md`, "Protection": 500 QU charge, 5 QU per harm point prevented).
+A thin sphere of projected qi. Layer 7 holds one cast before a real fight (never in a friendly spar): 5 QU to raise plus up to 40 QU of charge. It absorbs wound harm at 2 QU per harm point (so a full shell stops about 20 harm, two good blows), leaks 2% a second, and breaks when empty. Layer 8 can project a new one once mid-fight. Small, short and expensive: real defence is **formation barriers**, which are external graphs fed by veins or spirit stones (`docs/qi_formations_research.md`, "Protection": 500 QU charge, 5 QU per harm point prevented).
 
 ### Sword pulse (layer 8) and flying swords (Foundation)
 
@@ -92,3 +92,17 @@ The rulebook's Stage 4 (physical martial techniques: weapons, reach, tempo, parr
 3. **Arts and elements:** qi arts as manual branches, elemental effects, qi phenomena.
 4. **Formations:** barrier and killing arrays through the same interception path.
 5. **Foundation Establishment:** spiritual sense, flying swords, and the walls.
+
+## Implementation status (2026-11-21)
+
+Phase 1 is built in `src/combat.gd` with constants in `data/society/combat.json` → `qi`, tested by `tools/test_qi_combat.gd`:
+qi profile from the real body (layer, reserve, purity, stability, control error, tolerance, palm and sole routes,
+coherence, blade skill); paid reinforcement of strike and guard (one at a time before layer 7); qi sense against ambush;
+second wind; all-in burst; qi-step; qi armour; shells; opening projection; sword pulse against a fleeing enemy;
+`Combat.settle_qi` / `spend_qi` debit the reserve into `dissipated` (residual stays 0). The old flat `qi_power` is gone.
+
+Measured (1,000 seeded fights, BT9 bodies): layer-1 novice vs Perfect mortal 10% / 90%; layer 5 vs equal mortal 92%;
+layer 5 vs Perfect mortal 42%; layer 8 vs tiger 100% (about 84 QU of shells a fight) where an ordinary mortal wins 33%.
+A real Perfect body's palm route carries about 0.021 QU/s, so a reinforced blow adds about 12 to a power of 53–69.
+
+Not yet: channel strain from combat, elemental arts and qi phenomena, weapons and reach (phase 2), formations.

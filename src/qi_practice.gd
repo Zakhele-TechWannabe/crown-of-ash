@@ -23,6 +23,15 @@ func load_state(saved: Dictionary) -> void:
 	_bodies.clear()
 	records = saved.get("records",{}).duplicate(true)
 
+## Execution error before strain: mastery, understanding, disruption and control.
+static func base_control_error() -> float:
+	var law: Dictionary=Anatomy.definition()
+	return clampf(.25*(1-float(law.operation_mastery))+.20*(1-float(law.understanding))+.15*float(law.emotional_disruption)-.10*float(law.control),0,.60)
+
+## Execution error now; strain up to .20 adds up to .10.
+static func control_error(state: Anatomy.Cultivator) -> float:
+	return clampf(base_control_error()+.10*clampf(state.strain/.20,0,1),0,.60)
+
 func body(s: RefCounted, p: int) -> Anatomy.Cultivator:
 	if not _bodies.has(p):
 		if records.has(p) and records[p].has("body"):
@@ -385,8 +394,8 @@ func _pulse(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, path: Ar
 			node.moments=node.moments.duplicate()
 		_compiler.accounting.add(trial.nodes[4],{"mass":[100,0,0,0,0],"moments":moments})
 		var delivered := 0
-		var base_error: float=clampf(.25*(1-float(Anatomy.definition().operation_mastery))+.20*(1-float(Anatomy.definition().understanding))+.15*float(Anatomy.definition().emotional_disruption)-.10*float(Anatomy.definition().control),0,.60)
-		var error := clampf(base_error+.10*clampf(state.strain/.20,0,1),0,.60)
+		var base_error: float=base_control_error()
+		var error := control_error(state)
 		for step in int(operation.assay_cycles):
 			if trial.strain>.35 or trial.deaths>0: break
 			for edge: int in path:

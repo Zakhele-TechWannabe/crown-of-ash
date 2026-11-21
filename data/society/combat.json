@@ -44,18 +44,6 @@
     "breath_per_layer": 0.25,
     "skill_power": 12.0,
     "skill_guard": 25.0,
-    "qi_power": [
-      0.0,
-      5.5,
-      40.0
-    ],
-    "qi_power_per_layer": 1.1,
-    "qi_speed": [
-      0.0,
-      3.0,
-      15.0
-    ],
-    "qi_speed_per_layer": 0.4,
     "child_age": 16,
     "child_factor": 0.6,
     "injured_power": 0.7,
@@ -323,5 +311,30 @@
       "weight": 0,
       "verb": "strikes"
     }
+  },
+  "qi": {
+    "_law": "docs/combat.md: qi is paid per action, delivered through real channels and capped by tissue tolerance",
+    "harm_per_qu": 1000.0,
+    "windup_seconds": 0.6,
+    "hand_buffer_qu": 0.02,
+    "allin_buffer_qu": 0.05,
+    "tolerance_ordinary": 0.5,
+    "tolerance_perfect": 1.0,
+    "second_wind_qu": 1.0,
+    "step_speed": 1.15,
+    "step_qu_per_second": 0.002,
+    "armour_qu_per_second": 0.01,
+    "armour_score": 10.0,
+    "armour_share": 0.5,
+    "shell_raise_qu": 5.0,
+    "shell_max_qu": 40.0,
+    "shell_qu_per_harm": 2.0,
+    "shell_leak_per_second": 0.02,
+    "shell_min_reserve_qu": 50.0,
+    "projection_qu": 0.1,
+    "projection_tiles": 3.0,
+    "sense_ambush": 0.5,
+    "pulse_escape": 0.6,
+    "pulse_qu_per_second": 0.05
   }
 }
