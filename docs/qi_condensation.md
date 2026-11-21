@@ -1670,7 +1670,7 @@ the daily integration draw above the floor keeps their vessel short of 97.5%.
 
 ## Vessel ceiling and filling (owner decisions 2026-11-21)
 
-- Layer 5 standard: 40 QU/hour (best single hour on the core circuit, 30 days). 45 and above remain distinctions.
+- Layer 5 standard: 35 QU/hour (best single hour on the core circuit, 30 days). 40 and above remain distinctions.
 - **Vessel ceiling:** `initial capacity × dantian safe pressure × 1.5^(layer pursued) × 10^(realm − 1)`
   (`data/cultivation/lab.json` → `vessel_ceiling`, `QiPractice.vessel_ceiling`). Work the ceiling refuses
   goes to the channels like any other surplus. An ordinary vessel tops out near 3,800 QU at peak Qi Condensation.
