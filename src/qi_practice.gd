@@ -348,7 +348,12 @@ func drill_program(s: RefCounted, p: int, state: Anatomy.Cultivator) -> Dictiona
 			copy.operation="Split"
 			copy.targets=[1,3]
 			copy.control_demand=2
-		if copy.operation=="Guide" and copy.targets==[2]: copy.targets=[2,4]
+		# Lumbar sits below a filling dantian's back-pressure, so a passive Guide
+		# never moves its lane; the pair is driven by guided circulation instead.
+		if copy.operation=="Guide" and copy.targets==[2]:
+			copy=_compiler.accounting.vocabulary.Circulate.duplicate(true)
+			copy.operation="Circulate"
+			copy.targets=[2,4]
 		if copy.operation=="Integrate":
 			for edge: int in [4]+Certification.LIMBS[terminal]:
 				var guide: Dictionary=_compiler.accounting.vocabulary.Guide.duplicate(true)

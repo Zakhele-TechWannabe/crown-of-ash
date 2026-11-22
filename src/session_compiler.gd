@@ -583,6 +583,11 @@ func solve_day(state: Anatomy.Cultivator, net: Network, budget: int) -> void:
 	state.milestones.daily_execution["processed"]=0
 	state.milestones.daily_execution["qualified_mixed"]=0
 	state.milestones.daily_execution["simultaneous"]=0
+	# Seconds the split pair actually runs, so its rate is per hour of coordination.
+	var coordinated_seconds := 0.0
+	for op: Reference.Instruction in net.instructions:
+		if ((op.code>=1 and op.code<=3) or op.code==8) and op.targets==[2,4]: coordinated_seconds += op.slices*10.0
+	state.milestones.daily_execution["simultaneous_seconds"]=net.session_seconds*coordinated_seconds/maxf(1,net.seconds)
 	state.milestones.daily_execution["control_error"]=net.control_error
 	state.milestones.daily_execution["seconds"]=net.session_seconds
 	state.milestones.daily_execution["hourly_core"]=0.0
@@ -978,7 +983,8 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 			var code := op.code
 			var gate := 1-clampf(op.error+strain_gate,0,.60)
 			var independent := optimize_independent_flows and independent_flows[instruction_index]!=0
-			var coordinated := measure and code>=1 and code<=3 and targets.size()>1 and targets==[2,4]
+			# The drill drives its split pair with guided circulation (code 8), so it counts too.
+			var coordinated := measure and ((code>=1 and code<=3) or code==8) and targets==[2,4]
 			for slice in op.slices:
 				if code==0:
 					var p := amount[0]/1000.0/volumes[0]
@@ -1164,6 +1170,8 @@ func periodic(net: Network, program: Dictionary, sample: Dictionary, backpressur
 						qp[j] = pure[a]*q/maxi(1,amount[a])
 						qs[j] = stable[a]*q/maxi(1,amount[a])
 						qc[j] = corrupt[a]*q/maxi(1,amount[a])
+					if coordinated:
+						result[7+2*edge_count] += mini(moved[0],moved[1])
 					for j in targets.size():
 						if moved[j]==0: continue
 						var e: int = targets[j]

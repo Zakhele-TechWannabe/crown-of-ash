@@ -79,10 +79,13 @@ static func observe(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, 
 		mixed=components>=2
 	if valid and hours>=2 and mixed:
 		r.mixed_processed=int(r.get("mixed_processed",0))+int(daily.get("qualified_mixed",0))
-	var simultaneous: float=int(daily.get("simultaneous",0))/maxf(1,hours*1000)
+	# QU/hour while both branches run, not averaged over the whole session.
+	# Days without the split drill keep the last drilled rate.
+	var drilled: bool=float(daily.get("simultaneous_seconds",0))>0
+	var simultaneous: float=int(daily.get("simultaneous",0))/maxf(1,float(daily.get("simultaneous_seconds",0))/3.6) if drilled else float(r.get("branch_rate",0))
 	r.branch_rate=simultaneous
 	r.control_error=float(daily.get("control_error",1))
-	if valid and hours>=2 and simultaneous>=25 and r.control_error<=CONTROL_ERROR: r.coordination_days=int(r.get("coordination_days",0))+1
+	if drilled and valid and hours>=2 and simultaneous>=25 and r.control_error<=CONTROL_ERROR: r.coordination_days=int(r.get("coordination_days",0))+1
 	var release: Dictionary=r.get("release_today",EMPTY)
 	if valid and release.get("day",-1)==day and release.get("success",false): r.release_tests=int(r.get("release_tests",0))+1
 	r.last_reserve=state.reserve

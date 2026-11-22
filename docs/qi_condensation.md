@@ -1680,3 +1680,13 @@ the daily integration draw above the floor keeps their vessel short of 97.5%.
 - Thirty-year Perfect fixture: layers 1–4 on days 213, 246, 273, 307; both vessels reach the 1,139-QU layer-4
   ceiling. **Layer-5 wall:** the best hourly core output is about 39 QU/hour and channel adaptation (about ×2)
   does not raise it; the drive, not channel width, is the limit. Proposed to the owner: 35 QU/hour.
+
+## Layer 7 unblocked (2026-11-22)
+
+- The weekly split drill's lumbar lane never moved: lumbar sits at about 1.05 pressure, just below a filling
+  dantian's back-pressure (about 1.06), so a passive Guide had no gradient and the simultaneous minimum was always 0.
+  The drill now drives the pair `[2,4]` with guided Circulate (the dantian head pumps both lanes; uphill strain applies).
+- The branch rate is QU/hour while both lanes run (`simultaneous_seconds`), not averaged over the four-hour session;
+  days without the drill keep the last drilled rate. Standard unchanged: ≥25 QU/hour, error ≤0.15.
+- Perfect fixture, 30 years: layers 1–8 on days 213, 246, 273, 307, 818, 825, 832, 902. Drilled branch rates about
+  110 and 64 QU/hour. Both stop at layer 9 ("integrated practice, earlier functions intact").
