@@ -1,0 +1,79 @@
+site_name: Crown of Ash Wiki
+site_url: https://zakhele-techwannabe.github.io/crown-of-ash/
+repo_url: https://github.com/Zakhele-TechWannabe/crown-of-ash
+docs_dir: wiki
+theme:
+  name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+nav:
+  - Home: index.md
+  - World:
+      - "The valley and map": world/valley.md
+      - "Places and sites": world/places.md
+      - "Qi field and spirit veins": world/qi.md
+      - "Time, seasons and saves": world/time.md
+  - People:
+      - "Villagers, families and the heart": people/society.md
+      - "Childhood": people/childhood.md
+      - "Skills and learning": people/skills.md
+      - "Law and crime": people/law.md
+      - "The Fifty and Palace disciples": people/fifty.md
+      - "Death and lifespan": people/death.md
+  - Cultivation:
+      - "Cultivation and realms": cultivation/overview.md
+      - "Body Tempering": cultivation/body-tempering.md
+      - "Qi Condensation: layers 1\u20139": cultivation/qi-condensation.md
+      - "The dantian and vessel": cultivation/vessel.md
+      - "Meridians and circulation": cultivation/meridians.md
+      - "Programme choice and danger sense": cultivation/programmes.md
+      - "Foundation quality and vessel tiers": cultivation/foundation-tiers.md
+      - "Walls and distinctions": cultivation/walls.md
+      - "Foundation Establishment": cultivation/foundation-establishment.md
+  - Combat:
+      - "How fights resolve": combat/resolution.md
+      - "Qi in combat by layer": combat/qi.md
+      - "Beasts and hunting": combat/hunting.md
+      - "Stone guardians": combat/guardians.md
+      - "Planned combat and qi phenomena": combat/planned.md
+  - Wildlife:
+      - "The living ecosystem": wildlife/ecosystem.md
+      - "Species catalogue": wildlife/species.md
+      - "Beast cultivation": wildlife/cultivation.md
+  - Materials:
+      - "Goods and materials": materials/goods.md
+      - "Medicine and alchemy": materials/medicine.md
+  - The Dao:
+      - "Playing the Heavenly Dao": the-dao/role.md
+      - "Qi decrees": the-dao/decrees.md
+      - "The Dao's Eye": the-dao/eye.md
+  - Reference:
+      - "Glossary": reference/glossary.md
+      - "Units and scales": reference/units.md
+      - "Wiki and mechanics changes": reference/changelog.md
+      - "Maintaining this wiki": reference/maintaining.md
