@@ -15,7 +15,8 @@ const VESSEL_TIERS = [[1.5,"heavenly-gifted"],[1.333,"genius"],[0.0,"ordinary"]]
 # numbers (90 QU/hour, error 0.08, 70% release) remain distinctions to record.
 const OUTPUT_RATE := 35.0
 const CONTROL_ERROR := .15
-const CORE_RATE := 75.0 # strict 150 QU/hour is the legendary distinction
+const INTACT_DAYS := 7
+const CORE_RATE := 35.0 # owner 2026-11-22; 75 QU/hour is the distinction, 150 legendary
 const NAMES = ["first","second","third","fourth","fifth","sixth","seventh","eighth","ninth"]
 
 static func phase(s: RefCounted, p: int, r: Dictionary) -> int:
@@ -112,7 +113,14 @@ static func observe(s: RefCounted, p: int, state: Anatomy.Cultivator, day: int, 
 	# The dated 1.5-pressure proof remains an ability while storage and routes
 	# remain sound; a larger reservoir need not be filled to its rim each day.
 	var controlled_draw: bool=int(daily.get("draw",0))>0 and int(daily.get("fill",0))>=int(daily.get("draw",0)) and float(daily.get("instability",1))<=.10
-	var intact: bool=valid and hours>=2 and purity>=.90 and float(state.residue)/state.capacity<=.10 and state.opening_work>=500000 and state.settling_days>=30 and int(r.get("return_days",0))>=30 and int(r.get("cycles",0))>=10 and controlled_draw and hourly_rate>=OUTPUT_RATE and int(daily.get("qualified_mixed",0))>0 and terminals.size()==4 and int(r.get("output_days",0))>=30 and int(r.get("mixed_processed",0))>=1000000 and int(r.get("coordination_days",0))>=30 and int(r.get("release_tests",0))>=10 and release.get("success",false) and simultaneous>=25 and r.control_error<=CONTROL_ERROR and usable(state,[9,10,12,13,15,16,18,19])
+	# Release is tested weekly and mixed qi depends on the day's ground, so each
+	# function counts as intact when it was last shown within a week.
+	if valid and controlled_draw: r.shown_draw=day
+	if valid and hourly_rate>=OUTPUT_RATE: r.shown_output=day
+	if valid and int(daily.get("qualified_mixed",0))>0: r.shown_mixed=day
+	if valid and release.get("day",-1)==day and release.get("success",false): r.shown_release=day
+	var week := func(key: String) -> bool: return day-int(r.get(key,-INTACT_DAYS-1))<INTACT_DAYS
+	var intact: bool=valid and hours>=2 and purity>=.90 and float(state.residue)/state.capacity<=.10 and state.opening_work>=500000 and state.settling_days>=30 and int(r.get("return_days",0))>=30 and int(r.get("cycles",0))>=10 and week.call("shown_draw") and week.call("shown_output") and week.call("shown_mixed") and terminals.size()==4 and int(r.get("output_days",0))>=30 and int(r.get("mixed_processed",0))>=1000000 and int(r.get("coordination_days",0))>=30 and int(r.get("release_tests",0))>=10 and week.call("shown_release") and simultaneous>=25 and r.control_error<=CONTROL_ERROR and usable(state,[9,10,12,13,15,16,18,19])
 
 	if intact and throughput>=CORE_RATE and state.capacity>=1000000: r.integrated_days=int(r.get("integrated_days",0))+1
 	var ready := false
@@ -200,7 +208,7 @@ static func lines(layer: int, r: Dictionary, report: Dictionary) -> Array[String
 		7: result.append(measured("simultaneous branches ≥25 QU/hour; error ≤0.15",int(r.get("coordination_days",0)),30," days"))
 		8: result.append(measured("controlled 0.10 QU release at one tile, ≥30%, no overpressure",int(r.get("release_tests",0)),10," tests"))
 		9:
-			result.append(measured("integrated practice, earlier functions intact",int(r.get("integrated_days",0)),90," days"))
+			result.append(measured("integrated practice at 35 QU/hour, earlier functions shown this week",int(r.get("integrated_days",0)),90," days"))
 			result.append(measured("capacity",report.capacity/1000.0,1000," QU"))
 			result.append(measured("core circuit",float(r.get("core_rate",0)),75," QU/hour"))
 	result.append("[met] no injury through the span: clean" if r.get("clean",false) else "[missing] no injury through the span")

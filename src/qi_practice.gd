@@ -290,9 +290,10 @@ func advance(s: RefCounted, until: int) -> void:
 		field._close_ledger()
 
 ## Owner decisions 2026-11-21. The dantian may grow only up to its realm ceiling, and before a full-vessel
-## layer (3 and 9) the cultivator chooses to stop enlarging until the vessel is full. Not before layer 5:
-## a full dantian pushes back on the returning circuit, so sustained output is best at a moderate fill.
-const FULL_VESSEL_LAYERS := [3, 9]
+## step (layer 3, and Foundation after layer 9, whose tier reads the held fill) the cultivator chooses to stop
+## enlarging until the vessel is full. Not before layers 5 or 9: a full dantian pushes back on the returning
+## circuit, so sustained output is best at a moderate fill.
+const FULL_VESSEL_LAYERS := [3, 10]
 static func vessel_ceiling(layer: int, safe_pressure: float, realm: int = 1) -> int:
 	var law: Dictionary=Anatomy.definition()
 	var rule: Dictionary=law.vessel_ceiling

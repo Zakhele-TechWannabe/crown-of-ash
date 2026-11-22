@@ -1690,3 +1690,15 @@ the daily integration draw above the floor keeps their vessel short of 97.5%.
   days without the drill keep the last drilled rate. Standard unchanged: ≥25 QU/hour, error ≤0.15.
 - Perfect fixture, 30 years: layers 1–8 on days 213, 246, 273, 307, 818, 825, 832, 902. Drilled branch rates about
   110 and 64 QU/hour. Both stop at layer 9 ("integrated practice, earlier functions intact").
+
+## Layer 9 unblocked (2026-11-22)
+
+- The second vessel fill moved from layer 9 to Foundation (`FULL_VESSEL_LAYERS = [3, 10]`): nothing at layer 9 reads the
+  held fill, and a full dantian pushes back on the circuit layer 9 needs. Days with a 35 QU/hour hour at layer 8 rose
+  from 15 to 1,082 (of 1,869).
+- Integrated practice no longer needs every function on one day: draw, a 35 QU/hour hour, mixed qi and a successful
+  release each count when last shown within 7 days (`INTACT_DAYS`). Release is only tested weekly.
+- Owner decision: layer 9 core standard 35 QU/hour daily average (`CORE_RATE`); 75 is the distinction, 150 legendary.
+  The best daily core seen is about 40.
+- Perfect fixture, 30 years: one cultivator reaches layer 9 on day 2380 (about 6.5 years); the other stays at layer 8,
+  its core rarely holding 35.
