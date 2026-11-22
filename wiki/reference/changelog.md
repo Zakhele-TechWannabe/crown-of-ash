@@ -1,5 +1,11 @@
 # Wiki and mechanics changes
 
+## 2026-11-22: combat phase 2
+
+- **Weapons:** people fight with the weapon of their best weapon skill, or bare hands. Ten weapons with power, reach, tempo and parry; hunters take a spear.
+- **Reach:** long weapons hold short ones off; the shorter side must step inside, and the longer side steps back out.
+- **Parries, ripostes, feints and shields** for skilled fighters. Details on [fight resolution](../combat/resolution.md).
+
 ## 2026-11-22
 
 Initial player wiki created from the current design notes, configuration and certification code.

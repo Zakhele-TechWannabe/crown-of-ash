@@ -105,4 +105,42 @@ Measured (1,000 seeded fights, BT9 bodies): layer-1 novice vs Perfect mortal 10%
 layer 5 vs Perfect mortal 42%; layer 8 vs tiger 100% (about 84 QU of shells a fight) where an ordinary mortal wins 33%.
 A real Perfect body's palm route carries about 0.021 QU/s, so a reinforced blow adds about 12 to a power of 53–69.
 
-Not yet: channel strain from combat, elemental arts and qi phenomena, weapons and reach (phase 2), formations.
+Not yet: channel strain from combat, elemental arts and qi phenomena, formations.
+
+## Phase 2: weapons, reach, tempo, parries and feints (2026-11-22)
+
+Built in `src/combat.gd` with tables in `data/society/combat.json` → `weapons` and `tactics`, tested by `tools/test_weapons.gd`.
+
+- **Weapon:** a person fights with the weapon of their best weapon skill, else bare hands (`Combat.weapon_for`). There is no
+  equipment yet; owning and forging weapons comes with smithing. Hunters always take a spear (replaces the old flat
+  `hunter_weapon` 1.3). Beasts and the stone swordsmen use natural weapons: no power multiplier, their row's reach
+  (default 1 m) and parry.
+- **Weapon table:** power multiplier, reach in metres, tempo (multiplies the time between blows) and parry.
+
+| Weapon | Power | Reach | Tempo | Parry |
+|---|---|---|---|---|
+| Bare hands | 1.0 | 0.7 | 0.85 | 0.5 |
+| Staff | 1.15 | 2.0 | 1.0 | 1.2 |
+| Spear | 1.3 | 2.4 | 1.1 | 0.8 |
+| Dao (blade) | 1.35 | 1.0 | 0.95 | 1.0 |
+| Jian (straight sword) | 1.3 | 1.1 | 0.9 | 1.2 |
+| Axe | 1.45 | 0.9 | 1.2 | 0.6 |
+| Hammer | 1.55 | 0.9 | 1.3 | 0.5 |
+| Polearm | 1.45 | 2.6 | 1.25 | 0.8 |
+| Twin weapons | 1.2 | 0.9 | 0.75 | 1.0 |
+| Chain weapons | 1.2 | 2.0 | 1.1 | 0.4 |
+
+- **Reach:** when reaches differ by 0.5 m or more the fight opens at the longer weapon's distance, where it strikes with
+  +10% power per metre of advantage. The shorter side spends its turns stepping inside (35% base, ±30% per unit of speed
+  ratio, +1% per footwork level, 15–85%); "held off" wastes the turn. Inside, weapons of 2 m or more are crowded (×0.8),
+  and the longer side tries to step back out on its turn with the same odds; a stagger it lands also pushes the other back out.
+- **Parry and riposte:** a miss against a defender with weapon skill can be parried: chance = 0.5 × weapon parry ×
+  skill / (skill + 10). The parrier strikes again within 0.4 s at ×1.15 ("riposte").
+- **Feint:** an attacker with weapon skill 5+ facing a guard at least 80% of their power feints with chance
+  skill / (skill + 20): the guard is ×0.75 for that blow, which costs 0.3 s and cannot be parried.
+- **Shield:** a shield skill with a one-handed weapon or bare hands multiplies guard by 1.25.
+- A sword pulse needs the fighter to actually be fighting with a dao or jian.
+
+Measured (1,000 seeded fights, BT9 bodies unless noted): spear vs bare hands 88% / 12%; twin weapons strike 1.7× as
+often as a hammer and win 67%; skill-25 jian vs unskilled jian 55% with about 1.9 parries a fight; shield and dao vs
+dao 72%; an untempered villager does 3.5 harm to a tiger with a spear against 1.8 bare-handed.

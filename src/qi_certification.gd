@@ -210,7 +210,7 @@ static func lines(layer: int, r: Dictionary, report: Dictionary) -> Array[String
 		9:
 			result.append(measured("integrated practice at 35 QU/hour, earlier functions shown this week",int(r.get("integrated_days",0)),90," days"))
 			result.append(measured("capacity",report.capacity/1000.0,1000," QU"))
-			result.append(measured("core circuit",float(r.get("core_rate",0)),75," QU/hour"))
+			result.append(measured("core circuit",float(r.get("core_rate",0)),CORE_RATE," QU/hour"))
 	result.append("[met] no injury through the span: clean" if r.get("clean",false) else "[missing] no injury through the span")
 	return result
 

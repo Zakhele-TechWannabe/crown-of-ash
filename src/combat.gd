@@ -59,8 +59,38 @@ static func person(society: RefCounted, p: int) -> Dictionary:
 		power *= float(rules.injured_power)
 		guard *= float(rules.injured_guard)
 	var will: int = int(rules.will) if store.attributes[p * 8 + 6] >= 8.0 else int(rules.fearful_will)
+	var weapon := weapon_for(store, p)
+	var qi := qi_profile(society, p)
+	if not qi.is_empty(): qi.blade = weapon.id in ["blade", "straight_sword"]
 	return {"name": store.names[p], "person": p, "power": power, "guard": guard, "speed": speed, "breath": breath,
-		"will": will, "motive": "own", "lethal": false, "verb": "strikes", "qi": qi_profile(society, p)}
+		"will": will, "motive": "own", "lethal": false, "verb": weapon.verb, "weapon": weapon,
+		"footwork": skill_level(store, p, "unarmed_arts.footwork"), "qi": qi}
+
+
+## The weapon of a person's best weapon skill (bare hands if none), with their level in it and whether they
+## carry a shield in the free hand.
+static func weapon_for(store: RefCounted, p: int, id: String = "") -> Dictionary:
+	var table: Dictionary = config.weapons
+	var tactics: Dictionary = config.tactics
+	if id == "":
+		id = "unarmed"
+		var best := 0
+		for key: String in table:
+			if key.begins_with("_") or key == "unarmed": continue
+			var level := skill_level(store, p, str(table[key].skill))
+			if level > best:
+				best = level
+				id = key
+	var row: Dictionary = table[id]
+	var shield: bool = id in tactics.shield_hands and skill_level(store, p, str(tactics.shield_skill)) > 0
+	return {"id": id, "power": float(row.power), "reach": float(row.reach), "tempo": float(row.tempo),
+		"parry": float(row.parry), "skill": skill_level(store, p, str(row.skill)), "verb": str(row.verb), "shield": shield}
+
+
+## Claws, horns and stone blades: no weapon multiplier, the row's own reach and parry.
+static func natural_weapon(row: Dictionary) -> Dictionary:
+	return {"id": "", "power": 1.0, "reach": float(row.get("reach", config.tactics.beast_reach)), "tempo": 1.0,
+		"parry": float(row.get("parry", 0.0)), "skill": int(row.get("skill", 0)), "verb": str(row.get("verb", "strikes")), "shield": false}
 
 
 ## What a cultivator can pay for in a fight: certified layer, reserve, purity, control and the channel widths
@@ -125,7 +155,7 @@ static func beast(kind: String) -> Dictionary:
 	var row: Dictionary = config.beasts[kind]
 	return {"name": "a " + kind, "person": -1, "beast": kind, "power": float(row.power), "guard": float(row.guard),
 		"speed": float(row.speed), "breath": float(row.breath), "will": int(row.will), "motive": "own",
-		"lethal": bool(row.lethal), "verb": str(row.verb)}
+		"lethal": bool(row.lethal), "verb": str(row.verb), "weapon": natural_weapon(row)}
 
 
 ## Best level across the fighting and hunting skills.
@@ -164,7 +194,8 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		f.append({"s": side, "h": 0.0, "next": 0.0, "last": -1.0, "lungs": float(side.breath) * float(config.breath_seconds),
 			"winded": false, "retry": 0.0, "allin": false, "will": will_for(int(side.will), str(side.motive)),
 			"q": side.get("qi", {}), "reserve": float(side.get("qi", {}).get("reserve", 0.0)), "spent": 0.0, "shell": 0.0,
-			"paid_to": 0.0, "upkeep": float(side.get("qi", {}).get("reserve", 0.0)) > 0.0, "second": false, "burst": false, "recast": false})
+			"paid_to": 0.0, "upkeep": float(side.get("qi", {}).get("reserve", 0.0)) > 0.0, "second": false, "burst": false, "recast": false,
+			"w": side.get("weapon", natural_weapon({})), "riposte": false})
 	for i in 2: f[i].h = clampf(float(starting[i]), 0.0, 100.0)
 	var stop_at: int = clampi(int(opt.get("stop_at", 2 if opt.get("spar", false) else 0)), 0, 3)
 	var spar: bool = stop_at > 0
@@ -173,6 +204,11 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 	var result := {}
 	var seconds := float(config.strike_seconds)
 	var qr: Dictionary = config.qi
+	var tr: Dictionary = config.tactics
+	# Reach: a long weapon holds a shorter one off until it steps inside; a heavy blow pushes it back out.
+	var reach_gap: float = float(f[0].w.reach) - float(f[1].w.reach)
+	var reach := {"far": absf(reach_gap) >= float(tr.reach_gap)}
+	var longer := 0 if reach_gap > 0.0 else 1
 
 	# Qi is paid from a fight-local reserve; Combat.settle_qi debits the real one afterwards.
 	var layer := func(i: int) -> int: return int(f[i].q.get("layer", 0))
@@ -209,12 +245,14 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 	var out := func(i: int, t: float) -> bool: return t >= f[i].lungs
 	var people := func(i: int) -> bool: return int(f[i].s.person) >= 0
 	var power := func(i: int, t: float) -> float:
-		var p: float = float(f[i].s.power) * (0.6 if out.call(i, t) else 1.0)
+		var p: float = float(f[i].s.power) * float(f[i].w.power) * (0.6 if out.call(i, t) else 1.0)
+		if reach.far and i == longer: p *= 1.0 + float(tr.reach_power_per_metre) * absf(reach_gap)
+		elif not reach.far and float(f[i].w.reach) >= float(tr.crowded_reach): p *= float(tr.crowded_power)
 		if f[i].s.motive == "young": p *= 1.1
 		if f[i].allin: p *= 1.35
 		return p
 	var guard := func(i: int) -> float:
-		var g: float = float(f[i].s.guard) * (0.7 if f[i].allin else 1.0)
+		var g: float = float(f[i].s.guard) * (0.7 if f[i].allin else 1.0) * (float(tr.shield_guard) if f[i].w.shield else 1.0)
 		if layer.call(i) >= 5 and f[i].upkeep:
 			g += minf(float(qr.armour_score), float(f[i].s.guard) * float(f[i].q.tolerance) * float(qr.armour_share))
 		return g * (1.15 if forest else 1.0)
@@ -222,7 +260,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		return float(f[i].s.speed) * (0.7 if out.call(i, t) else 1.0) * (float(qr.step_speed) if stepping.call(i) else 1.0)
 	# Undergrowth slows people running, not striking.
 	var running := func(i: int, t: float) -> float: return speed.call(i, t) * (0.75 if forest and people.call(i) else 1.0)
-	var gap := func(i: int, t: float) -> float: return seconds / speed.call(i, t) * rng.randf_range(0.85, 1.15)
+	var gap := func(i: int, t: float) -> float: return seconds * float(f[i].w.tempo) / speed.call(i, t) * rng.randf_range(0.85, 1.15)
 	var finish := func(t: float, how: String, winner: int, loser: int) -> void:
 		result.merge({"how": how, "winner": winner, "loser": loser, "time": t}, true)
 		events.append({"t": "end", "time": t, "how": how, "winner": winner, "loser": loser, "harm": [f[0].h, f[1].h]})
@@ -230,6 +268,10 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 	var strike := func(i: int, t: float, mult: float, why: String) -> void:
 		var you: Dictionary = f[1 - i]
 		for k in 2: upkeep.call(k, t)
+		if f[i].riposte:
+			f[i].riposte = false
+			mult *= float(tr.riposte_power)
+			if why == "": why = "riposte"
 		# Second wind (layer 2): qi buys back the breath once.
 		if out.call(i, t) and layer.call(i) >= 2 and not f[i].second and pay.call(i, float(qr.second_wind_qu)) >= float(qr.second_wind_qu):
 			f[i].second = true
@@ -249,6 +291,13 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		p += qi_hit
 		var g: float = guard.call(1 - i)
 		if guarding.call(1 - i): g += reinforce.call(1 - i, g, float(qr.hand_buffer_qu))
+		# A skilled fighter facing a guard near their own strength draws it out first.
+		var feint := false
+		var skill_i := int(f[i].w.skill)
+		if why == "" and people.call(i) and skill_i >= int(tr.feint_min_skill) and g >= p * float(tr.feint_guard_ratio) and rng.randf() < skill_i / (skill_i + float(tr.feint_skill)):
+			feint = true
+			why = "after a feint"
+			g *= float(tr.feint_guard)
 		var chance := p / (p + g)
 		var hit := rng.randf() < chance
 		var dmg := 0.0
@@ -271,6 +320,13 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 			if dmg >= float(config.stagger_harm):
 				stagger = true
 				you.next = maxf(you.next, t) + 0.6
+				if i == longer and absf(reach_gap) >= float(tr.reach_gap): reach.far = true
+		var parried := false
+		var skill_j := int(you.w.skill)
+		if not hit and not feint and skill_j > 0 and float(you.w.parry) > 0.0 and rng.randf() < float(tr.parry_share) * float(you.w.parry) * skill_j / (skill_j + float(tr.parry_skill)):
+			parried = true
+			you.riposte = true
+			you.next = minf(you.next, t + float(tr.riposte_seconds))
 		var allin := false
 		if you.s.motive == "revenge" and you.h >= HARM_AT[3] and not you.allin:
 			you.allin = true
@@ -281,9 +337,9 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 			winded = true
 		var trade: bool = you.last >= 0.0 and absf(t - you.last) < 0.3
 		f[i].last = t
-		f[i].next = t + gap.call(i, t)
+		f[i].next = t + gap.call(i, t) + (float(tr.feint_seconds) if feint else 0.0)
 		events.append({"t": "strike", "time": t, "i": i, "hit": hit, "dmg": dmg, "chance": chance, "why": why, "qi": qi_hit,
-			"stagger": stagger, "trade": trade, "winded": winded, "allin": allin, "harm": [f[0].h, f[1].h]})
+			"stagger": stagger, "trade": trade, "winded": winded, "allin": allin, "parried": parried, "harm": [f[0].h, f[1].h]})
 
 	var over := func(i: int, t: float) -> bool:
 		if spar and f[1 - i].h >= HARM_AT[stop_at]:
@@ -304,6 +360,7 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		for i in 2: raise_shell.call(i, 0.0)
 	var ambush: int = opt.get("ambush", -1)
 	if ambush >= 0:
+		reach.far = false
 		var hidden := float(opt.get("ambush_power", 1.5))
 		# Qi sense (layer 1) feels the hidden presence before the blow lands.
 		if layer.call(1 - ambush) >= 1: hidden = 1.0 + (hidden - 1.0) * float(qr.sense_ambush)
@@ -325,6 +382,24 @@ static func fight(a: Dictionary, b: Dictionary, opt: Dictionary, rng: RandomNumb
 		if t > float(config.time_limit):
 			finish.call(float(config.time_limit), "apart", -1, -1)
 			break
+		# The shorter weapon must step inside the longer one's reach before it can land; once inside, the
+		# longer one tries to step back out to its own distance. Speed and footwork decide both.
+		var step_chance := func(k: int) -> float:
+			var ratio: float = speed.call(k, t) / maxf(0.01, speed.call(1 - k, t))
+			return clampf(float(tr.close_base) + float(tr.close_per_speed) * (ratio - 1.0) + float(f[k].s.get("footwork", 0)) / float(tr.close_footwork), float(tr.close_min), float(tr.close_max))
+		if reach.far and i != longer:
+			var close: float = step_chance.call(i)
+			var inside := rng.randf() < close
+			events.append({"t": "close" if inside else "held off", "time": t, "i": i, "chance": close, "harm": [f[0].h, f[1].h]})
+			if not inside:
+				f[i].next = t + gap.call(i, t)
+				continue
+			reach.far = false
+		elif not reach.far and i == longer and absf(reach_gap) >= float(tr.reach_gap):
+			var back: float = step_chance.call(i)
+			if rng.randf() < back:
+				reach.far = true
+				events.append({"t": "steps back", "time": t, "i": i, "chance": back, "harm": [f[0].h, f[1].h]})
 		strike.call(i, t, 1.0, "")
 		if over.call(i, t): break
 		if spar: continue
@@ -393,8 +468,8 @@ static func between(society: RefCounted, a: int, b: int, kind: String) -> Dictio
 static func hunt(society: RefCounted, p: int, kind: String, persistent_profile: Dictionary = {}, harm: float = 0.0, awakened: bool = false) -> Dictionary:
 	var store: RefCounted = society.population
 	var hunter := person(society, p)
-	hunter.power *= float(config.person.hunter_weapon)
-	hunter.verb = "thrusts the spear"
+	hunter.weapon = weapon_for(store, p, "spear")
+	hunter.verb = str(hunter.weapon.verb)
 	hunter.motive = "fear" if kind == "black bear" else ("hunger" if store.hunger[p] > 0 else "own")
 	hunter.lethal = true
 	# A hunter backs off once hurt; nobody is paid to die for marrow.

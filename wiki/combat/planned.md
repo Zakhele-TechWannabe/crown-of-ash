@@ -16,5 +16,4 @@ A local qi phenomenon does not give a cultivator control over valley weather. Fo
 
 This page will track these features as implementation evidence becomes available. Current abilities are on [qi in combat](qi.md); next-realm progression is on [Foundation Establishment](../cultivation/foundation-establishment.md).
 
-!!! note "Unverified"
-    The design's “phase 2 not yet built” list is stale for weapon reach, tempo, parries, ripostes, feints and shields. Those are present in the current code; see [fight resolution](resolution.md). This does not establish the full proposed martial-programme engine.
+Weapons, reach, tempo, parries, ripostes, feints and shields are built; see [fight resolution](resolution.md). Owning and forging weapons waits for smithing.

@@ -47,8 +47,7 @@
     "child_age": 16,
     "child_factor": 0.6,
     "injured_power": 0.7,
-    "injured_guard": 0.8,
-    "hunter_weapon": 1.3
+    "injured_guard": 0.8
   },
   "beasts": {
     "stone swordsman": {
@@ -59,7 +58,10 @@
       "will": 9,
       "lethal": true,
       "weight": 0.0,
-      "verb": "cuts with its jian"
+      "verb": "cuts with its jian",
+      "reach": 1.1,
+      "parry": 1.2,
+      "skill": 20
     },
     "sika deer": {
       "power": 6,
@@ -336,5 +338,119 @@
     "sense_ambush": 0.5,
     "pulse_escape": 0.6,
     "pulse_qu_per_second": 0.05
+  },
+  "weapons": {
+    "_law": "Phase 2 (docs/combat.md): a person fights with the weapon of their best weapon skill, else bare-handed. power multiplies strike power; reach in metres; tempo multiplies the time between blows; parry scales the chance to turn a miss into a parry.",
+    "unarmed": {
+      "skill": "unarmed_arts.fist_and_palm",
+      "power": 1.0,
+      "reach": 0.7,
+      "tempo": 0.85,
+      "parry": 0.5,
+      "verb": "strikes"
+    },
+    "staff": {
+      "skill": "weapons.staff",
+      "power": 1.15,
+      "reach": 2.0,
+      "tempo": 1.0,
+      "parry": 1.2,
+      "verb": "swings the staff"
+    },
+    "spear": {
+      "skill": "weapons.spear",
+      "power": 1.3,
+      "reach": 2.4,
+      "tempo": 1.1,
+      "parry": 0.8,
+      "verb": "thrusts the spear"
+    },
+    "blade": {
+      "skill": "weapons.blade",
+      "power": 1.35,
+      "reach": 1.0,
+      "tempo": 0.95,
+      "parry": 1.0,
+      "verb": "cuts with the dao"
+    },
+    "straight_sword": {
+      "skill": "weapons.straight_sword",
+      "power": 1.3,
+      "reach": 1.1,
+      "tempo": 0.9,
+      "parry": 1.2,
+      "verb": "cuts with the jian"
+    },
+    "axe": {
+      "skill": "weapons.axe",
+      "power": 1.45,
+      "reach": 0.9,
+      "tempo": 1.2,
+      "parry": 0.6,
+      "verb": "hacks with the axe"
+    },
+    "hammer": {
+      "skill": "weapons.hammer",
+      "power": 1.55,
+      "reach": 0.9,
+      "tempo": 1.3,
+      "parry": 0.5,
+      "verb": "swings the hammer"
+    },
+    "polearm": {
+      "skill": "weapons.polearm",
+      "power": 1.45,
+      "reach": 2.6,
+      "tempo": 1.25,
+      "parry": 0.8,
+      "verb": "sweeps the glaive"
+    },
+    "twin_weapons": {
+      "skill": "weapons.twin_weapons",
+      "power": 1.2,
+      "reach": 0.9,
+      "tempo": 0.75,
+      "parry": 1.0,
+      "verb": "cuts with both blades"
+    },
+    "chain_weapons": {
+      "skill": "weapons.chain_weapons",
+      "power": 1.2,
+      "reach": 2.0,
+      "tempo": 1.1,
+      "parry": 0.4,
+      "verb": "lashes the chain"
+    }
+  },
+  "tactics": {
+    "_law": "Reach, parries and feints (docs/combat.md, phase 2).",
+    "beast_reach": 1.0,
+    "reach_gap": 0.5,
+    "reach_power_per_metre": 0.1,
+    "close_base": 0.35,
+    "close_per_speed": 0.3,
+    "close_footwork": 60.0,
+    "close_min": 0.15,
+    "close_max": 0.85,
+    "crowded_reach": 2.0,
+    "crowded_power": 0.8,
+    "parry_share": 0.5,
+    "parry_skill": 10.0,
+    "riposte_power": 1.15,
+    "riposte_seconds": 0.4,
+    "feint_min_skill": 5,
+    "feint_skill": 20.0,
+    "feint_guard_ratio": 0.8,
+    "feint_guard": 0.75,
+    "feint_seconds": 0.3,
+    "shield_skill": "weapons.shield",
+    "shield_guard": 1.25,
+    "shield_hands": [
+      "unarmed",
+      "blade",
+      "straight_sword",
+      "axe",
+      "hammer"
+    ]
   }
 }

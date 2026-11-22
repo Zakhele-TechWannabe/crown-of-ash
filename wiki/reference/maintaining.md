@@ -68,7 +68,7 @@ Paths below are repository-relative source references, not website links. Wildca
 | Materials | Select goods whose `category_path` contains `materials`; copy name, final category, grade, unit and source |
 | Qi geography | Vein rows from `data/qi/veins.json` → `grades`; density ranges from `data/qi/field.json` |
 | Beast progression | Minimum years and completed-layer lifespan multipliers from `data/wild/beasts.json`; do not confuse chronological age with biological age |
-| Combat status | Current working-tree code also implements weapon/reach phase 2, ahead of the final status in `docs/combat.md`; armour is a guard-score bonus and sword pulse modifies escape chance. No layer-6 ambient admission is present |
+| Combat status | Weapons and reach (phase 2) are in `docs/combat.md` → "Phase 2" and `data/society/combat.json` → `weapons`, `tactics`; armour is a guard-score bonus and sword pulse modifies escape chance. No layer-6 ambient admission is present |
 | Eye and decrees | Simulation decree support exists; phase-1 Eye mutation workflows remain unavailable |
 
 ## Build and validation

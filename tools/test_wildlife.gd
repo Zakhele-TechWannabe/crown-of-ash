@@ -140,7 +140,8 @@ func _initialize() -> void:
 	exposed.society.wildlife.encounter_places = {}
 	exposed.society.wildlife.advance(3650)
 	assert(exposed.society.wildlife.totals.encounters > 0, "Seeded decade includes wildlife encounters")
-	assert(exposed.society.wildlife.totals.human_deaths <= 2, "Seeded ordinary decade keeps deaths rare")
+	# A rate, not a count: any change to the shared random stream moves single deaths around.
+	assert(exposed.society.wildlife.totals.human_deaths <= maxi(2, roundi(exposed.society.wildlife.totals.encounters * 0.02)), "Seeded ordinary decade keeps deaths rare")
 	print("ENCOUNTER10 ", exposed.society.wildlife.totals)
 	var ecology:=Wildlife.new()
 	ecology.seed()

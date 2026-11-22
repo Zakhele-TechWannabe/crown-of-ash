@@ -40,7 +40,7 @@ A full shell absorbs about **20 harm points** before leakage. It is held before 
 The 21 November notes report 1,000 seeded fights per comparison: a layer-1 novice won **10%** against a Perfect mortal; layer 5 won **92%** against an equal mortal and **42%** against a Perfect mortal. These are fixture outcomes, not general win probabilities.
 
 !!! note "Unverified"
-    The design calls for combat channel strain, but the implementation-status section explicitly lists it as not yet built. Paid qi settlement and the listed phase-1 abilities are implemented; elemental arts, local qi phenomena and full martial programmes remain [planned](planned.md). Current code already contains weapon/reach rules.
+    The design calls for combat channel strain, but the implementation-status section explicitly lists it as not yet built. Paid qi settlement and the listed phase-1 abilities are implemented; elemental arts, local qi phenomena and full martial programmes remain [planned](planned.md). Weapons and reach are built; see [fight resolution](resolution.md).
 
 See [fight resolution](resolution.md) and [layer certifications](../cultivation/qi-condensation.md).
 
