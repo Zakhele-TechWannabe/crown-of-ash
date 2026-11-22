@@ -1702,3 +1702,17 @@ the daily integration draw above the floor keeps their vessel short of 97.5%.
   The best daily core seen is about 40.
 - Perfect fixture, 30 years: one cultivator reaches layer 9 on day 2380 (about 6.5 years); the other stays at layer 8,
   its core rarely holding 35.
+
+## Programme choice remembers strain (2026-11-22)
+
+- The cautious cultivator's "long pauses" were a 90-day flip-flop, not danger pauses: each review trialled programmes
+  for one day from the current body, so the light filter (strain builds to ~0.065 over weeks) looked safe after a
+  rested stint on the full filter (output ~2 QU/hour, vessel draining), and unsafe after a stint on itself.
+- Each review now records the peak strain the outgoing programme actually built (`felt_strain`), and rejects a
+  candidate on the worse of its one-day trial and that memory.
+- Habituation: the peak strain of a stint that ended without injury becomes acceptable (`endured_strain`, capped at
+  `HABITUATION_CAP` 0.15).
+- From layer 8 the filter never drops below `INTEGRATED_FILTER` 0.25: layer 9 must show filtering, which the work score
+  alone never values (the optimiser had drifted to filter 0, so no mixed qi qualified).
+- Perfect fixture, 30 years: cautious cultivator layers 1–9 on days 245, 277, 282, 315, 560, 567, 574, 644, 1015;
+  the other 213, 246, 273, 307, 818, 825, 832, 902, 2442.

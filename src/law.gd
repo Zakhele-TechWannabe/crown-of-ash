@@ -223,6 +223,7 @@ func battle(society: RefCounted, g: Dictionary, p: int, kin: bool = false) -> Di
 	stone.name = g.name
 	var r := Combat.fight(stone, person, {"lethal": true, "escape_cover": cover(g.tile, false), "start_harm": [float(g.get("harm", 0.0)), 0.0]}, store.rng)
 	r.merge({"kind": "guardian", "day": store.day, "ids": [-1, p], "names": [g.name, store.names[p]], "motives": ["own", "own"], "defenders": defenders})
+	Combat.spend_qi(society, p, float(r.qi_spent[1]))
 	g.harm = float(r.harm[0])
 	g.fights = int(g.get("fights", 0)) + 1
 	g.last_fight = "Day %d · %s · %s" % [store.day, store.names[p], r.how]

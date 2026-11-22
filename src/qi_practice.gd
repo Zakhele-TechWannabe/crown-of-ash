@@ -77,6 +77,8 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	if opened and not state.retained_program.is_empty() and not state.retained_program.get("opened",false):
 		state.retained_program=program(str(state.retained_program.id),float(state.retained_program.filter),true)
 		s.meridian_store.expected_intake[s.meridian_store.slot[p]]=-1
+	# Remember the strain a programme actually built up: a one-day trial from a rested body underrates it.
+	records[p]["stint_strain"]=maxf(float(records[p].get("stint_strain",0.0)),state.strain)
 	if not state.retained_program.is_empty() and state.day-int(records[p].get("last_policy_day",state.day-90))<90: return
 	if records[p].get("wants_purer_qi",false) and not state.retained_program.is_empty():
 		records[p]["last_policy_day"]=state.day
@@ -88,8 +90,16 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 		records[p]["last_policy_day"]=state.day
 		return
 	records[p]["last_policy_day"]=state.day
+	var felt: Dictionary=records[p].get("felt_strain",{})
+	felt[_program_key(state.retained_program)]=float(records[p].stint_strain)
+	records[p]["felt_strain"]=felt
+	# Strain endured for a whole stint without injury stops frightening them (up to HABITUATION_CAP).
+	if state.injuries==int(records[p].get("stint_injuries",state.injuries)):
+		records[p]["endured_strain"]=minf(HABITUATION_CAP,maxf(float(records[p].get("endured_strain",0.0)),float(records[p].stint_strain)))
+	records[p]["stint_strain"]=0.0
+	records[p]["stint_injuries"]=state.injuries
 	var step := clampf(.02+.12*u[7]+.10*u[4]-.08*u[2],.01,.20)
-	var accepted := clampf(.10+.35*u[6]+.25*u[3]-.30*u[2],.05,.60)
+	var accepted := maxf(clampf(.10+.35*u[6]+.25*u[3]-.30*u[2],.05,.60),float(records[p].get("endured_strain",0.0)))
 	var current: Dictionary = state.retained_program
 	var chosen := current
 	var best := -INF
@@ -98,14 +108,18 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	# Residue cannot purge before today's exposure; storage can grow at most
 	# its funded 0.5% daily ceiling. If even this best case exceeds accepted
 	# strain, every candidate is rejected, so retain the policy without trials.
+	# Layer 9 must show filtering in its integrated practice; scoring alone would filter nothing.
+	var layer: int=s.meridian_store.integers[s.meridian_store.slot[p]*Store.PERSON_INTS+Store.PersonInt.LAYER]
+	var floor_filter: float=INTEGRATED_FILTER if layer>=8 else 0.0
 	if unavoidable_strain(state)<=accepted:
-		candidates=[current,program("A",1,opened),program("B",.25,opened),program(current.id,clampf(current.filter-step,0,1),opened),program(current.id,clampf(current.filter+step,0,1),opened)]
+		candidates=[current,program("A",1,opened),program("B",.25,opened),program(current.id,clampf(current.filter-step,floor_filter,1),opened),program(current.id,clampf(current.filter+step,0,1),opened)]
+		if float(current.filter)<floor_filter: candidates[0]=program(current.id,floor_filter,opened)
 	for candidate: Dictionary in candidates:
 		if evaluated.has(candidate): continue
 		evaluated.append(candidate)
 		var trial := _compiler.production_trial(state)
 		_compiler.solve_day(trial,_compiler.compile(trial,candidate,sample,0,true),budget)
-		if trial.strain>accepted or trial.injuries>state.injuries: continue
+		if maxf(trial.strain,float(felt.get(_program_key(candidate),0.0)))>accepted or trial.injuries>state.injuries: continue
 		var score: float = trial.work-state.work-(trial.residue_added-state.residue_added)*u[2]-trial.strain*1000
 		if score>best:
 			best=score
@@ -115,6 +129,12 @@ func select_program(s: RefCounted, p: int, state: Anatomy.Cultivator, sample: Di
 	state.retained_program=chosen
 	state.choices.append({"day":state.day,"route":chosen.id,"filter":chosen.filter})
 	if state.choices.size()>16: state.choices.pop_front()
+
+const HABITUATION_CAP := .15
+const INTEGRATED_FILTER := .25
+
+static func _program_key(program: Dictionary) -> String:
+	return "%s:%.2f" % [program.get("id",""),float(program.get("filter",0))]
 
 ## Only observations of this body enter the warning; no trial of future days.
 func danger_response(s: RefCounted, p: int, state: Anatomy.Cultivator, position: Vector2) -> Vector2:

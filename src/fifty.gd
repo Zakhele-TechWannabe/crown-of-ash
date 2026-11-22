@@ -117,6 +117,7 @@ func bout(a: int, b: int) -> Dictionary:
 		r.winner = 0 if float(r.harm[0]) <= float(r.harm[1]) else 1
 		r.loser = 1 - int(r.winner)
 	r.merge({"kind": "spar", "day": store.day, "ids": [a, b], "names": [store.names[a], store.names[b]]})
+	Combat.settle_qi(s, [a, b], r)
 	r.fates = [Combat._hurt(s, a, r.harm[0], b, r), Combat._hurt(s, b, r.harm[1], a, r)]
 	s.record_fight(r)
 	var winner: int = r.ids[r.winner]

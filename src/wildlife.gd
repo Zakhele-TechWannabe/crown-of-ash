@@ -461,6 +461,7 @@ func encounter_near_work(b: Dictionary) -> void:
 	person.motive = "fear"
 	var r := Combat.fight(person,beast,{"ground":"forest","start_harm":[0.0,b.harm]},rng)
 	r.merge({"kind":"wildlife","beast_id":b.id,"beast_species":b.species,"beast_position":b.position,"spot":contact_place(store,p),"day":day,"ids":[p,-1],"names":[person.name,b.name],"motives":["fear",motive]})
+	Combat.spend_qi(society,p,float(r.qi_spent[0]))
 	b.harm = r.harm[1]
 	if r.how == "death" and r.loser == 1: b.alive = false
 	var fate := Combat._hurt(society,p,r.harm[0],-1,r)
